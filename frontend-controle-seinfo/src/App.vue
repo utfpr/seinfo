@@ -28,16 +28,8 @@ export default {
 body{
   margin: 0;
   padding: 0;
-  background-color: #17a2b8;
+  background-color: rgb(255, 255, 255);
   height: 100vh;
-}
-
-.nav-link{
-  color:white;
-}
-
-.nav-link:hover{
-  color:rgb(221, 5, 5);
 }
 
 </style>
