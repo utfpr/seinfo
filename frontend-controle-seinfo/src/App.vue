@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Dashboard from "./components/dashboard.vue";
+import Home from "./components/home.vue";
 
 export default {
   name: 'App',
   component:{
-    Dashboard
+    Home
   }
 }
 </script>
