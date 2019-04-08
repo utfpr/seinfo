@@ -10,17 +10,11 @@
           </ul>
         </div>
     </nav>
-    <workspace></workspace>
   </div>
 </template>
 
 <script>
-import workspace from "./workspace.vue"
 export default {
-    name: 'work',
-    components:{
-        workspace
-    }
 
 };
 </script>
