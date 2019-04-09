@@ -14,16 +14,16 @@ function execSQLQuery(sqlQry, res){
   const connection = mysql.createConnection({
     host     : 'localhost',
     port     : 3306,
-    user     : 'hick',
+    user     : 'root',
     password : 'root',
     database : 'seinfo'
   });
 
   connection.query(sqlQry, function(error, results, fields){
       if(error)
-        res.json(error);
+        console.log('deu erro');
       else
-        res.json(results);
+      console.log('deu bom');
       connection.end();
       console.log('executou!');
   });
@@ -31,14 +31,14 @@ function execSQLQuery(sqlQry, res){
 
 //definindo as rotas
 const router = express.Router();
-router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
+router.get('/', (req, res) => res.json(execSQLQuery(`select * from evento`)));
 app.use('/', router);
 
 router.get('/eventos/:id?', (req, res) =>{
     let filter = '';
-    if(req.params.id) filter = ' WHERE idEvento=' + parseInt(req.params.id);
+    if(req.params.id) filter = ' WHERE idEvento= ' + parseInt(req.params.id);
     execSQLQuery('SELECT * FROM evento' + filter, res);
-})
+});
 
 router.post('/eventos', (req, res) =>{
     const nome = req.body.nome;
@@ -48,15 +48,14 @@ router.post('/eventos', (req, res) =>{
     const data_fim = req.body.data_fim;
     const hora_fim = req.body.hora_fim;
     const descricao = req.body.descricao;
-
-    console.log("POST");
-    console.log(valor);
+    
     const dataFull_Ini = data_ini+" "+hora_ini;
     const dataFull_fim = data_fim+" "+hora_fim;
-    console.log(descricao);
+    console.log("POST");
+    
 
     execSQLQuery(`INSERT INTO evento(nome, valor, descricao, data_horario_inicio, data_hora_fim ) VALUES('${nome}','${valor}','${descricao}','${dataFull_Ini}','${dataFull_fim}')`, res);
-
+    
     });
 
 //inicia o servidor
