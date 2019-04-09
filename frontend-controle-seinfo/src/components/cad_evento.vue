@@ -2,6 +2,18 @@
   <div class="title">
     <a>{{obj_evento.title}}</a>
     <div class="box">
+
+     <!-- comentar é ctrl+"/" -->
+      <!-- <div>
+        <a-button icon="user" type="primary">Primary</a-button>
+        <a-icon class="novo" type="plus" />
+        <a-button>Default</a-button>
+        <a-button type="dashed">Dashed</a-button>
+        <a-button type="danger">Danger</a-button>
+      </div> -->
+
+
+
       <form class="form" action="http://localhost:3000/eventos" method="post">
         <div class="form-row justify-content-center">
           <div class="form-group col-md-3">
@@ -65,5 +77,7 @@ export default {
   padding: 50px;
   border-radius: 5px;
 }
-
+.novo{
+  color:red;
+}
 </style>
