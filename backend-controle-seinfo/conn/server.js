@@ -14,7 +14,7 @@ function execSQLQuery(sqlQry, res){
   const connection = mysql.createConnection({
     host     : 'localhost',
     port     : 3306,
-    user     : 'root',
+    user     : 'hick',
     password : 'root',
     database : 'seinfo'
   });
@@ -187,4 +187,4 @@ router.patch()
     
 //inicia o servidor
 app.listen(port);
-console.log('API funcionando!');
+console.log('conn funcionando!');

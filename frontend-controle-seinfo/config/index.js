@@ -10,7 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {'/api': {
+    proxyTable: {'/conn': {
       target: 'http://localhost:3000', //toda requisiçao para /api vai ser passada para o target
       changeOrigin: true
     },

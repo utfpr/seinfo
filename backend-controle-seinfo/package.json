@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "node api/server.js"
+    "api": "node conn/server.js"
   },
   "author": "",
   "license": "ISC",
