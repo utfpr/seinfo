@@ -20,4 +20,18 @@ Logo em seguida inicia o servidor do backend utilizando o seguinte comando:
 node index.js 
 ```
 
+Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/index.js
+```javascript
+function execSQLQuery(sqlQry, res){
+  const connection = mysql.createConnection({
+    host     : 'localhost',
+    port     : 3306,
+    user     : 'seu_usuario',
+    password : 'sua_senha',
+    database : 'seu_banco_dados'
+  });
+
+```
+
+
 DACOM-CM SEINFO
