@@ -3,6 +3,17 @@
 # Controle de Eventos - SeInfo (COE)
 
 
+## Descrição
+Sistema para gerenciamento de cobranças, presenças e inscrições para os eventos, sendo desenvolvido pelos alunos da disciplina Programação de Aplicativos (BCC34F) turma IC4A de 2019/1 da Universidade Tecnológica Federal do Paraná - [UTFPR](http://portal.utfpr.edu.br).
+
+#### Desenvolvido com
+- [Vue.js](https://vuejs.org/)
+- [Bootstrap](https://getbootstrap.com/)
+- [NodeJS](https://nodejs.org)
+- [MariaDB](https://mariadb.org)
+
+
+#### Como usar
 Após baixar o projeto, entre dentro da pasta /frontend-controle-seinfo e digite o comando abaixo para baixar todas as dependencias:
 ```bash
 npm install
@@ -33,5 +44,5 @@ function execSQLQuery(sqlQry, res){
 
 ```
 
-
-DACOM-CM SEINFO
+## Licença
+Este projeto se encontra sob a lincença [MIT](http://opensource.org/licenses/MIT)
