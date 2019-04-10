@@ -5,8 +5,7 @@
     <a-layout-sider
       breakpoint="lg"
       collapsedWidth="0"
-      @collapse="onCollapse"
-      @breakpoint="onBreakpoint"
+      width="256"
     >
   <div class="menu">
     <a-menu
@@ -15,12 +14,13 @@
       :inlineCollapsed="collapsed"
     >
       <a-menu-item key="1">
-        <router-link to="/login"> 
+        <router-link to="/adm/tabela"> 
         <a-icon type="table" />
         <span>Eventos Disponíveis</span>
         </router-link>
       </a-menu-item>
       <a-menu-item key="3">
+        <router-link to="/adm"></router-link>
         <a-icon type="bank" />
         <span>Controle de Caixa</span>
       </a-menu-item>
@@ -43,22 +43,25 @@
     </a-menu>
   </div>
 </a-layout-sider>
-        <a-layout>
             <a-layout-content>
                 <router-view/>
             </a-layout-content>
         </a-layout>
-    </a-layout>
 </div>
 </template>
 
 <script>
+import navSimples from "./navSimples.vue"
 export default {
   data() {
     return {
       collapsed:false
     };
   } ,
+  name: 'nav',
+    components:{
+        navSimples
+    },
     methods: {
       logOut () {
             localStorage.clear();
@@ -76,6 +79,11 @@ export default {
   text-align: left;
 }
 
-
+.ant-layout-sider {
+  background:transparent;
+}
+.ant-layout {
+  background:transparent;
+}
 
 </style>
