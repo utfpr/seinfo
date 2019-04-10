@@ -8,17 +8,16 @@ function execSQLQuery(sqlQry, res){
       password : 'root',
       database : 'seinfo'
     });
-  
-  connection.query(sqlQry, function(error, results, fields){
-      if(error)
-        res.json(error);
-      else
-        res.json(results);
-      connection.end();
-      console.log('executou!');
-  });
-}
 
+    connection.query(sqlQry, function(error, results, fields){
+        if(error)
+          res.json(error);
+        else
+          res.json(results);
+        connection.end();
+        console.log('executou!');
+    });
+  }
 
 module.exports = {
   execSQLQuery,
