@@ -5,6 +5,7 @@ import Login from '@/components/login'
 import Registrar from '@/components/registrar'
 import Cad_evento from '@/components/cad_evento'
 import adm from '@/components/adm'
+import tabela from '@/components/tabela'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/adm',
       name: 'adm',
       component: adm
+    },
+    {
+      path: '/tabela',
+      name: 'tabela',
+      component: tabela
     }
   ]
 })
