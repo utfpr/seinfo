@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="table_back">
-      <td>SEINFO</td>
-      <td>20/04/2019</td>
-      <td><button> <a-icon type="edit" /></button>  <button><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
+    <tr class="table_back" v-for="tabela in tabelas">
+      <td>{{tabela.nome}}</td>
+      <td>{{tabela.data_horario_inicio }}</td>
+      <td><button> <a-icon type="edit" /></button>  <button v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
     </tr>
   </tbody>
 </table>
@@ -20,8 +20,71 @@
 </template>
 
 <script>
-export default {};
+
+
+export default {
+  data () {
+     return {
+       tabelas: {}
+     }
+   },
+   created(){
+     console.log("Navegador");
+   axios.get('http://localhost:3000/eventos')
+     .then( (response) => {
+       console.log(response.data);
+       console.log("Sò reponse");
+       this.tabelas = response.data;
+       console.log(this.tabelas);
+       // this.tabelas.id = response.data[0].idEvento;
+       // this.tabelas.nome = response.data[0].nome;
+       // this.tabelas.data = response.data[0].data_horario_inicio;
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
+
+
+   },
+  methods: {
+    deletar(pos) {
+      console.log("ID "+pos);
+      axios.delete('http://localhost:3000/eventos/'+pos)
+            .then(response => {
+                console.log("TESTE");
+                console.log(response);
+            });
+            console.log("Deletou!");
+            location.reload();
+    }
+  }
+  // apagar:() => {
+  //   console.log("TESte");
+
+          // axios.delete('http://localhost:3000/eventos')
+          //       .then(response => {
+          //           this.result.splice(id, 1)
+          //       });
+          //       console.log(this.result);
+
+//          }
+
+};
+
+
+
+
+
+const axios = require('axios');
+
+
+
+
+
+
+
 </script>
+
 
 <style scoped>
 .box {

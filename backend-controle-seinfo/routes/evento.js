@@ -4,10 +4,9 @@ const eventoController = require('../controllers/evento');
 
 const router = express.Router();
 
-
 router.get('/', (req, res) =>{
     eventoController.executarSelection(res);
- 
+
     // let filter = '';
     // if(req.params.id) filter = ' WHERE idEvento= ' + parseInt(req.params.id);
     // execSQLQuery('SELECT * FROM evento' + filter, res);
@@ -26,12 +25,19 @@ router.post('/', (req, res) =>{
     const hora_fim = req.body.hora_fim;
 
     const descricao = req.body.descricao;
-    
+
     const dataFull_Ini = data_ini+" "+hora_ini;
     const dataFull_fim = data_fim+" "+hora_fim;
-    
-  
+
+
     eventoController.executaPost(nome, valor, dataFull_Ini, dataFull_fim, descricao,res);
+
+  });
+
+  router.delete('/:id?',(req,res)=>{
+    eventoController.executarDeletar(parseInt(req.params.id),res)
+    console.log("Deletar Evento ID ["+parseInt(req.params.id)+"]")
+
   });
 
 module.exports = router;
