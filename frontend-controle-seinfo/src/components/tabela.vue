@@ -30,7 +30,7 @@ export default {
    },
    created(){
      console.log("Navegador");
-   axios.get('http://localhost:3000/eventos')
+   axios.get('http://localhost:3000/evento')
      .then( (response) => {
        console.log(response.data);
        console.log("Sò reponse");
@@ -49,7 +49,7 @@ export default {
   methods: {
     deletar(pos) {
       console.log("ID "+pos);
-      axios.delete('http://localhost:3000/eventos/'+pos)
+      axios.delete('http://localhost:3000/evento/'+pos)
             .then(response => {
                 console.log("TESTE");
                 console.log(response);
