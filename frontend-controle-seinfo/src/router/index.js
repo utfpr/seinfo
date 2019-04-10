@@ -34,12 +34,18 @@ export default new Router({
     {
       path: '/adm',
       name: 'adm',
-      component: adm
+      component: adm,
+      children: [
+      {
+        path: '',
+        component: tabela
+          },
+      {
+        path: 'tabela',
+        component: tabela
+      }
+      ]
     },
-    {
-      path: '/tabela',
-      name: 'tabela',
-      component: tabela
-    }
-  ]
+  ],
+  mode: 'history'
 })
