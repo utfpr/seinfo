@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res) =>{
     eventoController.executarSelection(res);
-
+  
     // let filter = '';
     // if(req.params.id) filter = ' WHERE idEvento= ' + parseInt(req.params.id);
     // execSQLQuery('SELECT * FROM evento' + filter, res);
