@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 
-const eventos = require('./routes/eventos');
+const eventos = require('./routes/evento');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
