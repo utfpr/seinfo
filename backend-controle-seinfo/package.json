@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "node conn/server.js"
+    "api": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",
+    "cors": "^2.8.5",
     "express": "4.16.4",
     "mysql": "^2.16.0"
   }
