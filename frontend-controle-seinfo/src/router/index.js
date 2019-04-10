@@ -27,11 +27,6 @@ export default new Router({
       component: Registrar
     },
     {
-      path: '/cadEvento',
-      name: 'Evento',
-      component: Cad_evento
-    },
-    {
       path: '/adm',
       name: 'adm',
       component: adm,
@@ -43,6 +38,10 @@ export default new Router({
       {
         path: 'tabela',
         component: tabela
+      },
+      {
+        path: 'cadEvento',
+        component: Cad_evento
       }
       ]
     },
