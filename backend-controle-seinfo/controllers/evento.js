@@ -1,5 +1,5 @@
 
-const banco = require('../models/banco');
+const banco = require('../banco/dbconnection');
 
 const executarSelection = async (res) => {
     console.log("Executar o GET");
