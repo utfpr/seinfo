@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-      <form class="form" action="http://localhost:3000/eventos" method="post">
+      <form class="form" action="http://localhost:3000/evento" method="post">
         <div class="form-row justify-content-center">
           <div class="form-group col-md-3">
             <label for="inputNome">Nome</label>
