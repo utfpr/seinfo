@@ -34,7 +34,7 @@
       </a-sub-menu>
       <a-sub-menu key="sub2">
         <span slot="title"><a-icon type="form" /><span>Cadastro de Eventos</span></span>
-        <a-menu-item key="5">Evento</a-menu-item>
+        <a-menu-item key="5">Evento<router-link to="/adm/cadEvento"></router-link></a-menu-item>
         <a-menu-item key="6">Minicurso</a-menu-item>
         <a-menu-item key="6">Palestra</a-menu-item>
         <a-menu-item key="8">Receita</a-menu-item>
