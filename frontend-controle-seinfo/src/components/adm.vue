@@ -1,57 +1,81 @@
 <template>
 <div>
-  <navSimples></navSimples>
-  <div class="row">
-  <div class="col-3">
-    <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
-    </div>
+<navSimples></navSimples>
+<a-layout id="components-layout-demo-trigger">
+    <a-layout-sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      @collapse="onCollapse"
+      @breakpoint="onBreakpoint"
+    >
+  <div class="menu">
+    <a-menu
+      :defaultSelectedKeys="['1']"
+      mode="inline"
+      :inlineCollapsed="collapsed"
+    >
+      <a-menu-item key="1">
+        <router-link to="/login"> 
+        <a-icon type="table" />
+        <span>Eventos Disponíveis</span>
+        </router-link>
+      </a-menu-item>
+      <a-menu-item key="3">
+        <a-icon type="bank" />
+        <span>Controle de Caixa</span>
+      </a-menu-item>
+      <a-sub-menu key="sub1">
+        <span slot="title"><a-icon type="form" /><span>Cadastro de Pessoas</span></span>
+        <a-menu-item key="5">Palestrante</a-menu-item>
+        <a-menu-item key="6">Ministrante</a-menu-item>
+        <a-menu-item key="6">Convidado</a-menu-item>
+        <a-menu-item key="8">Aluno</a-menu-item>
+        <a-menu-item key="8">Administrador</a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu key="sub2">
+        <span slot="title"><a-icon type="form" /><span>Cadastro de Eventos</span></span>
+        <a-menu-item key="5">Evento</a-menu-item>
+        <a-menu-item key="6">Minicurso</a-menu-item>
+        <a-menu-item key="6">Palestra</a-menu-item>
+        <a-menu-item key="8">Receita</a-menu-item>
+        <a-menu-item key="8">Despesa</a-menu-item>
+      </a-sub-menu>
+    </a-menu>
   </div>
-  <div class="col-6">
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"><workspace></workspace></div>
-      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list"></div>
-      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list"></div>
-      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"></div>
-    </div>
-  </div>
-</div>  
+</a-layout-sider>
+        <a-layout>
+            <a-layout-content>
+                <router-view/>
+            </a-layout-content>
+        </a-layout>
+    </a-layout>
 </div>
 </template>
 
 <script>
-import navSimples from "./navSimples.vue"
-import workspace from "./workspace.vue"
 export default {
   data() {
     return {
-      obj_evento: {
-        title: "EVENTOS DISPONÍVEIS"
-      }
+      collapsed:false
     };
   } ,
-  name: 'work',
-    components:{
-        navSimples,
-        workspace
-    },
+    methods: {
+      logOut () {
+            localStorage.clear();
+            this.$router.push('/');
+      }
+  }
 };
 </script>
 
 <style scoped>
 
-.title{
-  margin-top: 20px;
+
+.menu{
+  width: 256px;
+  text-align: left;
 }
 
-.box{
-  margin-right: 20px;
-  margin-left: 20px;
-  padding: 50px;
-  border-radius: 5px;
-}
+
 
 </style>
