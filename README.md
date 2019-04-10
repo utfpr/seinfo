@@ -28,7 +28,7 @@ npm install
 ```
 Logo em seguida inicia o servidor do backend utilizando o seguinte comando:
 ```bash
-node run api
+npm run api
 ```
 
 Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/api/index.js
