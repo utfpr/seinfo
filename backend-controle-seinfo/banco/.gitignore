@@ -1,0 +1,4 @@
+dbconnection.js
+
+# Assim não precisa ficar mudando toda hora de usuário no login e senha do banco,
+# uma vez que você da um git clone e muda, não precisa mais se preocupar
