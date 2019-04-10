@@ -31,7 +31,7 @@ Logo em seguida inicia o servidor do backend utilizando o seguinte comando:
 npm run dev
 ```
 
-Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/api/index.js
+Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/banco/dbconnection.js
 ```javascript
 function execSQLQuery(sqlQry, res){
   const connection = mysql.createConnection({
