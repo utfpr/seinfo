@@ -1,65 +1,80 @@
 <template>
-    <div class="box">
-      <form class="form" action="http://localhost:3000/evento" method="post">
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <label for="inputNome">Nome</label>
-            <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputValor">Valor</label>
-            <input type="number" class="form-control" id="inputValor" name="valor" placeholder="Valor">
-          </div>
+  <div class="box">
+    <form class="form" action="http://localhost:3000/evento" method="post">
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <a-input placeholder="Nome" name="nome" type="text">
+            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <a-input placeholder="Valor" name="valor" type="number">
+            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <a-input placeholder="Nome" name="data_ini" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <a-input placeholder="Nome" name="hora_ini" type="time">
+            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <a-input placeholder="Nome" name="data_fim" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <a-input placeholder="Nome" name="hora_fim" type="time">
+            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <div class="space_2">
+          <a-textarea  type="text" name="descricao" placeholder="Descrição" :rows="4"/>
         </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <label for="inputDateStart">Data de Inicio</label>
-            <input type="date" class="form-control" id="inputDateStart" name="data_ini">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputTimeStart">Hora de Inicio</label>
-            <input type="time" class="form-control" id="inputTimeStart" name="hora_ini">
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <label for="inputDateStart">Data de Fim</label>
-            <input type="date" class="form-control" id="inputDateStart" name="data_fim">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputTimeStart">Hora de Fim</label>
-            <input type="time" class="form-control" id="inputTimeStart" name="hora_fim">
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="form-group col-md-6">
-            <label for="inputDescricao">Descrição</label>
-            <input type="text" class="form-control" id="inputDescricao" placeholder="Descrição" name="descricao">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-dark">Cadastrar</button>
-      </form>
+      </div>
+      <div class="row justify-content-center">
+      <a-button type="submit" class="bt">Cadastrar</a-button>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>
 
 <style scoped>
+.box {
+  margin-top: 20px;
+}
 
-.box{
-  margin-right: 20px;
-  margin-left: 20px;
-  padding: 50px;
-  border-radius: 5px;
+.space {
+  padding: 2px;
+  width: 221px;
 }
-.novo{
-  color:red;
+
+.space_2 {
+  padding: 2px;
+  width: 444px;
 }
+
+.bt{
+  margin-top: 10px;
+  background-color: rgb(224, 224, 224);
+}
+
 </style>
