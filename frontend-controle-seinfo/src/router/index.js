@@ -6,6 +6,7 @@ import Registrar from '@/components/registrar'
 import Cad_evento from '@/components/cad_evento'
 import adm from '@/components/adm'
 import tabela from '@/components/tabela'
+import Cad_Minicurso from '@/components/cad_minicurso' 
 
 Vue.use(Router)
 
@@ -34,7 +35,7 @@ export default new Router({
       {
         path: '',
         component: tabela
-          },
+      },
       {
         path: 'tabela',
         component: tabela
@@ -42,6 +43,10 @@ export default new Router({
       {
         path: 'cadEvento',
         component: Cad_evento
+      },
+      {
+        path: 'cadMinicurso',
+        component: Cad_Minicurso
       }
       ]
     },
