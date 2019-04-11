@@ -19,26 +19,26 @@
         <span>Eventos Disponíveis</span>
         </router-link>
       </a-menu-item>
-      <a-menu-item key="3">
+      <a-menu-item key="2">
         <router-link to="/adm"></router-link>
         <a-icon type="bank" />
         <span>Controle de Caixa</span>
       </a-menu-item>
       <a-sub-menu key="sub1">
         <span slot="title"><a-icon type="form" /><span>Cadastro de Pessoas</span></span>
-        <a-menu-item key="5">Palestrante</a-menu-item>
-        <a-menu-item key="6">Ministrante</a-menu-item>
-        <a-menu-item key="6">Convidado</a-menu-item>
-        <a-menu-item key="8">Aluno</a-menu-item>
-        <a-menu-item key="8">Administrador</a-menu-item>
+        <a-menu-item key="3">Palestrante</a-menu-item>
+        <a-menu-item key="4">Ministrante</a-menu-item>
+        <a-menu-item key="5">Convidado</a-menu-item>
+        <a-menu-item key="6">Aluno</a-menu-item>
+        <a-menu-item key="7">Administrador</a-menu-item>
       </a-sub-menu>
       <a-sub-menu key="sub2">
         <span slot="title"><a-icon type="form" /><span>Cadastro de Eventos</span></span>
-        <a-menu-item key="5">Evento<router-link to="/adm/cadEvento"></router-link></a-menu-item>
-        <a-menu-item key="6">Minicurso</a-menu-item>
-        <a-menu-item key="6">Palestra</a-menu-item>
-        <a-menu-item key="8">Receita</a-menu-item>
-        <a-menu-item key="8">Despesa</a-menu-item>
+        <a-menu-item key="8">Evento<router-link to="/adm/cadEvento"></router-link></a-menu-item>
+        <a-menu-item key="9">Minicurso<router-link to="/adm/cadMinicurso"></router-link></a-menu-item>
+        <a-menu-item key="10">Palestra</a-menu-item>
+        <a-menu-item key="11">Receita</a-menu-item>
+        <a-menu-item key="12">Despesa</a-menu-item>
       </a-sub-menu>
     </a-menu>
   </div>
