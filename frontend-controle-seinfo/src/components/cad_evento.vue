@@ -1,10 +1,25 @@
 <template>
     <div class="box">
-      <form class="form" action="http://localhost:3000/evento" method="post">
+      <form class="form" action="http://localhost:3000/api/evento" method="post">
         <div class="form-row justify-content-center">
           <div class="form-group col-md-3">
-            <label for="inputNome">Nome</label>
-            <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome">
+          <a-form-item
+    >
+      <a-input
+        v-decorator="[
+          'userName',
+          {rules: [{ required: true, message: 'Please input your username!' }]}
+        ]"
+        placeholder="Username"
+        name = "nome"
+      >
+        <a-icon
+          slot="prefix"
+          type="user"
+          style="color:rgba(0,0,0,.25)"
+        />
+      </a-input>
+    </a-form-item>
           </div>
           <div class="form-group col-md-3">
             <label for="inputValor">Valor</label>

@@ -29,16 +29,12 @@ export default {
      }
    },
    created(){
-     console.log("Navegador");
-   axios.get('http://localhost:3000/evento')
+     console.log("Entrou para Listar");
+   axios.get('http://localhost:3000/api/eventos')
      .then( (response) => {
-       console.log(response.data);
-       console.log("Sò reponse");
+       console.log("Listou Eventos!");
        this.tabelas = response.data;
-       console.log(this.tabelas);
-       // this.tabelas.id = response.data[0].idEvento;
-       // this.tabelas.nome = response.data[0].nome;
-       // this.tabelas.data = response.data[0].data_horario_inicio;
+       //console.log(this.tabelas);
      })
      .catch(function (error) {
        console.log(error);
@@ -49,36 +45,21 @@ export default {
   methods: {
     deletar(pos) {
       console.log("ID "+pos);
-      axios.delete('http://localhost:3000/evento/'+pos)
+      axios.delete('http://localhost:3000/api/evento/'+pos)
             .then(response => {
                 console.log("TESTE");
                 console.log(response);
             });
-            console.log("Deletou!");
+            console.log("Deletou! ID:"+pos);
             location.reload();
     }
   }
-  // apagar:() => {
-  //   console.log("TESte");
-
-          // axios.delete('http://localhost:3000/eventos')
-          //       .then(response => {
-          //           this.result.splice(id, 1)
-          //       });
-          //       console.log(this.result);
-
-//          }
 
 };
 
 
 
-
-
 const axios = require('axios');
-
-
-
 
 
 
