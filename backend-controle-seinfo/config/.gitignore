@@ -1,0 +1,5 @@
+env.js
+
+# Assim não precisa ficar mudando toda hora de usuário no login e senha do banco,
+# caso seja necessário mudar alguma coisa no env.js, altere o gitignore e faça commit, então altere e
+# adicione de novo 
