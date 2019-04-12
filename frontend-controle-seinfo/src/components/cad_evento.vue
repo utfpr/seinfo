@@ -3,11 +3,13 @@
     <form class="form" action="http://localhost:3000/evento" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
+          <label class="ant-form-item-required">Nome do Evento:</label>
           <a-input placeholder="Nome" name="nome" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
+          <label class="ant-form-item-required">Valor do Evento:</label>
           <a-input placeholder="Valor" name="valor" type="number">
             <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
@@ -15,35 +17,40 @@
       </div>
       <div class="row justify-content-center">
         <a-form-item class="space">
-          <a-input placeholder="Nome" name="data_ini" type="date">
+          <label class="ant-form-item-required">Data de Inicio:</label>
+          <a-input name="data_ini" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
-          <a-input placeholder="Nome" name="hora_ini" type="time">
+          <label class="ant-form-item-required">Hora de Inicio:</label>
+          <a-input  name="hora_ini" type="time">
             <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
         <a-form-item class="space">
-          <a-input placeholder="Nome" name="data_fim" type="date">
+          <label class="ant-form-item-required">Data de Fim:</label>
+          <a-input  name="data_fim" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
-          <a-input placeholder="Nome" name="hora_fim" type="time">
+          <label class="ant-form-item-required">Hora de Fim:</label>
+          <a-input  name="hora_fim" type="time">
             <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
-        <div class="space_2">
+        <a-form-item class="space_2">
+          <label class="ant-form-item-required">Descrição:</label>
           <a-textarea  type="text" name="descricao" placeholder="Descrição" :rows="4"/>
-        </div>
+        </a-form-item>
       </div>
       <div class="row justify-content-center">
-      <a-button type="submit" class="bt">Cadastrar</a-button>
+      <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
       </div>
     </form>
   </div>
@@ -60,6 +67,14 @@ export default {
 <style scoped>
 .box {
   margin-top: 20px;
+}
+
+label{
+  margin-bottom: 0;
+}
+
+.ant-form-item{
+  margin-bottom: 0;
 }
 
 .space {
