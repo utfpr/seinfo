@@ -1,80 +1,103 @@
 <template>
-    <div class="box">
-      <form class="form" action="http://localhost:3000/api/evento" method="post">
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-          <a-form-item
-    >
-      <a-input
-        v-decorator="[
-          'userName',
-          {rules: [{ required: true, message: 'Please input your username!' }]}
-        ]"
-        placeholder="Username"
-        name = "nome"
-      >
-        <a-icon
-          slot="prefix"
-          type="user"
-          style="color:rgba(0,0,0,.25)"
-        />
-      </a-input>
-    </a-form-item>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputValor">Valor</label>
-            <input type="number" class="form-control" id="inputValor" name="valor" placeholder="Valor">
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <label for="inputDateStart">Data de Inicio</label>
-            <input type="date" class="form-control" id="inputDateStart" name="data_ini">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputTimeStart">Hora de Inicio</label>
-            <input type="time" class="form-control" id="inputTimeStart" name="hora_ini">
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <label for="inputDateStart">Data de Fim</label>
-            <input type="date" class="form-control" id="inputDateStart" name="data_fim">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="inputTimeStart">Hora de Fim</label>
-            <input type="time" class="form-control" id="inputTimeStart" name="hora_fim">
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="form-group col-md-6">
-            <label for="inputDescricao">Descrição</label>
-            <input type="text" class="form-control" id="inputDescricao" placeholder="Descrição" name="descricao">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-dark">Cadastrar</button>
-      </form>
+<div class="title">
+  <h5 style="text-align:center">Cadastro de Evento</h5>
+  <div class="box">
+    <form class="form" action="http://localhost:3000/evento" method="post">
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Nome do Evento:</label>
+          <a-input placeholder="Nome" name="nome" type="text">
+            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Valor do Evento:</label>
+          <a-input placeholder="Valor" name="valor" type="number">
+            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Data de Inicio:</label>
+          <a-input name="data_ini" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Hora de Inicio:</label>
+          <a-input  name="hora_ini" type="time">
+            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Data de Fim:</label>
+          <a-input  name="data_fim" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Hora de Fim:</label>
+          <a-input  name="hora_fim" type="time">
+            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space_2">
+          <label class="ant-form-item-required">Descrição:</label>
+          <a-textarea  type="text" name="descricao" placeholder="Descrição" :rows="4"/>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+      <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+      </div>
+    </form>
   </div>
+</div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>
 
 <style scoped>
 
-.box{
-  margin-right: 20px;
-  margin-left: 20px;
-  padding: 50px;
-  border-radius: 5px;
+.box {
+  margin-top: 10px;
+  border-left: solid 1px rgba(161, 161, 161, 0.233);
+  border-right: solid 1px rgba(161, 161, 161, 0.233);
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 20px;
 }
-.novo{
-  color:red;
+
+.title{
+  margin-top: 10px;
 }
+
+label{
+  margin-bottom: 0;
+}
+
+.ant-form-item{
+  margin-bottom: 0;
+}
+
+.space {
+  padding: 2px;
+  width: 221px;
+}
+
+.space_2 {
+  padding: 2px;
+  width: 444px;
+}
+
 </style>

@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import Home from '@/components/home'
 import Login from '@/components/login'
 import Registrar from '@/components/registrar'
-import Cad_evento from '@/components/cad_evento'
 import adm from '@/components/adm'
 import tabela from '@/components/tabela'
+import Cad_evento from '@/components/cad_evento'
 import Cad_Minicurso from '@/components/cad_minicurso' 
+import Cad_Palestra from '@/components/cad_palestra'
+import Cad_Receita from '@/components/cad_receita'
+import Cad_Despesa from '@/components/cad_despesa'
 
 Vue.use(Router)
 
@@ -31,24 +34,36 @@ export default new Router({
       path: '/adm',
       name: 'adm',
       component: adm,
-      children: [
-      {
-        path: '',
-        component: tabela
-      },
-      {
-        path: 'tabela',
-        component: tabela
-      },
-      {
-        path: 'cadEvento',
-        component: Cad_evento
-      },
-      {
-        path: 'cadMinicurso',
-        component: Cad_Minicurso
-      }
-      ]
+        children: [
+        {
+          path: '',
+          component: tabela
+        },
+        {
+          path: 'tabela',
+          component: tabela
+        },
+        {
+          path: 'cadEvento',
+          component: Cad_evento
+        },
+        {
+          path: 'cadMinicurso',
+          component: Cad_Minicurso
+        },
+        {
+          path: 'cadPalestra',
+          component: Cad_Palestra
+        },
+        {
+          path: 'cadReceita',
+          component: Cad_Receita
+        },
+        {
+          path: 'cadDespesa',
+          component: Cad_Despesa
+        }
+        ]
     },
   ],
   mode: 'history'

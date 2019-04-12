@@ -1,8 +1,9 @@
 <template>
   <div class="box">
-    <table class="table table-bordered">
+    
+    <table class="table table-sm table-bordered">
   <thead class="thead-dark">
-    <tr>
+    <tr class="th">
       <th scope="col">Nome do Evento</th>
       <th scope="col">Data do Evento</th>
       <th scope="col">Opções</th>
@@ -69,16 +70,23 @@ const axios = require('axios');
 
 <style scoped>
 .box {
+  margin-top: 20px;
   margin-right: 20px;
-  margin-left: 50px;
+  margin-left: 20px;
+  padding: 10px;
 }
 
 .table{
     text-align: center;
 }
 
+.table .thead-dark th{
+  background-color: rgb(63, 63, 63);
+  border: 1px solid rgb(202, 202, 202);
+}
+
 .table_back{
-    background-color: rgb(165, 165, 165);
+    background-color: rgba(15, 15, 15, 0.253);
 }
 
 </style>
