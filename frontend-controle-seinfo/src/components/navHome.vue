@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><b>SEINFO</b></a>
+    <nav class="navbar navbar-expand-lg navi">
+      <a class="navbar-brand" href="http://localhost:8080/"><b>SEINFO</b></a>
         <div class="navbar-collapse justify-content-end">
           <ul class="nav">
            <li class="nav-item">
@@ -24,5 +24,11 @@ export default {
 .nav-link{
   color: rgb(145, 145, 145);
 }
+
+.navi{
+  background-color: rgb(65, 64, 64);
+  box-shadow: 6px 3px 10px rgb(202, 202, 202);
+}
+
 
 </style>

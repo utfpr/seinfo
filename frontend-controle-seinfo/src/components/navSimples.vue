@@ -1,10 +1,10 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navi">
         <div class="navbar-collapse justify-content-center">
           <ul class="nav">
            <li class="nav-item">
-            <a class="nav-link" href="#"><b>SEINFO</b></a>
+            <a class="nav-link" href="http://localhost:8080/"><b>SEINFO</b></a>
            </li>
           </ul>
         </div>
@@ -21,7 +21,12 @@ export default {
 <style scoped>
 
 .nav-link{
-  color: rgb(145, 145, 145);
+  color: rgb(197, 197, 197);
+}
+
+.navi{
+  background-color: rgb(65, 64, 64);
+  box-shadow: 6px 3px 10px rgb(202, 202, 202);
 }
 
 </style>
