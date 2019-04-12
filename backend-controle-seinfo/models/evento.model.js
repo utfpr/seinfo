@@ -1,3 +1,6 @@
+/*Referencia para os Tipos e Dados:
+ https://sequelize.readthedocs.io/en/v3/docs/models-definition/ */
+
 module.exports = (sequelize, Sequelize) => {
     const Evento = sequelize.define('evento', {
     idEvento: {
@@ -29,3 +32,5 @@ module.exports = (sequelize, Sequelize) => {
     
     return Evento;
   }
+
+  

@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 const router = express.Router();
 
+//Chamo todas as minhas Rotas aqui
 require('./routes/evento.route.js')(app);
-
 app.use('/', router);
 
 module.exports = app;
