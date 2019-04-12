@@ -1,14 +1,13 @@
 const db = require('../config/db.config.js');
 const Evento = db.eventos;
  
-// Post a Evento
+// Post do Evento
 exports.create = (req, res) => {
 
+  //Concatenando para ser inserido no Banco de Dados
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
-  console.log("Data INI: "+ data_ini_full);
-  console.log("Data FIM: "+ data_fim_full)
-  // Save to MySQL database
+
   Evento.create({  
     idEvento: req.body.idEvento,
     nome: req.body.nome,
@@ -16,9 +15,10 @@ exports.create = (req, res) => {
     descricao: req.body.descricao,
     data_horario_inicio: data_ini_full ,
     data_hora_fim: data_fim_full
+
   }).then(evento => {    
-    // Send created customer to client
-    console.log("Criado o evento: ")
+    // Cria um Evento
+    console.log("Criado o evento!")
     res.send(evento);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -27,9 +27,9 @@ exports.create = (req, res) => {
  
 
 exports.findById = (req, res) => {  
-    Evento.findById(req.params.customerId).then(evento => {
-      console.log("PUTA MERDA");
-      res.send(evento);
+    Evento.findByPk(req.params.eventoId).then(evento => {
+      console.log("Achou o evento pelo ID "+req.params.eventoId);
+      res.send(evento); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
@@ -37,8 +37,8 @@ exports.findById = (req, res) => {
 
   exports.findAll = (req, res) => {  
     Evento.findAll({ raw: true}).then(evento => {
-      console.log("PUTA MERDA");
-      res.send(evento);
+      console.log("Listou Todos os Eventos!");
+      res.send(evento); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
@@ -47,13 +47,13 @@ exports.findById = (req, res) => {
 
   exports.delete = (req, res) => {  
     Evento.destroy({ where: { idEvento: req.params.eventoId } }).then(evento => {
-      console.log("Deletando");
-      res.send(evento);
+      console.log("Deletando o evento com o ID: "+req.params.eventoId);
+      res.send(evento); //Retorna um Json para a Pagina da API
     }).catch(err => {
-      res.status(500).send("Error 2 -> " + err);
+      res.status(500).send("Error -> " + err);
     })
   };
 
   exports.amoeba = (req, res) => {
-    console.log("PUTA MERDA22222");
+    console.log("Função de Teste");
   };

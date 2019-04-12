@@ -11,8 +11,8 @@ module.exports = function(app) {
   // Procura todos os Eventos
   app.get('/api/eventos', eventos.findAll);
 
-  // Update a Customer with ID
-  //app.put('/api/evento/:eventoId', customers.update);
+  // Update de um Evento pelo ID (Implementar)
+  //app.put('/api/evento/:eventoId', evento.update);
 
   // Deleta um evento pelo ID
   app.delete('/api/evento/:eventoId', eventos.delete);
