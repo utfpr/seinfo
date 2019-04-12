@@ -100,9 +100,4 @@ label{
   width: 444px;
 }
 
-.bt{
-  margin-top: 10px;
-  background-color: rgb(224, 224, 224);
-}
-
 </style>

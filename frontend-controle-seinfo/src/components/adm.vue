@@ -65,7 +65,6 @@ import navSimples from "./navSimples.vue";
 export default {
   data() {
     return {
-      collapsed: false
     };
   },
   name: "nav",

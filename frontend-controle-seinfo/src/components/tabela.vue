@@ -72,17 +72,7 @@ export default {
 
 };
 
-
-
-
-
 const axios = require('axios');
-
-
-
-
-
-
 
 </script>
 
@@ -100,12 +90,12 @@ const axios = require('axios');
 }
 
 .table .thead-dark th{
-  background-color: rgb(41, 25, 100);
+  background-color: rgb(63, 63, 63);
   border: 1px solid rgb(202, 202, 202);
 }
 
 .table_back{
-    background-color: rgb(165, 165, 165);
+    background-color: rgba(15, 15, 15, 0.253);
 }
 
 </style>
