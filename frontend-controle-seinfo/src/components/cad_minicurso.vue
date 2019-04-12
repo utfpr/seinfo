@@ -1,59 +1,54 @@
 <template>
-    <div class="box">
-    <h3>Cadastro de Minicursos</h3> 
-      <form class="form" action="http://localhost:3000/evento" method="post">
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-5">
-            <label for="nome" title="Nome do Minicurso:" class="ant-form-item-required">Nome do Minicurso:</label>
-            <a-input placeholder="Nome:"/>
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-5">
-            <label for="value:" title="Valor" class="ant-form-item-required">Valor:</label><br />
-            <a-input-number
-            :defaultValue="0"
-            :formatter="value => `R$: ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-            :parser="value => value.replace(/\$\s?|(,*)/g, '')"
-            />
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-5">
-            <label for="descricao:" title="Descrição" class="ant-form-item-required">Descrição:</label><br />
-            <a-textarea placeholder="Basic usage" :rows="4"/>
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-5">
-            <label for="descricao:" title="Descrição" class="ant-form-item-required">Descrição:</label><br />
-          </div>
-        </div>
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-5">
-            <label for="descricao:" title="Descrição" class="ant-form-item-required">Data e Hora:</label><br />
-            <a-range-picker
-            :defaultValue="[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]"
-            :format="dateFormat"
-            />
-            <a-time-picker :defaultValue="moment('12:08', 'HH:mm')" format="HH:mm" />
-          </div>
-        </div>
-      </form>
-    </div>
+  <div class="box">
+    <form class="form" action="http://localhost:3000/evento" method="post">
+      <div class="row justify-content-center">
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Nome do Evento:</label>
+          <a-input placeholder="Nome" name="nome" type="text">
+            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Valor do Evento:</label>
+          <a-input placeholder="Valor" name="valor" type="number">
+            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space_2">
+          <label class="ant-form-item-required">Descrição:</label>
+          <a-textarea type="text" name="descricao" placeholder="Descrição" :rows="4"/>
+        </a-form-item>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
-import moment from 'moment';
 export default {
-  data(){
-    return {
-      dateFormat: 'YYYY/MM/DD',
-      monthFormat: 'YYYY/MM',
-    }
-  },
-  methods: {
-    moment,
+  data() {
+    return {};
   }
-}
+};
 </script>
+<style scoped>
+.space {
+  padding: 2px;
+  width: 221px;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.ant-form-item {
+  margin-bottom: 0;
+}
+
+.space_2 {
+  padding: 2px;
+  width: 444px;
+}
+
+</style>
