@@ -1,4 +1,6 @@
 <template>
+<div class="title">
+  <h5 style="text-align:center">Cadastro de Evento</h5>
   <div class="box">
     <form class="form" action="http://localhost:3000/evento" method="post">
       <div class="row justify-content-center">
@@ -54,6 +56,7 @@
       </div>
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -65,8 +68,18 @@ export default {
 </script>
 
 <style scoped>
+
 .box {
-  margin-top: 20px;
+  margin-top: 10px;
+  border-left: solid 1px rgba(161, 161, 161, 0.233);
+  border-right: solid 1px rgba(161, 161, 161, 0.233);
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 20px;
+}
+
+.title{
+  margin-top: 10px;
 }
 
 label{
