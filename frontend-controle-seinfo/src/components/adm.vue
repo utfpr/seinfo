@@ -2,7 +2,7 @@
   <div>
     <navSimples></navSimples>
     <a-layout>
-      <a-layout-sider  width="256">
+      <a-layout-sider  width="256px">
         <div class="menu">
           <a-menu :defaultSelectedKeys="['1']" mode="inline">
             <a-menu-item key="1">
@@ -57,24 +57,21 @@
         <router-view/>
       </a-layout-content>
     </a-layout>
+    <footer></footer>
   </div>
 </template>
 
 <script>
 import navSimples from "./navSimples.vue";
 export default {
-  data() {
-    return {
-    };
-  },
-  name: "nav",
   components: {
-    navSimples
-  },
+    navSimples,
+  }
 };
 </script>
 
 <style scoped>
+
 .menu {
   width: 256px;
   text-align: left;
@@ -86,4 +83,5 @@ export default {
 .ant-layout {
   background: transparent;
 }
+
 </style>

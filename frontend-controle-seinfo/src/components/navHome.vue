@@ -1,13 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navi">
-      <a class="navbar-brand" href="http://localhost:8080/"><b>SEINFO</b></a>
+    <nav class="navbar navbar-expand navi">
+      <a class="brand" href="http://localhost:8080/"><b>SEINFO</b></a>
         <div class="navbar-collapse justify-content-end">
-          <ul class="nav">
-           <li class="nav-item">
             <a class="nav-link" href="#"><b>ENTRAR</b></a>
-           </li>
-          </ul>
         </div>
     </nav>
   </div>
@@ -26,9 +22,12 @@ export default {
 }
 
 .navi{
-  background-color: rgb(65, 64, 64);
+  background-color: rgb(34, 34, 34);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
 }
 
+.brand{
+  color: rgb(240, 240, 240);
+}
 
 </style>
