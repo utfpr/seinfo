@@ -2,18 +2,18 @@
   <div>
     <navHome></navHome>
     <workspace></workspace>
+    <footer></footer>
   </div>
 </template>
 
 <script>
-import workspace from "./workspace.vue"
-import navHome from "./navHome.vue"
+import workspace from "./workspace.vue";
+import navHome from "./navHome.vue";
 export default {
-    name: 'work',
     components:{
         workspace,
-        navHome
-    },
+        navHome,
+    }
 };
 </script>
 
