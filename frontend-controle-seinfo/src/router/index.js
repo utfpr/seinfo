@@ -10,6 +10,7 @@ import Cad_Minicurso from '@/components/cad_minicurso'
 import Cad_Palestra from '@/components/cad_palestra'
 import Cad_Receita from '@/components/cad_receita'
 import Cad_Despesa from '@/components/cad_despesa'
+import Cad_Palestrante from '@/components/cad_palestrante'
 
 Vue.use(Router)
 
@@ -62,6 +63,10 @@ export default new Router({
         {
           path: 'cadDespesa',
           component: Cad_Despesa
+        },
+        {
+          path: 'cadPalestrante',
+          component: Cad_Palestrante
         }
         ]
     },

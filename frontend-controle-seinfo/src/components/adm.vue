@@ -21,7 +21,9 @@
                 <a-icon type="form"/>
                 <span>Cadastro de Pessoas</span>
               </span>
-              <a-menu-item key="3">Palestrante</a-menu-item>
+              <a-menu-item key="3">Palestrante
+                <router-link to="/adm/cadPalestrante"></router-link>
+              </a-menu-item>
               <a-menu-item key="4">Ministrante</a-menu-item>
               <a-menu-item key="5">Convidado</a-menu-item>
               <a-menu-item key="6">Aluno</a-menu-item>
@@ -57,7 +59,6 @@
         <router-view/>
       </a-layout-content>
     </a-layout>
-    <footer></footer>
   </div>
 </template>
 
@@ -65,7 +66,7 @@
 import navSimples from "./navSimples.vue";
 export default {
   components: {
-    navSimples,
+    navSimples
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <navHome></navHome>
     <workspace></workspace>
-    <footer></footer>
+    <rodape></rodape>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import navHome from "./navHome.vue";
 export default {
     components:{
         workspace,
-        navHome,
+        navHome
     }
 };
 </script>
