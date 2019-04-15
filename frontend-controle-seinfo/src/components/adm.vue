@@ -27,7 +27,9 @@
               <a-menu-item key="4">Ministrante
                 <router-link to="/adm/cadMinistrante"></router-link>
               </a-menu-item>
-              <a-menu-item key="5">Convidado</a-menu-item>
+              <a-menu-item key="5">Convidado
+                <router-link to="/adm/cadConvidado"></router-link>
+              </a-menu-item>
               <a-menu-item key="6">Aluno
                 <router-link to="/adm/cadAluno"></router-link>
               </a-menu-item>
