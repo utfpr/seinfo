@@ -2,7 +2,7 @@
 <div class="title">
   <h5 style="text-align:center">Cadastro de Minicurso</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/evento" method="post">
+    <form class="form" action="http://localhost:3000/minicurso" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome do Minicurso:</label>
