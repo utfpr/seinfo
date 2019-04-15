@@ -1,28 +1,20 @@
 <template>
 <div class="title">
-  <h5 style="text-align:center">Cadastro de Palestrante</h5>
+  <h5 style="text-align:center">Cadastro de Administrador</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/palestrante" method="post">
+    <form class="form" action="http://localhost:3000/adm" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space_2">
-          <label class="ant-form-item-required">Nome do Palestrante:</label>
-          <a-input placeholder="Nome" name="nome_paletrante" type="text">
+          <label class="ant-form-item-required">Nome do Administrador:</label>
+          <a-input placeholder="Nome" name="nome_adm" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
-      <a-form-item class="space_2">
-          <label class="ant-form-item-required">Email do Palestrante:</label>
-          <a-input placeholder="Email" name="email_palestrante" type="text">
-            <a-icon slot="mail" type="home" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
         <a-form-item class="space_2">
-          <label class="ant-form-item-required">CPF do Palestrante:</label>
-          <a-input type="number" name="cpf_palestrante" placeholder="CPF"/>
+          <label class="ant-form-item-required">Senha do Administrador:</label>
+          <a-input type="password" name="senha_adm" placeholder="Senha"/>
         </a-form-item>
       </div>
       <div class="row justify-content-center">

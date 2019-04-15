@@ -11,6 +11,7 @@ import Cad_Palestra from '@/components/cad_palestra'
 import Cad_Receita from '@/components/cad_receita'
 import Cad_Despesa from '@/components/cad_despesa'
 import Cad_Palestrante from '@/components/cad_palestrante'
+import Cad_Adm from '@/components/cad_adm'
 
 Vue.use(Router)
 
@@ -67,6 +68,10 @@ export default new Router({
         {
           path: 'cadPalestrante',
           component: Cad_Palestrante
+        },
+        {
+          path: 'cadAdm',
+          component: Cad_Adm
         }
         ]
     },

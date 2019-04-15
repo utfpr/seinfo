@@ -27,7 +27,9 @@
               <a-menu-item key="4">Ministrante</a-menu-item>
               <a-menu-item key="5">Convidado</a-menu-item>
               <a-menu-item key="6">Aluno</a-menu-item>
-              <a-menu-item key="7">Administrador</a-menu-item>
+              <a-menu-item key="7">Administrador
+                <router-link to="/adm/cadAdm"></router-link>
+              </a-menu-item>
             </a-sub-menu>
             <a-sub-menu key="sub2">
               <span slot="title">
