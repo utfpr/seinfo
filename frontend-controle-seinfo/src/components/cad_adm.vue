@@ -14,7 +14,9 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">Senha do Administrador:</label>
-          <a-input type="password" name="senha_adm" placeholder="Senha"/>
+          <a-input type="password" name="senha_adm" placeholder="Senha">
+          <a-icon slot="prefix" type="key" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
