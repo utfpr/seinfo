@@ -11,6 +11,7 @@ Sistema para gerenciamento de cobranças, presenças e inscrições para os even
 - [Bootstrap](https://getbootstrap.com/)
 - [NodeJS](https://nodejs.org)
 - [MariaDB](https://mariadb.org)
+- [Ant Design Vue](https://vue.ant.design/docs/vue/introduce/)
 
 
 #### Como usar
