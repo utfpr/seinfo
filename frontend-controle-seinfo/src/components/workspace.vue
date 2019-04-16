@@ -69,7 +69,6 @@ export default {
   margin-left: 20px;
   padding: 50px;
   border-radius: 5px;
-  background-color: rgb(211, 211, 211);
 }
 
 .title{
