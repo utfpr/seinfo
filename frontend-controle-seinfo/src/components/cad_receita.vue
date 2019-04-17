@@ -30,17 +30,18 @@ export default {
 };
 </script>
 <style scoped>
+
 .box {
-  margin-top: 10px;
   border-left: solid 1px rgba(161, 161, 161, 0.233);
   border-right: solid 1px rgba(161, 161, 161, 0.233);
   margin-left: 25%;
+  margin-top: 10px;
   margin-right: 25%;
   padding: 20px;
 }
 
 .title {
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .space {
