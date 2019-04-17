@@ -61,8 +61,7 @@ export default {
 <style scoped>
 
 .box {
-  border-left: solid 1px rgba(161, 161, 161, 0.233);
-  border-right: solid 1px rgba(161, 161, 161, 0.233);
+  border: solid 1px rgba(161, 161, 161, 0.233); 
   margin-left: 25%;
   margin-top: 10px;
   margin-right: 25%;

@@ -15,6 +15,7 @@ import Cad_Adm from '@/components/cad_adm'
 import Cad_Ministrante from '@/components/cad_ministrante'
 import Cad_Aluno from '@/components/cad_aluno'
 import Cad_Convidado from '@/components/cad_convidado'
+import Logo from '@/components/logo'
 
 Vue.use(Router)
 
@@ -42,7 +43,7 @@ export default new Router({
         children: [
         {
           path: '',
-          component: tabela
+          component: Logo
         },
         {
           path: 'tabela',
