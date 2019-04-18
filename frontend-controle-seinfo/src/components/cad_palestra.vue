@@ -2,7 +2,7 @@
 <div class="title">
   <h5 style="text-align:center">Cadastro de Palestra</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/palestra" method="post">
+    <form class="form" action="http://localhost:3000/api/palestra" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome da Palestra:</label>
@@ -32,12 +32,18 @@
         </a-form-item>
       </div>
       <div class="row justify-content-center">
-      <a-form-item class="space_2">
+      <a-form-item class="space">
           <label class="ant-form-item-required">Local da Palestra:</label>
           <a-input placeholder="Local" name="local_pale" type="text">
             <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
+      </a-form-item>
+      <a-form-item class="space">
+          <label class="ant-form-item-required">Selecione o Evento:</label>
+        <a-select defaultValue="...">
+      <a-select-option v-for="tabela in tabelas" :key="tabela.idEvento" :value="tabela.idEvento" >{{tabela.nome}}</a-select-option>
+    </a-select>
+      </a-form-item>
       </div>
       <div class="row justify-content-center">
         <a-form-item class="space_2">
@@ -55,8 +61,28 @@
 
 <script>
 export default {
+data () {
+     return {
+       tabelas: {}
+     }
+   },
+   created(){
+     console.log("Entrou para Listar");
+   axios.get('http://localhost:3000/api/eventos')
+     .then( (response) => {
+       console.log("Listou Eventos!");
+       this.tabelas = response.data;
+       //console.log(this.tabelas);
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
 
+
+   },
 };
+
+const axios = require('axios');
 </script>
 <style scoped>
 
