@@ -45,6 +45,14 @@
     </a-select>
       </a-form-item>
       </div>
+    <div class="row justify-content-center">
+      <a-form-item class="space_2">
+          <label class="ant-form-item-required">Selecione o Palestrante:</label>
+        <a-select defaultValue="...">
+      <a-select-option v-for="tabela in tabelas" :key="tabela.idEvento" :value="tabela.idEvento" >{{tabela.nome}}</a-select-option>
+    </a-select>
+      </a-form-item>
+    </div>
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">Descrição:</label>
