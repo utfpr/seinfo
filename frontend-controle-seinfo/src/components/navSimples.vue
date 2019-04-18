@@ -23,6 +23,7 @@ export default {
 .navi{
   background-color: rgb(34, 34, 34);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
+  
 }
 
 </style>
