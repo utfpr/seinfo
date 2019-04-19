@@ -1,9 +1,9 @@
 <template>
-  <a-carousel autoplay>
-    <div><h3><img src="../assets/banner.png"  style="max-height:500px;"></h3></div>
-    <div><h3>2</h3></div>
-    <div><h3>3</h3></div>
-    <div><h3>4</h3></div>
+  <a-carousel effect="fade" autoplay>
+    <div><img src="../assets/banner.png"></div>
+    <div><img src="../assets/banner.png"></div>
+    <div><img src="../assets/banner.png"></div>
+    <div><img src="../assets/banner.png"></div>
   </a-carousel>
 </template>
 <script>
@@ -14,18 +14,20 @@ export default {
 
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: 500px;
+  min-height: 500px;
+  max-height: 500px;
   line-height: 160px;
-  background: #364d79;
+  background: #000000;
   overflow: hidden;
 }
 
-.ant-carousel >>> .slick-slide h3 {
-  color: #fff;
-}
-
-.ant-carousel .slick-dots li button {
-  
+img{
+  min-width: 100%;
+  min-width: 100%;
+  max-height:500px;
+  min-height: 500px;
+  border: 1px solid black;
+  border-top: transparent;
 }
 
 </style>
