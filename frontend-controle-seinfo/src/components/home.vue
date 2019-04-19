@@ -9,6 +9,7 @@
       </a-menu>
     </a-layout-header>
     <a-layout-content>
+      <carousel></carousel>
       <workspace></workspace>
     </a-layout-content>
   </a-layout>
@@ -16,9 +17,11 @@
 
 <script>
 import workspace from "./workspace.vue";
+import carousel from "./carousel.vue";
 export default {
   components: {
-    workspace
+    workspace,
+    carousel
   }
 };
 </script>
