@@ -20,6 +20,7 @@ db.sequelize = sequelize;
  
 //Models/tables
 db.eventos = require('../models/evento.model.js')(sequelize, Sequelize);
- 
+db.pessoas = require('../models/pessoa.model.js')(sequelize, Sequelize);
+db.alunos = require('../models/aluno.model.js')(sequelize, Sequelize);
  
 module.exports = db;
