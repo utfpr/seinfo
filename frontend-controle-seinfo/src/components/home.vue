@@ -28,7 +28,7 @@ export default {
 <style>
 
 .nav-link{
-  color: rgb(255, 255, 255);
+  color: rgb(255, 238, 0);
 }
 
 .navi{
