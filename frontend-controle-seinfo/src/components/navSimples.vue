@@ -12,7 +12,7 @@
             </a-menu-item>
             <a-menu-divider/>
             <a-menu-item key="1"><a href="#">Settings</a></a-menu-item>
-            <a-menu-item key="2"><a href="#">Settings</a></a-menu-item>
+            <a-menu-item key="2"><a href="#">Help</a></a-menu-item>
               <a-menu-divider/>
               <a-menu-item key="3"><a href="http://localhost:8080/">Sign Out</a></a-menu-item>
           </a-menu>

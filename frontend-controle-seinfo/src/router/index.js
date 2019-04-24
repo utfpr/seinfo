@@ -15,6 +15,7 @@ import Cad_Adm from '@/components/cad_adm'
 import Cad_Ministrante from '@/components/cad_ministrante'
 import Cad_Aluno from '@/components/cad_aluno'
 import Cad_Convidado from '@/components/cad_convidado'
+import Cad_Outro from '@/components/cad_outros'
 import Logo from '@/components/logo'
 import Evento from '@/components/evento'
 
@@ -94,6 +95,10 @@ export default new Router({
         {
           path: 'cadConvidado',
           component: Cad_Convidado
+        },
+        {
+          path: 'cadOutros',
+          component: Cad_Outro
         }
         ]
     },
