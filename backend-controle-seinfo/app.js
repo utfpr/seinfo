@@ -14,6 +14,8 @@ const router = express.Router();
 
 //Chamo todas as minhas Rotas aqui
 require('./routes/evento.route.js')(app);
+require('./routes/minicurso.route.js')(app);
+require('./routes/palestra.route.js')(app);
 require('./routes/aluno.route.js')(app);
 app.use('/', router);
 
