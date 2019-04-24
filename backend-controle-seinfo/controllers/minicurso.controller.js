@@ -1,5 +1,5 @@
 const db = require('../config/db.config.js');
-const Evento = db.eventos;
+const Minicurso = db.minicruso;
  
 // Post do Evento
 exports.create = (req, res) => {
@@ -8,18 +8,21 @@ exports.create = (req, res) => {
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
 
-  Evento.create({  
-    //idEvento: req.body.idEvento,
+  Minicurso.create({  
     nome: req.body.nome,
     valor: req.body.valor,
     descricao: req.body.descricao,
     data_horario_inicio: data_ini_full ,
     data_hora_fim: data_fim_full,
-    urlImagem: req.body.urlImagem
-  }).then(evento => {    
+    local: req.body.local,
+    idEvento: req.body.eventoId
+  },
+  /*{
+     // where: {idEvento: req.body.eventoId}
+  }*/).then(minicurso => {    
     // Cria um Evento
-    console.log("Criado o evento!")
-    res.send(evento);
+    console.log("Criado o minicurso!")
+    res.send(minicurso);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
@@ -27,18 +30,18 @@ exports.create = (req, res) => {
  
 
 exports.findById = (req, res) => {  
-    Evento.findByPk(req.params.eventoId).then(evento => {
-      console.log("Achou o evento pelo ID "+req.params.eventoId);
-      res.send(evento); //Retorna um Json para a Pagina da API
+    Minicurso.findByPk(req.params.minicursoId).then(minicruso => {
+      console.log("Achou o minicurso pelo ID "+req.params.minicursoId);
+      res.send(minicruso); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
   };
 
   exports.findAll = (req, res) => {  
-    Evento.findAll({ raw: true}).then(evento => {
-      console.log("Listou Todos os Eventos!");
-      res.send(evento); //Retorna um Json para a Pagina da API
+    Minicurso.findAll({ raw: true}).then(minicruso => {
+      console.log("Listou Todos os Minicursos!");
+      res.send(minicruso); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
@@ -47,32 +50,30 @@ exports.findById = (req, res) => {
   exports.atualiza = (req,res)=>{
     const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
     const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
-    Evento.update(
+    Minicurso.update(
       {nome: req.body.nome,
       valor: req.body.valor,
       descricao: req.body.descricao,
       data_horario_inicio: data_ini_full ,
       data_hora_fim: data_fim_full,
-      urlImagem: req.body.urlImagem},
-      {where: {idEvento: req.params.eventoId}}).then(evento=>{
+      local: req.body.local,
+      //idEvento: req.body.eventoId
+    },
+      {where: {idMinicurso: req.params.minicursoId}}).then(minicruso=>{
         console.log("Atualizando evento");
-        res.send(evento);
+        res.send(minicruso);
       }).catch(err=>{
-        res.status(500).send("Error "+err);
+        res.sendStatus(500).send("Error "+err);
       })
       
     },
   
 
   exports.delete = (req, res) => {  
-    Evento.destroy({ where: { idEvento: req.params.eventoId } }).then(evento => {
-      console.log("Deletando o evento com o ID: "+req.params.eventoId);
-      res.send(evento); //Retorna um Json para a Pagina da API
+    Minicurso.destroy({ where: { idMinicurso: req.params.minicursoId } }).then(minicurso => {
+      console.log("Deletando o evento com o ID: "+req.params.minicursoId);
+      res.send(minicurso); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
   };
-
-  // exports.amoeba = (req, res) => {
-  //   console.log("Função de Teste");
-  // };
