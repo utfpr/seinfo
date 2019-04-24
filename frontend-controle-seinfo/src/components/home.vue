@@ -2,8 +2,8 @@
   <a-layout id="components-layout-demo-top" class="layout">
       <div>
     <nav class="navbar navbar-expand-sm navi">
-        <div class="navbar-collapse justify-content-center">
-            <a class="nav-link" href="http://localhost:8080/"><b>SEINFO</b></a>
+        <div class="navbar-collapse justify-content-end">
+            <a class="nav-link" href="http://localhost:8080/login"><b>LOGIN</b></a>
         </div>
     </nav>
   </div>
@@ -28,11 +28,11 @@ export default {
 <style>
 
 .nav-link{
-  color: rgb(255, 238, 0);
+  color: rgb(0, 0, 0);
 }
 
 .navi{
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
   
 }

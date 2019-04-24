@@ -16,6 +16,7 @@ import Cad_Ministrante from '@/components/cad_ministrante'
 import Cad_Aluno from '@/components/cad_aluno'
 import Cad_Convidado from '@/components/cad_convidado'
 import Logo from '@/components/logo'
+import Evento from '@/components/evento'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/registrar',
       name: 'Registrar',
       component: Registrar
+    },
+    {
+      path: '/evento',
+      name: 'Evento',
+      component: Evento
     },
     {
       path: '/adm',

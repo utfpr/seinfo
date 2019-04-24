@@ -1,18 +1,25 @@
 <template>
 <div>
-  <a-carousel effect="fade" autoplay>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
+  <navSimples></navSimples>
+  <a-carousel>
     <div><img src="../assets/banner.png"></div>
   </a-carousel>
 </div>
 </template>
 <script>
+import navSimples from "./navSimples.vue";
 export default {
-}
+  data() {
+    return {
+      collapsed: false
+    };
+  },
+  components: {
+    navSimples
+  }
+};
 </script>
-<style scoped>
+<style>
 
 .ant-carousel >>> .slick-slide {
   text-align: center;
@@ -24,12 +31,11 @@ export default {
 }
 
 img{
-  max-width: 100%;
-  min-width: 100%;
-  max-height:500px;
-  min-height: 500px;
+  max-width: 50%;
+  min-width: 50%;
+  max-height:250px;
+  min-height: 250px;
   border: 1px solid black;
   border-top: transparent;
 }
-
 </style>

@@ -12,7 +12,7 @@
     slot="cover"
   />
   <template class="ant-card-actions" slot="actions">
-    <a-button class="bt">INFORMAÇÕES</a-button>
+    <a-button class="bt" href="http://localhost:8080/evento">INFORMAÇÕES</a-button>
   </template>
   <a-card-meta
     title="SEINFO 2019"
@@ -32,7 +32,7 @@
     slot="cover"
   />
   <template class="ant-card-actions" slot="actions">
-    <a-button class="bt">INFORMAÇÕES</a-button>
+    <a-button class="bt" href="http://localhost:8080/evento">INFORMAÇÕES</a-button>
   </template>
   <a-card-meta
     title="SEINFO 2019"
@@ -62,6 +62,10 @@ export default {
   margin-top: 30px;
   background: transparent;
   border: transparent;
+}
+
+.ant-card-actions > li > span a{
+  line-height:28px;
 }
 
 .ant-card-meta-title {
