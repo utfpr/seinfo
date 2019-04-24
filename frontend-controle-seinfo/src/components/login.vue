@@ -42,7 +42,7 @@ export default {};
 </script>
 
 <style scoped>
-body {
+body { 
   margin: 0;
   padding: 0;
   background-color: #17a2b8;
