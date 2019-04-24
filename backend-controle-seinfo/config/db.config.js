@@ -20,7 +20,15 @@ db.sequelize = sequelize;
  
 //Models/tables
 db.eventos = require('../models/evento.model.js')(sequelize, Sequelize);
-db.pessoas = require('../models/pessoa.model.js')(sequelize, Sequelize);
-db.alunos = require('../models/aluno.model.js')(sequelize, Sequelize);
- 
+db.minicruso = require('../models/minicurso.model.js')(sequelize,Sequelize);
+db.palestra = require('../models/palestra.model.js')(sequelize,Sequelize);
+db.alunos = require('../models/aluno.model.js')(sequelize, Sequelize); 
+db.pessoas = require('../models/pessoa.model.js')(sequelize,Sequelize);
+/*
+db.eventos.hasMany(db.minicruso,{ foreignKey: 'idEvento'})
+db.eventos.hasMany(db.palestra,{ foreignKey: 'idEvento'})
+db.minicruso.belongsTo(db.eventos,{ foreignKey: 'idEvento'})
+db.palestra.belongsTo(db.eventos,{ foreignKey: 'idEvento'})
+*/
+
 module.exports = db;
