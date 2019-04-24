@@ -1,7 +1,7 @@
 const env = {
     database: 'seinfo',
-    username: 'app',
-    password: '',
+    username: 'root',
+    password: 'bancodolo',
     host: 'localhost',
     dialect: 'mysql',
     pool: {
