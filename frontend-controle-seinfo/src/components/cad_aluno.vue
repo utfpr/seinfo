@@ -2,7 +2,7 @@
 <div class="title">
   <h5 style="text-align:center">Cadastro de Aluno</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/aluno" method="post">
+    <form class="form" action="http://localhost:3000/api/aluno" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome do Aluno:</label>
@@ -12,7 +12,7 @@
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required">Senha do Aluno:</label>
-          <a-input placeholder="Senha" name="nome_aluno" type="password">
+          <a-input placeholder="Senha" name="senha_aluno" type="password">
             <a-icon slot="prefix" type="key" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -20,7 +20,7 @@
       <div class="row justify-content-center">
       <a-form-item class="space_2">
           <label class="ant-form-item-required">RA do Aluno:</label>
-          <a-input placeholder="RA" name="email_aluno" type="text">
+          <a-input placeholder="RA" name="ra_aluno" type="text">
             <a-icon slot="prefix" type="tag" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -36,7 +36,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">CPF do Aluno:</label>
-          <a-input type="number" name="cpf_aluno" placeholder="CPF"/>
+          <a-input type="number" name="cpf_aluno" placeholder="CPF" />
         </a-form-item>
       </div>
       <div class="row justify-content-center">

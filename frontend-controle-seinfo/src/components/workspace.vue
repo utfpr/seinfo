@@ -1,80 +1,87 @@
 <template>
-<div class="title">
-  <a>{{obj_evento.title}}</a>
-  <div class="box">
-    <div class = "row">
-      <div class="col-md-3">
-        <div class="card">
-          <img class="card-img-top" src="../assets/test.jpg" alt="Card image cap">
-          <div class="card-body">
-            <p
-              class="card-text"
-            >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg">INFORMAÇÕES</button>
-        </div>
-
-        <div class="modal fade bd-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-md">
-            <div class="modal-content">
-              <h3><b>{{obj_evento.titulo}}</b></h3>
-              <a>{{obj_evento.descricao}}</a>
-              <router-link tag = "button" class="btn btn-dark" to="/login">INSCREVER-SE</router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="row justify-content-center">
+  <div >
+<a-card
+  hoverable
+  class="box-1"
+>
+  <img
+    class="box-2"
+    alt="example"
+    src="../assets/se.jpeg"
+    slot="cover"
+  />
+  <template class="ant-card-actions" slot="actions">
+    <a-button class="bt" href="http://localhost:8080/evento">INFORMAÇÕES</a-button>
+  </template>
+  <a-card-meta
+    title="SEINFO 2019"
+    description="A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.">
+  </a-card-meta>
+</a-card>
+</div>
+<div>
+<a-card
+  hoverable
+  class="box-1"
+>
+  <img
+    class="box-2"
+    alt="example"
+    src="../assets/se.jpeg"
+    slot="cover"
+  />
+  <template class="ant-card-actions" slot="actions">
+    <a-button class="bt" href="http://localhost:8080/evento">INFORMAÇÕES</a-button>
+  </template>
+  <a-card-meta
+    title="SEINFO 2019"
+    description="A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.">
+  </a-card-meta>
+</a-card>
+</div>
 </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      obj_evento: {
-        titulo: "SEINFO 2019",
-        descricao: "TEMOS QUE ARRUMAR AQUI!",
-        title:"EVENTOS DISPONÍVEIS"
-      }
-    }
-  },
-  methods:{
-    openLogin(){
-      window.location.href = "http://localhost:8080/#/login";
-    }
-  }
 };
 </script>
 
 <style scoped>
 
-.card{
-  width: 18rem;
-  height: 28rem;
-  border: 1px solid black;
-}
-
-.card-body{
-  background-color: black;
-}
-
-.btn-dark{
-  border-radius: 0px;
-}
-
-.box{
-  margin-right: 20px;
-  margin-left: 20px;
-  padding: 50px;
-  border-radius: 5px;
-}
-
-.title{
-  margin-top: 20px;
+.texto{
   text-align: center;
-  padding-bottom: 10px;
+}
+
+.box-1{
+  height: 450px;
+  width: 450px;
+  padding: 5px;
+  margin: 50px;
+  margin-top: 30px;
+  background: transparent;
+  border: transparent;
+}
+
+.ant-card-actions > li > span a{
+  line-height:28px;
+}
+
+.ant-card-meta-title {
+  text-align: center;
+}
+
+.bt{
+  border-color:blue;
+  color: blue;
+}
+
+.box-2{
+  min-height: 260px;
+  max-height: 260px;
+  min-width: 440px;
+  max-width: 440px;
 }
 
 </style>

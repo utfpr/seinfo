@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.get('/api/eventos', eventos.findAll);
 
   // Update de um Evento pelo ID (Implementar)
-  //app.put('/api/evento/:eventoId', evento.update);
+  app.patch('/api/evento/:eventoId', eventos.atualiza);
 
   // Deleta um evento pelo ID
   app.delete('/api/evento/:eventoId', eventos.delete);

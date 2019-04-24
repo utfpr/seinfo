@@ -1,14 +1,14 @@
 <template>
   <a-layout id="components-layout-demo-top" class="layout">
-    <a-layout-header>
-       <div class="logo"><a href="http://localhost:8080/"><h5>SEINFO</h5></a></div>
-      <a-menu class="menu" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">LOGIN
-          <router-link to="/login"></router-link>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-header>
+      <div>
+    <nav class="navbar navbar-expand-sm navi">
+        <div class="navbar-collapse justify-content-end">
+            <a class="nav-link" href="http://localhost:8080/login"><b>LOGIN</b></a>
+        </div>
+    </nav>
+  </div>
     <a-layout-content>
+      <carousel></carousel>
       <workspace></workspace>
     </a-layout-content>
   </a-layout>
@@ -16,29 +16,25 @@
 
 <script>
 import workspace from "./workspace.vue";
+import carousel from "./carousel.vue";
 export default {
   components: {
-    workspace
+    workspace,
+    carousel
   }
 };
 </script>
 
 <style>
 
-.menu{
-  text-align: end;
+.nav-link{
+  color: rgb(0, 0, 0);
 }
 
-h5{
-  color: white;
-  margin: 0;
-}
-
-#components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  margin: 20px 24px 10px;
-  float: left;
+.navi{
+  background-color: rgb(255, 255, 255);
+  box-shadow: 6px 3px 10px rgb(202, 202, 202);
+  
 }
 
 </style>
