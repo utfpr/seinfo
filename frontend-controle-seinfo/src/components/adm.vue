@@ -3,11 +3,27 @@
     <navSimples></navSimples>
     <a-layout>
         <a-menu class="menu" v-model="current" mode="horizontal">
-          <a-menu-item key="1">
-            <router-link to="/adm/tabela"></router-link>
-              <a-icon type="table"/>
-              <span>Eventos Disponiveis</span>
-          </a-menu-item>
+          <a-sub-menu key="sub0">
+            <span slot="title"><a-icon type="ordered-list"/><span>Listagem</span></span>
+            <a-menu-item key="14">Eventos
+                <router-link to="/adm/tabela"></router-link>
+              </a-menu-item>
+              <a-menu-item key="15">Alunos
+                <router-link to="/adm/tabela"></router-link>
+              </a-menu-item>
+              <a-menu-item key="16">Convidados
+                <router-link to="/adm/tabela"></router-link>
+              </a-menu-item>
+              <a-menu-item key="16">Palestrantes
+                <router-link to="/adm/tabela"></router-link>
+              </a-menu-item>
+              <a-menu-item key="16">Ministrantes
+                <router-link to="/adm/cadDespesa"></router-link>
+              </a-menu-item>
+              <a-menu-item key="16">Administradores
+                <router-link to="/adm/cadDespesa"></router-link>
+              </a-menu-item>
+          </a-sub-menu>
           <a-sub-menu key="sub1">
             <span slot="title"><a-icon type="bank"/><span>Cadastro de Caixa</span></span>
             <a-menu-item key="11">Receita
