@@ -1,21 +1,29 @@
 <template>
   <div class="box">
-    
+      <a-select defaultValue="Selecione uma Opção" @change="handleChange" class="space">
+        <a-select-option name="administradores" value="administradores">Administradores</a-select-option>
+        <a-select-option name="alunos" value="alunos">Alunos</a-select-option>
+        <a-select-option name="convidados" value="convidados">Convidados</a-select-option>
+        <a-select-option name="eventos" value="eventos">Eventos</a-select-option>
+        <a-select-option name="palestrantes" value="palestrantes">Palestrantes</a-select-option>
+        <a-select-option name="ministrantes" value="ministrantes">Ministrantes</a-select-option>
+      </a-select>
+
     <table class="table table-sm table-bordered">
-  <thead class="thead-dark">
-    <tr class="th">
-      <th scope="col">Nome do Evento</th>
-      <th scope="col">Data do Evento</th>
-      <th scope="col">Opções</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table_back" v-for="tabela in tabelas">
-      <td>{{tabela.nome}}</td>
-      <td>{{tabela.data_horario_inicio }}</td>
-      <td><button> <a-icon type="edit" /></button>  <button v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
-    </tr>
-  </tbody>
+    <thead class="thead-dark">
+      <tr class="th">
+        <th scope="col">Nome do Evento</th>
+        <th scope="col">Data do Evento</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table_back" v-for="tabela in tabelas">
+        <td>{{tabela.nome}}</td>
+        <td>{{tabela.data_horario_inicio }}</td>
+        <td><button> <a-icon type="edit" /></button>  <button v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
+      </tr>
+    </tbody>
 </table>
   </div>
 </template>
@@ -53,6 +61,9 @@ export default {
             });
             console.log("Deletou! ID:"+pos);
             location.reload();
+    },
+    onSearch (value) {
+      console.log(value)
     }
   }
 
@@ -89,4 +100,10 @@ const axios = require('axios');
     background-color: rgba(15, 15, 15, 0.253);
 }
 
+.space {
+  padding: 2px;
+  width: 221px;
+  margin-left:25%;
+  width: 50%;
+}
 </style>
