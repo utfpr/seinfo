@@ -14,6 +14,10 @@ export default {
 </script>
 <style scoped>
 
+.ant-carousel{
+  z-index: 1000;
+}
+
 .ant-carousel >>> .slick-slide {
   text-align: center;
   min-height: 500px;
