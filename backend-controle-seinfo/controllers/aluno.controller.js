@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     
     console.log("Criado a Pessoa!");
     id_pk = pessoa.idPessoa;
-    res.send(pessoa);
+    //res.send(pessoa);
 
     /*
         Depois de Criado a pessoa eu crio o aluno logo abaixo
