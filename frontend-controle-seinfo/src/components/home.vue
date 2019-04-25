@@ -1,11 +1,7 @@
 <template>
   <a-layout id="components-layout-demo-top" class="layout">
       <div>
-    <nav class="navbar navbar-expand-sm navi">
-        <div class="navbar-collapse justify-content-end">
-            <a class="nav-link" href="http://localhost:8080/login"><b>LOGIN</b></a>
-        </div>
-    </nav>
+    <navHome></navHome>
   </div>
     <a-layout-content>
       <carousel></carousel>
@@ -17,10 +13,12 @@
 <script>
 import workspace from "./workspace.vue";
 import carousel from "./carousel.vue";
+import navHome from "./navHome.vue";
 export default {
   components: {
     workspace,
-    carousel
+    carousel,
+    navHome
   }
 };
 </script>
