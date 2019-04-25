@@ -4,22 +4,7 @@
     </div>
     <nav class="navbar navbar-expand-sm navi">
       <div class="navbar-collapse justify-content-center">
-        <img src="../assets/logo_com_nome.jpg" class="justify-content-center">  
-        <a-dropdown>
-          <a class="bt" href="#">
-            <a-icon type="menu-fold"/>
-          </a>
-          <a-menu slot="overlay">
-            <a-menu-item key="0">
-              <a href="#">Profile</a>
-            </a-menu-item>
-            <a-menu-divider/>
-            <a-menu-item key="1"><a href="#">Settings</a></a-menu-item>
-            <a-menu-item key="2"><a href="#">Help</a></a-menu-item>
-              <a-menu-divider/>
-              <a-menu-item key="3"><a href="http://localhost:8080/">Sign Out</a></a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <a href="http://localhost:8080/"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a> 
       </div>
     </nav>
   </div>
@@ -30,6 +15,11 @@ export default {};
 </script>
 
 <style scoped>
+
+.navbar{
+  padding:0%
+}
+
 .bt {
   background: transparent;
   border: transparent;
