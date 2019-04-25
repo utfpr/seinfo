@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS `seinfo`.`pessoa` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `idPessoa` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(60) NOT NULL,
-  `email` VARCHAR(60) NULL,
+  `nome` VARCHAR(256) NOT NULL,
+  `email` VARCHAR(256) NULL,
   `CPF` CHAR(11) NOT NULL,
   PRIMARY KEY (`idPessoa`))
 ENGINE = InnoDB;
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seinfo`.`convidado` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`convidado` (
-  `senha` VARCHAR(20) NOT NULL,
+  `senha` CHAR(32) NOT NULL,
   `idPessoa` INT NOT NULL,
   PRIMARY KEY (`idPessoa`),
   CONSTRAINT `fk_convidado_pessoa1`
@@ -43,8 +43,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`convidado` (
     REFERENCES `seinfo`.`pessoa` (`idPessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = '(VER COM O PROF. ANDRE DE BANCO).\n\nCOMO CONVIDADO NÃO TEM NADA A MAIS QUE UM ALUNO, PODEMOS CADASTRAR DIRETO NA TABELA ALUNOS,\n\nPORTANTO, QUEM TIVER NA TABELA PESSOA E NA TABELA ALUNO É ALUNO.\nQUEM TIVER NA TABELA PESSOA E NÃO NA TABELA ALUNO É CONVIDADO...';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -53,10 +52,10 @@ COMMENT = '(VER COM O PROF. ANDRE DE BANCO).\n\nCOMO CONVIDADO NÃO TEM NADA A M
 DROP TABLE IF EXISTS `seinfo`.`aluno` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`aluno` (
-  `RA` INT(7) NOT NULL,
-  `senha` VARCHAR(20) NOT NULL,
+  `ra` CHAR(8) NOT NULL,
+  `senha` CHAR(32) NOT NULL,
   `idPessoa` INT NOT NULL,
-  PRIMARY KEY (`RA`),
+  PRIMARY KEY (`ra`),
   INDEX `fk_aluno_pessoa1_idx` (`idPessoa` ASC),
   CONSTRAINT `fk_aluno_pessoa1`
     FOREIGN KEY (`idPessoa`)
@@ -73,8 +72,9 @@ DROP TABLE IF EXISTS `seinfo`.`admin` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`admin` (
   `usuario` VARCHAR(20) NOT NULL,
-  `senha` VARCHAR(20) NOT NULL,
-  `nome` VARCHAR(60) NOT NULL,
+  `senha` CHAR(32) NOT NULL,
+  `nome` VARCHAR(256) NOT NULL,
+  `nivel` INT NOT NULL DEFAULT 2,
   PRIMARY KEY (`usuario`))
 ENGINE = InnoDB;
 
@@ -86,58 +86,53 @@ DROP TABLE IF EXISTS `seinfo`.`evento` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`evento` (
   `idEvento` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(60) NOT NULL,
-  `valor` FLOAT NOT NULL,
-  `descricao` VARCHAR(500) NULL,
+  `nome` VARCHAR(256) NOT NULL,
+  `descricao` VARCHAR(5000) NULL,
   `data_horario_inicio` DATETIME NOT NULL,
   `data_hora_fim` DATETIME NULL,
-  `urlImagem` VARCHAR(45) NULL DEFAULT '../imagens/default.png',
+  `urlImagem` VARCHAR(256) NULL DEFAULT '../imagens/default.png',
   PRIMARY KEY (`idEvento`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`minicurso`
+-- Table `seinfo`.`categoria`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`minicurso` ;
+DROP TABLE IF EXISTS `seinfo`.`categoria` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`minicurso` (
-  `idMinicurso` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(60) NOT NULL,
-  `valor` FLOAT NOT NULL,
-  `descricao` VARCHAR(500) NULL,
-  `data_horario_inicio` DATETIME NOT NULL,
-  `local` VARCHAR(45) NOT NULL,
-  `data_hora_fim` DATETIME NULL,
-  `idEvento` INT NOT NULL,
-  PRIMARY KEY (`idMinicurso`),
-  INDEX `fk_minicurso_evento1_idx` (`idEvento` ASC),
-  CONSTRAINT `fk_minicurso_evento1`
-    FOREIGN KEY (`idEvento`)
-    REFERENCES `seinfo`.`evento` (`idEvento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `seinfo`.`categoria` (
+  `idcategoria` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`idcategoria`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`palestra`
+-- Table `seinfo`.`atividade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`palestra` ;
+DROP TABLE IF EXISTS `seinfo`.`atividade` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`palestra` (
-  `idpalestra` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(60) NOT NULL,
-  `descricao` VARCHAR(500) NULL,
-  `data_horario_inicio` DATETIME NOT NULL,
-  `local` VARCHAR(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `seinfo`.`atividade` (
+  `idAtividade` INT NOT NULL AUTO_INCREMENT,
+  `valor` FLOAT NOT NULL DEFAULT 0.00,
+  `descricao` VARCHAR(5000) NULL,
+  `dataHorarioInicio` DATETIME NOT NULL,
+  `local` VARCHAR(256) NOT NULL,
+  `dataHoraFim` DATETIME NOT NULL,
+  `horasParticipacao` TIME NOT NULL,
   `idEvento` INT NOT NULL,
-  `hora_fim` TIME NOT NULL,
-  PRIMARY KEY (`idpalestra`),
-  INDEX `fk_palestra_evento1_idx` (`idEvento` ASC),
-  CONSTRAINT `fk_palestra_evento1`
+  `idcategoria` INT NOT NULL,
+  PRIMARY KEY (`idAtividade`),
+  INDEX `fk_minicurso_evento1_idx` (`idEvento` ASC),
+  INDEX `fk_atividade_categoria1_idx` (`idcategoria` ASC),
+  CONSTRAINT `fk_minicurso_evento1`
     FOREIGN KEY (`idEvento`)
     REFERENCES `seinfo`.`evento` (`idEvento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_atividade_categoria1`
+    FOREIGN KEY (`idcategoria`)
+    REFERENCES `seinfo`.`categoria` (`idcategoria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -169,22 +164,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`participaMinicurso`
+-- Table `seinfo`.`participaAtividade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`participaMinicurso` ;
+DROP TABLE IF EXISTS `seinfo`.`participaAtividade` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`participaMinicurso` (
-  `idMinicurso` INT NOT NULL,
-  `confirmacao_pagamento_minicurso` TINYINT NULL DEFAULT 0,
-  `participacao_minicurso` TINYINT NULL DEFAULT 0,
+CREATE TABLE IF NOT EXISTS `seinfo`.`participaAtividade` (
+  `idAtividade` INT NOT NULL,
+  `confirmacaoPagamentoAtividade` TINYINT NULL DEFAULT 0,
+  `presenca` TINYINT NULL DEFAULT 0,
   `idEvento` INT NOT NULL,
   `idPessoa` INT NOT NULL,
-  INDEX `fk_evento_has_Pessoa_has_minicurso_minicurso1_idx` (`idMinicurso` ASC),
-  PRIMARY KEY (`idMinicurso`, `idEvento`, `idPessoa`),
+  INDEX `fk_evento_has_Pessoa_has_minicurso_minicurso1_idx` (`idAtividade` ASC),
+  PRIMARY KEY (`idAtividade`, `idEvento`, `idPessoa`),
   INDEX `fk_participaMinicurso_inscricao1_idx` (`idEvento` ASC, `idPessoa` ASC),
   CONSTRAINT `fk_evento_has_Pessoa_has_minicurso_minicurso1`
-    FOREIGN KEY (`idMinicurso`)
-    REFERENCES `seinfo`.`minicurso` (`idMinicurso`)
+    FOREIGN KEY (`idAtividade`)
+    REFERENCES `seinfo`.`atividade` (`idAtividade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_participaMinicurso_inscricao1`
@@ -196,11 +191,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`Caixa`
+-- Table `seinfo`.`caixa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`Caixa` ;
+DROP TABLE IF EXISTS `seinfo`.`caixa` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`Caixa` (
+CREATE TABLE IF NOT EXISTS `seinfo`.`caixa` (
   `idCaixa` INT NOT NULL AUTO_INCREMENT,
   `idEvento` INT NOT NULL,
   PRIMARY KEY (`idCaixa`),
@@ -220,15 +215,15 @@ DROP TABLE IF EXISTS `seinfo`.`despesa` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`despesa` (
   `idDespesa` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(60) NOT NULL,
-  `valor_unitario` FLOAT NULL,
-  `quantidade` INT NULL,
+  `descricao` VARCHAR(256) NOT NULL,
+  `valorUnitario` FLOAT NOT NULL DEFAULT 0.00,
+  `quantidade` INT NOT NULL DEFAULT 1,
   `idCaixa` INT NOT NULL,
   PRIMARY KEY (`idDespesa`),
   INDEX `fk_despesa_Caixa1_idx` (`idCaixa` ASC),
   CONSTRAINT `fk_despesa_Caixa1`
     FOREIGN KEY (`idCaixa`)
-    REFERENCES `seinfo`.`Caixa` (`idCaixa`)
+    REFERENCES `seinfo`.`caixa` (`idCaixa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -241,14 +236,14 @@ DROP TABLE IF EXISTS `seinfo`.`receita` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`receita` (
   `idReceita` INT NOT NULL AUTO_INCREMENT,
-  `valor` FLOAT NOT NULL,
-  `descricao` VARCHAR(60) NOT NULL,
+  `valor` FLOAT NOT NULL DEFAULT 0.00,
+  `descricao` VARCHAR(256) NOT NULL,
   `idCaixa` INT NOT NULL,
   PRIMARY KEY (`idReceita`),
   INDEX `fk_receita_Caixa1_idx` (`idCaixa` ASC),
   CONSTRAINT `fk_receita_Caixa1`
     FOREIGN KEY (`idCaixa`)
-    REFERENCES `seinfo`.`Caixa` (`idCaixa`)
+    REFERENCES `seinfo`.`caixa` (`idCaixa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -261,46 +256,20 @@ DROP TABLE IF EXISTS `seinfo`.`receitaInterna` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`receitaInterna` (
   `idReceita` INT NOT NULL,
-  `idMinicurso` INT NOT NULL,
+  `idAtividade` INT NOT NULL,
   `idEvento` INT NOT NULL,
   `idPessoa` INT NOT NULL,
   INDEX `fk_receita_interna_receita1_idx` (`idReceita` ASC),
   PRIMARY KEY (`idReceita`),
-  INDEX `fk_receitaInterna_participaMinicurso1_idx` (`idMinicurso` ASC, `idEvento` ASC, `idPessoa` ASC),
+  INDEX `fk_receitaInterna_participaMinicurso1_idx` (`idAtividade` ASC, `idEvento` ASC, `idPessoa` ASC),
   CONSTRAINT `fk_receita_interna_receita1`
     FOREIGN KEY (`idReceita`)
     REFERENCES `seinfo`.`receita` (`idReceita`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_receitaInterna_participaMinicurso1`
-    FOREIGN KEY (`idMinicurso` , `idEvento` , `idPessoa`)
-    REFERENCES `seinfo`.`participaMinicurso` (`idMinicurso` , `idEvento` , `idPessoa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `seinfo`.`participacaoDaPalestra`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`participacaoDaPalestra` ;
-
-CREATE TABLE IF NOT EXISTS `seinfo`.`participacaoDaPalestra` (
-  `idPalestra` INT NOT NULL,
-  `presenca` TINYINT NULL DEFAULT 0,
-  `idEvento` INT NOT NULL,
-  `idPessoa` INT NOT NULL,
-  PRIMARY KEY (`idPalestra`, `idEvento`, `idPessoa`),
-  INDEX `fk_evento_has_Pessoa_has_palestra_palestra1_idx` (`idPalestra` ASC),
-  INDEX `fk_participaPalestra_inscricao1_idx` (`idEvento` ASC, `idPessoa` ASC),
-  CONSTRAINT `fk_evento_has_Pessoa_has_palestra_palestra1`
-    FOREIGN KEY (`idPalestra`)
-    REFERENCES `seinfo`.`palestra` (`idpalestra`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_participaPalestra_inscricao1`
-    FOREIGN KEY (`idEvento` , `idPessoa`)
-    REFERENCES `seinfo`.`inscricao` (`idEvento` , `idPessoa`)
+    FOREIGN KEY (`idAtividade` , `idEvento` , `idPessoa`)
+    REFERENCES `seinfo`.`participaAtividade` (`idAtividade` , `idEvento` , `idPessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -332,22 +301,66 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`palestrante`
+-- Table `seinfo`.`Orador`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`palestrante` ;
+DROP TABLE IF EXISTS `seinfo`.`Orador` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`palestrante` (
-  `idPalestra` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `seinfo`.`Orador` (
   `idPessoa` INT NOT NULL,
-  PRIMARY KEY (`idPalestra`, `idPessoa`),
-  INDEX `fk_pessoa_has_palestra_palestra1_idx` (`idPalestra` ASC),
-  INDEX `fk_palestrante_pessoa1_idx` (`idPessoa` ASC),
-  CONSTRAINT `fk_pessoa_has_palestra_palestra1`
-    FOREIGN KEY (`idPalestra`)
-    REFERENCES `seinfo`.`palestra` (`idpalestra`)
+  `idAtividade` INT NOT NULL,
+  PRIMARY KEY (`idPessoa`, `idAtividade`),
+  INDEX `fk_pessoa_has_minicurso_minicurso1_idx` (`idAtividade` ASC),
+  INDEX `fk_pessoa_has_minicurso_pessoa1_idx` (`idPessoa` ASC),
+  CONSTRAINT `fk_pessoa_has_minicurso_pessoa1`
+    FOREIGN KEY (`idPessoa`)
+    REFERENCES `seinfo`.`pessoa` (`idPessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_palestrante_pessoa1`
+  CONSTRAINT `fk_pessoa_has_minicurso_minicurso1`
+    FOREIGN KEY (`idAtividade`)
+    REFERENCES `seinfo`.`atividade` (`idAtividade`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `seinfo`.`organizacao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `seinfo`.`organizacao` ;
+
+CREATE TABLE IF NOT EXISTS `seinfo`.`organizacao` (
+  `idPessoa` INT NOT NULL,
+  `idEvento` INT NOT NULL,
+  `horasOrganizacao` TIME NOT NULL,
+  PRIMARY KEY (`idPessoa`, `idEvento`),
+  INDEX `fk_pessoa_has_evento_evento1_idx` (`idEvento` ASC),
+  INDEX `fk_pessoa_has_evento_pessoa1_idx` (`idPessoa` ASC),
+  CONSTRAINT `fk_pessoa_has_evento_pessoa1`
+    FOREIGN KEY (`idPessoa`)
+    REFERENCES `seinfo`.`pessoa` (`idPessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pessoa_has_evento_evento1`
+    FOREIGN KEY (`idEvento`)
+    REFERENCES `seinfo`.`evento` (`idEvento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `seinfo`.`professor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `seinfo`.`professor` ;
+
+CREATE TABLE IF NOT EXISTS `seinfo`.`professor` (
+  `nick` VARCHAR(256) NOT NULL,
+  `idPessoa` INT NOT NULL,
+  `senha` CHAR(32) NOT NULL,
+  PRIMARY KEY (`nick`),
+  INDEX `fk_professor_pessoa1_idx` (`idPessoa` ASC),
+  CONSTRAINT `fk_professor_pessoa1`
     FOREIGN KEY (`idPessoa`)
     REFERENCES `seinfo`.`pessoa` (`idPessoa`)
     ON DELETE NO ACTION
@@ -356,24 +369,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`ministrante`
+-- Table `seinfo`.`lote`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`ministrante` ;
+DROP TABLE IF EXISTS `seinfo`.`lote` ;
 
-CREATE TABLE IF NOT EXISTS `seinfo`.`ministrante` (
-  `idPessoa` INT NOT NULL,
-  `idMinicurso` INT NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idMinicurso`),
-  INDEX `fk_pessoa_has_minicurso_minicurso1_idx` (`idMinicurso` ASC),
-  INDEX `fk_pessoa_has_minicurso_pessoa1_idx` (`idPessoa` ASC),
-  CONSTRAINT `fk_pessoa_has_minicurso_pessoa1`
-    FOREIGN KEY (`idPessoa`)
-    REFERENCES `seinfo`.`pessoa` (`idPessoa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pessoa_has_minicurso_minicurso1`
-    FOREIGN KEY (`idMinicurso`)
-    REFERENCES `seinfo`.`minicurso` (`idMinicurso`)
+CREATE TABLE IF NOT EXISTS `seinfo`.`lote` (
+  `idLote` INT NOT NULL AUTO_INCREMENT,
+  `valor` FLOAT NOT NULL DEFAULT 0.00,
+  `dataAbertura` DATE NOT NULL,
+  `dataFechamento` DATE NOT NULL,
+  `idEvento` INT NOT NULL,
+  PRIMARY KEY (`idLote`),
+  INDEX `fk_lote_evento1_idx` (`idEvento` ASC),
+  CONSTRAINT `fk_lote_evento1`
+    FOREIGN KEY (`idEvento`)
+    REFERENCES `seinfo`.`evento` (`idEvento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
