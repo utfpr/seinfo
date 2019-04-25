@@ -2,7 +2,7 @@
 <div class="title">
   <h5 style="text-align:center">Cadastro de Convidado</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/convidado" method="post">
+    <form class="form" action="http://localhost:3000/api/convidado" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome do Convidado:</label>
@@ -12,7 +12,7 @@
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required">Senha do Convidado:</label>
-          <a-input placeholder="Senha" name="nome_convidado" type="password">
+          <a-input placeholder="Senha" name="senha_convidado" type="password">
             <a-icon slot="prefix" type="key" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
