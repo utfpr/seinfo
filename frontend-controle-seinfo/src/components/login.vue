@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div id="app" class="body" style="background-color:gren;">
     <div id="login">
       <div class="container" style="text-align:left;">
         <div id="login-row" class="row justify-content-center">
@@ -67,4 +67,16 @@ body {
   #register-link {
   margin-top: -85px;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  height: 100%;
+}
+
+
 </style>
