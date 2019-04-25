@@ -30,6 +30,11 @@
           sourceKey: 'idPessoa',
           as: 'Alunos',
         });
+        models.pessoa.model.hasMany(models.convidado.model, {
+          foreignKey: 'idPessoa',
+          sourceKey: 'idPessoa',
+          as: 'Convidados',
+        });
       };
 
 
