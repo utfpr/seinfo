@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="body" style="background-color:gren;">
+  <div id="app" class="body" style="background-color:black;">
     <div id="login">
       <div class="container" style="text-align:left;">
         <div id="login-row" class="row justify-content-center">
