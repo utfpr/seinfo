@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     //res.send(pessoa);
 
     /*
-        Depois de Criado a pessoa eu crio o aluno logo abaixo
+        Depois de Criado a pessoa eu crio o convidado logo abaixo
         passando o id_pk que será a nossa FK;
     */
    Convidado.create({  
