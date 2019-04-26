@@ -1,6 +1,6 @@
 <template>
 <div>
-  <a-carousel effect="fade" autoplay>
+  <a-carousel effect="fade" autoplay >
     <div><img src="../assets/banner.png"></div>
     <div><img src="../assets/banner.png"></div>
     <div><img src="../assets/banner.png"></div>
@@ -15,7 +15,7 @@ export default {
 <style scoped>
 
 .ant-carousel{
-  z-index: 1000;
+  border: 1px solid rgba(12, 12, 12, 0.863);
 }
 
 .ant-carousel >>> .slick-slide {
@@ -32,7 +32,6 @@ img{
   min-width: 100%;
   max-height:500px;
   min-height: 500px;
-  border: 1px solid black;
   border-top: transparent;
 }
 
