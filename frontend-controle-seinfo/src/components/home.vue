@@ -25,15 +25,5 @@ export default {
 
 <style>
 
-.nav-link{
-  color: rgb(0, 0, 0);
-}
-
-.navi{
-  background-color: rgb(255, 255, 255);
-  box-shadow: 6px 3px 10px rgb(202, 202, 202);
-  
-}
-
 </style>
 
