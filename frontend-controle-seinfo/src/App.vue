@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view/><a-layout id="components-layout-demo-top" class="layout">
+      <div>
+    <app-footer></app-footer>
+  </div>
+  </a-layout>
   </div>
 </template>
 
 <script>
 import Home from "./components/home.vue";
+import Footer from "./components/footer.vue";
 
 export default {
   name: 'App',
-  component:{
-    Home
+  components:{
+    Home,
+     'app-footer' : Footer
   }
 }
 </script>
@@ -30,3 +36,5 @@ body{
 }
 
 </style>
+
+
