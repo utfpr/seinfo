@@ -75,7 +75,7 @@ exports.atualiza=(req,res)=>{
       {RA: req.body.ra_aluno,
         senha: req.body.senha_aluno,
     },
-      {where: {RA: req.body.ra_aluno, idPessoa: req.params.pessoaId}}).then(aluno=>{
+      {where: {idPessoa: req.params.pessoaId}}).then(aluno=>{
         console.log("Atualizando aluno");
         res.send(aluno);
       }).catch(err=>{
@@ -89,15 +89,15 @@ exports.atualiza=(req,res)=>{
 
 exports.delete=(req,res)=>{
  
-    Aluno.destroy({where: {idPessoa: req.params.pessoaId, RA: req.body.ra_aluno}}).then(aluno=>{
+    Aluno.destroy({where: {idPessoa: req.params.pessoaId }}).then(aluno=>{
       Pessoa.destroy({ where: { idPessoa: req.params.pessoaId } }).then(pessoa => {
         console.log("Deletando o pessoa com o ID: "+req.params.pessoaId);
-        res.send(pessoa); //Retorna um Json para a Pagina da API
+        //res.sendStatus(pessoa); //Retorna um Json para a Pagina da API
       }).catch(err => {
         res.status(500).send("Error -> " + err);
       })
-      console.log("Deletando o aluno com o ID: "+req.params.ra_aluno);
-    res.send(aluno);
+      console.log("Deletando o aluno com o ID: "+req.body.ra_aluno);
+    //res.sendStatus(aluno);
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
