@@ -2,7 +2,7 @@
 <div>
   <nav class="navbar navbar-light justify-content-between" >
   <a class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-button class="bt" href="http://localhost:8080/login" style="font-family:sans-serif"><a-icon type="user" />LOGIN</a-button>
+  <a-button class="bt" :href="'/login'" style="font-family:sans-serif"><a-icon type="user" />LOGIN</a-button>
 </nav>
 </div>
 </template>
