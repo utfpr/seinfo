@@ -21,7 +21,7 @@ npm install
 ```
 Logo em seguida coloque o servidor para rodar com o comando:
 ```bash
-npm run dev
+npm start
 ```
 Para iniciar o backend, abra o terminal na pasta /backend-controle-seinfo e digite o comando: 
 ```bash
@@ -29,7 +29,7 @@ npm install
 ```
 Logo em seguida inicia o servidor do backend utilizando o seguinte comando:
 ```bash
-npm run dev
+npm start
 ```
 
 Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/config/env.js
