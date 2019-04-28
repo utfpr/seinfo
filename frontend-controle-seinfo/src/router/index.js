@@ -1,32 +1,38 @@
-import Vue from 'vue' 
-import Router from 'vue-router'
-import Home from '@/components/home'
-import Login from '@/components/login'
-import Registrar from '@/components/registrar'
-import adm from '@/components/adm'
-import tabela from '@/components/tabela'
-import Cad_evento from '@/components/cad_evento'
-import Cad_Minicurso from '@/components/cad_minicurso' 
-import Cad_Palestra from '@/components/cad_palestra'
-import Cad_Receita from '@/components/cad_receita'
-import Cad_Despesa from '@/components/cad_despesa'
-import Cad_Palestrante from '@/components/cad_palestrante'
-import Cad_Adm from '@/components/cad_adm'
-import Cad_Ministrante from '@/components/cad_ministrante'
-import Cad_Aluno from '@/components/cad_aluno'
-import Cad_Convidado from '@/components/cad_convidado'
-import Cad_Outro from '@/components/cad_outros'
-import Logo from '@/components/logo'
-import Evento from '@/components/evento'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '@/components/home';
+import Login from '@/components/login';
+import Registrar from '@/components/registrar';
+import adm from '@/components/adm';
+import tabela from '@/components/tabela';
+import Cad_evento from '@/components/cad_evento';
+import Cad_Minicurso from '@/components/cad_minicurso';
+import Cad_Palestra from '@/components/cad_palestra';
+import Cad_Receita from '@/components/cad_receita';
+import Cad_Despesa from '@/components/cad_despesa';
+import Cad_Palestrante from '@/components/cad_palestrante';
+import Cad_Adm from '@/components/cad_adm';
+import Cad_Ministrante from '@/components/cad_ministrante';
+import Cad_Aluno from '@/components/cad_aluno';
+import Cad_Convidado from '@/components/cad_convidado';
+import Cad_Outro from '@/components/cad_outros';
+import Logo from '@/components/logo';
+import Evento from '@/components/evento';
+import Footer from '@/components/footer';
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      children: [{
+        path: '',
+        component: Footer
+      }]
     },
     {
       path: '/login',
@@ -104,4 +110,4 @@ export default new Router({
     },
   ],
   mode: 'history'
-})
+});
