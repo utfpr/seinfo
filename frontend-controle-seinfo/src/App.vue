@@ -1,23 +1,12 @@
 <template>
   <div id="app">
-    <router-view/><a-layout id="components-layout-demo-top" class="layout">
-      <div>
-    <app-footer></app-footer>
-  </div>
-  </a-layout>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Home from "./components/home.vue";
-import Footer from "./components/footer.vue";
-
 export default {
   name: 'App',
-  components:{
-    Home,
-     'app-footer' : Footer
-  }
 }
 </script>
 
@@ -33,6 +22,11 @@ export default {
 
 body{
   background-color: rgb(255, 255, 255);
+}
+
+.row{
+  margin-right: 0;
+  margin-left: 0;
 }
 
 </style>
