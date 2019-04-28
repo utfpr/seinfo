@@ -23,6 +23,8 @@ export default {};
 
 .navbar{
   width: 100%;
+  position: fixed;
+  z-index: 1050;
   padding: 0;
   padding-left: 20px;
   padding-right: 20px;
