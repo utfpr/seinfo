@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="footer-meio">
-        <span>UTFPR - Universidade Tecnológica Federal do Paraná</span>
+        <span>© UTFPR - Universidade Tecnológica Federal do Paraná</span>
     </div>
   </footer>
 </template>
@@ -21,7 +21,7 @@ export default {
 <style>
 
 .footer-distributed {
-  background-color: #292c2f;
+  background-color: #1b1b1b;
   padding: 17px 25px;
 }
 
