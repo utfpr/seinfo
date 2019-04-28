@@ -59,6 +59,10 @@ export default {
 
 <style scoped>
 
+.ant-card-meta{
+  background-color: white;
+}
+
 .texto{
   text-align: center;
 }
@@ -76,6 +80,7 @@ export default {
 .ant-card-actions > li > span a{
   line-height:28px;
 }
+
 
 .ant-card-meta-title {
   text-align: center;

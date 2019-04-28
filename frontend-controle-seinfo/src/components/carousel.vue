@@ -15,6 +15,7 @@ export default {
 <style scoped>
 
 .ant-carousel{
+  margin-top: 60px;
   border: 1px solid rgba(12, 12, 12, 0.863);
 }
 
