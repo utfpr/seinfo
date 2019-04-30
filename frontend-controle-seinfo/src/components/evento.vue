@@ -1,52 +1,80 @@
 <template>
-<div class="">
-  <div>
-      <div class="title">Seinfo</div>
-      <div class="desc"><h6>A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.</h6></div>
+  <div id="eve">
+    <navHome></navHome>
+    <div>
+      
+    </div>
   </div>
-</div>
 </template>
 <script>
-import navSimples from "./navSimples.vue";
+import navHome from "./navHome.vue";
 export default {
   data() {
     return {
-      collapsed: false
     };
   },
   components: {
-    navSimples
+    navHome
   }
 };
 </script>
 <style>
-
-.title{
-  text-align: center;
-  opacity: 0.60;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-}
-
-.desc{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-}
-
-
-.ant-carousel >>> .slick-slide {
-  text-align: center;
-  min-height: 500px;
-  max-height: 500px;
-  line-height: 160px;
-  background: #000000;
-}
-
-img{
-  max-width: 100%;
-  min-width: 100%;
-  max-height:500px;
-  min-height: 500px;
-  border-top: transparent;
+#eve {
+  height: 100%;
+  background: #092756;
+  background: -moz-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -moz-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4)
+          100%),
+    -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -webkit-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(104, 128, 138) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -webkit-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(
+            42,
+            60,
+            87,
+            0.4
+          )
+          100%),
+    -webkit-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -o-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgb(9, 21, 26) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -o-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4)
+          100%),
+    -o-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -ms-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(6, 26, 34, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    -ms-linear-gradient(top, rgba(57, 173, 219, 0.25) 0%, rgba(42, 60, 87, 0.4)
+          100%),
+    -ms-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+  background: -webkit-radial-gradient(
+      0% 100%,
+      ellipse cover,
+      rgba(11, 28, 36, 0.4) 10%,
+      rgba(138, 114, 76, 0) 40%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(57, 173, 219, 0.25) 0%,
+      rgba(42, 60, 87, 0.4) 100%
+    ),
+    linear-gradient(135deg, #670d10 0%, #092756 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 </style>
