@@ -18,6 +18,7 @@ require('./routes/minicurso.route.js')(app);
 require('./routes/palestra.route.js')(app);
 require('./routes/aluno.route.js')(app);
 require('./routes/convidado.route.js')(app);
+require('./routes/lote.route.js')(app);
 app.use('/', router);
 
 module.exports = app;
