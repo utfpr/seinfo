@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
     valor: {
         type: Sequelize.FLOAT
       },
-    dataAberutra: {
+    dataAbertura: {
         type: Sequelize.STRING
       },
     dataFechamento: {

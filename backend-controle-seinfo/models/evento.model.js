@@ -11,9 +11,6 @@ module.exports = (sequelize, Sequelize) => {
     nome: {
         type: Sequelize.STRING
       },
-    valor: {
-        type: Sequelize.DOUBLE
-      },
     descricao: {
         type: Sequelize.STRING
       },

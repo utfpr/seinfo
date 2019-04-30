@@ -11,7 +11,6 @@ exports.create = (req, res) => {
   Evento.create({  
     //idEvento: req.body.idEvento,
     nome: req.body.nome,
-    valor: req.body.valor,
     descricao: req.body.descricao,
     data_horario_inicio: data_ini_full ,
     data_hora_fim: data_fim_full,
