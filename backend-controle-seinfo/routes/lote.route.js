@@ -11,7 +11,7 @@ module.exports = function(app) {
     // Procura todos os lotes
     app.get('/api/lotes', lotes.findAll);
   
-    // Update de um lote pelo ID (Implementar)
+    // Update de um lote pelo ID 
     app.patch('/api/lote/:loteId', lotes.atualiza);
   
     // Deleta um lote pelo ID

@@ -31,10 +31,7 @@ module.exports = (sequelize, Sequelize) => {
     });
     
     Evento.associate = models=>{
-      models.evento.model.hasMany(models.minicurso.model,{
-        foreignKey: 'idEvento'
-      })
-      models.evento.model.hasMany(models.palestra.model,{
+      models.evento.model.hasMany(models.atividade.model,{
         foreignKey: 'idEvento'
       })
     }
