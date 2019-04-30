@@ -1,6 +1,20 @@
 <template>
 <div>
-  <a-carousel effect="fade" autoplay >
+  <a-carousel effect="fade" autoplay arrows >
+    <div
+      slot="prevArrow" slot-scope="props"
+      class="custom-slick-arrow"
+      style="left: 10px;zIndex: 1"
+    >
+      <a-icon type="left"/>
+    </div>
+    <div
+      slot="nextArrow" slot-scope="props"
+      class="custom-slick-arrow"
+      style="right: 10px"
+    >
+      <a-icon type="right" />
+    </div>
     <div><img src="../assets/banner.png"></div>
     <div><img src="../assets/banner.png"></div>
     <div><img src="../assets/banner.png"></div>
@@ -13,6 +27,21 @@ export default {
 }
 </script>
 <style scoped>
+
+.ant-carousel >>> .custom-slick-arrow {
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  color: #fff;
+  background-color: rgba(31,45,61,.11);
+  opacity: 0.3;
+}
+.ant-carousel >>> .custom-slick-arrow:before {
+  display: none;
+}
+.ant-carousel >>> .custom-slick-arrow:hover {
+  opacity: 0.5;
+}
 
 .ant-carousel{
   margin-top: 60px;
