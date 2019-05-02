@@ -1,4 +1,5 @@
 const db = require('../config/db.config.js');
+const agEventos = require('../controllers/agendamentoEvento.controller.js');
 const Agenda = db.agendas;
  
 // Post do Eventod
@@ -13,7 +14,9 @@ exports.create = (req, res) => {
 
   }).then(agenda => {    
     // Cria um Evento
-    console.log("Criado o Agenda! "+agenda.idAgenda)
+    console.log("Criado o Agenda! "+agenda.idAgenda);
+    //vincula os id na tabela agendamentoEventos
+    agEventos.create({"evento":req.evento,"agenda":agenda.idAgenda});
     res.send(agenda.idAgenda);
   }).catch(err => {
     res.status(500).send("Error -> " + err);

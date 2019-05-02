@@ -1,7 +1,7 @@
 const db = require('../config/db.config.js');
 const Evento = db.eventos;
 const agendas = require('../controllers/agenda.controller.js');
-const agEventos = require('../controllers/agendamentoEvento.controller.js');
+
  
 // Post do Evento
 exports.create = (req, res) => {
@@ -23,25 +23,15 @@ exports.create = (req, res) => {
     //urlImagem: req.body.urlImagem
   }).then( evento => {
 
-    /*
-    
-  Precissa descobrir uma forma de sincronismo
-    
-    
-    */
 
     // Cria um Evento
     console.log("Criado o evento com o id: "+evento.idEvento);
     
     // Cria Agenda e retorna o idDa Agenda
-    var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas});
-    console.log("Criado o agenda com o id: "+idAgenda);
-
-    //vincula os id na tabela agendamentoEventos
-    agEventos.create({"evento":evento.idEvento,"agenda":idAgenda});
-
-
+    var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
+  
     res.send(evento);
+
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
