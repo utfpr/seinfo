@@ -11,8 +11,22 @@
           </a-input>
         </a-form-item>
         <a-form-item class="space">
+          <label class="ant-form-item-required">Valor do Minicurso:</label>
+          <a-input placeholder="Valor" name="valor_min" type="number">
+            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
           <label class="ant-form-item-required">Data de Inicio:</label>
           <a-input name="data_ini_pale" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Data de Fim:</label>
+          <a-input  name="data_fim_min" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>

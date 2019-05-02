@@ -48,7 +48,13 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Descrição:</label>
-            <a-textarea type="text" name="descricao" placeholder="Descrição" :rows="4"/>
+            <a-textarea  maxlength="5000" type="text" name="descricao" placeholder="Descrição" :rows="4"/>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space_2">
+            <label class="ant-form-item-required">Status:</label>
+            <a-textarea  maxlength="5000" type="text" name="status" value="1" placeholder="status" :rows="4"/>
           </a-form-item>
         </div>
         <div class="row justify-content-center">

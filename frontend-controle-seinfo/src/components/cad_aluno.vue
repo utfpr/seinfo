@@ -36,7 +36,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">CPF do Aluno:</label>
-          <a-input type="number" name="cpf_aluno" placeholder="CPF" />
+          <a-input type="text" name="cpf_aluno" class="ls-mask-cpf" placeholder="000.000.000-00" />
         </a-form-item>
       </div>
       <div class="row justify-content-center">
