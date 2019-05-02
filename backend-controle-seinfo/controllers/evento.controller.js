@@ -1,5 +1,7 @@
 const db = require('../config/db.config.js');
 const Evento = db.eventos;
+const agendas = require('../controllers/agenda.controller.js');
+const agEventos = require('../controllers/agendamentoEvento.controller.js');
  
 // Post do Evento
 exports.create = (req, res) => {
@@ -8,16 +10,20 @@ exports.create = (req, res) => {
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
 
+  // Cria Agenda e retorna o idDa Agenda
+  var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":req.body.local,"horas":req.body.horas});
   Evento.create({  
     //idEvento: req.body.idEvento,
     nome: req.body.nome,
     descricao: req.body.descricao,
-    data_horario_inicio: data_ini_full ,
-    data_hora_fim: data_fim_full,
-    urlImagem: req.body.urlImagem
+    status: req.body.status,
+    //data_horario_inicio: data_ini_full ,
+    //data_hora_fim: data_fim_full,
+    //urlImagem: req.body.urlImagem
   }).then(evento => {    
     // Cria um Evento
-    console.log("Criado o evento!")
+    console.log("Criado o evento com o id: "+evento.eventoId);
+    
     res.send(evento);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -47,12 +53,16 @@ exports.findById = (req, res) => {
     const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
     const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
     Evento.update(
-      {nome: req.body.nome,
-      valor: req.body.valor,
+      {
+      nome: req.body.nome,
       descricao: req.body.descricao,
-      data_horario_inicio: data_ini_full ,
-      data_hora_fim: data_fim_full,
-      urlImagem: req.body.urlImagem},
+      status: req.body.status,
+
+      //data_horario_inicio: data_ini_full ,
+      //data_hora_fim: data_fim_full,
+      //urlImagem: req.body.urlImagem
+    
+      },
       {where: {idEvento: req.params.eventoId}}).then(evento=>{
         console.log("Atualizando evento");
         res.send(evento);

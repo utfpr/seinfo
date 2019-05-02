@@ -26,6 +26,8 @@ db.convidados = require('../models/convidado.model.js')(sequelize,Sequelize);
 db.lotes = require('../models/lote.model.js')(sequelize,Sequelize);
 db.categorias = require('../models/categoria.model.js')(sequelize,Sequelize);
 db.atividades = require('../models/atividade.model.js')(sequelize,Sequelize);
+db.agendas = require('../models/agenda.model.js')(sequelize,Sequelize);
+db.agEventos = require('../models/agendamentoEvento.model.js')(sequelize,Sequelize);
 /*
 db.eventos.hasMany(db.minicruso,{ foreignKey: 'idEvento'})
 db.eventos.hasMany(db.palestra,{ foreignKey: 'idEvento'})

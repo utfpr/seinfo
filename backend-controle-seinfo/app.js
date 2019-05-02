@@ -19,6 +19,7 @@ require('./routes/convidado.route.js')(app);
 require('./routes/lote.route.js')(app);
 require('./routes/categoria.route.js')(app);
 require('./routes/atividade.route.js')(app);
+require('./routes/agenda.route.js')(app);
 app.use('/', router);
 
 module.exports = app;
