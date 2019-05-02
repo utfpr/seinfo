@@ -18,7 +18,6 @@ import Cad_Convidado from '@/components/cad_convidado';
 import Cad_Outro from '@/components/cad_outros';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
-import Footer from '@/components/footer';
 
 
 Vue.use(Router);
@@ -28,11 +27,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
-      children: [{
-        path: '',
-        component: Footer
-      }]
+      component: Home
     },
     {
       path: '/login',
