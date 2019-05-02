@@ -35,6 +35,14 @@ export default {};
 
 <style scoped>
 
+<<<<<<< HEAD
+.ant-card-meta{
+  background-color: white;
+}
+
+.texto{
+  text-align: center;
+=======
 #work{
 	background: #092756;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
@@ -47,6 +55,7 @@ export default {};
 
 .ant-divider-horizontal{
   margin: 7px 0;
+>>>>>>> master
 }
 
 .card-text{
@@ -77,9 +86,19 @@ export default {};
   border: transparent;
 }
 
+<<<<<<< HEAD
+.ant-card-actions > li > span a{
+  line-height:28px;
+}
+
+
+.ant-card-meta-title {
+  text-align: center;
+=======
 .bt {
   border-color: rgb(39, 10, 204);
   color: rgb(26, 12, 110);
+>>>>>>> master
 }
 
 .box-2 {
