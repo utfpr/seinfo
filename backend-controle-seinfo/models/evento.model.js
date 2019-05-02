@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
     status: {
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN
     }
     },
     { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
@@ -26,6 +26,10 @@ module.exports = (sequelize, Sequelize) => {
     
     Evento.associate = models=>{
       models.evento.model.hasMany(models.atividade.model,{
+        foreignKey: 'idEvento'
+      })
+
+      models.evento.model.hasMany(models.agendamentoEvento.model,{
         foreignKey: 'idEvento'
       })
     }
