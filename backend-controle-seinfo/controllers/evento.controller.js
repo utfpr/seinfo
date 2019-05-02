@@ -9,25 +9,45 @@ exports.create = (req, res) => {
   //Concatenando para ser inserido no Banco de Dados
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
+  const local = req.body.local;
+  const horas = req.body.horas;
 
-  // Cria Agenda e retorna o idDa Agenda
-  var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":req.body.local,"horas":req.body.horas});
+
+  
   Evento.create({  
-    //idEvento: req.body.idEvento,
+
     nome: req.body.nome,
     descricao: req.body.descricao,
     status: req.body.status,
-    //data_horario_inicio: data_ini_full ,
-    //data_hora_fim: data_fim_full,
+
     //urlImagem: req.body.urlImagem
-  }).then(evento => {    
-    // Cria um Evento
-    console.log("Criado o evento com o id: "+evento.eventoId);
+  }).then( evento => {
+
+    /*
     
+  Precissa descobrir uma forma de sincronismo
+    
+    
+    */
+
+    // Cria um Evento
+    console.log("Criado o evento com o id: "+evento.idEvento);
+    
+    // Cria Agenda e retorna o idDa Agenda
+    var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas});
+    console.log("Criado o agenda com o id: "+idAgenda);
+
+    //vincula os id na tabela agendamentoEventos
+    agEventos.create({"evento":evento.idEvento,"agenda":idAgenda});
+
+
     res.send(evento);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
+
+
+
 };
  
 

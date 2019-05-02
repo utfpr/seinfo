@@ -1,7 +1,7 @@
 const db = require('../config/db.config.js');
 const Agenda = db.agendas;
  
-// Post do Evento
+// Post do Eventod
 exports.create = (req, res) => {
 
   Agenda.create({  
@@ -52,7 +52,7 @@ exports.findById = (req, res) => {
 
     
       },
-      {where: {idAgenda: req.params.agendaId}}).then(evento=>{
+      {where: {idAgenda: req.params.agendaId}}).then(agenda=>{
         console.log("Atualizando Agendamento");
         res.send(agenda);
       }).catch(err=>{
