@@ -326,7 +326,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seinfo`.`imagem` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`imagem` (
-  `idImagem` INT NOT NULL,
+  `idImagem` INT NOT NULL AUTO_INCREMENT,
   `url` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`idImagem`),
   UNIQUE INDEX `url_UNIQUE` (`url` ASC))
@@ -339,7 +339,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seinfo`.`carrossel` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`carrossel` (
-  `idCarrossel` INT NOT NULL,
+  `idCarrossel` INT NOT NULL AUTO_INCREMENT,
   `status` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idCarrossel`))
 ENGINE = InnoDB;
@@ -351,7 +351,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seinfo`.`agenda` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`agenda` (
-  `idAgenda` INT NOT NULL,
+  `idAgenda` INT NOT NULL AUTO_INCREMENT,
   `dataHoraInicio` DATETIME NOT NULL,
   `dataHoraFim` DATETIME NOT NULL,
   `local` VARCHAR(256) NOT NULL,
