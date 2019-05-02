@@ -14,15 +14,9 @@ module.exports = (sequelize, Sequelize) => {
     descricao: {
         type: Sequelize.STRING
       },
-    data_horario_inicio: {
+    status: {
         type: Sequelize.STRING
-    },
-    data_hora_fim: {
-        type: Sequelize.STRING
-    },
-    urlImagem:{
-      type: Sequelize.STRING
-    },
+    }
     },
     { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'evento',
