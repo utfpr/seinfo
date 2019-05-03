@@ -6,7 +6,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome do Aluno:</label>
-          <a-input placeholder="Nome" name="nome_aluno" type="text">
+          <a-input maxlength="255" placeholder="Nome" name="nome_aluno" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -28,7 +28,7 @@
       <div class="row justify-content-center">
       <a-form-item class="space_2">
           <label class="ant-form-item-required">Email do Aluno:</label>
-          <a-input placeholder="Email" name="email_aluno" type="text">
+          <a-input maxlength="255" placeholder="Email" name="email_aluno" type="text">
             <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>

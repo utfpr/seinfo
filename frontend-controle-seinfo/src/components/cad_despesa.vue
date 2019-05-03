@@ -5,7 +5,7 @@
     <form class="form" action="http://localhost:3000/despesa" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space_2">
-          <label class="ant-form-item-required">Nome da Despesa:</label>
+          <label maxlength="255" class="ant-form-item-required">Nome da Despesa:</label>
           <a-input placeholder="Nome" name="nome_desp" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
@@ -28,7 +28,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">Descrição:</label>
-          <a-textarea type="text" name="descricao_desp" placeholder="Descrição" :rows="4"/>
+          <a-textarea maxlength="5000" type="text" name="descricao_desp" placeholder="Descrição" :rows="4"/>
         </a-form-item>
       </div>
       <div class="row justify-content-center">

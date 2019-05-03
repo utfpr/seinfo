@@ -5,7 +5,7 @@
     <form class="form" action="http://localhost:3000/adm" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space_2">
-          <label class="ant-form-item-required">Nome do Administrador:</label>
+          <label maxlength="255" class="ant-form-item-required">Nome do Administrador:</label>
           <a-input placeholder="Nome" name="nome_adm" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>

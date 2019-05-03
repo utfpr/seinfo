@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space">
             <label class="ant-form-item-required">Nome do Evento:</label>
-            <a-input placeholder="Nome" name="nome" type="text">
+            <a-input maxlength="255" placeholder="Nome" name="nome" type="text">
               <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -49,7 +49,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space">
             <label class="ant-form-item-required">Local do evento</label>
-            <a-input name="local_eve" type="text">
+            <a-input maxlength="255" name="local_eve" type="text">
             <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -59,6 +59,14 @@
               <a-select-option value="1">Evento disponivel</a-select-option>
               <a-select-option value="0">Evento indisponivel</a-select-option>
             </a-select>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space_2">
+            <label class="ant-form-item-required">Imagem do Evento</label>
+            <a-input maxlength="255" name="img" type="text">
+            <a-icon slot="prefix" type="picture" style="color:rgba(0,0,0,.25)"/>
+            </a-input>
           </a-form-item>
         </div>
         <div class="row justify-content-center">
@@ -75,7 +83,7 @@
         </div>
         <div class="row justify-content-center">
           <a-form-item class="space_2">
-            <a-input name="hora_part" type="hidden">
+            <a-input name="hora_part" value="0" type="hidden">
             </a-input>
           </a-form-item>
         </div>

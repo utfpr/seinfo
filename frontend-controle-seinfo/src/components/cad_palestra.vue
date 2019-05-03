@@ -6,7 +6,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome da Palestra:</label>
-          <a-input placeholder="Nome" name="nome_pale" type="text">
+          <a-input maxlength="255" placeholder="Nome" name="nome_pale" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -34,7 +34,7 @@
       <div class="row justify-content-center">
       <a-form-item class="space">
           <label class="ant-form-item-required">Local da Palestra:</label>
-          <a-input placeholder="Local" name="local_pale" type="text">
+          <a-input maxlength="255" placeholder="Local" name="local_pale" type="text">
             <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
           </a-input>
       </a-form-item>
@@ -56,7 +56,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">Descrição:</label>
-          <a-textarea type="text" name="descricao_pale" placeholder="Descrição" :rows="4"/>
+          <a-textarea maxlength="5000" type="text" name="descricao_pale" placeholder="Descrição" :rows="4"/>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
