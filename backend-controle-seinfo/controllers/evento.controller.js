@@ -1,6 +1,7 @@
 const db = require('../config/db.config.js');
 const Evento = db.eventos;
 const agendas = require('../controllers/agenda.controller.js');
+const imagens = require('../controllers/imagem.controller.js');
 
  
 // Post do Evento
@@ -11,6 +12,7 @@ exports.create = (req, res) => {
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local;
   const horas = req.body.horas;
+  const imagem = req.body.img;
 
 
   
@@ -18,7 +20,7 @@ exports.create = (req, res) => {
 
     nome: req.body.nome,
     descricao: req.body.descricao,
-    status: req.body.status,
+    //status: req.body.status,
 
     //urlImagem: req.body.urlImagem
   }).then( evento => {
@@ -28,8 +30,11 @@ exports.create = (req, res) => {
     console.log("Criado o evento com o id: "+evento.idEvento);
     
     // Cria Agenda e retorna o idDa Agenda
-    var idAgenda = agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
+    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
   
+    // Insere uma url na tabela Imagem
+    imagens.create({"url":imagem,"evento":evento.idEvento});
+
     res.send(evento);
 
   }).catch(err => {
