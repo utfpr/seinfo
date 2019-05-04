@@ -20,22 +20,21 @@ module.exports = (sequelize, Sequelize) => {
 
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
-      tableName: 'agenda',
-      timestamps: false,
-      createdAt: false,
-    });
-    
-    Agenda.associate = models=>{
-        models.agenda.model.hasMany(
-            models.agendamentoEvento.model,{
-                foreignKey: 'idAgenda'
-            },
-            models.agendamentoAtividade.model,{
-                foreignKey: 'idAgenda'
-            }
-        )
-      }
-
-
-    return Agenda;
+    tableName: 'agenda',
+    timestamps: false,
+    createdAt: false,
+  });
+  
+  Agenda.associate = models=>{
+    models.agenda.model.hasMany(
+        models.agendamentoEvento.model,{
+            foreignKey: 'idAgenda'
+        },
+        models.agendamentoAtividade.model,{
+            foreignKey: 'idAgenda'
+        }
+    )
   }
+
+  return Agenda;
+}

@@ -42,10 +42,10 @@ exports.create = (req, res) => {
     /* 
         Função de Teste
     */
-  exports.amoeba = (req, res) => {
-    console.log("Função de Teste de Aluno");
+exports.amoeba = (req, res) => {
+  console.log("Função de Teste de Aluno");
 
-  };
+};
 
 exports.findById=(req,res)=>{
   Aluno.findByPk(req.params.alunoId).then(aluno => {
@@ -89,16 +89,16 @@ exports.atualiza=(req,res)=>{
 
 exports.delete=(req,res)=>{
  
-    Aluno.destroy({where: {idPessoa: req.params.pessoaId }}).then(aluno=>{
-      Pessoa.destroy({ where: { idPessoa: req.params.pessoaId } }).then(pessoa => {
-        console.log("Deletando o pessoa com o ID: "+req.params.pessoaId);
-        //res.sendStatus(pessoa); //Retorna um Json para a Pagina da API
-      }).catch(err => {
-        res.status(500).send("Error -> " + err);
-      })
-      console.log("Deletando o aluno com o ID: "+req.body.ra_aluno);
-    //res.sendStatus(aluno);
+  Aluno.destroy({where: {idPessoa: req.params.pessoaId }}).then(aluno=>{
+    Pessoa.destroy({ where: { idPessoa: req.params.pessoaId } }).then(pessoa => {
+      console.log("Deletando o pessoa com o ID: "+req.params.pessoaId);
+      //res.sendStatus(pessoa); //Retorna um Json para a Pagina da API
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
+    console.log("Deletando o aluno com o ID: "+req.body.ra_aluno);
+  //res.sendStatus(aluno);
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
 }
