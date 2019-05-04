@@ -42,55 +42,55 @@ exports.create = (req, res) => {
  
 
 exports.findById = (req, res) => {  
-    Evento.findByPk(req.params.eventoId).then(evento => {
-      console.log("Achou o evento pelo ID "+req.params.eventoId);
-      res.send(evento); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  };
+  Evento.findByPk(req.params.eventoId).then(evento => {
+    console.log("Achou o evento pelo ID "+req.params.eventoId);
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};
 
-  exports.findAll = (req, res) => {  
-    Evento.findAll({ raw: true}).then(evento => {
-      console.log("Listou Todos os Eventos!");
-      res.send(evento); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  };
+exports.findAll = (req, res) => {  
+  Evento.findAll({ raw: true}).then(evento => {
+    console.log("Listou Todos os Eventos!");
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};
 
-  exports.atualiza = (req,res)=>{
-    const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
-    const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
-    Evento.update(
-      {
-      nome: req.body.nome,
-      descricao: req.body.descricao,
-      status: req.body.status,
+exports.atualiza = (req,res)=>{
+  const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
+  const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
+  Evento.update(
+    {
+    nome: req.body.nome,
+    descricao: req.body.descricao,
+    status: req.body.status,
 
-      //data_horario_inicio: data_ini_full ,
-      //data_hora_fim: data_fim_full,
-      //urlImagem: req.body.urlImagem
-    
-      },
-      {where: {idEvento: req.params.eventoId}}).then(evento=>{
-        console.log("Atualizando evento");
-        res.send(evento);
-      }).catch(err=>{
-        res.status(500).send("Error "+err);
-      })
-      
+    //data_horario_inicio: data_ini_full ,
+    //data_hora_fim: data_fim_full,
+    //urlImagem: req.body.urlImagem
+  
     },
+    {where: {idEvento: req.params.eventoId}}).then(evento=>{
+      console.log("Atualizando evento");
+      res.send(evento);
+    }).catch(err=>{
+      res.status(500).send("Error "+err);
+    })
+    
+  },
   
 
-  exports.delete = (req, res) => {  
-    Evento.destroy({ where: { idEvento: req.params.eventoId } }).then(evento => {
-      console.log("Deletando o evento com o ID: "+req.params.eventoId);
-      res.send(evento); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  };
+exports.delete = (req, res) => {  
+  Evento.destroy({ where: { idEvento: req.params.eventoId } }).then(evento => {
+    console.log("Deletando o evento com o ID: "+req.params.eventoId);
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};
 
   // exports.amoeba = (req, res) => {
   //   console.log("Função de Teste");

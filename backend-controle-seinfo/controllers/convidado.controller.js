@@ -41,10 +41,10 @@ exports.create = (req, res) => {
     /* 
         Função de Teste
     */
-  exports.amoeba = (req, res) => {
-    console.log("Função de Teste de Aluno");
+exports.amoeba = (req, res) => {
+  console.log("Função de Teste de Aluno");
 
-  };
+};
 
 /*
 
