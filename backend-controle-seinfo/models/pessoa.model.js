@@ -17,6 +17,15 @@
     CPF: {
         type: Sequelize.STRING
     },
+    senha:{
+      type: Sequelize.STRING
+    },
+    nivel:{
+      type: Sequelize.INTEGER
+    },
+    classificacao:{
+      type: Sequelize.INTEGER
+    }
     },
     { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'pessoa',
@@ -25,17 +34,19 @@
     });
     
     Pessoa.associate = models => {
-        models.pessoa.model.hasMany(models.aluno.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-          as: 'Alunos',
-        });
-        models.pessoa.model.hasMany(models.convidado.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-          as: 'Convidados',
-        });
-      };
+      models.pessoa.model.hasMany(models.protagonista.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
+      models.pessoa.model.hasMany(models.organizacao.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
+      models.pessoa.model.hasMany(models.inscricao.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
+    };
 
 
     return Pessoa;

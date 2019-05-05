@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Orador = sequelize.define('orador', {
+    const Protagonista = sequelize.define('protagonista', {
     idPessoa: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -8,8 +8,10 @@ module.exports = (sequelize, Sequelize) => {
         model: 'idPessoa',
         key: 'idPessoa',
       },
-      },
-    
+    },
+    atuacao:{
+      type: Sequelize.INTEGER
+    },
     idAtividade: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -21,23 +23,23 @@ module.exports = (sequelize, Sequelize) => {
     },
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
-      tableName: 'orador',
+      tableName: 'protagonista',
       timestamps: false,
       createdAt: false,
     });
     
-    Orador.associate = models => {
+    Protagonista.associate = models => {
         
-    models.orador.model.belongsTo(models.atividade.model, {
+    models.protagonista.model.belongsTo(models.atividade.model, {
         foreignKey: 'idAtividade',
         sourceKey: 'idAtividade',
       });
-      models.orador.model.belongsTo(models.pessoa.model, {
+      models.protagonista.model.belongsTo(models.pessoa.model, {
           foreignKey: 'idPessoa',
           sourceKey: 'idPessoa',
         });
     };
       
 
-    return Orador;
+    return Protagonista;
   }

@@ -36,18 +36,18 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: 'idEvento',
         sourceKey: 'idEvento',
       });
-      models.inscricao.model.belongsTo(models.pessoa.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-        });
-        models.inscricao.model.hasMAny(models.inscricao.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-        });
-        models.inscricao.model.hasMAny(models.receitaEvento.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-        });
+    models.inscricao.model.belongsTo(models.pessoa.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
+    models.inscricao.model.hasMAny(models.participaAtividade.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
+    models.inscricao.model.hasMAny(models.receitaEvento.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+      });
     };
       
 

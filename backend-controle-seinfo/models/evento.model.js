@@ -32,6 +32,26 @@ module.exports = (sequelize, Sequelize) => {
       models.evento.model.hasMany(models.agendamentoEvento.model,{
         foreignKey: 'idEvento'
       })
+
+      models.evento.model.hasMany(models.inscricao.model,{
+        foreignKey: 'idEvento'
+      })
+
+      models.evento.model.hasMany(models.lote.model,{
+        foreignKey: 'idEvento'
+      })
+
+      models.evento.model.hasMany(models.organizacao.model,{
+        foreignKey: 'idEvento'
+      })
+
+      models.evento.model.hasMany(models.eventoImagem.model,{
+        foreignKey: 'idEvento'
+      })
+
+      models.evento.model.hasOne(models.caixa.model,{
+        foreignKey: 'idEvento'
+      })
     }
 
     return Evento;
