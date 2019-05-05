@@ -22,6 +22,14 @@ module.exports = (sequelize, Sequelize) => {
             foreignKey: 'idEvento',
             sourceKey: 'idEvento',
           });
+          models.caixa.model.hasMany(models.despesa.model, {
+            foreignKey: 'idDespesa',
+            sourceKey: 'idDespesa',
+          })
+          models.caixa.model.hasMany(models.receita.model, {
+            foreignKey: 'idReceita',
+            sourceKey: 'idReceita',
+          })
 
 
     };

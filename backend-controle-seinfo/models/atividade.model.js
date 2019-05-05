@@ -11,18 +11,6 @@ module.exports = (sequelize, Sequelize) => {
       descricao: {
         type: Sequelize.STRING
       },    
-      dataHorarioInicio: {
-        type: Sequelize.STRING
-      },    
-      local: {
-        type: Sequelize.STRING
-      },    
-      dataHoraFim: {
-        type: Sequelize.STRING
-      },    
-      horasParticipacao: {
-        type: Sequelize.STRING
-      },
       idEvento:{
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -31,12 +19,12 @@ module.exports = (sequelize, Sequelize) => {
           key: 'idEvento',
         },
       },
-      idcategoria:{
+      idCategoria:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'idcategoria',
-          key: 'idcategoria',
+          model: 'idCategoria',
+          key: 'idCategoria',
         },
       }
     },
@@ -52,7 +40,10 @@ module.exports = (sequelize, Sequelize) => {
           foreignKey: 'idEvento'
         })
         models.atividade.model.belongsTo(models.categoria.model,{
-          foreignKey: 'idcategoria'
+          foreignKey: 'idCategoria'
+        })
+        models.atividade.model.hasMany(models.agendamentoAtividade.model,{
+          foreignKey: 'idAtividade'
         })
       }
 

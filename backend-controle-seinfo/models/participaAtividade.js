@@ -7,8 +7,14 @@ module.exports = (sequelize, Sequelize) => {
         model: 'idPessoa',
         key: 'idPessoa',
       },
-      },
-    
+    },
+    presenca:{
+      type: Sequelize.BOOLEAN
+    },
+    confirmacaoPagamentoAtividade:{
+      type: Sequelize.BOOLEAN
+    },
+
     idEvento: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -40,18 +46,18 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: 'idPessoa',
         sourceKey: 'idPessoa',
       });
-      models.participaAtividade.model.belongsTo(models.receitaInterna.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-          foreignKey: 'idEvento',
-          sourceKey: 'idEvento',
-          foreignKey: 'idAtividade',
-          sourceKey: 'idAtividade',
-        });
-        models.participaAtividade.model.belongsTo(models.atividade.model, {
-            foreignKey: 'idAtividade',
-            sourceKey: 'idAtividade',
-          });
+    models.participaAtividade.model.hasMany(models.receitaInterna.model, {
+        foreignKey: 'idPessoa',
+        sourceKey: 'idPessoa',
+        foreignKey: 'idEvento',
+        sourceKey: 'idEvento',
+        foreignKey: 'idAtividade',
+        sourceKey: 'idAtividade',
+      });
+    models.participaAtividade.model.belongsTo(models.atividade.model, {
+        foreignKey: 'idAtividade',
+        sourceKey: 'idAtividade',
+      });
     };
       
 
