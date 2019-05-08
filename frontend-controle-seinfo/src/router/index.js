@@ -18,6 +18,7 @@ import Cad_Convidado from '@/components/cad_convidado';
 import Cad_Outro from '@/components/cad_outros';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
+import ADMevento from '@/components/adm_evento';
 
 
 Vue.use(Router);
@@ -100,6 +101,10 @@ export default new Router({
         {
           path: 'cadOutros',
           component: Cad_Outro
+        },
+        {
+          path: 'ADMevento',
+          component: ADMevento
         }
         ]
     },

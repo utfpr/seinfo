@@ -21,7 +21,7 @@
       <tr class="table_back" v-for="tabela in tabelas">
         <td>{{tabela.nome}}</td>
         <td>{{tabela.data_horario_inicio }}</td>
-        <td><button> <a-icon type="edit" /></button>  <button v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
+        <td>    <button v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>  <button><a-icon type="eye" /></button></td>
       </tr>
     </tbody>
 </table>
