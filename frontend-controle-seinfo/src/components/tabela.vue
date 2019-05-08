@@ -1,16 +1,20 @@
 <template>
   <div>
-    <a-select defaultValue="Selecione uma Opção" @change="handleChange" class="space">
-          <a-select-option name="administradores" value="administradores">Administradores</a-select-option>
-          <a-select-option name="alunos" value="alunos">Alunos</a-select-option>
-          <a-select-option name="convidados" value="convidados">Convidados</a-select-option>
-          <a-select-option name="eventos" value="eventos">Eventos</a-select-option>
-          <a-select-option name="palestrantes" value="palestrantes">Palestrantes</a-select-option>
-          <a-select-option name="ministrantes" value="ministrantes">Ministrantes</a-select-option>
-    </a-select>
+    <a-select defaultValue="Selecione uma Opção" class="space" @change="onchange()" v-model="key">
+        <a-select-option name="administradores" value="administradores">Administradores</a-select-option>
+        <a-select-option name="alunos" value="alunos">Alunos</a-select-option>
+        <a-select-option name="convidados" value="convidados">Convidados</a-select-option>
+        <a-select-option name="eventos" value="eventos">Eventos</a-select-option>
+        <a-select-option name="palestrantes" value="palestrantes">Palestrantes</a-select-option>
+        <a-select-option name="ministrantes" value="ministrantes">Ministrantes</a-select-option>
+      </a-select>
 
     <a-table :columns="columns" :dataSource="data" :pagination="{ pageSize: 15 }" :scroll="{ y: 380 }" >
-      <a slot="action" slot-scope="text" ><button type="button" class="ic"><a-icon type="edit" /></button><button type="button" class="ic" v-on:click="deletar(tabela.idEvento)" >  <a-icon type="delete" /></button>    <button type="button" class="ic"><a-icon type="eye" />  </button></a>
+      <a slot="action" slot-scope="text" >
+        <button type="button" class="ic"><a-icon type="edit" /></button>
+        <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)" ><a-icon type="delete" /></button>
+        <button type="button" class="ic"><a-icon type="eye" /></button>
+      </a>
     </a-table>
 
   </div>
@@ -35,30 +39,37 @@ const columns = [{
     width: 200,
     scopedSlots: { customRender: 'action' },
   },
-  ];
-
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    nome: `SEINFO 2019 ${i}`,
-    data: '20/05/2019',
-    status: `Disponivel. ${i}`,
-  });
-}
+];
 
 export default {
+  methods: {
+    onchange: function() {
+    	console.log(this.key)
+      alert(this.key)
+      for (let i = 0; i < 100; i++) {
+      this.data.push({
+        key: i,
+        nome: `SEINFO 2019 ${i} - ` + this.key,
+        data: '20/05/2019',
+        status: `Disponivel. ${i}`,
+      })
+    }
+  }
+  },
+
   data() {
     return {
-      data,
+      data: [],
       columns,
+      key: "Selecione...",
     }
   }
 }
 </script>
 
-<style scoped>
 
+
+<style scoped>
 .ic{
   background: transparent;
   border: transparent;

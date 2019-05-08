@@ -19,6 +19,7 @@ import Cad_Outro from '@/components/cad_outros';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
+import Teste from '@/components/teste';
 
 
 Vue.use(Router);
@@ -29,6 +30,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/teste',
+      name: 'Teste',
+      component: Teste
     },
     {
       path: '/login',
