@@ -2,7 +2,6 @@
   <div id="eve">
     <navHome></navHome>
     <div>
-      
     </div>
   </div>
 </template>
@@ -15,7 +14,7 @@ export default {
   },
   components: {
     navHome
-  }
+  },
 };
 </script>
 <style>
