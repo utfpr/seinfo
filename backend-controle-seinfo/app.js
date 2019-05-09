@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 const app = express();
+
 
 
 app.use(cors());
@@ -14,8 +14,6 @@ const router = express.Router();
 
 //Chamo todas as minhas Rotas aqui
 require('./routes/evento.route.js')(app);
-require('./routes/aluno.route.js')(app);
-require('./routes/convidado.route.js')(app);
 require('./routes/lote.route.js')(app);
 require('./routes/categoria.route.js')(app);
 require('./routes/atividade.route.js')(app);

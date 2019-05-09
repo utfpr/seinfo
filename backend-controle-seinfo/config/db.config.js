@@ -20,9 +20,7 @@ db.sequelize = sequelize;
  
 //Models/tables
 db.eventos = require('../models/evento.model.js')(sequelize, Sequelize);
-db.alunos = require('../models/aluno.model.js')(sequelize, Sequelize); 
 db.pessoas = require('../models/pessoa.model.js')(sequelize,Sequelize);
-db.convidados = require('../models/convidado.model.js')(sequelize,Sequelize);
 db.lotes = require('../models/lote.model.js')(sequelize,Sequelize);
 db.categorias = require('../models/categoria.model.js')(sequelize,Sequelize);
 db.atividades = require('../models/atividade.model.js')(sequelize,Sequelize);
