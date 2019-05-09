@@ -52,7 +52,7 @@ export default {
 
 .ic{
   background: transparent;
-  border: transparent;
+  border: none;
   cursor: pointer;
   color: black;
 }
