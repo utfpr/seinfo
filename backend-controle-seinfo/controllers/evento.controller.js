@@ -2,19 +2,7 @@ const db = require('../config/db.config.js');
 const Evento = db.eventos;
 const agendas = require('../controllers/agenda.controller.js');
 const imagens = require('../controllers/imagem.controller.js');
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, '../frontend-controle-seinfo/src/assets/img/')
-  },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname);
-      console.log("\n Nome do Arquivo de Imagem -----> "+file.originalname+"\n");
-  }
-});
-
-const upload = multer({storage});
 
  
 // Post do Evento
@@ -26,6 +14,8 @@ exports.create = (req, res) => {
   const local = req.body.local;
   const horas = req.body.horas;
   const imagem = req.body.img;
+
+  console.log("\n\n\n\n\n IMAGEM NO EVENTO"+req.body.file);
 
   upload.single('file');
 
@@ -112,6 +102,6 @@ exports.delete = (req, res) => {
   })
 };
 
-  // exports.amoeba = (req, res) => {
-  //   console.log("Função de Teste");
-  // };
+   exports.amoeba = (req, res) => {
+     console.log("\n------------------- Função de Teste ------------------------------ \n");
+   };

@@ -107,6 +107,7 @@
             </a-select>
           </a-form-item>
         </div>
+        <input type="file" name="file" />
         <div class="row justify-content-center">
           <a-form-item class="space">
             <a-upload
@@ -115,6 +116,7 @@
       >
         <a-form-item>
         <a-button style="width:217px;border-radius:0;">
+        
           <a-icon type="upload" />Imagem do Evento
         </a-button>
         </a-form-item>
