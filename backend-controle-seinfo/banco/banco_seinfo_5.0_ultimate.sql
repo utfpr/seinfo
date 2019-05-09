@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS `seinfo`.`pessoa` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `idPessoa` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(256) NOT NULL,
-  `email` VARCHAR(256) NOT NULL,
+  `nome` VARCHAR(300) NOT NULL,
+  `email` VARCHAR(300) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
   `senha` CHAR(32) NOT NULL,
   `nivel` INT NOT NULL COMMENT 'O nível seleciona quem vai ter acesso, 0 como usuário, 1 adm básico e 2 como super adm',
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `seinfo`.`evento` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`evento` (
   `idEvento` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(256) NOT NULL,
+  `nome` VARCHAR(300) NOT NULL,
   `descricao` VARCHAR(5000) NULL,
   `status` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idEvento`))
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `seinfo`.`categoria` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`categoria` (
   `idCategoria` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(256) NOT NULL,
+  `nome` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`idCategoria`))
 ENGINE = InnoDB;
 
@@ -327,7 +327,7 @@ DROP TABLE IF EXISTS `seinfo`.`imagem` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`imagem` (
   `idImagem` INT NOT NULL AUTO_INCREMENT,
-  `url` VARCHAR(256) NOT NULL,
+  `url` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`idImagem`),
   UNIQUE INDEX `url_UNIQUE` (`url` ASC))
 ENGINE = InnoDB;
@@ -354,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`agenda` (
   `idAgenda` INT NOT NULL AUTO_INCREMENT,
   `dataHoraInicio` DATETIME NOT NULL,
   `dataHoraFim` DATETIME NOT NULL,
-  `local` VARCHAR(256) NOT NULL,
+  `local` VARCHAR(300) NOT NULL,
   `horasParticipacao` TIME NOT NULL DEFAULT '00:00:00',
   PRIMARY KEY (`idAgenda`))
 ENGINE = InnoDB;
