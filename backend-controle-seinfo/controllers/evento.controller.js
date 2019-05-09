@@ -22,7 +22,7 @@ exports.create = (req, res) => {
     descricao: req.body.descricao,
     //status: req.body.status,
 
-    //urlImagem: req.body.urlImagem
+    //urlImagem:  req.body.urlImagem
   }).then( evento => {
 
 
