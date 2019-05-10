@@ -1,3 +1,7 @@
+
+/*                                   TABELA PESSOA                              */
+
+
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('admin', 'admin@hotmail.com','00000000000','admin123', '2', '1');
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Luiz Henrique de Barros de Oliveira', 'hick@gmail.com','00000000001','senhahick', '0', '0');
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Luiz Paulo de Barros de Oliveira', 'luiz@gmail.com','00000000002','senhaluiz', '0', '0');
@@ -28,4 +32,19 @@ INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classi
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Angélica Natalina', 'angelica@gmail.com','00000000027','senhaangelica', '0', '2');
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Jaqueline Rezende', 'jaqueline@gmail.com','00000000028','senhajaqueline', '0', '2');
 INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Antonio Marcos da Silva', 'antonio@gmail.com','00000000029','senhaantonio', '0', '2');
+
+
+
+
+
+
+/*                                   TABELA EVENTO                              */
+
+
+INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('Seinfo 2019', 'A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.', '1');
+INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('A 33ª Semana da Matemática', 'A 33ª Semana da Matemática: "Matemática e Educação Matemática: Funções Sociais" será um evento voltado aos que cursam Graduação em Matemática (Bacharelado, Empresarial e Licenciatura), alunos da Pós-Graduação e professores de Matemática da Educação Básica e do Ensino Superior. Nesta edição, serão ofertados minicursos, palestras, sessões de filmes, mesa redonda, comunicações científicas, sessão de pôsteres e outras atividades, que serão documentadas em anais.', '1');
+INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('VI Semana Acadêmica da Matemática','A Semana da Matemática da UTFPR – Toledo (SEMAT) tem o intuito de complementar a formação dos acadêmicos do curso de Licenciatura em Matemática da instituição. Além disso, tem como propósito preparar o acadêmico para o exercício do magistério no Ensino Fundamental e Ensino Médio, bem como formar professores e pesquisadores com atitudes críticas e reflexivas nas áreas de Educação Matemática, Matemática Aplicada e Matemática Pura. Também configura-se como uma oportunidade para acadêmicos, pós-graduandos, professores e pesquisadores engajarem-se em atividades de pesquisa e na divulgação de seus trabalhos. A Semana da Matemática da UTFPR – Toledo (SEMAT) surgiu no ano de 2013 e visa aproximar alunos de graduação e de pós-graduação, professores da rede pública de ensino da região e das universidades e pesquisadores, oportunizando o diálogo e o compartilhamento de ideias, conhecimentos e experiências. A SEMAT já está em sua sexta edição, indicando uma consolidação na realização do evento, sendo esperado, principalmente, pelos acadêmicos do curso e docentes da região. A cada ano contamos com a participação de mais alunos e docentes de instituições da região de Toledo, como é o caso de instituições de Assis Chateubriand, Cascavel, Foz do Iguaçu, Francisco Beltrão, Palotina, Pato Branco etc. Para mais informações sobre o evento, acesse: http://www.td.utfpr.edu.br/semat/VI_semat/','1');
+INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('SEMANA DO CALOURO','A 14º Calourada UTFPR-CM é um evento de recepção, ambientação e a integração entre os acadêmicos e os alunos ingressantes no Campus Campo Mourão da UTFPR, com realização do Movimento Estudantil, a 14º Calourada UTFPR/CM ocorrerá no dia 9 (nove) de agosto de 2018, com início às 15:00 (quinze) horas e término às 19:00 (dezenove). A realização da 14º Calourada UTFPR/CM receberá o apoio do Campus Campo Mourão da UTFPR, visto que é interesse da Universidade promover atividades culturais e de integração, que contribuam para banir a prática do chamado “trote”.','0');
+INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('Concurso Cultural "A Foto Mais Curtida"','O concurso visa a integração da comunidade acadêmica através do olhar fotográfico, expondo as qualidades, defeitos, diferenças e a diversidade cultural no Câmpus. ','0');
+
 
