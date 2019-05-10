@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `email` VARCHAR(300) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
   `senha` CHAR(32) NOT NULL,
-  `nivel` INT NOT NULL COMMENT 'O nível seleciona quem vai ter acesso, 0 como usuário, 1 adm básico e 2 como super adm',
+  `nivel` INT NOT NULL COMMENT 'O nível seleciona quem vai ter acesso, 0 como usuário, 1 adm básico e 2 como super adm.',
   `classificacao` INT NOT NULL COMMENT 'classificação define quem são as pessoas, 0 como aluno, 1 como professor e 2 como visitante.',
   PRIMARY KEY (`idPessoa`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
@@ -356,6 +356,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`agenda` (
   `dataHoraFim` DATETIME NOT NULL,
   `local` VARCHAR(300) NOT NULL,
   `horasParticipacao` TIME NOT NULL DEFAULT '00:00:00',
+  `quantidadeVagas` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idAgenda`))
 ENGINE = InnoDB;
 
