@@ -1,31 +1,40 @@
 module.exports = (sequelize, Sequelize) => {
     const Atividade = sequelize.define('atividade', {
       idAtividade: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
         primaryKey: true,
-        autoIncrement: true, // tem que definir PK e Auto Increment
+        autoIncrement: true,
+        field: 'idAtividade'
       },
       valor: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: '0',
+        field: 'valor'
       },
       descricao: {
-        type: Sequelize.STRING
-      },    
-      idEvento:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'idEvento',
-          key: 'idEvento',
-        },
+        type: Sequelize.STRING(5000),
+        allowNull: true,
+        field: 'descricao'
       },
-      idCategoria:{
-        type: Sequelize.INTEGER,
+      idEvento: {
+        type: Sequelize.INTEGER(11),
         allowNull: false,
         references: {
-          model: 'idCategoria',
-          key: 'idCategoria',
+          model: 'evento',
+          key: 'idEvento'
         },
+        field: 'idEvento'
+      },
+      idCategoria: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        references: {
+          model: 'categoria',
+          key: 'idCategoria'
+        },
+        field: 'idCategoria'
       }
     },
   

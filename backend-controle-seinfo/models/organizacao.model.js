@@ -1,26 +1,31 @@
 module.exports = (sequelize, Sequelize) => {
     const Organizacao = sequelize.define('organizacao', {
-    idPessoa: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'idPessoa',
-        key: 'idPessoa',
+      idPessoa: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'pessoa',
+          key: 'idPessoa'
+        },
+        field: 'idPessoa'
       },
+      idEvento: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'evento',
+          key: 'idEvento'
+        },
+        field: 'idEvento'
       },
-    horasOrganizacao: {
-        type: Sequelize.STRING
-      },
-    idEvento: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'idEvento',
-        key: 'idEvento',
-      },
-    },
+      horasParticipacao: {
+        type: Sequelize.TIME,
+        allowNull: false,
+        defaultValue: '00:00:00',
+        field: 'horasParticipacao'
+      }
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'organizacao',

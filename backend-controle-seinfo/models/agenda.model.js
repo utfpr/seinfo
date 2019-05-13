@@ -1,23 +1,38 @@
 module.exports = (sequelize, Sequelize) => {
     const Agenda = sequelize.define('agenda', {
-    idAgenda: {
-      type: Sequelize.INTEGER,
-       primaryKey: true,
-      autoIncrement: true, // tem que definir PK e Auto Increment
+      idAgenda: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'idAgenda'
       },
-    dataHoraInicio: {
-        type: Sequelize.STRING
+      dataHoraInicio: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        field: 'dataHoraInicio'
       },
-    dataHoraFim: {
-        type: Sequelize.STRING
+      dataHoraFim: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        field: 'dataHoraFim'
       },
-    local: {
-        type: Sequelize.STRING
+      local: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        field: 'local'
       },
-    horasParticipacao: {
-        type: Sequelize.STRING
+      horasParticipacao: {
+        type: Sequelize.TIME,
+        allowNull: false,
+        defaultValue: '00:00:00',
+        field: 'horasParticipacao'
       },
-
+      quantidadeVagas: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        field: 'quantidadeVagas'
+      }
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
     tableName: 'agenda',
