@@ -1,36 +1,47 @@
 module.exports = (sequelize, Sequelize) => {
     const ParticipaAtividade = sequelize.define('participaAtividade', {
-    idPessoa: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'idPessoa',
-        key: 'idPessoa',
-      },
-    },
-    presenca:{
-      type: Sequelize.BOOLEAN
-    },
-    confirmacaoPagamentoAtividade:{
-      type: Sequelize.BOOLEAN
-    },
-
-    idEvento: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'idEvento',
-        key: 'idEvento',
-      },
-    },
-    idAtividade: {
-        type: Sequelize.INTEGER,
+      idAtividade: {
+        type: Sequelize.INTEGER(11),
         allowNull: false,
+        primaryKey: true,
         references: {
-          model: 'idAtividade',
-          key: 'idAtividade',
+          model: 'atividade',
+          key: 'idAtividade'
         },
+        field: 'idAtividade'
       },
+      confirmacaoPagamentoAtividade: {
+        type: Sequelize.INTEGER(4),
+        allowNull: false,
+        defaultValue: '0',
+        field: 'confirmacaoPagamentoAtividade'
+      },
+      presenca: {
+        type: Sequelize.INTEGER(4),
+        allowNull: false,
+        defaultValue: '0',
+        field: 'presenca'
+      },
+      idEvento: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'inscricao',
+          key: 'idEvento'
+        },
+        field: 'idEvento'
+      },
+      idPessoa: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'inscricao',
+          key: 'idPessoa'
+        },
+        field: 'idPessoa'
+      }
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'participaAtividade',

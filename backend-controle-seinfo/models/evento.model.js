@@ -3,20 +3,29 @@
 
 module.exports = (sequelize, Sequelize) => {
     const Evento = sequelize.define('evento', {
-    idEvento: {
-      type: Sequelize.INTEGER,
-       primaryKey: true,
-      autoIncrement: true, // tem que definir PK e Auto Increment
+      idEvento: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'idEvento'
       },
-    nome: {
-        type: Sequelize.STRING
+      nome: {
+        type: Sequelize.STRING(256),
+        allowNull: false,
+        field: 'nome'
       },
-    descricao: {
-        type: Sequelize.STRING
+      descricao: {
+        type: Sequelize.STRING(5000),
+        allowNull: true,
+        field: 'descricao'
       },
-    status: {
-        type: Sequelize.BOOLEAN
-    }
+      status: {
+        type: Sequelize.INTEGER(4),
+        allowNull: false,
+        defaultValue: '0',
+        field: 'status'
+      }
     },
     { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'evento',

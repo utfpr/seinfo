@@ -3,29 +3,45 @@
 
  module.exports = (sequelize, Sequelize) => {
     const Pessoa = sequelize.define('pessoa', {
-    idPessoa: {
-      type: Sequelize.INTEGER,
-       primaryKey: true,
-      autoIncrement: true, // tem que definir PK e Auto Increment
+      idPessoa: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+        field: 'idPessoa'
       },
-    nome: {
-        type: Sequelize.STRING
+      nome: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        field: 'nome'
       },
-    email: {
-        type: Sequelize.STRING
+      email: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        unique: true,
+        field: 'email'
       },
-    CPF: {
-        type: Sequelize.STRING
-    },
-    senha:{
-      type: Sequelize.STRING
-    },
-    nivel:{
-      type: Sequelize.INTEGER
-    },
-    classificacao:{
-      type: Sequelize.INTEGER
-    }
+      cpf: {
+        type: Sequelize.CHAR(11),
+        allowNull: false,
+        unique: true,
+        field: 'CPF'
+      },
+      senha: {
+        type: Sequelize.CHAR(32),
+        allowNull: false,
+        field: 'senha'
+      },
+      nivel: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        field: 'nivel'
+      },
+      classificacao: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        field: 'classificacao'
+      }
     },
     { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
       tableName: 'pessoa',
