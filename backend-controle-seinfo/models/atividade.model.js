@@ -54,6 +54,12 @@ module.exports = (sequelize, Sequelize) => {
         models.atividade.model.hasMany(models.agendamentoAtividade.model,{
           foreignKey: 'idAtividade'
         })
+        models.atividade.model.hasMany(models.participaAtividade.model,{
+          foreignKey: 'idAtividade'
+        })
+        models.atividade.model.hasMany(models.protagonista.model,{
+          foreignKey: 'idAtividade'
+        })
       }
 
 

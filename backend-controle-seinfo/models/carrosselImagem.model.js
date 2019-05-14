@@ -30,14 +30,14 @@ module.exports = (sequelize, Sequelize) => {
     
     CarrosselImagem.associate = models => {
         
-        models.carrosselImagem.model.hasMany(models.imagem.model, {
-            foreignKey: 'idCarrossel',
-            sourceKey: 'idCarrossel',
+        models.carrosselImagem.model.belongsTo(models.imagem.model, {
+            foreignKey: 'idImagem',
+            sourceKey: 'idImagem',
           });
 
           models.carrosselImagem.model.belongsTo(models.carrossel.model, {
-            foreignKey: 'idImagem',
-            sourceKey: 'idImagem',
+            foreignKey: 'idCarrossel',
+            sourceKey: 'idCarrossel',
           });
 
 

@@ -41,6 +41,10 @@ module.exports = (sequelize, Sequelize) => {
             foreignKey: 'idPessoa',
             sourceKey: 'idPessoa',
         });
+        models.receitaEvento.model.belongsTo(models.inscricao.model, {
+          foreignKey: 'idEvento',
+          sourceKey: 'idEvento',
+      });
         models.receitaEvento.model.belongsTo(models.receita.model, {
             foreignKey: 'idReceita',
             sourceKey: 'idReceita',

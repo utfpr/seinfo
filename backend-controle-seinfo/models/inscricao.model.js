@@ -47,9 +47,17 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: 'idPessoa',
         sourceKey: 'idPessoa',
       });
+    models.inscricao.model.hasMAny(models.participaAtividade.model, {
+        foreignKey: 'idEvento',
+        sourceKey: 'idEvento',
+      });
     models.inscricao.model.hasMAny(models.receitaEvento.model, {
         foreignKey: 'idPessoa',
         sourceKey: 'idPessoa',
+      });
+    models.inscricao.model.hasMAny(models.receitaEvento.model, {
+        foreignKey: 'idEvento',
+        sourceKey: 'idEvento',
       });
     };
       
