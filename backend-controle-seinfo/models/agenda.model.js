@@ -31,6 +31,7 @@ module.exports = (sequelize, Sequelize) => {
       quantidadeVagas: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
+        defaultValue: '0',
         field: 'quantidadeVagas'
       }
   },
@@ -42,9 +43,11 @@ module.exports = (sequelize, Sequelize) => {
   
   Agenda.associate = models=>{
     models.agenda.model.hasMany(
+      //adiciona idAgenda na tabela agendamentoEvento
         models.agendamentoEvento.model,{
             foreignKey: 'idAgenda'
         },
+        //adiciona idAgenda na tabela agendamentoAtividade
         models.agendamentoAtividade.model,{
             foreignKey: 'idAgenda'
         }

@@ -31,12 +31,13 @@ module.exports = (sequelize, Sequelize) => {
   
       
   AgEvento.associate = models => {
+    //adiciona idEvento (vindo da tabela evento) na tabela agendamentoEvento
     models.agendamentoEvento.model.belongsTo(models.evento.model, {
         foreignKey: 'idEvento',
         sourceKey: 'idEvento',
       }
     );
-
+    //adiciona idAgenda (vindo da tabela agenda) na tabela agendamentoEvento
     models.agendamentoEvento.model.belongsTo(models.agenda.model, {
         foreignKey: 'idAgenda',
         sourceKey: 'idAgenda',
