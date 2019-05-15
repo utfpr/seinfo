@@ -1,11 +1,23 @@
+<!-->To-do
+1 - Mostrar no workspace os eventos disponíveis e suas descrições
+2 - Adicionar get para pegar id do evento e mostrar informações
+3 - mostrar as informações aqui
+
+
+
+<-->
+
 <template>
   <div id="eve">
     <navHome></navHome>
-    <div>
+    <div class="fixed-bottom">
+
+    <ft></ft>
     </div>
   </div>
 </template>
 <script>
+import ft from "./footer.vue";
 import navHome from "./navHome.vue";
 export default {
   data() {
@@ -13,7 +25,8 @@ export default {
     };
   },
   components: {
-    navHome
+    navHome,
+    ft
   },
 };
 </script>

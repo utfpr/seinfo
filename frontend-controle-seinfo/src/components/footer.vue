@@ -22,7 +22,8 @@ export default {
 
 .footer-distributed {
   background-color: #1b1b1b;
-  padding: 17px 25px;
+  padding: 17px 24px;
+  border: 1px solid #1b1b1b;
 }
 
 .footer-distributed .footer-right {
@@ -38,7 +39,7 @@ export default {
 .footer-distributed .footer-right a {
   font-size: 17px;
   color: #ffffff;
-  line-height: 25px;
+  line-height: 24px;
 }
 
 </style>

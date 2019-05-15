@@ -15,7 +15,7 @@ export default {
   height: 100%;
 }
 
- html, body {
+ html, body, #page, header {
   width: 100%;
   height: 100%;
 }
