@@ -7,8 +7,8 @@ yarn-debug.log*
 yarn-error.log*
 *.log
 /config/env.js*
-config/env.js
-env.js
+config/env.js*
+env.js*
 
 
 # Editor directories and files
