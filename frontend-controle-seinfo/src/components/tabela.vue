@@ -11,11 +11,25 @@
 
     <a-table :columns="columns" :dataSource="data" :pagination="{ pageSize: 15 }" :scroll="{ y: 380 }" >
       <a slot="action" slot-scope="text" >
-        <button type="button" class="ic"><a-icon type="edit" /></button>
-        <button type="button" class="ic"><a-icon type="delete" /></button> 
-        <button type="button" class="ic"><a-icon type="eye" /></button>
+        <button type="button" class="ic" @click="showModal(data)"><a-icon type="edit" /></button>
+        <button type="button" class="ic" @click="showModal(data)"><a-icon type="delete" /></button> 
+        <button type="button" class="ic" @click="showModal(data)"><a-icon type="eye" /></button>
       </a>
     </a-table>
+
+    <a-modal title="Title" :visible="visible" @ok="handleOk" @cancel="handleCancel" >
+      <div class="title">
+        <h5 style="text-align:center">Cadastro de Aluno</h5>
+        <div class="box">
+          <label class="ant-form-item">Nome do Aluno:</label>
+          <label class="ant-form-item">Senha do Aluno:</label>
+          <label class="ant-form-item">RA do Aluno:</label>
+          <label class="ant-form-item">Email do Aluno:</label>
+          <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+        </div>
+      </div>
+    </a-modal>
+
 
   </div>
 </template>
@@ -45,6 +59,16 @@ const columns = [{
 
 export default {
   methods: {
+    showModal(e) {
+      console.log(e)
+      this.visible = true
+    },
+    handleCancel() {
+      this.visible = false
+    },
+    handleOk() {
+      this.visible = false
+    },
     pegar_tabela (name) {
       axios.get('http://localhost:3000/api/' + name)
       .then((response) => {
@@ -62,6 +86,7 @@ export default {
       data: [],
       columns,
       tabelas: [],
+      visible: false,
     }
   }
 }
