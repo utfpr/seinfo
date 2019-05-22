@@ -10,7 +10,7 @@
       <input name="password" type="password" placeholder="Password" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
-      <a-button class="bt" html-type="submit" style="background:transparent;border:transparent;color:white;margin-top: 5px;">Entrar</a-button>
+      <a-button class="bt" html-type="submit" >Entrar</a-button>
       <a-button style="background:transparent;color:white">Cadastro</a-button>
     </a-form-item>
   </a-form>
@@ -26,9 +26,10 @@ export default {};
 
 .bt {
   background: transparent;
+  border:transparent;
   border-radius: 20px;
-  border-color: rgb(0, 201, 201);
-  color: rgb(0, 201, 201);
+  border-color: rgb(67, 75, 75);
+  color: rgb(255, 255, 255);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
