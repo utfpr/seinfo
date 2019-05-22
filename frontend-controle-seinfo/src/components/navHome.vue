@@ -2,7 +2,26 @@
 <div>
   <nav class="navbar navbar-light justify-content-between" >
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-button class="bt" :href="'/login'" style="font-family:sans-serif"><a-icon type="user" />LOGIN</a-button>
+  <a-form layout="inline">
+    <a-form-item>
+    <a-input name="username" type="text" placeholder="Username" class="lg" required="required">
+        <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
+      </a-input>
+    </a-form-item>
+    <a-form-item>
+      <a-input name="password" type="password" placeholder="Password" class="lg" required="required">
+        <a-icon
+          slot="prefix"
+          type="lock"
+          style="color:rgba(0,0,0,.25)"
+        />
+      </a-input>
+    </a-form-item>
+    <a-form-item>
+      <a-button html-type="submit" value="a" style="background:transparent;border:transparent;color:white">Entrar</a-button>
+      <a-button value="b" style="background:transparent;color:white">Cadastro</a-button>
+    </a-form-item>
+  </a-form>
 </nav>
 </div>
 </template>
@@ -41,6 +60,11 @@ export default {};
 .navi {
   background-color: rgb(34, 34, 34);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
+}
+
+.lg{
+  width: 160px;
+  height: 30px;
 }
 
 </style>
