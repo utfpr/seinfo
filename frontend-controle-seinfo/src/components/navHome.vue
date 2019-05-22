@@ -2,24 +2,16 @@
 <div>
   <nav class="navbar navbar-light justify-content-between" >
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-form layout="inline">
+  <a-form class="form" layout="inline" action="http://localhost:3000/api/evento" method="post">
     <a-form-item>
-    <a-input name="username" type="text" placeholder="Username" class="lg" required="required">
-        <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
-      </a-input>
+    <input name="username" type="text" placeholder="Username" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
-      <a-input name="password" type="password" placeholder="Password" class="lg" required="required">
-        <a-icon
-          slot="prefix"
-          type="lock"
-          style="color:rgba(0,0,0,.25)"
-        />
-      </a-input>
+      <input name="password" type="password" placeholder="Password" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
-      <a-button html-type="submit" value="a" style="background:transparent;border:transparent;color:white">Entrar</a-button>
-      <a-button value="b" style="background:transparent;color:white">Cadastro</a-button>
+      <a-button class="bt" html-type="submit" style="background:transparent;border:transparent;color:white;margin-top: 5px;">Entrar</a-button>
+      <a-button style="background:transparent;color:white">Cadastro</a-button>
     </a-form-item>
   </a-form>
 </nav>
@@ -57,6 +49,27 @@ export default {};
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2),
+    0 1px 1px rgba(255, 255, 255, 0.2);
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}
+
 .navi {
   background-color: rgb(34, 34, 34);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
@@ -65,6 +78,7 @@ export default {};
 .lg{
   width: 160px;
   height: 30px;
+  margin-top: 5px;
 }
 
 </style>

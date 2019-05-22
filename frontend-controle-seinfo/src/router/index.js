@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/home';
-import Login from '@/components/login';
+import Visitante from '@/components/cad_visitante';
 import Registrar from '@/components/registrar';
 import adm from '@/components/adm';
 import tabela from '@/components/tabela';
@@ -37,9 +37,9 @@ export default new Router({
       component: Teste
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: '/visitante',
+      name: 'visitante',
+      component: Visitante
     },
     {
       path: '/registrar',
