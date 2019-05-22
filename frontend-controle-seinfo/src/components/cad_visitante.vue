@@ -1,9 +1,11 @@
 <template>
   <div id="login">
     <div class="login">
-      <h1>Login</h1>
+      <h1>Visitante</h1>
       <form method="post">
         <input type="text" name="u" placeholder="Username" required="required">
+        <input type="password" name="p" placeholder="Password" required="required">
+        <input type="password" name="p" placeholder="Password" required="required">
         <input type="password" name="p" placeholder="Password" required="required">
         <button type="submit" class="btn-outline-primary btn-block btn-large">Entrar</button>
       </form>
