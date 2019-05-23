@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     res.status(500).send("Error -> " + err);
   })
 };
- 
+
 
 exports.findById = (req, res) => {  
   Lotes.findByPk(req.params.loteId).then(lote => {
