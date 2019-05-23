@@ -1,7 +1,7 @@
 <template>
 <div>
 <a-button class="eve" type="button" :href="'/adm/cadEvento'"><a-icon type="plus" /> EVENTO</a-button>
-<a-table :columns="columns" :dataSource="data" :pagination="{ pageSize: 15 }" :scroll="{ y: 380 }" >
+<a-table :columns="columns" :dataSource="data" :pagination="{ pageSize:6}" >
   <a slot="action" slot-scope="text" ><button type="button" class="ic"><a-icon type="edit" /></button>    <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)" >  <a-icon type="delete" /></button>    <button type="button" class="ic"><a-icon type="eye" />  </button></a>
 </a-table>
 </div>
@@ -20,8 +20,7 @@ const columns = [{
   title: 'Status do Evento',
   dataIndex: 'status',
 },{
-    title: 'Action',
-    key: 'operation',
+    title: 'Operações',
     fixed: 'right',
     width: 200,
     scopedSlots: { customRender: 'action' },
@@ -29,7 +28,7 @@ const columns = [{
   ];
 
 const data = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 8; i++) {
   data.push({
     key: i,
     nome: `SEINFO 2019 ${i}`,
