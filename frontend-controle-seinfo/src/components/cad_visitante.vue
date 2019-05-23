@@ -2,7 +2,7 @@
   <a-layout id="login" class="layout">
     <navHome></navHome>
     <a-layout-content>
-    <div class="login">
+      <div class="login">
       <h1>Visitante</h1>
       <a-form  class="form" action="http://localhost:3000/api/convidado" method="post">
         <label class="ant-form-item-required" style="color:white;">Nome Completo:</label>
@@ -10,21 +10,26 @@
         <label class="ant-form-item-required" style="color:white;">Email:</label>
         <input type="text" name="email_visi" placeholder="Email" required="required">
         <label class="ant-form-item-required" style="color:white;">Senha:</label>
-        <input  type="text" name="senha_visi" placeholder="Senha" required="required">
+        <input  type="password" name="senha_visi" placeholder="Senha" required="required">
         <label class="ant-form-item-required" style="color:white;">CPF:</label>
-        <input type="password" name="cpf_visi" placeholder="CPF" required="required">
+        <input type="number" name="cpf_visi" placeholder="CPF" required="required">
         <button type="submit" class="btn-large">Entrar</button>
       </a-form>
     </div>
     </a-layout-content>
+    <div>
+    <ft></ft>
+    </div>
   </a-layout>
 </template>
 
 <script>
 import navHome from "./navHome.vue";
+import ft from "./footer.vue";
 export default {
   components: {
-    navHome
+    navHome,
+    ft
   }
 };
 </script>
@@ -46,7 +51,8 @@ export default {
 }
 
 .btn-large {
-  padding: 9px 14px;
+  width: 100px;
+  padding: 7px 12px;
   font-size: 15px;
   line-height: normal;
   background: transparent;
@@ -57,13 +63,13 @@ export default {
 }
 
 .btn-large:hover{
-  background-color: transparent;
-  border-color: aqua;
+  background-color:transparent;
+  border-color: rgb(165, 15, 15);
 }
 
 .login {
   position: absolute;
-  top: 35%;
+  top: 38%;
   left: 38%;
   margin: -150px 0 0 -150px;
   width: 600px;
