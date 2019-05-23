@@ -58,7 +58,7 @@
         foreignKey: 'idPessoa',
         sourceKey: 'idPessoa',
       });
-      models.pessoa.model.hasMany(models.inscricao.model, {
+      models.pessoa.model.hasMany(models.inscricaoEvento.model, {
         foreignKey: 'idPessoa',
         sourceKey: 'idPessoa',
       });
