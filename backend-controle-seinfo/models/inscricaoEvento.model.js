@@ -49,8 +49,20 @@ module.exports = function(sequelize, Sequelize) {
 		models.inscricaoEvento.model.belongsTo(models.evento.model,{
 			foreignKey: 'idEvento'
 		})
-		models.inscricaoEvento.model.hasOne(models.lote.model,{
+		models.inscricaoEvento.model.belongsTo(models.lote.model,{
 			foreignKey: 'idLote'
+		})
+		models.inscricaoEvento.model.hasOne(models.receitaInscricaoEvento.model,{
+			foreignKey: 'idEvento'
+		})
+		models.inscricaoEvento.model.hasOne(models.receitaInscricaoEvento.model,{
+			foreignKey: 'idPessoa'
+		})
+		models.inscricaoEvento.model.hasOne(models.inscricaoAtividade.model,{
+			foreignKey: 'idPessoa'
+		})
+		models.inscricaoEvento.model.hasOne(models.inscricaoAtividade.model,{
+			foreignKey: 'idEvento'
 		})
 	} 
 

@@ -46,12 +46,21 @@ module.exports = function(sequelize, Sequelize) {
 	InscricaoA.associate = models =>{
 		models.inscricaoAtividade.model.belongsTo(models.atividade.model,{
 			foreignKey: 'idAtividade'
-		})
+		}),
 		models.inscricaoAtividade.model.belongsTo(models.inscricaoEvento.model,{
 			foreignKey: 'idEvento'
-		})
+		}),
 		models.inscricaoAtividade.model.belongsTo(models.inscricaoEvento.model,{
 			foreignKey: 'idPessoa'
+		}),
+		models.inscricaoAtividade.model.hasOne(models.receitaInscricaoAtividade.model,{
+			foreignKey: 'idPessoa'
+		}),
+		models.inscricaoAtividade.model.hasOne(models.receitaInscricaoAtividade.model,{
+			foreignKey: 'idEvento'
+		}),
+		models.inscricaoAtividade.model.hasOne(models.receitaInscricaoAtividade.model,{
+			foreignKey: 'idAtividade'
 		})
 	}
 

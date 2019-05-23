@@ -52,6 +52,15 @@ module.exports = function(sequelize, Sequelize) {
 		}),
 		models.receitaInscricaoAtividade.model.belongsTo(models.inscricaoAtividade.model,{
 			foreignKey: 'idEvento'
+		}),
+		models.receitaInscricaoAtividade.model.hasOne(models.participaAtividade.model,{
+			foreignKey: 'idEvento'
+		}),
+		models.receitaInscricaoAtividade.model.hasOne(models.participaAtividade.model,{
+			foreignKey: 'idPessoa'
+		}),
+		models.receitaInscricaoAtividade.model.hasOne(models.participaAtividade.model,{
+			foreignKey: 'idAtividade'
 		})
 	}
 
