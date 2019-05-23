@@ -1,13 +1,13 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, Sequelize) {
-	const ParticipaAtv = sequelize.define('participaAtividade', {
+	const InscricaoA = sequelize.define('inscricaoAtividade', {
 		idEvento: {
 			type: Sequelize.INTEGER(11),
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'inscricaoEvento',
 				key: 'idEvento'
 			},
 			field: 'idEvento'
@@ -17,7 +17,7 @@ module.exports = function(sequelize, Sequelize) {
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'inscricaoEvento',
 				key: 'idPessoa'
 			},
 			field: 'idPessoa'
@@ -27,34 +27,34 @@ module.exports = function(sequelize, Sequelize) {
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'atividade',
 				key: 'idAtividade'
 			},
 			field: 'idAtividade'
 		},
-		presenca: {
-			type: Sequelize.INTEGER(4),
+		dataInscricao: {
+			type: Sequelize.DATEONLY,
 			allowNull: false,
-			defaultValue: '0',
-			field: 'presenca'
+			field: 'dataInscricao'
 		}
 	}, {
-		tableName: 'participaAtividade',
+		tableName: 'inscricaoAtividade',
 		timestamps: false,
       	createdAt: false,
 	});
 
-	ParticipaAtv.associate = models => {
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
-			foreignKey: 'idEvento'
-		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
-			foreignKey: 'idPessoa'
-		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+	InscricaoA.associate = models =>{
+		models.inscricaoAtividade.model.belongsTo(models.atividade.model,{
 			foreignKey: 'idAtividade'
+		})
+		models.inscricaoAtividade.model.belongsTo(models.inscricaoEvento.model,{
+			foreignKey: 'idEvento'
+		})
+		models.inscricaoAtividade.model.belongsTo(models.inscricaoEvento.model,{
+			foreignKey: 'idPessoa'
 		})
 	}
 
-	return ParticipaAtv;
+	return InscricaoA;
+
 };

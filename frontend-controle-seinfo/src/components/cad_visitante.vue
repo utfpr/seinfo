@@ -1,20 +1,37 @@
 <template>
-  <div id="login">
-    <div class="login">
+  <a-layout id="login" class="layout">
+    <navHome></navHome>
+    <a-layout-content>
+      <div class="login">
       <h1>Visitante</h1>
-      <form method="post">
-        <input type="text" name="u" placeholder="Username" required="required">
-        <input type="password" name="p" placeholder="Password" required="required">
-        <input type="password" name="p" placeholder="Password" required="required">
-        <input type="password" name="p" placeholder="Password" required="required">
-        <button type="submit" class="btn-outline-primary btn-block btn-large">Entrar</button>
-      </form>
+      <a-form  class="form" action="http://localhost:3000/api/convidado" method="post">
+        <label class="ant-form-item-required" style="color:white;">Nome Completo:</label>
+        <input  type="text" name="nome_visi" placeholder="Nome" required="required">
+        <label class="ant-form-item-required" style="color:white;">Email:</label>
+        <input type="text" name="email_visi" placeholder="Email" required="required">
+        <label class="ant-form-item-required" style="color:white;">Senha:</label>
+        <input  type="password" name="senha_visi" placeholder="Senha" required="required">
+        <label class="ant-form-item-required" style="color:white;">CPF:</label>
+        <input type="number" name="cpf_visi" placeholder="CPF" required="required">
+        <button type="submit" class="btn-large">Entrar</button>
+      </a-form>
     </div>
-  </div>
+    </a-layout-content>
+    <div>
+    <ft></ft>
+    </div>
+  </a-layout>
 </template>
 
 <script>
-export default {};
+import navHome from "./navHome.vue";
+import ft from "./footer.vue";
+export default {
+  components: {
+    navHome,
+    ft
+  }
+};
 </script>
 
 <style scoped>
@@ -34,53 +51,34 @@ export default {};
 }
 
 .btn-large {
-  padding: 9px 14px;
+  width: 100px;
+  padding: 7px 12px;
   font-size: 15px;
   line-height: normal;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  background: transparent;
+  color: white;
+  border-color: white;
+  margin-left: 42%;
+  border: 1px solid white;
 }
 
-.btn-outline-primary:hover{
-  background-color: transparent;
-}
-
-.btn:hover {
-  color: #333333;
-  text-decoration: none;
-  background-color: #e6e6e6;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -ms-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-
-.btn-block {
-  width: 100%;
-  display: block;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.btn-large:hover{
+  background-color:transparent;
+  border-color: rgb(165, 15, 15);
 }
 
 .login {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 38%;
+  left: 38%;
   margin: -150px 0 0 -150px;
-  width: 300px;
+  width: 600px;
   height: 300px;
 }
 .login h1 {
-  color: #fff;
+  color: rgb(255, 255, 255);
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-align: center;
 }
 
