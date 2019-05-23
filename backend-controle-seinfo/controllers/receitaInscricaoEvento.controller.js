@@ -22,15 +22,22 @@ exports.create = (req, res) => {
 /* não tem como pesquisar por id pois não tem ID específico de Receita */
 
 
-// exports.findById = (req, res) => { 
+exports.findById = (req, res) => { 
 
 
-//   ReceitaInscricaoEvento.findByPk(req[0].params.loteId).then(receitaEvento => {
-//     console.log("Achou o lote pelo ID "+req.params.loteId);
-//     res.send(receitaEvento); //Retorna um Json para a Pagina da API
-//   }).catch(err => {
-//     res.status(500).send("Error -> " + err);
-//   })
+  ReceitaInscricaoEvento.findByPk(req.params.eventoId).then(receitaEvento => {
+    console.log("Achou o lote pelo ID "+req.params.loteId);
+    res.send(receitaEvento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+
+  ReceitaInscricaoEvento.findByPk(req.params.pessoaId).then(receitaEvento => {
+    console.log("Achou o lote pelo ID "+req.params.loteId);
+    res.send(receitaEvento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
 
 
 
@@ -65,7 +72,10 @@ exports.create = (req, res) => {
   
 
 // exports.delete = (req, res) => {  
-//   Lotes.destroy({ where: { idLote: req.params.loteId } }).then(lote => {
+//   Lotes.destroy({ 
+      //   where: { idLote: req.params.loteId, idPessoa: req.params.pessoaId },
+      //   orWhere: { idLote: req.params.pessoaId },
+      // }).then(lote => {
 //     console.log("Deletando o lote com o ID: "+req.params.loteId);
 //     res.send(lote); //Retorna um Json para a Pagina da API
 //   }).catch(err => {
