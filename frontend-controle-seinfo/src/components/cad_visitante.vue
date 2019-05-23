@@ -3,7 +3,7 @@
     <navHome></navHome>
     <a-layout-content>
       <div class="login">
-      <h1>Visitante</h1>
+      <h1 style="font-variant:small-caps;">Visitante</h1>
       <a-form  class="form" action="http://localhost:3000/api/convidado" method="post">
         <label class="ant-form-item-required" style="color:white;">Nome Completo:</label>
         <input  type="text" name="nome_visi" placeholder="Nome" required="required">
