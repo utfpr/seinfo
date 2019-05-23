@@ -19,6 +19,18 @@ module.exports = (sequelize, Sequelize) => {
           key: 'idAgenda'
         },
         field: 'idAgenda'
+      },
+      horasParticipacao: {
+        type: Sequelize.TIME,
+        allowNull: false,
+        defaultValue: '00:00:00',
+        field: 'horasParticipacao'
+      },
+      quantidadeVagas: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        defaultValue: '0',
+        field: 'quantidadeVagas'
       }
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
