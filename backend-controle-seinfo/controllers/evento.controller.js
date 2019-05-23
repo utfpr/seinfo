@@ -36,7 +36,7 @@ exports.create = (req, res) => {
     console.log("Criado o evento com o id: "+evento.idEvento);
     
     // Cria Agenda e retorna o idDa Agenda
-    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEveno,"status":});
+    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEveno});
   
     // Insere uma url na tabela Imagem
     imagens.create({"url":imagem,"evento":evento.idEvento});
