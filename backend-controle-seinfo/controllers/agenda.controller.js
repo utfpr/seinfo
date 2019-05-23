@@ -4,13 +4,14 @@ const Agenda = db.agendas;
  
 // Post do Eventod
 exports.create = (req, res) => {
-
+  console.log("\n\n\n\nVai toma no cu: "+req.data_ini+"\n  "+req.data_fim+"\n "+req.local);
+  
   Agenda.create({  
 
     dataHoraInicio: req.data_ini,
     dataHoraFim: req.data_fim,
     local: req.local,
-    horasParticipacao: req.horas,
+    
 
   }).then(agenda => {    
     // Cria um Evento

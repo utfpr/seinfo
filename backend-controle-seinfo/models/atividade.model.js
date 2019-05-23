@@ -54,7 +54,7 @@ module.exports = (sequelize, Sequelize) => {
         models.atividade.model.hasMany(models.agendamentoAtividade.model,{
           foreignKey: 'idAtividade'
         })
-        models.atividade.model.hasMany(models.participaAtividade.model,{
+        models.atividade.model.hasMany(models.inscricaoAtividade.model,{
           foreignKey: 'idAtividade'
         })
         models.atividade.model.hasMany(models.protagonista.model,{

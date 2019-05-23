@@ -41,9 +41,13 @@ module.exports = (sequelize, Sequelize) => {
     
     Lote.associate = models => {
         
-    models.lote.model.belongsTo(models.evento.model, {
+      models.lote.model.belongsTo(models.evento.model, {
         foreignKey: 'idEvento',
         sourceKey: 'idEvento',
+      });
+      models.lote.model.hasMany(models.inscricaoEvento.model, {
+        foreignKey: 'idLote',
+        sourceKey: 'idLote',
       });
       };
 

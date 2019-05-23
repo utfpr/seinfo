@@ -1,55 +1,50 @@
-module.exports = (sequelize, Sequelize) => {
-    const Receita = sequelize.define('receita', {
-      idReceita: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-        field: 'idReceita'
-      },
-      valor: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-        defaultValue: '0',
-        field: 'valor'
-      },
-      descricao: {
-        type: Sequelize.STRING(500),
-        allowNull: false,
-        field: 'descricao'
-      },
-      idCaixa: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        references: {
-          model: 'caixa',
-          key: 'idCaixa'
-        },
-        field: 'idCaixa'
-      }
-  },
-  { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
-      tableName: 'receita',
-      timestamps: false,
-      createdAt: false,
-    });
-    
-    Receita.associate = models => {
-        
-        models.receita.model.belongsTo(models.caixa.model, {
-            foreignKey: 'idCaixa',
-            sourceKey: 'idCaixa',
-        });
-        models.receita.model.hasOne(models.receitaEvento.model, {
-            foreignKey: 'idReceita',
-            sourceKey: 'idReceita',
-        });
-        models.receita.model.hasOne(models.receitaInterna.model, {
-            foreignKey: 'idReceita',
-            sourceKey: 'idReceita',
-        });
-    };
-      
+/* jshint indent: 1 */
 
-    return Receita;
-  }
+module.exports = function(sequelize, Sequelize) {
+	const Receita = sequelize.define('receita', {
+		idReceita: {
+			type: Sequelize.INTEGER(11),
+			allowNull: false,
+			primaryKey: true,
+			autoIncrement: true,
+			field: 'idReceita'
+		},
+		descricao: {
+			type: Sequelize.STRING(500),
+			allowNull: false,
+			field: 'descricao'
+		},
+		valor: {
+			type: Sequelize.FLOAT,
+			allowNull: false,
+			defaultValue: '0',
+			field: 'valor'
+		},
+		dataReceita: {
+			type: Sequelize.DATEONLY,
+			allowNull: false,
+			field: 'dataReceita'
+		},
+		idEvento: {
+			type: Sequelize.INTEGER(11),
+			allowNull: false,
+			references: {
+				model: 'evento',
+				key: 'idEvento'
+			},
+			field: 'idEvento'
+		}
+	}, {
+		tableName: 'receita',
+		timestamps: false,
+      	createdAt: false,
+	});
+
+	Receita.associate = models =>{
+		models.receita.model.belongsTo(models.evento.model,{
+			foreignKey: 'idEvento'
+		})
+	}
+
+	return Receita;
+};

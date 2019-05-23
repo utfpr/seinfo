@@ -42,7 +42,7 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: 'idEvento'
       })
 
-      models.evento.model.hasMany(models.inscricao.model,{
+      models.evento.model.hasMany(models.inscricaoEvento.model,{
         foreignKey: 'idEvento'
       })
 
@@ -58,7 +58,10 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: 'idEvento'
       })
 
-      models.evento.model.hasOne(models.caixa.model,{
+      models.evento.model.hasMany(models.receita.model,{
+        foreignKey: 'idEvento'
+      })
+      models.evento.model.hasMany(models.despesa.model,{
         foreignKey: 'idEvento'
       })
     }
