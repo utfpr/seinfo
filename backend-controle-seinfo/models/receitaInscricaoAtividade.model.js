@@ -1,13 +1,13 @@
 /* jshint indent: 1 */
 
 module.exports = function(sequelize, Sequelize) {
-	const ParticipaAtv = sequelize.define('participaAtividade', {
+	const ReceitaAtv =  sequelize.define('receitaInscricaoAtividade', {
 		idEvento: {
 			type: Sequelize.INTEGER(11),
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'inscricaoAtividade',
 				key: 'idEvento'
 			},
 			field: 'idEvento'
@@ -17,7 +17,7 @@ module.exports = function(sequelize, Sequelize) {
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'inscricaoAtividade',
 				key: 'idPessoa'
 			},
 			field: 'idPessoa'
@@ -27,34 +27,33 @@ module.exports = function(sequelize, Sequelize) {
 			allowNull: false,
 			primaryKey: true,
 			references: {
-				model: 'receitaInscricaoAtividade',
+				model: 'inscricaoAtividade',
 				key: 'idAtividade'
 			},
 			field: 'idAtividade'
 		},
-		presenca: {
-			type: Sequelize.INTEGER(4),
+		dataPagamento: {
+			type: Sequelize.DATEONLY,
 			allowNull: false,
-			defaultValue: '0',
-			field: 'presenca'
+			field: 'dataPagamento'
 		}
 	}, {
-		tableName: 'participaAtividade',
+		tableName: 'receitaInscricaoAtividade',
 		timestamps: false,
       	createdAt: false,
 	});
 
-	ParticipaAtv.associate = models => {
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
-			foreignKey: 'idEvento'
-		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+	ReceitaAtv.associate = models =>{
+		models.receitaInscricaoAtividade.model.belongsTo(models.inscricaoAtividade.model,{
 			foreignKey: 'idPessoa'
 		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+		models.receitaInscricaoAtividade.model.belongsTo(models.inscricaoAtividade.model,{
 			foreignKey: 'idAtividade'
+		}),
+		models.receitaInscricaoAtividade.model.belongsTo(models.inscricaoAtividade.model,{
+			foreignKey: 'idEvento'
 		})
 	}
 
-	return ParticipaAtv;
+	return ReceitaAtv;
 };
