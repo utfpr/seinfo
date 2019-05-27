@@ -11,7 +11,6 @@
     </a-form-item>
     <a-form-item>
       <a-button class="bt" html-type="submit" >Entrar</a-button>
-      <a-button style="background:transparent;color:white" :href="'/visitante'">Cadastrar</a-button>
     </a-form-item>
   </a-form>
 </nav>
@@ -19,17 +18,13 @@
 </template>
 
 <script>
-export default {};
 </script>
 
 <style scoped>
 
 .bt {
   background: transparent;
-  border:transparent;
-  border-radius: 20px;
-  border-color: rgb(67, 75, 75);
-  color: rgb(255, 255, 255);
+  color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
