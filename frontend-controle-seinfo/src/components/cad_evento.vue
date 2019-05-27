@@ -48,7 +48,7 @@
           </a-form-item>
           <a-form-item class="space">
             <label class="ant-form-item-required">Status do evento:</label>
-            <a-select name="status" defaultValue="0">
+            <a-select name="sta_evento" defaultValue="0">
               <a-select-option value="1">Evento disponivel</a-select-option>
               <a-select-option value="0">Evento indisponivel</a-select-option>
             </a-select>
@@ -57,7 +57,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Imagem do evento:</label>
-            <a-input name="file" type="file" class="">
+            <a-input name="file" type="file" class="inpt">
             </a-input>
           </a-form-item>
         </div>
