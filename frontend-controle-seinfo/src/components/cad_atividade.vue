@@ -6,13 +6,13 @@
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Nome da Atividade:</label>
-          <a-input maxlength="255" placeholder="Nome" name="nome_pale" type="text">
+          <a-input maxlength="255" placeholder="Nome" name="nome_atv" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
-          <label class="ant-form-item-required">Valor do Minicurso:</label>
-          <a-input placeholder="Valor" name="valor_min" type="number">
+          <label class="ant-form-item-required">Valor da Atividade:</label>
+          <a-input placeholder="Valor" name="valor_atv" type="number">
             <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -20,13 +20,13 @@
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Data de Inicio:</label>
-          <a-input name="data_ini_pale" type="date">
+          <a-input name="data_ini_atv" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required">Data de Fim:</label>
-          <a-input  name="data_fim_min" type="date">
+          <a-input  name="data_fim_atv" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -34,13 +34,13 @@
       <div class="row justify-content-center">
         <a-form-item class="space">
           <label class="ant-form-item-required">Hora de Inicio:</label>
-          <a-input  name="hora_ini_pale" type="time">
+          <a-input  name="hora_ini_atv" type="time">
             <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required">Hora de Fim:</label>
-          <a-input  name="hora_fim_pale" type="time">
+          <a-input  name="hora_fim_atv" type="time">
             <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -54,7 +54,7 @@
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required">Quantidade de Vagas:</label>
-          <a-input  name="hora_fim_pale" type="number">
+          <a-input  name="qtd" type="number">
             <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -62,7 +62,7 @@
       <div class="row justify-content-center">
       <a-form-item class="space">
           <label class="ant-form-item-required">Local da Atividade:</label>
-          <a-input maxlength="255" placeholder="Local" name="local_pale" type="text">
+          <a-input maxlength="255" placeholder="Local" name="local_atv" type="text">
             <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
           </a-input>
       </a-form-item>
@@ -86,7 +86,7 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">Descrição:</label>
-          <a-textarea maxlength="5000" type="text" name="descricao_pale" placeholder="Descrição" :rows="4"/>
+          <a-textarea maxlength="5000" type="text" name="descricao_atv" placeholder="Descrição" :rows="4"/>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
@@ -115,9 +115,8 @@ data () {
      .catch(function (error) {
        console.log(error);
      });
-
-
    },
+   
 };
 
 const axios = require('axios');

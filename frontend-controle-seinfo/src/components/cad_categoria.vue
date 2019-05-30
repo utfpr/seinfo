@@ -21,28 +21,8 @@
 
 <script>
 export default {
-data () {
-     return {
-       tabelas: {}
-     }
-   },
-   created(){
-     console.log("Entrou para Listar");
-   axios.get('http://localhost:3000/api/eventos')
-     .then( (response) => {
-       console.log("Listou Eventos!");
-       this.tabelas = response.data;
-       //console.log(this.tabelas);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-
-
-   },
 };
 
-const axios = require('axios');
 </script>
 <style scoped>
 
