@@ -1,18 +1,32 @@
 <template>
 <div class="title">
-  <h5 style="text-align:center">Cadastro de Palestra</h5>
+  <h5 style="text-align:center">Cadastro de Atividade</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/api/palestra" method="post">
+    <form class="form" action="http://localhost:3000/api/atividade" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space">
-          <label class="ant-form-item-required">Nome da Palestra:</label>
+          <label class="ant-form-item-required">Nome da Atividade:</label>
           <a-input maxlength="255" placeholder="Nome" name="nome_pale" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item class="space">
+          <label class="ant-form-item-required">Valor do Minicurso:</label>
+          <a-input placeholder="Valor" name="valor_min" type="number">
+            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
+        <a-form-item class="space">
           <label class="ant-form-item-required">Data de Inicio:</label>
           <a-input name="data_ini_pale" type="date">
+            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Data de Fim:</label>
+          <a-input  name="data_fim_min" type="date">
             <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -32,8 +46,22 @@
         </a-form-item>
       </div>
       <div class="row justify-content-center">
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Hora de Participação:</label>
+          <a-input  name="hora_part" type="time">
+            <a-icon slot="prefix" type="dashboard" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item class="space">
+          <label class="ant-form-item-required">Quantidade de Vagas:</label>
+          <a-input  name="hora_fim_pale" type="number">
+            <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+      </div>
+      <div class="row justify-content-center">
       <a-form-item class="space">
-          <label class="ant-form-item-required">Local da Palestra:</label>
+          <label class="ant-form-item-required">Local da Atividade:</label>
           <a-input maxlength="255" placeholder="Local" name="local_pale" type="text">
             <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
           </a-input>
@@ -46,10 +74,12 @@
       </a-form-item>
       </div>
     <div class="row justify-content-center">
+    </div>
+    <div class="row justify-content-center">
       <a-form-item class="space_2">
-          <label class="ant-form-item-required">Selecione o Palestrante:</label>
+          <label class="ant-form-item-required">Selecione uma Categoria:</label>
         <a-select defaultValue="...">
-      <a-select-option v-for="tabela in tabelas" :key="tabela.idEvento" :value="tabela.idEvento" >{{tabela.nome}}</a-select-option>
+      <a-select-option v-for="tabela in tabelas" :key="tabela.idCategoria" :value="tabela.idCategoria" >{{tabela.nome}}</a-select-option>
     </a-select>
       </a-form-item>
     </div>
@@ -91,6 +121,7 @@ data () {
 };
 
 const axios = require('axios');
+
 </script>
 <style scoped>
 
