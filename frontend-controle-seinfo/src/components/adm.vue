@@ -27,24 +27,8 @@
             <span>Cadastro de Pessoas</span>
           </span>
           <a-menu-item key="7">
-            Administrador
-            <router-link to="/adm/cadAdm"></router-link>
-          </a-menu-item>
-          <a-menu-item key="6">
-            Aluno
-            <router-link to="/adm/cadAluno"></router-link>
-          </a-menu-item>
-          <a-menu-item key="3">
-            Palestrante
-            <router-link to="/adm/cadPalestrante"></router-link>
-          </a-menu-item>
-          <a-menu-item key="4">
-            Ministrante
-            <router-link to="/adm/cadMinistrante"></router-link>
-          </a-menu-item>
-          <a-menu-item key="5">
-            Visitante
-            <router-link to="/adm/cadConvidado"></router-link>
+            Pessoa
+            <router-link to="/adm/cadPessoa"></router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub1">
