@@ -12,17 +12,13 @@
             <a-icon type="form"/>
             <span>Cadastro de Atividades</span>
           </span>
-          <a-menu-item key="9">
-            Minicurso
-            <router-link to="/adm/cadMinicurso"></router-link>
+          <a-menu-item key="13">
+            Atividade
+            <router-link to="/adm/cadAtividade"></router-link>
           </a-menu-item>
           <a-menu-item key="10">
-            Palestra
-            <router-link to="/adm/cadPalestra"></router-link>
-          </a-menu-item>
-          <a-menu-item key="13">
-            Outras Atividades
-            <router-link to="/adm/cadOutros"></router-link>
+            Categoria
+            <router-link to="/adm/cadCategoria"></router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">

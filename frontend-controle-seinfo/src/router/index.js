@@ -5,8 +5,6 @@ import Registrar from '@/components/registrar';
 import adm from '@/components/adm';
 import tabela from '@/components/tabela';
 import Cad_evento from '@/components/cad_evento';
-import Cad_Minicurso from '@/components/cad_minicurso';
-import Cad_Palestra from '@/components/cad_palestra';
 import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Palestrante from '@/components/cad_palestrante';
@@ -14,7 +12,8 @@ import Cad_Adm from '@/components/cad_adm';
 import Cad_Ministrante from '@/components/cad_ministrante';
 import Cad_Aluno from '@/components/cad_aluno';
 import Cad_Convidado from '@/components/cad_convidado';
-import Cad_Outro from '@/components/cad_outros';
+import Cad_Atividade from '@/components/cad_atividade';
+import Cad_Categoria from '@/components/cad_categoria';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
@@ -61,15 +60,7 @@ export default new Router({
         {
           path: 'cadEvento',
           component: Cad_evento
-        },
-        {
-          path: 'cadMinicurso',
-          component: Cad_Minicurso
-        },
-        {
-          path: 'cadPalestra',
-          component: Cad_Palestra
-        },
+        }, 
         {
           path: 'cadReceita',
           component: Cad_Receita
@@ -99,8 +90,12 @@ export default new Router({
           component: Cad_Convidado
         },
         {
-          path: 'cadOutros',
-          component: Cad_Outro
+          path: 'cadAtividade',
+          component: Cad_Atividade
+        },,
+        {
+          path: 'cadCategoria',
+          component: Cad_Categoria
         },
         {
           path: 'ADMevento',

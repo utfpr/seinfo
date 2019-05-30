@@ -4,7 +4,7 @@
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
   <a-form class="form" layout="inline" action="http://localhost:3000/api/evento" method="post">
     <a-form-item>
-    <input name="username" type="text" placeholder="Ra ou Email" class="lg" required="required"/>
+    <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
       <input name="password" type="password" placeholder="Senha" class="lg" required="required"/>
@@ -24,6 +24,7 @@
 
 .bt {
   background: transparent;
+  height: 30px;
   color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
