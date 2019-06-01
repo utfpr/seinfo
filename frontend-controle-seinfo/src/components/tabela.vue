@@ -29,7 +29,7 @@
                       <td class="actions">
                         <button type="button" class="ic"><a-icon type="edit" /></button>
                         <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)"><a-icon type="delete" /></button>
-                        <button type="button" class="ic"><a-icon type="eye" /></button>
+                        <button type="button" class="ic" data-toggle="modal" data-target=".bd-example-modal-lg-ver-mais" @click="openModal(res)"><a-icon type="eye"/></button>
                       </td>
                     </tr>
                   </tbody>
@@ -49,6 +49,29 @@
         </div>
       </div>
     </a-modal>
+
+    <!-- MODAL VER MAIS (INICIO) -->
+      <div class="modal fade bd-example-modal-lg-ver-mais" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ver Mais</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <label>ID: {{modalData.idEvento}}</label>
+                <br>
+                <label>Nome: {{modalData.nome}}</label>
+                <br>
+                <label>Descição: {{modalData.descricao}}</label>
+                <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL VER MAIS (FIM) -->
 
 
   </div>
@@ -79,15 +102,9 @@ const columns = [{
 
 export default {
   methods: {
-    showModal(e) {
-      console.log(e)
-      this.visible = true
-    },
-    handleCancel() {
-      this.visible = false
-    },
-    handleOk() {
-      this.visible = false
+    openModal (data) {
+      this.modalData = data
+      this.modalVisible = true
     },
     pegar_tabela (name) {
       axios.get('http://localhost:3000/api/' + name)
@@ -106,7 +123,8 @@ export default {
       res_localizar: [{"idEvento":1,"nome":"Extraction and agglomeration of peat","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
       columns,
       tabelas: [],
-      visible: false
+      modalVisible: false,
+      modalData: ''
     
     }
   }
