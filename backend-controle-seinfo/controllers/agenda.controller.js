@@ -4,7 +4,7 @@ const Agenda = db.agendas;
  
 // Post do Eventod
 exports.create = (req, res) => {
-  console.log("\n\n\n\nVai toma no cu: "+req.data_ini+"\n  "+req.data_fim+"\n "+req.local);
+  console.log("\n\n Dentro de Agenda!");
   
   Agenda.create({  
 
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 
 exports.findById = (req, res) => {  
   Agenda.findByPk(req.params.agendaId).then(agenda => {
-    console.log("Achou o agendamento pelo ID "+req.params.agendaId);
+    console.log("Achou o Agenda pelo ID "+req.params.agendaId);
     res.send(agenda); //Retorna um Json para a Pagina da API
   }).catch(err => {
     res.status(500).send("Error -> " + err);
