@@ -1,21 +1,13 @@
 <template>
 <div class="title">
-  <h5 style="text-align:center">Cadastro de Administrador</h5>
+  <h5 style="text-align:center">Cadastro de Categoria</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/adm" method="post">
+    <form class="form" action="http://localhost:3000/api/categoria" method="post">
       <div class="row justify-content-center">
         <a-form-item class="space_2">
-          <label maxlength="255" class="ant-form-item-required">Nome do Administrador:</label>
-          <a-input placeholder="Nome" name="nome_adm" type="text">
+          <label class="ant-form-item-required">Nome da Categoria:</label>
+          <a-input maxlength="255" placeholder="Nome" name="nome_cate" type="text">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-        <a-form-item class="space_2">
-          <label class="ant-form-item-required">Senha do Administrador:</label>
-          <a-input type="password" name="senha_adm" placeholder="Senha">
-          <a-icon slot="prefix" type="key" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
       </div>
@@ -29,8 +21,8 @@
 
 <script>
 export default {
-
 };
+
 </script>
 <style scoped>
 

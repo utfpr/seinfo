@@ -4,14 +4,13 @@
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
   <a-form class="form" layout="inline" action="http://localhost:3000/api/evento" method="post">
     <a-form-item>
-    <input name="username" type="text" placeholder="Ra ou Email" class="lg" required="required"/>
+    <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
       <input name="password" type="password" placeholder="Senha" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
       <a-button class="bt" html-type="submit" >Entrar</a-button>
-      <a-button style="background:transparent;color:white" :href="'/visitante'">Cadastrar</a-button>
     </a-form-item>
   </a-form>
 </nav>
@@ -19,17 +18,14 @@
 </template>
 
 <script>
-export default {};
 </script>
 
 <style scoped>
 
 .bt {
   background: transparent;
-  border:transparent;
-  border-radius: 20px;
-  border-color: rgb(67, 75, 75);
-  color: rgb(255, 255, 255);
+  height: 30px;
+  color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 

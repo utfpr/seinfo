@@ -1,50 +1,1703 @@
 
-/*                                   TABELA PESSOA                              */
-
-
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('admin', 'admin@hotmail.com','00000000000','admin123', '2', '1');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Luiz Henrique de Barros de Oliveira', 'hick@gmail.com','00000000001','senhahick', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Luiz Paulo de Barros de Oliveira', 'luiz@gmail.com','00000000002','senhaluiz', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Luis Otávio Capelari', 'luis@gmail.com','00000000003','senhaluis', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Rafael Menezes', 'rafael@gmail.com','00000000004','senharafael', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Michel Gomes de Souza', 'michel@gmail.com','00000000005','senhamichel', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Juliano Cezar Petini', 'juliano@gmail.com','00000000006','senhajuliano', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Daniel Rodrigues Farina', 'daniel@gmail.com','00000000007','senhadaniel', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Willian Rodrigues', 'willian@gmail.com','00000000008','senhawillian', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Matheus Souza Viera','matheus@gmail.com','00000000009','senhamatheus', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Marcos Silvano Pereira', 'marcos@gmail.com','00000000010','senhamarcos', '0', '1');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Andre Kawamoto', 'andre@gmail.com','00000000011','senhaandre', '0', '1');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Ivanilton Polato', 'ivanilton@gmail.com','00000000012','senhaivanilton', '1', '1');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Paola Silva Oliveira', 'paola@gmail.com','00000000013','senhapaola', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Marcos Aurelio Gracioto', 'gracioto@gmail.com','00000000014','senhagracioto', '0', '1');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Jessica Mendes', 'jessica@gmail.com','00000000015','senhajessica', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Claudia Silva Renner', 'claudia@gmail.com','00000000016','senhaclaudia', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Maria Isabela Moreira', 'maria@gmail.com','00000000017','senhamaria', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Sofia Cortegana', 'sofia@gmail.com','00000000018','senhasofia', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Karina Marques Rocha', 'karina@gmail.com','00000000019','senhakarina', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('José da Rocha Silva', 'jose@gmail.com','00000000020','senhajose', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('João Paulo Crispane', 'joao@gmail.com','00000000021','senhajoao', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Maria Joaquina Gomes', 'joaquina@gmail.com','00000000022','senhajoaquina', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Renata Vilvert', 'renata@gmail.com','00000000023','senharenata', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Rodrigo Cristovão', 'rodrigo@gmail.com','00000000024','senharodrigo', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Vinicius Carrara', 'vinicius@gmail.com','00000000025','senhavinicius', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Maria Eduarda Souza', 'eduarda@gmail.com','00000000026','senhaeduarda', '0', '0');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Angélica Natalina', 'angelica@gmail.com','00000000027','senhaangelica', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Jaqueline Rezende', 'jaqueline@gmail.com','00000000028','senhajaqueline', '0', '2');
-INSERT INTO `seinfo`.`pessoa` (`nome`, `email`, `CPF`, `senha`, `nivel`, `classificacao`) VALUES ('Antonio Marcos da Silva', 'antonio@gmail.com','00000000029','senhaantonio', '0', '2');
+-- Script was generated by Devart dbForge Data Generator for MySQL, Version 2.2.33.0
+-- Product Home Page: http://www.devart.com/dbforge/mysql/data-generator
+-- Script date 23/05/2019 11:36:53
+-- Target server version: 8.0.16
+-- Target connection string: User Id=hick;Host=localhost;Database=seinfo;Character Set=utf8
 
 
 
 
+SET NAMES 'utf8';
+USE seinfo;
 
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(1, '2019-01-01 01:07:12', '2019-01-04 01:42:17.766443', '71 Hunting Hill Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(2, '2020-04-22 08:11:59', '2020-04-24 03:45:11.558954', '729 Bayview Pkwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(3, '2019-07-24 06:44:29', '2019-07-26 14:28:12.902105', '48 Monument Ave');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(4, '2019-11-21 10:30:55', '2019-11-27 12:28:27.199255', '1331 Red Rock Hill Loop');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(5, '2020-07-28 00:20:16', '2020-07-31 13:44:53.487662', '75 East Front Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(6, '2020-11-22 19:51:10', '2020-11-23 03:09:20.918884', '71 W Deepwood Lane');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(7, '2019-05-16 16:58:51', '2019-05-22 14:43:38.544404', '114 Market Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(8, '2020-07-25 12:32:59', '2020-07-30 08:53:46.550758', '2538 1st Parkway');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(9, '2019-01-01 01:01:03', '2019-01-07 21:42:50.588637', '1166 Old Fox Hill Rd');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(10, '2020-05-04 16:07:42', '2020-05-06 02:46:41.858042', '17 East Buttonwood Pkwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(11, '2019-08-01 10:53:19', '2019-08-06 18:22:35.847282', '133 Church Loop');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(12, '2019-01-01 01:00:04', '2019-01-06 21:00:49.554456', '446 Red Beachwood Way');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(13, '2019-02-06 15:08:38', '2019-02-08 23:25:17.058424', '3588 Rose Hill Parkway');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(14, '2019-01-01 01:00:00', '2019-01-01 06:48:56.798713', '1151 Cedar Tree Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(15, '2019-08-22 11:59:09', '2019-08-25 11:30:41.058279', '510 Meadowview St');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(16, '2020-11-11 01:13:31', '2020-11-17 01:53:09.041678', '898 South Beachwood Circle');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(17, '2019-08-10 19:14:23', '2019-08-17 13:16:28.537464', '24 Riverside Pkwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(18, '2019-01-01 01:15:41', '2019-01-08 08:14:13.254241', '222 Waterview Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(19, '2019-10-18 22:47:58', '2019-10-22 08:45:46.40383', '1807 NE Pine Tree Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(20, '2019-01-01 01:01:22', '2019-01-01 20:50:28.181217', '244 White Social Parkway');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(21, '2019-09-15 02:30:40', '2019-09-15 06:44:44.106596', '537 New Deepwood Court');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(22, '2019-09-14 02:55:15', '2019-09-15 12:29:33.459903', '151 Front Loop');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(23, '2019-10-30 04:07:43', '2019-11-04 16:38:31.116645', '162 Rock Hill Hwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(24, '2020-10-29 07:10:37', '2020-11-03 05:39:48.373364', '3131 Social Ave');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(25, '2019-01-01 01:05:12', '2019-01-04 09:37:25.031879', '577 Red Riverview Blvd');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(26, '2019-06-21 16:40:06', '2019-06-26 18:04:37.533721', '1381 East Glenwood Blvd');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(27, '2020-08-18 15:43:14', '2020-08-23 07:48:30.38679', '1719 White Oak Ave');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(28, '2019-01-01 01:01:27', '2019-01-04 01:41:30.712066', '3706 South Riverside Ave');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(29, '2019-07-13 10:15:19', '2019-07-17 08:15:13.858956', '984 East Burwood Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(30, '2019-01-01 01:01:37', '2019-01-02 02:22:58.63048', '601 S Chapel Hill Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(31, '2019-09-30 20:35:37', '2019-10-04 16:56:55.68696', '3644 Prospect Hill Pkwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(32, '2020-09-24 06:21:46', '2020-10-01 07:13:02.420467', '1975 North Oak Hwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(33, '2020-03-21 23:13:07', '2020-03-22 12:01:00.177726', '1015 Parkwood Court');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(34, '2019-01-01 02:00:17', '2019-01-04 02:47:09.973173', '2208 Old Prospect Hill Blvd');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(35, '2020-08-27 11:30:40', '2020-09-03 17:14:48.782163', '584 East Rushwood Way');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(36, '2019-01-23 19:17:08', '2019-01-25 11:21:02.390633', '3066 SE Riddle Hill Way');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(37, '2019-11-21 17:43:40', '2019-11-21 20:24:29.694502', '2543 Red Cedar Tree Avenue');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(38, '2020-04-11 12:59:43', '2020-04-17 19:20:48.495298', '441 Red Fox Hill Way');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(39, '2020-05-29 17:26:15', '2020-06-03 03:45:05.205106', '610 NE Rockwood Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(40, '2020-06-17 17:05:52', '2020-06-18 15:45:46.449544', '85 Riverview Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(41, '2019-09-05 05:06:49', '2019-09-11 10:17:51.615349', '3226 3rd Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(42, '2020-11-16 07:04:39', '2020-11-19 03:01:55.254645', '16 Rockwood Road');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(43, '2019-12-03 19:21:06', '2019-12-05 04:48:52.173313', '91 N Lake Ct');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(44, '2020-09-13 08:54:53', '2020-09-17 23:59:47.806148', '58 Sharp Hill Lane');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(45, '2019-01-01 01:02:21', '2019-01-02 11:01:59.369431', '3510 Rose Hill Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(46, '2019-12-31 04:38:46', '2020-01-01 05:05:17.141276', '652 New Mountain Way');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(47, '2020-02-20 18:37:35', '2020-02-22 08:11:23.356147', '1873 Town Hwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(48, '2019-12-08 18:30:38', '2019-12-10 06:00:59.163873', '28 North Quailwood Hwy');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(49, '2019-12-24 00:13:47', '2019-12-26 15:03:40.585943', '1462 Edgewood Ln');
+INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
+(50, '2019-01-01 03:45:14', '2019-01-04 09:26:03.300989', '909 Beachwood Ct');
 
-/*                                   TABELA EVENTO                              */
+--
+-- Inserting data into table carrossel
+--
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(1, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(2, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(3, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(4, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(5, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(6, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(7, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(8, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(9, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(10, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(11, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(12, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(13, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(14, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(15, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(16, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(17, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(18, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(19, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(20, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(21, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(22, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(23, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(24, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(25, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(26, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(27, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(28, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(29, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(30, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(31, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(32, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(33, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(34, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(35, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(36, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(37, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(38, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(39, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(40, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(41, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(42, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(43, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(44, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(45, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(46, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(47, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(48, 1);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(49, 0);
+INSERT INTO carrossel(idCarrossel, status) VALUES
+(50, 1);
 
+--
+-- Inserting data into table categoria
+--
+INSERT INTO categoria(idCategoria, nome) VALUES
+(1, 'Motion picture, video and television programme post-production activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(2, 'Other sports activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(3, 'Manufacture of military fighting vehicles');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(4, 'Sea and coastal passenger water transport');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(5, 'Web portals');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(6, 'Manufacture of wearing apparel, except fur apparel');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(7, 'Architectural and engineering activities and related technical consultancy');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(8, 'Mining of uranium and thorium ores');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(9, 'Central banking');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(10, 'Growing of grapes');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(11, 'Real estate activities with own or leased property');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(12, 'Creative, arts and entertainment activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(13, 'Wholesale of food, beverages and tobacco');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(14, 'Installation of industrial machinery and equipment');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(15, 'Growing of vegetables and melons, roots and tubers');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(16, 'Manufacture of cocoa, chocolate and sugar confectionery');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(17, 'Publishing of directories and mailing lists');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(18, 'Non-life insurance');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(19, 'Growing of fibre crops');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(20, 'Manufacture of weapons and ammunition');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(21, 'Maintenance and repair of motor vehicles');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(22, 'Distilling, rectifying and blending of spirits');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(23, 'Growing of tropical and subtropical fruits');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(24, 'Manufacture of other articles of paper and paperboard');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(25, 'Other activities auxiliary to financial service activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(26, 'Other education n.e.c.');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(27, 'Repair of electronic and optical equipment');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(28, 'Retail sale of second-hand goods');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(29, 'Washing and (dry-) cleaning of textile and fur products');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(30, 'Organization of conventions and trade shows');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(31, 'Support activities for other mining and quarrying');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(32, 'Social work activities without accommodation for the elderly and disabled');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(33, 'General cleaning of buildings');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(34, 'Passenger rail transport, interurban');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(35, 'Growing of other perennial crops');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(36, 'Marine fishing');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(37, 'Retail sale via stalls and markets of textiles, clothing and footwear');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(38, 'Library and archives activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(39, 'Risk and damage evaluation');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(40, 'Manufacture of plastics products');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(41, 'Wireless telecommunications activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(42, 'Security systems service activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(43, 'Manufacture of clay building materials');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(44, 'Retail sale of carpets, rugs, wall and floor coverings in specialized stores');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(45, 'Wholesale of construction materials, hardware, plumbing and heating equipment and supplies');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(46, 'Manufacture of engines and turbines, except aircraft, vehicle and cycle engines');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(47, 'Other specialized construction activities');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(48, 'Growing of cereals (except rice), leguminous crops and oil seeds');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(49, 'Growing of rice');
+INSERT INTO categoria(idCategoria, nome) VALUES
+(50, 'Photographic activities');
 
-INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('Seinfo 2019', 'A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.', '1');
-INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('A 33ª Semana da Matemática', 'A 33ª Semana da Matemática: "Matemática e Educação Matemática: Funções Sociais" será um evento voltado aos que cursam Graduação em Matemática (Bacharelado, Empresarial e Licenciatura), alunos da Pós-Graduação e professores de Matemática da Educação Básica e do Ensino Superior. Nesta edição, serão ofertados minicursos, palestras, sessões de filmes, mesa redonda, comunicações científicas, sessão de pôsteres e outras atividades, que serão documentadas em anais.', '1');
-INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('VI Semana Acadêmica da Matemática','A Semana da Matemática da UTFPR – Toledo (SEMAT) tem o intuito de complementar a formação dos acadêmicos do curso de Licenciatura em Matemática da instituição. Além disso, tem como propósito preparar o acadêmico para o exercício do magistério no Ensino Fundamental e Ensino Médio, bem como formar professores e pesquisadores com atitudes críticas e reflexivas nas áreas de Educação Matemática, Matemática Aplicada e Matemática Pura. Também configura-se como uma oportunidade para acadêmicos, pós-graduandos, professores e pesquisadores engajarem-se em atividades de pesquisa e na divulgação de seus trabalhos. A Semana da Matemática da UTFPR – Toledo (SEMAT) surgiu no ano de 2013 e visa aproximar alunos de graduação e de pós-graduação, professores da rede pública de ensino da região e das universidades e pesquisadores, oportunizando o diálogo e o compartilhamento de ideias, conhecimentos e experiências. A SEMAT já está em sua sexta edição, indicando uma consolidação na realização do evento, sendo esperado, principalmente, pelos acadêmicos do curso e docentes da região. A cada ano contamos com a participação de mais alunos e docentes de instituições da região de Toledo, como é o caso de instituições de Assis Chateubriand, Cascavel, Foz do Iguaçu, Francisco Beltrão, Palotina, Pato Branco etc. Para mais informações sobre o evento, acesse: http://www.td.utfpr.edu.br/semat/VI_semat/','1');
-INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('SEMANA DO CALOURO','A 14º Calourada UTFPR-CM é um evento de recepção, ambientação e a integração entre os acadêmicos e os alunos ingressantes no Campus Campo Mourão da UTFPR, com realização do Movimento Estudantil, a 14º Calourada UTFPR/CM ocorrerá no dia 9 (nove) de agosto de 2018, com início às 15:00 (quinze) horas e término às 19:00 (dezenove). A realização da 14º Calourada UTFPR/CM receberá o apoio do Campus Campo Mourão da UTFPR, visto que é interesse da Universidade promover atividades culturais e de integração, que contribuam para banir a prática do chamado “trote”.','0');
-INSERT INTO `seinfo`.`evento` (`nome`, `descricao`, `status`) VALUES ('Concurso Cultural "A Foto Mais Curtida"','O concurso visa a integração da comunidade acadêmica através do olhar fotográfico, expondo as qualidades, defeitos, diferenças e a diversidade cultural no Câmpus. ','0');
+--
+-- Inserting data into table evento
+--
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(1, 'Extraction and agglomeration of peat', 'VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(2, 'Raising of poultry', 'QUHNJTQAQDEPIQQBSBPB', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(3, 'Wholesale of waste and scrap', 'FFCN', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(4, 'Manufacture of explosives', 'U', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(5, 'Fitness facilities', 'SSQOZXCYMTE', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(6, 'Wired telecommunications activities', 'PHZKLHGDARMXBK', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(7, 'Other specialist photography (not including portrait photography)', 'KSOWKCCSZVHE', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(8, 'Growing of other non-perennial crops', 'HXQEWTZRFGF', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(9, 'Growing of cereals (except rice), leguminous crops and oil seeds', 'R', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(10, 'Other professional, scientific and technical activities (not including environmental consultancy or quantity surveying) n.e.c. ', 'J', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(11, 'Manufacture of other products of wood, manufacture of articles of cork, straw and plaiting materials', 'QEU', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(12, 'Agents involved in the sale of fuels, ores, metals and industrial chemicals', 'GM', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(13, 'Other holiday and other collective accommodation n.e.c.', 'KJ', 0);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(14, 'Wholesale of  petroleum and petroleum products ', 'SUSLU', 1);
+INSERT INTO evento(idEvento, nome, descricao, status) VALUES
+(15, 'Hotels and similar accommodation', 'LZTGF', 0);
 
+--
+-- Inserting data into table imagem
+--
+INSERT INTO imagem(idImagem, url) VALUES
+(1, 'imagens://buterevese.bmp');
+INSERT INTO imagem(idImagem, url) VALUES
+(2, 'imagens://ereorbuther962.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(3, 'imagenss://heentntha84.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(4, 'imagens://tiomeherat.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(5, 'imagens://ourereher.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(6, 'imagens://edithneted.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(7, 'imagenss://entbutitome87.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(8, 'imagens://leouritou8.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(9, 'imagens://veandverwit518.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(10, 'imagenss://ourwaon4.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(11, 'imagenss://oultioenuld62.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(12, 'imagens://thaent.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(13, 'imagenss://youle.bmp');
+INSERT INTO imagem(idImagem, url) VALUES
+(14, 'imagens://ithforthaall.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(15, 'imagenss://isatteder66.bmp');
+INSERT INTO imagem(idImagem, url) VALUES
+(16, 'imagens://heneraheera.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(17, 'imagens://asneedsho.bmp');
+INSERT INTO imagem(idImagem, url) VALUES
+(18, 'imagenss://hadhinarele.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(19, 'imagenss://terourenit.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(20, 'imagens://asevehadha688.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(21, 'imagens://hisheomeere.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(22, 'imagenss://uldith.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(23, 'imagens://thoulthed.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(24, 'imagens://youitseng9.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(25, 'imagenss://erethaishis.jpg');
+INSERT INTO imagem(idImagem, url) VALUES
+(26, 'imagenss://thwa.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(27, 'imagens://ingthiinera04.png');
+INSERT INTO imagem(idImagem, url) VALUES
+(28, 'imagenss://need.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(29, 'imagens://ionyoutias.gif');
+INSERT INTO imagem(idImagem, url) VALUES
+(30, 'imagens://orha930.png');
 
+--
+-- Inserting data into table pessoa
+--
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('j6l8s6h4m5i4', 'Michael Johnson', 'ArnoldG.Ambrose455@example.com', '3451', 'O9K4M1R1YK986', 0, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o3n8h9i7a6b2', 'Kina Abraham', 'Whitman9@example.com', '60', 'SBIL3P', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a4057618', 'Alexis Laflamme', 'Stacey85@nowhere.com', '405', '9EUTVO6NG718Y6', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3263193', 'Julienne Baxley', 'Lutz438@nowhere.com', '171', '421X65A8E9', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6724257', 'Adolfo Bergeron', 'RegaladoO@example.com', '87', '3233422X', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1368135', 'Garry Metzger', 'Hyman@example.com', '75', 'Q74812', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('z2a5g7m2i0e5', 'Cathrine Southerland', 'KareemBinkley@example.com', '06367610204', '854Z3IA', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a0286453', 'Emely Shull', 'Eda_Mallory577@example.com', '0', 'C5914', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('d3k3e5t2f3q6', 'Charlsie Alston', 'AguiarP@nowhere.com', '42', 'G', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o6o8c6m6e5a2', 'Yevette Vanwinkle', 'RicardaNAndre@example.com', '774', '3CJ7MM8C', 2, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('f7n4s5j5w5n0', 'Roxy Julian', 'BannisterO485@example.com', '153', 'LDPZ3T9WJ29R', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('x7n2a0q9f0g2', 'Casey Pleasant', 'MauricePepper949@example.com', '07', '15Y75NY', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('j9w6c7u4t3i0', 'Jefferey Abrams', 'Fay.Andres@example.com', '', 'Y458L2AJ', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('i4n5m3u2v2z0', 'Raymundo Bottoms', 'Wade.H.Marx722@example.com', '649046', '9', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('m8i3a0x2b8q0', 'Sophia Driscoll', 'zajvyfes_gigpanbvkz@example.com', '51', 'MT', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a5942650', 'Dave Browder', 'jmcqy5@example.com', '6', '18D8', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6501224', 'Randee Quinonez', 'Acevedo733@example.com', '8', 'JW80Q5W3ICSC84', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('w5u9l4y6w9z4', 'Terrell Fryer', 'Abreu@example.com', '91577', '20ZQ', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('p4c5r5y3i5c3', 'Nicola Neil', 'Moeller@example.com', '7765162', 'R25FK', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3132951', 'Earleen Sessions', 'Acker@example.com', '976187', '17RP', 0, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6806151', 'Daniele Hundley', 'ElissaJacobs@example.com', '4509438', 'YHHCQYH', 0, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('i3c7z2j2i9q6', 'Lucrecia Cason', 'rxrisnix_pmwl@nowhere.com', '33', 'R5UK', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('v4j9f1b2t9r6', 'Adeline Abraham', 'gmfyejp7@example.com', '293613', '158S3289S6', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('u2v0m1w2e4m1', 'Tresa Mallory', 'FallonLane@example.com', '7780', '8V424OZZGW', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a5949702', 'Timika Leger', 'Alvin.Hahn@example.com', '01', '3BNR', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1919434', 'Curt Munoz', 'bfpu4@example.com', '2', 'FY96', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6653710', 'Angelika Hinkle', 'ElijahAbney@example.com', '395695', 'PT1O', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('w8c6n2q6j4y2', 'Bradford Meza', 'Haynes729@example.com', '049200', '26XE5D', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('t8c0t2u1p6p6', 'Cordie Acker', 'Marchand@example.com', '37898297', '2FHA4L', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('d3v8z4h3k6b3', 'Mickey Brubaker', 'AndyLott617@example.com', '63676', '817268', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1519440', 'Neville Triplett', 'MasonM_Cortes145@nowhere.com', '31', 'DV', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o9h1z4e5v3o8', 'Agripina Mcclendon', 'AbbyRhoads4@example.com', '3742', 'NO022', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a7175071', 'Maxie Parnell', 'IlonaAshmore@example.com', '53', '3041', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a8462836', 'Hue Reece', 'Valentin@nowhere.com', '8247618342', 'R41MDGD13B9N513L2QKOW', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1103421', 'Fay Matson', 'ylffg9891@example.com', '71', '934551', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3678554', 'Emiko Colbert', 'Keith29@nowhere.com', '134', 'PN', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1141548', 'Alphonso Artis', 'Abrams29@example.com', '86211', 'D', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a2687085', 'Vernon Tibbs', 'xrysmi3@example.com', '70', '5794', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a8826194', 'Abby Webster', 'LaddT@nowhere.com', '018', '5', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a7556622', 'Tosha Fischer', 'CurtisBTrimble2@example.com', '30', 'Q6', 0, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('f7w6z9n1m2f2', 'Versie Andrade', 'IgnacioEllington43@example.com', '43236231527', 'PH93M70', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('s7v0c1e1c6j3', 'Alisa Almeida', 'Forsythe@nowhere.com', '88851906337', 'Q3', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a9894799', 'Terrence Hazel', 'Toby.Dellinger@example.com', '184', 'R58D63B3584LI0D0OT5Y2', 0, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('p2w7n5p9n4m3', 'Jenelle Woodard', 'ScottyNavarro6@example.com', '5602813', '317M1J6P', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('s3o3z7a2z1c1', 'Alva Westfall', 'Martha.Ayala@example.com', '21', 'J', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6325867', 'Adah Caballero', 'AllmanD@example.com', '4535', 'Z7G7', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a9496021', 'Ramona Correia', 'Whitmire346@example.com', '6222', 'H1', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3716877', 'Paige Welsh', 'Nava@example.com', '4912199', '66', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3768263', 'Kevin Stephen', 'rregc52@example.com', '31841', '6D', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3524954', 'Camie Cosgrove', 'Scoggins@nowhere.com', '24723', 'MB8', 1, 0);
+
+--
+-- Inserting data into table atividade
+--
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(1, 'Cmdr', 132, 'Vel accusantium perspiciatis.\r\n', 13, 11);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(2, 'Pres', 126, 'Sit deserunt perferendis.\r\n', 29, 14);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(3, 'Madam', 45, 'Sed quas et quidem cum sit sed.', 32, 1);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(4, 'Hon', 8, 'Aspernatur quidem natus quia.', 48, 8);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(5, 'Sgt.', 136, 'Inventore at voluptatem. Rerum.', 12, 13);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(6, 'Hon.', 18, 'Qui eum nisi eius id.', 33, 5);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(7, 'Sgt', 69, 'Non nam quo. Animi atque.\r\n', 4, 8);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(8, 'Lord', 124, 'Doloribus sit labore.\r\nSint.', 4, 15);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(9, 'Sen.', 102, 'Perspiciatis ea dolorem.\r\n', 19, 6);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(10, 'Cpl.', 12, 'Omnis doloremque odio. Animi.\r\n', 1, 12);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(11, 'Brgdr.', 151, 'Ea autem sit. Cumque.', 48, 9);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(12, 'Supt.', 59, 'Ea atque aut.\r\nEveniet.', 46, 3);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(13, 'Rep.', 134, 'Nisi tempora perferendis.\r\n', 47, 3);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(14, 'Rep', 149, 'Quis est aut. Ipsa dolor vel.\r\n', 26, 8);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(15, 'Br.', 62, 'Cumque aliquid sint provident.', 10, 7);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(16, 'Treas', 182, 'Optio veritatis debitis.', 39, 8);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(17, 'Atty', 103, 'Omnis esse ea.\r\nEt accusantium.', 19, 12);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(18, 'Sir', 44, 'Recusandae quia quasi. Quas.', 24, 11);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(19, 'Msgr', 87, 'Accusantium et aperiam. Qui ut.', 11, 7);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(20, 'Pres.', 82, 'Maxime voluptatum adipisci.', 42, 13);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(21, 'Treas.', 130, 'Quis nihil hic. Distinctio et.', 1, 14);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(22, 'Dame', 0, 'Earum quod mollitia.\r\n', 23, 8);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(23, 'Lady', 43, 'Accusantium repudiandae.\r\n', 25, 2);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(24, 'Ofc.', 68, 'Itaque quasi cumque.\r\n', 24, 3);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(25, 'Cmdr.', 2, 'Aliquam quos vero error sed et.', 32, 2);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(26, 'Atty.', 199, 'Dolor dolorum blanditiis. Sit.', 7, 5);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(27, 'Fr.', 3, 'Omnis ut eius. Animi iure.\r\n', 34, 9);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(28, 'Brgdr', 60, 'Consectetur delectus veritatis.', 24, 6);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(29, 'Fr', 189, 'Id aut eos aliquid recusandae.', 25, 9);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, idCategoria, idEvento) VALUES
+(30, 'Adv.', 80, 'Aut sequi fugiat.\r\nVelit quia.', 2, 11);
+
+--
+-- Inserting data into table lote
+--
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(1, 150, '2019-02-10', '2019-02-10', 12);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(2, 14, '2020-09-18', '2020-09-18', 9);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(3, 69, '2019-06-26', '2019-06-26', 1);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(4, 70, '2019-03-12', '2019-03-12', 14);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(5, 67, '2019-07-08', '2019-07-08', 1);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(6, 79, '2019-10-30', '2019-10-30', 12);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(7, 64, '2019-02-27', '2019-02-27', 11);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(8, 68, '2019-12-20', '2019-12-20', 15);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(9, 74, '2019-09-28', '2019-09-28', 15);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(10, 140, '2020-04-13', '2020-04-13', 10);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(11, 70, '2019-04-24', '2019-04-24', 13);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(12, 53, '2020-09-30', '2020-09-30', 5);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(13, 18, '2019-12-30', '2019-12-30', 6);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(14, 28, '2019-08-05', '2019-08-05', 13);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(15, 111, '2019-06-23', '2019-06-23', 14);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(16, 59, '2020-07-22', '2020-07-22', 4);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(17, 100, '2020-08-04', '2020-08-04', 11);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(18, 101, '2019-03-12', '2019-03-12', 12);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(19, 36, '2020-07-19', '2020-07-19', 14);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(20, 5, '2019-03-10', '2019-03-10', 14);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(21, 36, '2019-09-10', '2019-09-10', 4);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(22, 109, '2020-03-20', '2020-03-20', 8);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(23, 149, '2019-05-04', '2019-05-04', 11);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(24, 1, '2019-03-30', '2019-03-30', 12);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(25, 95, '2019-06-27', '2019-06-27', 2);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(26, 127, '2019-08-27', '2019-08-27', 10);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(27, 39, '2019-08-04', '2019-08-04', 2);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(28, 99, '2019-01-07', '2019-01-07', 5);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(29, 71, '2019-10-17', '2019-10-17', 10);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(30, 41, '2020-07-23', '2020-07-23', 10);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(31, 87, '2019-10-21', '2019-10-21', 8);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(32, 14, '2019-09-16', '2019-09-16', 7);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(33, 31, '2019-10-09', '2019-10-09', 14);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(34, 143, '2019-01-12', '2019-01-12', 3);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(35, 49, '2020-09-14', '2020-09-14', 2);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(36, 113, '2020-04-05', '2020-04-05', 11);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(37, 6, '2020-06-25', '2020-06-25', 1);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(38, 12, '2019-01-07', '2019-01-07', 5);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(39, 109, '2019-12-15', '2019-12-15', 7);
+INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
+(40, 47, '2019-07-28', '2019-07-28', 8);
+
+--
+-- Inserting data into table inscricaoevento
+--
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(2, 'a9496021', 16, '2019-01-04');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(9, 'd3k3e5t2f3q6', 1, '2020-02-17');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(3, 'w5u9l4y6w9z4', 30, '2019-01-08');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(4, 'a3263193', 24, '2019-04-17');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(13, 'w8c6n2q6j4y2', 12, '2019-08-10');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(5, 'a3524954', 23, '2019-02-17');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(15, 's3o3z7a2z1c1', 16, '2019-08-04');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(3, 'a3716877', 18, '2019-04-06');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(1, 'a6325867', 37, '2019-05-04');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(8, 'v4j9f1b2t9r6', 20, '2020-04-25');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(13, 'j9w6c7u4t3i0', 11, '2019-02-04');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(4, 'p4c5r5y3i5c3', 27, '2019-01-06');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(12, 's7v0c1e1c6j3', 20, '2019-01-05');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(14, 'i4n5m3u2v2z0', 8, '2019-03-24');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(5, 'a3132951', 35, '2019-06-24');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(4, 'a3768263', 40, '2019-09-30');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(15, 'm8i3a0x2b8q0', 12, '2020-05-03');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(7, 'a1141548', 38, '2019-05-08');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(13, 'a9894799', 32, '2019-07-01');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(6, 'a6806151', 32, '2019-11-14');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(14, 't8c0t2u1p6p6', 38, '2019-01-11');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(8, 'a2687085', 18, '2020-01-10');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(10, 'o6o8c6m6e5a2', 6, '2020-04-09');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(1, 'a5942650', 17, '2019-08-05');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(5, 'a6724257', 31, '2019-02-27');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(11, 'f7n4s5j5w5n0', 36, '2020-04-25');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(9, 'u2v0m1w2e4m1', 38, '2019-07-03');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(15, 'd3v8z4h3k6b3', 37, '2019-04-05');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(10, 'a5949702', 38, '2019-04-30');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(7, 'i3c7z2j2i9q6', 31, '2019-07-12');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(14, 'p2w7n5p9n4m3', 24, '2019-01-10');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(6, 'a1368135', 1, '2019-09-10');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(1, 'a1519440', 26, '2019-01-02');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(9, 'a8826194', 31, '2019-10-26');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(11, 'a1919434', 30, '2019-06-25');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(2, 'o9h1z4e5v3o8', 24, '2020-05-13');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(2, 'a6501224', 26, '2020-03-20');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(12, 'x7n2a0q9f0g2', 27, '2019-02-02');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(1, 'j6l8s6h4m5i4', 9, '2019-02-06');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(4, 'a8462836', 20, '2019-03-31');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(10, 'a7556622', 9, '2019-06-15');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(12, 'a6653710', 27, '2019-11-14');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(3, 'a7175071', 30, '2020-04-13');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(7, 'z2a5g7m2i0e5', 20, '2019-11-03');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(5, 'a1103421', 40, '2019-05-18');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(11, 'f7w6z9n1m2f2', 29, '2020-03-15');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(6, 'a3678554', 35, '2019-10-01');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(2, 'o3n8h9i7a6b2', 17, '2019-01-04');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(8, 'a0286453', 35, '2019-03-10');
+INSERT INTO inscricaoEvento(idEvento, idPessoa, idLote, dataInscricao) VALUES
+(3, 'a4057618', 9, '2019-08-05');
+
+--
+-- Inserting data into table inscricaoatividade
+--
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(2, 'a9496021', 17, '2019-01-04');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(9, 'd3k3e5t2f3q6', 9, '2020-02-17');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(3, 'w5u9l4y6w9z4', 18, '2019-01-08');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(4, 'a3263193', 4, '2019-04-17');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(13, 'w8c6n2q6j4y2', 28, '2019-08-10');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(5, 'a3524954', 20, '2019-02-17');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(15, 's3o3z7a2z1c1', 15, '2019-08-04');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(3, 'a3716877', 18, '2019-04-06');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(1, 'a6325867', 16, '2019-05-04');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(8, 'v4j9f1b2t9r6', 23, '2020-04-25');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(13, 'j9w6c7u4t3i0', 13, '2019-02-04');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(4, 'p4c5r5y3i5c3', 19, '2019-01-06');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(12, 's7v0c1e1c6j3', 12, '2019-01-05');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(14, 'i4n5m3u2v2z0', 14, '2019-03-24');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(5, 'a3132951', 20, '2019-06-24');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(4, 'a3768263', 19, '2019-09-30');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(15, 'm8i3a0x2b8q0', 15, '2020-05-03');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(7, 'a1141548', 7, '2019-05-08');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(13, 'a9894799', 13, '2019-07-01');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(6, 'a6806151', 21, '2019-11-14');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(14, 't8c0t2u1p6p6', 29, '2019-01-11');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(8, 'a2687085', 8, '2020-01-10');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(10, 'o6o8c6m6e5a2', 10, '2020-04-09');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(1, 'a5942650', 16, '2019-08-05');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(5, 'a6724257', 5, '2019-02-27');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(11, 'f7n4s5j5w5n0', 11, '2020-04-25');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(9, 'u2v0m1w2e4m1', 24, '2019-07-03');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(15, 'd3v8z4h3k6b3', 30, '2019-04-05');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(10, 'a5949702', 25, '2019-04-30');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(7, 'i3c7z2j2i9q6', 22, '2019-07-12');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(14, 'p2w7n5p9n4m3', 14, '2019-01-10');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(6, 'a1368135', 6, '2019-09-10');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(1, 'a1519440', 1, '2019-01-02');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(9, 'a8826194', 9, '2019-10-26');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(11, 'a1919434', 26, '2019-06-25');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(2, 'o9h1z4e5v3o8', 2, '2020-05-13');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(2, 'a6501224', 17, '2020-03-20');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(12, 'x7n2a0q9f0g2', 12, '2019-02-02');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(1, 'j6l8s6h4m5i4', 1, '2019-02-06');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(4, 'a8462836', 4, '2019-03-31');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(10, 'a7556622', 10, '2019-06-15');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(12, 'a6653710', 27, '2019-11-14');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(3, 'a7175071', 3, '2020-04-13');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(7, 'z2a5g7m2i0e5', 7, '2019-11-03');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(5, 'a1103421', 5, '2019-05-18');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(11, 'f7w6z9n1m2f2', 11, '2020-03-15');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(6, 'a3678554', 6, '2019-10-01');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(2, 'o3n8h9i7a6b2', 2, '2019-01-04');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(8, 'a0286453', 8, '2019-03-10');
+INSERT INTO inscricaoAtividade(idEvento, idPessoa, idAtividade, dataInscricao) VALUES
+(3, 'a4057618', 3, '2019-08-05');
+
+--
+-- Inserting data into table receitaInscricaoAtividade
+--
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(2, 'a9496021', 17, '2019-01-01');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(9, 'd3k3e5t2f3q6', 9, '2019-01-02');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(3, 'w5u9l4y6w9z4', 18, '2019-01-03');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(4, 'a3263193', 4, '2019-01-04');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(13, 'w8c6n2q6j4y2', 28, '2019-01-05');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(5, 'a3524954', 20, '2019-01-06');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(15, 's3o3z7a2z1c1', 15, '2019-01-07');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(3, 'a3716877', 18, '2019-01-08');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(1, 'a6325867', 16, '2019-01-09');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(8, 'v4j9f1b2t9r6', 23, '2019-01-10');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(13, 'j9w6c7u4t3i0', 13, '2019-01-11');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(4, 'p4c5r5y3i5c3', 19, '2019-01-12');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(12, 's7v0c1e1c6j3', 12, '2019-01-13');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(14, 'i4n5m3u2v2z0', 14, '2019-01-14');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(5, 'a3132951', 20, '2019-01-15');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(4, 'a3768263', 19, '2019-01-16');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(15, 'm8i3a0x2b8q0', 15, '2019-01-17');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(7, 'a1141548', 7, '2019-01-18');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(13, 'a9894799', 13, '2019-01-19');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(6, 'a6806151', 21, '2019-01-20');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(14, 't8c0t2u1p6p6', 29, '2019-01-21');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(8, 'a2687085', 8, '2019-01-22');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(10, 'o6o8c6m6e5a2', 10, '2019-01-23');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(1, 'a5942650', 16, '2019-01-24');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(5, 'a6724257', 5, '2019-01-25');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(11, 'f7n4s5j5w5n0', 11, '2019-01-26');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(9, 'u2v0m1w2e4m1', 24, '2019-01-27');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(15, 'd3v8z4h3k6b3', 30, '2019-01-28');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(10, 'a5949702', 25, '2019-01-29');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(7, 'i3c7z2j2i9q6', 22, '2019-01-30');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(14, 'p2w7n5p9n4m3', 14, '2019-01-31');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(6, 'a1368135', 6, '2019-02-01');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(1, 'a1519440', 1, '2019-02-02');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(9, 'a8826194', 9, '2019-02-03');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(11, 'a1919434', 26, '2019-02-04');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(2, 'o9h1z4e5v3o8', 2, '2019-02-05');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(2, 'a6501224', 17, '2019-02-06');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(12, 'x7n2a0q9f0g2', 12, '2019-02-07');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(1, 'j6l8s6h4m5i4', 1, '2019-02-08');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(4, 'a8462836', 4, '2019-02-09');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(10, 'a7556622', 10, '2019-02-10');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(12, 'a6653710', 27, '2019-02-11');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(3, 'a7175071', 3, '2019-02-12');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(7, 'z2a5g7m2i0e5', 7, '2019-02-13');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(5, 'a1103421', 5, '2019-02-14');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(11, 'f7w6z9n1m2f2', 11, '2019-02-15');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(6, 'a3678554', 6, '2019-02-16');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(2, 'o3n8h9i7a6b2', 2, '2019-02-17');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(8, 'a0286453', 8, '2019-02-18');
+INSERT INTO receitaInscricaoAtividade(idEvento, idPessoa, idAtividade, dataPagamento) VALUES
+(3, 'a4057618', 3, '2019-02-19');
+
+--
+-- Inserting data into table agendamentoAtividade
+--
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(7, 8, '02:13:42', 30);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(5, 5, '07:08:28', 21);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(14, 14, '02:12:31', 33);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(1, 1, '19:23:55', 20);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(25, 25, '14:25:42', 22);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(10, 11, '03:10:50', 15);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(9, 10, '02:58:34', 33);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(8, 9, '19:01:00', 37);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(10, 10, '02:55:46', 42);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(15, 15, '15:58:06', 27);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(6, 6, '03:20:30', 22);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(21, 21, '00:38:53', 26);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(11, 11, '03:32:05', 23);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(16, 16, '00:15:22', 35);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(1, 2, '05:48:59', 17);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(12, 12, '15:40:30', 29);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(26, 26, '00:59:17', 31);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(22, 22, '12:32:07', 32);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(6, 7, '10:20:02', 24);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(17, 17, '18:50:17', 25);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(27, 27, '18:06:36', 28);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(2, 3, '13:04:54', 15);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(2, 2, '00:43:08', 16);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(13, 13, '04:14:28', 44);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(7, 7, '02:27:20', 44);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(3, 3, '09:10:30', 34);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(23, 23, '00:34:01', 41);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(19, 19, '11:49:38', 26);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(24, 24, '06:11:07', 21);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(18, 18, '17:40:04', 36);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(28, 28, '19:35:10', 39);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(8, 8, '12:42:23', 38);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(20, 20, '02:51:06', 31);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(3, 4, '00:02:55', 42);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(4, 4, '01:42:28', 20);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(9, 9, '00:23:33', 35);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(29, 29, '03:51:06', 40);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(4, 5, '05:08:56', 36);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(30, 30, '07:15:40', 18);
+INSERT INTO agendamentoAtividade(idAtividade, idAgenda, horasParticipacao, quantidadeVagas) VALUES
+(5, 6, '05:49:28', 19);
+
+--
+-- Inserting data into table agendamentoEvento
+--
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(10, 10);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(2, 2);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(5, 5);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(1, 1);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(4, 4);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(13, 13);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(12, 12);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(11, 11);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(6, 6);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(15, 15);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(3, 3);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(14, 14);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(7, 7);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(9, 9);
+INSERT INTO agendamentoEvento(idEvento, idAgenda) VALUES
+(8, 8);
+
+--
+-- Inserting data into table carrosselImagem
+--
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(18, 17);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(9, 9);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(18, 18);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(4, 4);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(28, 28);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(21, 20);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(16, 15);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(19, 18);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(17, 16);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(23, 23);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(13, 13);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(19, 19);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(13, 12);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(14, 14);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(20, 20);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(20, 19);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(15, 15);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(8, 7);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(14, 13);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(21, 21);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(29, 29);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(9, 8);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(10, 10);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(16, 16);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(5, 5);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(11, 11);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(24, 24);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(30, 30);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(25, 25);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(22, 22);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(15, 14);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(6, 6);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(2, 1);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(10, 9);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(26, 26);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(3, 2);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(17, 17);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(12, 12);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(1, 1);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(5, 4);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(11, 10);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(27, 27);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(4, 3);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(7, 7);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(6, 5);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(12, 11);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(7, 6);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(2, 2);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(8, 8);
+INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
+(3, 3);
+
+--
+-- Inserting data into table despesa
+--
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(1, 'Forestry & Paper', 263, '2019-01-01', 13);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(2, 'Media', 108, '2019-01-02', 8);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(3, 'Oil Equipment, Services & Distribution', 130, '2019-01-03', 13);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(4, 'Tobacco', 230, '2019-01-04', 4);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(5, 'Mobile Telecommunications', 123, '2019-01-05', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(6, 'Support Services', 95, '2019-01-06', 13);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(7, 'Industrial Metals & Mining', 122, '2019-01-07', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(8, 'Mining', 44, '2019-01-08', 6);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(9, 'Chemicals', 31, '2019-01-09', 8);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(10, 'Industrial Transportation', 8, '2019-01-10', 11);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(11, 'Health Care Equipment & Services', 246, '2019-01-11', 2);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(12, 'Leisure Goods', 175, '2019-01-12', 15);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(13, 'Household Goods & Home Construction', 96, '2019-01-13', 12);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(14, 'Alternative Energy', 202, '2019-01-14', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(15, 'Personal Goods', 3, '2019-01-15', 5);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(16, 'Construction & Materials', 62, '2019-01-16', 7);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(17, 'Travel & Leisure', 260, '2019-01-17', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(18, 'Financial Services', 307, '2019-01-18', 9);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(19, 'Gas, Water & Multiutilities', 35, '2019-01-19', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(20, 'Fixed Line Telecommunications', 324, '2019-01-20', 7);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(21, 'Technology Hardware & Equipment', 365, '2019-01-21', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(22, 'Life Insurance', 424, '2019-01-22', 3);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(23, 'Software & Computer Services', 9, '2019-01-23', 12);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(24, 'Automobiles & Parts', 12, '2019-01-24', 12);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(25, 'Electricity', 293, '2019-01-25', 13);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(26, 'Banks', 251, '2019-01-26', 8);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(27, 'Industrial Engineering', 485, '2019-01-27', 5);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(28, 'General Industrials', 421, '2019-01-28', 13);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(29, 'Electronic & Electrical Equipment', 269, '2019-01-29', 5);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(30, 'Beverages', 218, '2019-01-30', 10);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(31, 'Food & Drug Retailers', 369, '2019-01-31', 8);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(32, 'Nonequity Investment Instruments', 118, '2019-02-01', 5);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(33, 'Aerospace & Defense', 316, '2019-02-02', 1);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(34, 'General Retailers', 463, '2019-02-03', 8);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(35, 'Pharmaceuticals & Biotechnology', 15, '2019-02-04', 2);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(36, 'Nonlife Insurance', 140, '2019-02-05', 14);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(37, 'Real Estate Investment & Services', 447, '2019-02-06', 1);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(38, 'Oil & Gas Producers', 35, '2019-02-07', 15);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(39, 'Food Producers', 163, '2019-02-08', 1);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(40, 'Real Estate Investment Trusts', 343, '2019-02-09', 10);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(41, 'Equity Investment Instruments', 215, '2019-02-10', 10);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(42, 'Chemicals', 81, '2019-02-11', 10);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(43, 'Media', 275, '2019-02-12', 14);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(44, 'Forestry & Paper', 364, '2019-02-13', 1);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(45, 'Alternative Energy', 162, '2019-02-14', 10);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(46, 'Industrial Metals & Mining', 198, '2019-02-15', 7);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(47, 'Financial Services', 106, '2019-02-16', 4);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(48, 'Tobacco', 22, '2019-02-17', 14);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(49, 'Gas, Water & Multiutilities', 342, '2019-02-18', 5);
+INSERT INTO despesa(idDespesa, descricao, valor, dataDespesa, idEvento) VALUES
+(50, 'Construction & Materials', 1, '2019-02-19', 7);
+
+--
+-- Inserting data into table eventoImagem
+--
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(10, 10);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(2, 2);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(5, 5);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(1, 1);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(4, 4);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(13, 13);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(12, 12);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(11, 11);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(6, 6);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(15, 15);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(3, 3);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(14, 14);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(7, 7);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(9, 9);
+INSERT INTO eventoImagem(idEvento, idImagem) VALUES
+(8, 8);
+
+--
+-- Inserting data into table organizacao
+--
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(10, 'o6o8c6m6e5a2', '00:20:40');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(5, 'a6724257', '19:52:19');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(1, 'j6l8s6h4m5i4', '09:25:46');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(6, 'a1368135', '00:20:06');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(2, 'o3n8h9i7a6b2', '19:10:19');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(7, 'z2a5g7m2i0e5', '00:21:02');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(3, 'a4057618', '13:09:45');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(8, 'a0286453', '01:33:01');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(4, 'a3263193', '00:21:14');
+INSERT INTO organizacao(idEvento, idPessoa, horasParticipacao) VALUES
+(9, 'd3k3e5t2f3q6', '00:42:13');
+
+--
+-- Inserting data into table participaAtividade
+--
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(2, 'a9496021', 17, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(9, 'd3k3e5t2f3q6', 9, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(3, 'w5u9l4y6w9z4', 18, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(4, 'a3263193', 4, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(13, 'w8c6n2q6j4y2', 28, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(5, 'a3524954', 20, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(15, 's3o3z7a2z1c1', 15, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(3, 'a3716877', 18, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(1, 'a6325867', 16, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(8, 'v4j9f1b2t9r6', 23, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(13, 'j9w6c7u4t3i0', 13, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(4, 'p4c5r5y3i5c3', 19, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(12, 's7v0c1e1c6j3', 12, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(14, 'i4n5m3u2v2z0', 14, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(5, 'a3132951', 20, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(4, 'a3768263', 19, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(15, 'm8i3a0x2b8q0', 15, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(7, 'a1141548', 7, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(13, 'a9894799', 13, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(6, 'a6806151', 21, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(14, 't8c0t2u1p6p6', 29, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(8, 'a2687085', 8, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(10, 'o6o8c6m6e5a2', 10, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(1, 'a5942650', 16, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(5, 'a6724257', 5, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(11, 'f7n4s5j5w5n0', 11, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(9, 'u2v0m1w2e4m1', 24, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(15, 'd3v8z4h3k6b3', 30, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(10, 'a5949702', 25, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(7, 'i3c7z2j2i9q6', 22, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(14, 'p2w7n5p9n4m3', 14, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(6, 'a1368135', 6, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(1, 'a1519440', 1, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(9, 'a8826194', 9, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(11, 'a1919434', 26, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(2, 'o9h1z4e5v3o8', 2, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(2, 'a6501224', 17, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(12, 'x7n2a0q9f0g2', 12, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(1, 'j6l8s6h4m5i4', 1, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(4, 'a8462836', 4, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(10, 'a7556622', 10, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(12, 'a6653710', 27, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(3, 'a7175071', 3, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(7, 'z2a5g7m2i0e5', 7, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(5, 'a1103421', 5, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(11, 'f7w6z9n1m2f2', 11, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(6, 'a3678554', 6, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(2, 'o3n8h9i7a6b2', 2, 0);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(8, 'a0286453', 8, 1);
+INSERT INTO participaAtividade(idEvento, idPessoa, idAtividade, presenca) VALUES
+(3, 'a4057618', 3, 0);
+
+--
+-- Inserting data into table protagonista
+--
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(10, 'o6o8c6m6e5a2', 1);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(5, 'a6724257', 1);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(1, 'j6l8s6h4m5i4', 1);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(6, 'a1368135', 0);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(2, 'o3n8h9i7a6b2', 1);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(7, 'z2a5g7m2i0e5', 0);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(3, 'a4057618', 0);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(8, 'a0286453', 1);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(4, 'a3263193', 0);
+INSERT INTO protagonista(idAtividade, idPessoa, atuacao) VALUES
+(9, 'd3k3e5t2f3q6', 0);
+
+--
+-- Inserting data into table receita
+--
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(1, 'South X-Mobile Group', 704, '2019-01-01', 4);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(2, 'First High-Technologies Group', 171, '2019-01-02', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(3, 'Professional High-Technologies Corporation', 312, '2019-01-03', 1);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(4, 'American Space Explore Corp.', 404, '2019-01-04', 2);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(5, 'American Space Research Group', 1.001, '2019-01-05', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(6, 'Domestic Business Group', 532, '2019-01-06', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(7, 'National Products Inc.', 920, '2019-01-07', 9);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(8, 'Advanced Broadcasting Group', 837, '2019-01-08', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(9, 'Global Space Explore Inc.', 761, '2019-01-09', 5);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(10, 'South Space Explore Group', 12, '2019-01-10', 7);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(11, 'Flexible Y-Mobile Corporation', 98, '2019-01-11', 4);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(12, 'Domestic Space Explore Inc.', 797, '2019-01-12', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(13, 'First Space Explore Corporation', 157, '2019-01-13', 9);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(14, 'First Delivery Inc.', 928, '2019-01-14', 13);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(15, 'United Space Explore Inc.', 246, '2019-01-15', 4);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(16, 'Australian Media Group', 717, '2019-01-16', 7);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(17, 'Future Instruments Corporation', 756, '2019-01-17', 8);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(18, 'Flexible Space Explore Group', 227, '2019-01-18', 10);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(19, 'International High-Technologies Corp.', 471, '2019-01-19', 14);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(20, 'National High-Technologies Inc.', 379, '2019-01-20', 14);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(21, 'Creative Engineering Corporation', 999.999, '2019-01-21', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(22, 'North Industry Co.', 141, '2019-01-22', 9);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(23, 'United High-Technologies Group', 117, '2019-01-23', 10);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(24, 'City Renewable Power Inc.', 48, '2019-01-24', 11);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(25, 'Flexible High-Technologies Inc.', 1, '2019-01-25', 8);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(26, 'Domestic Industry Inc.', 556, '2019-01-26', 15);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(27, 'City Space Research Inc.', 571, '2019-01-27', 4);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(28, 'Professional High-Technologies Corporation', 369, '2019-01-28', 10);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(29, 'WorldWide Goods Corporation', 504, '2019-01-29', 1);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(30, 'Advanced Space Research Corp.', 638, '2019-01-30', 11);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(31, 'Future 3G Wireless Corp.', 537, '2019-01-31', 10);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(32, 'Beyond Partners Inc.', 350, '2019-02-01', 9);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(33, 'Federal Entertainment Corporation', 877, '2019-02-02', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(34, 'Domestic Space Research Inc.', 1000, '2019-02-03', 15);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(35, 'Beyond High-Technologies Co.', 702, '2019-02-04', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(36, 'WorldWide Research Inc.', 645, '2019-02-05', 9);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(37, 'Pacific High-Technologies Inc.', 12, '2019-02-06', 2);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(38, 'WorldWide B-Mobile Corporation', 763, '2019-02-07', 15);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(39, 'Home Space Research Inc.', 784, '2019-02-08', 11);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(40, 'Pacific 2G Wireless Co.', 525, '2019-02-09', 3);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(41, 'First High-Technologies Co.', 98, '2019-02-10', 11);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(42, 'Creative Materials Inc.', 331, '2019-02-11', 4);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(43, 'Federal Partners Corporation', 207, '2019-02-12', 7);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(44, 'Canadian Space Research Group', 251, '2019-02-13', 13);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(45, 'North Investment Corp.', 281, '2019-02-14', 14);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(46, 'Advanced I-Mobile Inc.', 334, '2019-02-15', 10);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(47, 'Global K-Mobile Group', 23, '2019-02-16', 8);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(48, 'General Instruments Co.', 22, '2019-02-17', 12);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(49, 'Australian Space Research Group', 445, '2019-02-18', 8);
+INSERT INTO receita(idReceita, descricao, valor, dataReceita, idEvento) VALUES
+(50, 'Beyond Broadcasting Inc.', 251, '2019-02-19', 3);
+
+--
+-- Inserting data into table receitainscricaoEvento
+--
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(2, 'a9496021', '2019-01-01');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(9, 'd3k3e5t2f3q6', '2019-01-02');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(3, 'w5u9l4y6w9z4', '2019-01-03');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(4, 'a3263193', '2019-01-04');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(13, 'w8c6n2q6j4y2', '2019-01-05');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(5, 'a3524954', '2019-01-06');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(15, 's3o3z7a2z1c1', '2019-01-07');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(3, 'a3716877', '2019-01-08');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(1, 'a6325867', '2019-01-09');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(8, 'v4j9f1b2t9r6', '2019-01-10');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(13, 'j9w6c7u4t3i0', '2019-01-11');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(4, 'p4c5r5y3i5c3', '2019-01-12');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(12, 's7v0c1e1c6j3', '2019-01-13');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(14, 'i4n5m3u2v2z0', '2019-01-14');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(5, 'a3132951', '2019-01-15');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(4, 'a3768263', '2019-01-16');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(15, 'm8i3a0x2b8q0', '2019-01-17');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(7, 'a1141548', '2019-01-18');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(13, 'a9894799', '2019-01-19');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(6, 'a6806151', '2019-01-20');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(14, 't8c0t2u1p6p6', '2019-01-21');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(8, 'a2687085', '2019-01-22');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(10, 'o6o8c6m6e5a2', '2019-01-23');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(1, 'a5942650', '2019-01-24');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(5, 'a6724257', '2019-01-25');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(11, 'f7n4s5j5w5n0', '2019-01-26');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(9, 'u2v0m1w2e4m1', '2019-01-27');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(15, 'd3v8z4h3k6b3', '2019-01-28');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(10, 'a5949702', '2019-01-29');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(7, 'i3c7z2j2i9q6', '2019-01-30');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(14, 'p2w7n5p9n4m3', '2019-01-31');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(6, 'a1368135', '2019-02-01');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(1, 'a1519440', '2019-02-02');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(9, 'a8826194', '2019-02-03');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(11, 'a1919434', '2019-02-04');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(2, 'o9h1z4e5v3o8', '2019-02-05');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(2, 'a6501224', '2019-02-06');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(12, 'x7n2a0q9f0g2', '2019-02-07');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(1, 'j6l8s6h4m5i4', '2019-02-08');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(4, 'a8462836', '2019-02-09');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(10, 'a7556622', '2019-02-10');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(12, 'a6653710', '2019-02-11');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(3, 'a7175071', '2019-02-12');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(7, 'z2a5g7m2i0e5', '2019-02-13');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(5, 'a1103421', '2019-02-14');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(11, 'f7w6z9n1m2f2', '2019-02-15');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(6, 'a3678554', '2019-02-16');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(2, 'o3n8h9i7a6b2', '2019-02-17');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(8, 'a0286453', '2019-02-18');
+INSERT INTO receitaInscricaoEvento(idEvento, idPessoa, dataPagamento) VALUES
+(3, 'a4057618', '2019-02-19');
