@@ -13,32 +13,25 @@ exports.create = (req, res) => {
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
   const horas = req.body.horas;
-  const imagem = req.body.img;
-
-  console.log("\n\n\n\n\n IMAGEM NO EVENTO"+req.body.file);
-  console.log("\n\n\n\n\n LOCAL: "+local);
-
-  ///upload.single('file');
-
-
+  const imagem = req.body.urlImagem;
   
   Evento.create({  
 
     nome: req.body.nome,
     descricao: req.body.descricao,
-    status: req.body.status,
+    status: req.body.status
 
-    urlImagem:  req.body.urlImagem
   }).then( evento => {
 
 
     // Cria um Evento
-    console.log("Criado o evento com o id: "+evento.idEvento);
+    console.log("\nCriado o evento com o id: "+evento.idEvento);
     
     // Cria Agenda e retorna o idDa Agenda
-    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEveno});
+    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
   
     // Insere uma url na tabela Imagem
+    console.log("\nURL da IMAGEM: "+imagem);
     imagens.create({"url":imagem,"evento":evento.idEvento});
 
     res.send(evento);

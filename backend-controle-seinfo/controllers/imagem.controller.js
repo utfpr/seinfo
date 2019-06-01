@@ -6,6 +6,7 @@ const Imagem = db.imagens;
 // Post do Imagem
 exports.create = (req, res) => {
   console.log("\n\n\n Dentro de Imagem ");
+  console.log("\n ID EVENTO dentro IMAGEM "+req.evento);
   Imagem.create({  
     url: req.url,
   }).then( imagem => {
