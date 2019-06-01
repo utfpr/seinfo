@@ -8,14 +8,34 @@
         <a-select-option name="palestrantes" value="palestrantes" v-on:click="pegar_tabela('palestrantes')">Palestrantes</a-select-option>
         <a-select-option name="ministrantes" value="ministrantes" v-on:click="pegar_tabela('ministrantes')">Ministrantes</a-select-option>
     </a-select>
-
-    <a-table :columns="columns" :dataSource="data" :pagination="{ pageSize: 15 }" :scroll="{ y: 380 }" >
-      <a slot="action" slot-scope="text" >
-        <button type="button" class="ic" @click="showModal(data)"><a-icon type="edit" /></button>
-        <button type="button" class="ic" @click="showModal(data)"><a-icon type="delete" /></button> 
-        <button type="button" class="ic" @click="showModal(data)"><a-icon type="eye" /></button>
-      </a>
-    </a-table>
+    <div id="list" class="row">
+              <div class="table-responsive col-md-12">
+                <table class="table table-striped" cellspacing="0" cellpadding="0" style="text-align: center;">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nome</th>
+                      <th>Descrição</th>
+                      <th>Status</th>
+                      <th class="actions">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
+                    <tr>
+                      <td>{{i+1}}</td>
+                      <td>{{res.nome}}</td>
+                      <td>{{res.descricao}}</td>
+                      <td>{{res.status}}</td>
+                      <td class="actions">
+                        <button type="button" style="width: 75px;" class="btn btn-success btn-sm" @click="openModal(res)">Ver Mais</button>
+                        <button type="button" style="width: 75px;" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg-editar" @click="openModal(res)">Editar</button>
+                        <button type="button" style="width: 75px;" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg-excluir" @click="openModal(res)">Excluir</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+      </div><!-- /#list -->
 
     <a-modal title="Title" :visible="visible" @ok="handleOk" @cancel="handleCancel" >
       <div class="title">
@@ -74,7 +94,7 @@ export default {
       .then((response) => {
        console.log("Listou " + name);
        console.log(response.data);
-       this.data = response.data;
+       this.res_localizar = response.data
      })
      .catch(function (error) {
        console.log(error);
@@ -83,10 +103,11 @@ export default {
   },
   data() {
     return {
-      data: [],
+      res_localizar: [{"idEvento":1,"nome":"Extraction and agglomeration of peat","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
       columns,
       tabelas: [],
-      visible: false,
+      visible: false
+    
     }
   }
 }

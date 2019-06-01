@@ -6,39 +6,32 @@ const imagens = require('../controllers/imagem.controller.js');
 
  
 // Post do Evento
-exports.create = (req, res) => {
+exports.create = (req, res, nomedoarquivo) => {
 
   //Concatenando para ser inserido no Banco de Dados
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
   const horas = req.body.horas;
-  const imagem = req.body.img;
-
-  console.log("\n\n\n\n\n IMAGEM NO EVENTO"+req.body.file);
-  console.log("\n\n\n\n\n LOCAL: "+local);
-
-  ///upload.single('file');
-
-
+  const imagem = nomedoarquivo;
   
   Evento.create({  
 
     nome: req.body.nome,
     descricao: req.body.descricao,
-    status: req.body.status,
+    status: req.body.status
 
-    urlImagem:  req.body.urlImagem
   }).then( evento => {
 
 
     // Cria um Evento
-    console.log("Criado o evento com o id: "+evento.idEvento);
+    console.log("\nCriado o evento com o id: "+evento.idEvento);
     
     // Cria Agenda e retorna o idDa Agenda
-    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEveno});
+    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
   
     // Insere uma url na tabela Imagem
+    console.log("\nURL da IMAGEM: "+imagem);
     imagens.create({"url":imagem,"evento":evento.idEvento});
 
     res.send(evento);
