@@ -28,7 +28,7 @@
                       <td>{{res.status}}</td>
                       <td class="actions">
                         <button type="button" class="ic"><a-icon type="edit" /></button>
-                        <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)"><a-icon type="delete" /></button>
+                        <button type="button" class="ic" data-toggle="modal" data-target=".bd-example-modal-lg-ver-excluir" @click="openModal(res)"><a-icon type="delete" /></button>
                         <button type="button" class="ic" data-toggle="modal" data-target=".bd-example-modal-lg-ver-mais" @click="openModal(res)"><a-icon type="eye"/></button>
                       </td>
                     </tr>
@@ -67,11 +67,41 @@
                 <br>
                 <label>Descição: {{modalData.descricao}}</label>
                 <br>
+                <label>Status: {{modalData.status}}</label>
             </div>
           </div>
         </div>
       </div>
       <!-- MODAL VER MAIS (FIM) -->
+
+      <!-- MODAL VER MAIS (EXCLUIR) -->
+      <div class="modal fade bd-example-modal-lg-ver-excluir" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4>Voce realmente deseja excluir este item:</h4>
+                <br>
+                <label>ID: {{modalData.idEvento}}</label>
+                <br>
+                <label>Nome: {{modalData.nome}}</label>
+                <br>
+                <label>Descição: {{modalData.descricao}}</label>
+                <br>
+                <label>Status: {{modalData.status}}</label>,
+                <br>
+                <br>
+                <a-button type="danger" block>Eu desejo Excluir este item</a-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL VER MAIS (EXCLUIR) -->
 
 
   </div>
