@@ -27,9 +27,9 @@
                       <td>{{res.descricao}}</td>
                       <td>{{res.status}}</td>
                       <td class="actions">
-                        <button type="button" style="width: 75px;" class="btn btn-success btn-sm" @click="openModal(res)">Ver Mais</button>
-                        <button type="button" style="width: 75px;" class="btn btn-info btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg-editar" @click="openModal(res)">Editar</button>
-                        <button type="button" style="width: 75px;" class="btn btn-danger btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg-excluir" @click="openModal(res)">Excluir</button>
+                        <button type="button" class="ic"><a-icon type="edit" /></button>
+                        <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)"><a-icon type="delete" /></button>
+                        <button type="button" class="ic"><a-icon type="eye" /></button>
                       </td>
                     </tr>
                   </tbody>
