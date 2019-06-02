@@ -27,13 +27,26 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `CPF` CHAR(11) NOT NULL,
   `senha` CHAR(32) NOT NULL,
   `nivel` INT NOT NULL COMMENT 'O nível seleciona quem vai ter acesso, 0 como usuário, 1 adm básico e 2 como super adm.',
-  `classificacao` INT NOT NULL COMMENT 'classificação define quem são as pessoas, 0 como aluno, 1 como professor e 2 como visitante.',
   PRIMARY KEY (`idPessoa`))
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `email_UNIQUE` ON `seinfo`.`pessoa` (`email` ASC);
 
 CREATE UNIQUE INDEX `CPF_UNIQUE` ON `seinfo`.`pessoa` (`CPF` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `seinfo`.`agenda`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `seinfo`.`agenda` ;
+
+CREATE TABLE IF NOT EXISTS `seinfo`.`agenda` (
+  `idAgenda` INT NOT NULL AUTO_INCREMENT,
+  `dataHoraInicio` DATETIME NOT NULL,
+  `dataHoraFim` DATETIME NOT NULL,
+  `local` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idAgenda`))
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -46,8 +59,16 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`evento` (
   `nome` VARCHAR(255) NOT NULL,
   `descricao` VARCHAR(5000) NULL,
   `status` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`idEvento`))
+  `idAgenda` INT NOT NULL,
+  PRIMARY KEY (`idEvento`),
+  CONSTRAINT `fk_evento_agenda1`
+    FOREIGN KEY (`idAgenda`)
+    REFERENCES `seinfo`.`agenda` (`idAgenda`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE INDEX `fk_evento_agenda1_idx` ON `seinfo`.`evento` (`idAgenda` ASC);
 
 
 -- -----------------------------------------------------
@@ -72,6 +93,8 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`atividade` (
   `titulo` VARCHAR(255) NOT NULL,
   `valor` FLOAT NOT NULL DEFAULT 0.00,
   `descricao` VARCHAR(5000) NULL,
+  `horasParticipacao` TIME NOT NULL DEFAULT '00:00:00',
+  `quantidadeVagas` INT NOT NULL DEFAULT 0,
   `idCategoria` INT NOT NULL,
   `idEvento` INT NOT NULL,
   PRIMARY KEY (`idAtividade`),
@@ -93,28 +116,6 @@ CREATE INDEX `fk_atividade_evento1_idx` ON `seinfo`.`atividade` (`idEvento` ASC)
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`lote`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`lote` ;
-
-CREATE TABLE IF NOT EXISTS `seinfo`.`lote` (
-  `idLote` INT NOT NULL AUTO_INCREMENT,
-  `valor` FLOAT NOT NULL DEFAULT 0.00,
-  `dataAbertura` DATE NOT NULL,
-  `dataFechamento` DATE NOT NULL,
-  `idEvento` INT NOT NULL,
-  PRIMARY KEY (`idLote`),
-  CONSTRAINT `fk_lote_evento1`
-    FOREIGN KEY (`idEvento`)
-    REFERENCES `seinfo`.`evento` (`idEvento`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_lote_evento1_idx` ON `seinfo`.`lote` (`idEvento` ASC);
-
-
--- -----------------------------------------------------
 -- Table `seinfo`.`inscricaoEvento`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `seinfo`.`inscricaoEvento` ;
@@ -122,17 +123,11 @@ DROP TABLE IF EXISTS `seinfo`.`inscricaoEvento` ;
 CREATE TABLE IF NOT EXISTS `seinfo`.`inscricaoEvento` (
   `idEvento` INT NOT NULL,
   `idPessoa` VARCHAR(64) NOT NULL,
-  `idLote` INT NOT NULL,
   `dataInscricao` DATE NOT NULL,
   PRIMARY KEY (`idEvento`, `idPessoa`),
   CONSTRAINT `fk_evento_has_Pessoa_evento1`
     FOREIGN KEY (`idEvento`)
     REFERENCES `seinfo`.`evento` (`idEvento`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_inscricao_lote1`
-    FOREIGN KEY (`idLote`)
-    REFERENCES `seinfo`.`lote` (`idLote`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_inscricaoEvento_pessoa1`
@@ -143,8 +138,6 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`inscricaoEvento` (
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_evento_has_Pessoa_evento1_idx` ON `seinfo`.`inscricaoEvento` (`idEvento` ASC);
-
-CREATE INDEX `fk_inscricao_lote1_idx` ON `seinfo`.`inscricaoEvento` (`idLote` ASC);
 
 CREATE INDEX `fk_inscricaoEvento_pessoa1_idx` ON `seinfo`.`inscricaoEvento` (`idPessoa` ASC);
 
@@ -290,24 +283,22 @@ DROP TABLE IF EXISTS `seinfo`.`protagonista` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`protagonista` (
   `atuacao` INT NOT NULL COMMENT 'O atributo atuação é destinado para palestrante e ministrante.\nSendo 0 para palestrante e 1 para ministrante.',
-  `idAtividade` INT NOT NULL,
   `idPessoa` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`idAtividade`, `idPessoa`),
-  CONSTRAINT `fk_protagonista_atividade1`
-    FOREIGN KEY (`idAtividade`)
-    REFERENCES `seinfo`.`atividade` (`idAtividade`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  `idAtividade` INT NOT NULL,
+  PRIMARY KEY (`idPessoa`, `idAtividade`),
   CONSTRAINT `fk_protagonista_pessoa1`
     FOREIGN KEY (`idPessoa`)
     REFERENCES `seinfo`.`pessoa` (`idPessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_protagonista_atividade1`
+    FOREIGN KEY (`idAtividade`)
+    REFERENCES `seinfo`.`atividade` (`idAtividade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_protagonista_atividade1_idx` ON `seinfo`.`protagonista` (`idAtividade` ASC);
-
-CREATE INDEX `fk_protagonista_pessoa1_idx` ON `seinfo`.`protagonista` (`idPessoa` ASC);
 
 
 -- -----------------------------------------------------
@@ -338,6 +329,28 @@ CREATE INDEX `fk_organizacao_pessoa1_idx` ON `seinfo`.`organizacao` (`idPessoa` 
 
 
 -- -----------------------------------------------------
+-- Table `seinfo`.`lote`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `seinfo`.`lote` ;
+
+CREATE TABLE IF NOT EXISTS `seinfo`.`lote` (
+  `idLote` INT NOT NULL AUTO_INCREMENT,
+  `valor` FLOAT NOT NULL DEFAULT 0.00,
+  `dataAbertura` DATE NOT NULL,
+  `dataFechamento` DATE NOT NULL,
+  `idEvento` INT NOT NULL,
+  PRIMARY KEY (`idLote`),
+  CONSTRAINT `fk_lote_evento1`
+    FOREIGN KEY (`idEvento`)
+    REFERENCES `seinfo`.`evento` (`idEvento`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_lote_evento1_idx` ON `seinfo`.`lote` (`idEvento` ASC);
+
+
+-- -----------------------------------------------------
 -- Table `seinfo`.`imagem`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `seinfo`.`imagem` ;
@@ -364,46 +377,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `seinfo`.`agenda`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`agenda` ;
-
-CREATE TABLE IF NOT EXISTS `seinfo`.`agenda` (
-  `idAgenda` INT NOT NULL AUTO_INCREMENT,
-  `dataHoraInicio` DATETIME NOT NULL,
-  `dataHoraFim` DATETIME NOT NULL,
-  `local` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idAgenda`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `seinfo`.`agendamentoEvento`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`agendamentoEvento` ;
-
-CREATE TABLE IF NOT EXISTS `seinfo`.`agendamentoEvento` (
-  `idEvento` INT NOT NULL,
-  `idAgenda` INT NOT NULL,
-  PRIMARY KEY (`idEvento`, `idAgenda`),
-  CONSTRAINT `fk_evento_has_agenda_evento1`
-    FOREIGN KEY (`idEvento`)
-    REFERENCES `seinfo`.`evento` (`idEvento`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_evento_has_agenda_agenda1`
-    FOREIGN KEY (`idAgenda`)
-    REFERENCES `seinfo`.`agenda` (`idAgenda`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_evento_has_agenda_agenda1_idx` ON `seinfo`.`agendamentoEvento` (`idAgenda` ASC);
-
-CREATE INDEX `fk_evento_has_agenda_evento1_idx` ON `seinfo`.`agendamentoEvento` (`idEvento` ASC);
-
-
--- -----------------------------------------------------
 -- Table `seinfo`.`agendamentoAtividade`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `seinfo`.`agendamentoAtividade` ;
@@ -411,8 +384,6 @@ DROP TABLE IF EXISTS `seinfo`.`agendamentoAtividade` ;
 CREATE TABLE IF NOT EXISTS `seinfo`.`agendamentoAtividade` (
   `idAtividade` INT NOT NULL,
   `idAgenda` INT NOT NULL,
-  `horasParticipacao` TIME NOT NULL DEFAULT '00:00:00',
-  `quantidadeVagas` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idAtividade`, `idAgenda`),
   CONSTRAINT `fk_atividade_has_agenda_atividade1`
     FOREIGN KEY (`idAtividade`)
