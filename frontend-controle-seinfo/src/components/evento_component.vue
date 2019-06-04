@@ -1,41 +1,30 @@
 <template>
-  <div>
+  <div style="margin-top: 60px">
     <div id="work">
-      <div class="row justify-content-center">
+      <div class="grid-container">
         <div>
-          <div class="box-1">
-            <img class="box-2" src="../assets/banner.png">
-            <div class="card-body">
-              <h5 class="card-title">SEINFO 2019</h5>
-              <p
-                class="card-text"
-              >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.</p>
-              <a-divider/>
-              <a-button :href="'/evento'" class="bt" style="margin-left:33%;">
-                <a-icon type="plus"/>SAIBA MAIS
-              </a-button>
-            </div>
-          </div>
+          <img class="box-2" src="../assets/banner.png">
         </div>
         <div>
-          <div class="box-1">
-            <div class="card-body">
-              <h5 class="card-title">SEINFO 2019</h5>
-              <p
-                class="card-text"
-              >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
-              <a-divider/>
-              <a-button :href="'/evento'" class="bt" style="margin-left:33%;">
-                <a-icon type="plus"/>SAIBA MAIS
-              </a-button>
-            </div>
-          </div>
+          <a-card title="Nome">
+            <p>Placeholder</p>
+          </a-card>
+          <a-card title="Data">
+            <p>Placeholder</p>
+          </a-card>
+          <a-card title="Preço">
+            <p>Placeholder</p>
+          </a-card>
+          <a-card title="Lotes">
+            <p>Placeholder</p>
+          </a-card>
         </div>
       </div>
-      <div>
-        <p>Descrição</p>
-        <p>Lorem ipsum dolor sit amet aaaaaaaaaaaaaaaaadfosjgljkajsdljgrljgallks</p>
-      </div>
+      <br>
+      <a-card title="Descrição">
+        <p>A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.</p>
+      </a-card>
+      <br>
       <div>
         <a-card title="Minicursos">
           <p>Minicurso 1</p>
@@ -43,6 +32,7 @@
           <p>Minicurso 3</p>
         </a-card>
       </div>
+      <br>
       <div>
         <a-card title="Palestras">
           <p>Palesta 1</p>
@@ -50,12 +40,13 @@
           <p>Palesta 3</p>
         </a-card>
       </div>
+      <br>
     </div>
     <a-calendar @panelChange="onPanelChange" @select="onSelect">
-        <!-->
+      <!--
         setar validRange para a range do evento
         disabledDate também
-        <-->
+      -->
       <template slot="dateCellRender"></template>
       <template slot="monthCellRender"></template>
     </a-calendar>
@@ -130,47 +121,22 @@ export default {};
   width: 100%;
 }
 
-.ant-divider-horizontal {
-  margin: 7px 0;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 8px;
+  background-color: #000000;
+  padding: 8px;
 }
 
-.card-text {
-  max-height: 250px;
-  min-height: 250px;
-  max-width: 410px;
-  min-width: 410px;
-  overflow: hidden;
-}
-
-.card-body {
-  background-color: rgb(255, 255, 255);
-  float: left;
-  max-height: 370px;
-  min-height: 370px;
-  margin: 40px;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.box-1 {
-  height: 450px;
-  width: 450px;
-  margin: 50px;
-  margin-top: 30px;
-  background: transparent;
-  border: transparent;
-}
-
-.bt {
-  border-color: rgb(39, 10, 204);
-  color: rgb(26, 12, 110);
+.grid-container > div {
+  background-color: rgba(72, 74, 75, 0.596);
+  text-align: center;  
 }
 
 .box-2 {
-  min-height: 260px;
-  max-height: 260px;
-  min-width: 450px;
-  max-width: 450px;
+  max-width: 650px;
+  max-height: 650px;
+  margin-top: 18%;
 }
 </style>
