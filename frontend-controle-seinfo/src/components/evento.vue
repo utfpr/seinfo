@@ -4,7 +4,6 @@
       <navHome></navHome>
     </div>
     <a-layout-content>
-      <carousel></carousel>
       <evento_component></evento_component>
       <ft></ft>
     </a-layout-content>
