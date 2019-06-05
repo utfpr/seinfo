@@ -5,7 +5,7 @@
       <a-menu class="menu" v-model="current" mode="horizontal">
         <a-menu-item key="14">
           <a-icon type="global"/>Eventos
-          <router-link to="/adm/ADMevento"></router-link>
+          <router-link to="/adm/cadEvento"></router-link>
         </a-menu-item>
         <a-sub-menu key="sub3">
           <span slot="title">
