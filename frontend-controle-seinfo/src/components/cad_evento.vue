@@ -70,16 +70,28 @@
             <hr/>
             </a-form-item>
             <a-form-item v-bind="formItemLayoutWithOutLabel">
-              <a-button type="dashed" style="width: 100%" @click="add">Adicionar Lote</a-button>
+              <a-button type="default" style="width: 100%" @click="add">Adicionar Lote</a-button>
             </a-form-item>
           </a-form>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space_2">
-              <label class="ant-form-item-required">Imagem do evento:</label>
-              <a-input name="file" type="file" class="">
-              </a-input>
-            </a-form-item>
+            <a-form-item
+      label="Upload"
+    >
+      <a-upload
+        v-decorator="['upload', {
+          valuePropName: 'fileList',
+          getValueFromEvent: normFile,
+        }]"
+        name="logo"
+        action="/upload.do"
+        list-type="picture"
+      >
+        <a-button>
+          <a-icon type="upload" /> Selecione a Imagem
+        </a-button>
+      </a-upload>
+    </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space_2">
