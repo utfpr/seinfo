@@ -1,25 +1,27 @@
 <template>
   <div style="margin-top: 60px">
     <div id="work">
-      <div class="grid-container">
-        <div>
-          <img class="box-2" src="../assets/banner.png">
+      <a-layout-content>
+        <div class="grid-container">
+          <div class="parent" style="max-width: 700px;">
+            <img class="child" src="../assets/banner.png">
+          </div>
+          <div style="min-width: 600px">
+            <a-card title="Nome">
+              <p>Placeholder</p>
+            </a-card>
+            <a-card title="Data">
+              <p>Placeholder</p>
+            </a-card>
+            <a-card title="Preço">
+              <p>Placeholder</p>
+            </a-card>
+            <a-card title="Lotes">
+              <p>Placeholder</p>
+            </a-card>
+          </div>
         </div>
-        <div>
-          <a-card title="Nome">
-            <p>Placeholder</p>
-          </a-card>
-          <a-card title="Data">
-            <p>Placeholder</p>
-          </a-card>
-          <a-card title="Preço">
-            <p>Placeholder</p>
-          </a-card>
-          <a-card title="Lotes">
-            <p>Placeholder</p>
-          </a-card>
-        </div>
-      </div>
+      </a-layout-content>
       <br>
       <a-card title="Descrição">
         <p>A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos.</p>
@@ -125,18 +127,21 @@ export default {};
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 8px;
-  background-color: #000000;
   padding: 8px;
 }
 
 .grid-container > div {
-  background-color: rgba(72, 74, 75, 0.596);
-  text-align: center;  
+  text-align: center;
 }
 
-.box-2 {
-  max-width: 650px;
-  max-height: 650px;
-  margin-top: 18%;
+.parent {
+  margin: auto;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.child {
+  width: 100%;
+  margin: auto;
 }
 </style>
