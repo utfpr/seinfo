@@ -13,7 +13,7 @@ module.exports = function(sequelize, Sequelize) {
 			field: 'idEvento'
 		},
 		idPessoa: {
-			type: Sequelize.INTEGER(11),
+			type: Sequelize.STRING(64),
 			allowNull: false,
 			primaryKey: true,
 			references: {
@@ -45,13 +45,16 @@ module.exports = function(sequelize, Sequelize) {
 	});
 
 	ParticipaAtv.associate = models => {
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+		models.participaAtividade.belongsTo(models.receitaInscricaoAtividade,{
+			as:'EventoRec',
 			foreignKey: 'idEvento'
 		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+		models.participaAtividade.belongsTo(models.receitaInscricaoAtividade,{
+			as:'PessoaRec',
 			foreignKey: 'idPessoa'
 		}),
-		models.participaAtividade.model.belongsTo(models.receitaInscricaoAtividade.model,{
+		models.participaAtividade.belongsTo(models.receitaInscricaoAtividade,{
+			as:'AtividadeRec',
 			foreignKey: 'idAtividade'
 		})
 	}

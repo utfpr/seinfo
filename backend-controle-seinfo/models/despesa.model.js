@@ -41,7 +41,7 @@ module.exports = function(sequelize, Sequelize) {
 	});
 	
 	Despesa.associate = models =>{
-		models.despesa.model.belongsTo(models.evento.model,{
+		models.despesa.belongsTo(models.evento,{
 			foreignKey: 'idEvento'
 		})
 	}
