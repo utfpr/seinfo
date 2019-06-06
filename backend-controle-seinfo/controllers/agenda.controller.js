@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+const db = require('../models/index.js');
 const agEventos = require('../controllers/agendamentoEvento.controller.js');
 const Agenda = db.agendas;
  
