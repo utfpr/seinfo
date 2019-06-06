@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+const db = require('../models/index.js');
 const AgEventos = db.agEventos;
  
 // Post do Evento

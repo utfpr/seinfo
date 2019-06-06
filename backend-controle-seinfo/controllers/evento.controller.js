@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+const db = require('../models/index.js');
 const Evento = db.eventos;
 const agendas = require('../controllers/agenda.controller.js');
 const imagens = require('../controllers/imagem.controller.js');
@@ -97,3 +97,18 @@ exports.delete = (req, res) => {
    exports.amoeba = (req, res) => {
      console.log("\n------------------- Função de Teste ------------------------------ \n");
    };
+/*Evento.findOne({where: {idEvento:req.params.idEvento},include:[{model: db.agendamentoEvento,as:'agendamento',include:[{model: db.agenda,as:'agendaEv'}]},{model:db.atividade,as:'atividades', include:[{model:db.categoria,as:'categoria',attributes:['nome']}]},{model:db.lote,as:'lotes'}]}).then(evento => {
+    console.log("Achou o evento pelo ID "+req.params.idEvento);
+    //res.send(evento.agendamento[0].agendaEv.local); //Retorna um Json para a Pagina da API    
+    //res.send(evento.atividades[0].categoria.nome); //Retorna um Json para a Pagina da API    
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+
+  Evento.findOne({where: {idEvento:req.params.idEvento},include: [{model: db.pessoa, as:'ePessoa',through:{attributes:['horasParticipacao']}}]}).then(evento=>{
+    //Evento.getPessoa
+    res.send(evento)
+  }).catch(err=>{
+    res.status(500).send(err)
+  })*/

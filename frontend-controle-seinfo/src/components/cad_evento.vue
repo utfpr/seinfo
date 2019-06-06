@@ -75,23 +75,11 @@
           </a-form>
           </div>
           <div class="row justify-content-center">
-            <a-form-item
-      label="Upload"
-    >
-      <a-upload
-        v-decorator="['upload', {
-          valuePropName: 'fileList',
-          getValueFromEvent: normFile,
-        }]"
-        name="logo"
-        action="/upload.do"
-        list-type="picture"
-      >
-        <a-button>
-          <a-icon type="upload" /> Selecione a Imagem
-        </a-button>
-      </a-upload>
-    </a-form-item>
+            <a-form-item class="space_2">
+              <label class="ant-form-item-required">Imagem do evento:</label>
+              <a-input name="file" type="file" class="">
+              </a-input>
+            </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space_2">
