@@ -30,11 +30,13 @@ module.exports = (sequelize, Sequelize) => {
   
   eveImage.associate = models => {       
       models.imagem.belongsToMany(models.evento, {
-        as: 'eventoImg',  
+        as: 'eventoImg', 
+        through: models.eventoImagem, 
         foreignKey: 'idEvento',
       }),
       models.evento.belongsToMany(models.imagem, {
         as: 'imagemEv',
+        through: models.eventoImagem,
         foreignKey: 'idImagem',
       })
   };

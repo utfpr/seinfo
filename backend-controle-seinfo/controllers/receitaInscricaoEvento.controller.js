@@ -41,7 +41,7 @@ exports.findById = (req, res) => {
 
 
 
-// };
+}
 
 // exports.findAll = (req, res) => {  
 //   Lotes.findAll({ raw: true}).then(lote => {

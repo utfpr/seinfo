@@ -1,6 +1,6 @@
 const db = require('../models/index.js');
 const EveImagens = require('../controllers/eventoImagem.controller.js');
-const Imagem = db.imagens;
+const Imagem = db.imagem;
 
  
 // Post do Imagem
