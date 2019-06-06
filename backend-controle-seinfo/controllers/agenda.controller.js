@@ -1,6 +1,6 @@
 const db = require('../models/index.js');
 const agEventos = require('../controllers/agendamentoEvento.controller.js');
-const Agenda = db.agendas;
+const Agenda = db.agenda;
  
 // Post do Eventod
 exports.create = (req, res) => {

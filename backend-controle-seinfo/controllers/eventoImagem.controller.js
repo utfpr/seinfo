@@ -1,5 +1,5 @@
 const db = require('../models/index.js');
-const EveImagens = db.eveImagens;
+const EveImagens = db.eventoImagem;
  
 // Post do Evento
 exports.create = (req, res) => {
