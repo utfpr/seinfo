@@ -43,10 +43,16 @@
           <a-icon type="bars"/>Relatório
           <router-link to="/adm/tabela"></router-link>
         </a-menu-item>
-        <a-menu-item key="16">
-          <a-icon type="tool"/>Configurações
-          <router-link to="/adm/tabela"></router-link>
-        </a-menu-item>
+        <a-sub-menu key="sub6">
+          <span slot="title">
+            <a-icon type="tool"/>
+            <span>Fluxo de Caixa</span>
+          </span>
+          <a-menu-item key="18">
+          Carousel Home
+            <router-link to="/adm/conCarousel"></router-link>
+          </a-menu-item>
+        </a-sub-menu>
       </a-menu>
       <a-layout>
         <a-layout-content>
