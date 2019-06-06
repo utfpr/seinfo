@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+const db = require('../models/index.js');
 const ReceitaInscricaoEvento = db.receitaInscricaoEvento;
  
 // Post do Evento
