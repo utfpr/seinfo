@@ -21,20 +21,10 @@
             <router-link to="/adm/cadCategoria"></router-link>
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <span slot="title">
-            <a-icon type="form"/>
-            <span>Cadastro de Pessoas</span>
-          </span>
-          <a-menu-item key="7">
-            Pessoa
-            <router-link to="/adm/cadPessoa"></router-link>
-          </a-menu-item>
-        </a-sub-menu>
         <a-sub-menu key="sub1">
           <span slot="title">
             <a-icon type="bank"/>
-            <span>Cadastro de Caixa</span>
+            <span>Fluxo de Caixa</span>
           </span>
           <a-menu-item key="11">
             Receita
@@ -45,8 +35,16 @@
             <router-link to="/adm/cadDespesa"></router-link>
           </a-menu-item>
         </a-sub-menu>
+        <a-menu-item key="7">
+          <a-icon type="form"/>Visitante
+          <router-link to="/adm/cadPessoa"></router-link>
+        </a-menu-item>
         <a-menu-item key="15">
           <a-icon type="bars"/>Relatório
+          <router-link to="/adm/tabela"></router-link>
+        </a-menu-item>
+        <a-menu-item key="16">
+          <a-icon type="tool"/>Configurações
           <router-link to="/adm/tabela"></router-link>
         </a-menu-item>
       </a-menu>
