@@ -45,26 +45,22 @@
   Evento.associate = models=>{
     models.evento.hasMany(models.atividade,{
       as: 'atividades',
-      foreignKey: 'idEvento',
-      targetKey: 'idEvento'
+      foreignKey: 'idEvento'
     });
 
     models.evento.belongsTo(models.agenda,{
       as: 'agendamento',
-      foreignKey: 'idEvento',
-      targetKey: 'idEvento'
+      foreignKey: 'idEvento'
     });
 
     models.evento.hasMany(models.inscricaoEvento,{
       as: 'inscricoes',
-      foreignKey: 'idEvento',
-      targetKey: 'idEvento'
+      foreignKey: 'idEvento'
     });
 
     models.evento.hasMany(models.lote,{
       as: 'lotes',
-      foreignKey: 'idEvento',
-      targetKey: 'idEvento'
+      foreignKey: 'idEvento'
     });
   
     models.evento.hasMany(models.receita,{
