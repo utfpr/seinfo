@@ -1,5 +1,5 @@
 const db = require('../models/index.js');
-const Atividades = db.atividades;
+const Atividades = db.atividade;
  
 // Post do Atividade
 exports.create = (req, res) => {

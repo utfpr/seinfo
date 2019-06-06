@@ -1,5 +1,5 @@
 const db = require('../models/index.js');
-const Evento = db.eventos;
+const Evento = db.evento;
 const agendas = require('../controllers/agenda.controller.js');
 const imagens = require('../controllers/imagem.controller.js');
 
