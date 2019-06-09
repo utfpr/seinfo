@@ -77,7 +77,7 @@
           <div class="row justify-content-center">
             <a-form-item class="space_2">
               <label class="ant-form-item-required">Imagem do evento:</label>
-              <a-input name="file" type="file" class="">
+              <a-input name="urlImagem" type="file" class="">
               </a-input>
             </a-form-item>
           </div>
@@ -166,6 +166,7 @@ export default {
             this.objeto_lote.push(obj_temp)
           }
           console.log(this.objeto_lote)
+          console.log("TESTANDO");
         }
       });
     },

@@ -1,8 +1,7 @@
 const db = require('../models/index.js');
-const agEventos = require('../controllers/agendamentoEvento.controller.js');
 const Agenda = db.agenda;
  
-// Post do Eventod
+// Post do Eventos
 exports.create = (req, res) => {
   console.log("\n\n Dentro de Agenda!");
   
@@ -10,17 +9,15 @@ exports.create = (req, res) => {
 
     dataHoraInicio: req.data_ini,
     dataHoraFim: req.data_fim,
-    local: req.local,
+    local: req.local
     
 
   }).then(agenda => {    
     // Cria um Evento
     console.log("Criado o Agenda! "+agenda.idAgenda);
-    //vincula os id na tabela agendamentoEventos
-    agEventos.create({"evento":req.evento,"agenda":agenda.idAgenda});
     res.send(agenda.idAgenda);
   }).catch(err => {
-    res.status(500).send("Error -> " + err);
+    res.status(500).send("Error -> " + err)
   })
 };
  
