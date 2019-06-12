@@ -12,6 +12,16 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: '0',
       field: 'status'
+    },
+    idImagem: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'imagem',
+        key: 'idImagem'
+      },
+      field: 'idImagem'
     }
 
 },
@@ -21,6 +31,13 @@ module.exports = (sequelize, Sequelize) => {
     createdAt: false,
   });
   
+  /*Carrossel.associate = models => {       
+    models.carrosel.hasMany(models.imagem, {
+      as:'Imagem',  
+      foreignKey: 'idImagem',
+    })
+    
+  };*/
 
   return Carrossel;
 }
