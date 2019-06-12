@@ -46,7 +46,7 @@
         <a-sub-menu key="sub6">
           <span slot="title">
             <a-icon type="tool"/>
-            <span>Fluxo de Caixa</span>
+            <span>Configurações</span>
           </span>
           <a-menu-item key="18">
           Carousel Home
