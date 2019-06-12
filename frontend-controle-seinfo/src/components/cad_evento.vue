@@ -48,7 +48,7 @@
           </a-form-item>
           <a-form-item class="space">
             <label class="ant-form-item-required">Status do evento:</label>
-            <a-select name="sta_evento" defaultValue="0">
+            <a-select name="select_status" defaultValue="0">
               <a-select-option value="1">Evento disponivel</a-select-option>
               <a-select-option value="0">Evento indisponivel</a-select-option>
             </a-select>

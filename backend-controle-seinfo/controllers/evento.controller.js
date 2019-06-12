@@ -27,7 +27,7 @@ exports.create = (req, res, nomedoarquivo) => {
     Evento.create({  
       nome: req.body.nome,
       descricao: req.body.descricao,
-      status: req.body.status,
+      status: req.body.select_status,
       idAgenda: agenda.idAgenda
   
     }).then( evento => {
