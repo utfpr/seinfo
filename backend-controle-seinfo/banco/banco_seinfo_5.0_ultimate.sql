@@ -372,8 +372,16 @@ DROP TABLE IF EXISTS `seinfo`.`carrossel` ;
 CREATE TABLE IF NOT EXISTS `seinfo`.`carrossel` (
   `idCarrossel` INT NOT NULL AUTO_INCREMENT,
   `status` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`idCarrossel`))
+  `idImagem` INT NOT NULL,
+  PRIMARY KEY (`idCarrossel`),
+  CONSTRAINT `fk_carrossel_imagem1`
+    FOREIGN KEY (`idImagem`)
+    REFERENCES `seinfo`.`imagem` (`idImagem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE INDEX `fk_carrossel_imagem1_idx` ON `seinfo`.`carrossel` (`idImagem` ASC);
 
 
 -- -----------------------------------------------------
@@ -426,32 +434,6 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_evento_has_imagem_imagem1_idx` ON `seinfo`.`eventoImagem` (`idImagem` ASC);
 
 CREATE INDEX `fk_evento_has_imagem_evento1_idx` ON `seinfo`.`eventoImagem` (`idEvento` ASC);
-
-
--- -----------------------------------------------------
--- Table `seinfo`.`carrosselImagem`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `seinfo`.`carrosselImagem` ;
-
-CREATE TABLE IF NOT EXISTS `seinfo`.`carrosselImagem` (
-  `idCarrossel` INT NOT NULL,
-  `idImagem` INT NOT NULL,
-  PRIMARY KEY (`idCarrossel`, `idImagem`),
-  CONSTRAINT `fk_carrossel_has_imagem_carrossel1`
-    FOREIGN KEY (`idCarrossel`)
-    REFERENCES `seinfo`.`carrossel` (`idCarrossel`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_carrossel_has_imagem_imagem1`
-    FOREIGN KEY (`idImagem`)
-    REFERENCES `seinfo`.`imagem` (`idImagem`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_carrossel_has_imagem_imagem1_idx` ON `seinfo`.`carrosselImagem` (`idImagem` ASC);
-
-CREATE INDEX `fk_carrossel_has_imagem_carrossel1_idx` ON `seinfo`.`carrosselImagem` (`idCarrossel` ASC);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
