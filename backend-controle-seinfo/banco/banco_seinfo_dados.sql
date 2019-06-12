@@ -111,110 +111,8 @@ INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
 INSERT INTO agenda(idAgenda, dataHoraInicio, dataHoraFim, local) VALUES
 (50, '2019-01-01 03:45:14', '2019-01-04 09:26:03.300989', '909 Beachwood Ct');
 
---
--- Inserting data into table carrossel
---
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(1, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(2, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(3, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(4, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(5, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(6, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(7, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(8, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(9, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(10, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(11, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(12, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(13, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(14, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(15, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(16, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(17, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(18, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(19, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(20, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(21, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(22, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(23, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(24, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(25, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(26, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(27, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(28, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(29, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(30, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(31, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(32, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(33, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(34, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(35, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(36, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(37, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(38, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(39, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(40, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(41, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(42, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(43, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(44, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(45, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(46, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(47, 0);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(48, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(49, 1);
-INSERT INTO carrossel(idCarrossel, status) VALUES
-(50, 0);
 
+--------------------------------------------------
 --
 -- Inserting data into table categoria
 --
@@ -382,6 +280,112 @@ INSERT INTO imagem(idImagem, url) VALUES
 (29, 'imagens://ionyoutias.gif');
 INSERT INTO imagem(idImagem, url) VALUES
 (30, 'imagens://orha930.png');
+
+
+--
+-- Inserting data into table carrossel
+--
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(1, 1, 17);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(2, 1, 9);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(3, 1, 18);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(4, 0, 4);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(5, 0, 28);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(6, 0, 20);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(7, 1, 15);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(8, 0, 18);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(9, 1, 16);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(10, 1, 23);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(11, 0, 13);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(12, 0, 19);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(13, 1, 12);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(14, 1, 14);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(15, 0, 20);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(16, 0, 19);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(17, 1, 15);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(18, 1, 7);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(19, 0, 13);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(20, 1, 21);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(21, 1, 29);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(22, 0, 8);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(23, 0, 10);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(24, 0, 16);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(25, 1, 5);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(26, 1, 11);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(27, 1, 24);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(28, 1, 30);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(29, 1, 25);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(30, 1, 22);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(31, 0, 14);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(32, 0, 6);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(33, 1, 1);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(34, 0, 9);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(35, 0, 26);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(36, 1, 2);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(37, 1, 17);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(38, 1, 12);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(39, 0, 1);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(40, 1, 4);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(41, 1, 10);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(42, 0, 27);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(43, 0, 3);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(44, 0, 7);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(45, 0, 5);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(46, 1, 11);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(47, 0, 6);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(48, 1, 2);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(49, 1, 8);
+INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
+(50, 0, 3);
+
 
 --
 -- Inserting data into table pessoa
@@ -981,109 +985,6 @@ INSERT INTO agendamentoAtividade(idAtividade, idAgenda) VALUES
 INSERT INTO agendamentoAtividade(idAtividade, idAgenda) VALUES
 (5, 6);
 
---
--- Inserting data into table carrosselImagem
---
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(18, 17);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(9, 9);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(18, 18);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(4, 4);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(28, 28);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(21, 20);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(16, 15);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(19, 18);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(17, 16);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(23, 23);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(13, 13);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(19, 19);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(13, 12);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(14, 14);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(20, 20);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(20, 19);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(15, 15);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(8, 7);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(14, 13);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(21, 21);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(29, 29);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(9, 8);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(10, 10);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(16, 16);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(5, 5);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(11, 11);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(24, 24);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(30, 30);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(25, 25);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(22, 22);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(15, 14);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(6, 6);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(2, 1);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(10, 9);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(26, 26);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(3, 2);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(17, 17);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(12, 12);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(1, 1);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(5, 4);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(11, 10);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(27, 27);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(4, 3);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(7, 7);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(6, 5);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(12, 11);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(7, 6);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(2, 2);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(8, 8);
-INSERT INTO carrosselImagem(idCarrossel, idImagem) VALUES
-(3, 3);
 
 --
 -- Inserting data into table despesa
