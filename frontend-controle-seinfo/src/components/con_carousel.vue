@@ -2,13 +2,22 @@
 <div class="title">
   <h5 style="text-align:center">Imagem de Carousel</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/api/pessoa" method="post">
+    <form class="form" action="http://localhost:3000/api/carrossel" method="post" encType="multipart/form-data">
       <div class="row justify-content-center">
         <a-form-item class="space_2">
               <label class="ant-form-item-required">Imagem do carousel:</label>
-              <a-input name="file" type="file">
+              <a-input name="urlImagem" type="file">
               </a-input>
-            </a-form-item>
+        </a-form-item>
+      
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Status da Imagem:</label>
+            <select name="select_status" defaultValue="1">
+              <option value="1">Disponivel</option>
+              <option value="0">Indisponivel</option>
+            </select>
+          </a-form-item>
+      
       </div>
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
