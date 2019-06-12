@@ -1,21 +1,35 @@
 const db = require('../models/index.js');
 const EveImagens = require('../controllers/eventoImagem.controller.js');
 const Imagem = db.imagem;
-
+const Carrosel = require('../controllers/carrossel.controller.js');
+var _url;
  
 // Post do Imagem
-exports.create = (req, res) => {
+exports.create = (req, res, imagem_url) => {
   console.log("\n\n\n Dentro de Imagem ");
-  console.log("\n ID EVENTO dentro IMAGEM "+req.evento);
+  _url = req.url;
+  if(imagem_url) _url = imagem_url;
+
+  if(req.evento){
+    console.log("\n ID EVENTO dentro IMAGEM "+req.evento);
+  }
   Imagem.create({  
-    url: req.url,
+    url: _url,
   }).then( imagem => {
 
     // Cria um Evento
     console.log("Criado Imagem com o id: "+imagem.idImagem);
 
-    //vincula os id na tabela eventoImagem
-    EveImagens.create({"evento":req.evento,"imagem":imagem.idImagem});
+    if(req.evento){
+      console.log("Foi no 1º!");
+      EveImagens.create({"evento":req.evento,"imagem":imagem.idImagem});
+    }else{
+        //asdasd
+
+      console.log("Foi no 2º!");
+      Carrosel.create({"status":req.body.status,"imagem":imagem.idImagem});
+    }
+   
 
     res.send(imagem);
 

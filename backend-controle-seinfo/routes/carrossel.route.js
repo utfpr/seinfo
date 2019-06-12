@@ -17,25 +17,13 @@ const upload = multer({storage});
 
 module.exports = function(app) {
  
-  const carossel = require('../controllers/carossel.controller.js');
+  const carossel = require('../controllers/carrossel.controller.js');
+  const imagem = require('../controllers/imagem.controller.js');
 
-  app.post('/api/carossel', upload.single('urlImagem'), function (req, res, next) {
+  app.post('/api/carrossel', upload.single('urlImagem'), function (req, res, next) {
     console.log("POST DO carossel!\n")
-    carossel.create(req,res,nomedoarquivo);
+    console.log("\n\n\n STATUS: "+req.body.select_status);
+    imagem.create(req,res,nomedoarquivo);
   })
 
-  // Insere um Novo Evento
- // app.post('/api/evento', eventos.create);
-
-  //Procura um evento pelo ID
-  app.get('/api/carossel/:carosselId', carossel.findById);
-
-  // Procura todos os Eventos
-  app.get('/api/carossels', carossel.findAll);
-
-  // Update de um Evento pelo ID (Implementar)
-  app.patch('/api/carossel/:eventoId', carossel.atualiza);
-
-  // Deleta um evento pelo ID
-  app.delete('/api/carossel/:eventoId', carossel.delete);
 }
