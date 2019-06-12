@@ -1,49 +1,51 @@
 module.exports = (sequelize, Sequelize) => {
-    const Protagonista = sequelize.define('protagonista', {
-      idPessoa: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'pessoa',
-          key: 'idPessoa'
-        },
-        field: 'idPessoa'
+  const Protagonista = sequelize.define('protagonista', {
+    atuacao: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false,
+      field: 'atuacao'
+    },
+    idPessoa: {
+      type: Sequelize.STRING(64),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'pessoa',
+        key: 'idPessoa'
       },
-      idAtividade: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'atividade',
-          key: 'idAtividade'
-        },
-        field: 'idAtividade'
+      field: 'idPessoa'
+    },
+    idAtividade: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'atividade',
+        key: 'idAtividade'
       },
-      atuacao: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        field: 'atuacao'
-      }
-  },
-  { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
-      tableName: 'protagonista',
-      timestamps: false,
-      createdAt: false,
-    });
-    
-    Protagonista.associate = models => {
-        
-    models.protagonista.model.belongsTo(models.atividade.model, {
-        foreignKey: 'idAtividade',
-        sourceKey: 'idAtividade',
-      });
-      models.protagonista.model.belongsTo(models.pessoa.model, {
-          foreignKey: 'idPessoa',
-          sourceKey: 'idPessoa',
-        });
-    };
+      field: 'idAtividade'
+    }
+},
+{ //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
+    tableName: 'protagonista',
+    timestamps: false,
+    createdAt: false,
+  });
+  
+  Protagonista.associate = models => {
       
+  models.pessoa.belongsToMany(models.atividade, {
+    as:'pessoaProt',
+    through:models.protagonista,  
+    foreignKey: 'idAtividade',
+  }),
+  models.atividade.belongsToMany(models.pessoa, {
+    as:'atividadeProt',
+    through:models.protagonista,  
+    foreignKey: 'idPessoa',
+  })
+  };
+    
 
-    return Protagonista;
-  }
+  return Protagonista;
+}

@@ -1,8 +1,8 @@
-const db = require('../config/db.config.js');
-const Evento = db.eventos;
-const agendas = require('../controllers/agenda.controller.js');
-const imagens = require('../controllers/imagem.controller.js');
-
+const db = require('../models/index.js');
+const Evento = db.evento;
+const Agenda = db.agenda;
+const Imagem = db.imagem;
+const evImagem = require('../controllers/eventoImagem.controller.js');;
 
  
 // Post do Evento
@@ -12,33 +12,55 @@ exports.create = (req, res, nomedoarquivo) => {
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
-  const horas = req.body.horas;
-  const imagem = nomedoarquivo;
+  const imagem_url = nomedoarquivo;
   
-  Evento.create({  
+  Agenda.create({  
 
-    nome: req.body.nome,
-    descricao: req.body.descricao,
-    status: req.body.status
+    dataHoraInicio: data_ini_full,
+    dataHoraFim: data_fim_full,
+    local: local,
+  
+  }).then(agenda => {
+    // Cria uma Agenda 
+    console.log("Criado o Agenda! "+agenda.idAgenda);
 
-  }).then( evento => {
-
-
-    // Cria um Evento
-    console.log("\nCriado o evento com o id: "+evento.idEvento);
+    Evento.create({  
+      nome: req.body.nome,
+      descricao: req.body.descricao,
+      status: req.body.status,
+      idAgenda: agenda.idAgenda
+  
+    }).then( evento => {
+      // Cria um Evento
+      console.log("\nCriado o evento com o id: "+evento.idEvento);
+      
+      Imagem.create({  
+        url: imagem_url
     
-    // Cria Agenda e retorna o idDa Agenda
-    agendas.create({"data_ini":data_ini_full,"data_fim":data_fim_full,"local":local,"horas":horas,"evento":evento.idEvento});
+      }).then( imagem => {
+        // Cria uma Imagem
+        console.log("\nCriado a Imagem com o id: "+imagem.idImagem);
+        
+        //Cria o vingulo entre IdEvento e idImagem
+        evImagem.create({"imagem":imagem.idImagem,"evento":evento.idEvento});
   
-    // Insere uma url na tabela Imagem
-    console.log("\nURL da IMAGEM: "+imagem);
-    imagens.create({"url":imagem,"evento":evento.idEvento});
-
-    res.send(evento);
+    
+      }).catch(err => {
+        res.status(500).send("Error -> " + err);
+      })
+  
+      res.send(evento); 
+      //res.redirect("http://localhost:8080/adm/cadEvento"); 
+  
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
+    })
 
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
+
+
 
 };
  
@@ -97,3 +119,18 @@ exports.delete = (req, res) => {
    exports.amoeba = (req, res) => {
      console.log("\n------------------- Função de Teste ------------------------------ \n");
    };
+/*Evento.findOne({where: {idEvento:req.params.idEvento},include:[{model: db.agendamentoEvento,as:'agendamento',include:[{model: db.agenda,as:'agendaEv'}]},{model:db.atividade,as:'atividades', include:[{model:db.categoria,as:'categoria',attributes:['nome']}]},{model:db.lote,as:'lotes'}]}).then(evento => {
+    console.log("Achou o evento pelo ID "+req.params.idEvento);
+    //res.send(evento.agendamento[0].agendaEv.local); //Retorna um Json para a Pagina da API    
+    //res.send(evento.atividades[0].categoria.nome); //Retorna um Json para a Pagina da API    
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+
+  Evento.findOne({where: {idEvento:req.params.idEvento},include: [{model: db.pessoa, as:'ePessoa',through:{attributes:['horasParticipacao']}}]}).then(evento=>{
+    //Evento.getPessoa
+    res.send(evento)
+  }).catch(err=>{
+    res.status(500).send(err)
+  })*/

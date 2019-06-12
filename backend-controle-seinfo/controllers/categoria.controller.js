@@ -1,5 +1,5 @@
-const db = require('../config/db.config.js');
-const Categorias = db.categorias;
+const db = require('../models/index.js');
+const Categorias = db.categoria;
 
 // Post do Evento
 exports.create = (req, res) => {
