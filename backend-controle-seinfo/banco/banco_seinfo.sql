@@ -27,8 +27,9 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `CPF` CHAR(11) NOT NULL,
   `senha` CHAR(32) NOT NULL,
   `nivel` INT NOT NULL COMMENT 'O nível seleciona quem vai ter acesso, 0 como usuário, 1 adm básico e 2 como super adm.',
+  `classificacao` INT NOT NULL,
   PRIMARY KEY (`idPessoa`))
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 CREATE UNIQUE INDEX `email_UNIQUE` ON `seinfo`.`pessoa` (`email` ASC);
 
