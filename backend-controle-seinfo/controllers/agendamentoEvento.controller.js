@@ -1,5 +1,5 @@
-const db = require('../config/db.config.js');
-const AgEventos = db.agEventos;
+const db = require('../models/index.js');
+const AgEventos = db.agendamentoEvento;
  
 // Post do Evento
 exports.create = (req, res) => {

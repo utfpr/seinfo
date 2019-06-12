@@ -20,7 +20,7 @@ module.exports = function(app) {
   const eventos = require('../controllers/evento.controller.js');
 
   app.post('/api/evento', upload.single('urlImagem'), function (req, res, next) {
-
+    console.log("POST DO EVENTO!\n")
     eventos.create(req,res,nomedoarquivo);
   })
 

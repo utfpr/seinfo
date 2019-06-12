@@ -2,7 +2,7 @@
   <div class="title">
     <h5 style="text-align:center">Cadastro de Evento</h5>
     <div class="box">
-      <form class="form" action="http://localhost:3000/api/evento" @submit="handleSubmit" method="post">
+      <form class="form" action="http://localhost:3000/api/evento" method="post"  encType="multipart/form-data">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Nome do Evento:</label>
@@ -70,14 +70,14 @@
             <hr/>
             </a-form-item>
             <a-form-item v-bind="formItemLayoutWithOutLabel">
-              <a-button type="dashed" style="width: 100%" @click="add">Adicionar Lote</a-button>
+              <a-button type="default" style="width: 100%" @click="add">Adicionar Lote</a-button>
             </a-form-item>
           </a-form>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space_2">
               <label class="ant-form-item-required">Imagem do evento:</label>
-              <a-input name="file" type="file" class="">
+              <a-input name="urlImagem" type="file" class="">
               </a-input>
             </a-form-item>
           </div>
@@ -166,6 +166,7 @@ export default {
             this.objeto_lote.push(obj_temp)
           }
           console.log(this.objeto_lote)
+          console.log("TESTANDO");
         }
       });
     },

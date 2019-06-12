@@ -1,11 +1,11 @@
-const db = require('../config/db.config.js');
-const EveImagens = db.eveImagens;
+const db = require('../models/index.js');
+const EveImagens = db.eventoImagem;
  
 // Post do Evento
 exports.create = (req, res) => {
     console.log("Dentro de Evento Imagem: \nidEvento = "+req.evento+"\n idImagem: "+req.imagem)
-    EveImagens.create({  
-    //idEvento: req.body.idEvento,
+    EveImagens.create({
+      
     idEvento: req.evento,
     idImagem: req.imagem
 
@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     console.log("Criado o eventoImagem!")
     res.send(agevento);
   }).catch(err => {
-    res.status(500).send("Error -> " + err);
+    console.log("Console -> " + err);
   })
 };
  

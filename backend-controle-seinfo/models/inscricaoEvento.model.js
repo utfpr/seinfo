@@ -13,7 +13,7 @@ module.exports = function(sequelize, Sequelize) {
 			field: 'idEvento'
 		},
 		idPessoa: {
-			type: Sequelize.INTEGER(11),
+			type: Sequelize.STRING(64),
 			allowNull: false,
 			primaryKey: true,
 			references: {
@@ -21,15 +21,6 @@ module.exports = function(sequelize, Sequelize) {
 				key: 'idPessoa'
 			},
 			field: 'idPessoa'
-		},
-		idLote: {
-			type: Sequelize.INTEGER(11),
-			allowNull: false,
-			references: {
-				model: 'lote',
-				key: 'idLote'
-			},
-			field: 'idLote'
 		},
 		dataInscricao: {
 			type: Sequelize.DATEONLY,
@@ -43,25 +34,28 @@ module.exports = function(sequelize, Sequelize) {
 	});
 
 	InscricaoE.associate = models => {
-		models.inscricaoEvento.model.belongsTo(models.pessoa.model,{
+		models.inscricaoEvento.belongsTo(models.pessoa,{
+			as:'pessoaInsc',
 			foreignKey: 'idPessoa'
-		})
-		models.inscricaoEvento.model.belongsTo(models.evento.model,{
+		}),
+		models.inscricaoEvento.belongsTo(models.evento,{
+			as:'eventoInsc',
 			foreignKey: 'idEvento'
-		})
-		models.inscricaoEvento.model.belongsTo(models.lote.model,{
-			foreignKey: 'idLote'
-		})
-		models.inscricaoEvento.model.hasOne(models.receitaInscricaoEvento.model,{
+		}),
+		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
+			as:'receitaInscEv',
 			foreignKey: 'idEvento'
-		})
-		models.inscricaoEvento.model.hasOne(models.receitaInscricaoEvento.model,{
+		}),
+		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
+			as:'receitaInscPe',
 			foreignKey: 'idPessoa'
-		})
-		models.inscricaoEvento.model.hasOne(models.inscricaoAtividade.model,{
+		}),
+		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
+			as:'inscAtvPe',
 			foreignKey: 'idPessoa'
-		})
-		models.inscricaoEvento.model.hasOne(models.inscricaoAtividade.model,{
+		}),
+		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
+			as:'inscAtvEv',
 			foreignKey: 'idEvento'
 		})
 	} 

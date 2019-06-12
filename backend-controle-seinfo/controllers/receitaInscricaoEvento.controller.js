@@ -1,4 +1,4 @@
-const db = require('../config/db.config.js');
+const db = require('../models/index.js');
 const ReceitaInscricaoEvento = db.receitaInscricaoEvento;
  
 // Post do Evento
@@ -41,7 +41,7 @@ exports.findById = (req, res) => {
 
 
 
-// };
+};
 
 // exports.findAll = (req, res) => {  
 //   Lotes.findAll({ raw: true}).then(lote => {
@@ -85,4 +85,4 @@ exports.findById = (req, res) => {
 
 // exports.amoeba = (req, res) => {
 //   console.log("Função de Teste");
-// };
+// }
