@@ -4,49 +4,51 @@
       <a-layout-content>
         <div>
           <div>
+            <br><br>
             <img class="child" src="../assets/banner.png">
           </div>
           <div class="box">
           <a-row :gutter="16">
             <a-col :span="6">
               <a-card class="title" title="Data de Inicio" :bordered=false>
-                <p>card content</p>
+                <p>15/05/2019</p>
               </a-card>
             </a-col>
             <a-col :span="6">
               <a-card class="title" title="Data de Fim" :bordered=false>
-                <p>card content</p>
+                <p>15/06/2019</p>
               </a-card> 
             </a-col>
             <a-col :span="6">
               <a-card class="title" title="Valor do Evento" :bordered=false>
-                <p>card content</p>
+                <p>800$</p>
               </a-card>   
             </a-col>
             <a-col :span="6">
               <a-card class="title" title="Local" :bordered=false>
-                <p>card content</p>
+                <p>Casa das Primas</p>
               </a-card>   
             </a-col>
           </a-row>
         </div>
-          <div>
-    <a-card
-      class="layer"
-      title="Evento"
-      :tabList="tabList"
-      :activeTabKey="key"
-      @tabChange="key => onTabChange(key, 'key')"
-    >
-      <span slot="customRender" slot-scope="item">
-        <a-icon type="home"/>{{item.key}}
-      </span>
-      {{contentList[key]}}
-    </a-card>
-    <br /><br />
 
-  </div>
+        <a-card class="layer" title="Descrição do evento">
+          <p class="para">A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+        </a-card>
 
+        <a-card class="layer" title="Palestras">
+          <p class="para">A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+        </a-card>
+
+        <a-card class="layer" title="Atividades">
+          <p class="para">A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+        </a-card>
+
+        <a-card class="layer" title="Cronograma">
+          <p> <a-calendar/></p>
+        </a-card>
+
+        <br><br>
     </div>
       </a-layout-content>
   </div>
@@ -55,41 +57,7 @@
 
 <script>
 export default {
-data () {
-    return {
-      tabList: [{
-        key: 'tab1',
-        // tab: 'tab1',
-        scopedSlots: { tab: 'customRender'}
-      }, {
-        key: 'tab2',
-        tab: 'tab2',
-      }],
-      contentList: {
-        tab1: 'content1',
-        tab2: 'content2',
-      },
-      tabListNoTitle: [{
-        key: 'article',
-        tab: 'article',
-      }, {
-        key: 'app',
-        tab: 'app',
-      }, {
-        key: 'project',
-        tab: 'project',
-      }],
-      key: 'tab1',
-      noTitleKey: 'app',
-    }
-  },
-  methods: {
-    onTabChange (key, type) {
-      console.log(key, type)
-      this[type] = key
-    },
-  },
-}
+};
 </script>
 
 <style scoped>
@@ -103,10 +71,15 @@ data () {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
+.para{
+  text-align: left;
+}
+
 .layer{
   margin-top: 3%;
   width: 90%;
   margin-left: 5%;
+  text-align: center;
 }
 
 .child {
@@ -115,6 +88,10 @@ data () {
   max-height: 70%;
   min-height: 70%;
   margin-left: 15%;
+}
+
+.paraCale{
+  max-height: 200px;
 }
 
 .title{
