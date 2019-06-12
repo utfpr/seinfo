@@ -2,11 +2,52 @@
   <div style="margin-top: 60px">
     <div id="work">
       <a-layout-content>
-        <div class="grid-container">
-          <div class="parent" style="max-width: 700px;">
+        <div>
+          <div>
             <img class="child" src="../assets/banner.png">
           </div>
+          <div class="box">
+          <a-row :gutter="16">
+            <a-col :span="6">
+              <a-card class="title" title="Data de Inicio" :bordered=false>
+                <p>card content</p>
+              </a-card>
+            </a-col>
+            <a-col :span="6">
+              <a-card class="title" title="Data de Fim" :bordered=false>
+                <p>card content</p>
+              </a-card> 
+            </a-col>
+            <a-col :span="6">
+              <a-card class="title" title="Valor do Evento" :bordered=false>
+                <p>card content</p>
+              </a-card>   
+            </a-col>
+            <a-col :span="6">
+              <a-card class="title" title="Local" :bordered=false>
+                <p>card content</p>
+              </a-card>   
+            </a-col>
+          </a-row>
         </div>
+          <div>
+    <a-card
+      class="layer"
+      title="Evento"
+      :tabList="tabList"
+      :activeTabKey="key"
+      @tabChange="key => onTabChange(key, 'key')"
+    >
+      <span slot="customRender" slot-scope="item">
+        <a-icon type="home"/>{{item.key}}
+      </span>
+      {{contentList[key]}}
+    </a-card>
+    <br /><br />
+
+  </div>
+
+    </div>
       </a-layout-content>
   </div>
   </div>
@@ -14,8 +55,41 @@
 
 <script>
 export default {
-
-};
+data () {
+    return {
+      tabList: [{
+        key: 'tab1',
+        // tab: 'tab1',
+        scopedSlots: { tab: 'customRender'}
+      }, {
+        key: 'tab2',
+        tab: 'tab2',
+      }],
+      contentList: {
+        tab1: 'content1',
+        tab2: 'content2',
+      },
+      tabListNoTitle: [{
+        key: 'article',
+        tab: 'article',
+      }, {
+        key: 'app',
+        tab: 'app',
+      }, {
+        key: 'project',
+        tab: 'project',
+      }],
+      key: 'tab1',
+      noTitleKey: 'app',
+    }
+  },
+  methods: {
+    onTabChange (key, type) {
+      console.log(key, type)
+      this[type] = key
+    },
+  },
+}
 </script>
 
 <style scoped>
@@ -29,21 +103,31 @@ export default {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 8px;
-  padding: 8px;
+.layer{
+  margin-top: 3%;
+  width: 90%;
+  margin-left: 5%;
 }
 
-.parent {
-  margin: auto;
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
 .child {
-  width: 100%;
-  margin: auto;
+  max-width: 70%;
+  min-width: 70%;
+  max-height: 70%;
+  min-height: 70%;
+  margin-left: 15%;
 }
+
+.title{
+  text-align: center;
+  border: 0.1px solid black;
+  cursor: pointer;
+  position: relative;
+}
+
+.box{
+  margin-top: 3%;
+  width: 90%;
+  margin-left: 5%;
+}
+
 </style>
