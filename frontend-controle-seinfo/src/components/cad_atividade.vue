@@ -76,10 +76,16 @@
     <div class="row justify-content-center">
     </div>
     <div class="row justify-content-center">
-      <a-form-item class="space_2">
+      <a-form-item class="space">
           <label class="ant-form-item-required">Selecione uma Categoria:</label>
         <a-select defaultValue="...">
       <a-select-option v-for="tabela in tabelas" :key="tabela.idCategoria" :value="tabela.idCategoria" >{{tabela.nome}}</a-select-option>
+    </a-select>
+      </a-form-item>
+      <a-form-item class="space">
+          <label class="ant-form-item-required">Selecione um Protagonista:</label>
+        <a-select defaultValue="...">
+      <a-select-option v-for="tabela in tabelas" :key="tabela.idPessoa" :value="tabela.idPessoa" >{{tabela.idPessoa}}</a-select-option>
     </a-select>
       </a-form-item>
     </div>
