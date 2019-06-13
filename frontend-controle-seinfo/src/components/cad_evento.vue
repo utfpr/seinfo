@@ -2,7 +2,7 @@
   <div class="title">
     <h5 style="text-align:center">Cadastro de Evento</h5>
     <div class="box">
-      <form class="form" action="http://localhost:3000/api/evento" method="post"  encType="multipart/form-data">
+      <form class="form" action="http://localhost:3000/api/evento" method="post" encType="multipart/form-data">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Nome do Evento:</label>

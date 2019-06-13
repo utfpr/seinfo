@@ -31,13 +31,13 @@ module.exports = (sequelize, Sequelize) => {
     createdAt: false,
   });
   
-  /*Carrossel.associate = models => {       
-    models.carrosel.hasMany(models.imagem, {
+  Carrossel.associate = models => {       
+    models.carrossel.belongsTo(models.imagem, {
       as:'Imagem',  
       foreignKey: 'idImagem',
     })
     
-  };*/
+  };
 
   return Carrossel;
 }
