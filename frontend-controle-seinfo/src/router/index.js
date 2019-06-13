@@ -14,6 +14,7 @@ import Cad_Categoria from '@/components/cad_categoria';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
+import funcPessoa from '@/components/funcPessoa';
 import Teste from '@/components/teste';
 
 
@@ -85,6 +86,10 @@ export default new Router({
         {
           path: 'ADMevento',
           component: ADMevento
+        },
+        {
+          path: 'funcPessoa',
+          component: funcPessoa
         }
         ]
     },
