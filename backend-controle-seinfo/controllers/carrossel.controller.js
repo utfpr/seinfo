@@ -3,7 +3,7 @@ const Carrossel = db.carrossel;
  
 // Post do Evento
 exports.create = (req, res) => {
-    //console.log("Dentro de Evento Imagem: \nidEvento = "+req.evento+"\n idImagem: "+req.imagem)
+   
     Carrossel.create({
       
     status: req.status,
@@ -11,11 +11,9 @@ exports.create = (req, res) => {
 
   }).then(agevento => {    
     // Cria um Evento
-    console.log("Criado o eventoImagem!")
+    console.log("Criado o Carrossel!")
     res.send(agevento);
   }).catch(err => {
     console.log("Console -> " + err);
   })
 };
- 
-
