@@ -15,6 +15,7 @@ import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
 import Teste from '@/components/teste';
+import Usuario from '@/components/usuario'
 
 
 Vue.use(Router);
@@ -30,6 +31,17 @@ export default new Router({
       path: '/teste',
       name: 'Teste',
       component: Teste
+    },
+    {
+      path: '/usuario',
+      name: 'Usuario',
+      component: Usuario,
+      children: [
+        {
+          path: '',
+          component: Logo
+        },
+      ]
     },
     {
       path: '/registrar',
