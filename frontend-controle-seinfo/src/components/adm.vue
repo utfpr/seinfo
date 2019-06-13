@@ -49,8 +49,12 @@
             <span>Configurações</span>
           </span>
           <a-menu-item key="18">
-          Carousel Home
+            Carousel Home
             <router-link to="/adm/conCarousel"></router-link>
+          </a-menu-item>
+          <a-menu-item key="19">
+            Funções de Pessoas
+            <router-link to="/adm/funcPessoa"></router-link>
           </a-menu-item>
         </a-sub-menu>
       </a-menu>
