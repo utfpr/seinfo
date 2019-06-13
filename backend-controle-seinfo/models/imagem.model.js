@@ -20,12 +20,12 @@ module.exports = (sequelize, Sequelize) => {
     createdAt: false,
   });
   
- /* Imagem.associate = models => {       
-    models.imagem.belongsTo(models.carrosel, {
-      as:'carroselImg',
-      through: models.carrosel,  
+  Imagem.associate = models => {       
+    models.imagem.hasMany(models.carrossel, {
+      as:'carroselImg', 
       foreignKey: 'idImagem',
     })
-};*/
+};
+
   return Imagem;
 }
