@@ -3,10 +3,8 @@ const Categorias = db.categoria;
 
 // Post do Evento
 exports.create = (req, res) => {
-
     Categorias.create({  
-
-    nome: req.body.nome
+      nome: req.body.nome
   }).then(categoria => {    
     // Cria um Evento
     console.log("Criado uma categoria!")
@@ -18,7 +16,7 @@ exports.create = (req, res) => {
 
 
 exports.findById = (req, res) => {  
-  Categorias.findByPk(req.params.categoriaId).then(categoria => {
+  Categorias.findOne({where:{idCategoria:req.params.categoriaId}}).then(categoria => {
     console.log("Achou uma categoria pelo ID "+req.params.categoriaId);
     res.send(categoria); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -36,30 +34,25 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req,res)=>{
-
-  Categorias.update(
-    {
+  Categorias.update({
       nome: req.body.nome
   },
-    {where: {idcategoria: req.params.categoriaId}}).then(categoria=>{
+    {where: {idCategoria: req.params.categoriaId}}).then(categoria=>{
       console.log("Atualizando uma Categoria");
       res.send(categoria);
     }).catch(err=>{
       res.status(500).send("Error "+err);
-    })
-    
-  },
+    })    
+},
   
 
 exports.delete = (req, res) => {  
-  Categorias.destroy({ where: { idcategoria: req.params.categoriaId } }).then(categoria => {
-    console.log("Deletando uma Categoria com o ID: "+req.params.categoriaId);
-    res.send(categoria); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
+  Categorias.findOne({where:{idCategoria: req.params.categoriaId}}).then(cat=>{
+    db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
+    cat.destroy()
+    res.send('tchau')
+    //db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
   })
 };
 
-exports.amoeba = (req, res) => {
-  console.log("Função de Teste");
-};
+

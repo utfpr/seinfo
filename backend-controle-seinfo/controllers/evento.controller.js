@@ -134,3 +134,37 @@ exports.delete = (req, res) => {
   }).catch(err=>{
     res.status(500).send(err)
   })*/
+
+  //------------------------------------------------------------------------------------------
+
+exports.criaOrganizacao =(req,res)=>{
+  Evento.findOne({where:{idEvento:req.params.idEvento}}).then(evento=>{
+    db.pessoa.findOne({where:{idPessoa:req.params.idPessoa}}).then(pessoa=>{
+      db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'idPessoa':pessoa.idPessoa}).then(org=>{
+        res.send(org)
+      }).catch(err=>{
+        res.status(500).send("Error -> " + err);
+      })
+    }).catch(err=>{
+      res.status(500).send("Error -> " + err);
+    })
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+}
+
+exports.selectOrganizacao=(req,res)=>{
+  db.organizacao.findAll({raw:true}).then(org=>{
+    res.send(org)
+  })
+  /*db.organizacao.findOne({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}}).then(org=>{
+    res.send(org)
+  })*/
+}
+
+
+exports.deleteOrganizacao=(req,res)=>{
+  db.organizacao.destroy({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}}).then(org=>{
+    res.send('deletou')
+  })  
+}
