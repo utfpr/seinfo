@@ -20,7 +20,7 @@
       unique: true,
       field: 'email'
     },
-    cpf: {
+    CPF: {
       type: Sequelize.CHAR(11),
       allowNull: false,
       unique: true,

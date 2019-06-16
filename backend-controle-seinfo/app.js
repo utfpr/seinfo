@@ -20,6 +20,7 @@ require('./routes/atividade.route.js')(app);
 require('./routes/agenda.route.js')(app);
 require('./routes/imagem.route.js')(app);
 require('./routes/carrossel.route.js')(app);
+require('./routes/pessoa.route.js')(app);
 app.use('/', router);
 
 module.exports = app;

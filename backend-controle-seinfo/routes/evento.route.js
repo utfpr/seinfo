@@ -38,4 +38,11 @@ module.exports = function(app) {
 
   // Deleta um evento pelo ID
   app.delete('/api/evento/:eventoId', eventos.delete);
+
+  app.post('/api/organizacao/:idEvento/:idPessoa',eventos.criaOrganizacao);
+
+  app.get('/api/organizacoes',eventos.selectOrganizacao);
+
+  app.delete('/api/organizacao/:idEvento/:idPessoa',eventos.deleteOrganizacao);
+
 }

@@ -37,12 +37,12 @@ module.exports = (sequelize, Sequelize) => {
   models.pessoa.belongsToMany(models.atividade, {
     as:'pessoaProt',
     through:models.protagonista,  
-    foreignKey: 'idAtividade',
+    foreignKey: 'idPessoa',
   }),
   models.atividade.belongsToMany(models.pessoa, {
     as:'atividadeProt',
     through:models.protagonista,  
-    foreignKey: 'idPessoa',
+    foreignKey: 'idAtividade',
   })
   };
     
