@@ -19,7 +19,7 @@
         <a-menu-item key="2">
           <a-icon type="global" />
           <span>Eventos</span>
-          <router-link to="/adm/cadEvento"></router-link>
+          <router-link to="/usuario/listEvent"></router-link>
         </a-menu-item>
         <a-menu-item key="3">
           <a-icon type="logout" />
