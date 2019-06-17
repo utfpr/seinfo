@@ -16,7 +16,8 @@ import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/funcPessoa';
 import Teste from '@/components/teste';
-import Usuario from '@/components/usuario'
+import Usuario from '@/components/usuario';
+import UsuEvento from '@/components/eventos_usuario';
 
 
 Vue.use(Router);
@@ -41,6 +42,10 @@ export default new Router({
         {
           path: '',
           component: Logo
+        },
+        {
+          path: 'listEvent',
+          component: UsuEvento
         },
       ]
     },
