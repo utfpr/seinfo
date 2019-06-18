@@ -86,6 +86,8 @@ exports.cadastrarEmEvento = (req, res) => {
           })
           .then(inscriEv => {
             res.send(inscriEv);
+          }).catch(err => {
+            res.status(500).send("Error -> " + err);
           });
       });
   });
@@ -98,22 +100,51 @@ exports.deletaInscricaoEvento = (req, res) => {
     })
     .then(delteInsc => {
       res.send("deletou");
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
     });
 };
 
 exports.selectInscricaoEvento = (req, res) => {
+  //seleciona todos inscritos em todos eventos
   db.inscricaoEvento.findAll({raw:true}).then(pessoaEv=>{
     res.send(pessoaEv)
-  })
-  /*
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+  
+};
+
+exports.selectInsctito=(req,res)=>{
+  //seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
       where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
     })
     .then(pessoaEv => {
       res.send(pessoaEv);
-    });*/
-};
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
+    });
+}
+
+exports.InscricoesNoEvento=(req,res)=>{
+  //seleciona todos inscritos em um evento
+  db.inscricaoEvento.findAll({where:{idEvento:req.params.idEvento}}).then(pessoaEv=>{
+    res.send(pessoaEv)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+}
+
+exports.InscricoesPessoa=(req,res)=>{
+  //seleciona todos eventos que a pessoa se inscreveu
+  db.inscricaoEvento.findAll({where:{idPessoa:req.params.idPessoa}}).then(pessoaEv=>{
+    res.send(pessoaEv)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+}
 
 //----------------------------------------------------------------------------------------------------------
 
@@ -132,7 +163,11 @@ exports.cadastrarEmAtividade = (req, res) => {
         })
         .then(inscriAtv => {
           res.send(inscriAtv);
+        }).catch(err => {
+          res.status(500).send("Error -> " + err);
         });
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
     });
 };
 
@@ -147,14 +182,24 @@ exports.deletaInscricaoAtividade = (req, res) => {
     })
     .then(deleteInsc => {
       res.send("deletou");
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
     });
 };
 
 exports.selectInscricaoAtividade = (req, res) => {
+  //seleciona todas pessoas inscritas em todas atividades
   db.inscricaoAtividade.findAll({raw:true}).then(pessoaAtv=>{
     res.send(pessoaAtv)
-  })
-  /*
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+  
+};
+
+
+exports.selectInscritoAtv=(req,res)=>{
+  //seleciona um inscrito em uma atividade
   db.inscricaoAtividade
     .findOne({
       where: {
@@ -165,5 +210,25 @@ exports.selectInscricaoAtividade = (req, res) => {
     })
     .then(pessoaAtv => {
       res.send(pessoaAtv);
-    });*/
-};
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
+    });
+}
+
+exports.selectInscricoesNaAtividade=(req,res)=>{
+  //seleciona as pessoas inscritas na ativdade
+  db.inscricaoAtividade.findAll({where:{idAtividade:req.params.idAtividade,idEvento:req.params.idEvento}}).then(insc=>{
+    res.send(insc)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+}
+
+exports.selectInscricoesPessoa=(req,res)=>{
+  //seleciona as atividades que a pessoa se inscreveu
+  db.inscricaoAtividade.findAll({where:{idPessoa:req.params.idPessoa}}).then(insc=>{
+    res.send(insc)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+}
