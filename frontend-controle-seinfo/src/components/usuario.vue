@@ -8,22 +8,25 @@
     >
       <div class="logo" />
       <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-        <a-menu-item key="4">
-          <a-icon type="home" />
-          <span>Home</span>
-        </a-menu-item>
         <a-menu-item key="1">
           <a-icon type="user" />
           <span>Perfil</span>
+          <router-link to="/usuario/perfilUsu" ></router-link>
         </a-menu-item>
         <a-menu-item key="2">
           <a-icon type="global" />
           <span>Eventos</span>
           <router-link to="/usuario/listEvent"></router-link>
         </a-menu-item>
+        <a-menu-item key="4">
+          <a-icon type="form" />
+          <span>Atividades</span>
+          <router-link to="/usuario/homeUsu"></router-link>
+        </a-menu-item>
         <a-menu-item key="3">
           <a-icon type="logout" />
           <span>Sair</span>
+           <router-link to="/"></router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

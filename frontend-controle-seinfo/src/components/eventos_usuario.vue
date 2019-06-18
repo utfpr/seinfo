@@ -2,34 +2,50 @@
   <div>
     <h3>Eventos Disponíveis</h3>
     <div id="list" class="row">
-              <div class="table-responsive col-md-12">
-                <table class="table table-striped" cellspacing="0" cellpadding="0">
-                  <thead>
-                    <tr>
-                      <th style="width:35%">Nome</th>
-                      <th style="text-align: left;">Valor</th>
-                      <th style="text-align: left;" >Status</th>
-                      <th style="text-align:center" class="actions">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
-                    <tr>
-                      <td>{{res.nome}}</td>
-                      <td>50$</td>
-                      <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
-                      <td style="text-align:center" class="actions">
-                        <a-popconfirm placement="top" okText="Sim" cancelText="Não" @cancel="cancel" @confirm="confirm">
-                          <template slot="title">
-                            <p>Gostaria de se inscrever-se neste evento.</p>
-                          </template>
-                          <a-button style="text-align:right" type="button" class="ic">  INSCREVER-SE</a-button>
-                        </a-popconfirm>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-      </div>
+      <div class="table-responsive col-md-12">
+        <table class="table table-striped" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th style="width:35%">Nome</th>
+              <th style="text-align: left;">Valor</th>
+              <th style="text-align: left;" >Status</th>
+              <th style="text-align:center" class="actions">Ações</th>
+            </tr>
+          </thead>
+          <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
+            <tr>
+              <td>{{res.nome}}</td>
+              <td>500$</td>
+              <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
+              <td style="text-align:center" class="actions">
+                <a-popconfirm placement="top" okText="Sim" cancelText="Não" @cancel="cancel" @confirm="confirm">
+                  <template slot="title">
+                    <p>Gostaria de se inscrever-se neste evento.</p>
+                  </template>
+                  <a-button style="text-align:right" type="button" class="ic">  INSCREVER-SE</a-button>
+                </a-popconfirm>
+              </td>
+            </tr>
+
+            <tr>
+              <td>{{res.nome}}</td>
+              <td>500$</td>
+              <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
+              <td style="text-align:center" class="actions">
+                <a-popconfirm placement="top" okText="Sim" cancelText="Não" @cancel="cancel" @confirm="confirm">
+                  <template slot="title">
+                    <p>Gostaria de se inscrever-se neste evento.</p>
+                  </template>
+                  <a-button style="text-align:right" type="button" class="ic">  INSCREVER-SE</a-button>
+                </a-popconfirm>
+              </td>
+              </tr>
+
+              
+          </tbody>
+        </table>
+      </div>  
+    </div>
   </div>
 </template>
 
@@ -80,7 +96,7 @@ export default {
   },
   data() {
     return {
-      res_localizar: [{"idEvento":1,"nome":"Extraction and agglomeration of peat","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
+      res_localizar: [{"idEvento":1,"nome":"SEINFO 2019","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
       columns,
       tabelas: [],
       modalVisible: false,
@@ -94,8 +110,14 @@ export default {
 <style scoped>
 
 .ic{
+  background-color: rgb(69, 236, 69);
   cursor: pointer;
 } 
+.ic:hover{
+  color: white;
+  border-color: white;
+  background-color:   rgb(240, 93, 93);
+}
 
 
 .eve{
