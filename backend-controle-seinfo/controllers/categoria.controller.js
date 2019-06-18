@@ -56,3 +56,11 @@ exports.delete = (req, res) => {
 };
 
 
+exports.AtividadesCategoria=(req,res)=>{
+  //seleciona as atividades de uma categoria especifica
+  db.atividade.findAll({where:{idCategoria:req.params.idCategoria}}).then(atv=>{
+    res.send(atv)
+  }).catch(err=>{
+    res.status(500).send(err)
+  })
+}

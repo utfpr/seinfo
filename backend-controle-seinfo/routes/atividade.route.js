@@ -6,9 +6,9 @@ module.exports = function(app) {
   app.post('/api/atividade', atividades.create);
 
   //Procura uma atividade pelo id
-  app.get('/api/atividade/:atividadeId', atividades.findById);
+  app.get('/api/atividade/:idAtividade', atividades.findById);
 
-  app.post('/api/protagonista/:atividadeId/:idPessoa',atividades.criarProtagonista);
+  app.post('/api/protagonista/:idAtividade/:idPessoa',atividades.criarProtagonista);
 
   app.get('/api/protagonistas',atividades.selectProtagonista);
 
@@ -18,8 +18,8 @@ module.exports = function(app) {
   app.get('/api/atividades', atividades.findAll);
 
   // Update de uma atividade pelo ID 
-  app.patch('/api/atividade/:atividadeId', atividades.atualiza);
+  app.patch('/api/atividade/:idAtividade', atividades.atualiza);
 
   // Deleta uma atividade pelo ID
-  app.delete('/api/atividade/:atividadeId', atividades.delete);
+  app.delete('/api/atividade/:idAtividade', atividades.delete);
 }
