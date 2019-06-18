@@ -18,6 +18,9 @@ import funcPessoa from '@/components/funcPessoa';
 import Teste from '@/components/teste';
 import Usuario from '@/components/usuario';
 import UsuEvento from '@/components/eventos_usuario';
+import UsuHome from '@/components/atv_usuario';
+import UsuPerfil from '@/components/perfil_usuario';
+
 
 
 Vue.use(Router);
@@ -46,6 +49,14 @@ export default new Router({
         {
           path: 'listEvent',
           component: UsuEvento
+        },
+        {
+          path: 'homeUsu',
+          component: UsuHome
+        },
+        {
+          path: 'perfilUsu',
+          component: UsuPerfil
         },
       ]
     },
