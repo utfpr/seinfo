@@ -9,7 +9,8 @@ exports.create = (req, res) => {
     email: req.body.email,
     CPF: req.body.cpf,
     senha: req.body.senha,
-    nivel: req.body.nivel
+    nivel: req.body.nivel,
+    classificacao: req.body.classificacao
   })
     .then(pessoa => {
       console.log("Criado uma Pessoa!");
@@ -115,7 +116,7 @@ exports.selectInscricaoEvento = (req, res) => {
   
 };
 
-exports.selectInsctito=(req,res)=>{
+exports.selectInscrito = (req,res)=>{
   //seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
@@ -126,7 +127,7 @@ exports.selectInsctito=(req,res)=>{
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     });
-}
+};
 
 exports.InscricoesNoEvento=(req,res)=>{
   //seleciona todos inscritos em um evento
@@ -135,7 +136,7 @@ exports.InscricoesNoEvento=(req,res)=>{
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   });
-}
+};
 
 exports.InscricoesPessoa=(req,res)=>{
   //seleciona todos eventos que a pessoa se inscreveu
@@ -144,7 +145,7 @@ exports.InscricoesPessoa=(req,res)=>{
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   });
-}
+};
 
 //----------------------------------------------------------------------------------------------------------
 
@@ -213,7 +214,7 @@ exports.selectInscritoAtv=(req,res)=>{
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     });
-}
+};
 
 exports.selectInscricoesNaAtividade=(req,res)=>{
   //seleciona as pessoas inscritas na ativdade
@@ -222,7 +223,7 @@ exports.selectInscricoesNaAtividade=(req,res)=>{
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   });
-}
+};
 
 exports.selectInscricoesPessoa=(req,res)=>{
   //seleciona as atividades que a pessoa se inscreveu
@@ -231,4 +232,4 @@ exports.selectInscricoesPessoa=(req,res)=>{
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   });
-}
+};

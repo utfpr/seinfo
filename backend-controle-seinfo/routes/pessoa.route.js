@@ -8,18 +8,6 @@ module.exports = function(app) {
     //Procura um pessoa pelo ID
     app.get('/api/pessoa/:idPessoa', pessoa.findById);
 
-    app.post('/api/inscEv/:idEvento/:idPessoa',pessoa.cadastrarEmEvento)
-
-    app.get('/api/inscEv'/*/:idEvento/:idPessoa'*/,pessoa.selectInscricaoEvento)
-
-    app.delete('/api/inscEv/:idEvento/:idPessoa',pessoa.deletaInscricaoEvento)
-
-    app.post('/api/inscAtv/:idEvento/:idPessoa',pessoa.cadastrarEmAtividade)
-
-    app.get('/api/inscAtv'/*/:idEvento/:idAtividade/:idPessoa'*/,pessoa.selectInscricaoAtividade)
-
-    app.delete('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.deletaInscricaoAtividade)
-
     // Procura todos os pessoa
     app.get('/api/pessoas', pessoa.findAll);
   
@@ -28,5 +16,33 @@ module.exports = function(app) {
   
     // Deleta um pessoa pelo ID
     app.delete('/api/pessoa/:idPessoa', pessoa.delete);
+
+    //----------------------------------------------------------------------------
+    
+    app.post('/api/inscEv/:idEvento/:idPessoa',pessoa.cadastrarEmEvento)
+
+    app.get('/api/inscEv',pessoa.selectInscricaoEvento)
+
+    app.get('/api/inscEv/:idEvento/:idPessoa',pessoa.selectInscrito)
+
+    app.get('/api/inscEv/:idEvento',pessoa.InscricoesNoEvento)
+
+    app.get('/api/inscEv/:idPessoa',pessoa.InscricoesPessoa)
+
+    app.delete('/api/inscEv/:idEvento/:idPessoa',pessoa.deletaInscricaoEvento)
+
+    //-----------------------------------------------------------------------------
+
+    app.post('/api/inscAtv/:idEvento/:idPessoa',pessoa.cadastrarEmAtividade)
+
+    app.get('/api/inscAtv',pessoa.selectInscricaoAtividade)
+
+    app.get('/api/inscAtv/:idPessoa',pessoa.selectInscricoesPessoa)
+
+    app.get('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.selectInscritoAtv)
+
+    app.get('/api/inscAtv/:idEvento/:idAtividade',pessoa.selectInscricoesNaAtividade)
+
+    app.delete('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.deletaInscricaoAtividade)
   }
   
