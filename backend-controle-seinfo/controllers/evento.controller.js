@@ -135,7 +135,7 @@ exports.delete = (req, res) => {
     res.status(500).send(err)
   })*/
 
-  //------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 
 exports.criaOrganizacao =(req,res)=>{
   Evento.findOne({where:{idEvento:req.params.idEvento}}).then(evento=>{
