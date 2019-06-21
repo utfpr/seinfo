@@ -13,6 +13,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'pessoa',
         key: 'idPessoa'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idPessoa'
     },
     idAtividade: {
@@ -23,6 +25,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'atividade',
         key: 'idAtividade'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idAtividade'
     }
 },

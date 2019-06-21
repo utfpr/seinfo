@@ -8,6 +8,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'evento',
         key: 'idEvento'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idEvento'
     },
     idImagem: {
@@ -18,6 +20,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'imagem',
         key: 'idImagem'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idImagem'
     }
 

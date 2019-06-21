@@ -73,6 +73,7 @@ exports.delete = (req, res) => {
     db.protagonista.destroy({where:{idAtividade:req.params.idAtividade}})
     atividade.destroy({where:{idAtividade: req.params.idAtividade}})
     console.log("Achou uma atividade pelo ID "+req.params.idAtividade);
+    //res.status(204).send()
     res.send('deletou'); //Retorna um Json para a Pagina da API
   }).catch(err => {
     res.status(500).send("Error -> " + err);

@@ -21,6 +21,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'imagem',
         key: 'idImagem'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idImagem'
     }
 

@@ -33,6 +33,8 @@
         model: 'agenda',
         key: 'idAgenda'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idAgenda'
     }
   },
