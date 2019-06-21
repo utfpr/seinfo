@@ -30,6 +30,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'evento',
         key: 'idEvento'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idEvento'
     }
 },

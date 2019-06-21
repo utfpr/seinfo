@@ -10,6 +10,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'evento',
 				key: 'idEvento'
 			},
+			onUpdate: 'cascade',
+		    onDelete: 'cascade',
 			field: 'idEvento'
 		},
 		idPessoa: {
@@ -20,6 +22,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'pessoa',
 				key: 'idPessoa'
 			},
+			onUpdate: 'no action',
+			onDelete: 'no action',
 			field: 'idPessoa'
 		},
 		dataInscricao: {
