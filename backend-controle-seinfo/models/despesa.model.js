@@ -44,7 +44,9 @@ module.exports = function(sequelize, Sequelize) {
 	
 	Despesa.associate = models =>{
 		models.despesa.belongsTo(models.evento,{
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+		    //onDelete: 'cascade',
 		})
 	}
 

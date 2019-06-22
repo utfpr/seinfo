@@ -45,6 +45,8 @@ module.exports = (sequelize, Sequelize) => {
       
     models.lote.belongsTo(models.evento, {
       foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
   };
 

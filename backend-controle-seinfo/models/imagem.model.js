@@ -24,6 +24,8 @@ module.exports = (sequelize, Sequelize) => {
     models.imagem.hasMany(models.carrossel, {
       as:'carroselImg', 
       foreignKey: 'idImagem',
+      //onUpdate: 'no action',
+      //onDelete: 'no action',
     })
 };
 
