@@ -42,11 +42,15 @@ module.exports = (sequelize, Sequelize) => {
     as:'pessoaProt',
     through:models.protagonista,  
     foreignKey: 'idPessoa',
+    //onUpdate: 'no action',
+    //onDelete: 'no action',
   }),
   models.atividade.belongsToMany(models.pessoa, {
     as:'atividadeProt',
     through:models.protagonista,  
     foreignKey: 'idAtividade',
+    //onUpdate: 'no action',
+    //onDelete: 'no action',
   })
   };
     

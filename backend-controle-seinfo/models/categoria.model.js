@@ -24,6 +24,8 @@ module.exports = (sequelize, Sequelize) => {
     models.categoria.hasMany(models.atividade, {
       as:'atividadesCatg',  
       foreignKey: 'idCategoria',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
   };
 

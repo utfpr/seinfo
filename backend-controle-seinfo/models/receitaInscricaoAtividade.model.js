@@ -52,27 +52,39 @@ module.exports = function(sequelize, Sequelize) {
 	ReceitaAtv.associate = models =>{
 		models.receitaInscricaoAtividade.belongsTo(models.inscricaoAtividade,{
 			as:'receitaInscrito',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoAtividade.belongsTo(models.inscricaoAtividade,{
 			as:'receitaAtv',
-			foreignKey: 'idAtividade'
+			foreignKey: 'idAtividade',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoAtividade.belongsTo(models.inscricaoAtividade,{
 			as:'receitaInscEv',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoAtividade.hasOne(models.participaAtividade,{
 			as:'participacaoEv',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoAtividade.hasOne(models.participaAtividade,{
 			as:'participacaoPes',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoAtividade.hasOne(models.participaAtividade,{
 			as:'participacaoAtv',
-			foreignKey: 'idAtividade'
+			foreignKey: 'idAtividade',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		})
 	}
 

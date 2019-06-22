@@ -36,13 +36,17 @@ module.exports = (sequelize, Sequelize) => {
     models.atividade.belongsToMany(models.agenda, {
       as:'atvAgenda',
       through: models.agendamentoAtividade,
-      foreignKey: 'idAtividade'
+      foreignKey: 'idAtividade',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     }),
     
     models.agenda.belongsToMany(models.atividade,{
       as: 'agendaAtv',  
       through: models.agendamentoAtividade,
       foreignKey: 'idAgenda',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     })
   };
 
