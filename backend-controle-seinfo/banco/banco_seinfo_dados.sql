@@ -390,106 +390,106 @@ INSERT INTO carrossel(idCarrossel, status, idImagem) VALUES
 --
 -- Inserting data into table pessoa
 --
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('j6l8s6h4m5i4', 'Michael Johnson', 'ArnoldG.Ambrose455@example.com', '3451', 'O9K4M1R1YK986', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('o3n8h9i7a6b2', 'Kina Abraham', 'Whitman9@example.com', '60', 'SBIL3P', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a4057618', 'Alexis Laflamme', 'Stacey85@nowhere.com', '405', '9EUTVO6NG718Y6', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3263193', 'Julienne Baxley', 'Lutz438@nowhere.com', '171', '421X65A8E9', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a6724257', 'Adolfo Bergeron', 'RegaladoO@example.com', '87', '3233422X', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a1368135', 'Garry Metzger', 'Hyman@example.com', '75', 'Q74812', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('z2a5g7m2i0e5', 'Cathrine Southerland', 'KareemBinkley@example.com', '06367610204', '854Z3IA', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a0286453', 'Emely Shull', 'Eda_Mallory577@example.com', '0', 'C5914', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('d3k3e5t2f3q6', 'Charlsie Alston', 'AguiarP@nowhere.com', '42', 'G', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('o6o8c6m6e5a2', 'Yevette Vanwinkle', 'RicardaNAndre@example.com', '774', '3CJ7MM8C', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('f7n4s5j5w5n0', 'Roxy Julian', 'BannisterO485@example.com', '153', 'LDPZ3T9WJ29R', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('x7n2a0q9f0g2', 'Casey Pleasant', 'MauricePepper949@example.com', '07', '15Y75NY', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('j9w6c7u4t3i0', 'Jefferey Abrams', 'Fay.Andres@example.com', '', 'Y458L2AJ', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('i4n5m3u2v2z0', 'Raymundo Bottoms', 'Wade.H.Marx722@example.com', '649046', '9', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('m8i3a0x2b8q0', 'Sophia Driscoll', 'zajvyfes_gigpanbvkz@example.com', '51', 'MT', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a5942650', 'Dave Browder', 'jmcqy5@example.com', '6', '18D8', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a6501224', 'Randee Quinonez', 'Acevedo733@example.com', '8', 'JW80Q5W3ICSC84', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('w5u9l4y6w9z4', 'Terrell Fryer', 'Abreu@example.com', '91577', '20ZQ', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('p4c5r5y3i5c3', 'Nicola Neil', 'Moeller@example.com', '7765162', 'R25FK', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3132951', 'Earleen Sessions', 'Acker@example.com', '976187', '17RP', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a6806151', 'Daniele Hundley', 'ElissaJacobs@example.com', '4509438', 'YHHCQYH', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('i3c7z2j2i9q6', 'Lucrecia Cason', 'rxrisnix_pmwl@nowhere.com', '33', 'R5UK', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('v4j9f1b2t9r6', 'Adeline Abraham', 'gmfyejp7@example.com', '293613', '158S3289S6', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('u2v0m1w2e4m1', 'Tresa Mallory', 'FallonLane@example.com', '7780', '8V424OZZGW', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a5949702', 'Timika Leger', 'Alvin.Hahn@example.com', '01', '3BNR', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a1919434', 'Curt Munoz', 'bfpu4@example.com', '2', 'FY96', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a6653710', 'Angelika Hinkle', 'ElijahAbney@example.com', '395695', 'PT1O', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('w8c6n2q6j4y2', 'Bradford Meza', 'Haynes729@example.com', '049200', '26XE5D', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('t8c0t2u1p6p6', 'Cordie Acker', 'Marchand@example.com', '37898297', '2FHA4L', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('d3v8z4h3k6b3', 'Mickey Brubaker', 'AndyLott617@example.com', '63676', '817268', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a1519440', 'Neville Triplett', 'MasonM_Cortes145@nowhere.com', '31', 'DV', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('o9h1z4e5v3o8', 'Agripina Mcclendon', 'AbbyRhoads4@example.com', '3742', 'NO022', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a7175071', 'Maxie Parnell', 'IlonaAshmore@example.com', '53', '3041', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a8462836', 'Hue Reece', 'Valentin@nowhere.com', '8247618342', 'R41MDGD13B9N513L2QKOW', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a1103421', 'Fay Matson', 'ylffg9891@example.com', '71', '934551', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3678554', 'Emiko Colbert', 'Keith29@nowhere.com', '134', 'PN', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a1141548', 'Alphonso Artis', 'Abrams29@example.com', '86211', 'D', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a2687085', 'Vernon Tibbs', 'xrysmi3@example.com', '70', '5794', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a8826194', 'Abby Webster', 'LaddT@nowhere.com', '018', '5', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a7556622', 'Tosha Fischer', 'CurtisBTrimble2@example.com', '30', 'Q6', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('f7w6z9n1m2f2', 'Versie Andrade', 'IgnacioEllington43@example.com', '43236231527', 'PH93M70', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('s7v0c1e1c6j3', 'Alisa Almeida', 'Forsythe@nowhere.com', '88851906337', 'Q3', 0);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a9894799', 'Terrence Hazel', 'Toby.Dellinger@example.com', '184', 'R58D63B3584LI0D0OT5Y2', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('p2w7n5p9n4m3', 'Jenelle Woodard', 'ScottyNavarro6@example.com', '5602813', '317M1J6P', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('s3o3z7a2z1c1', 'Alva Westfall', 'Martha.Ayala@example.com', '21', 'J', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a6325867', 'Adah Caballero', 'AllmanD@example.com', '4535', 'Z7G7', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a9496021', 'Ramona Correia', 'Whitmire346@example.com', '6222', 'H1', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3716877', 'Paige Welsh', 'Nava@example.com', '4912199', '66', 2);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3768263', 'Kevin Stephen', 'rregc52@example.com', '31841', '6D', 1);
-INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel) VALUES
-('a3524954', 'Camie Cosgrove', 'Scoggins@nowhere.com', '24723', 'MB8', 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('j6l8s6h4m5i4', 'Michael Johnson', 'ArnoldG.Ambrose455@example.com', '3451', 'O9K4M1R1YK986', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o3n8h9i7a6b2', 'Kina Abraham', 'Whitman9@example.com', '60', 'SBIL3P', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a4057618', 'Alexis Laflamme', 'Stacey85@nowhere.com', '405', '9EUTVO6NG718Y6', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3263193', 'Julienne Baxley', 'Lutz438@nowhere.com', '171', '421X65A8E9', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6724257', 'Adolfo Bergeron', 'RegaladoO@example.com', '87', '3233422X', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1368135', 'Garry Metzger', 'Hyman@example.com', '75', 'Q74812', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('z2a5g7m2i0e5', 'Cathrine Southerland', 'KareemBinkley@example.com', '06367610204', '854Z3IA', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a0286453', 'Emely Shull', 'Eda_Mallory577@example.com', '0', 'C5914', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('d3k3e5t2f3q6', 'Charlsie Alston', 'AguiarP@nowhere.com', '42', 'G', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o6o8c6m6e5a2', 'Yevette Vanwinkle', 'RicardaNAndre@example.com', '774', '3CJ7MM8C', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('f7n4s5j5w5n0', 'Roxy Julian', 'BannisterO485@example.com', '153', 'LDPZ3T9WJ29R', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('x7n2a0q9f0g2', 'Casey Pleasant', 'MauricePepper949@example.com', '07', '15Y75NY', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('j9w6c7u4t3i0', 'Jefferey Abrams', 'Fay.Andres@example.com', '', 'Y458L2AJ', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('i4n5m3u2v2z0', 'Raymundo Bottoms', 'Wade.H.Marx722@example.com', '649046', '9', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('m8i3a0x2b8q0', 'Sophia Driscoll', 'zajvyfes_gigpanbvkz@example.com', '51', 'MT', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a5942650', 'Dave Browder', 'jmcqy5@example.com', '6', '18D8', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6501224', 'Randee Quinonez', 'Acevedo733@example.com', '8', 'JW80Q5W3ICSC84', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('w5u9l4y6w9z4', 'Terrell Fryer', 'Abreu@example.com', '91577', '20ZQ', 2, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('p4c5r5y3i5c3', 'Nicola Neil', 'Moeller@example.com', '7765162', 'R25FK', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3132951', 'Earleen Sessions', 'Acker@example.com', '976187', '17RP', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6806151', 'Daniele Hundley', 'ElissaJacobs@example.com', '4509438', 'YHHCQYH', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('i3c7z2j2i9q6', 'Lucrecia Cason', 'rxrisnix_pmwl@nowhere.com', '33', 'R5UK', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('v4j9f1b2t9r6', 'Adeline Abraham', 'gmfyejp7@example.com', '293613', '158S3289S6', 2, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('u2v0m1w2e4m1', 'Tresa Mallory', 'FallonLane@example.com', '7780', '8V424OZZGW', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a5949702', 'Timika Leger', 'Alvin.Hahn@example.com', '01', '3BNR', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1919434', 'Curt Munoz', 'bfpu4@example.com', '2', 'FY96', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6653710', 'Angelika Hinkle', 'ElijahAbney@example.com', '395695', 'PT1O', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('w8c6n2q6j4y2', 'Bradford Meza', 'Haynes729@example.com', '049200', '26XE5D', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('t8c0t2u1p6p6', 'Cordie Acker', 'Marchand@example.com', '37898297', '2FHA4L', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('d3v8z4h3k6b3', 'Mickey Brubaker', 'AndyLott617@example.com', '63676', '817268', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1519440', 'Neville Triplett', 'MasonM_Cortes145@nowhere.com', '31', 'DV', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('o9h1z4e5v3o8', 'Agripina Mcclendon', 'AbbyRhoads4@example.com', '3742', 'NO022', 0, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a7175071', 'Maxie Parnell', 'IlonaAshmore@example.com', '53', '3041', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a8462836', 'Hue Reece', 'Valentin@nowhere.com', '8247618342', 'R41MDGD13B9N513L2QKOW', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1103421', 'Fay Matson', 'ylffg9891@example.com', '71', '934551', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3678554', 'Emiko Colbert', 'Keith29@nowhere.com', '134', 'PN', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a1141548', 'Alphonso Artis', 'Abrams29@example.com', '86211', 'D', 1, 2);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a2687085', 'Vernon Tibbs', 'xrysmi3@example.com', '70', '5794', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a8826194', 'Abby Webster', 'LaddT@nowhere.com', '018', '5', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a7556622', 'Tosha Fischer', 'CurtisBTrimble2@example.com', '30', 'Q6', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('f7w6z9n1m2f2', 'Versie Andrade', 'IgnacioEllington43@example.com', '43236231527', 'PH93M70', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('s7v0c1e1c6j3', 'Alisa Almeida', 'Forsythe@nowhere.com', '88851906337', 'Q3', 0, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a9894799', 'Terrence Hazel', 'Toby.Dellinger@example.com', '184', 'R58D63B3584LI0D0OT5Y2', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('p2w7n5p9n4m3', 'Jenelle Woodard', 'ScottyNavarro6@example.com', '5602813', '317M1J6P', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('s3o3z7a2z1c1', 'Alva Westfall', 'Martha.Ayala@example.com', '21', 'J', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a6325867', 'Adah Caballero', 'AllmanD@example.com', '4535', 'Z7G7', 1, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a9496021', 'Ramona Correia', 'Whitmire346@example.com', '6222', 'H1', 2, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3716877', 'Paige Welsh', 'Nava@example.com', '4912199', '66', 2, 1);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3768263', 'Kevin Stephen', 'rregc52@example.com', '31841', '6D', 1, 0);
+INSERT INTO pessoa(idPessoa, nome, email, CPF, senha, nivel, classificacao) VALUES
+('a3524954', 'Camie Cosgrove', 'Scoggins@nowhere.com', '24723', 'MB8', 0, 0);
 
 --
 -- Inserting data into table evento
