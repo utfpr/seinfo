@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
   `senha` CHAR(32) NOT NULL,
   `nivel` INT NOT NULL,
   `classificacao` INT NOT NULL,
-    PRIMARY KEY (`idPessoa`)
+  PRIMARY KEY (`idPessoa`)
 )
 ENGINE = InnoDB;
 
