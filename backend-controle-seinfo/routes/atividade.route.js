@@ -6,16 +6,18 @@ module.exports = function(app) {
   app.post('/api/atividade', atividades.create);
 
   //Procura uma atividade pelo id
-  app.get('/api/atividade/:idAtividade', atividades.findById);
+  app.get('/api/atividade/:idAtividade/:idEvento', atividades.findById);
 
   // Procura todas as atividades
   app.get('/api/atividades', atividades.findAll);
+
+  app.get('/api/atividade/:idEvento',atividades.AtividadeEvento);
 
   // Update de uma atividade pelo ID 
   app.patch('/api/atividade/:idAtividade', atividades.atualiza);
 
   // Deleta uma atividade pelo ID
-  app.delete('/api/atividade/:idAtividade', atividades.delete);
+  app.delete('/api/atividade/:idAtividade/:idEvento', atividades.delete);
 
   //-------------------------------------------------------------------------
 

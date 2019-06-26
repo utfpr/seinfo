@@ -65,6 +65,12 @@ exports.atualiza = (req,res)=>{
   
 
 exports.delete = (req, res) => {
+  Atividades.destroy({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atv=>{
+    res.send('deletou')
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+  /*
   Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atividade => {
     db.agendamentoAtividade.findOne({where:{idAtividade:req.params.idAtividade}}).then(agenda=>{
       db.agenda.destroy({where:{idAgenda:agenda.idAgenda}})
@@ -77,7 +83,8 @@ exports.delete = (req, res) => {
     res.send('deletou'); //Retorna um Json para a Pagina da API
   }).catch(err => {
     res.status(500).send("Error -> " + err);
-  })  
+  })
+  */  
 };
 
 exports.AtividadeEvento=(req,res)=>{
@@ -97,6 +104,8 @@ exports.criarProtagonista = (req,res)=>{
     db.pessoa.findOne({where:{idPessoa: req.params.idPessoa}}).then(pessoa=>{
       db.protagonista.create({'atuacao':req.body.atuacao,'idAtividade':atividade.idAtividade,'idPessoa':pessoa.idPessoa}).then(prot=>{
         res.send(prot)
+      }).catch(err=>{
+        res.status(500).send("Error -> " + err);
       })      
       //atividade.createAtividadeProt({'atuacao':req.body.atuacao,'idAtividade':atividade.idAtividade,'idPessoa':pessoa.idPessoa})
     }).catch(err=>{
