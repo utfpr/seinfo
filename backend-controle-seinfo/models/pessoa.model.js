@@ -52,8 +52,6 @@
     models.pessoa.hasMany(models.inscricaoEvento, {
       as:'inscrito',
       foreignKey: 'idPessoa',
-      //onUpdate: 'no action',
-			//onDelete: 'no action',
     })
   };
 
