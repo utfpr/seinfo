@@ -21,6 +21,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'imagem',
         key: 'idImagem'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idImagem'
     }
 
@@ -35,6 +37,8 @@ module.exports = (sequelize, Sequelize) => {
     models.carrossel.belongsTo(models.imagem, {
       as:'Imagem',  
       foreignKey: 'idImagem',
+      //onUpdate: 'no action',
+      //onDelete: 'no action',
     })
     
   };

@@ -42,6 +42,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'categoria',
         key: 'idCategoria'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idCategoria'
     },
     idEvento: {
@@ -51,6 +53,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'evento',
         key: 'idEvento'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idEvento'
     }
   },
@@ -64,15 +68,21 @@ module.exports = (sequelize, Sequelize) => {
   Atividade.associate = models=> {
       models.atividade.belongsTo(models.evento,{
         as: 'atividadesDoEvento',
-        foreignKey: 'idEvento'
+        foreignKey: 'idEvento',
+        //onUpdate: 'cascade',
+        //onDelete: 'cascade',
       }),
       models.atividade.belongsTo(models.categoria,{
         as: 'categoriaAtv',
-        foreignKey: 'idCategoria'
+        foreignKey: 'idCategoria',
+        //onUpdate: 'cascade',
+		    //onDelete: 'cascade',
       }),
       models.atividade.hasMany(models.inscricaoAtividade,{
         as:'inscricoesAtv',
-        foreignKey: 'idAtividade'
+        foreignKey: 'idAtividade',
+        //onUpdate: 'cascade',
+		    //onDelete: 'cascade',
       })
     }
 

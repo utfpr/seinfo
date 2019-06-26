@@ -10,6 +10,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'evento',
 				key: 'idEvento'
 			},
+			onUpdate: 'cascade',
+		    onDelete: 'cascade',
 			field: 'idEvento'
 		},
 		idPessoa: {
@@ -20,6 +22,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'pessoa',
 				key: 'idPessoa'
 			},
+			onUpdate: 'no action',
+			onDelete: 'no action',
 			field: 'idPessoa'
 		},
 		dataInscricao: {
@@ -36,27 +40,39 @@ module.exports = function(sequelize, Sequelize) {
 	InscricaoE.associate = models => {
 		models.inscricaoEvento.belongsTo(models.pessoa,{
 			as:'pessoaInsc',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'no action',
+			//onDelete: 'no action',
 		}),
 		models.inscricaoEvento.belongsTo(models.evento,{
 			as:'eventoInsc',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+		    //onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
 			as:'receitaInscEv',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
 			as:'receitaInscPe',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvPe',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'no action',
+			//onDelete: 'no action',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvEv',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'no action',
+			//onDelete: 'no action',
 		})
 	} 
 

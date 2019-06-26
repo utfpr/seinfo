@@ -30,6 +30,8 @@ module.exports = (sequelize, Sequelize) => {
         model: 'evento',
         key: 'idEvento'
       },
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idEvento'
     }
 },
@@ -43,6 +45,8 @@ module.exports = (sequelize, Sequelize) => {
       
     models.lote.belongsTo(models.evento, {
       foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
   };
 

@@ -33,6 +33,8 @@
         model: 'agenda',
         key: 'idAgenda'
       },
+      onUpdate: 'no action',
+      onDelete: 'no action',
       field: 'idAgenda'
     }
   },
@@ -41,35 +43,49 @@
     timestamps: false,
     createdAt: false,
   });
-  
+  //source.association(target)
+  //user.hasMany(task) userid na model task
+  //task.belongsTo(user) userid na model task
   Evento.associate = models=>{
     models.evento.hasMany(models.atividade,{
       as: 'atividades',
-      foreignKey: 'idEvento'
+      foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
 
     models.evento.belongsTo(models.agenda,{
       as: 'agendamento',
-      foreignKey: 'idEvento'
+      foreignKey: 'idAgenda',
+      //onUpdate: 'no action',
+      //onDelete: 'no action',
     });
 
     models.evento.hasMany(models.inscricaoEvento,{
       as: 'inscricoes',
-      foreignKey: 'idEvento'
+      foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
 
     models.evento.hasMany(models.lote,{
       as: 'lotes',
-      foreignKey: 'idEvento'
+      foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
   
     models.evento.hasMany(models.receita,{
       as: 'receita',
-      foreignKey: 'idEvento'
+      foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
     models.evento.hasMany(models.despesa,{
       as: 'despesa',
-      foreignKey: 'idEvento'
+      foreignKey: 'idEvento',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     })
   }
 

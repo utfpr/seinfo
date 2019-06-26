@@ -20,7 +20,7 @@
       unique: true,
       field: 'email'
     },
-    cpf: {
+    CPF: {
       type: Sequelize.CHAR(11),
       allowNull: false,
       unique: true,
@@ -35,6 +35,11 @@
       type: Sequelize.INTEGER(11),
       allowNull: false,
       field: 'nivel'
+    },
+    classificacao: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false,
+      field: 'classificacao'
     }
   },
   { //Isso serve para não recriar a tabela e impedir de recriar esses atributos setados como false(timestamps,createdAt)
@@ -47,6 +52,8 @@
     models.pessoa.hasMany(models.inscricaoEvento, {
       as:'inscrito',
       foreignKey: 'idPessoa',
+      //onUpdate: 'no action',
+			//onDelete: 'no action',
     })
   };
 
