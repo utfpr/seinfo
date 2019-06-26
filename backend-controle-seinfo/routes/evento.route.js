@@ -28,14 +28,29 @@ module.exports = function(app) {
  // app.post('/api/evento', eventos.create);
 
   //Procura um evento pelo ID
-  app.get('/api/evento/:eventoId', eventos.findById);
+  app.get('/api/evento/:idEvento', eventos.findById);
 
   // Procura todos os Eventos
   app.get('/api/eventos', eventos.findAll);
 
   // Update de um Evento pelo ID (Implementar)
-  app.patch('/api/evento/:eventoId', eventos.atualiza);
+  app.patch('/api/evento/:idEvento', eventos.atualiza);
 
   // Deleta um evento pelo ID
-  app.delete('/api/evento/:eventoId', eventos.delete);
+  app.delete('/api/evento/:idEvento', eventos.delete);
+
+  //----------------------------------------------------------------------
+
+  app.post('/api/organizacao/:idEvento/:idPessoa',eventos.criaOrganizacao);
+
+  app.get('/api/organizacoes',eventos.selectOrganizacao);
+
+  app.get('/api/organizacoes/:idEvento/:idPessoa',eventos.selectUmOrganizador);
+
+  app.get('/api/organizacoes/:idEvento',eventos.selectOrganizacaoEvento);
+
+  app.get('/api/organizacoes/:idPessoa',eventos.selectEventoOrganizador);
+
+  app.delete('/api/organizacao/:idEvento/:idPessoa',eventos.deleteOrganizacao);
+
 }

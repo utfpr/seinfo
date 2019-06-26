@@ -10,6 +10,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'inscricaoEvento',
 				key: 'idEvento'
 			},
+			onUpdate: 'cascade',
+      		onDelete: 'cascade',
 			field: 'idEvento'
 		},
 		idPessoa: {
@@ -20,6 +22,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'inscricaoEvento',
 				key: 'idPessoa'
 			},
+			onUpdate: 'cascade',
+      		onDelete: 'cascade',
 			field: 'idPessoa'
 		},
 		dataPagamento: {
@@ -36,11 +40,15 @@ module.exports = function(sequelize, Sequelize) {
 	ReceitaEv.associate = models =>{
 		models.receitaInscricaoEvento.belongsTo(models.inscricaoEvento,{
 			as:'evRecInsc',
-			foreignKey: 'idEvento'
+			foreignKey: 'idEvento',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		}),
 		models.receitaInscricaoEvento.belongsTo(models.inscricaoEvento,{
 			as:'peRecInsc',
-			foreignKey: 'idPessoa'
+			foreignKey: 'idPessoa',
+			//onUpdate: 'cascade',
+			//onDelete: 'cascade',
 		})
 	}
 

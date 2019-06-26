@@ -32,9 +32,11 @@ module.exports = (sequelize, Sequelize) => {
 
 Agenda.associate = models=>{
   //adiciona idAgenda na tabela agendamentoEvento
-  models.agenda.belongsTo(models.evento,{
+  models.agenda.hasMany(models.evento,{
     as :'agendaEv',  
-    foreignKey: 'idAgenda'
+    foreignKey: 'idAgenda',
+    //onUpdate: 'no action',
+    //onDelete: 'no action',
   })
 }
 
