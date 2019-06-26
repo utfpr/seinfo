@@ -10,8 +10,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'inscricaoEvento',
 				key: 'idEvento'
 			},
-			onUpdate: 'no action',
-      		onDelete: 'no action',
+			onUpdate: 'cascade',
+      		onDelete: 'cascade',
 			field: 'idEvento'
 		},
 		idPessoa: {
@@ -22,8 +22,8 @@ module.exports = function(sequelize, Sequelize) {
 				model: 'inscricaoEvento',
 				key: 'idPessoa'
 			},
-			onUpdate: 'no action',
-      		onDelete: 'no action',
+			onUpdate: 'cascade',
+      		onDelete: 'cascade',
 			field: 'idPessoa'
 		},
 		idAtividade: {
@@ -59,14 +59,14 @@ module.exports = function(sequelize, Sequelize) {
 		models.inscricaoAtividade.belongsTo(models.inscricaoEvento,{
 			as:'eventoInsc',
 			foreignKey: 'idEvento',
-			//onUpdate: 'no action',
-			//onDelete: 'no action',
+			//onUpdate: 'cascade',
+		    //onDelete: 'cascade',
 		}),
 		models.inscricaoAtividade.belongsTo(models.inscricaoEvento,{
 			as:'pessoaInsc',
 			foreignKey: 'idPessoa',
-			//onUpdate: 'no action',
-			//onDelete: 'no action',
+			//onUpdate: 'cascade',
+		    //onDelete: 'cascade',
 		}),
 		models.inscricaoAtividade.hasOne(models.receitaInscricaoAtividade,{
 			as:'pessoaAtvRec',

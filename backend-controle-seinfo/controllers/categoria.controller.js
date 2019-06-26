@@ -47,11 +47,18 @@ exports.atualiza = (req,res)=>{
   
 
 exports.delete = (req, res) => {  
+  /*
   Categorias.findOne({where:{idCategoria: req.params.categoriaId}}).then(cat=>{
     db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
     cat.destroy()
     res.send('tchau')
     //db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
+  })
+  */
+  Categorias.destroy({where:{idCategoria: req.params.categoriaId}}).then(cate=>{
+    res.send('foi')
+  }).catch(err=>{
+    res.status(500).send(err)
   })
 };
 

@@ -33,8 +33,8 @@
         model: 'agenda',
         key: 'idAgenda'
       },
-      onUpdate: 'no action',
-      onDelete: 'no action',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
       field: 'idAgenda'
     }
   },
@@ -57,15 +57,13 @@
     models.evento.belongsTo(models.agenda,{
       as: 'agendamento',
       foreignKey: 'idAgenda',
-      //onUpdate: 'no action',
-      //onDelete: 'no action',
+      //onUpdate: 'cascade',
+      //onDelete: 'cascade',
     });
 
     models.evento.hasMany(models.inscricaoEvento,{
       as: 'inscricoes',
       foreignKey: 'idEvento',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
     });
 
     models.evento.hasMany(models.lote,{
