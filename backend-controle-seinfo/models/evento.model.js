@@ -33,8 +33,6 @@
         model: 'agenda',
         key: 'idAgenda'
       },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
       field: 'idAgenda'
     }
   },
@@ -50,15 +48,13 @@
     models.evento.hasMany(models.atividade,{
       as: 'atividades',
       foreignKey: 'idEvento',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
     });
 
     models.evento.belongsTo(models.agenda,{
       as: 'agendamento',
       foreignKey: 'idAgenda',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     });
 
     models.evento.hasMany(models.inscricaoEvento,{
@@ -69,21 +65,15 @@
     models.evento.hasMany(models.lote,{
       as: 'lotes',
       foreignKey: 'idEvento',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
     });
   
     models.evento.hasMany(models.receita,{
       as: 'receita',
       foreignKey: 'idEvento',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
     });
     models.evento.hasMany(models.despesa,{
       as: 'despesa',
       foreignKey: 'idEvento',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
     })
   }
 

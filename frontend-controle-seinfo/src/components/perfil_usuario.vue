@@ -48,47 +48,14 @@
               </tr>
             </thead>
             <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
-              <tr>
+              <tr style="background-color:white">
                 <td>{{res.nome}}</td>
-                <td>500$</td>
+                <td>R$ {{res.lotes[0].valor}}</td>
                 <td>
-                  <a-tag style="min-width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>
+                  <a-tag style="width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>
                 </td>
                 <td style="text-align:center" class="actions">
-                  <a-popconfirm
-                    placement="top"
-                    okText="Sim"
-                    cancelText="Não"
-                    @cancel="cancel"
-                    @confirm="confirm"
-                  >
-                    <template slot="title">
-                      <p>Gostaria de se inscrever-se neste evento.</p>
-                    </template>
                     <a-button style="text-align:right" type="button" class="ic">CANCELAR</a-button>
-                  </a-popconfirm>
-                </td>
-              </tr>
-
-              <tr>
-                <td>{{res.nome}}</td>
-                <td>500$</td>
-                <td>
-                  <a-tag style="min-width:100px;text-align:center;" color="#f50">Pendente</a-tag>
-                </td>
-                <td style="text-align:center" class="actions">
-                  <a-popconfirm
-                    placement="top"
-                    okText="Sim"
-                    cancelText="Não"
-                    @cancel="cancel"
-                    @confirm="confirm"
-                  >
-                    <template slot="title">
-                      <p>Gostaria de se inscrever-se neste evento.</p>
-                    </template>
-                    <a-button style="text-align:right" type="button" class="ic">CANCELAR</a-button>
-                  </a-popconfirm>
                 </td>
               </tr>
             </tbody>
@@ -99,70 +66,62 @@
   </div>
 </template>
 <script>
-const axios = require("axios");
-const columns = [
-  {
-    title: "Nome do Evento",
-    dataIndex: "nome",
-    width: 200
-  },
-  {
-    title: "Status do Evento",
-    dataIndex: "status"
-  },
-  {
-    title: "Action",
-    key: "operation",
-    fixed: "right",
+const axios = require('axios');
+const columns = [{
+  title: 'Nome do Evento',
+  dataIndex: 'nome',
+  width: 200,
+}, {
+  title: 'Data do Evento',
+  dataIndex: 'data',
+  width: 200,
+}, {
+  title: 'Status do Evento',
+  dataIndex: 'status',
+},{
+    title: 'Action',
+    key: 'operation',
+    fixed: 'right',
     width: 200,
-    scopedSlots: { customRender: "action" }
-  }
+    scopedSlots: { customRender: 'action' },
+},{
+  title: 'Valor',
+  dataIndex: ''
+}
 ];
 
 export default {
+  mounted(){
+    this.pegar_tabela ("eventosD")
+  },
   methods: {
-    openModal(data) {
-      this.modalData = data;
-      this.modalVisible = true;
+    openModal (data) {
+      this.modalData = data
+      this.modalVisible = true
     },
-    pegar_tabela(name) {
-      axios
-        .get("http://localhost:3000/api/" + name)
-        .then(response => {
-          console.log("Listou " + name);
-          console.log(response.data);
-          this.res_localizar = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    pegar_tabela (name) {
+      axios.get('http://localhost:3000/api/' + name)
+      .then((response) => {
+       console.log("Listou " + name);
+       console.log(response.data);
+       this.res_localizar = response.data
+     })
+     .catch(function (error) {
+       console.log(error);
+     })
     },
-    confirm(e) {
-      console.log(e);
-      this.$message.success("Inscricao com sucesso");
-    },
-    cancel(e) {
-      console.log(e);
-      this.$message.error("Inscricao cancelada");
-    }
   },
   data() {
     return {
-      res_localizar: [
-        {
-          idEvento: 1,
-          nome: "SEINFO 2019",
-          descricao: "VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU",
-          status: 1
-        }
-      ],
+      res_localizar: [],
       columns,
       tabelas: [],
       modalVisible: false,
-      modalData: ""
-    };
+      modalData: ''
+    
+    }
   }
-};
+}
 </script>
 <style>
 .ic {
