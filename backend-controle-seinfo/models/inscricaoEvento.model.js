@@ -45,26 +45,18 @@ module.exports = function(sequelize, Sequelize) {
 		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
 			as:'receitaInscEv',
 			foreignKey: 'idEvento',
-			//onUpdate: 'cascade',
-			//onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
 			as:'receitaInscPe',
 			foreignKey: 'idPessoa',
-			//onUpdate: 'cascade',
-			//onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvPe',
 			foreignKey: 'idPessoa',
-			//onUpdate: 'cascade',
-			//onDelete: 'cascade',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvEv',
 			foreignKey: 'idEvento',
-			//onUpdate: 'cascade',
-			//onDelete: 'cascade',
 		})
 	} 
 

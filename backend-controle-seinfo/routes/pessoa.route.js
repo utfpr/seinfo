@@ -19,30 +19,42 @@ module.exports = function(app) {
 
     //----------------------------------------------------------------------------
     
+    //cadastra uma pessoa em um evento
     app.post('/api/inscEv/:idEvento/:idPessoa',pessoa.cadastrarEmEvento)
 
+    //seleciona todos dados de pessoas inscritas em eventos
     app.get('/api/inscEv',pessoa.selectInscricaoEvento)
 
+    //seleciona uma pessoa inscrita em um evento
     app.get('/api/inscEv/:idEvento/:idPessoa',pessoa.selectInscrito)
 
+    //seleciona todas pessoas inscrita em um evento
     app.get('/api/inscEv/:idEvento',pessoa.InscricoesNoEvento)
 
+    //seleciona os eventos que uma pessoa se inscreveu
     app.get('/api/inscEv/:idPessoa',pessoa.InscricoesPessoa)
 
+    //deleta a inscricao de uma pessoa em um evento
     app.delete('/api/inscEv/:idEvento/:idPessoa',pessoa.deletaInscricaoEvento)
 
     //-----------------------------------------------------------------------------
 
+    //cadastra uma pessoa em uma atividade de um evento que ela se inscreveu
     app.post('/api/inscAtv/:idEvento/:idPessoa',pessoa.cadastrarEmAtividade)
 
+    //seleciona todas inscricoes em atividades 
     app.get('/api/inscAtv',pessoa.selectInscricaoAtividade)
 
+    //seleciona todas atividades que uma pessoa se inscreveu
     app.get('/api/inscAtv/:idPessoa',pessoa.selectInscricoesPessoa)
 
+    //seleciona uma pessoa inscrita em uma atividade
     app.get('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.selectInscritoAtv)
 
+    //seleciona todas pessoas inscritas em uma atividade especifica
     app.get('/api/inscAtv/:idEvento/:idAtividade',pessoa.selectInscricoesNaAtividade)
 
+    //deleta inscricao de uma pessoa em uma atividade
     app.delete('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.deletaInscricaoAtividade)
   }
   
