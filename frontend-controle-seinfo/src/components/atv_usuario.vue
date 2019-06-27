@@ -1,7 +1,8 @@
 <template>
   <div>
 
-    <ul class="check-card" style="float:left;margin-left: 30px;">
+	
+  <ul class="check-card" style="float:left;margin-left: 30px;">
 	<li class="check-card-item">
 		<input type="checkbox" id="check01" name="check" value="1">
 		<label for="check01" class="radio"></label>
@@ -21,55 +22,6 @@
 		</div>
 	</li>
 </ul>
-
-
-
-<ul class="check-card" style="float:left;margin-left: 30px;">
-	<li class="check-card-item">
-		<input type="checkbox" id="check02" name="check" value="2">
-		<label for="check02" class="radio"></label>
-		<div class="check-card-bg"></div>
-		<div class="check-card-body">
-			<div class="check-card-toggle">
-				<span></span>
-				<span></span>
-			</div>
-			<div class="check-card-body-in">
-				<h3 class="check-card-title">Minicurso de React</h3>
-				<p class="check-card-description">
-					Curso para aprendizagem de programação web
-				</p>
-			</div>
-			<div class="check-card-cancel">CANCELAR</div>
-		</div>
-	</li>
-</ul>
-
-
-
-
-
-<ul class="check-card" style="float:left;margin-left: 30px;">
-	<li class="check-card-item">
-		<input type="checkbox" id="check03" name="check" value="3">
-		<label for="check03" class="radio"></label>
-		<div class="check-card-bg"></div>
-		<div class="check-card-body">
-			<div class="check-card-toggle">
-				<span></span>
-				<span></span>
-			</div>
-			<div class="check-card-body-in">
-				<h3 class="check-card-title">Minicurso de React</h3>
-				<p class="check-card-description">
-					Curso para aprendizagem de programação web
-				</p>
-			</div>
-			<div class="check-card-cancel">CANCELAR</div>
-		</div>
-	</li>
-</ul>
-
 
   </div>
 </template>

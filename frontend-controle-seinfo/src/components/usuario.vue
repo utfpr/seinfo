@@ -1,7 +1,8 @@
 <template>
 <div>
-  <a-layout id="components-layout-demo-custom-trigger" style="height:100vh;">
+  <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider
+      style="height:100vh"
       :trigger="null"
       collapsible
       v-model="collapsed"
@@ -38,7 +39,7 @@
           @click="()=> collapsed = !collapsed"
         />
       </a-layout-header>
-      <a-layout-content :style="{  margin: '24px 16px', padding: '20px', background: '#fff', minHeight: '280px' ,maxHeight: '800px' }">
+      <a-layout-content :style="{  margin: '24px 16px', padding: '20px', background: '#fff', height: '100%' }">
         <router-view></router-view>
       </a-layout-content>
     </a-layout>

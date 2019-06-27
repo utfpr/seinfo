@@ -48,47 +48,14 @@
               </tr>
             </thead>
             <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
-              <tr>
+              <tr style="background-color:white">
                 <td>{{res.nome}}</td>
                 <td>500$</td>
                 <td>
-                  <a-tag style="min-width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>
+                  <a-tag style="width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>
                 </td>
                 <td style="text-align:center" class="actions">
-                  <a-popconfirm
-                    placement="top"
-                    okText="Sim"
-                    cancelText="Não"
-                    @cancel="cancel"
-                    @confirm="confirm"
-                  >
-                    <template slot="title">
-                      <p>Gostaria de se inscrever-se neste evento.</p>
-                    </template>
                     <a-button style="text-align:right" type="button" class="ic">CANCELAR</a-button>
-                  </a-popconfirm>
-                </td>
-              </tr>
-
-              <tr>
-                <td>{{res.nome}}</td>
-                <td>500$</td>
-                <td>
-                  <a-tag style="min-width:100px;text-align:center;" color="#f50">Pendente</a-tag>
-                </td>
-                <td style="text-align:center" class="actions">
-                  <a-popconfirm
-                    placement="top"
-                    okText="Sim"
-                    cancelText="Não"
-                    @cancel="cancel"
-                    @confirm="confirm"
-                  >
-                    <template slot="title">
-                      <p>Gostaria de se inscrever-se neste evento.</p>
-                    </template>
-                    <a-button style="text-align:right" type="button" class="ic">CANCELAR</a-button>
-                  </a-popconfirm>
                 </td>
               </tr>
             </tbody>
@@ -120,6 +87,9 @@ const columns = [
 ];
 
 export default {
+  mounted(){
+    this.pegar_tabela ("eventos")
+  },
   methods: {
     openModal(data) {
       this.modalData = data;
