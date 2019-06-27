@@ -216,6 +216,10 @@ const columns = [{
 
 export default {
   methods: {
+    openModal (data) {
+      this.modalData = data
+      this.modalVisible = true
+    },
     pegar_tabela (name) {
       axios.get('http://localhost:3000/api/' + name)
       .then((response) => {

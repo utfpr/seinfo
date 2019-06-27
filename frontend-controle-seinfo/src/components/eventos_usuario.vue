@@ -15,7 +15,7 @@
           <tbody v-for="(res,i) in res_localizar" :key="res.idEvento">
             <tr style="background-color:white;">
               <td>{{res.nome}}</td>
-              <td>{{res.valor}}</td>
+              <td>R$ {{res.lotes[0].valor}}</td>
               <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
               <td style="text-align:center" class="actions">
                   <a-button style="text-align:right" type="button" class="ic">  INSCREVER-SE</a-button>
@@ -56,7 +56,7 @@ const columns = [{
 
 export default {
   mounted(){
-    this.pegar_tabela ("eventos")
+    this.pegar_tabela ("eventosD")
   },
   methods: {
     openModal (data) {
@@ -77,7 +77,7 @@ export default {
   },
   data() {
     return {
-      res_localizar: [{"idEvento":1,"nome":"Extraction and agglomeration of peat","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
+      res_localizar: [],
       columns,
       tabelas: [],
       modalVisible: false,
