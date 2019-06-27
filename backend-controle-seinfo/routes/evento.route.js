@@ -33,6 +33,18 @@ module.exports = function(app) {
   // Procura todos os Eventos
   app.get('/api/eventos', eventos.findAll);
 
+  //todos eventos disponiveis
+  app.get('/api/eventosD',eventos.EvDisponivel);
+
+  //receitas de um evento
+  app.get('/api/eventoReceita/:idEvento',eventos.EvReceita);
+
+  //receita de inscricoes no evento
+  app.get('/api/eventoRecInsc',eventos.RecInEv);
+  
+  //despesas de um evento
+  app.get('/api/eventoDespesa',eventos.DespEv);
+
   // Update de um Evento pelo ID (Implementar)
   app.patch('/api/evento/:idEvento', eventos.atualiza);
 
@@ -41,16 +53,22 @@ module.exports = function(app) {
 
   //----------------------------------------------------------------------
 
+  //definir organizador para evento
   app.post('/api/organizacao/:idEvento/:idPessoa',eventos.criaOrganizacao);
 
+  //seleciona todos dados na tabela organizacao
   app.get('/api/organizacoes',eventos.selectOrganizacao);
 
+  //seleciona um organizador em especifico
   app.get('/api/organizacoes/:idEvento/:idPessoa',eventos.selectUmOrganizador);
 
+  //seleciona os organizadores de um evento
   app.get('/api/organizacoes/:idEvento',eventos.selectOrganizacaoEvento);
 
+  //seleciona os eventos em que uma pessoa é organizador
   app.get('/api/organizacoes/:idPessoa',eventos.selectEventoOrganizador);
 
+  //deleta uma linha organizador
   app.delete('/api/organizacao/:idEvento/:idPessoa',eventos.deleteOrganizacao);
 
 }
