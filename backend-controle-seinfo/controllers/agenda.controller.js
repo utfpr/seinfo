@@ -11,7 +11,6 @@ exports.create = (req, res) => {
     dataHoraFim: req.data_fim,
     local: req.local
     
-
   }).then(agenda => {    
     // Cria um Evento
     console.log("Criado o Agenda! "+agenda.idAgenda);
@@ -48,30 +47,23 @@ exports.atualiza = (req,res)=>{
       dataHoraInicio: req.data_ini,
       dataHoraFim: req.data_fim,
       local: req.local,
-      horasParticipacao: req.horas,
-
-
-  
+      horasParticipacao: req.horas,  
     },
     {where: {idAgenda: req.params.agendaId}}).then(agenda=>{
       console.log("Atualizando Agendamento");
       res.send(agenda);
     }).catch(err=>{
       res.status(500).send("Error "+err);
-    })
-    
-  },
+    })    
+},
   
 
 exports.delete = (req, res) => {  
   Agenda.destroy({ where: { idAgenda: req.params.agendaId } }).then(agenda => {
     console.log("Deletando o evento com o ID: "+req.params.agendaId);
-    res.send(agenda); //Retorna um Json para a Pagina da API
+    res.send('agenda'); //Retorna um Json para a Pagina da API
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
 };
 
-exports.amoeba = (req, res) => {
-  console.log("Função de Teste Agenda! \n"+req.data_ini+"\n "+req.data_fim+"\n "+req.local+"\n "+req.horas);
-};

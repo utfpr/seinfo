@@ -97,6 +97,7 @@ exports.AtividadeEvento=(req,res)=>{
   })
 }
 
+
 //-------------------------------------------------------------------------------------------
 
 exports.criarProtagonista = (req,res)=>{

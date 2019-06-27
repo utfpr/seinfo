@@ -53,7 +53,13 @@
 
           <a-card class="layer" title="Cronograma">
             <p>
-              <a-calendar/>
+              <a-table
+                :columns="columns"
+                :dataSource="data"
+                :scroll="{ x: 1300 }"
+                :bordered="true"
+                :pagination="false"
+              ></a-table>
             </p>
           </a-card>
 
@@ -66,7 +72,139 @@
 </template>
 
 <script>
-export default {};
+const columns = [
+  {
+    title: "Horários",
+    dataIndex: "horarios",
+    key: "horarios",
+    width: "5%",
+    fixed: "left",
+    scopedSlots: { customRender: "horarios" }
+  },
+  {
+    title: "Segunda",
+    width: 200,
+    dataIndex: "segunda"
+  },
+  {
+    title: "Terça",
+    width: 200,
+    dataIndex: "terca"
+  },
+  {
+    title: "Quarta",
+    width: 200,
+    dataIndex: "quarta"
+  },
+  {
+    title: "Quinta",
+    width: 200,
+    dataIndex: "quinta"
+  },
+  {
+    title: "Sexta",
+    width: 200,
+    dataIndex: "sexta"
+  }
+];
+const data = [
+  {
+    key: "1",
+    horarios: "13h00",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  },
+  {
+    key: "2",
+    horarios: "13h50",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  },
+  {
+    key: "3",
+    horarios: "15h30",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  },
+  {
+    key: "4",
+    horarios: "17h30",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  },
+  {
+    key: "5",
+    horarios: "19h30",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  },
+  {
+    key: "6",
+    horarios: "21h10",
+    segunda: "a",
+    terca: "a",
+    quarta: "a",
+    quinta: "a",
+    sexta: "a"
+  }
+];
+export default {
+  // handleTableChange(pagination, filters, sorter) {
+  //   console.log(pagination);
+  //   const pager = { ...this.pagination };
+  //   pager.current = pagination.current;
+  //   this.pagination = pager;
+  //   this.fetch({
+  //     results: pagination.pageSize,
+  //     page: pagination.current,
+  //     sortField: sorter.field,
+  //     sortOrder: sorter.order,
+  //     ...filters
+  //   });
+  // },
+  // fetch(params = {}) {
+  //   console.log("params:", params);
+  //   this.loading = true;
+  //   reqwest({
+  //     url: "https://randomuser.me/api",
+  //     method: "get",
+  //     data: {
+  //       results: 10,
+  //       ...params
+  //     },
+  //     type: "json"
+  //   }).then(data => {
+  //     const pagination = { ...this.pagination };
+  //     // Read total count from server
+  //     // pagination.total = data.totalCount;
+  //     pagination.total = 200;
+  //     this.loading = false;
+  //     this.data = data.results;
+  //     this.pagination = pagination;
+  //   });
+  // }
+  data() {
+    return {
+      data,
+      columns
+    };
+  }
+};
 </script>
 
 <style scoped>

@@ -20,6 +20,7 @@ module.exports = function(app) {
   const carossel = require('../controllers/carrossel.controller.js');
   const imagem = require('../controllers/imagem.controller.js');
 
+  //cria um carrossel
   app.post('/api/carrossel', upload.single('urlImagem'), function (req, res, next) {
     console.log("POST DO carossel!\n")
     console.log("\n\n\n STATUS: "+req.body.select_status);
