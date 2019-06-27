@@ -18,4 +18,4 @@ env.js*
 *.ntvs*
 *.njsproj
 *.sln
-/controllers/autenticacao.controllers.js
+controllers/autenticacao.controllers.js
