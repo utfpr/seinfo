@@ -35,8 +35,6 @@ Agenda.associate = models=>{
   models.agenda.hasMany(models.evento,{
     as :'agendaEv',  
     foreignKey: 'idAgenda',
-    //onUpdate: 'cascade',
-		//onDelete: 'cascade',
   })
 }
 

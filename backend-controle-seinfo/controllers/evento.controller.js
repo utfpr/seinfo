@@ -44,7 +44,6 @@ exports.create = (req, res, nomedoarquivo) => {
         //Cria o vingulo entre IdEvento e idImagem
         evImagem.create({"imagem":imagem.idImagem,"evento":evento.idEvento});
   
-    
       }).catch(err => {
         res.status(500).send("Error -> " + err);
       })
@@ -59,9 +58,6 @@ exports.create = (req, res, nomedoarquivo) => {
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
-
-
-
 };
  
 
@@ -116,9 +112,43 @@ exports.delete = (req, res) => {
   })
 };
 
-   exports.amoeba = (req, res) => {
-     console.log("\n------------------- Função de Teste ------------------------------ \n");
-   };
+exports.EvDisponivel = (req, res) => {  
+  //eventos disponiveis
+  Evento.findAll({ where:{status:1},include:[{model:db.lote,as:'lotes'}]}).then(evento => {
+    console.log("Listou Todos os Eventos!");
+    res.send(evento); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};
+
+exports.EvReceita=(req,res)=>{
+  //receita de um evento
+  db.receita.findAll({where:{idEvento:req.params.idEvento}}).then(recEv=>{
+    res.send(recEv)
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+}
+
+//receita de inscritos no evento
+exports.RecInEv=(req,res)=>{
+  db.receitaInscricaoEvento.findAll({where:{idEvento:req.params.idEvento}}).then(inscEv=>{
+    res.send(inscEv)
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+}
+
+exports.DespEv=(req,res)=>{
+  //despesa de um evento
+  db.despesa.findAll({where:{idEvento:req.params.idEvento}}).then(DeEv=>{
+    res.send(DeEv)
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+}
+
 /*Evento.findOne({where: {idEvento:req.params.idEvento},include:[{model: db.agendamentoEvento,as:'agendamento',include:[{model: db.agenda,as:'agendaEv'}]},{model:db.atividade,as:'atividades', include:[{model:db.categoria,as:'categoria',attributes:['nome']}]},{model:db.lote,as:'lotes'}]}).then(evento => {
     console.log("Achou o evento pelo ID "+req.params.idEvento);
     //res.send(evento.agendamento[0].agendaEv.local); //Retorna um Json para a Pagina da API    

@@ -8,8 +8,6 @@ module.exports = (sequelize, Sequelize) => {
         model: 'atividade',
         key: 'idAtividade'
       },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
       field: 'idAtividade'
     },
     idAgenda: {
@@ -20,8 +18,6 @@ module.exports = (sequelize, Sequelize) => {
         model: 'agenda',
         key: 'idAgenda'
       },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
       field: 'idAgenda'
     }
 },
@@ -37,16 +33,16 @@ module.exports = (sequelize, Sequelize) => {
       as:'atvAgenda',
       through: models.agendamentoAtividade,
       foreignKey: 'idAtividade',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     }),
     
     models.agenda.belongsToMany(models.atividade,{
       as: 'agendaAtv',  
       through: models.agendamentoAtividade,
       foreignKey: 'idAgenda',
-      //onUpdate: 'cascade',
-      //onDelete: 'cascade',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     })
   };
 
