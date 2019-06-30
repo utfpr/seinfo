@@ -108,7 +108,7 @@ exports.deletaInscricaoEvento = (req, res) => {
 
 exports.selectInscricaoEvento = (req, res) => {
   //seleciona todos inscritos em todos eventos
-  db.inscricaoEvento.findAll({raw:true}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({raw:true, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -120,7 +120,7 @@ exports.selectInscrito = (req,res)=>{
   //seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
+      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]
     })
     .then(pessoaEv => {
       res.send(pessoaEv);
@@ -131,7 +131,7 @@ exports.selectInscrito = (req,res)=>{
 
 exports.InscricoesNoEvento=(req,res)=>{
   //seleciona todos inscritos em um evento
-  db.inscricaoEvento.findAll({where:{idEvento:req.params.idEvento}}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({where:{idEvento:req.params.idEvento}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -140,7 +140,7 @@ exports.InscricoesNoEvento=(req,res)=>{
 
 exports.InscricoesPessoa=(req,res)=>{
   //seleciona todos eventos que a pessoa se inscreveu
-  db.inscricaoEvento.findAll({where:{idPessoa:req.params.idPessoa}}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({where:{idPessoa:req.params.idPessoa}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -190,7 +190,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
 
 exports.selectInscricaoAtividade = (req, res) => {
   //seleciona todas pessoas inscritas em todas atividades
-  db.inscricaoAtividade.findAll({raw:true}).then(pessoaAtv=>{
+  db.inscricaoAtividade.findAll({raw:true,include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]}).then(pessoaAtv=>{
     res.send(pessoaAtv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -207,7 +207,7 @@ exports.selectInscritoAtv=(req,res)=>{
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
         idPessoa: req.params.idAtividade
-      }
+      },include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]
     })
     .then(pessoaAtv => {
       res.send(pessoaAtv);
@@ -218,7 +218,7 @@ exports.selectInscritoAtv=(req,res)=>{
 
 exports.selectInscricoesNaAtividade=(req,res)=>{
   //seleciona as pessoas inscritas na ativdade
-  db.inscricaoAtividade.findAll({where:{idAtividade:req.params.idAtividade,idEvento:req.params.idEvento}}).then(insc=>{
+  db.inscricaoAtividade.findAll({where:{idAtividade:req.params.idAtividade,idEvento:req.params.idEvento},include:[{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]}).then(insc=>{
     res.send(insc)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -227,7 +227,7 @@ exports.selectInscricoesNaAtividade=(req,res)=>{
 
 exports.selectInscricoesPessoa=(req,res)=>{
   //seleciona as atividades que a pessoa se inscreveu
-  db.inscricaoAtividade.findAll({where:{idPessoa:req.params.idPessoa}}).then(insc=>{
+  db.inscricaoAtividade.findAll({where:{idPessoa:req.params.idPessoa},include:[{model:db.atividade,as:'atividade'}]}).then(insc=>{
     res.send(insc)
   }).catch(err => {
     res.status(500).send("Error -> " + err);

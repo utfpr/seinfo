@@ -43,6 +43,14 @@ module.exports = (sequelize, Sequelize) => {
     as:'atividadeProt',
     through:models.protagonista,  
     foreignKey: 'idAtividade',
+  }),
+  models.protagonista.belongsTo(models.atividade,{
+    as: 'aAtv',
+    foreignKey: 'idAtividade'
+  }),
+  models.protagonista.belongsTo(models.pessoa,{
+    as: 'aPes',
+    foreignKey: 'idPessoa'
   })
   };
     

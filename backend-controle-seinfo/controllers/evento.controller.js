@@ -62,7 +62,7 @@ exports.create = (req, res, nomedoarquivo) => {
  
 
 exports.findById = (req, res) => {  
-  Evento.findByPk(req.params.idEvento).then(evento => {
+  Evento.findOne({where:{idEvento:req.params.idEvento},include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
     console.log("Achou o evento pelo ID "+req.params.idEvento);
     res.send(evento); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -71,7 +71,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Evento.findAll({ raw: true}).then(evento => {
+  Evento.findAll({ raw: true,include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
     console.log("Listou Todos os Eventos!");
     res.send(evento); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -114,7 +114,7 @@ exports.delete = (req, res) => {
 
 exports.EvDisponivel = (req, res) => {  
   //eventos disponiveis
-  Evento.findAll({ where:{status:1},include:[{model:db.lote,as:'lotes'}]}).then(evento => {
+  Evento.findAll({ where:{status:1},include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
     console.log("Listou Todos os Eventos!");
     res.send(evento); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -185,7 +185,7 @@ exports.criaOrganizacao =(req,res)=>{
 
 exports.selectOrganizacao=(req,res)=>{
   //seleciona todos organizadores em todos eventos
-  db.organizacao.findAll({raw:true}).then(org=>{
+  db.organizacao.findAll({raw:true, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -195,7 +195,7 @@ exports.selectOrganizacao=(req,res)=>{
 
 exports.selectUmOrganizador=(req,res)=>{
   //seleciona um organizdor de um evento
-  db.organizacao.findOne({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}}).then(org=>{
+  db.organizacao.findOne({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -204,7 +204,7 @@ exports.selectUmOrganizador=(req,res)=>{
 
 exports.selectOrganizacaoEvento=(req,res)=>{
   //seleciona os organizadores de um evento
-  db.organizacao.findAll({where:{idEvento:req.params.idEvento}}).then(org=>{
+  db.organizacao.findAll({where:{idEvento:req.params.idEvento}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -213,7 +213,7 @@ exports.selectOrganizacaoEvento=(req,res)=>{
 
 exports.selectEventoOrganizador=(req,res)=>{
   //seleciona os eventos onde a pessoa é organizadora
-  db.organizacao.findAll({where:{idPessoa:req.params.idPessoa}}).then(org=>{
+  db.organizacao.findAll({where:{idPessoa:req.params.idPessoa}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
