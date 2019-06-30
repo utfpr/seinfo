@@ -29,20 +29,32 @@ module.exports = (sequelize, Sequelize) => {
   });
   
   eveImage.associate = models => {       
-      models.imagem.belongsToMany(models.evento, {
-        as: 'eventoImg', 
-        through: models.eventoImagem, 
-        foreignKey: 'idEvento',
-        onUpdate: 'cascade',
-        onDelete: 'cascade',
-      }),
-      models.evento.belongsToMany(models.imagem, {
-        as: 'imagemEv',
-        through: models.eventoImagem,
-        foreignKey: 'idImagem',
-        onUpdate: 'cascade',
-        onDelete: 'cascade',
-      })
+    models.imagem.belongsToMany(models.evento, {
+      as: 'eventoImg', 
+      through: models.eventoImagem, 
+      foreignKey: 'idEvento',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    }),
+    models.evento.belongsToMany(models.imagem, {
+      as: 'imagemEv',
+      through: models.eventoImagem,
+      foreignKey: 'idImagem',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    }),
+    models.eventoImagem.belongsTo(models.evento,{
+      as:'EvIm',
+      foreignKey: 'idEvento',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    }),
+    models.eventoImagem.belongsTo(models.imagem,{
+      as:'ImEv',
+      foreignKey: 'idImagem',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    })
   };
 
 

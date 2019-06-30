@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 
 
 exports.findById = (req, res) => {  
-  Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento},include:[{model:db.categoria,as:'categoriaAtv'}]}).then(atividade => {
+  Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento},include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
     console.log("Achou uma atividade pelo ID "+req.params.idAtividade);
     res.send(atividade); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -36,7 +36,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Atividades.findAll({ raw: true,include:[{model:db.categoria,as:'categoriaAtv'}]}).then(atividade => {
+  Atividades.findAll({ raw: true,include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
     console.log("Listou Todas as Atividades!");
     res.send(atividade); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -89,7 +89,7 @@ exports.delete = (req, res) => {
 
 exports.AtividadeEvento=(req,res)=>{
   //seleciona as atividades de um unico evento
-  Atividades.findAll({where:{idEvento:req.params.idEvento},include:[{model:db.categoria,as:'categoriaAtv'}]}).then(atividade => {
+  Atividades.findAll({where:{idEvento:req.params.idEvento},include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
     console.log("Listou Todas as Atividades!");
     res.send(atividade); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -119,7 +119,7 @@ exports.criarProtagonista = (req,res)=>{
 
 exports.selectProtagonista=(req,res)=>{
   //seleciona todos protagonistas no banco de dados
-  db.protagonista.findAll({raw:true}).then(prot=>{
+  db.protagonista.findAll({raw:true,include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -129,7 +129,7 @@ exports.selectProtagonista=(req,res)=>{
 
 exports.selectUmProtagonista=(req,res)=>{
   //seleciona um protagonista de uma atividade
-  db.protagonista.findOne({where:{idAtividade:req.params.idAtividade,idPessoa:req.params.idPessoa}}).then(prot=>{
+  db.protagonista.findOne({where:{idAtividade:req.params.idAtividade,idPessoa:req.params.idPessoa},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -138,7 +138,7 @@ exports.selectUmProtagonista=(req,res)=>{
 
 exports.ProtagonistasDaAtv=(req,res)=>{
   //seleciona os protagonistas de uma atividade especifica
-  db.protagonista.findAll({where:{idAtividade:req.params.idAtividade}}).then(prot=>{
+  db.protagonista.findAll({where:{idAtividade:req.params.idAtividade},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -147,7 +147,7 @@ exports.ProtagonistasDaAtv=(req,res)=>{
 
 exports.AtividadesDoProtagonista=(req,res)=>{
   //seleciona as atividades em que essa pessoa é protagonista
-  db.protagonista.findAll({where:{idPessoa:req.params.idPessoa}}).then(prot=>{
+  db.protagonista.findAll({where:{idPessoa:req.params.idPessoa},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);

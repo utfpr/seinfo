@@ -44,8 +44,15 @@ module.exports = (sequelize, Sequelize) => {
     as: 'ePessoa',
     through: models.organizacao,
     foreignKey: 'idEvento',
+  }),
+  models.organizacao.belongsTo(models.evento,{
+    as: 'oEv',
+    foreignKey: 'idEvento'
+  }),
+  models.organizacao.belongsTo(models.pessoa,{
+    as: 'oPes',
+    foreignKey: 'idPessoa'
   })
-
   };
     
 
