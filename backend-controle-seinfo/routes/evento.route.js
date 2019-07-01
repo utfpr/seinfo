@@ -63,10 +63,10 @@ module.exports = function(app) {
   app.get('/api/organizacoes/:idEvento/:idPessoa',eventos.selectUmOrganizador);
 
   //seleciona os organizadores de um evento
-  app.get('/api/organizacoes/:idEvento',eventos.selectOrganizacaoEvento);
+  app.get('/api/organizacoesE/:idEvento',eventos.selectOrganizacaoEvento);
 
   //seleciona os eventos em que uma pessoa é organizador
-  app.get('/api/organizacoes/:idPessoa',eventos.selectEventoOrganizador);
+  app.get('/api/organizacoesP/:idPessoa',eventos.selectEventoOrganizador);
 
   //deleta uma linha organizador
   app.delete('/api/organizacao/:idEvento/:idPessoa',eventos.deleteOrganizacao);

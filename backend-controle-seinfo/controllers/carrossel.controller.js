@@ -17,3 +17,41 @@ exports.create = (req, res) => {
     console.log("Console -> " + err);
   })
 };
+
+exports.delete = (req,res)=>{
+  Carrossel.destroy(
+    {where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
+    res.send('morreu')
+  }).catch(err=>{
+    res.status(500).send("Error "+err)
+  })
+}
+
+exports.atualiza = (req,res)=>{
+  Carrossel.update({
+    status: req.status,
+    idImagem: req.imagem
+  },{where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
+    res.send(car)
+  }).catch(err=>{
+    res.status(500).send("Error "+err)
+  })
+}
+
+exports.selectCarrossel = (req,res)=>{
+  Carrossel.findOne(
+    {where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
+    res.send(car)
+  }).catch(err=>{
+    res.status(500).send("Error "+err)
+  })
+}
+
+exports.selectTodosCarrossel = (req,res)=>{
+  Carrossel.findAll(
+    {raw:true}).then(car=>{
+    res.send(car)
+  }).catch(err=>{
+    res.status(500).send("Error "+err)
+  })
+}

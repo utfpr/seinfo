@@ -10,6 +10,8 @@ module.exports = function(app) {
   
     // Procura todos os lotes
     app.get('/api/lotes', lotes.findAll);
+
+    app.get('/api/loteEvento',lotes.loteEvento)
   
     // Update de um lote pelo ID 
     app.patch('/api/lote/:loteId', lotes.atualiza);

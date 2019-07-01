@@ -32,7 +32,7 @@ module.exports = function(app) {
     app.get('/api/inscEv/:idEvento',pessoa.InscricoesNoEvento)
 
     //seleciona os eventos que uma pessoa se inscreveu
-    app.get('/api/inscEv/:idPessoa',pessoa.InscricoesPessoa)
+    app.get('/api/inscEvP/:idPessoa',pessoa.InscricoesPessoa)
 
     //deleta a inscricao de uma pessoa em um evento
     app.delete('/api/inscEv/:idEvento/:idPessoa',pessoa.deletaInscricaoEvento)

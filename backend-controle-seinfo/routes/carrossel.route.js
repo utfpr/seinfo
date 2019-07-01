@@ -27,4 +27,12 @@ module.exports = function(app) {
     imagem.create(req,res,nomedoarquivo);
   })
 
+  app.delete('/api/carrossel/:idCarrossel',carossel.delete)
+
+  app.patch('/api/carrossel/:idCarrossel',carossel.atualiza)
+
+  app.get('/api/carrossel',carossel.selectTodosCarrossel)
+
+  app.get('/api/carrossel/:idCarrossel',carossel.selectCarrossel)
+
 }
