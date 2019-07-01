@@ -22,7 +22,7 @@ exports.create = (req, res) => {
  
 
 exports.findById = (req, res) => {  
-  Agenda.findByPk(req.params.agendaId).then(agenda => {
+  Agenda.findOne({where:{idAgenda:req.params.agendaId}}).then(agenda => {
     console.log("Achou o Agenda pelo ID "+req.params.agendaId);
     res.send(agenda); //Retorna um Json para a Pagina da API
   }).catch(err => {

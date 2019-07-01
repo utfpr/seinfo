@@ -43,7 +43,7 @@ exports.create = (req, res, imagem_url) => {
  
 
 exports.findById = (req, res) => {  
-    Imagem.findByPk(req.params.imagemId).then(imagem => {
+    Imagem.findOne({where:{idImagem:req.params.imagemId}}).then(imagem => {
       console.log("Achou a Imagem pelo ID "+req.params.imagemId);
       res.send(imagem); //Retorna um Json para a Pagina da API
     }).catch(err => {

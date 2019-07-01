@@ -206,7 +206,7 @@ exports.selectInscritoAtv=(req,res)=>{
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        idPessoa: req.params.idAtividade
+        idPessoa: req.params.idPessoa
       },include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]
     })
     .then(pessoaAtv => {

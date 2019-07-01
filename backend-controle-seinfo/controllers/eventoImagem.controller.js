@@ -20,7 +20,7 @@ exports.create = (req, res) => {
  
 
 exports.findById = (req, res) => {  
-    EveImagens.findByPk(req.params.loteId).then(agevento => {
+    EveImagens.findOne({where:{idLote:req.params.loteId}}).then(agevento => {
       console.log("Achou o lote pelo ID "+req.params.loteId);
       res.send(agevento); //Retorna um Json para a Pagina da API
     }).catch(err => {
@@ -46,6 +46,3 @@ exports.findById = (req, res) => {
     })
   };
 
-   exports.amoeba = (req, res) => {
-     console.log("Função de Teste");
-   };

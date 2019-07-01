@@ -32,10 +32,10 @@ module.exports = function(app) {
   app.get('/api/protagonistas/:idAtividade/:idPessoa',atividades.selectUmProtagonista);
 
   //seleciona todos protagonistas de uma atividade
-  app.get('/api/protagonistas/:idAtividade',atividades.ProtagonistasDaAtv);
+  app.get('/api/protagonistaP/:idAtividade',atividades.ProtagonistasDaAtv);
 
   //seleciona as atividades que uma pessoa é protagonista
-  app.get('/api/protagonistas/:idPessoa',atividades.AtividadesDoProtagonista);
+  app.get('/api/protagonistaA/:idPessoa',atividades.AtividadesDoProtagonista);
 
   //deleta um protagonista de uma atividade
   app.delete('/api/protagonista/:idAtividade/:idPessoa',atividades.deletaProtagonista);

@@ -21,7 +21,7 @@ exports.create = (req, res) => {
 
 
 exports.findById = (req, res) => {  
-  Lotes.findByPk(req.params.loteId).then(lote => {
+  Lotes.findOne({where:{idLote:req.params.loteId}}).then(lote => {
     console.log("Achou o lote pelo ID "+req.params.loteId);
     res.send(lote); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -37,6 +37,15 @@ exports.findAll = (req, res) => {
     res.status(500).send("Error -> " + err);
   })
 };
+
+exports.loteEvento=(req,res)=>{
+  //todos lotes de um evento
+  Lotes.findAll({where:{idEvento:req.params.idEvento}}).then(ltev=>{
+    res.send(ltev)
+  }).catch(err=>{
+    res.status(500).send("Error -> " + err);
+  })
+}
 
 exports.atualiza = (req,res)=>{
 
