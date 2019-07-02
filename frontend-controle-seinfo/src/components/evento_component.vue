@@ -1,9 +1,9 @@
 <template>
   <div style="margin-top: 60px">
-    <!-- trabalhar melhor no if e else, caso evento não seja disponível retornar para home,
-    caso evento não exista, mostrar 404-->
-    <div id="work" v-if="this.res.status===1">
-      <a-layout-content>
+    <div id="work" v-if="fetch">
+      <span v-if="!this.res">{{sair404()}}</span>
+
+      <a-layout-content v-else-if="this.res.status===1">
         <div>
           <div>
             <br>
@@ -63,6 +63,12 @@
           <br>
         </div>
       </a-layout-content>
+
+      <a-layout-content
+        v-else-if="this.res.status!==1"
+        id="work"
+        style="height: 100vh;"
+      >{{sairHome()}}</a-layout-content>
     </div>
   </div>
 </template>
@@ -72,7 +78,7 @@ import e404 from "./not_found.vue";
 import moment from "moment";
 moment.locale("pt-br");
 const axios = require("axios");
-var res = "";
+
 const columns = [
   {
     title: "Horários",
@@ -182,17 +188,26 @@ export default {
           console.log("Listou " + name);
           console.log(response.data);
           this.res = response.data;
+          this.fetch = true;
         })
         .catch(function(error) {
           console.log(error);
         });
+    },
+    sair404() {
+      this.$router.push("/404");
+    },
+    sairHome() {
+      this.$router.push("/");
+      alert("Evento Indisponível no momento!");
     }
   },
   data() {
     return {
       res: [],
       data,
-      columns
+      columns,
+      fetch: false
     };
   },
   components: {
@@ -258,6 +273,7 @@ export default {
     ),
     linear-gradient(135deg, #670d10 0%, #092756 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+  height: auto;
 }
 
 .para {
