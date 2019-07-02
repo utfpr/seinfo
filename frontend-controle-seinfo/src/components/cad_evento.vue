@@ -2,11 +2,11 @@
   <div class="title">
     <h5 style="text-align:center">Cadastro de Evento</h5>
     <div class="box">
-      <form class="form" action="http://localhost:3000/api/evento" method="post" encType="multipart/form-data">
+      <form class="form"  @submit.prevent="handleSubmit" method="post" encType="multipart/form-data">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Nome do Evento:</label>
-            <a-input maxlength="255" placeholder="Nome" name="nome" type="text">
+            <a-input v-model="obj_Resource.nome" maxlength="255" placeholder="Nome" name="nome" type="text">
               <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -14,13 +14,13 @@
         <div class="row justify-content-center">
           <a-form-item class="space">
             <label class="ant-form-item-required">Data de Inicio do Evento:</label>
-            <a-input name="data_ini" type="date">
+            <a-input v-model="obj_Resource.data_ini" name="data_ini" type="date">
               <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
           <a-form-item class="space">
             <label class="ant-form-item-required">Hora de Inicio do Evento:</label>
-            <a-input name="hora_ini" type="time">
+            <a-input v-model="obj_Resource.hora_ini" name="hora_ini" type="time">
               <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -28,13 +28,13 @@
         <div class="row justify-content-center">
           <a-form-item class="space">
             <label class="ant-form-item-required">Data de Fim do Evento:</label>
-            <a-input name="data_fim" type="date">
+            <a-input v-model="obj_Resource.data_fim" name="data_fim" type="date">
               <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
           <a-form-item class="space">
             <label class="ant-form-item-required">Hora de Fim do Evento:</label>
-            <a-input name="hora_fim" type="time">
+            <a-input v-model="obj_Resource.hora_fim" name="hora_fim" type="time">
               <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -42,13 +42,13 @@
         <div class="row justify-content-center">
           <a-form-item class="space">
             <label class="ant-form-item-required">Local do evento:</label>
-            <a-input maxlength="255" name="local_eve" type="text" placeholder="Local">
+            <a-input v-model="obj_Resource.local_eve" maxlength="255" name="local_eve" type="text" placeholder="Local">
               <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
           <a-form-item class="space">
             <label class="ant-form-item-required">Status do evento:</label>
-            <a-select name="select_status" defaultValue="0">
+            <a-select v-model="obj_Resource.select_status" name="select_status" defaultValue="0">
               <a-select-option value="1">Evento disponivel</a-select-option>
               <a-select-option value="0">Evento indisponivel</a-select-option>
             </a-select>
@@ -64,8 +64,8 @@
               :label="index === 0 ? '' : ''"
               :required="false"
             >
-            <a-input v-decorator="[`data_inicio_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Inicio do Lote " style="width: 49%; margin-right: 4px"/>
-            <a-input v-decorator="[`data_fim_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Fim do Lote " style="width: 50%; margin-right: 0px"/>
+            <a-input type="date" v-decorator="[`data_inicio_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Inicio do Lote " style="width: 49%; margin-right: 4px"/>
+            <a-input type="date" v-decorator="[`data_fim_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Fim do Lote " style="width: 50%; margin-right: 0px"/>
             <a-input v-decorator="[`valor_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Valor do Lote R$:00,0" />
             <hr/>
             </a-form-item>
@@ -74,17 +74,18 @@
             </a-form-item>
           </a-form>
           </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space_2">
+          <!--
+          <div class="row justify-content-center" >
+            <a-form-item class="space_2" >
               <label class="ant-form-item-required">Imagem do evento:</label>
-              <a-input name="urlImagem" type="file" class="">
+              <a-input v-model="obj_Resource.urlImagem" name="urlImagem"  type="file" class="">
               </a-input>
             </a-form-item>
-          </div>
+          </div> !-->
           <div class="row justify-content-center">
             <a-form-item class="space_2">
               <label class="ant-form-item-required">Descrição:</label>
-              <a-textarea
+              <a-textarea v-model="obj_Resource.descricao"
                 maxlength="5000"
                 type="text"
                 name="descricao"
@@ -107,7 +108,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 let id = 0;
+let flag = 0;
 export default {
   data () {
     return {
@@ -122,6 +126,20 @@ export default {
         wrapperCol: {
         },
       },
+
+       obj_Resource: {
+        nome: '',
+        data_ini: '',
+        hora_ini: '',
+        data_fim: '',
+        hora_fim: '',
+        local_eve: '',
+        select_status: '',
+        //Disponibilidade
+        urlImagem: '',
+        descricao: '',
+        lote: ''
+      }
     };
   },
   beforeCreate () {
@@ -166,12 +184,25 @@ export default {
             this.objeto_lote.push(obj_temp)
           }
           console.log(this.objeto_lote)
-          console.log("TESTANDO");
+          console.log("\n\n BODY \n\n");
+          this.obj_Resource.lote = this.objeto_lote;
+          console.log(this.obj_Resource.lote[0].data_inicio_lote);
+          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response)}).catch(error => {console.log(error.response)});
+          location.reload();
         }
       });
     },
   },
+
+
+
+  
 };
+
+
+
+
+
 </script>
 <style>
 

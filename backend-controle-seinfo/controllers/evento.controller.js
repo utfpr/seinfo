@@ -2,17 +2,43 @@ const db = require('../models/index.js');
 const Evento = db.evento;
 const Agenda = db.agenda;
 const Imagem = db.imagem;
-const evImagem = require('../controllers/eventoImagem.controller.js');;
+const evImagem = require('../controllers/eventoImagem.controller.js');
+const lote = require('../controllers/lote.controller.js');
 
  
 // Post do Evento
+
+exports.create2 = (req, res) => {
+  console.log("PORAAAAAAAAAAAA!22!\n\n");
+  console.log(req.body.nome);
+  
+  const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
+  console.log(data_ini_full);
+
+  const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
+  console.log(data_fim_full);
+
+  const local = req.body.local_eve;
+  console.log(local);
+
+  const descricao = req.body.descricao;
+  console.log(descricao);
+
+  const status = req.body.select_status;
+  console.log(status);
+  
+  console.log(req.body.lote.length);
+
+};
 exports.create = (req, res, nomedoarquivo) => {
 
   //Concatenando para ser inserido no Banco de Dados
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
-  const imagem_url = nomedoarquivo;
+  //const imagem_url = nomedoarquivo;
+
+  const imagem_url = "";
   
   Agenda.create({  
 
@@ -34,8 +60,8 @@ exports.create = (req, res, nomedoarquivo) => {
       // Cria um Evento
       console.log("\nCriado o evento com o id: "+evento.idEvento);
       
-      Imagem.create({  
-        url: imagem_url
+     /* Imagem.create({  
+        //url: imagem_url
     
       }).then( imagem => {
         // Cria uma Imagem
@@ -47,8 +73,15 @@ exports.create = (req, res, nomedoarquivo) => {
       }).catch(err => {
         res.status(500).send("Error -> " + err);
       })
+      */
+
+
+      for(i = 0; i< req.body.lote.length;i++){
+       //Cria o vingulo entre IdEvento e Lote
+       lote.create({"evento":evento.idEvento,"valor":req.body.lote[i].valor_lote,"dataAbertura":req.body.lote[i].data_inicio_lote,"dataFechamento":req.body.lote[i].data_fim_lote});
+      }
   
-      res.send(evento); 
+      //res.send(evento); 
       //res.redirect("http://localhost:8080/adm/cadEvento"); 
   
     }).catch(err => {
