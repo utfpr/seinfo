@@ -52,4 +52,4 @@ const env = {
 ```
 
 ## Licença
-Este projeto se encontra sob a lincença [MIT](http://opensource.org/licenses/MIT)
+Este projeto se encontra sob a licença [MIT](http://opensource.org/licenses/MIT)
