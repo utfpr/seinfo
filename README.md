@@ -1,4 +1,4 @@
-<img src="http://portal.utfpr.edu.br/icones/cabecalho/logo-utfpr/@@images/7a0abbb5-f7ea-4c9f-85e2-18aed1cd8a0d.png" align="right" height="100"/>
+<img src="https://github.com/utfpr/seinfo/blob/master/frontend-controle-seinfo/src/assets/utfpr.jpg" align="right" height="100"/>
 
 # Controle de Eventos - SeInfo (CDE)
 
