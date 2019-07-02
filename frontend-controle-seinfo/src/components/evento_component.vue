@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 60px">
     <!-- trabalhar melhor no if e else, fazer pagina 404 padrão, 
-    caso evento não seja disponível retornar para hoje-->
+    caso evento não seja disponível retornar para home, caso evento não exista, mostrar 404-->
     <div id="work" v-if="this.res.status===1">
       <a-layout-content>
         <div>
