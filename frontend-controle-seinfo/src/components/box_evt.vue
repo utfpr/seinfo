@@ -1,7 +1,3 @@
-          <!-- 
-            Existe um bug atualmente com o tamanho das caixas, refatorar isso!
-            Quando o título é muito grande, buga tudo.
-           -->
 <template>
   <div id="work" class="row justify-content-center">
     <div v-for="(res,i) in res" :key="res.idEvento">
@@ -114,9 +110,18 @@ export default {
   margin: 7px 0;
 }
 
+.card-title {
+   display: inline-block;
+  max-width: 410px;
+  min-width: 410px;
+  max-height: 30px;
+  min-height: 30px;
+  overflow: hidden;
+}
+
 .card-text {
-  max-height: 250px;
-  min-height: 250px;
+  max-height: 150px;
+  min-height: 150px;
   max-width: 410px;
   min-width: 410px;
   overflow: hidden;
@@ -125,8 +130,8 @@ export default {
 .card-body {
   background-color: rgb(255, 255, 255);
   float: left;
-  max-height: 370px;
-  min-height: 370px;
+  max-height: 280px;
+  min-height: 280px;
   margin: 40px;
   margin-top: 0;
   margin-left: 0;
