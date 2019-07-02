@@ -6,16 +6,17 @@ exports.create = (req, res) => {
 
   Lotes.create({  
     //idEvento: req.body.idEvento,
-    valor: req.body.valor,
-    dataAbertura: req.body.dataAbertura,
-    dataFechamento: req.body.dataFechamento,
-    idEvento: req.body.idEvento
+    valor: req.valor,
+    dataAbertura: req.dataAbertura,
+    dataFechamento: req.dataFechamento,
+    idEvento: req.evento
   }).then(lote => {    
     // Cria um Evento
     console.log("Criado o Lote!")
-    res.send(lote);
+    res.redirect("http://localhost:8080/adm/cadEvento");
+    console.log(lote);
   }).catch(err => {
-    res.status(500).send("Error -> " + err);
+    console.log("Error -> " + err);
   })
 };
 
@@ -41,9 +42,9 @@ exports.findAll = (req, res) => {
 exports.loteEvento=(req,res)=>{
   //todos lotes de um evento
   Lotes.findAll({where:{idEvento:req.params.idEvento}}).then(ltev=>{
-    res.send(ltev)
+    console.log("DEU: "+ltev)
   }).catch(err=>{
-    res.status(500).send("Error -> " + err);
+    console.log("Error -> " + err);
   })
 }
 
