@@ -4,7 +4,6 @@
       <navHome></navHome>
     </div>
     <a-layout-content>
-      <carousel></carousel>
       <evento_component></evento_component>
       <ft></ft>
     </a-layout-content>
@@ -12,13 +11,13 @@
 </template>
 
 <script>
-import evento_component from "./evento_component.vue";
 import navHome from "./navHome.vue";
+import evento_component from "./evento_component.vue";
 import ft from "./footer.vue";
 export default {
   components: {
-    evento_component,
     navHome,
+    evento_component,
     ft
   }
 };

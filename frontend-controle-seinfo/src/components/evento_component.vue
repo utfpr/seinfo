@@ -1,6 +1,8 @@
 <template>
   <div style="margin-top: 60px">
-    <div id="work">
+    <!-- trabalhar melhor no if e else, fazer pagina 404 padrão, 
+    caso evento não seja disponível retornar para hoje-->
+    <div id="work" v-if="this.res.status===1">
       <a-layout-content>
         <div>
           <div>
@@ -12,37 +14,33 @@
             <a-row :gutter="16">
               <a-col :span="6">
                 <a-card class="title" title="Data de Inicio" :bordered="false">
-                  <p>15/05/2019</p>
+                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd MMMM Do YYYY, h:mm:ss a')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Data de Fim" :bordered="false">
-                  <p>15/06/2019</p>
+                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd MMMM Do YYYY, h:mm:ss a')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Valor do Evento" :bordered="false">
-                  <p>800$</p>
+                  <p>Conversar sobre isso</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Local" :bordered="false">
-                  <p>Casa das Primas</p>
+                  <p>{{res.agendamento.local}}</p>
                 </a-card>
               </a-col>
             </a-row>
           </div>
 
           <a-card class="layer" title="Descrição do evento">
-            <p
-              class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+            <p class="para">{{res.descricao}}</p>
           </a-card>
 
           <a-card class="layer" title="Palestras">
-            <p
-              class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+            <p class="para">NYI</p>
           </a-card>
 
           <a-card class="layer" title="Atividades">
@@ -72,6 +70,10 @@
 </template>
 
 <script>
+import moment from "moment";
+moment.locale("pt-br");
+const axios = require("axios");
+
 const columns = [
   {
     title: "Horários",
@@ -164,42 +166,32 @@ const data = [
   }
 ];
 export default {
-  // handleTableChange(pagination, filters, sorter) {
-  //   console.log(pagination);
-  //   const pager = { ...this.pagination };
-  //   pager.current = pagination.current;
-  //   this.pagination = pager;
-  //   this.fetch({
-  //     results: pagination.pageSize,
-  //     page: pagination.current,
-  //     sortField: sorter.field,
-  //     sortOrder: sorter.order,
-  //     ...filters
-  //   });
-  // },
-  // fetch(params = {}) {
-  //   console.log("params:", params);
-  //   this.loading = true;
-  //   reqwest({
-  //     url: "https://randomuser.me/api",
-  //     method: "get",
-  //     data: {
-  //       results: 10,
-  //       ...params
-  //     },
-  //     type: "json"
-  //   }).then(data => {
-  //     const pagination = { ...this.pagination };
-  //     // Read total count from server
-  //     // pagination.total = data.totalCount;
-  //     pagination.total = 200;
-  //     this.loading = false;
-  //     this.data = data.results;
-  //     this.pagination = pagination;
-  //   });
-  // }
+  mounted() {
+    this.pegar_tabela("evento/" + this.$route.params.id);
+  },
+  methods: {
+    moment: function(date) {
+      return moment(date);
+    },
+    date: function(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    pegar_tabela(name) {
+      axios
+        .get("http://localhost:3000/api/" + name)
+        .then(response => {
+          console.log("Listou " + name);
+          console.log(response.data);
+          this.res = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
   data() {
     return {
+      res: [],
       data,
       columns
     };

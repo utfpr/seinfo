@@ -12,7 +12,7 @@ module.exports = function(app) {
     // app.post('/api/autentication/',login.autentica);
     app.post('/api/login/',login.login);
     
-}
+};
 
 
 // setInterval(() => {
