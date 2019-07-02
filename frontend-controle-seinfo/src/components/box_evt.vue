@@ -1,16 +1,16 @@
+          <!-- 
+            Existe um bug atualmente com o tamanho das caixas, refatorar isso!
+            Quando o título é muito grande, buga tudo.
+           -->
 <template>
   <div id="work" class="row justify-content-center">
     <div v-for="(res,i) in res" :key="res.idEvento">
       <div class="box-1">
-        <!-- mudar para pegar link -->
         <img class="box-2" src="../assets/banner.png">
         <div class="card-body">
-          <!-- pegar titulo evento -->
           <h5 class="card-title">{{res.nome}}</h5>
-          <!-- pegar descrição -->
           <p class="card-text">{{res.descricao}}</p>
           <a-divider/>
-          <!-- criar id -->
           <a-button :href="'/evento/'+ res.idEvento" class="bt" style="margin-left:33%;">
             <a-icon type="plus"/>SAIBA MAIS
           </a-button>
@@ -110,11 +110,11 @@ export default {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
-.ant-divider-horizontal{
+.ant-divider-horizontal {
   margin: 7px 0;
 }
 
-.card-text{
+.card-text {
   max-height: 250px;
   min-height: 250px;
   max-width: 410px;
@@ -128,7 +128,7 @@ export default {
   max-height: 370px;
   min-height: 370px;
   margin: 40px;
-  margin-top:0;
+  margin-top: 0;
   margin-left: 0;
   margin-right: 0;
 }
