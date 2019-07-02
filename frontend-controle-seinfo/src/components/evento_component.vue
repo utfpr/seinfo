@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 60px">
-    <!-- trabalhar melhor no if e else, fazer pagina 404 padrão, 
-    caso evento não seja disponível retornar para home, caso evento não exista, mostrar 404-->
+    <!-- trabalhar melhor no if e else, caso evento não seja disponível retornar para home,
+    caso evento não exista, mostrar 404-->
     <div id="work" v-if="this.res.status===1">
       <a-layout-content>
         <div>
@@ -14,12 +14,12 @@
             <a-row :gutter="16">
               <a-col :span="6">
                 <a-card class="title" title="Data de Inicio" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd MMMM Do YYYY, h:mm:ss a')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd D MMMM YYYY')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Data de Fim" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd MMMM Do YYYY, h:mm:ss a')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd D MMMM YYYY')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
@@ -40,13 +40,11 @@
           </a-card>
 
           <a-card class="layer" title="Palestras">
-            <p class="para">NYI</p>
+            <p class="para">Ainda não implementado!</p>
           </a-card>
 
           <a-card class="layer" title="Atividades">
-            <p
-              class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+            <p class="para">Ainda não implementado!</p>
           </a-card>
 
           <a-card class="layer" title="Cronograma">
@@ -70,10 +68,11 @@
 </template>
 
 <script>
+import e404 from "./not_found.vue";
 import moment from "moment";
 moment.locale("pt-br");
 const axios = require("axios");
-
+var res = "";
 const columns = [
   {
     title: "Horários",
@@ -195,6 +194,9 @@ export default {
       data,
       columns
     };
+  },
+  components: {
+    e404
   }
 };
 </script>
@@ -284,7 +286,6 @@ export default {
 .title {
   text-align: center;
   border: 0.1px solid black;
-  cursor: pointer;
   position: relative;
 }
 

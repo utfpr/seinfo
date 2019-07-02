@@ -4,7 +4,7 @@
       <navHome></navHome>
     </div>
     <a-layout-content>
-      <evento_component></evento_component>
+      <evento></evento>
       <ft></ft>
     </a-layout-content>
   </a-layout>
@@ -12,12 +12,12 @@
 
 <script>
 import navHome from "./navHome.vue";
-import evento_component from "./evento_component.vue";
+import evento from "./evento_component.vue";
 import ft from "./footer.vue";
 export default {
   components: {
     navHome,
-    evento_component,
+    evento,
     ft
   }
 };

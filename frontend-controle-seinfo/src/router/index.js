@@ -14,18 +14,20 @@ import Cad_Categoria from '@/components/cad_categoria';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
-import funcPessoa from '@/components/funcPessoa';
+import funcPessoa from '@/components/func_pessoa';
 import Teste from '@/components/teste';
 import Usuario from '@/components/usuario';
 import UsuEvento from '@/components/eventos_usuario';
 import UsuHome from '@/components/atv_usuario';
 import UsuPerfil from '@/components/perfil_usuario';
+import not_found from '@/components/not_found';
 
 
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -74,7 +76,7 @@ export default new Router({
       path: '/adm',
       name: 'adm',
       component: adm,
-        children: [
+      children: [
         {
           path: '',
           component: Logo
@@ -86,11 +88,11 @@ export default new Router({
         {
           path: 'cadEvento',
           component: Cad_evento
-        }, 
+        },
         {
           path: 'conCarousel',
           component: Cad_Carousel
-        }, 
+        },
         {
           path: 'cadReceita',
           component: Cad_Receita
@@ -106,7 +108,7 @@ export default new Router({
         {
           path: 'cadAtividade',
           component: Cad_Atividade
-        },,
+        }, ,
         {
           path: 'cadCategoria',
           component: Cad_Categoria
@@ -119,8 +121,12 @@ export default new Router({
           path: 'funcPessoa',
           component: funcPessoa
         }
-        ]
+      ]
     },
-  ],
-  mode: 'history'
+    {
+      path: '*',
+      name: 'e404',
+      component: not_found
+    }
+  ]
 });
