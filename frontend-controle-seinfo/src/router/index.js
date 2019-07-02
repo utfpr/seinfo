@@ -66,7 +66,7 @@ export default new Router({
       component: Registrar
     },
     {
-      path: '/evento',
+      path: '/evento/:id',
       name: 'Evento',
       component: Evento
     },
