@@ -3,7 +3,7 @@
     <div class="error" id="error">
       <h1>404</h1>
       <h2 style="text-align: center">Página não encontrada!</h2>
-      <p>A página que você tentou acessar encontra-se atualmente indisponível, removida ou temporariamente desabilitade.</p>
+      <p>A página que você tentou acessar encontra-se atualmente indisponível, removida ou temporariamente desabilitada.</p>
       <p>Aperte no botão abaixo para voltar ao início</p>
       <a-button href="/" type="primary">Voltar para o início</a-button>
     </div>
