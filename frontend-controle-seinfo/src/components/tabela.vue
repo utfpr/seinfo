@@ -22,7 +22,7 @@
                   </thead>
                   <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
                     <tr>
-                      <td>{{i+1}}</td>
+                      <td>{{res.idEvento}}</td>
                       <td>{{res.nome}}</td>
                       <td>{{res.descricao}}</td>
                       <td>{{res.status}}</td>

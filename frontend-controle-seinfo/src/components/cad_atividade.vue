@@ -1,144 +1,179 @@
 <template>
-<div class="title">
-  <h5 style="text-align:center">Cadastro de Atividade</h5>
-  <div class="box">
-    <form class="form" action="http://localhost:3000/api/atividade" method="post">
-      <div class="row justify-content-center">
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Nome da Atividade:</label>
-          <a-input maxlength="255" placeholder="Nome" name="nome_atv" type="text">
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Valor da Atividade:</label>
-          <a-input placeholder="Valor" name="valor_atv" type="number">
-            <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Data de Inicio:</label>
-          <a-input name="data_ini_atv" type="date">
-            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Data de Fim:</label>
-          <a-input  name="data_fim_atv" type="date">
-            <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Hora de Inicio:</label>
-          <a-input  name="hora_ini_atv" type="time">
-            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Hora de Fim:</label>
-          <a-input  name="hora_fim_atv" type="time">
-            <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Hora de Participação:</label>
-          <a-input  name="hora_part" type="time">
-            <a-icon slot="prefix" type="dashboard" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Quantidade de Vagas:</label>
-          <a-input  name="qtd" type="number">
-            <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-      <a-form-item class="space">
-          <label class="ant-form-item-required">Local da Atividade:</label>
-          <a-input maxlength="255" placeholder="Local" name="local_atv" type="text">
-            <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-      </a-form-item>
-      <a-form-item class="space">
-          <label class="ant-form-item-required">Selecione o Evento:</label>
-        <a-select defaultValue="...">
-      <a-select-option v-for="tabela in tabelas" :key="tabela.idEvento" :value="tabela.idEvento" >{{tabela.nome}}</a-select-option>
-    </a-select>
-      </a-form-item>
-      </div>
-    <div class="row justify-content-center">
+  <div class="title">
+    <h5 style="text-align:center">Cadastro de Atividade</h5>
+    <div class="box">
+      <form class="form" action="http://localhost:3000/api/atividade" method="post">
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Nome da Atividade:</label>
+            <a-input maxlength="255" placeholder="Nome" name="nome_atv" type="text">
+              <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Valor da Atividade:</label>
+            <a-input placeholder="Valor" name="valor_atv" type="number">
+              <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Data de Inicio:</label>
+            <a-input name="data_ini_atv" type="date">
+              <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Data de Fim:</label>
+            <a-input name="data_fim_atv" type="date">
+              <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Hora de Inicio:</label>
+            <a-input name="hora_ini_atv" type="time">
+              <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Hora de Fim:</label>
+            <a-input name="hora_fim_atv" type="time">
+              <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Hora de Participação:</label>
+            <a-input name="hora_part" type="time">
+              <a-icon slot="prefix" type="dashboard" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Quantidade de Vagas:</label>
+            <a-input name="qtd" type="number">
+              <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Local da Atividade:</label>
+            <a-input maxlength="255" placeholder="Local" name="local_atv" type="text">
+              <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Selecione o Evento:</label>
+            <a-select defaultValue="...">
+              <a-select-option
+                v-for="tabela in eventos"
+                :key="tabela.idEvento"
+                :value="tabela.idEvento"
+              >{{tabela.nome}}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center"></div>
+        <div class="row justify-content-center">
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Selecione uma Categoria:</label>
+            <a-select defaultValue="...">
+              <a-select-option
+                v-for="tabela in categorias"
+                :key="tabela.idCategoria"
+                :value="tabela.idCategoria"
+              >{{tabela.nome}}</a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item class="space">
+            <label class="ant-form-item-required">Selecione um Protagonista:</label>
+            <a-select defaultValue="...">
+              <a-select-option
+                v-for="tabela in protagonistas"
+                :key="tabela.idPessoa"
+                :value="tabela.idPessoa"
+              >{{tabela.idPessoa}}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space_2">
+            <label class="ant-form-item-required">Descrição:</label>
+            <a-textarea
+              maxlength="5000"
+              type="text"
+              name="descricao_atv"
+              placeholder="Descrição"
+              :rows="4"
+            />
+          </a-form-item>
+        </div>
+        <div class="row justify-content-center">
+          <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+        </div>
+      </form>
     </div>
-    <div class="row justify-content-center">
-      <a-form-item class="space">
-          <label class="ant-form-item-required">Selecione uma Categoria:</label>
-        <a-select defaultValue="...">
-      <a-select-option v-for="tabela in tabelas" :key="tabela.idCategoria" :value="tabela.idCategoria" >{{tabela.nome}}</a-select-option>
-    </a-select>
-      </a-form-item>
-      <a-form-item class="space">
-          <label class="ant-form-item-required">Selecione um Protagonista:</label>
-        <a-select defaultValue="...">
-      <a-select-option v-for="tabela in tabelas" :key="tabela.idPessoa" :value="tabela.idPessoa" >{{tabela.idPessoa}}</a-select-option>
-    </a-select>
-      </a-form-item>
-    </div>
-      <div class="row justify-content-center">
-        <a-form-item class="space_2">
-          <label class="ant-form-item-required">Descrição:</label>
-          <a-textarea maxlength="5000" type="text" name="descricao_atv" placeholder="Descrição" :rows="4"/>
-        </a-form-item>
-      </div>
-      <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
-      </div>
-    </form>
   </div>
-</div>
 </template>
 
 <script>
+const axios = require("axios");
+
 export default {
-data () {
-     return {
-       tabelas: {}
-     }
-   },
-   created(){
-     console.log("Entrou para Listar");
-   axios.get('http://localhost:3000/api/eventos')
-     .then( (response) => {
-       console.log("Listou Eventos!");
-       this.tabelas = response.data;
-       //console.log(this.tabelas);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-   },
-   
+  data() {
+    return {
+      eventos: {},
+      categorias: {},
+      protagonistas: {}
+    };
+  },
+  created() {
+    axios
+      .get("http://localhost:3000/api/eventosD")
+      .then(response => {
+        this.eventos = response.data;
+        //console.log(this.eventos);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:3000/api/categorias")
+      .then(response => {
+        this.categorias = response.data;
+        //console.log(this.categorias);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:3000/api/protagonistas")
+      .then(response => {
+        this.protagonistas = response.data;
+        //console.log(this.protagonistas);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 };
-
-const axios = require('axios');
-
 </script>
 <style scoped>
-
 .box {
-  border: solid 1px rgba(161, 161, 161, 0.233); 
+  border: solid 1px rgba(161, 161, 161, 0.233);
   margin-left: 25%;
   margin-top: 10px;
   margin-right: 25%;
   padding: 20px;
 }
 
-.title{
+.title {
   margin-top: 30px;
 }
 
@@ -159,5 +194,4 @@ label {
   padding: 2px;
   width: 444px;
 }
-
 </style>
