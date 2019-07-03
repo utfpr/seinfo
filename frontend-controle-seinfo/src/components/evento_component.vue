@@ -8,6 +8,7 @@
           <div>
             <br>
             <br>
+            <!-- pegar imagem do evento -->
             <img class="child" src="../assets/banner.png">
           </div>
           <div class="box">
@@ -35,10 +36,15 @@
             </a-row>
           </div>
 
+          <a-card class="layer" title="Título do evento">
+            <p class="para" style="text-align: center">{{res.nome}}</p>
+          </a-card>
+
           <a-card class="layer" title="Descrição do evento">
             <p class="para">{{res.descricao}}</p>
           </a-card>
-
+            <!-- manter palestras e atividades ou só atividades? o que diferencia?
+                 listar tudo? -->
           <a-card class="layer" title="Palestras">
             <p class="para">Ainda não implementado!</p>
           </a-card>
