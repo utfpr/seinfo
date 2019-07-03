@@ -1,54 +1,61 @@
 <template>
   <div style="margin-top: 60px">
-    <div id="work">
-      <a-layout-content>
+    <div id="work" v-if="fetch">
+      <span v-if="!this.res">{{sair404()}}</span>
+
+      <a-layout-content v-else-if="this.res.status===1">
         <div>
           <div>
-            <br>
-            <br>
-            <img class="child" src="../assets/banner.png">
+            <br />
+            <br />
+            <!-- pegar imagem do evento -->
+            <img class="child" src="../assets/banner.png" />
           </div>
           <div class="box">
             <a-row :gutter="16">
               <a-col :span="6">
                 <a-card class="title" title="Data de Inicio" :bordered="false">
-                  <p>15/05/2019</p>
+                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd D MMMM YYYY')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Data de Fim" :bordered="false">
-                  <p>15/06/2019</p>
+                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd D MMMM YYYY')}}</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Valor do Evento" :bordered="false">
-                  <p>800$</p>
+                  <p>Conversar sobre isso</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card class="title" title="Local" :bordered="false">
-                  <p>Casa das Primas</p>
+                  <p>{{res.agendamento.local}}</p>
                 </a-card>
               </a-col>
             </a-row>
           </div>
 
-          <a-card class="layer" title="Descrição do evento">
-            <p
-              class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+          <a-card class="layer" title="Título do evento">
+            <p class="para" style="text-align: center">{{res.nome}}</p>
           </a-card>
 
+          <a-card class="layer" title="Descrição do evento">
+            <p class="para">{{res.descricao}}</p>
+          </a-card>
+          <!-- manter palestras e atividades ou só atividades? o que diferencia?
+          listar tudo?-->
           <a-card class="layer" title="Palestras">
-            <p
-              class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+            <p class="para">Ainda não implementado!</p>
           </a-card>
 
           <a-card class="layer" title="Atividades">
             <p
               class="para"
-            >A Semana de Informática da UTFPR-CM, atualmente em sua sexta edição, é um evento voltado aos estudantes e profissionais na área de Informática da cidade de Campo Mourão e região, direcionado, principalmente, aos acadêmicos dos cursos de Tecnologia em Sistemas para Internet e Ciência da Computação da UTFPR-CM. O evento propicia aos participantes uma visão do mercado de trabalho, por meio do contato com palestrantes de outros estados e grandes empresas do país, além da troca de experiências com professores e egressos dos cursos de Informática da UTFPR-CM. Além disso, os participantes também conseguem adquirir uma visão da área acadêmica, graças à participação em seminários, palestras e minicursos .</p>
+              v-for="(atv, i) in atividades"
+              :key="i"
+            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
+            <p class="para" v-if="atividades.length == 0">Nenhuma atividade cadastrada!</p>
           </a-card>
 
           <a-card class="layer" title="Cronograma">
@@ -63,15 +70,27 @@
             </p>
           </a-card>
 
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
       </a-layout-content>
+
+      <a-layout-content
+        v-else-if="this.res.status!==1"
+        id="work"
+        style="height: 100vh;"
+      >{{sairHome()}}</a-layout-content>
     </div>
   </div>
 </template>
 
 <script>
+import e404 from "./not_found.vue";
+import moment from "moment";
+moment.locale("pt-br");
+const axios = require("axios");
+
+var i = 0;
 const columns = [
   {
     title: "Horários",
@@ -164,45 +183,66 @@ const data = [
   }
 ];
 export default {
-  // handleTableChange(pagination, filters, sorter) {
-  //   console.log(pagination);
-  //   const pager = { ...this.pagination };
-  //   pager.current = pagination.current;
-  //   this.pagination = pager;
-  //   this.fetch({
-  //     results: pagination.pageSize,
-  //     page: pagination.current,
-  //     sortField: sorter.field,
-  //     sortOrder: sorter.order,
-  //     ...filters
-  //   });
-  // },
-  // fetch(params = {}) {
-  //   console.log("params:", params);
-  //   this.loading = true;
-  //   reqwest({
-  //     url: "https://randomuser.me/api",
-  //     method: "get",
-  //     data: {
-  //       results: 10,
-  //       ...params
-  //     },
-  //     type: "json"
-  //   }).then(data => {
-  //     const pagination = { ...this.pagination };
-  //     // Read total count from server
-  //     // pagination.total = data.totalCount;
-  //     pagination.total = 200;
-  //     this.loading = false;
-  //     this.data = data.results;
-  //     this.pagination = pagination;
-  //   });
-  // }
+  mounted() {
+    this.pegar_tabela("evento/" + this.$route.params.id);
+    this.fetch = false;
+    axios
+      .get("http://localhost:3000/api/atividade/" + this.$route.params.id)
+      .then(response => {
+        console.log(response.data);
+        this.atividades = response.data;
+        this.fetch = true;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  },
+
+  methods: {
+    moment: function(date) {
+      return moment(date);
+    },
+
+    date: function(date) {
+      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    },
+
+    pegar_tabela(name) {
+      axios
+        .get("http://localhost:3000/api/" + name)
+        .then(response => {
+          console.log("Listou " + name);
+          console.log(response.data);
+          this.res = response.data;
+          this.fetch = true;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
+    sair404() {
+      this.$router.push("/404");
+    },
+
+    sairHome() {
+      this.$router.push("/");
+      alert("Evento Indisponível no momento!");
+    }
+  },
+
   data() {
     return {
+      res: [],
+      atividades: [],
       data,
-      columns
+      columns,
+      fetch: false
     };
+  },
+
+  components: {
+    e404
   }
 };
 </script>
@@ -264,6 +304,7 @@ export default {
     ),
     linear-gradient(135deg, #670d10 0%, #092756 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+  height: auto;
 }
 
 .para {
@@ -292,7 +333,6 @@ export default {
 .title {
   text-align: center;
   border: 0.1px solid black;
-  cursor: pointer;
   position: relative;
 }
 

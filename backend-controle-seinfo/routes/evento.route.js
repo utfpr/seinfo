@@ -46,10 +46,10 @@ module.exports = function(app) {
   app.get('/api/eventoReceita/:idEvento',eventos.EvReceita);
 
   //receita de inscricoes no evento
-  app.get('/api/eventoRecInsc',eventos.RecInEv);
+  app.get('/api/eventoRecInsc/:idEvento',eventos.RecInEv);
   
-  //despesas de um evento
-  app.get('/api/eventoDespesa',eventos.DespEv);
+  //despesas de um evento pelo ID
+  app.get('/api/eventoDespesa/:idEvento',eventos.DespEv);
 
   // Update de um Evento pelo ID (Implementar)
   app.patch('/api/evento/:idEvento', eventos.atualiza);

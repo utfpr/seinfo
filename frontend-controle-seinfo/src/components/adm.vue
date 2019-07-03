@@ -2,7 +2,7 @@
   <div>
     <navSimples></navSimples>
     <a-layout>
-      <a-menu class="menu" v-model="current" mode="horizontal">
+      <a-menu class="menu" mode="horizontal">
         <a-menu-item key="14">
           <a-icon type="global"/>Eventos
           <router-link to="/adm/cadEvento"></router-link>
