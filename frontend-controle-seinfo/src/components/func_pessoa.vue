@@ -2,15 +2,13 @@
   <div class="title">
     <h5 style="text-align:center">Funcionalidade de Pessoa</h5>
     <div class="box">
-      <form class="form" action="http://localhost:3000/api/pessoa" method="post">
+      <form class="form" action="http://localhost:3000/api/pessoa" method="get">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Pessoa:</label>
             <div>
-              <a-select name="select_pessoa" defaultValue="0">
-                <a-select-option value="0">Pessoa 1</a-select-option>
-                <a-select-option value="1">Pessoa 2</a-select-option>
-                <a-select-option value="2">Pessoa 3</a-select-option>
+              <a-select name="select_pessoa" defaultValue="${0}">
+                <a-select-option  v-for="(res,i) in res" :key="res.idPessoa" :value="res.idPessoa">{{res.nome}}</a-select-option>
               </a-select>
             </div>
           </a-form-item>
@@ -27,7 +25,7 @@
         </div>
         <div class="row justify-content-center">
           <a-form-item class="space_2">
-            <a-radio-group @change="onChange" v-model="value">
+            <a-radio-group v-model="value">
               <a-radio :style="radioStyle" :value="1">Organizador de Evento</a-radio>
               <a-radio :style="radioStyle" :value="2">Protagonista de Atividade</a-radio>
             </a-radio-group>
@@ -63,10 +61,31 @@
 </template>
 
 <script>
+const axios = require("axios");
 export default {
+  mounted() {
+    this.pegar_tabela("pessoas");
+  },
+  methods: {
+    pegar_tabela(name) {
+      axios
+        .get("http://localhost:3000/api/" + name)
+        .then(response => {
+          console.log("Listou " + name);
+          console.log(response.data);
+          this.res = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
   data() {
     return {
-      value: 1,
+      res: [],
+      nome: "",
+      descricao: "",
+      value: 0,
       radioStyle: {
         display: "block",
         height: "30px",
@@ -76,6 +95,7 @@ export default {
   }
 };
 </script>
+
 <style>
 .box {
   border: solid 1px rgba(161, 161, 161, 0.233);
