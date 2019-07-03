@@ -36,7 +36,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Atividades.findAll({ raw: true,include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
+  Atividades.findAll({ include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
     console.log("Listou Todas as Atividades!");
     res.send(atividade); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -119,7 +119,7 @@ exports.criarProtagonista = (req,res)=>{
 
 exports.selectProtagonista=(req,res)=>{
   //seleciona todos protagonistas no banco de dados
-  db.protagonista.findAll({raw:true,include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
+  db.protagonista.findAll({include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
