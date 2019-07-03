@@ -6,10 +6,10 @@
       <a-layout-content v-else-if="this.res.status===1">
         <div>
           <div>
-            <br>
-            <br>
+            <br />
+            <br />
             <!-- pegar imagem do evento -->
-            <img class="child" src="../assets/banner.png">
+            <img class="child" src="../assets/banner.png" />
           </div>
           <div class="box">
             <a-row :gutter="16">
@@ -43,14 +43,19 @@
           <a-card class="layer" title="Descrição do evento">
             <p class="para">{{res.descricao}}</p>
           </a-card>
-            <!-- manter palestras e atividades ou só atividades? o que diferencia?
-                 listar tudo? -->
+          <!-- manter palestras e atividades ou só atividades? o que diferencia?
+          listar tudo?-->
           <a-card class="layer" title="Palestras">
             <p class="para">Ainda não implementado!</p>
           </a-card>
 
           <a-card class="layer" title="Atividades">
-            <p class="para">Ainda não implementado!</p>
+            <p
+              class="para"
+              v-for="(atv, i) in atividades"
+              :key="i"
+            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
+            <p class="para" v-if="atividades.length == 0">Nenhuma atividade cadastrada!</p>
           </a-card>
 
           <a-card class="layer" title="Cronograma">
@@ -65,8 +70,8 @@
             </p>
           </a-card>
 
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
       </a-layout-content>
 
@@ -85,6 +90,7 @@ import moment from "moment";
 moment.locale("pt-br");
 const axios = require("axios");
 
+var i = 0;
 const columns = [
   {
     title: "Horários",
@@ -179,14 +185,28 @@ const data = [
 export default {
   mounted() {
     this.pegar_tabela("evento/" + this.$route.params.id);
+    this.fetch = false;
+    axios
+      .get("http://localhost:3000/api/atividade/" + this.$route.params.id)
+      .then(response => {
+        console.log(response.data);
+        this.atividades = response.data;
+        this.fetch = true;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
+
   methods: {
     moment: function(date) {
       return moment(date);
     },
+
     date: function(date) {
       return moment(date).format("MMMM Do YYYY, h:mm:ss a");
     },
+
     pegar_tabela(name) {
       axios
         .get("http://localhost:3000/api/" + name)
@@ -200,22 +220,27 @@ export default {
           console.log(error);
         });
     },
+
     sair404() {
       this.$router.push("/404");
     },
+
     sairHome() {
       this.$router.push("/");
       alert("Evento Indisponível no momento!");
     }
   },
+
   data() {
     return {
       res: [],
+      atividades: [],
       data,
       columns,
       fetch: false
     };
   },
+
   components: {
     e404
   }
