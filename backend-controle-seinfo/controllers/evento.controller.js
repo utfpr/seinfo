@@ -119,7 +119,7 @@ exports.delete = (req, res) => {
     console.log("Deletando o evento com o ID: "+req.params.idEvento);
     res.send(evento); //Retorna um Json para a Pagina da API
   }).catch(err => {
-    res.status(500).send("Error -> " + err);
+   console.send("Error -> " + err);
   })
 };
 

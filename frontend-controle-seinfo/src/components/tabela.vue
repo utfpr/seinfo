@@ -180,7 +180,7 @@
                 <label>Status: {{modalData.status}}</label>,
                 <br>
                 <br>
-                <a-button type="danger" block>Eu desejo Excluir este item</a-button>
+                <a-button v-on:click="deletar_evento(modalData.idEvento)" type="danger" block>Eu desejo Excluir este item</a-button>
             </div>
           </div>
         </div>
@@ -220,6 +220,17 @@ export default {
       this.modalData = data
       this.modalVisible = true
     },
+    deletar_evento(pos) {
+      console.log("ID "+pos);
+      axios.delete('http://localhost:3000/api/evento/'+pos)
+            .then(response => {
+                console.log("Deletou!");
+                console.log(response);
+            });
+            
+            location.reload();
+    },
+  
     pegar_tabela (name) {
       axios.get('http://localhost:3000/api/' + name)
       .then((response) => {
