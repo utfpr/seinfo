@@ -108,7 +108,7 @@ exports.deletaInscricaoEvento = (req, res) => {
 
 exports.selectInscricaoEvento = (req, res) => {
   //seleciona todos inscritos em todos eventos
-  db.inscricaoEvento.findAll({raw:true, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -190,7 +190,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
 
 exports.selectInscricaoAtividade = (req, res) => {
   //seleciona todas pessoas inscritas em todas atividades
-  db.inscricaoAtividade.findAll({raw:true,include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]}).then(pessoaAtv=>{
+  db.inscricaoAtividade.findAll({include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]}).then(pessoaAtv=>{
     res.send(pessoaAtv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
