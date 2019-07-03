@@ -166,6 +166,18 @@ export default {
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
       });
     },
+
+    info() {
+      const h = this.$createElement
+      this.$info({
+        title: 'Cadastrar Evento',
+        content: h('div',{}, [
+          h('p', 'Cadastro feito com Sucesso!'),
+        ]),
+        onOk() {location.reload();},
+      });
+      
+    },
    
     handleSubmit  (e) { 
       e.preventDefault();
@@ -187,9 +199,9 @@ export default {
           console.log("\n\n BODY \n\n");
           this.obj_Resource.lote = this.objeto_lote;
           console.log(this.obj_Resource.lote[0].data_inicio_lote);
-          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response)}).catch(error => {console.log(error.response)});
-          location.reload();
-        }
+          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info(); }).catch(error => {console.log(error.response)});
+          
+          }
       });
     },
   },
