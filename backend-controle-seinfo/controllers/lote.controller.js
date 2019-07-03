@@ -13,8 +13,8 @@ exports.create = (req, res) => {
   }).then(lote => {    
     // Cria um Evento
     console.log("Criado o Lote!")
-    res.redirect("http://localhost:8080/adm/cadEvento");
-    console.log(lote);
+    //res.redirect("http://localhost:8080/adm/cadEvento");
+    //console.log(lote);
   }).catch(err => {
     console.log("Error -> " + err);
   })
