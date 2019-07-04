@@ -24,7 +24,7 @@
     >
       <a-input v-model="obj_login.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
       <a-input v-model="obj_login.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
-    </a-modal> 
+    </a-modal>
 </nav>
 </div>
 </template>
@@ -48,7 +48,7 @@ export default {
     handleOk(e) {
       this.visible = false
       console.log("LOGIN - OK")
-      console.log(this.obj_login)
+      console.log(this.obj_login.username)
 
       axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response.data)}).catch(error => {console.log(error.response)});
       console.log("FEZ O LOGIN")
