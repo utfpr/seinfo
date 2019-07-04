@@ -2,12 +2,12 @@
 <div>
   <nav class="navbar navbar-light justify-content-between" >
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-form class="form" layout="inline" action="http://localhost:3000/api/evento" method="post">
+  <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
     <a-form-item>
-    <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required"/>
+    <input v-model="obj_login.username" type="text" placeholder="Número do Ra" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
-      <input name="password" type="password" placeholder="Senha" class="lg" required="required"/>
+      <input v-model="obj_login.password" type="password" placeholder="Senha" class="lg" required="required"/>
     </a-form-item>
     <a-form-item>
       <a-button class="bt" html-type="submit" >Entrar</a-button>
@@ -18,17 +18,40 @@
 </template>
 
 <script>
+const axios = require("axios");
+export default {
+  mounted() {
+    this.pegar_tabela("pessoas");
+  },
+  methods: {
+    realizar_login() {
+      console.log("LOGIN - OK")
+      console.log(this.obj_login)
+
+      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response)}).catch(error => {console.log(error.response)});
+      console.log("FEZ O LOGIN")
+      console.log(this.obj_usuario_logado)
+    }
+  },
+  data() {
+    return {
+      obj_usuario_logado: {},
+      obj_login: {
+        username : '',
+        password: ''
+      }
+    };
+  }
+};
 </script>
 
 <style scoped>
-
 .bt {
   background: transparent;
   height: 30px;
   color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
 .navbar{
   width: 100%;
   position: fixed;
