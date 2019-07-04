@@ -18,13 +18,13 @@
         <a-col :span="12">
           <a-form-item>
             <label>CPF</label>
-            <a-input maxlength="255" placeholder="Nome" name="cpf" type="number">
+            <a-input maxlength="255" placeholder="CPF" name="cpf" type="number">
               <a-icon slot="prefix" type="idcard" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
           <a-form-item>
             <label>Email:</label>
-            <a-input maxlength="255" placeholder="Nome" name="email" type="text">
+            <a-input maxlength="255" placeholder="e-mail" name="email" type="text">
               <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -45,9 +45,9 @@
                 <th style="text-align:center" class="actions">Ações</th>
               </tr>
             </thead>
-            <tbody v-for="(res, i) in res_localizar_Eventos" :key="res.idEvento">
+            <tbody v-for="(res/*, i*/) in res_localizar_Eventos" :key="res.idEvento">
               <tr style="background-color:white">
-                <td>{{res.nomeEventoe}}</td>
+                <td>{{res.nome}}</td>
                 <td>R$ {{res.lotes[0].valor}}</td>
                 <td>
                   <a-tag style="width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>

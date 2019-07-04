@@ -8,7 +8,7 @@
             <label class="ant-form-item-required">Pessoa:</label>
             <div>
               <a-select name="select_pessoa" defaultValue="${0}">
-                <a-select-option  v-for="(res,i) in res" :key="res.idPessoa" :value="res.idPessoa">{{res.nome}}</a-select-option>
+                <a-select-option  v-for="(res/*,i*/) in res" :key="res.idPessoa" :value="res.idPessoa">{{res.nome}}</a-select-option>
               </a-select>
             </div>
           </a-form-item>
