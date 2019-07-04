@@ -82,7 +82,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Evento.findAll({ raw: true,include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
+  Evento.findAll({include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
     console.log("Listou Todos os Eventos!");
     res.send(evento); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -196,7 +196,7 @@ exports.criaOrganizacao =(req,res)=>{
 
 exports.selectOrganizacao=(req,res)=>{
   //seleciona todos organizadores em todos eventos
-  db.organizacao.findAll({raw:true, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
+  db.organizacao.findAll({ include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
