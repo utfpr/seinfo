@@ -21,6 +21,7 @@ import UsuEvento from '@/components/eventos_usuario';
 import UsuHome from '@/components/atv_usuario';
 import UsuPerfil from '@/components/perfil_usuario';
 import not_found from '@/components/not_found';
+import Cad_Aluno from '@/components/cad_aluno';
 
 
 
@@ -71,6 +72,10 @@ export default new Router({
       path: '/evento/:id',
       name: 'Evento',
       component: Evento
+    },{
+      path: '/cadastro',
+      name: 'Cad_Aluno',
+      component: Cad_Aluno
     },
     {
       path: '/adm',

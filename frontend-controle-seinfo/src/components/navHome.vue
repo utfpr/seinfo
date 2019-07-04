@@ -4,36 +4,48 @@
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
   <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
     <a-form-item>
-    <input v-model="obj_login.username" type="text" placeholder="Número do Ra" class="lg" required="required"/>
+    <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required" style="background: rgba(0, 0, 0, 0.3); border: none; outline: none; padding: 10px; font-size: 13px; color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);"/>
     </a-form-item>
     <a-form-item>
-      <input v-model="obj_login.password" type="password" placeholder="Senha" class="lg" required="required"/>
+      <input name="password" type="password" placeholder="Senha" class="lg" required="required" style="background: rgba(0, 0, 0, 0.3); border: none; outline: none; padding: 10px; font-size: 13px; color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);"/>
     </a-form-item>
     <a-form-item>
       <a-button class="bt" html-type="submit" >Entrar</a-button>
     </a-form-item>
+    <a-form-item>
+      <a-button class="bti" @click="showModal" >Cadastrar</a-button>
+    </a-form-item>
   </a-form>
+  <a-modal
+      title="Basic Modal"
+      v-model="visible"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <a-input v-model="obj_username"  name ="username" type ="text" placeholder="Ra" class="tp" required="required"/>
+      <a-input v-model="obj_password" name ="password" type ="password" placeholder="Senha" class="tp" required="required"/>
+    </a-modal> 
 </nav>
 </div>
 </template>
 
 <script>
-const axios = require("axios");
 export default {
-  mounted() {
-    this.pegar_tabela("pessoas");
+  data() {
+    return {
+      visible: false,
+      obj_username,
+      obj_password,
+    }
   },
   methods: {
     realizar_login() {
       console.log("LOGIN - OK")
       console.log(this.obj_login)
 
-      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {gravar_cookie(response.data())}).catch(error => {console.log(error.response)});
+      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response)}).catch(error => {console.log(error.response)});
       console.log("FEZ O LOGIN")
       console.log(this.obj_usuario_logado)
-    },
-    gravar_cookie(data) {
-      localStorage = data
     }
   },
   data() {
@@ -45,7 +57,7 @@ export default {
       }
     };
   }
-};
+}
 </script>
 
 <style scoped>
@@ -55,6 +67,16 @@ export default {
   color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.bti {
+  background: transparent;
+  border: 0px;
+  padding: 0;
+  height: 30px;
+  color:white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .navbar{
   width: 100%;
   position: fixed;
@@ -72,27 +94,6 @@ export default {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
-input {
-  width: 100%;
-  margin-bottom: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
-  outline: none;
-  padding: 10px;
-  font-size: 13px;
-  color: #fff;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2),
-    0 1px 1px rgba(255, 255, 255, 0.2);
-  -webkit-transition: box-shadow 0.5s ease;
-  -moz-transition: box-shadow 0.5s ease;
-  -o-transition: box-shadow 0.5s ease;
-  -ms-transition: box-shadow 0.5s ease;
-  transition: box-shadow 0.5s ease;
-}
-
 .navi {
   background-color: rgb(34, 34, 34);
   box-shadow: 6px 3px 10px rgb(202, 202, 202);
@@ -102,6 +103,10 @@ input {
   width: 160px;
   height: 30px;
   margin-top: 5px;
+}
+
+.tp{
+  width: 230px;
 }
 
 </style>
