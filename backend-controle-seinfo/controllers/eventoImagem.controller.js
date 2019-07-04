@@ -29,7 +29,7 @@ exports.findById = (req, res) => {
   };
 
   exports.findAll = (req, res) => {  
-    EveImagens.findAll({ raw: true}).then(agevento => {
+    EveImagens.findAll().then(agevento => {
       console.log("Listou Todos os Lotes!");
       res.send(agevento); //Retorna um Json para a Pagina da API
     }).catch(err => {

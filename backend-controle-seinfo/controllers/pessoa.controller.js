@@ -4,7 +4,7 @@ const Pessoa = db.pessoa;
 // Post do Atividade
 exports.create = (req, res) => {
   Pessoa.create({
-    idPessoa: "usuario" + req.body.RA,
+    idPessoa: /*"usuario" + */req.body.RA,
     nome: req.body.nome,
     email: req.body.email,
     CPF: req.body.cpf,
@@ -33,7 +33,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Pessoa.findAll({ raw: true })
+  Pessoa.findAll()
     .then(pessoa => {
       console.log("Listou Todas as Pessoas!");
       res.send(pessoa); //Retorna um Json para a Pagina da API
@@ -71,6 +71,21 @@ exports.delete = (req, res) => {
       res.status(500).send("Error -> " + err);
     });
 };
+
+exports.PessoaExistente=(req,res)=>{
+  Pessoa.findOne({where:{idPessoa: req.params.RA}}).then(pessoa=>{
+    if (pessoa){
+      res.send(true)
+    }
+    else{
+      res.send(false)
+    }
+    //return true
+  }).catch(err=>{
+    res.status(500).send(err)
+    //return false
+  })
+}
 
 //----------------------------------------------------------------------------------------------------
 
