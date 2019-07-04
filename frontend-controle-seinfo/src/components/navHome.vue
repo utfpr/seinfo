@@ -22,20 +22,23 @@
       @ok="handleOk"
       @cancel="handleCancel"
     >
-      <a-input v-model="obj_username"  name ="username" type ="text" placeholder="Ra" class="tp" required="required"/>
-      <a-input v-model="obj_password" name ="password" type ="password" placeholder="Senha" class="tp" required="required"/>
+      <a-input v-model="obj_login.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
+      <a-input v-model="obj_login.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
     </a-modal> 
 </nav>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       visible: false,
-      obj_username,
-      obj_password,
+      obj_login : {
+        username: '',
+        password: ''
+      }
     }
   },
   methods: {
@@ -43,10 +46,13 @@ export default {
       this.visible = true
     },
     handleOk(e) {
-      console.log('OQWGEUIOQWVEQWVRQWRVWQORVWQVRWQVRQVRUWQVRQR');
-      console.log(obj_username);
-      console.log(obj_password);
       this.visible = false
+      console.log("LOGIN - OK")
+      console.log(this.obj_login)
+
+      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response.data)}).catch(error => {console.log(error.response)});
+      console.log("FEZ O LOGIN")
+      console.log(this.obj_usuario_logado)
     },
     handleCancel(e) {
       console.log('Clicked cancel button');
