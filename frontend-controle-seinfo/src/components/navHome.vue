@@ -28,9 +28,12 @@ export default {
       console.log("LOGIN - OK")
       console.log(this.obj_login)
 
-      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response)}).catch(error => {console.log(error.response)});
+      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {gravar_cookie(response.data())}).catch(error => {console.log(error.response)});
       console.log("FEZ O LOGIN")
       console.log(this.obj_usuario_logado)
+    },
+    gravar_cookie(data) {
+      localStorage = data
     }
   },
   data() {
