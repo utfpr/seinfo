@@ -39,7 +39,7 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           if (nome.value.length == 0) {
-            alert("Nome da atividade não pode ser vazio!");
+            alert("Nome da Categoria não pode ser vazio!");
             return;
           } else {
             this.obj_Resource.nome = this.nome;
