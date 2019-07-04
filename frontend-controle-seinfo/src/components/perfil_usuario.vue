@@ -6,9 +6,7 @@
         <a-col :span="12">
           <a-form-item>
             <label>Ra:</label>
-            <a-input maxlength="255" placeholder="Ra" name="ra" type="text">
-              <a-icon slot="prefix" type="tag" style="color:rgba(0,0,0,.25)"/>
-            </a-input>
+            <label></label>
           </a-form-item>
           <a-form-item>
             <label>Nome:</label>
@@ -47,9 +45,9 @@
                 <th style="text-align:center" class="actions">Ações</th>
               </tr>
             </thead>
-            <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
+            <tbody v-for="(res, i) in res_localizar_Eventos" :key="res.idEvento">
               <tr style="background-color:white">
-                <td>{{res.nome}}</td>
+                <td>{{res.nomeEventoe}}</td>
                 <td>R$ {{res.lotes[0].valor}}</td>
                 <td>
                   <a-tag style="width:100px;text-align:center;" color="#3BCA34">Pago</a-tag>
@@ -69,7 +67,7 @@
 const axios = require('axios');
 const columns = [{
   title: 'Nome do Evento',
-  dataIndex: 'nome',
+  dataIndex: 'nomeEvento',
   width: 200,
 }, {
   title: 'Data do Evento',
@@ -87,12 +85,16 @@ const columns = [{
 },{
   title: 'Valor',
   dataIndex: ''
+},{
+  title: 'Nome',
+  dataIndex: 'nome'
 }
 ];
 
 export default {
   mounted(){
-    this.pegar_tabela ("eventosD")
+    this.pegar_tabela ("eventosD"),
+    this.pega_usuario ("pessoas")
   },
   methods: {
     openModal (data) {
@@ -104,16 +106,28 @@ export default {
       .then((response) => {
        console.log("Listou " + name);
        console.log(response.data);
-       this.res_localizar = response.data
+       this.res_localizar_Eventos = response.data
      })
      .catch(function (error) {
        console.log(error);
      })
     },
+    pega_usuario(name){
+      axios.get('http://localhost:3000/api/' + name)
+      .then((response) => {
+       console.log("Listou " + name);
+       console.log(response.data);
+       this.res_localizar_Pessoas = response.data
+     })
+     .catch(function (error) {
+       console.log(error);
+     })
+    }
   },
   data() {
     return {
-      res_localizar: [],
+      res_localizar_Eventos: [{"SS":"ss"}],
+      res_localizar_Pessoas: [],
       columns,
       tabelas: [],
       modalVisible: false,
