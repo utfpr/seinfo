@@ -2,7 +2,7 @@
 <div>
   <nav class="navbar navbar-light justify-content-between" >
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-form class="form" layout="inline" action="http://localhost:3000/api/evento" method="post">
+  <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
     <a-form-item>
     <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required" style="background: rgba(0, 0, 0, 0.3); border: none; outline: none; padding: 10px; font-size: 13px; color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);"/>
     </a-form-item>
@@ -57,7 +57,6 @@ export default {
 </script>
 
 <style scoped>
-
 .bt {
   background: transparent;
   height: 30px;
