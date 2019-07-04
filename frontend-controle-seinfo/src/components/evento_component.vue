@@ -6,47 +6,71 @@
       <a-layout-content v-else-if="this.res.status===1">
         <div>
           <div>
-            <br />
-            <br />
+            <br>
+            <br>
             <!-- pegar imagem do evento -->
-            <img class="child" src="../assets/banner.png" />
+            <img class="child" src="../assets/banner.png">
+            
           </div>
           <div class="box">
             <a-row :gutter="16">
-              <a-col :span="6">
+              <a-col :span="8">
                 <a-card class="title" title="Data de Inicio" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd D MMMM YYYY')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd, D [de] MMMM [de] YYYY')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraInicio).format('[Horário de Início:] hh:mm')}}</p>
                 </a-card>
               </a-col>
-              <a-col :span="6">
+              <a-col :span="8">
                 <a-card class="title" title="Data de Fim" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd D MMMM YYYY')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd, D [de] MMMM [de] YYYY')}}</p>
+                  <p>{{moment(res.agendamento.dataHoraFim).format('[Horário de Fim:] hh:mm')}}</p>
+                  <p></p>
                 </a-card>
               </a-col>
-              <a-col :span="6">
-                <a-card class="title" title="Valor do Evento" :bordered="false">
-                  <p>Conversar sobre isso</p>
-                </a-card>
-              </a-col>
-              <a-col :span="6">
+              <a-col :span="8">
                 <a-card class="title" title="Local" :bordered="false">
                   <p>{{res.agendamento.local}}</p>
                 </a-card>
               </a-col>
             </a-row>
           </div>
-
           <a-card class="layer" title="Título do evento">
-            <p class="para" style="text-align: center">{{res.nome}}</p>
+              <p class="para" style="text-align: center">{{res.nome}}</p>
+            </a-card>
+          <a-card class="layer" title="Lotes" :bordered="false">
+            <p v-for="(lotes, i) in lotes" :key="i">
+              <span
+                v-if="res.lotes[i].dataAbertura !== res.lotes[i].dataFechamento"
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de] MMMM [de] YYYY')}} até {{moment(res.lotes[i].dataFechamento).format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              <span
+                v-else-if="i!== res.lotes.length-1"
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de]  [de] YYYY')}} até {{moment(res.lotes[i+1].dataAbertura).subtract(1, 'days').format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              <span
+                v-else
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+            </p>
           </a-card>
-
           <a-card class="layer" title="Descrição do evento">
             <p class="para">{{res.descricao}}</p>
           </a-card>
+
           <!-- manter palestras e atividades ou só atividades? o que diferencia?
           listar tudo?-->
-          <a-card class="layer" title="Palestras">
-            <p class="para">Ainda não implementado!</p>
+          <a-card class="layer" title="Palestras" v-if="palestras.length!==0">
+            <p
+              class="para"
+              v-for="(atv, i) in palestras"
+              :key="i"
+            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
+            
+          </a-card>
+          <a-card class="layer" title="Minicursos" v-if="minicursos.length!==0">
+            <p
+              class="para"
+              v-for="(atv, i) in minicursos"
+              :key="i"
+            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
+            
           </a-card>
 
           <a-card class="layer" title="Atividades">
@@ -70,8 +94,8 @@
             </p>
           </a-card>
 
-          <br />
-          <br />
+          <br>
+          <br>
         </div>
       </a-layout-content>
 
@@ -186,11 +210,21 @@ export default {
   mounted() {
     this.pegar_tabela("evento/" + this.$route.params.id);
     this.fetch = false;
+    // pegar atividades
     axios
       .get("http://localhost:3000/api/atividade/" + this.$route.params.id)
       .then(response => {
+        console.log("atividades");
         console.log(response.data);
-        this.atividades = response.data;
+        for(var i=0; i<response.data.length; i++){
+          if(((response.data[i].categoriaAtv.nome > "Minicurso") - (response.data[i].categoriaAtv.nome < "Minicurso"))==0){
+            this.minicursos.push(response.data[i]);
+          }else if(((response.data[i].categoriaAtv.nome > "Palestra") - (response.data[i].categoriaAtv.nome < "Palestra"))==0){
+            this.palestras.push(response.data[i]);            
+          }else{
+            this.atividades.push(response.data[i]);
+          }
+        }
         this.fetch = true;
       })
       .catch(function(error) {
@@ -203,10 +237,6 @@ export default {
       return moment(date);
     },
 
-    date: function(date) {
-      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
-    },
-
     pegar_tabela(name) {
       axios
         .get("http://localhost:3000/api/" + name)
@@ -215,6 +245,7 @@ export default {
           console.log(response.data);
           this.res = response.data;
           this.fetch = true;
+          this.lotes = this.res.lotes;
         })
         .catch(function(error) {
           console.log(error);
@@ -235,6 +266,9 @@ export default {
     return {
       res: [],
       atividades: [],
+      minicursos: [],
+      palestras: [],
+      lotes: [],
       data,
       columns,
       fetch: false
@@ -334,6 +368,8 @@ export default {
   text-align: center;
   border: 0.1px solid black;
   position: relative;
+  min-height: 176px;
+  max-height: auto;
 }
 
 .box {
