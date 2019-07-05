@@ -2,13 +2,13 @@
   <div id="work" class="row justify-content-center">
     <div v-for="(res,i) in res" :key="res.idEvento">
       <div class="box-1">
-        <img class="box-2" src="../assets/banner.png">
+        <img class="box-2" src="../assets/banner.png" />
         <div class="card-body">
           <h5 class="card-title">{{res.nome}}</h5>
           <p class="card-text">{{res.descricao}}</p>
-          <a-divider/>
+          <a-divider />
           <a-button :href="'/evento/'+ res.idEvento" class="bt" style="margin-left:33%;">
-            <a-icon type="plus"/>SAIBA MAIS
+            <a-icon type="plus" />SAIBA MAIS
           </a-button>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default {
 }
 
 .card-title {
-   display: inline-block;
+  display: inline-block;
   max-width: 410px;
   min-width: 410px;
   max-height: 30px;
