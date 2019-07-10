@@ -6,11 +6,10 @@
       <a-layout-content v-else-if="this.res.status===1">
         <div>
           <div>
-            <br>
-            <br>
+            <br />
+            <br />
             <!-- pegar imagem do evento -->
-            <img class="child" src="../assets/banner.png">
-            
+            <img class="child" src="../assets/banner.png" />
           </div>
           <div class="box">
             <a-row :gutter="16">
@@ -35,19 +34,19 @@
             </a-row>
           </div>
           <a-card class="layer" title="Título do evento">
-              <p class="para" style="text-align: center">{{res.nome}}</p>
-            </a-card>
+            <p class="para" style="text-align: center">{{res.nome}}</p>
+          </a-card>
           <a-card class="layer" title="Lotes" :bordered="false">
             <p v-for="(lotes, i) in lotes" :key="i">
               <span
                 v-if="res.lotes[i].dataAbertura !== res.lotes[i].dataFechamento"
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de] MMMM [de] YYYY')}} até {{moment(res.lotes[i].dataFechamento).format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de] MMMM [de] YYYY')}} até {{moment(res.lotes[i].dataFechamento).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
               <span
                 v-else-if="i!== res.lotes.length-1"
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de]  [de] YYYY')}} até {{moment(res.lotes[i+1].dataAbertura).subtract(1, 'days').format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} até {{moment(res.lotes[i+1].dataAbertura).subtract(1, 'days').format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
               <span
                 v-else
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de]  [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
             </p>
           </a-card>
           <a-card class="layer" title="Descrição do evento">
@@ -62,7 +61,6 @@
               v-for="(atv, i) in palestras"
               :key="i"
             >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
-            
           </a-card>
           <a-card class="layer" title="Minicursos" v-if="minicursos.length!==0">
             <p
@@ -70,7 +68,6 @@
               v-for="(atv, i) in minicursos"
               :key="i"
             >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
-            
           </a-card>
 
           <a-card class="layer" title="Atividades">
@@ -94,8 +91,8 @@
             </p>
           </a-card>
 
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
       </a-layout-content>
 
@@ -207,21 +204,31 @@ const data = [
   }
 ];
 export default {
-  mounted() {
+  props: {
+    fetch: { type: Boolean }
+  },
+  beforeMount() {
     this.pegar_tabela("evento/" + this.$route.params.id);
-    this.fetch = false;
     // pegar atividades
     axios
       .get("http://localhost:3000/api/atividade/" + this.$route.params.id)
       .then(response => {
-        console.log("atividades");
-        console.log(response.data);
-        for(var i=0; i<response.data.length; i++){
-          if(((response.data[i].categoriaAtv.nome > "Minicurso") - (response.data[i].categoriaAtv.nome < "Minicurso"))==0){
+        // console.log("atividades");
+        // console.log(response.data);
+        for (var i = 0; i < response.data.length; i++) {
+          if (
+            (response.data[i].categoriaAtv.nome > "Minicurso") -
+              (response.data[i].categoriaAtv.nome < "Minicurso") ==
+            0
+          ) {
             this.minicursos.push(response.data[i]);
-          }else if(((response.data[i].categoriaAtv.nome > "Palestra") - (response.data[i].categoriaAtv.nome < "Palestra"))==0){
-            this.palestras.push(response.data[i]);            
-          }else{
+          } else if (
+            (response.data[i].categoriaAtv.nome > "Palestra") -
+              (response.data[i].categoriaAtv.nome < "Palestra") ==
+            0
+          ) {
+            this.palestras.push(response.data[i]);
+          } else {
             this.atividades.push(response.data[i]);
           }
         }
@@ -241,8 +248,8 @@ export default {
       axios
         .get("http://localhost:3000/api/" + name)
         .then(response => {
-          console.log("Listou " + name);
-          console.log(response.data);
+          // console.log("Listou " + name);
+          // console.log(response.data);
           this.res = response.data;
           this.fetch = true;
           this.lotes = this.res.lotes;
@@ -271,7 +278,6 @@ export default {
       lotes: [],
       data,
       columns,
-      fetch: false
     };
   },
 

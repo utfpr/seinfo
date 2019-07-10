@@ -1,6 +1,6 @@
 <template>
   <div id="work" class="row justify-content-center">
-    <div v-for="(res,i) in res" :key="res.idEvento">
+    <div v-for="res in res" :key="res.idEvento">
       <div class="box-1">
         <img class="box-2" src="../assets/banner.png" />
         <div class="card-body">
@@ -28,8 +28,8 @@ export default {
       axios
         .get("http://localhost:3000/api/" + name)
         .then(response => {
-          console.log("Listou " + name);
-          console.log(response.data);
+          // console.log("Listou " + name);
+          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function(error) {
