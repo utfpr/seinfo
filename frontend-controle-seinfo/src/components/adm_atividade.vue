@@ -188,12 +188,12 @@
           <tbody v-for="resp in res" :key="resp.idAtividade">
             <tr>
               <td>{{resp.idAtividade}}</td>
-              <td style="text-align: left;">{{resp.idEvento}}</td>
+              <td style="text-align: left;">ID:{{resp.idEvento}} | {{getEvtNome(resp.idEvento)}}</td>
               <td style="text-align: left;">{{resp.titulo}}</td>
               <td style="text-align: left;">R$ {{resp.valor}}</td>
-              <td style="text-align: left;">{{resp.categoriaAtv.nome}}</td>
+              <td style="text-align: left;">ID:{{resp.categoriaAtv.idCategoria}} | {{resp.categoriaAtv.nome}}</td>
               <td style="text-align: left;">{{resp.quantidadeVagas}}</td>
-              <td style="text-align: left;">{{resp.horasParticipacao}}</td>
+              <td style="text-align: left;">{{resp.horasParticipacao.slice(0, 5)}}</td>
               <td class="actions">
                 <a-tooltip placement="top">
                   <template slot="title">Ver Mais</template>
@@ -270,7 +270,7 @@
             <br />
             <label>Local da Atividade: {{modalData.local_atv}}</label>
             <br />
-            <label>Evento: {{modalData.idEvento}}</label>
+            <label>Evento: {{nomeEvento}}</label>
             <br />
             <label>Categoria: {{modalData.idCategoria}}</label>
             <br />
@@ -420,7 +420,7 @@
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Selecione o Evento:</label>
                     <a-select
-                      v-model="modalData.idEvento"
+                      v-model="nomeEvento"
                       v-bind:disabled="true"
                       defaultValue="..."
                     >
@@ -534,7 +534,7 @@
             <br />
             <label>Local da Atividade: {{modalData.local_atv}}</label>
             <br />
-            <label>Evento: {{modalData.idEvento}}</label>
+            <label>Evento: {{nomeEvento}}</label>
             <br />
             <label>Categoria: {{modalData.idCategoria}}</label>
             <br />
@@ -568,7 +568,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:3000/api/eventosD")
+      .get("http://localhost:3000/api/eventos")
       .then(response => {
         this.eventos = response.data;
         // console.log(this.eventos);
@@ -614,15 +614,19 @@ export default {
           console.log(error);
         });
     },
+    getEvtNome(idEvt) {
+      for (var i = 0; i < this.eventos.length; i++) {
+        if (this.eventos[i].idEvento == idEvt) return this.eventos[i].nome;
+      }
+    },
     openModal(data) {
       this.pegar_tabela();
-      var nova = data;
-      this.modalData = nova;
+      this.modalData = data;
       this.modalVisible = true;
       // console.log(data);
       for (var i = 0; i < this.eventos.length; i++) {
         if (this.eventos[i].idEvento == this.modalData.idEvento) {
-          this.modalData.idEvento = this.eventos[i].nome;
+          this.nomeEvento = this.eventos[i].nome;
           this.modalData.local_atv = this.eventos[i].agendamento.local;
           var datahorainicio = this.eventos[i].agendamento.dataHoraInicio;
           var datahorafim = this.eventos[i].agendamento.dataHoraFim;
@@ -641,7 +645,8 @@ export default {
           this.modalData.idPessoa = this.protagonistas[i].aPes.nome;
         }
       }
-      this.modalData.horasParticipacao = data.horasParticipacao.slice(0, -3);
+      this.modalData.idCategoria = data.categoriaAtv.nome;
+      this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
     },
     handleSubmit(e) {
       var erros = [];
@@ -758,6 +763,8 @@ export default {
       pegou: false,
       modalVisible: false,
       active: false,
+      nomeEvento: "",
+      nomeCat: "",
       modalData: {
         titulo: "",
         valor: "",
