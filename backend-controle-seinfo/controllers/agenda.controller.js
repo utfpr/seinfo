@@ -31,7 +31,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Agenda.findAll({ raw: true}).then(agenda => {
+  Agenda.findAll().then(agenda => {
     console.log("Listou Todos os Agendamentos!");
     res.send(agenda); //Retorna um Json para a Pagina da API
   }).catch(err => {

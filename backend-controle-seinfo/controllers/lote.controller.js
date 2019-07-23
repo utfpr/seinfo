@@ -31,7 +31,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Lotes.findAll({ raw: true}).then(lote => {
+  Lotes.findAll().then(lote => {
     console.log("Listou Todos os Lotes!");
     res.send(lote); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -76,6 +76,3 @@ exports.delete = (req, res) => {
   })
 };
 
-exports.amoeba = (req, res) => {
-  console.log("Função de Teste");
-};

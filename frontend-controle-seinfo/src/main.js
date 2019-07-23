@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import 'ant-design-vue/dist/antd.css';
 import Antd from 'ant-design-vue';
+import SlideUpDown from "vue-slide-up-down";
+
+Vue.component('slide-up-down', SlideUpDown);
 Vue.use(Antd);
 
 
@@ -16,4 +19,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});

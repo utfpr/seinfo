@@ -1,5 +1,5 @@
-module.exports = function(app) {
- 
+module.exports = function (app) {
+
   const atividades = require('../controllers/atividade.controller.js');
 
   // Insere uma atividade
@@ -12,7 +12,7 @@ module.exports = function(app) {
   app.get('/api/atividades', atividades.findAll);
 
   //seleciona as atividades de um evento especifico
-  app.get('/api/atividade/:idEvento',atividades.AtividadeEvento);
+  app.get('/api/atividade/:idEvento', atividades.AtividadeEvento);
 
   // Update de uma atividade pelo ID 
   app.patch('/api/atividade/:idAtividade', atividades.atualiza);
@@ -23,20 +23,20 @@ module.exports = function(app) {
   //-------------------------------------------------------------------------
 
   //define um protagnoista de uma atividade
-  app.post('/api/protagonista/:idAtividade/:idPessoa',atividades.criarProtagonista);
+  app.post('/api/protagonista/:idAtividade/:idPessoa', atividades.criarProtagonista);
 
   //seleciona todos protagonistas
-  app.get('/api/protagonistas',atividades.selectProtagonista);
+  app.get('/api/protagonistas', atividades.selectProtagonista);
 
   //seleciona um protagonista de uma atividade
-  app.get('/api/protagonistas/:idAtividade/:idPessoa',atividades.selectUmProtagonista);
+  app.get('/api/protagonistas/:idAtividade/:idPessoa', atividades.selectUmProtagonista);
 
   //seleciona todos protagonistas de uma atividade
-  app.get('/api/protagonistaP/:idAtividade',atividades.ProtagonistasDaAtv);
+  app.get('/api/protagonistaP/:idAtividade', atividades.ProtagonistasDaAtv);
 
   //seleciona as atividades que uma pessoa é protagonista
-  app.get('/api/protagonistaA/:idPessoa',atividades.AtividadesDoProtagonista);
+  app.get('/api/protagonistaA/:idPessoa', atividades.AtividadesDoProtagonista);
 
   //deleta um protagonista de uma atividade
-  app.delete('/api/protagonista/:idAtividade/:idPessoa',atividades.deletaProtagonista);
-}
+  app.delete('/api/protagonista/:idAtividade/:idPessoa', atividades.deletaProtagonista);
+};

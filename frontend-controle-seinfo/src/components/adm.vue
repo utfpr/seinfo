@@ -10,15 +10,15 @@
         <a-sub-menu key="sub3">
           <span slot="title">
             <a-icon type="form"/>
-            <span>Cadastro de Atividades</span>
+            <span>Atividades/Categorias</span>
           </span>
           <a-menu-item key="13">
             Atividade
-            <router-link to="/adm/cadAtividade"></router-link>
+            <router-link to="/adm/atividade"></router-link>
           </a-menu-item>
           <a-menu-item key="10">
             Categoria
-            <router-link to="/adm/cadCategoria"></router-link>
+            <router-link to="/adm/categoria"></router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub1">

@@ -24,21 +24,16 @@ exports.create = (req, res, imagem_url) => {
       console.log("Foi no 1º!");
       EveImagens.create({"evento":req.evento,"imagem":imagem.idImagem});
     }else{
-        //asdasd
 
       console.log("Foi no 2º!");
       Carrosel.create({"status":req.body.status,"imagem":imagem.idImagem});
     }
-   
 
     res.send(imagem);
 
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
-
-
-
 };
  
 
@@ -49,23 +44,22 @@ exports.findById = (req, res) => {
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
-  };
+};
 
-  exports.findAll = (req, res) => {  
-    Imagem.findAll({ raw: true}).then(imagem => {
-      console.log("Listou Todos as Imagens!");
-      res.send(imagem); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  };
+exports.findAll = (req, res) => {  
+  Imagem.findAll().then(imagem => {
+    console.log("Listou Todos as Imagens!");
+    res.send(imagem); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};
 
-  exports.atualiza = (req,res)=>{
+exports.atualiza = (req,res)=>{
     Imagem.update(
       {
         url: req.url,
 
-    
       },
       {where: {idImagem: req.params.imagemId}}).then(imagem=>{
         console.log("Atualizando Imagem");
@@ -74,18 +68,14 @@ exports.findById = (req, res) => {
         res.status(500).send("Error "+err);
       })
       
-    },
+},
   
 
-  exports.delete = (req, res) => {  
-    Imagem.destroy({ where: { idEvento: req.params.eventoId } }).then(imagem => {
-      console.log("Deletando a Imagem com o ID: "+req.params.eventoId);
-      res.send(imagem); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  };
-
-  // exports.amoeba = (req, res) => {
-  //   console.log("Função de Teste");
-  // };
+exports.delete = (req, res) => {  
+  Imagem.destroy({ where: { idEvento: req.params.eventoId } }).then(imagem => {
+    console.log("Deletando a Imagem com o ID: "+req.params.eventoId);
+    res.send(imagem); //Retorna um Json para a Pagina da API
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  })
+};

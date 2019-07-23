@@ -25,7 +25,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAll = (req, res) => {  
-  Categorias.findAll({ raw: true}).then(categoria => {
+  Categorias.findAll().then(categoria => {
     console.log("Listou Todas as Categorias!");
     res.send(categoria); //Retorna um Json para a Pagina da API
   }).catch(err => {
@@ -47,14 +47,6 @@ exports.atualiza = (req,res)=>{
   
 
 exports.delete = (req, res) => {  
-  /*
-  Categorias.findOne({where:{idCategoria: req.params.categoriaId}}).then(cat=>{
-    db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
-    cat.destroy()
-    res.send('tchau')
-    //db.atividade.destroy({where:{idCategoria:cat.idCategoria}})
-  })
-  */
   Categorias.destroy({where:{idCategoria: req.params.categoriaId}}).then(cate=>{
     res.send('foi')
   }).catch(err=>{

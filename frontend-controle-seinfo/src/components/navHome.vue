@@ -4,10 +4,10 @@
   <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
   <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
     <a-form-item>
-    <input name="username" type="text" placeholder="Número do Ra" class="lg" required="required" style="background: rgba(0, 0, 0, 0.3); border: none; outline: none; padding: 10px; font-size: 13px; color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);"/>
+    <input name="username" type="text" placeholder="Número do Ra" class="lg st" required="required" />
     </a-form-item>
     <a-form-item>
-      <input name="password" type="password" placeholder="Senha" class="lg" required="required" style="background: rgba(0, 0, 0, 0.3); border: none; outline: none; padding: 10px; font-size: 13px; color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);"/>
+      <input name="password" type="password" placeholder="Senha" class="lg st" required="required" />
     </a-form-item>
     <a-form-item>
       <a-button class="bt" html-type="submit" >Entrar</a-button>
@@ -77,6 +77,15 @@ export default {
   height: 30px;
   color:white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.st{
+  background: rgba(0, 0, 0, 0.3);
+  border: none; outline: none; 
+  padding: 10px; font-size: 13px; 
+  color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+  border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; 
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);
 }
 
 .navbar{
