@@ -245,8 +245,8 @@ export default {
   },
   data() {
     return {
-      res_localizar: [{"idEvento":1,"nome":"Extraction and agglomeration of peat","descricao":"VSIIGZRZJIDKZHHGFYXWIPJTZHXZQU","status":1}],
-      columns,
+      res_localizar: [],
+      columns: [],
       tabelas: [],
       modalVisible: false,
       modalData: ''

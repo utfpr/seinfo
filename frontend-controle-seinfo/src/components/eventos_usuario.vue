@@ -12,7 +12,7 @@
               <th style="text-align:center" class="actions">Ações</th>
             </tr>
           </thead>
-          <tbody v-for="(res,i) in res_localizar" :key="res.idEvento">
+          <tbody v-for="(res/*,i*/) in res_localizar" :key="res.idEvento">
             <tr style="background-color:white;">
               <td>{{res.nome}}</td>
               <td>R$ {{res.lotes[0].valor}}</td>
@@ -95,9 +95,9 @@ export default {
   cursor: pointer;
 } 
 .ic:hover{
-  color: white;
+  color: black;
   border-color: white;
-  background-color:   rgb(240, 93, 93);
+  background-color:   rgb(69, 236, 69);
 }
 
 </style>

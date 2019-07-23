@@ -48,8 +48,7 @@ exports.selectCarrossel = (req,res)=>{
 }
 
 exports.selectTodosCarrossel = (req,res)=>{
-  Carrossel.findAll(
-    {raw:true}).then(car=>{
+  Carrossel.findAll().then(car=>{
     res.send(car)
   }).catch(err=>{
     res.status(500).send("Error "+err)

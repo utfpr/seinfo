@@ -10,6 +10,9 @@ module.exports = function(app) {
 
     // Procura todos os pessoa
     app.get('/api/pessoas', pessoa.findAll);
+
+    //Procura se o RA ja existe no banco de dados (se a pessoa ja se cadastrou)
+    app.get('/api/newpessoa/:RA',pessoa.PessoaExistente)
   
     // Update de um pessoa pelo ID 
     app.patch('/api/pessoa/:idPessoa', pessoa.atualiza);

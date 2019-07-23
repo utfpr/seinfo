@@ -9,8 +9,8 @@ import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Cad_Carousel from '@/components/con_carousel';
-import Cad_Atividade from '@/components/cad_atividade';
-import Cad_Categoria from '@/components/cad_categoria';
+import Cad_Atividade from '@/components/adm_atividade';
+import Cad_Categoria from '@/components/adm_categoria';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
 import ADMevento from '@/components/adm_evento';
@@ -18,10 +18,11 @@ import funcPessoa from '@/components/func_pessoa';
 import Teste from '@/components/teste';
 import Usuario from '@/components/usuario';
 import UsuEvento from '@/components/eventos_usuario';
-import UsuHome from '@/components/atv_usuario';
+import atvHome from '@/components/atv_usuario';
 import UsuPerfil from '@/components/perfil_usuario';
 import not_found from '@/components/not_found';
 import Cad_Aluno from '@/components/cad_aluno';
+import homeUsu from '@/components/home_usuario';
 
 
 
@@ -55,7 +56,11 @@ export default new Router({
         },
         {
           path: 'homeUsu',
-          component: UsuHome
+          component: homeUsu
+        },
+        {
+          path: 'atvHome',
+          component: atvHome
         },
         {
           path: 'perfilUsu',
@@ -111,11 +116,11 @@ export default new Router({
           component: Cad_Pessoa
         },
         {
-          path: 'cadAtividade',
+          path: 'atividade',
           component: Cad_Atividade
-        }, ,
+        },
         {
-          path: 'cadCategoria',
+          path: 'categoria',
           component: Cad_Categoria
         },
         {
