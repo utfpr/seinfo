@@ -2,14 +2,14 @@
 <div>
 <a-button class="eve" type="button" :href="'/adm/cadEvento'"><a-icon type="plus" /> EVENTO</a-button>
 <a-table :columns="columns" :dataSource="data" :pagination="{ pageSize:6}" >
-  <a slot="action" slot-scope="text" ><button type="button" class="ic"><a-icon type="edit" /></button>    <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)" >  <a-icon type="delete" /></button>    <button type="button" class="ic"><a-icon type="eye" />  </button></a>
+  <a slot="action" slot-scope="" ><button type="button" class="ic"><a-icon type="edit" /></button>    <button type="button" class="ic" v-on:click="deletar(tabela.idEvento)" >  <a-icon type="delete" /></button>    <button type="button" class="ic"><a-icon type="eye" />  </button></a>
 </a-table>
 </div>
 </template>
 
 <script>
 const columns = [{
-  title: 'Nome do Evento',
+  title: 'Nome do Evento', 
   dataIndex: 'nome',
   width: 200,
 }, {
