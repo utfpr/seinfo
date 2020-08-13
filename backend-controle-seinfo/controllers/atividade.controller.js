@@ -16,7 +16,6 @@ exports.create = (req, res) => {
 
   }).then(atividade => {
     atividade.createAtvAgenda({'dataHoraInicio':data_ini_full,'dataHoraFim':data_fim_full,'local':req.body.local})    
-    
     // Cria um Evento
     console.log("Criado uma categoria!")
     res.send(atividade);
