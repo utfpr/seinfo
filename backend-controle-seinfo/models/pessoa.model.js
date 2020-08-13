@@ -23,7 +23,7 @@
       type: Sequelize.CHAR(11),
       allowNull: false,
       unique: true,
-      primaryKey: true;
+      primaryKey: true,
       field: 'CPF'
     },
     senha: {
@@ -48,6 +48,7 @@
     createdAt: false,
   });
   
+  //????
   Pessoa.associate = models => {  
     models.pessoa.hasMany(models.inscricaoEvento, {
       as:'inscrito',

@@ -168,7 +168,7 @@ exports.DespEv=(req,res)=>{
 exports.criaOrganizacao =(req,res)=>{
   Evento.findOne({where:{idEvento:req.params.idEvento}}).then(evento=>{
     db.pessoa.findOne({where:{CPF:req.params.CPF}}).then(pessoa=>{
-      db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'idPessoa':pessoa.idPessoa}).then(org=>{
+      db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'CPF':pessoa.CPF}).then(org=>{
         res.send(org)
       }).catch(err=>{
         res.status(500).send("Error -> " + err);
