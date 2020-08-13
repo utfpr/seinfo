@@ -36,7 +36,7 @@ module.exports = function(sequelize, Sequelize) {
 	InscricaoE.associate = models => {
 		models.inscricaoEvento.belongsTo(models.pessoa,{
 			as:'pessoaInsc',
-			foreignKey: 'idPessoa',
+			foreignKey: 'CPF',
 		}),
 		models.inscricaoEvento.belongsTo(models.evento,{
 			as:'eventoInsc',
@@ -48,11 +48,11 @@ module.exports = function(sequelize, Sequelize) {
 		}),
 		models.inscricaoEvento.hasOne(models.receitaInscricaoEvento,{
 			as:'receitaInscPe',
-			foreignKey: 'idPessoa',
+			foreignKey: 'CPF',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvPe',
-			foreignKey: 'idPessoa',
+			foreignKey: 'CPF',
 		}),
 		models.inscricaoEvento.hasOne(models.inscricaoAtividade,{
 			as:'inscAtvEv',

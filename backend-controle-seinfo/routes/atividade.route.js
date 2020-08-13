@@ -23,20 +23,20 @@ module.exports = function (app) {
   //-------------------------------------------------------------------------
 
   //define um protagnoista de uma atividade
-  app.post('/api/protagonista/:idAtividade/:idPessoa', atividades.criarProtagonista);
+  app.post('/api/protagonista/:idAtividade/:CPF', atividades.criarProtagonista);
 
   //seleciona todos protagonistas
   app.get('/api/protagonistas', atividades.selectProtagonista);
 
   //seleciona um protagonista de uma atividade
-  app.get('/api/protagonistas/:idAtividade/:idPessoa', atividades.selectUmProtagonista);
+  app.get('/api/protagonistas/:idAtividade/:CPF', atividades.selectUmProtagonista);
 
   //seleciona todos protagonistas de uma atividade
   app.get('/api/protagonistaP/:idAtividade', atividades.ProtagonistasDaAtv);
 
   //seleciona as atividades que uma pessoa é protagonista
-  app.get('/api/protagonistaA/:idPessoa', atividades.AtividadesDoProtagonista);
+  app.get('/api/protagonistaA/:CPF', atividades.AtividadesDoProtagonista);
 
   //deleta um protagonista de uma atividade
-  app.delete('/api/protagonista/:idAtividade/:idPessoa', atividades.deletaProtagonista);
+  app.delete('/api/protagonista/:idAtividade/:CPF', atividades.deletaProtagonista);
 };

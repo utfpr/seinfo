@@ -12,15 +12,15 @@ module.exports = function(sequelize, Sequelize) {
 			},
 			field: 'idEvento'
 		},
-		idPessoa: {
+		CPF: {
 			type: Sequelize.STRING(64),
 			allowNull: false,
 			primaryKey: true,
 			references: {
 				model: 'inscricaoAtividade',
-				key: 'idPessoa'
+				key: 'CPF'
 			},
-			field: 'idPessoa'
+			field: 'CPF'
 		},
 		idAtividade: {
 			type: Sequelize.INTEGER(11),
@@ -46,7 +46,7 @@ module.exports = function(sequelize, Sequelize) {
 	ReceitaAtv.associate = models =>{
 		models.receitaInscricaoAtividade.belongsTo(models.inscricaoAtividade,{
 			as:'receitaInscrito',
-			foreignKey: 'idPessoa',
+			foreignKey: 'CPF',
 			onUpdate: 'cascade',
 			onDelete: 'cascade',
 		}),
@@ -68,7 +68,7 @@ module.exports = function(sequelize, Sequelize) {
 		}),
 		models.receitaInscricaoAtividade.hasOne(models.participaAtividade,{
 			as:'participacaoPes',
-			foreignKey: 'idPessoa',
+			foreignKey: 'CPF',
 		}),
 		models.receitaInscricaoAtividade.hasOne(models.participaAtividade,{
 			as:'participacaoAtv',

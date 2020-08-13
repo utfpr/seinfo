@@ -102,8 +102,8 @@ exports.AtividadeEvento=(req,res)=>{
 
 exports.criarProtagonista = (req,res)=>{
   Atividades.findOne({where:{idAtividade: req.params.idAtividade}}).then(atividade => {
-    db.pessoa.findOne({where:{idPessoa: req.params.idPessoa}}).then(pessoa=>{
-      db.protagonista.create({'atuacao':req.body.atuacao,'idAtividade':atividade.idAtividade,'idPessoa':pessoa.idPessoa}).then(prot=>{
+    db.pessoa.findOne({where:{CPF: req.params.CPF}}).then(pessoa=>{
+      db.protagonista.create({'atuacao':req.body.atuacao,'idAtividade':atividade.idAtividade,'CPF':pessoa.CPF}).then(prot=>{
         res.send(prot)
       }).catch(err=>{
         res.status(500).send("Error -> " + err);
@@ -129,7 +129,7 @@ exports.selectProtagonista=(req,res)=>{
 
 exports.selectUmProtagonista=(req,res)=>{
   //seleciona um protagonista de uma atividade
-  db.protagonista.findOne({where:{idAtividade:req.params.idAtividade,idPessoa:req.params.idPessoa},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
+  db.protagonista.findOne({where:{idAtividade:req.params.idAtividade,CPF:req.params.CPF},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -147,7 +147,7 @@ exports.ProtagonistasDaAtv=(req,res)=>{
 
 exports.AtividadesDoProtagonista=(req,res)=>{
   //seleciona as atividades em que essa pessoa é protagonista
-  db.protagonista.findAll({where:{idPessoa:req.params.idPessoa},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
+  db.protagonista.findAll({where:{CPF:req.params.CPF},include:[{model:db.pessoa,as:'aPes'},{model:db.atividade,as:'aAtv',include:[{model:db.categoria,as:'categoriaAtv'}]}]}).then(prot=>{
     res.send(prot)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -155,7 +155,7 @@ exports.AtividadesDoProtagonista=(req,res)=>{
 }
 
 exports.deletaProtagonista=(req,res)=>{
-  db.protagonista.destroy({where:{idAtividade:req.params.idAtividade,idPessoa:req.params.idPessoa}}).then(prot=>{
+  db.protagonista.destroy({where:{idAtividade:req.params.idAtividade,CPF:req.params.CPF}}).then(prot=>{
     res.send('sumiu')
   }).catch(err => {
     res.status(500).send("Error -> " + err);
