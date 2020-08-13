@@ -17,14 +17,15 @@ USE `seinfo` ;
 DROP TABLE IF EXISTS `seinfo`.`pessoa` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`pessoa` (
-  `idPessoa` VARCHAR(64) NOT NULL,
-  `nome` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
   `CPF` CHAR(11) NOT NULL,
-  `senha` CHAR(32) NOT NULL,
-  `nivel` INT NOT NULL,
+  
+  `idPessoa` VARCHAR(64) NOT NULL,
+  `nome`     VARCHAR(255) NOT NULL,
+  `email`    VARCHAR(255) NOT NULL,  
+  `senha`    CHAR(32) NOT NULL,
+  `nivel`         INT NOT NULL,
   `classificacao` INT NOT NULL,
-  PRIMARY KEY (`idPessoa`)
+  PRIMARY KEY (`CPF`)
 )
 ENGINE = InnoDB;
 
@@ -115,10 +116,10 @@ CREATE INDEX `fk_atividade_evento1_idx` ON `seinfo`.`atividade` (`idEvento` ASC)
 DROP TABLE IF EXISTS `seinfo`.`inscricaoEvento` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`inscricaoEvento` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `dataInscricao` DATE NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idEvento`))
+  PRIMARY KEY (`CPF`, `idEvento`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_pessoa_has_evento_evento2_idx` ON `seinfo`.`inscricaoEvento` (`idEvento` ASC);
@@ -132,15 +133,15 @@ CREATE INDEX `fk_pessoa_has_evento_pessoa1_idx` ON `seinfo`.`inscricaoEvento` (`
 DROP TABLE IF EXISTS `seinfo`.`inscricaoAtividade` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`inscricaoAtividade` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `idAtividade` INT NOT NULL,
   `dataInscricao` DATE NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idEvento`, `idAtividade`),
+  PRIMARY KEY (`CPF`, `idEvento`, `idAtividade`),
   FOREIGN KEY (`idAtividade`) REFERENCES `seinfo`.`atividade` (`idAtividade`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-  FOREIGN KEY (`idPessoa` , `idEvento`) REFERENCES `seinfo`.`inscricaoEvento` (`idPessoa` , `idEvento`)
+  FOREIGN KEY (`CPF` , `idEvento`) REFERENCES `seinfo`.`inscricaoEvento` (`CPF` , `idEvento`)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 )
@@ -148,7 +149,7 @@ ENGINE = InnoDB;
 
 CREATE INDEX `fk_inscricaoAtividade_atividade1_idx` ON `seinfo`.`inscricaoAtividade` (`idAtividade` ASC);
 
-CREATE INDEX `fk_inscricaoAtividade_inscricaoEvento1_idx` ON `seinfo`.`inscricaoAtividade` (`idPessoa` ASC, `idEvento` ASC);
+CREATE INDEX `fk_inscricaoAtividade_inscricaoEvento1_idx` ON `seinfo`.`inscricaoAtividade` (`CPF` ASC, `idEvento` ASC);
 
 
 -- -----------------------------------------------------
@@ -157,12 +158,12 @@ CREATE INDEX `fk_inscricaoAtividade_inscricaoEvento1_idx` ON `seinfo`.`inscricao
 DROP TABLE IF EXISTS `seinfo`.`receitaInscricaoAtividade` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`receitaInscricaoAtividade` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `idAtividade` INT NOT NULL,
   `dataPagamento` DATE NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idEvento`, `idAtividade`),
-  FOREIGN KEY (`idPessoa` , `idEvento` , `idAtividade`) REFERENCES `seinfo`.`inscricaoAtividade` (`idPessoa` , `idEvento` , `idAtividade`)
+  PRIMARY KEY (`CPF`, `idEvento`, `idAtividade`),
+  FOREIGN KEY (`CPF` , `idEvento` , `idAtividade`) REFERENCES `seinfo`.`inscricaoAtividade` (`CPF` , `idEvento` , `idAtividade`)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 )
@@ -175,12 +176,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `seinfo`.`participaAtividade` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`participaAtividade` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `idAtividade` INT NOT NULL,
   `presenca` TINYINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`idPessoa`, `idEvento`, `idAtividade`),
-  FOREIGN KEY (`idPessoa` , `idEvento` , `idAtividade`) REFERENCES `seinfo`.`receitaInscricaoAtividade` (`idPessoa` , `idEvento` , `idAtividade`)
+  PRIMARY KEY (`CPF`, `idEvento`, `idAtividade`),
+  FOREIGN KEY (`CPF` , `idEvento` , `idAtividade`) REFERENCES `seinfo`.`receitaInscricaoAtividade` (`CPF` , `idEvento` , `idAtividade`)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 )
@@ -235,11 +236,11 @@ CREATE INDEX `fk_receita_evento1_idx` ON `seinfo`.`receita` (`idEvento` ASC);
 DROP TABLE IF EXISTS `seinfo`.`receitaInscricaoEvento` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`receitaInscricaoEvento` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `dataPagamento` DATE NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idEvento`),
-  FOREIGN KEY (`idPessoa` , `idEvento`) REFERENCES `seinfo`.`inscricaoEvento` (`idPessoa` , `idEvento`)
+  PRIMARY KEY (`CPF`, `idEvento`),
+  FOREIGN KEY (`CPF` , `idEvento`) REFERENCES `seinfo`.`inscricaoEvento` (`CPF` , `idEvento`)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 )
@@ -352,15 +353,15 @@ CREATE INDEX `fk_evento_has_imagem_evento1_idx` ON `seinfo`.`eventoImagem` (`idE
 DROP TABLE IF EXISTS `seinfo`.`organizacao` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`organizacao` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idEvento` INT NOT NULL,
   `horasParticipacao` TIME NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idEvento`))
+  PRIMARY KEY (`CPF`, `idEvento`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_pessoa_has_evento_evento3_idx` ON `seinfo`.`organizacao` (`idEvento` ASC);
 
-CREATE INDEX `fk_pessoa_has_evento_pessoa2_idx` ON `seinfo`.`organizacao` (`idPessoa` ASC);
+CREATE INDEX `fk_pessoa_has_evento_pessoa2_idx` ON `seinfo`.`organizacao` (`CPF` ASC);
 
 
 -- -----------------------------------------------------
@@ -369,14 +370,14 @@ CREATE INDEX `fk_pessoa_has_evento_pessoa2_idx` ON `seinfo`.`organizacao` (`idPe
 DROP TABLE IF EXISTS `seinfo`.`protagonista` ;
 
 CREATE TABLE IF NOT EXISTS `seinfo`.`protagonista` (
-  `idPessoa` VARCHAR(64) NOT NULL,
+  `CPF` VARCHAR(64) NOT NULL,
   `idAtividade` INT NOT NULL,
   `atuacao` INT NOT NULL,
-  PRIMARY KEY (`idPessoa`, `idAtividade`))
+  PRIMARY KEY (`CPF`, `idAtividade`))
 ENGINE = InnoDB;
 
 CREATE INDEX `fk_pessoa_has_atividade_atividade1_idx` ON `seinfo`.`protagonista` (`idAtividade` ASC);
 
-CREATE INDEX `fk_pessoa_has_atividade_pessoa1_idx` ON `seinfo`.`protagonista` (`idPessoa` ASC);
+CREATE INDEX `fk_pessoa_has_atividade_pessoa1_idx` ON `seinfo`.`protagonista` (`CPF` ASC);
 
 
