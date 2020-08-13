@@ -6,7 +6,6 @@
     idPessoa: {
       type: Sequelize.STRING(64),
       allowNull: false,
-      primaryKey: true,
       field: 'idPessoa'
     },
     nome: {
@@ -24,6 +23,7 @@
       type: Sequelize.CHAR(11),
       allowNull: false,
       unique: true,
+      primaryKey: true;
       field: 'CPF'
     },
     senha: {
