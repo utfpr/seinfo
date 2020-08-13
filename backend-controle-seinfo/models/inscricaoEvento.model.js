@@ -12,15 +12,15 @@ module.exports = function(sequelize, Sequelize) {
 			},
 			field: 'idEvento'
 		},
-		idPessoa: {
+		CPF: {
 			type: Sequelize.STRING(64),
 			allowNull: false,
 			primaryKey: true,
 			references: {
 				model: 'pessoa',
-				key: 'idPessoa'
+				key: 'CPF'
 			},
-			field: 'idPessoa'
+			field: 'CPF'
 		},
 		dataInscricao: {
 			type: Sequelize.DATEONLY,

@@ -22,9 +22,9 @@ exports.create = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-  Pessoa.findOne({ where: { idPessoa: req.params.idPessoa } })
+  Pessoa.findOne({ where: { CPF: req.params.CPF } })
     .then(pessoa => {
-      console.log("Achou uma Pessoa pelo ID " + req.params.idPessoa);
+      console.log("Achou uma Pessoa pelo CPF " + req.params.CPF);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
@@ -50,7 +50,7 @@ exports.atualiza = (req, res) => {
       email: req.body.email,
       senha: req.body.senha
     },
-    { where: { idPessoa: req.params.idPessoa } }
+    { where: { CPF: req.params.CPF } }
   )
     .then(pessoa => {
       console.log("Atualizando uma Pessoa");
@@ -62,9 +62,9 @@ exports.atualiza = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Pessoa.destroy({ where: { idPessoa: req.params.idPessoa } })
+  Pessoa.destroy({ where: { CPF: req.params.CPF } })
     .then(pessoa => {
-      console.log("Deletando uma Pessoa com o ID: " + req.params.idPessoa);
+      console.log("Deletando uma Pessoa com o CPF: " + req.params.CPF);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
@@ -72,6 +72,7 @@ exports.delete = (req, res) => {
     });
 };
 
+//vou deixar assim...
 exports.PessoaExistente=(req,res)=>{
   Pessoa.findOne({where:{idPessoa: req.params.RA}}).then(pessoa=>{
     if (pessoa){
@@ -90,7 +91,7 @@ exports.PessoaExistente=(req,res)=>{
 //----------------------------------------------------------------------------------------------------
 
 exports.cadastrarEmEvento = (req, res) => {
-  Pessoa.findOne({ where: { idPessoa: req.params.idPessoa } }).then(pessoa => {
+  Pessoa.findOne({ where: { CPF: req.params.CPF } }).then(pessoa => {
     db.evento
       .findOne({ where: { idEvento: req.params.idEvento } })
       .then(evento => {
@@ -98,7 +99,7 @@ exports.cadastrarEmEvento = (req, res) => {
           .create({
             dataInscricao: req.body.dataInscricao,
             idEvento: evento.idEvento,
-            idPessoa: pessoa.idPessoa
+            CPF: pessoa.CPF
           })
           .then(inscriEv => {
             res.send(inscriEv);
@@ -112,7 +113,7 @@ exports.cadastrarEmEvento = (req, res) => {
 exports.deletaInscricaoEvento = (req, res) => {
   db.inscricaoEvento
     .destroy({
-      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
+      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }
     })
     .then(delteInsc => {
       res.send("deletou");
@@ -135,7 +136,7 @@ exports.selectInscrito = (req,res)=>{
   //seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]
+      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]
     })
     .then(pessoaEv => {
       res.send(pessoaEv);
@@ -155,7 +156,7 @@ exports.InscricoesNoEvento=(req,res)=>{
 
 exports.InscricoesPessoa=(req,res)=>{
   //seleciona todos eventos que a pessoa se inscreveu
-  db.inscricaoEvento.findAll({where:{idPessoa:req.params.idPessoa}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({where:{CPF:req.params.CPF}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -167,14 +168,14 @@ exports.InscricoesPessoa=(req,res)=>{
 exports.cadastrarEmAtividade = (req, res) => {
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
+      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }
     })
     .then(inscricao => {
       db.inscricaoAtividade
         .create({
           dataInscricao: req.body.dataInscricao,
           idEvento: inscricao.idEvento,
-          idPessoa: inscricao.idPessoa,
+          CPF: inscricao.CPF,
           idAtividade: req.body.idAtividade
         })
         .then(inscriAtv => {
@@ -193,7 +194,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        idPessoa: req.params.idPessoa
+        CPF: req.params.CPF
       }
     })
     .then(deleteInsc => {
@@ -221,7 +222,7 @@ exports.selectInscritoAtv=(req,res)=>{
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        idPessoa: req.params.idPessoa
+        CPF: req.params.CPF
       },include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]
     })
     .then(pessoaAtv => {
@@ -242,7 +243,7 @@ exports.selectInscricoesNaAtividade=(req,res)=>{
 
 exports.selectInscricoesPessoa=(req,res)=>{
   //seleciona as atividades que a pessoa se inscreveu
-  db.inscricaoAtividade.findAll({where:{idPessoa:req.params.idPessoa},include:[{model:db.atividade,as:'atividade'}]}).then(insc=>{
+  db.inscricaoAtividade.findAll({where:{CPF:req.params.CPF},include:[{model:db.atividade,as:'atividade'}]}).then(insc=>{
     res.send(insc)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
