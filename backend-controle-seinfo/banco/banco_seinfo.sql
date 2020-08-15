@@ -124,7 +124,7 @@ ENGINE = InnoDB;
 
 CREATE INDEX `fk_pessoa_has_evento_evento2_idx` ON `seinfo`.`inscricaoEvento` (`idEvento` ASC);
 
-CREATE INDEX `fk_pessoa_has_evento_pessoa1_idx` ON `seinfo`.`inscricaoEvento` (`idPessoa` ASC);
+CREATE INDEX `fk_pessoa_has_evento_pessoa1_idx` ON `seinfo`.`inscricaoEvento` (`CPF` ASC);
 
 
 -- -----------------------------------------------------
