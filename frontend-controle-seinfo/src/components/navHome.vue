@@ -17,22 +17,22 @@
     </a-form-item>
   </a-form>
   <a-modal
-      title="Basic Modal"
+      title="Cadastrar-se como aluno"
       v-model="visible"
       @ok="handleOk"
       @cancel="handleCancel"
     >
       <a-input v-model="obj_login.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
       <a-input v-model="obj_login.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
-  </a-modal>
+      </br>
+      <a> Não é aluno? <a href="cadPessoa"> Cadastrar-se como visitante </a></a>
+    </a-modal>
 </nav>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
-import auth from '../services/auth'
-
 export default {
   data() {
     return {
@@ -47,26 +47,14 @@ export default {
     showModal() {
       this.visible = true
     },
-    async handleOk(e) {
+    handleOk(e) {
       this.visible = false
-      // console.log("LOGIN - OK")
-      // console.log(this.obj_login.username)
+      console.log("LOGIN - OK")
+      console.log(this.obj_login.username)
 
-      const storegeDataUser = await auth.getUser();
-      const storegeToken = await auth.getToken();
-      console.log(storegeDataUser, storegeToken, JSON.parse(storegeDataUser))
-
-      axios
-        .post('http://localhost:3000/api/login/', this.obj_login)
-        .then(res => {
-          console.log(res.data);  
-          // location.replace("http://localhost:8080/adm")
-          auth.login(res.data.token, res.data.pessoa);
-        }).catch(error => {
-          console.log(error)
-        });
-      // console.log("FEZ O LOGIN")
-      // console.log(this.obj_usuario_logado)
+      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response.data)}).catch(error => {console.log(error.response)});
+      console.log("FEZ O LOGIN")
+      console.log(this.obj_usuario_logado)
     },
     handleCancel(e) {
       console.log('Clicked cancel button');
