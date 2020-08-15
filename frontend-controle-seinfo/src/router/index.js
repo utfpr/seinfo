@@ -81,6 +81,10 @@ export default new Router({
       path: '/cadastro',
       name: 'Cad_Aluno',
       component: Cad_Aluno
+    },{
+      path: '/cadPessoa',
+      name: 'Cad_Pessoa',
+      component: Cad_Pessoa
     },
     {
       path: '/adm',
