@@ -30,6 +30,11 @@
           <router-link to="/usuario/atvHome"></router-link>
         </a-menu-item>
         <a-menu-item key="5">
+          <a-icon type="profile" />
+          <span>Minhas inscrições</span>
+          <router-link to="/usuario/listInsc"></router-link>
+        </a-menu-item>
+        <a-menu-item key="6">
           <a-icon type="logout" />
           <span>Sair</span>
            <router-link to="/"></router-link>

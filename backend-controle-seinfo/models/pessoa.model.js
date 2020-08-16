@@ -52,7 +52,7 @@
   Pessoa.associate = models => {  
     models.pessoa.hasMany(models.inscricaoEvento, {
       as:'inscrito',
-      foreignKey: 'idPessoa',
+      foreignKey: 'CPF',
     })
   };
 
