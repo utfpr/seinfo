@@ -3,6 +3,8 @@
     <h5 style="text-align:center">Cadastro de Evento</h5>
     <br />
     <a-button type="primary" class="teste" v-on:click="toggle">Inserir Evento</a-button>
+   
+   <!-- Inicio da inserção -->
     <slide-up-down :active="active">
       <div class="box">
         <form 
@@ -113,7 +115,77 @@
         </form>
       </div>
       <br />
-    </slide-up-down>
+    </slide-up-down> 
+    <!-- Fim da Inserção -->
+    
+    <!-- Inicio da Listagem -->
+    <div id="list" class="row">
+      <div class="table-responsive">
+        <table
+          class="table table-striped"
+          cellspacing="0"
+          cellpadding="0"
+          style="text-align: center;"
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th style="text-align: left;">Nome</th>
+              <th style="text-align: left;">Descrição</th>
+              <th style="text-align: left;">Status</th>
+              <th style="text-align: left;">ID Agenda</th>
+              <th class="actions">Ações</th>
+            </tr>
+          </thead>
+          <tbody v-for="resp in res" :key="resp.idEvento">
+            <tr>
+              <td>{{resp.idEvento}}</td>
+              <td style="text-align: left;">{{resp.nome}}</td>
+              <td style="text-align: left;">{{resp.descricao}}</td>
+              <td style="text-align: left;">{{resp.status}}</td>
+              <td style="text-align: left;">{{resp.idAgenda}}</td>
+              <td class="actions">
+                <a-tooltip placement="top">
+                  <template slot="title">Ver Mais</template>
+                  <a-button
+                    class="ic"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-lg-ver-mais"
+                    @click="openModal(resp)"
+                  >
+                    <a-icon type="eye" />
+                  </a-button>
+                </a-tooltip>
+                <a-tooltip placement="top">
+                  <template slot="title">Editar</template>
+                  <a-button
+                    class="ic"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-lg-editar"
+                    @click="openModal(resp)"
+                  >
+                    <a-icon type="edit" />
+                  </a-button>
+                </a-tooltip>
+                <a-tooltip placement="top">
+                  <template slot="title">Excluir</template>
+                  <a-button
+                    class="ic"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-lg-ver-excluir"
+                    @click="openModal(resp)"
+                  >
+                    <a-icon type="delete" />
+                  </a-button>
+                </a-tooltip>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fim Listagem -->
   </div>
 
 
@@ -126,9 +198,44 @@ let id = 0;
 let flag = 0;
 export default {
 
+  mounted(){ // v
+    this.pegar_tabela ()
+    },
+
   props: {
     disabled: Boolean
   },
+
+  openModal(data) {
+      this.pegar_tabela();
+      this.modalData = data;
+      this.modalVisible = true;
+      // // console.log(data);
+      // for (var i = 0; i < this.eventos.length; i++) {
+      //   if (this.eventos[i].idEvento == this.modalData.idEvento) {
+      //     this.nomeEvento = this.eventos[i].nome;
+      //     this.modalData.local_atv = this.eventos[i].agendamento.local;
+      //     var datahorainicio = this.eventos[i].agendamento.dataHoraInicio;
+      //     var datahorafim = this.eventos[i].agendamento.dataHoraFim;
+      //     this.modalData.data_ini_atv = moment(datahorainicio).format(
+      //       "YYYY-MM-DD"
+      //     );
+      //     this.modalData.data_fim_atv = moment(datahorafim).format(
+      //       "YYYY-MM-DD"
+      //     );
+      //     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
+      //     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
+      //   }
+      // }
+      // for (var i = 0; i < this.protagonistas.length; i++) {
+      //   if (this.modalData.idAtividade == this.protagonistas[i].idAtividade) {
+      //     this.modalData.idPessoa = this.protagonistas[i].aPes.nome;
+      //   }
+      // }
+      // this.modalData.idCategoria = data.categoriaAtv.nome;
+      // this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
+    },
+  
   data () {
     return {
       active: false,
@@ -156,7 +263,8 @@ export default {
         urlImagem: '',
         descricao: '',
         lote: ''
-      }
+      },
+      res: [], // v
     };
   },
   beforeCreate () {
@@ -164,6 +272,19 @@ export default {
     his.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
+
+    pegar_tabela() { // v
+      axios
+        .get("http://localhost:3000/api/eventos")
+        .then(response => {
+          // console.log(response.data);
+          this.res = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
     toggle() {
       this.active = !this.active;
     },
