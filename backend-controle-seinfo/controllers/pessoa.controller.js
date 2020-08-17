@@ -19,12 +19,37 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send("Error -> " + err);
     });
+
+    var nodemailer = require('nodemailer');
+
+    var remetente = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      service: 'smtp.gmail.com',
+      port: 587,
+      secure: true,
+      auth:{
+        user: 'emailseinfo@gmail.com',
+        pass: 'bcc34falunos' }
+    });
+    var emailConfCadastro = {
+      from: 'emailseinfo@gmail.com',
+      to: Pessoa.email,
+      subject: 'Confirmação de cadastro Seinfo',
+      text: 'Você está recebendo este email para confirmar seu cadastro no evento Seinfo.',
+    };
+    remetente.sendMail(emailConfCadastro, function(error){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email enviado com sucesso.');
+      }
+    });
 };
 
 exports.findById = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } })
+  Pessoa.findOne({ where: { idPessoa: req.params.idPessoa } })
     .then(pessoa => {
-      console.log("Achou uma Pessoa pelo CPF " + req.params.CPF);
+      console.log("Achou uma Pessoa pelo ID " + req.params.idPessoa);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
@@ -50,7 +75,7 @@ exports.atualiza = (req, res) => {
       email: req.body.email,
       senha: req.body.senha
     },
-    { where: { CPF: req.params.CPF } }
+    { where: { idPessoa: req.params.idPessoa } }
   )
     .then(pessoa => {
       console.log("Atualizando uma Pessoa");
@@ -62,9 +87,9 @@ exports.atualiza = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Pessoa.destroy({ where: { CPF: req.params.CPF } })
+  Pessoa.destroy({ where: { idPessoa: req.params.idPessoa } })
     .then(pessoa => {
-      console.log("Deletando uma Pessoa com o CPF: " + req.params.CPF);
+      console.log("Deletando uma Pessoa com o ID: " + req.params.idPessoa);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
@@ -72,7 +97,6 @@ exports.delete = (req, res) => {
     });
 };
 
-//vou deixar assim...
 exports.PessoaExistente=(req,res)=>{
   Pessoa.findOne({where:{idPessoa: req.params.RA}}).then(pessoa=>{
     if (pessoa){
@@ -91,7 +115,7 @@ exports.PessoaExistente=(req,res)=>{
 //----------------------------------------------------------------------------------------------------
 
 exports.cadastrarEmEvento = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } }).then(pessoa => {
+  Pessoa.findOne({ where: { idPessoa: req.params.idPessoa } }).then(pessoa => {
     db.evento
       .findOne({ where: { idEvento: req.params.idEvento } })
       .then(evento => {
@@ -99,7 +123,7 @@ exports.cadastrarEmEvento = (req, res) => {
           .create({
             dataInscricao: req.body.dataInscricao,
             idEvento: evento.idEvento,
-            CPF: pessoa.CPF
+            idPessoa: pessoa.idPessoa
           })
           .then(inscriEv => {
             res.send(inscriEv);
@@ -113,7 +137,7 @@ exports.cadastrarEmEvento = (req, res) => {
 exports.deletaInscricaoEvento = (req, res) => {
   db.inscricaoEvento
     .destroy({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }
+      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
     })
     .then(delteInsc => {
       res.send("deletou");
@@ -136,7 +160,7 @@ exports.selectInscrito = (req,res)=>{
   //seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]
+      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]
     })
     .then(pessoaEv => {
       res.send(pessoaEv);
@@ -156,7 +180,7 @@ exports.InscricoesNoEvento=(req,res)=>{
 
 exports.InscricoesPessoa=(req,res)=>{
   //seleciona todos eventos que a pessoa se inscreveu
-  db.inscricaoEvento.findAll({where:{CPF:req.params.CPF}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
+  db.inscricaoEvento.findAll({where:{idPessoa:req.params.idPessoa}, include:[{model:db.pessoa,as:'pessoaInsc'},{model:db.evento,as:'eventoInsc'}]}).then(pessoaEv=>{
     res.send(pessoaEv)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -168,14 +192,14 @@ exports.InscricoesPessoa=(req,res)=>{
 exports.cadastrarEmAtividade = (req, res) => {
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF }
+      where: { idEvento: req.params.idEvento, idPessoa: req.params.idPessoa }
     })
     .then(inscricao => {
       db.inscricaoAtividade
         .create({
           dataInscricao: req.body.dataInscricao,
           idEvento: inscricao.idEvento,
-          CPF: inscricao.CPF,
+          idPessoa: inscricao.idPessoa,
           idAtividade: req.body.idAtividade
         })
         .then(inscriAtv => {
@@ -194,7 +218,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        CPF: req.params.CPF
+        idPessoa: req.params.idPessoa
       }
     })
     .then(deleteInsc => {
@@ -222,7 +246,7 @@ exports.selectInscritoAtv=(req,res)=>{
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        CPF: req.params.CPF
+        idPessoa: req.params.idPessoa
       },include:[{model:db.atividade,as:'atividade'},{model:db.inscricaoEvento,as:'eventoInsc',include:[{model:db.evento,as:'eventoInsc'},{model:db.pessoa,as:'pessoaInsc'}]}]
     })
     .then(pessoaAtv => {
@@ -243,7 +267,7 @@ exports.selectInscricoesNaAtividade=(req,res)=>{
 
 exports.selectInscricoesPessoa=(req,res)=>{
   //seleciona as atividades que a pessoa se inscreveu
-  db.inscricaoAtividade.findAll({where:{CPF:req.params.CPF},include:[{model:db.atividade,as:'atividade'}]}).then(insc=>{
+  db.inscricaoAtividade.findAll({where:{idPessoa:req.params.idPessoa},include:[{model:db.atividade,as:'atividade'}]}).then(insc=>{
     res.send(insc)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
