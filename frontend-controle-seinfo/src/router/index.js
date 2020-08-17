@@ -10,6 +10,7 @@ import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Cad_Carousel from '@/components/con_carousel';
 import Cad_Atividade from '@/components/adm_atividade';
+import listInscricoes from '@/components/list_inscricoes';
 import Cad_Categoria from '@/components/adm_categoria';
 import Logo from '@/components/logo';
 import Evento from '@/components/evento';
@@ -61,6 +62,10 @@ export default new Router({
         {
           path: 'atvHome',
           component: atvHome
+        },
+        {
+          path: 'listInsc',
+          component: listInscricoes
         },
         {
           path: 'perfilUsu',
