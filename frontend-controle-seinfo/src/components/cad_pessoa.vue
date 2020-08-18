@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Nome:</label>
-            <a-input maxlength="255" placeholder="Nome" name="nome_vi" type="text">
+            <a-input maxlength="255" placeholder="Nome" name="nome" type="text">
               <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Email:</label>
-            <a-input maxlength="255" placeholder="Email" name="email_vi" type="text">
+            <a-input maxlength="255" placeholder="Email" name="email" type="text">
               <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -22,7 +22,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">CPF:</label>
-            <a-input type="text" name="cpf_vi" placeholder="000.000.000-00"/>
+            <a-input type="text" name="cpf" placeholder="000.000.000-00"/>
           </a-form-item>
         </div>
         <div class="row justify-content-center">

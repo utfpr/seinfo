@@ -3,14 +3,42 @@ const Pessoa = db.pessoa;
 
 // Post do Atividade
 exports.create = (req, res) => {
+
+  var id
+  var senha
+  var nivel
+  var classificacao
+
+  if (req.body.RA == null){
+    id = "VISITANTE";
+  } else{
+    id = req.body.RA;
+  }
+
+  if (req.body.senha == null){
+    senha = Math.random().toString(36).slice(-8);
+  } else{
+    senha = req.body.senha;
+  }
+
+  //nivel 1 é um placeholder
+  if (req.body.nivel == null){
+    nivel = 1;
+  }
+
+  // classificacao 1 é um placeholder
+  if (req.body.classificacao == null){
+    classificacao = 1;
+  }
+
   Pessoa.create({
-    idPessoa: /*"usuario" + */req.body.RA,
+    idPessoa: id,
     nome: req.body.nome,
     email: req.body.email,
     CPF: req.body.cpf,
-    senha: req.body.senha,
-    nivel: req.body.nivel,
-    classificacao: req.body.classificacao
+    senha: senha,
+    nivel: nivel,
+    classificacao: classificacao
   })
     .then(pessoa => {
       console.log("Criado uma Pessoa!");
@@ -24,18 +52,18 @@ exports.create = (req, res) => {
 
     var remetente = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      service: 'smtp.gmail.com',
+      //service: 'smtp.gmail.com',
       port: 587,
-      secure: true,
+      secure: false,
       auth:{
         user: 'emailseinfo@gmail.com',
         pass: 'bcc34falunos' }
     });
     var emailConfCadastro = {
       from: 'emailseinfo@gmail.com',
-      to: Pessoa.email,
+      to: req.body.email,
       subject: 'Confirmação de cadastro Seinfo',
-      text: 'Você está recebendo este email para confirmar seu cadastro no evento Seinfo.',
+      text: 'Você está recebendo este email para confirmar seu cadastro no evento Seinfo.\n Sua senha é: ' + senha,
     };
     remetente.sendMail(emailConfCadastro, function(error){
       if (error) {
