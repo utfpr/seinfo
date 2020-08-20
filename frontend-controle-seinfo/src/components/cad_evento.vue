@@ -186,13 +186,55 @@
     </div>
 
     <!-- Fim Listagem -->
-  </div>
 
+    <!-- MODAL VER MAIS (INICIO) -->
+    
+    <div
+      class="modal fade bd-example-modal-lg-ver-mais"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ver Mais</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="text-align: center">
+          <label>ID Evento: {{modalData.idEvento}}</label>
+            <br />
+            <label>Nome do Evento: {{modalData.nome}}</label>
+            <br />
+            <label>Local do Evento: {{modalData.local_eve}}</label>
+            <br />
+            <!-- <label>Data de Início: {{moment(modalData.data_ini_eve).format("DD/MM/YYYY")}}</label>
+            <br />
+            <label>Data de Fim: {{moment(modalData.data_fim_eve).format("DD/MM/YYYY")}}</label>
+            <br />
+            <label>Horário de Início: {{modalData.hora_ini_eve}}</label>
+            <br />
+            <label>Horário de Fim: {{modalData.hora_fim_eve}}</label>
+            <br /> -->        
+            <label>Status: {{modalData.status}}</label>
+            <br />
+            <label>Descrição: {{modalData.descricao}}</label>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL VER MAIS (FIM) -->
+  </div>
 
 </template>
 
 <script>
 import axios from 'axios'
+import moment from "moment";
+moment.locale("pt-br");
 
 let id = 0;
 let flag = 0;
@@ -205,40 +247,34 @@ export default {
   props: {
     disabled: Boolean
   },
-
-  openModal(data) {
-      this.pegar_tabela();
-      this.modalData = data;
-      this.modalVisible = true;
-      // // console.log(data);
-      // for (var i = 0; i < this.eventos.length; i++) {
-      //   if (this.eventos[i].idEvento == this.modalData.idEvento) {
-      //     this.nomeEvento = this.eventos[i].nome;
-      //     this.modalData.local_atv = this.eventos[i].agendamento.local;
-      //     var datahorainicio = this.eventos[i].agendamento.dataHoraInicio;
-      //     var datahorafim = this.eventos[i].agendamento.dataHoraFim;
-      //     this.modalData.data_ini_atv = moment(datahorainicio).format(
-      //       "YYYY-MM-DD"
-      //     );
-      //     this.modalData.data_fim_atv = moment(datahorafim).format(
-      //       "YYYY-MM-DD"
-      //     );
-      //     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
-      //     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
-      //   }
-      // }
-      // for (var i = 0; i < this.protagonistas.length; i++) {
-      //   if (this.modalData.idAtividade == this.protagonistas[i].idAtividade) {
-      //     this.modalData.idPessoa = this.protagonistas[i].aPes.nome;
-      //   }
-      // }
-      // this.modalData.idCategoria = data.categoriaAtv.nome;
-      // this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
-    },
   
   data () {
     return {
+      res: [],
       active: false,
+      data_ini_eve: "",
+      data_fim_eve: "",
+      hora_ini_eve: "",
+      hora_fim_eve: "",
+      local_eve: "",
+      idEvento: "",
+      descricao: "",
+      pegou: false,
+      modalVisible: false,
+      active: false,
+      nomeEvento: "",
+
+      modalData: {
+        idEvento: "",
+        nome: "",
+        data_ini_eve: "",
+        data_fim_eve: "",
+        hora_ini_eve: "",
+        hora_fim_eve: "",
+        local_eve: "",
+        descricao: ""
+      },
+
       objeto_lote: [],
       formItemLayout: {
         labelCol: {
@@ -252,19 +288,16 @@ export default {
       },
 
        obj_Resource: {
-        nome: '',
-        data_ini: '',
-        hora_ini: '',
-        data_fim: '',
-        hora_fim: '',
-        local_eve: '',
-        select_status: '',
-        //Disponibilidade
-        urlImagem: '',
-        descricao: '',
-        lote: ''
+        nome: "",
+        data_ini_eve: "",
+        hora_ini_eve: "",
+        data_fim_eve: "",
+        hora_fim_eve: "",
+        local_eve: "",
+        status: "",
+        urlImagem: "",
+        descricao: "",
       },
-      res: [], // v
     };
   },
   beforeCreate () {
@@ -272,6 +305,31 @@ export default {
     his.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
+
+      openModal(data) {
+      console.log(data);
+      this.pegar_tabela();
+      this.modalData = data;
+      this.modalVisible = true;
+      for (var i = 0; i < this.res.length; i++) {
+        if (this.res[i].idEvento == this.modalData.idEvento) {
+          this.modelData.nome = this.res[i].nome;
+          this.modalData.local_eve = this.res[i].agendamento.local;
+          var datahorainicio = this.res[i].agendamento.dataHoraInicio;
+          var datahorafim = this.res[i].agendamento.dataHoraFim;
+          this.modalData.data_ini_eve = moment(datahorainicio).format(
+            "YYYY-MM-DD"
+          );
+          this.modalData.data_fim_eve = moment(datahorafim).format(
+            "YYYY-MM-DD"
+          );
+          this.modalData.hora_ini_eve = moment(datahorainicio).format("HH:mm");
+          this.modalData.hora_fim_eve = moment(datahorafim).format("HH:mm");
+        }
+      }
+    },
+
+
 
     pegar_tabela() { // v
       axios
