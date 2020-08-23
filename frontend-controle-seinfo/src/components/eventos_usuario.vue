@@ -18,7 +18,7 @@
               <td>R$ {{res.lotes[0].valor}}</td>
               <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
               <td style="text-align:center" class="actions">
-                  <a-button style="text-align:right" type="button" class="ic">  INSCREVER-SE</a-button>
+                  <a-button style="text-align:right" type="button" class="ic" @click="incricao(res.idEvento)" >  INSCREVER-SE</a-button>
               </td>
             </tr>          
           </tbody>
@@ -54,6 +54,10 @@ const columns = [{
 }
 ];
 
+const pessoa = {
+  cpf: '77'
+}
+
 export default {
   mounted(){
     this.pegar_tabela ("eventosD")
@@ -74,6 +78,17 @@ export default {
        console.log(error);
      })
     },
+
+    incricao (id) {
+      axios.post(`http://localhost:3000/api/inscEv/${id}/${pessoa.cpf}`, {dataInscricao: "2020/08/09"} )
+      .then((response) => {
+       console.log(response.data);
+     })
+     .catch(function (error) {
+       console.log(error);
+     })
+    }
+    
   },
   data() {
     return {
@@ -81,8 +96,8 @@ export default {
       columns,
       tabelas: [],
       modalVisible: false,
-      modalData: ''
-    
+      modalData: '',
+      pessoa
     }
   }
 }
