@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+    <AuthProvider>
+      <router-view/>
+    </AuthProvider>
   </div>
 </template>
 
 <script>
+import AuthProvider from './contexts/authProvider';
 export default {
   name: 'App',
+  components: {
+    AuthProvider,
+  },
 }
 </script>
 
