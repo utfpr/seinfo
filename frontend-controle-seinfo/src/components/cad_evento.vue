@@ -302,11 +302,11 @@ export default {
   },
   beforeCreate () {
     this.form = this.$form.createForm(this);
-    his.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
 
-      openModal(data) {
+    openModal(data) {
       console.log(data);
       this.pegar_tabela();
       this.modalData = data;
@@ -360,6 +360,7 @@ export default {
     add  () {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
+      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
@@ -394,11 +395,8 @@ export default {
             obj_temp.valor_lote = values.valor_lote[i]
             this.objeto_lote.push(obj_temp)
           }
-          console.log(this.objeto_lote)
-          console.log("\n\n BODY \n\n");
-          this.obj_Resource.lote = this.objeto_lote;
-          console.log(this.obj_Resource.lote[0].data_inicio_lote);
-          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info(); }).catch(error => {console.log(error.response)});
+          this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
+          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info();this.toggle()}).catch(error => {console.log(error.response)});
           
           }
       });
