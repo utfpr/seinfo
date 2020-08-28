@@ -1,37 +1,55 @@
 <template>
-<div>
-<h5>Eventos que você participa</h5>
-      <div id="list" class="row">
-        <div class="table-responsive">
-          <table class="table table-striped" cellspacing="0" cellpadding="0">
-            <thead>
-              <tr>
-                <th style="width:35%">Nome</th>
-                <th style="text-align: center;">Valor</th>
-                <th style="text-align: center;">Status</th>
-              </tr>
-            </thead>
-            <tbody v-for="(res/*, i*/) in res_localizar_Eventos" :key="res.idEvento">
-              <tr style="background-color:white">
-                <td>{{res.nome}}</td>
-                <td style="text-align:center;">R$ {{res.lotes[0].valor}}</td>
-                <td style="text-align:center;"> 
-                  <a-tag style="width:130px;text-align:center;" color="#3BCA34">Pago</a-tag>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-</div>
-
+  <div>
+  <div>
+    <a-alert
+      v-if="visible"
+      message="Inscrito com sucesso!"
+      type="success"
+      closable
+      :after-close="handleClose"
+    />
+    <a-alert
+      v-if="visible2"
+      message="Não foi possível realizar a inscrição!"
+      type="error"
+      closable
+      :after-close="handleClose"
+    />
+  </div>
+    <h3>Eventos Disponíveis</h3>
+    <div id="list" class="row">
+      <div class="table-responsive col-md-12">
+        <table class="table table-striped" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr >
+              <th style="width:35%">Nome</th>
+              <th style="text-align: left;">Valor</th>
+              <th style="text-align: left;" >Status</th>
+              <th style="text-align:center" class="actions">Ações</th>
+            </tr>
+          </thead>
+          <tbody v-for="(res/*,i*/) in res_localizar" :key="res.idEvento">
+            <tr style="background-color:white;">
+              <td>{{res.nome}}</td>
+              <td>R$ {{res.lotes[0].valor}}</td>
+              <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
+              <td style="text-align:center" class="actions">
+                  <a-button style="text-align:right" type="button" class="ic"  href="atvHome"> INSCREVER-SE  </a-button>
+              </td>
+            </tr>          
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
 </template>
+
 
 <script>
 const axios = require('axios');
 const columns = [{
   title: 'Nome do Evento',
-  dataIndex: 'nomeEvento',
+  dataIndex: 'nome',
   width: 200,
 }, {
   title: 'Data do Evento',
@@ -49,15 +67,17 @@ const columns = [{
 },{
   title: 'Valor',
   dataIndex: ''
-},{
-  title: 'Nome',
-  dataIndex: 'nome'
 }
 ];
+
+const pessoa = {
+  cpf: '1'
+}
+
+
 export default {
   mounted(){
-    this.pegar_tabela ("eventosD"),
-    this.pega_usuario ("pessoas")
+    this.pegar_tabela ("eventosD")
   },
   methods: {
     openModal (data) {
@@ -69,38 +89,57 @@ export default {
       .then((response) => {
        console.log("Listou " + name);
        console.log(response.data);
-       this.res_localizar_Eventos = response.data
+       this.res_localizar = response.data
      })
      .catch(function (error) {
        console.log(error);
      })
     },
-    pega_usuario(name){
-      axios.get('http://localhost:3000/api/' + name)
+    handleClose() {
+      this.visible = false;
+      this.visible2 = false;
+    },
+    incricao (id) {
+      axios.post(`http://localhost:3000/api/inscEv/${id}/${pessoa.cpf}`, {dataInscricao: "2020/08/09"} )
       .then((response) => {
-       console.log("Listou " + name);
        console.log(response.data);
-       this.res_localizar_Pessoas = response.data
+       console.log('sucess');
+       this.visible = true;
+       //alert("Inscrição bem sucedida!");
      })
      .catch(function (error) {
        console.log(error);
+       //alert("Inscrição falhou!");
+       this.visible2 = true;
      })
     }
+    
   },
   data() {
     return {
-      res_localizar_Eventos: [{"SS":"ss"}],
-      res_localizar_Pessoas: [],
+      res_localizar: [],
       columns,
       tabelas: [],
       modalVisible: false,
-      modalData: ''
-    
+      modalData: '',
+      visible: false,
+      visible2: false,
+      pessoa
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+
+.ic{
+  background-color: rgb(69, 236, 69);
+  cursor: pointer;
+} 
+.ic:hover{
+  color: black;
+  border-color: white;
+  background-color:   rgb(69, 236, 69);
+}
 
 </style>

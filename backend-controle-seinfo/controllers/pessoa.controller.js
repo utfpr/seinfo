@@ -103,7 +103,7 @@ exports.atualiza = (req, res) => {
       email: req.body.email,
       senha: req.body.senha
     },
-    { where: { idPessoa: req.params.idPessoa } }
+    { where: { CPF: req.params.CPF } }
   )
     .then(pessoa => {
       console.log("Atualizando uma Pessoa");
@@ -115,9 +115,9 @@ exports.atualiza = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Pessoa.destroy({ where: { idPessoa: req.params.idPessoa } })
+  Pessoa.destroy({ where: { CPF: req.params.CPF } })
     .then(pessoa => {
-      console.log("Deletando uma Pessoa com o ID: " + req.params.idPessoa);
+      console.log("Deletando uma Pessoa com o ID: " + req.params.CPF);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
@@ -126,7 +126,7 @@ exports.delete = (req, res) => {
 };
 
 exports.PessoaExistente=(req,res)=>{
-  Pessoa.findOne({where:{idPessoa: req.params.RA}}).then(pessoa=>{
+  Pessoa.findOne({where:{CPF: req.params.CPF}}).then(pessoa=>{
     if (pessoa){
       res.send(true)
     }
