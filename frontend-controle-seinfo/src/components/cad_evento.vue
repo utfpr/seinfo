@@ -210,14 +210,14 @@
             <br />
             <label>Local do Evento: {{modalData.local_eve}}</label>
             <br />
-            <!-- <label>Data de Início: {{moment(modalData.data_ini_eve).format("DD/MM/YYYY")}}</label>
+            <label>Data de Início: {{modalData.data_ini_eve}}</label>
             <br />
-            <label>Data de Fim: {{moment(modalData.data_fim_eve).format("DD/MM/YYYY")}}</label>
+            <label>Data de Fim: {{modalData.data_fim_eve}}</label>
             <br />
             <label>Horário de Início: {{modalData.hora_ini_eve}}</label>
             <br />
             <label>Horário de Fim: {{modalData.hora_fim_eve}}</label>
-            <br /> -->        
+            <br />      
             <label>Status: {{modalData.status}}</label>
             <br />
             <label>Descrição: {{modalData.descricao}}</label>
@@ -307,26 +307,15 @@ export default {
     methods: {
 
     openModal(data) {
-      console.log(data);
       this.pegar_tabela();
       this.modalData = data;
       this.modalVisible = true;
-      for (var i = 0; i < this.res.length; i++) {
-        if (this.res[i].idEvento == this.modalData.idEvento) {
-          this.modelData.nome = this.res[i].nome;
-          this.modalData.local_eve = this.res[i].agendamento.local;
-          var datahorainicio = this.res[i].agendamento.dataHoraInicio;
-          var datahorafim = this.res[i].agendamento.dataHoraFim;
-          this.modalData.data_ini_eve = moment(datahorainicio).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.data_fim_eve = moment(datahorafim).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.hora_ini_eve = moment(datahorainicio).format("HH:mm");
-          this.modalData.hora_fim_eve = moment(datahorafim).format("HH:mm");
-        }
-      }
+      this.modalData.nome = data.nome;
+      this.modalData.local_eve = data.agendamento.local;
+      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
+      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
     },
 
 
