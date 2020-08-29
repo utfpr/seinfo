@@ -1,7 +1,6 @@
 const db = require("../models/index.js");
 const Pessoa = db.pessoa;
 
-// Post do Atividade
 exports.create = (req, res) => {
 
   var id
@@ -57,9 +56,11 @@ exports.create = (req, res) => {
       secure: false,
       auth:{
         user: 'emailseinfo@gmail.com',
-        pass: 'bcc34falunos' }
+        pass: 'bcc34falunos'
+      }
     });
-    var emailConfCadastro = {
+    var emailConfCadastro = 
+    {
       from: 'emailseinfo@gmail.com',
       to: req.body.email,
       subject: 'Confirmação de cadastro Seinfo',
