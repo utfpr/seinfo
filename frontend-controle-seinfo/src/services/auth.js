@@ -18,7 +18,7 @@ const getUser = async () => {
   try {
     const value = await localStorage.getItem(dataUser);
     if (value !== undefined) {
-      return value;
+      return JSON.parse(value);
     }
   } catch (error) {
     console.log(error);

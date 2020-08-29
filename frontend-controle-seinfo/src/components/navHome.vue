@@ -1,60 +1,91 @@
 <template>
-<div>
-  <nav class="navbar navbar-light justify-content-between" >
-  <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
-  <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
-    <a-form-item>
-    <input name="username" type="text" placeholder="Número do Ra" class="lg st" required="required" />
-    </a-form-item>
-    <a-form-item>
-      <input name="password" type="password" placeholder="Senha" class="lg st" required="required" />
-    </a-form-item>
-    <a-form-item>
-      <a-button class="bt" html-type="submit" >Entrar</a-button>
-    </a-form-item>
-    <a-form-item>
-      <a-button class="bti" @click="showModal" >Cadastrar</a-button>
-    </a-form-item>
-  </a-form>
-  <a-modal
-      title="Cadastrar-se como aluno"
-      v-model="visible"
-      @ok="handleOk"
-      @cancel="handleCancel"
-    >
-      <a-input v-model="obj_login.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
-      <a-input v-model="obj_login.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
-      </br>
-      <a> Não é aluno? <a href="cadPessoa"> Cadastrar-se como visitante </a></a>
-    </a-modal>
-</nav>
-</div>
+  <AuthConsumer>
+    <div slot-scope="{ signIn }">
+      <nav class="navbar navbar-light justify-content-between" >
+        <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
+        <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
+          <a-form-item>
+          <input v-model="obj_login.username" name="username" type="text" placeholder="Número do Ra" class="lg st" required="required" />
+          </a-form-item>
+          <a-form-item>
+            <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />
+          </a-form-item>
+          <a-form-item>
+            <a-button class="bt" @click="LoginUser(signIn)" >Entrar</a-button>
+          </a-form-item>
+          <a-form-item>
+            <a-button class="bti" @click="showModal" >Cadastrar</a-button>
+          </a-form-item>   
+        </a-form>
+        <a-modal
+            title="Cadastrar-se como aluno"
+            v-model="visible"
+            @ok="handleOk"
+            @cancel="handleCancel"
+          >
+            <a-input v-model="obj_userInterno.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
+            <a-input v-model="obj_userInterno.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
+            <br/>
+            <a> Não é aluno? <a href="cadPessoa"> Cadastrar-se como visitante </a></a>
+        </a-modal>
+      </nav>
+    </div>
+  </AuthConsumer>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import AuthConsumer from '../contexts/authConsumer';
 export default {
   data() {
     return {
       visible: false,
+      obj_userInterno : {
+        username: '',
+        password: ''
+      },
       obj_login : {
         username: '',
         password: ''
       }
     }
   },
+  components: {
+    AuthConsumer
+  },
   methods: {
     showModal() {
-      this.visible = true
+      this.visible = true;
+    },
+    LoginUser(signIn) {
+      console.log("LOGIN - OK")
+
+      axios
+        .post('http://localhost:3000/api/login', this.obj_login)
+        .then(response => {
+            // console.log(response.data)
+            if(response.data.message === "FUNCIONOU"){
+              signIn({token: response.data.token, user: response.data.pessoa});
+            }
+          }).catch(error => {
+            console.log(error.response)
+          });
+
+      console.log("FEZ O LOGIN")
     },
     handleOk(e) {
       this.visible = false
       console.log("LOGIN - OK")
-      console.log(this.obj_login.username)
 
-      axios.post('http://localhost:3000/api/login', this.obj_login).then(response => {console.log(response.data)}).catch(error => {console.log(error.response)});
+      axios
+        .post('http://localhost:3000/api/login', this.obj_userInterno)
+        .then(response => {
+            console.log(response.data)
+          }).catch(error => {
+            console.log(error.response)
+          });
+
       console.log("FEZ O LOGIN")
-      console.log(this.obj_usuario_logado)
     },
     handleCancel(e) {
       console.log('Clicked cancel button');

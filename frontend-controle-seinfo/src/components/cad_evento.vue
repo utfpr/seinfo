@@ -210,14 +210,14 @@
             <br />
             <label>Local do Evento: {{modalData.local_eve}}</label>
             <br />
-            <!-- <label>Data de Início: {{moment(modalData.data_ini_eve).format("DD/MM/YYYY")}}</label>
+            <label>Data de Início: {{modalData.data_ini_eve}}</label>
             <br />
-            <label>Data de Fim: {{moment(modalData.data_fim_eve).format("DD/MM/YYYY")}}</label>
+            <label>Data de Fim: {{modalData.data_fim_eve}}</label>
             <br />
             <label>Horário de Início: {{modalData.hora_ini_eve}}</label>
             <br />
             <label>Horário de Fim: {{modalData.hora_fim_eve}}</label>
-            <br /> -->        
+            <br />      
             <label>Status: {{modalData.status}}</label>
             <br />
             <label>Descrição: {{modalData.descricao}}</label>
@@ -302,31 +302,20 @@ export default {
   },
   beforeCreate () {
     this.form = this.$form.createForm(this);
-    his.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
 
-      openModal(data) {
-      console.log(data);
+    openModal(data) {
       this.pegar_tabela();
       this.modalData = data;
       this.modalVisible = true;
-      for (var i = 0; i < this.res.length; i++) {
-        if (this.res[i].idEvento == this.modalData.idEvento) {
-          this.modelData.nome = this.res[i].nome;
-          this.modalData.local_eve = this.res[i].agendamento.local;
-          var datahorainicio = this.res[i].agendamento.dataHoraInicio;
-          var datahorafim = this.res[i].agendamento.dataHoraFim;
-          this.modalData.data_ini_eve = moment(datahorainicio).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.data_fim_eve = moment(datahorafim).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.hora_ini_eve = moment(datahorainicio).format("HH:mm");
-          this.modalData.hora_fim_eve = moment(datahorafim).format("HH:mm");
-        }
-      }
+      this.modalData.nome = data.nome;
+      this.modalData.local_eve = data.agendamento.local;
+      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
+      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
     },
 
 
@@ -360,6 +349,7 @@ export default {
     add  () {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
+      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
@@ -394,11 +384,8 @@ export default {
             obj_temp.valor_lote = values.valor_lote[i]
             this.objeto_lote.push(obj_temp)
           }
-          console.log(this.objeto_lote)
-          console.log("\n\n BODY \n\n");
-          this.obj_Resource.lote = this.objeto_lote;
-          console.log(this.obj_Resource.lote[0].data_inicio_lote);
-          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info(); }).catch(error => {console.log(error.response)});
+          this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
+          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info();this.toggle()}).catch(error => {console.log(error.response)});
           
           }
       });

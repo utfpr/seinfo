@@ -18,12 +18,12 @@ import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
 import Teste from '@/components/teste';
 import Usuario from '@/components/usuario';
-import UsuEvento from '@/components/eventos_usuario';
 import atvHome from '@/components/atv_usuario';
 import UsuPerfil from '@/components/perfil_usuario';
 import not_found from '@/components/not_found';
 import Cad_Aluno from '@/components/cad_aluno';
 import homeUsu from '@/components/home_usuario';
+
 
 
 
@@ -50,10 +50,6 @@ export default new Router({
         {
           path: '',
           component: Logo
-        },
-        {
-          path: 'listEvent',
-          component: UsuEvento
         },
         {
           path: 'homeUsu',
