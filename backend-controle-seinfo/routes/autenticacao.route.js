@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    // const login = require('../controllers/autenticacao.controller.js');
+    const login = require('../controllers/autenticacao.controller.js');
 
     // setTimeout(autenticar_API,1);
     // setInterval(autenticar_API,1000*60*60*23); // EXECUTA A API EM INTERVALO DE TEMPO (EM MILISEGUNDOS)
@@ -9,8 +9,8 @@ module.exports = function(app) {
     //     login.autenticar();
     // }
 
-    // // app.post('/api/autentication/',login.autentica);
-    // app.post('/api/login/',login.login);
+    // app.post('/api/autentication/',login.autentica);
+    app.post('/api/login/',login.login);
     
 };
 
