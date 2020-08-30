@@ -23,11 +23,24 @@
             @ok="handleOk"
             @cancel="handleCancel"
           >
-            <a-input v-model="obj_userInterno.username"  type ="text" placeholder="Ra" class="tp" required="required"/>
+            <a-input v-model="obj_userInterno.username"  type ="text" placeholder="CPF" class="tp" required="required"/>
             <a-input v-model="obj_userInterno.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
             <br/>
-            <a> Não é aluno? <a href="cadPessoa"> Cadastrar-se como visitante </a></a>
+            <a href="cadPessoa" style=color:#3366BB>&bull; Cadastrar-se como visitante </a>
+            <br/>
+            <a @click="showModalRecuperacao" style=color:#3366BB >&bull; Recuperar Senha</a>
         </a-modal>
+        <a-modal
+              title="Recuperar Senha"
+              v-model="recuperacao"
+              @ok="handleOkRecuperacao"
+              @cancel="handleCancel"
+            >
+            <p>Para recuperar sua conta, por favor digite o seu CPF para enviarmos um email com uma nova senha.</p>
+              <a-input v-model="obj_rec.cpf"  type ="text" placeholder="CPF" class="tp" required="required"/>
+              <br/>
+        </a-modal>
+
       </nav>
     </div>
   </AuthConsumer>
@@ -40,6 +53,7 @@ export default {
   data() {
     return {
       visible: false,
+      recuperacao: false,
       obj_userInterno : {
         username: '',
         password: ''
@@ -47,6 +61,10 @@ export default {
       obj_login : {
         username: '',
         password: ''
+      },
+      obj_rec:
+      {
+        cpf: ''
       }
     }
   },
@@ -54,7 +72,15 @@ export default {
     AuthConsumer
   },
   methods: {
-    showModal() {
+    showModalRecuperacao()
+    {
+      this.recuperacao = true;
+      this.visible = false;
+      this.obj_rec.cpf = "";
+    },
+    showModal() {      
+      this.obj_userInterno.username = "";
+      this.obj_userInterno.password = "";
       this.visible = true;
     },
     LoginUser(signIn) {
@@ -90,7 +116,23 @@ export default {
     handleCancel(e) {
       console.log('Clicked cancel button');
       this.visible = false
+      this.recuperacao = false
     },
+    handleOkRecuperacao(e) 
+    {
+      this.recuperacao = false
+      alert("Qualquer coisa");
+
+      /*axios
+        .post('http://localhost:3000/api/login', this.obj_userInterno)
+        .then(response => {
+            console.log(response.data)
+          }).catch(error => {
+            console.log(error.response)
+          });
+      */
+      console.log("FEZ O LOGIN")
+    }
   }
 }
 </script>
