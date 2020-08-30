@@ -14,9 +14,12 @@ exports.create = (req, res) => {
     id = req.body.RA;
   }
 
-  if (req.body.senha == null) {
+  if (req.body.senha == null)
+  {
     senha = Math.random().toString(36).slice(-8);
-  } else {
+  } 
+  else
+  {
     senha = req.body.senha;
   }
 
