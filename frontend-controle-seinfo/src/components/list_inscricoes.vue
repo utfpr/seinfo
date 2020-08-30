@@ -18,7 +18,7 @@
                 <a-progress type="circle" :percent="100" status="success" :width="33" />
               </td>
               <td style="text-align:center" class="actions">
-                <a-button style="text-align:right" type="button" class="ic">VER ATIVIDADES</a-button>
+                <a-button style="text-align:right" type="button" class="ic" :href="'/Usuario/atvHome'" >VER ATIVIDADES </a-button>
                 <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)">CANCELAR INSCRIÇÃO</a-button>
               </td>
             </tr>
