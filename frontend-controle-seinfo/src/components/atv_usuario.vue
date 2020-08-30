@@ -22,7 +22,7 @@
 		</div>
 	</li>
 </ul>
-
+ 
   </div>
 </template>
 
@@ -34,7 +34,7 @@ moment.locale("pt-br");
 
 
 export default {
-	mounted(){ // v
+	mounted(){ // V
     	this.pegar_tabela ()
 	},
 
