@@ -37,7 +37,7 @@ export default {
 	mounted(){ // V
     	this.pegar_tabela ()
 	},
-	//teste 2
+	//test
   	data () {
         return { 
 			items: []
