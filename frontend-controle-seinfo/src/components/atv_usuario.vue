@@ -3,7 +3,7 @@
 
 	
   <ul class="check-card" style="float:left;margin-left: 30px;">
-	<li class="check-card-item">
+	<li v-for="item in items" :key="item.title" class="check-card-item">
 		<input type="checkbox" id="check01" name="check" value="1">
 		<label for="check01" class="radio"></label>
 		<div class="check-card-bg"></div>
@@ -13,9 +13,9 @@
 				<span></span>
 			</div>
 			<div class="check-card-body-in">
-				<h3 class="check-card-title">Minicurso de React</h3>
+				<h3 class="check-card-title">{{item.titulo}}</h3>
 				<p class="check-card-description">
-					Curso para aprendizagem de programação web
+					{{item.descricao}}
 				</p>
 			</div>
 			<div class="check-card-cancel">CANCELAR</div>
@@ -28,9 +28,35 @@
 
 
 <script>
-export default {
+import axios from 'axios';
+import moment from "moment";
+moment.locale("pt-br");
 
-}
+
+export default {
+	mounted(){ // v
+    	this.pegar_tabela ()
+	},
+
+  	data () {
+        return { 
+			items: []
+        };
+    },
+    methods: {
+		pegar_tabela() { // v
+			axios
+			.get(`http://localhost:3000/api/atividades`)
+			.then(response => {
+				console.log(response.data);
+				this.items = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+    	},
+    },
+};
 </script>
 
 <style scoped>
