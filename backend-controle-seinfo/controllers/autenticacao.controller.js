@@ -18,7 +18,7 @@ exports.autenticar =  async (req, res) => {
         username: config.loginLDAP.username,
         password: config.loginLDAP.password,
     }).then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         authorization = response.data.token;
         return authorization
     }).catch(ex => console.warn(ex));
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
 
     db.pessoa.findOne({
       where: {
-        idPessoa: username
+        CPF: username
       }}).then(async pessoa => {
         if(!pessoa) return res.status(400).send({message: "Usuário não encontrado"});
 
