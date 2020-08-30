@@ -36,7 +36,7 @@ const columns = [
   {
     title: "Nome do Evento",
     dataIndex: "nome",
-    width: 200,
+    width: 200, //teste
   },
   {
     title: "Data do Evento",
