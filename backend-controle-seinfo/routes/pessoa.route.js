@@ -5,6 +5,10 @@ module.exports = function(app) {
     // Insere um Novo pessoa
     app.post('/api/pessoa', pessoa.create);
   
+    //Recuperar senha pelo CPF
+    app.get('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
+    //'/api/recuperarSenha/'+CPF
+    
     //Procura um pessoa pelo CPF
     app.get('/api/pessoa/:CPF', pessoa.findById);
 
