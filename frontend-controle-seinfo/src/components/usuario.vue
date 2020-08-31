@@ -2,7 +2,7 @@
 <div>
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider
-      style="height:100vh"
+      style="min-height: 100vh;"
       :trigger="null"
       collapsible
       v-model="collapsed"
