@@ -2,7 +2,7 @@
   <div>
 
 	
-  <ul class="check-card" style="float:left;margin-left: 30px;">
+  <ul class="check-card">
 	<li v-for="item in items" :key="item.title" class="check-card-item">
 		<input type="checkbox" id="check01" name="check" value="1">
 		<label for="check01" class="radio"></label>
@@ -75,15 +75,19 @@ body {
 }
 .check-card {
 	list-style: none;
-  width: 320px;
+  width: 100%;
+  float:left;
+  margin-left: 30px
 }
 .check-card .check-card-item {
 	position: relative;
-	width: 100%;
-	margin: 0 1% 15px;
+	width: 320px;
+	margin: 30px;
+	margin-top: 40px;
 	font-size: 16px;
 	background: #2bbe44;
 	overflow: hidden;
+	float:left;
 }
 .check-card li label {
 	display: block;
@@ -92,6 +96,7 @@ body {
 	width: 100%;
 	z-index: 100;
 	cursor: pointer;
+	float:left;
 }
 .check-card .check-card-body {
 	height: 300px;
