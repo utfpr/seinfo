@@ -227,6 +227,162 @@
       </div>
     </div>
     <!-- MODAL VER MAIS (FIM) -->
+
+<!-- MODAL VER EDITAR (INICIO) -->
+    <div
+      class="modal fade bd-example-modal-lg-editar"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="form">
+              <div class="row justify-content-center">
+                <div class="row justify-content-center">
+                  <a-form-item class="space_2">
+                    <label class="ant-form-item-required">Nome do Evento:</label>
+                    <a-input
+                      maxlength="255"
+                      placeholder="Nome"
+                      v-model="modalData.titulo"
+                      autocomplete="off"
+                      type="text"
+                    >
+                      <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+                </div>
+
+                <div class="row justify-content-center">
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Data de Inicio:</label>
+                    <a-input
+                      v-model="modalData.data_ini_eve"
+                      type="date"
+                      id="data_ini_eve"
+                      name="data_ini_eve"
+                      v-bind:disabled="true"
+                    >
+                      <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Hora de Inicio:</label>
+                    <a-input
+                      v-model="modalData.hora_ini_eve"
+                      type="time"
+                      name="hora_ini_eve"
+                      id="hora_ini_eve"
+                      v-bind:disabled="true"
+                    >
+                      <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+                </div>
+                <div class="row justify-content-center">
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Data de Fim:</label>
+                    <a-input
+                      v-model="modalData.data_fim_eve"
+                      type="date"
+                      id="data_fim_eve"
+                      name="data_fim_eve"
+                      v-bind:disabled="true"
+                    >
+                      <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Hora de Fim:</label>
+                    <a-input
+                      id="hora_fim_eve"
+                      v-model="modalData.hora_fim_eve"
+                      type="time"
+                      name="hora_fim_eve"
+                      v-bind:disabled="true"
+                    >
+                      <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+                </div>
+                <div class="row justify-content-center">
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Local do Evento:</label>
+                    <a-input
+                      maxlength="255"
+                      autocomplete="off"
+                      placeholder="Local"
+                      v-model="modalData.local_eve"
+                      type="text"
+                      v-bind:disabled="true"
+                    >
+                      <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)" />
+                    </a-input>
+                  </a-form-item>
+                  <a-form-item class="space">
+                    <label class="ant-form-item-required">Status do Evento:</label>
+                    <a-select 
+                      v-model="obj_Resource.select_status"
+                      name="select_status"
+                      defaultValue="0">
+                      <a-select-option value="1">Evento disponivel</a-select-option>
+                      <a-select-option value="0">Evento indisponivel</a-select-option>
+                    </a-select>
+                  </a-form-item>
+                </div>
+                <div class="row justify-content-center"></div>
+
+                <div class="row justify-content-center">
+                  <a-form-item class="space_2">
+                    <label class="ant-form-item-required">Lotes:</label>
+                    <a-select 
+                      v-model="obj_Resource.select_status"
+                      name="select_status"
+                      defaultValue="0">
+                      <a-select-option value="1">Lote 1</a-select-option>
+                      <a-select-option value="0">Lote 1</a-select-option>
+                    </a-select>
+                  </a-form-item>
+                </div>
+                <div class="row justify-content-center"></div>
+
+                <div class="row justify-content-center">
+                  <a-form-item class="space_2">
+                    <label class="ant-form-item-required">Descrição:</label>
+                    <a-textarea
+                      autocomplete="off"
+                      maxlength="5000"
+                      type="text"
+                      v-model="modalData.descricao"
+                      placeholder="Descrição"
+                      :rows="4"
+                    >{{modalData.descricao}}</a-textarea>
+                  </a-form-item>
+                </div>
+              </div>
+              <br />
+              <div class="row justify-content-center">
+                <button
+                  type="submit"
+                  v-on:click="patch(modalData)"
+                  class="btn btn-outline-primary btn-sm"
+                >Editar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL VER EDITAR (FIM) -->
   </div>
 
 </template>
