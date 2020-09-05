@@ -121,17 +121,19 @@ export default {
     handleOkRecuperacao(e) 
     {
       this.recuperacao = false
-      alert("Qualquer coisa");
+      
 
-      /*axios
-        .post('http://localhost:3000/api/login', this.obj_userInterno)
+      axios
+      
+        .post('http://localhost:3000/api/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
+            alert("Qualquer coisa1");
           }).catch(error => {
             console.log(error.response)
+            alert("Qualquer coisa2");
           });
-      */
-      console.log("FEZ O LOGIN")
+      
     }
   }
 }

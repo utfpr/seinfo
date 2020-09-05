@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.post('/api/pessoa', pessoa.create);
   
     //Recuperar senha pelo CPF
-    app.get('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
+    app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
     //'/api/recuperarSenha/'+CPF
     
     //Procura um pessoa pelo CPF
