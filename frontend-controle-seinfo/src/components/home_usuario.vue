@@ -15,32 +15,38 @@
       closable
       :after-close="handleClose"
     />
-  </div>
-    <h3>Eventos Disponíveis</h3>
-    <div id="list" class="row">
-      <div class="table-responsive col-md-12">
-        <table class="table table-striped" cellspacing="0" cellpadding="0">
-          <thead>
-            <tr >
-              <th style="width:35%">Nome</th>
-              <th style="text-align: left;">Valor</th>
-              <th style="text-align: left;" >Status</th>
-              <th style="text-align:center" class="actions">Ações</th>
-            </tr>
-          </thead>
-          <tbody v-for="(res/*,i*/) in res_localizar" :key="res.idEvento">
-            <tr style="background-color:white;">
-              <td>{{res.nome}}</td>
-              <td>R$ {{res.lotes[0].valor}}</td>
-              <td><a-progress type="circle" :percent="100" status="success" :width="33" /></td>
-              <td style="text-align:center" class="actions">
-                  <a-button style="text-align:right" type="button" class="ic"  href="atvHome"> INSCREVER-SE  </a-button>
-              </td>
-            </tr>          
-          </tbody>
-        </table>
-      </div>  
     </div>
+    
+    <a-table :columns="columns" :data-source="res_localizar" :pagination="false">
+      <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
+        <div class="table-responsive col-md-12">
+          <p class="atividade">Atividades: {{record.nome}} <a-button type="button" class="ic" @click="inscricao(res.idEvento)" > INSCREVER-SE  </a-button></p>
+
+          <table class="table table-striped" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th style="width:25%">Nome</th>
+                <th style="text-align: left;">Valor</th>
+                <th style="text-align: left;">Vagas</th>
+                <th style="text-align: left;">Horas de participação</th>
+                <th style="text-align: left; width:40%">Descrição</th>
+              </tr>
+            </thead>
+            <tbody v-for="response in res_atividades" :key="response.idEvento">
+              <tr style="background-color:white;" v-if="response.idEvento == record.idEvento">
+                <td>{{response.titulo}}</td>
+                <td>R$ {{response.valor}}</td>
+                <td style="padding-left:20px;">{{response.quantidadeVagas}}</td>
+                <td style="padding-left:54px;">{{response.horasParticipacao}}</td>
+                <td>{{response.descricao}}</td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </a-table>
+
   </div>
 </template>
 
@@ -50,81 +56,48 @@ const axios = require('axios');
 const columns = [{
   title: 'Nome do Evento',
   dataIndex: 'nome',
-  width: 200,
-}, {
-  title: 'Data do Evento',
-  dataIndex: 'data',
-  width: 200,
-}, {
-  title: 'Status do Evento',
-  dataIndex: 'status',
+  width: 600,
 },{
-    title: 'Action',
-    key: 'operation',
-    fixed: 'right',
-    width: 200,
-    scopedSlots: { customRender: 'action' },
+  title: 'Local do Evento',
+  dataIndex: 'agendamento.local',
 },{
-  title: 'Valor',
-  dataIndex: ''
-}
-];
-
-const pessoa = {
-  cpf: '1'
-}
-
+  title: 'Descrição',
+  dataIndex: 'descricao'
+}];
 
 export default {
   mounted(){
-    this.pegar_tabela ("eventosD")
+    this.pegar_tabela_eventos ("eventosD")
+    this.pegar_tabela_atividades ("atividades")
   },
   methods: {
-    openModal (data) {
-      this.modalData = data
-      this.modalVisible = true
-    },
-    pegar_tabela (name) {
+    pegar_tabela_eventos (name) {
       axios.get('http://localhost:3000/api/' + name)
       .then((response) => {
-       console.log("Listou " + name);
-       console.log(response.data);
-       this.res_localizar = response.data
-     })
-     .catch(function (error) {
-       console.log(error);
-     })
+        // console.log("Listou " + name);
+        // console.log(response.data);
+        this.res_localizar = response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
     },
-    handleClose() {
-      this.visible = false;
-      this.visible2 = false;
-    },
-    incricao (id) {
-      axios.post(`http://localhost:3000/api/inscEv/${id}/${pessoa.cpf}`, {dataInscricao: "2020/08/09"} )
+    pegar_tabela_atividades (name) {
+      axios.get('http://localhost:3000/api/' + name)
       .then((response) => {
-       console.log(response.data);
-       console.log('sucess');
-       this.visible = true;
-       //alert("Inscrição bem sucedida!");
-     })
-     .catch(function (error) {
-       console.log(error);
-       //alert("Inscrição falhou!");
-       this.visible2 = true;
-     })
+        this.res_atividades = response.data
+      })
     }
     
   },
   data() {
     return {
       res_localizar: [],
+      res_atividades: [],
       columns,
-      tabelas: [],
-      modalVisible: false,
-      modalData: '',
+      loading: false,
       visible: false,
-      visible2: false,
-      pessoa
+      visible2: false
     }
   }
 }
@@ -133,13 +106,39 @@ export default {
 <style scoped>
 
 .ic{
-  background-color: rgb(69, 236, 69);
+  float: right;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(157, 211, 157, 0.5);
+  border: 2px solid rgb(64, 212, 64);
+  color: black;
   cursor: pointer;
 } 
 .ic:hover{
+  color: white;
+  background-color: rgb(64, 212, 64);
+}
+.ic-close {
+  background-color: rgb(255, 99, 99);
+  color: black;
+  cursor: pointer;
+}
+.ic-close:hover {
   color: black;
   border-color: white;
-  background-color:   rgb(69, 236, 69);
+  background-color:   rgb(224, 89, 89);
+}
+.article h4 {
+  margin-bottom: 16px;
+}
+.article button {
+  margin-top: 16px;
+}
+.atividade {
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: .8px;
 }
 
 </style>
