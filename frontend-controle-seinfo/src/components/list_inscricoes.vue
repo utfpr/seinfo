@@ -15,11 +15,14 @@
             <tr style="background-color:white;">
               <td>{{res.eventoInsc.nome}}</td>
               <td>
-                <a-progress type="circle" :percent="100" status="success" :width="33" />
+                <!-- <a-progress type="circle" :percent="100" status="success" :width="33" /> -->
+                <a-icon type="check-circle" theme="twoTone" two-tone-color="#52c41a" style="font-size: 32px; margin-left: 5px;" />
+
               </td>
-              <td style="text-align:center" class="actions">
-                <a-button style="text-align:right" type="button" class="ic" :href="'/Usuario/atvHome'" >VER ATIVIDADES </a-button>
-                <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)">CANCELAR INSCRIÇÃO</a-button>
+              <td style="text-align:center;" class="actions">
+                <a-button type="button" class="ic" :href="'/Usuario/atvHome'" > VER ATIVIDADES </a-button>
+                <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
+                <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button>
               </td>
             </tr>
           </tbody>
@@ -136,21 +139,28 @@ export default {
 
 <style scoped>
 .ic {
-  background-color: rgb(69, 236, 69);
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(157, 211, 157, 0.5);
+  border: 2px solid rgb(64, 212, 64);
+  color: black;
   cursor: pointer;
 }
 .ic:hover {
-  color: black;
-  border-color: white;
-  background-color: rgb(69, 236, 69);
+  color: white;
+  background-color: rgb(64, 212, 64);
 }
 .dl {
-  background-color: rgb(236, 69, 69);
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(236, 69, 69, 0.5);
+  border: 2px solid rgb(236, 69, 69);
+  color: black;
   cursor: pointer;
+  padding-top: 1.3px;
 }
 .dl:hover {
-  color: black;
-  border-color: white;
+  color: white;
   background-color: rgb(236, 69, 69);
 }
 </style>
