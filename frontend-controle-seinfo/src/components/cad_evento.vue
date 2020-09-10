@@ -445,12 +445,12 @@ export default {
 
        obj_Resource: {
         nome: "",
-        data_ini_eve: "",
-        hora_ini_eve: "",
-        data_fim_eve: "",
-        hora_fim_eve: "",
+        data_ini: "",
+        hora_ini: "",
+        data_fim: "",
+        hora_fim: "",
         local_eve: "",
-        status: "",
+        select_status: "",
         urlImagem: "",
         descricao: "",
       },
@@ -524,28 +524,69 @@ export default {
       
     },
    
-    handleSubmit  (e) { 
+    handleSubmit(e) {
+      var erros = [];
+      if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
+      if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
+      if (!this.obj_Resource.data_fim) erros.push("Data de Fim é obrigatório!");
+      if (!this.obj_Resource.hora_ini) erros.push("Hora de Início é obrigatório!");
+      if (!this.obj_Resource.hora_fim) erros.push("Hora de Fim é obrigatório!");
+      if (!this.obj_Resource.local_eve) erros.push("Local da Atividade é obrigatório!");
+      if (!this.obj_Resource.select_status) erros.push("Status é obrigatório!");
+      if (!this.obj_Resource.descricao) erros.push("Descrição é obrigatório!");
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          var i = 0;
-          for(i = 1; i < values.keys.length+1; i++){
-            var obj_temp = {
-              data_inicio_lote : '',
-              data_fim_lote : '',
-              valor_lote : ''
+      if (!erros.length) {
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            var i = 0;
+            for(i = 1; i < values.keys.length+1; i++){
+              var obj_temp = {
+                data_inicio_lote : '',
+                data_fim_lote : '',
+                valor_lote : ''
+              }
+              obj_temp.data_inicio_lote = values.data_inicio_lote[i]
+              obj_temp.data_fim_lote = values.data_fim_lote[i]
+              obj_temp.valor_lote = values.valor_lote[i]
+              this.objeto_lote.push(obj_temp)
             }
-            obj_temp.data_inicio_lote = values.data_inicio_lote[i]
-            obj_temp.data_fim_lote = values.data_fim_lote[i]
-            obj_temp.valor_lote = values.valor_lote[i]
-            this.objeto_lote.push(obj_temp)
-          }
-          this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-          axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info();this.toggle()}).catch(error => {console.log(error.response)});
-          
-          }
-      });
+            this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
+            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info();this.toggle()}).catch(error => {console.log(error.response)});
+            
+            }
+        });
+      }
+      else {
+        alert(erros.join("\n"));
+      }
     },
+
+    patch(dados) {
+      var erros = [];
+      if (!this.modalData.nome) erros.push("Nome é obrigatório!");
+      if (!this.modalData.local_eve) erros.push("Descrição é obrigatório!");
+      if (!this.modalData.status) erros.push("Descrição é obrigatório!");
+      if (!this.modalData.lote) erros.push("Descrição é obrigatório!");
+      if (!this.modalData.descricao) erros.push("Descrição é obrigatório!");
+      console.log(dados);
+      if (!erros.length) {
+        axios
+          .patch(
+            "http://localhost:3000/api/evento" + dados.idAtividade,
+            dados
+          )
+          .then(response => {
+            console.log("Editou!");
+            console.log(response);
+            this.$router.replace("/adm/atividade");
+            location.reload();
+          });
+      } else {
+        alert(erros.join("\n"));
+        this.$router.replace("/adm/atividade");
+      }
+  },
+
   },
   
 };
