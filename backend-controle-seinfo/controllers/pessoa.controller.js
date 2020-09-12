@@ -32,25 +32,7 @@ exports.create = (req, res) => {
   if (req.body.classificacao == null) {
     classificacao = 1;
   }
-
-  Pessoa.create({
-    idPessoa: id,
-    nome: req.body.nome,
-    email: req.body.email,
-    CPF: req.body.cpf,
-    senha: senha,
-    nivel: nivel,
-    classificacao: classificacao
-  })
-    .then(pessoa => {
-      console.log("Criado uma Pessoa!");
-      res.send("Foi cadastrado: "+id+"\n Entre no seu email para retirar sua senha e entrar no portal!");
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).send("Error -> " + err);
-    });
-
+  
   var nodemailer = require('nodemailer');
 
   var remetente = nodemailer.createTransport({
@@ -70,13 +52,33 @@ exports.create = (req, res) => {
     subject: 'Confirmação de cadastro Seinfo',
     text: 'Você está recebendo este email para confirmar seu cadastro no evento Seinfo.\n Sua senha é: ' + senha,
   };
-  remetente.sendMail(emailConfCadastro, function (error) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email enviado com sucesso.');
-    }
-  });
+  
+
+  Pessoa.create({
+    idPessoa: id,
+    nome: req.body.nome,
+    email: req.body.email,
+    CPF: req.body.cpf,
+    senha: senha,
+    nivel: nivel,
+    classificacao: classificacao
+  })
+    .then(pessoa => {
+      console.log("Criado uma Pessoa!");
+      remetente.sendMail(emailConfCadastro, function (error) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email enviado com sucesso.');
+        }
+      });
+      res.send("Foi cadastrado: "+id+"\nEntre no seu email para retirar sua senha e entrar no portal!");      
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("Error -> " + err);
+    });
+
 };
 
 exports.findById = (req, res) => {
