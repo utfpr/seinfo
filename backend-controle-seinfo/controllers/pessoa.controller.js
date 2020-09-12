@@ -44,9 +44,10 @@ exports.create = (req, res) => {
   })
     .then(pessoa => {
       console.log("Criado uma Pessoa!");
-      res.send(pessoa);
+      res.send("Foi cadastrado: "+id+"\n Entre no seu email e para retirar sua senha e entrar no portal!");
     })
     .catch(err => {
+      console.log(err);
       res.status(500).send("Error -> " + err);
     });
 
