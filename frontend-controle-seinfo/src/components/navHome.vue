@@ -128,10 +128,10 @@ export default {
         .post('http://localhost:3000/api/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
-            alert("Qualquer coisa1");
+            alert("Sua nova senha foi enviada ao email cadastrado.");
           }).catch(error => {
             console.log(error.response)
-            alert("Qualquer coisa2");
+            alert("Pedido inválido.");
           });
       
     }
