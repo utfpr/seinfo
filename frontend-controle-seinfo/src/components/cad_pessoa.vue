@@ -2,19 +2,19 @@
   <div class="title">
     <h5 style="text-align:center">Cadastro de Visitante</h5>
     <div class="box">
-      <form class="form" action="http://localhost:3000/api/pessoa" method="post">
+      <form class="form" method="post">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Nome:</label>
-            <a-input maxlength="255" placeholder="Nome" name="nome" type="text">
-              <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
+            <a-input maxlength="255" placeholder="Nome" v-model="obj_cadastro.nome" type="text">
+             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/> 
             </a-input>
           </a-form-item>
         </div>
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">Email:</label>
-            <a-input maxlength="255" placeholder="Email" name="email" type="text">
+            <a-input maxlength="255" placeholder="Email" v-model="obj_cadastro.email" type="text">
               <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)"/>
             </a-input>
           </a-form-item>
@@ -22,11 +22,13 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">CPF:</label>
-            <a-input type="text" name="cpf" placeholder="000.000.000-00"/>
+            <a-input type="text" v-model="obj_cadastro.cpf" placeholder="000.000.000-00"/>
           </a-form-item>
         </div>
         <div class="row justify-content-center">
-          <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+        <a-form-item>
+          <a-button type="submit" @click="Btn_Cadastrar" class="btn btn-outline-primary btn-sm">Cadastrar</a-button>
+        </a-form-item>
         </div>
       </form>
     </div>
@@ -34,7 +36,44 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+export default 
+{
+   data() {
+    return {
+      obj_cadastro : 
+      {
+        nome: '',
+        cpf: '',
+        email: '',
+      },
+      
+    }
+  },
+  methods:
+  {
+    Btn_Cadastrar() 
+    {
+      console.log(this.obj_cadastro)
+
+      axios
+        .post('http://localhost:3000/api/pessoa', this.obj_cadastro)
+        .then(response => {
+          console.log(response)
+          alert(response.data);
+          window.location = "http://localhost:8080/";  
+           }).catch(error => {
+            alert(error);
+          });
+      console.log("FEZ O LOGIN")
+    }
+  }
+
+
+
+
+};
+
 </script>
 <style scoped>
 .box {
