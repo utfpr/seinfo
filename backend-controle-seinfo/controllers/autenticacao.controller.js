@@ -38,7 +38,14 @@ exports.login = async (req, res) => {
 
         if(pessoa.senha === password){
           const token = await criaTokens({idPessoa: pessoa.idPessoa, CPF: pessoa.cpf})
-          return res.status(200).send({pessoa: pessoa.dataValues, message: "FUNCIONOU", token: token})
+          return res.status(200).send({pessoa: {
+            CPF: pessoa.dataValues.CPF, 
+            nome: pessoa.dataValues.nome,
+            email: pessoa.dataValues.email,
+            nivel: pessoa.dataValues.nivel,
+            classificacao: pessoa.dataValues.classificacao,
+            idPessoa: pessoa.dataValues.idPessoa,
+          }, message: "FUNCIONOU", token: token})
         }
 
         return res.status(400).send({message: "Senha incorreta"});

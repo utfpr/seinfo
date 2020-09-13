@@ -113,8 +113,8 @@ exports.atualiza = (req, res) => {
     { where: { CPF: req.params.CPF } }
   )
     .then(pessoa => {
-      console.log("Atualizando uma Pessoa");
-      res.send(pessoa);
+      console.log("Atualizando uma Pessoa", pessoa);
+      res.send("Seu perfil foi atualizado !");
     })
     .catch(err => {
       res.status(500).send("Error " + err);
@@ -144,7 +144,13 @@ exports.recuperarSenha = (req, res) => {
           subject: 'Recuperação de senha',
           text: 'Você está recebendo este email para recuperação de senha do seu cadastro na Seinfo.\n Sua senha é: ' + senha,
         };
-        remetente.sendMail(emailConfCadastro)
+        remetente.sendMail(emailConfCadastro, function (error) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email enviado com sucesso.');
+          }
+        })
         pessoa.update({senha: senha})
         return res.status(200).send("Email de recuperação enviado para:"+ pessoa.email)
       }
