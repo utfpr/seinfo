@@ -141,24 +141,9 @@ exports.recuperarSenha = (req, res) => {
           subject: 'Recuperação de senha',
           text: 'Você está recebendo este email para recuperação de senha do seu cadastro na Seinfo.\n Sua senha é: ' + senha,
         };
-        /*remetente.sendMail(emailConfCadastro, function (error) {
-          if (error) {
-            console.log(error);
-            return res.status(500).send("Error " + error)
-          } else {
-            console.log('Email enviado com sucesso.');
-            return res.status(200).send("Email de recuperação enviado para:"+ pessoa.email)
-          }
-
-        }*/
-        const {error} = remetente.sendMail(emailConfCadastro);
-        if(!error){
-          return res.status(200).send("Email de recuperação enviado para:"+ pessoa.email)
-        }
-        else{
-          return res.status(500).send("Error " + error)
-        }
-        
+        remetente.sendMail(emailConfCadastro)
+        pessoa.update({senha: senha})
+        return res.status(200).send("Email de recuperação enviado para:"+ pessoa.email)
       }
       res.status(404).send("Usuário não cadastrado");
     })
