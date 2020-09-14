@@ -14,13 +14,13 @@ async function criaTokens(object) {
 }
 
 exports.autenticar =  async (req, res) => {
-    const dados = await axios.post(config.urlLDAP, {
-        username: config.loginLDAP.username,
-        password: config.loginLDAP.password,
+    const dados = await axios.post('http://200.134.18.85:19881/login', {
+        username: 'seinfo',
+        password: 'G7OfSOwu',
     }).then(response => {
-        // console.log(response.data);
-        authorization = response.data.token;
-        return authorization
+      authorization = response.data.token;
+      //console.log(authorization);
+      return authorization
     }).catch(ex => console.warn(ex));
     // res.status(200).send(dados);
 };
@@ -48,14 +48,15 @@ exports.login = async (req, res) => {
       
       })
     
-    // const dados = await axios.post(urlLDAPLogin, {
-    //     user: username,
-    //     password,
-    // }, { headers: { Authorization: `Bearer ${authorization}` } }).then(response => {
-    //     console.log(response.data);
-    //     res.send(response.data);
-    // }).catch(ex => {
-    //     res.send(ex)
-    //     console.warn(ex);
-    // });
+
+     const dados = await axios.post('http://200.134.18.85:19881/ldap/doLogin', {
+         username: '',
+         password: '',
+     }, { headers: { Authorization: `Bearer ${authorization}` } }).then(response => {
+         console.log(response.data);
+         res.send(response.data);
+     }).catch(ex => {
+         res.send(ex)
+         console.warn(ex);
+     });
 }
