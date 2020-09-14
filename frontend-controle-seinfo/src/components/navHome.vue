@@ -92,6 +92,7 @@ export default {
             // console.log(response.data)
             if(response.data.message === "FUNCIONOU"){
               signIn({token: response.data.token, user: response.data.pessoa});
+              window.location.replace('http://localhost:8080/');
             }
           }).catch(error => {
             console.log(error.response)
