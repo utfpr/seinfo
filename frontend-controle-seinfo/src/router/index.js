@@ -56,7 +56,7 @@ export default new Router({
           component: homeUsu
         },
         {
-          path: 'atvHome',
+          path: 'atvHome/:idEvento',
           component: atvHome
         },
         {
