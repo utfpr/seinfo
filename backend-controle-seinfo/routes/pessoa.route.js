@@ -5,8 +5,12 @@ module.exports = function(app) {
     // Insere um Novo pessoa
     app.post('/api/pessoa', pessoa.create);
   
-    //Procura um pessoa pelo ID
-    app.get('/api/pessoa/:idPessoa', pessoa.findById);
+    //Recuperar senha pelo CPF
+    app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
+    //'/api/recuperarSenha/'+CPF
+    
+    //Procura um pessoa pelo CPF
+    app.get('/api/pessoa/:CPF', pessoa.findById);
 
     // Procura todos os pessoa
     app.get('/api/pessoas', pessoa.findAll);
@@ -14,50 +18,56 @@ module.exports = function(app) {
     //Procura se o RA ja existe no banco de dados (se a pessoa ja se cadastrou)
     app.get('/api/newpessoa/:RA',pessoa.PessoaExistente)
   
-    // Update de um pessoa pelo ID 
-    app.patch('/api/pessoa/:idPessoa', pessoa.atualiza);
+    // Update de um pessoa pelo CPF 
+    app.patch('/api/pessoa/:CPF', pessoa.atualiza);
   
-    // Deleta um pessoa pelo ID
-    app.delete('/api/pessoa/:idPessoa', pessoa.delete);
+    // Deleta um pessoa pelo CPF
+    app.delete('/api/pessoa/:CPF', pessoa.delete);
 
     //----------------------------------------------------------------------------
     
     //cadastra uma pessoa em um evento
-    app.post('/api/inscEv/:idEvento/:idPessoa',pessoa.cadastrarEmEvento)
+    app.post('/api/inscEv/:idEvento/:CPF',pessoa.cadastrarEmEvento)
 
     //seleciona todos dados de pessoas inscritas em eventos
     app.get('/api/inscEv',pessoa.selectInscricaoEvento)
 
     //seleciona uma pessoa inscrita em um evento
-    app.get('/api/inscEv/:idEvento/:idPessoa',pessoa.selectInscrito)
+    app.get('/api/inscEv/:idEvento/:CPF',pessoa.selectInscrito)
 
     //seleciona todas pessoas inscrita em um evento
     app.get('/api/inscEv/:idEvento',pessoa.InscricoesNoEvento)
 
     //seleciona os eventos que uma pessoa se inscreveu
-    app.get('/api/inscEvP/:idPessoa',pessoa.InscricoesPessoa)
+    app.get('/api/inscEvP/:CPF',pessoa.InscricoesPessoa)
 
     //deleta a inscricao de uma pessoa em um evento
-    app.delete('/api/inscEv/:idEvento/:idPessoa',pessoa.deletaInscricaoEvento)
+    app.delete('/api/inscEv/:idEvento/:CPF',pessoa.deletaInscricaoEvento)
 
     //-----------------------------------------------------------------------------
 
     //cadastra uma pessoa em uma atividade de um evento que ela se inscreveu
-    app.post('/api/inscAtv/:idEvento/:idPessoa',pessoa.cadastrarEmAtividade)
+    app.post('/api/inscAtv/:idEvento/:CPF',pessoa.cadastrarEmAtividade)
 
     //seleciona todas inscricoes em atividades 
     app.get('/api/inscAtv',pessoa.selectInscricaoAtividade)
 
     //seleciona todas atividades que uma pessoa se inscreveu
-    app.get('/api/inscAtv/:idPessoa',pessoa.selectInscricoesPessoa)
+    app.get('/api/inscAtv/:CPF',pessoa.selectInscricoesPessoa)
+
+    //seleciona as atividades que a pessoa se inscreveu de um evento em especifico
+    app.get('/api/inscAtvEvent/:CPF/:idEvento',pessoa.selectInscriAtvEvent)
+
+    //seleciona as atividades que a pessoa não se inscreveu de um evento em especifico
+    app.get('/api/inscAtvEventAll/:CPF/:idEvento',pessoa.selectInscriAtvEventAll)
 
     //seleciona uma pessoa inscrita em uma atividade
-    app.get('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.selectInscritoAtv)
+    app.get('/api/inscAtv/:idEvento/:idAtividade/:CPF',pessoa.selectInscritoAtv)
 
     //seleciona todas pessoas inscritas em uma atividade especifica
     app.get('/api/inscAtv/:idEvento/:idAtividade',pessoa.selectInscricoesNaAtividade)
 
     //deleta inscricao de uma pessoa em uma atividade
-    app.delete('/api/inscAtv/:idEvento/:idAtividade/:idPessoa',pessoa.deletaInscricaoAtividade)
+    app.delete('/api/inscAtv/:idEvento/:idAtividade/:CPF',pessoa.deletaInscricaoAtividade)
   }
   

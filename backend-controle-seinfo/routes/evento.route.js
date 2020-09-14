@@ -60,21 +60,21 @@ module.exports = function(app) {
   //----------------------------------------------------------------------
 
   //definir organizador para evento
-  app.post('/api/organizacao/:idEvento/:idPessoa',eventos.criaOrganizacao);
+  app.post('/api/organizacao/:idEvento/:CPF',eventos.criaOrganizacao);
 
   //seleciona todos dados na tabela organizacao
   app.get('/api/organizacoes',eventos.selectOrganizacao);
 
   //seleciona um organizador em especifico
-  app.get('/api/organizacoes/:idEvento/:idPessoa',eventos.selectUmOrganizador);
+  app.get('/api/organizacoes/:idEvento/:CPF',eventos.selectUmOrganizador);
 
   //seleciona os organizadores de um evento
   app.get('/api/organizacoesE/:idEvento',eventos.selectOrganizacaoEvento);
 
   //seleciona os eventos em que uma pessoa é organizador
-  app.get('/api/organizacoesP/:idPessoa',eventos.selectEventoOrganizador);
+  app.get('/api/organizacoesP/:CPF',eventos.selectEventoOrganizador);
 
   //deleta uma linha organizador
-  app.delete('/api/organizacao/:idEvento/:idPessoa',eventos.deleteOrganizacao);
+  app.delete('/api/organizacao/:idEvento/:CPF',eventos.deleteOrganizacao);
 
 }

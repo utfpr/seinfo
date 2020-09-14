@@ -162,11 +162,13 @@ exports.DespEv=(req,res)=>{
 
 
 //------------------------------------------------------------------------------------------
+//foi trocado IDPessoa para CPF
+
 
 exports.criaOrganizacao =(req,res)=>{
   Evento.findOne({where:{idEvento:req.params.idEvento}}).then(evento=>{
-    db.pessoa.findOne({where:{idPessoa:req.params.idPessoa}}).then(pessoa=>{
-      db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'idPessoa':pessoa.idPessoa}).then(org=>{
+    db.pessoa.findOne({where:{CPF:req.params.CPF}}).then(pessoa=>{
+      db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'CPF':pessoa.CPF}).then(org=>{
         res.send(org)
       }).catch(err=>{
         res.status(500).send("Error -> " + err);
@@ -191,7 +193,7 @@ exports.selectOrganizacao=(req,res)=>{
 
 exports.selectUmOrganizador=(req,res)=>{
   //seleciona um organizdor de um evento
-  db.organizacao.findOne({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
+  db.organizacao.findOne({where:{CPF:req.params.CPF,idEvento:req.params.idEvento}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -209,7 +211,7 @@ exports.selectOrganizacaoEvento=(req,res)=>{
 
 exports.selectEventoOrganizador=(req,res)=>{
   //seleciona os eventos onde a pessoa é organizadora
-  db.organizacao.findAll({where:{idPessoa:req.params.idPessoa}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
+  db.organizacao.findAll({where:{CPF:req.params.CPF}, include:[{model:db.pessoa,as:'oPes'},{model:db.evento,as:'oEv'}]}).then(org=>{
     res.send(org)
   }).catch(err => {
     res.status(500).send("Error -> " + err);
@@ -218,7 +220,7 @@ exports.selectEventoOrganizador=(req,res)=>{
 
 
 exports.deleteOrganizacao=(req,res)=>{
-  db.organizacao.destroy({where:{idPessoa:req.params.idPessoa,idEvento:req.params.idEvento}}).then(org=>{
+  db.organizacao.destroy({where:{CPF:req.params.CPF,idEvento:req.params.idEvento}}).then(org=>{
     res.send('deletou')
   }).catch(err => {
     res.status(500).send("Error -> " + err);
