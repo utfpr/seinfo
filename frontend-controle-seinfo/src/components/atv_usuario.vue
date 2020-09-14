@@ -1,186 +1,114 @@
 <template>
   <div>
-
-	
-  <ul class="check-card">
-	<li v-for="item in items" :key="item.title" class="check-card-item">
-		<input type="checkbox" id="check01" name="check" value="1">
-		<label for="check01" class="radio"></label>
-		<div class="check-card-bg"></div>
-		<div class="check-card-body">
-			<div class="check-card-toggle">
-				<span></span>
-				<span></span>
+		<a-table :columns="columns" :data-source="res_atividades" :pagination="false" >
+			<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
+				<tr>Valor:  R$ {{record.valor}}</tr>
+				<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
+				<tr>Horas de participação: {{record.horasParticipacao}}</tr>
+				<tr>Categoria da atividade: {{record.categoriaAtv.nome}}</tr>
+				<!-- <tr>Descrição: {{record.descricao}} </tr> -->
+				<tr>Descrição: Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
+					e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos
+					e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, 
+					como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. 
+					Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, 
+					e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.
+				</tr>
+				<div class="botoes">
+					<a-button type="button" class="ic" @click="redirectAtv(res.idEvento)" > INSCREVER </a-button>
+          <!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
+				</div>
 			</div>
-			<div class="check-card-body-in">
-				<h3 class="check-card-title">{{item.titulo}}</h3>
-				<p class="check-card-description">
-					{{item.descricao}}
-				</p>
-			</div>
-			<div class="check-card-cancel">CANCELAR</div>
-		</div>
-	</li>
-</ul>
- 
+    </a-table>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';
 import moment from "moment";
 moment.locale("pt-br");
 
+const columns = [{
+  title: 'Atividades',
+  dataIndex: 'titulo',
+	width: 1200,
+}];
 
 export default {
-	mounted(){ // V
-    	this.pegar_tabela ()
+	mounted() {
+		this.pegar_tabela_atividades(this.$route.params.idEvento)
 	},
-	//test
-  	data () {
-        return { 
-			items: []
-        };
-    },
-    methods: {
-		pegar_tabela() { // v
-			axios
-			.get(`http://localhost:3000/api/atividades`)
+	methods: {
+	pegar_tabela_atividades(id) {
+		axios
+			.get(`http://localhost:3000/api/atividade/` + id)
 			.then(response => {
+				// console.log(this.$route.params.idEvento);
 				console.log(response.data);
-				this.items = response.data;
+				this.res_atividades = response.data;
 			})
 			.catch(function(error) {
 				console.log(error);
 			});
-    	},
-    },
+		},
+	},
+	data () {
+		return { 
+			res_atividades: [],
+			idEvento: "",
+			columns,
+		};
+	},
+	
 };
 </script>
 
 <style scoped>
-* {
-	padding: 0;
-}
-*, *:before, *:after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-}
-body {
-	font-family: 'Josefin Sans', sans-serif;
-	background: #ddd;
-}
-.check-card {
-	list-style: none;
-  width: 100%;
-  float:left;
-  margin-left: 30px
-}
-.check-card .check-card-item {
-	position: relative;
-	width: 320px;
-	margin: 30px;
-	margin-top: 40px;
+.info {
 	font-size: 16px;
-	background: #2bbe44;
-	overflow: hidden;
-	float:left;
+	text-align: left;
+	font-weight: 600;
+	letter-spacing: 0.2px;
+	/* width: 80%; */
+	/* border: 1px solid red; */
 }
-.check-card li label {
-	display: block;
-	position: absolute;
-	height: 300px;
-	width: 100%;
-	z-index: 100;
-	cursor: pointer;
-	float:left;
-}
-.check-card .check-card-body {
-	height: 300px;
-	color: #fff;
-	z-index: 2;
-	position: relative;
-}
-.check-card .check-card-body-in {
-	padding: 40px 20px 20px;
-
-}
-.check-card .check-card-title {
-	font-family: 'Oswald', sans-serif;
-	font-size: 32px;
-	margin-bottom: 5px;
-}
-.check-card .check-card-bg,
-.check-card .check-card-toggle {
-	position: relative;
-	background: #2e2d37;
-	width: 36px;
+.info tr {
+	/* border: 1px solid red; */
 	height: 36px;
-	top: 10px;
-	left: 10px;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
 }
-.check-card .check-card-bg {
-	position: absolute;
-	background: #2e2d37;
-	-webkit-transition: all .3s ease-out;
-	transition: all .3s ease-out;
-	-webkit-transform:scale(1);
-	transform:scale(1);
-	z-index: 0;
+.botoes {
+	border: 1px solid red;
+	width: 112px;
+	height: 34px;
+	float: right;
 }
-.check-card .check-card-toggle span {
-	position: absolute;
-	display: block;
-	width: 20px;
-	margin-left: -10px;
-	height: 1px;
-	top: 50%;
-	left: 50%;
-	background: #fff;
-	-webkit-transition: all .4s ease-out;
-	transition: all .4s ease-out;
+.ic {
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(157, 211, 157, 0.5);
+  border: 2px solid rgb(64, 212, 64);
+  color: black;
+  cursor: pointer;
+	float: right;
+	margin-left: -50px	;
+	border: 1px solid red;
 
-	-webkit-transform: rotate(-270deg);
-	transform: rotate(-270deg);
 }
-.check-card .check-card-toggle span:first-child {
-	-webkit-transform: rotate(180deg);
-	transform: rotate(180deg);
+.ic:hover {
+  color: white;
+  background-color: rgb(64, 212, 64);
 }
-.check-card .check-card-cancel {
-	font-size: 18px;
-	border-top: solid 1px #fff;
-	border-bottom: solid 1px #fff;
-	padding: 10px 0 7px;
-	text-align: center;
-	position: absolute;
-	bottom: -50px;
-	margin: 0 7%;
-	width: 86%;
-	-webkit-transition: all .3s cubic-bezier(0.5, -0.8, 0.5, 1.8);
-	transition: all .3s cubic-bezier(0.5, -0.8, 0.5, 1.8);
+.dl {
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(236, 69, 69, 0.5);
+  border: 2px solid rgb(236, 69, 69);
+  color: black;
+  cursor: pointer;
+  padding-top: 1.3px;
 }
-.check-card input[type=checkbox] {
-	display: none;
-}
-.check-card input[type=checkbox]:checked ~ .check-card-body .check-card-toggle span {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
-}
-.check-card input[type=checkbox]:checked ~ .check-card-body .check-card-toggle span:first-child {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
-}
-.check-card input[type=checkbox]:checked ~ .check-card-bg {
-	-webkit-transform:scale(25);
-	transform:scale(25);
-}
-.check-card input[type=checkbox]:checked ~ .check-card-body .check-card-cancel {
-	bottom: 30px;
+.dl:hover {
+  color: white;
+  background-color: rgb(236, 69, 69);
 }
 </style>

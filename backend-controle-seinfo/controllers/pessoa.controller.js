@@ -340,10 +340,51 @@ exports.selectInscricoesNaAtividade = (req, res) => {
   });
 };
 
+
 exports.selectInscricoesPessoa = (req, res) => {
   //seleciona as atividades que a pessoa se inscreveu
   db.inscricaoAtividade.findAll({ where: { CPF: req.params.CPF }, include: [{ model: db.atividade, as: 'atividade' }] }).then(insc => {
     res.send(insc)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+};
+
+exports.selectInscriAtvEvent = (req, res) => {
+  //seleciona as atividades que a pessoa se inscreveu de um evento em especifico
+  db.inscricaoAtividade.findAll({ where: { CPF: req.params.CPF, idEvento: req.params.idEvento }, include: [{ model: db.atividade, as: 'atividade' }] }).then(insc => {
+    res.send(insc)
+  }).catch(err => {
+    res.status(500).send("Error -> " + err);
+  });
+};
+
+exports.selectInscriAtvEventAll = (req, res) => {
+  //seleciona as atividades que a pessoa não se inscreveu de um evento em especifico
+  var vetAtvEvt = [];
+  
+  db.inscricaoAtividade.findAll({ where: { CPF: req.params.CPF, idEvento: req.params.idEvento }, include: [{ model: db.atividade, as: 'atividade' }] }).then(insc => {
+    db.atividade.findAll({where:{idEvento:req.params.idEvento},include:[{model:db.categoria,as:'categoriaAtv'},{model:db.agenda,as:'atvAgenda',through:{attributes:[]}}]}).then(atividade => {
+      //Monta um array com os idsAtividade dos eventos que o pessoa esta incrita de um evento em especifico
+      const auxInsc = insc.map(Insc1 => { return Insc1.dataValues.idAtividade });
+      
+      //Monta um array com todos os idsAtividades de um evento em especifico
+      const auxAtv = atividade.map(Atv1 => { return Atv1.dataValues.idAtividade });
+      
+      //Monta um array com todos os idsAtividade na quala pessoa não esta inscrita 
+      const vetAtividade = auxAtv.filter((element, index, array) => {
+        if (auxInsc.indexOf(element) == -1) return element;
+      });
+      
+      //Monta um array com todos os valores da atividade de acordo com o idAtividade
+      atividade.filter((element, index, array) => {
+        if (vetAtividade.indexOf(element.dataValues.idAtividade) != -1) vetAtvEvt.push(element);
+      })
+
+      res.send(vetAtvEvt);
+    }).catch(err => {
+      res.status(500).send("Error -> " + err);
+    })
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   });
