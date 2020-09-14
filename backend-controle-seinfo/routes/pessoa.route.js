@@ -55,6 +55,12 @@ module.exports = function(app) {
     //seleciona todas atividades que uma pessoa se inscreveu
     app.get('/api/inscAtv/:CPF',pessoa.selectInscricoesPessoa)
 
+    //seleciona as atividades que a pessoa se inscreveu de um evento em especifico
+    app.get('/api/inscAtvEvent/:CPF/:idEvento',pessoa.selectInscriAtvEvent)
+
+    //seleciona as atividades que a pessoa não se inscreveu de um evento em especifico
+    app.get('/api/inscAtvEventAll/:CPF/:idEvento',pessoa.selectInscriAtvEventAll)
+
     //seleciona uma pessoa inscrita em uma atividade
     app.get('/api/inscAtv/:idEvento/:idAtividade/:CPF',pessoa.selectInscritoAtv)
 
