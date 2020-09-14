@@ -21,6 +21,9 @@ exports.autenticar =  async (req, res) => {
       authorization = response.data.token;
       //console.log(authorization);
       return authorization
+        console.log(response.data);
+        authorization = response.data.token;
+        return authorization
     }).catch(ex => console.warn(ex));
     // res.status(200).send(dados);
 };
@@ -32,13 +35,20 @@ exports.login = async (req, res) => {
 
     db.pessoa.findOne({
       where: {
-        idPessoa: username
+        CPF: username
       }}).then(async pessoa => {
         if(!pessoa) return res.status(400).send({message: "Usuário não encontrado"});
 
         if(pessoa.senha === password){
           const token = await criaTokens({idPessoa: pessoa.idPessoa, CPF: pessoa.cpf})
-          return res.status(200).send({pessoa: pessoa.dataValues, message: "FUNCIONOU", token: token})
+          return res.status(200).send({pessoa: {
+            CPF: pessoa.dataValues.CPF, 
+            nome: pessoa.dataValues.nome,
+            email: pessoa.dataValues.email,
+            nivel: pessoa.dataValues.nivel,
+            classificacao: pessoa.dataValues.classificacao,
+            idPessoa: pessoa.dataValues.idPessoa,
+          }, message: "FUNCIONOU", token: token})
         }
 
         return res.status(400).send({message: "Senha incorreta"});

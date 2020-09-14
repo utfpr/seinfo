@@ -12,6 +12,9 @@ module.exports = function(app) {
      app.post('/api/autentication/',login.autenticar);
      app.post('/api/login/',login.login);
     
+    // const login = require('../controllers/autenticacao.controller.js');
+
+    
 };
 
 //  setInterval(() => {
