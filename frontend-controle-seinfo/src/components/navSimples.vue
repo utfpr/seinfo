@@ -1,17 +1,39 @@
 <template>
-  <div>
+  <AuthConsumer>
+    <div slot-scope="{ signOut }">
     <div class="justify-content-center">
     </div>
     <nav class="navbar navbar-expand-sm navi">
       <div class="navbar-collapse justify-content-center">
         <a :href="'/'"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a> 
       </div>
+      <div class="logOut" >
+        <button type="submit"  class="buttonInvisible"  @click="logOut(signOut)">
+          <a-icon type="logout"/>
+          <span>Sair</span>
+        </button>
+      </div>
     </nav>
   </div>
+  </AuthConsumer>
 </template>
 
 <script>
-export default {};
+import AuthConsumer from '../contexts/authConsumer';
+export default {
+  data() {
+    return 
+  },
+  components: {
+    AuthConsumer
+  },
+  methods: {
+    logOut(signOut){
+      signOut();
+      window.location.replace('http://localhost:8080/');
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -36,5 +58,16 @@ export default {};
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.logOut {
+ color: white;
+ margin-right: 15px;
+}
+
+.buttonInvisible {
+  background-color: transparent; 
+  border-color: transparent; 
+  cursor: default;
 }
 </style>
