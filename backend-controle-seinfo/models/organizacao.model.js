@@ -10,15 +10,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       field: 'idEvento'
     },
-    idPessoa: {
+    CPF: {
       type: Sequelize.STRING(64),
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'pessoa',
-        key: 'idPessoa'
+        key: 'CPF'
       },
-      field: 'idPessoa'
+      field: 'CPF'
     },
     horasParticipacao: {
       type: Sequelize.TIME,
@@ -38,7 +38,7 @@ module.exports = (sequelize, Sequelize) => {
   models.pessoa.belongsToMany(models.evento,{
     as: 'pEvento',
     through: models.organizacao,
-    foreignKey: 'idPessoa',
+    foreignKey: 'CPF',
   }),
   models.evento.belongsToMany(models.pessoa,{
     as: 'ePessoa',
@@ -51,7 +51,7 @@ module.exports = (sequelize, Sequelize) => {
   }),
   models.organizacao.belongsTo(models.pessoa,{
     as: 'oPes',
-    foreignKey: 'idPessoa'
+    foreignKey: 'CPF'
   })
   };
     

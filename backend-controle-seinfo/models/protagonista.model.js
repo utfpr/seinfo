@@ -5,15 +5,15 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       field: 'atuacao'
     },
-    idPessoa: {
+    CPF: {
       type: Sequelize.STRING(64),
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'pessoa',
-        key: 'idPessoa'
+        key: 'CPF'
       },
-      field: 'idPessoa'
+      field: 'CPF'
     },
     idAtividade: {
       type: Sequelize.INTEGER(11),
@@ -37,7 +37,7 @@ module.exports = (sequelize, Sequelize) => {
   models.pessoa.belongsToMany(models.atividade, {
     as:'pessoaProt',
     through:models.protagonista,  
-    foreignKey: 'idPessoa',
+    foreignKey: 'CPF',
   }),
   models.atividade.belongsToMany(models.pessoa, {
     as:'atividadeProt',
@@ -50,7 +50,7 @@ module.exports = (sequelize, Sequelize) => {
   }),
   models.protagonista.belongsTo(models.pessoa,{
     as: 'aPes',
-    foreignKey: 'idPessoa'
+    foreignKey: 'CPF'
   })
   };
     

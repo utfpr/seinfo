@@ -7,7 +7,7 @@ exports.create = (req, res) => {
   ReceitaInscricaoEvento.create({  
     //idEvento: req.body.idEvento,
     idEvento: req.body.idEvento,
-    idPessoa: req.body.idPessoa,
+    CPF: req.body.CPF,
     dataPagamento: req.body.dataPagamento
 
   }).then(receitaInscricaoEvento => {    

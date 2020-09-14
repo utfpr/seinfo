@@ -1,21 +1,24 @@
 module.exports = function(app) {
-    const login = require('../controllers/autenticacao.controller.js');
+     const login = require('../controllers/autenticacao.controller.js');
 
-    setTimeout(autenticar_API,1);
-    setInterval(autenticar_API,1000*60*60*23); // EXECUTA A API EM INTERVALO DE TEMPO (EM MILISEGUNDOS)
+     
+     async function autenticar_API(){
+         console.log("Executando API")
+         await login.autenticar();
+        }
+        
+     setTimeout(autenticar_API,1);
+     setInterval(autenticar_API,1000*60*60*23); // EXECUTA A API EM INTERVALO DE TEMPO (EM MILISEGUNDOS)
+     app.post('/api/autentication/',login.autenticar);
+     app.post('/api/login/',login.login);
+    
+    // const login = require('../controllers/autenticacao.controller.js');
 
-    function autenticar_API(){
-        // console.log("Executando API")
-        login.autenticar();
-    }
-
-    // app.post('/api/autentication/',login.autentica);
-    app.post('/api/login/',login.login);
     
 };
 
+//  setInterval(() => {
+//      require('.routes/autenticacao.route.js')
+//  }, 1000 * 0 * 0 * 0);
 
-// setInterval(() => {
-//     require('.routes/autenticacao.route.js')
-// }, 1000 * 60 * 60 * 23);
 
