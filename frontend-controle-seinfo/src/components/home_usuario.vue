@@ -22,7 +22,7 @@
           <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
             <div class="table-responsive col-md-12">
               <p class="atividade">Atividades: {{record.nome}} <a-button type="button" class="ic" @click="inscricao(getUser.CPF, record.idEvento)" > INSCREVER-SE  </a-button></p>
-              <a-modal v-model="visibleInsc" title="Inscrição bem sucedida!" ok-text="Sair" cancel-text="Ir para avitivades" @ok="handleOk" @cancel="redirectAtv(record.idEvento)">
+              <a-modal v-model="visibleInsc" title="Inscrição bem sucedida!" ok-text="Sair" cancel-text="Ir para atividades" @ok="handleOk" @cancel="redirectAtv(record.idEvento)">
                 <p>Deseja se inscrever em alguma(s) atividade(s)?</p>
               </a-modal>
               <table class="table table-striped" cellspacing="0" cellpadding="0">
