@@ -84,6 +84,9 @@ exports.create = (req, res) => {
 exports.findById = (req, res) => {
   Pessoa.findOne({ where: { CPF: req.params.CPF } })
     .then(pessoa => {
+      if(!pessoa){
+        res.send("Pessoa não encontrada"); //Retorna um Json para a Pagina da API
+      }
       console.log("Achou uma Pessoa pelo ID " + req.params.idPessoa);
       res.send(pessoa); //Retorna um Json para a Pagina da API
     })
@@ -165,7 +168,7 @@ exports.delete = (req, res) => {
   Pessoa.destroy({ where: { CPF: req.params.CPF } })
     .then(pessoa => {
       console.log("Deletando uma Pessoa com o ID: " + req.params.CPF);
-      res.send(pessoa); //Retorna um Json para a Pagina da API
+      res.send(`${req.params.CPF} foi deletado`); //Retorna um Json para a Pagina da API
     })
     .catch(err => {
       res.status(500).send("Error -> " + err);
