@@ -489,7 +489,7 @@
                   type="submit"
                   v-on:click="patch(modalData)"
                   class="btn btn-outline-primary btn-sm"
-                >Cadastrar</button>
+                >Editar</button>
               </div>
             </form>
           </div>

@@ -252,7 +252,7 @@
                     <a-input
                       maxlength="255"
                       placeholder="Nome"
-                      v-model="modalData.titulo"
+                      v-model="modalData.nome"
                       autocomplete="off"
                       type="text"
                     >
@@ -531,7 +531,7 @@ export default {
       if (!this.obj_Resource.data_fim) erros.push("Data de Fim é obrigatório!");
       if (!this.obj_Resource.hora_ini) erros.push("Hora de Início é obrigatório!");
       if (!this.obj_Resource.hora_fim) erros.push("Hora de Fim é obrigatório!");
-      if (!this.obj_Resource.local_eve) erros.push("Local da Atividade é obrigatório!");
+      if (!this.obj_Resource.local_eve) erros.push("Local do Evento é obrigatório!");
       if (!this.obj_Resource.select_status) erros.push("Status é obrigatório!");
       if (!this.obj_Resource.descricao) erros.push("Descrição é obrigatório!");
       e.preventDefault();
@@ -564,26 +564,24 @@ export default {
     patch(dados) {
       var erros = [];
       if (!this.modalData.nome) erros.push("Nome é obrigatório!");
-      if (!this.modalData.local_eve) erros.push("Descrição é obrigatório!");
-      if (!this.modalData.status) erros.push("Descrição é obrigatório!");
-      if (!this.modalData.lote) erros.push("Descrição é obrigatório!");
+      if (!this.modalData.local_eve) erros.push("Local é obrigatório!");
+      if (!this.modalData.status) erros.push("Status é obrigatório!");
       if (!this.modalData.descricao) erros.push("Descrição é obrigatório!");
       console.log(dados);
       if (!erros.length) {
         axios
           .patch(
-            "http://localhost:3000/api/evento" + dados.idAtividade,
-            dados
+            `http://localhost:3000/api/evento/${modalData.idEvento}`, modalData
           )
           .then(response => {
             console.log("Editou!");
             console.log(response);
-            this.$router.replace("/adm/atividade");
-            location.reload();
+            // this.$router.replace("/adm/cadEvento");
+            // location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        this.$router.replace("/adm/atividade");
+        // this.$router.replace("/adm/cadEvento");
       }
   },
 
