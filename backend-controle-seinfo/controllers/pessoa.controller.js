@@ -377,8 +377,8 @@ exports.selectInscriAtvEventAll = (req, res) => {
       });
       
       //Monta um array com todos os valores da atividade de acordo com o idAtividade
-      atividade.map(value => {
-        if (vetAtividade.indexOf(value.dataValues.idAtividade) == 0) return vetAtvEvt.push(value);
+      atividade.filter((element, index, array) => {
+        if (vetAtividade.indexOf(element.dataValues.idAtividade) != -1) vetAtvEvt.push(element);
       })
 
       res.send(vetAtvEvt);
