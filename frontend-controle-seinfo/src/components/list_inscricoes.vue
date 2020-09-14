@@ -20,7 +20,7 @@
 
               </td>
               <td style="text-align:center;" class="actions">
-                <a-button type="button" class="ic" :href="'/Usuario/atvHome'" > VER ATIVIDADES </a-button>
+                <a-button type="button" class="ic" @click="redirectAtv(res.idEvento)" > VER ATIVIDADES </a-button>
                 <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
                 <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button>
               </td>
@@ -62,19 +62,19 @@ const columns = [
     dataIndex: "",
   },
 ];
-
-const pessoa = {
-  CPF: "1",
-};
-
+const auth = require("../services/auth");
 export default {
   mounted() {
-    this.pegar_tabela("eventosD");
+    this.pegarPerfil();
+    this.pegar_tabela();
   },
   methods: {
+    redirectAtv(idEvento){
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}`})
+    },
     exclusao(id) {
       axios
-        .delete(`http://localhost:3000/api/inscEv/${id}/${pessoa.CPF}`)
+        .delete(`http://localhost:3000/api/inscEv/${id}/${this.CPF}`)
         .then((response) => {
           console.log(response.data);
           this.pegar_tabela("eventosD");
@@ -83,8 +83,17 @@ export default {
           console.log(error);
         });
     },
+    async pegarPerfil() {
+      await auth.default.getUser().then(res => {
+        this.CPF = res.CPF;
+        this.pegar_tabela();
+      })
+      //console.log("USER:", user)
+      //this.CPF = user.CPF;
+    },
     showDeleteConfirm(id) {
-      this.$confirm({
+        var cpfPessoa = this.CPF;
+        this.$confirm({
         title: "Deseja remover sua inscrição?",
         content: "Essa ação não poderá ser desfeita!",
         okText: "Sim",
@@ -92,7 +101,7 @@ export default {
         cancelText: "Voltar",
         onOk() {
           axios
-            .delete(`http://localhost:3000/api/inscEv/${id}/${pessoa.CPF}`)
+            .delete(`http://localhost:3000/api/inscEv/${id}/${cpfPessoa}`)
             .then((response) => {
               console.log(response.data);
               document.location.reload(true);
@@ -111,11 +120,11 @@ export default {
       this.modalData = data;
       this.modalVisible = true;
     },
-    pegar_tabela(name) {
+    pegar_tabela() {
       axios
-        .get("http://localhost:3000/api/inscEvP/1")
+        .get(`http://localhost:3000/api/inscEvP/${this.CPF}`)
         .then((response) => {
-          console.log("Listou " + name);
+          console.log("Listou ");
           console.log(response.data);
           this.res_localizar = response.data;
         })
@@ -131,7 +140,7 @@ export default {
       tabelas: [],
       modalVisible: false,
       modalData: "",
-      pessoa,
+      CPF: "",
     };
   },
 };
