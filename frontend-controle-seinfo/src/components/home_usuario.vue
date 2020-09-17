@@ -1,30 +1,10 @@
 <template>
   <AuthConsumer>
     <div slot-scope="{ getUser }">
-      <div>
-        <a-alert
-          v-if="visible"
-          message="Inscrito com sucesso!"
-          type="success"
-          closable
-          :after-close="handleClose"
-        />
-        <a-alert
-          v-if="visible2"
-          message="Não foi possível realizar a inscrição!"
-          type="error"
-          closable
-          :after-close="handleClose"
-        />
-        </div>
-        
         <a-table :columns="columns" :data-source="res_localizar" :pagination="false">
           <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
             <div class="table-responsive col-md-12">
               <p class="atividade">Atividades: {{record.nome}} <a-button type="button" class="ic" @click="inscricao(getUser.CPF, record.idEvento)" > INSCREVER-SE  </a-button></p>
-              <a-modal v-model="visibleInsc" title="Inscrição bem sucedida!" ok-text="Sair" cancel-text="Ir para atividades" @ok="handleOk" @cancel="redirectAtv(record.idEvento)">
-                <p>Deseja se inscrever em alguma(s) atividade(s)?</p>
-              </a-modal>
               <table class="table table-striped" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
@@ -101,24 +81,17 @@ export default {
         this.res_atividades = response.data
       })
     },
-    showModal() {
-      this.visibleInsc = true;
-      
-    },
-    handleOk(e) {
-      console.log(e);
-      this.visibleInsc = false;
-    },
     inscricao(CPF, idEvento) {
       console.log(CPF, idEvento);
       axios
         .post(`http://localhost:3000/api/inscEv/${idEvento}/${CPF}` , {dataInscricao:'2020-08-09'})
         .then((response) => {
+          this.redirectAtv(idEvento);
           console.log(response.data);
-          this.showModal();
           //this.pegar_tabela("eventosD");
         })
         .catch(function (error) {
+          alert("Você já está inscrito nesse evento!");
           console.log(error);
         });
     },
@@ -130,9 +103,6 @@ export default {
       res_atividades: [],
       columns,
       loading: false,
-      visible: false,
-      visible2: false,
-      visibleInsc: false,
       confirmLoading: false,
     }
   }
