@@ -182,6 +182,12 @@ INSERT INTO evento(idEvento, nome, descricao, status, idAgenda) VALUES
 INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
 (1, 'Cpl.', 132, 'Vel accusantium perspiciatis.\r\n', '18:30:13', 38, 1, 1);
 INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
+(11, 'Cpl1.', 132, 'Vel accusantium perspiciatis.\r\n', '18:30:13', 38, 1, 1);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
+(12, 'Cpl2.', 132, 'Vel accusantium perspiciatis.\r\n', '18:30:13', 38, 1, 1);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
+(13, 'Cpl3.', 132, 'Vel accusantium perspiciatis.\r\n', '18:30:13', 38, 1, 1);
+INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
 (2, 'Gov', 126, 'Sit deserunt perferendis.\r\n', '00:01:01', 16, 2, 2);
 INSERT INTO atividade(idAtividade, titulo, valor, descricao, horasParticipacao, quantidadeVagas, idCategoria, idEvento) VALUES
 (3, 'Esq', 45, 'Sed quas et quidem cum sit sed.', '00:00:45', 36, 3, 3);

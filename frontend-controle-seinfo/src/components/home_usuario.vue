@@ -61,8 +61,8 @@ export default {
     AuthConsumer
   },
   methods: {
-    redirectAtv(idEvento){
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}`})
+    redirectAtv(idEvento, CPF){
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}`})
     },
     pegar_tabela_eventos (name) {
       axios.get('http://localhost:3000/api/' + name)
@@ -86,7 +86,7 @@ export default {
       axios
         .post(`http://localhost:3000/api/inscEv/${idEvento}/${CPF}` , {dataInscricao:'2020-08-09'})
         .then((response) => {
-          this.redirectAtv(idEvento);
+          this.redirectAtv(idEvento, CPF);
           console.log(response.data);
           //this.pegar_tabela("eventosD");
         })

@@ -1,29 +1,38 @@
 <template>
-  <div>
-		<a-table :columns="columns" :data-source="res_atividades" :pagination="false" >
-			<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
-				<tr>Valor:  R$ {{record.valor}}</tr>
-				<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
-				<tr>Horas de participação: {{record.horasParticipacao}}</tr>
-				<tr>Categoria da atividade: {{record.categoriaAtv.nome}}</tr>
-				<!-- <tr>Descrição: {{record.descricao}} </tr> -->
-				<tr>Descrição: Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
-					e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos
-					e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, 
-					como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. 
-					Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, 
-					e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.
-				</tr>
-				<div class="botoes">
-					<a-button type="button" class="ic" @click="redirectAtv(res.idEvento)" > INSCREVER </a-button>
-          <!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
+	<AuthConsumer>
+    <div slot-scope="{ getUser }">
+			<a-table :columns="columns" :data-source="res_atividades" :pagination="false" >
+				<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
+					<tr>Valor:  R$ {{record.valor}}</tr>
+					<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
+					<tr>Horas de participação: {{record.horasParticipacao}}</tr>
+					<tr>Categoria : {{record.categoriaAtv.nome}}</tr> 
+				    <tr>Descrição: {{record.descricao}} </tr>
+					<div class="botoes">
+						<a-button type="button" class="ic" @click="inscricao(getUser.CPF, record)"> INSCREVER-SE </a-button>
+				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
+					</div>
 				</div>
-			</div>
-    </a-table>
-  </div>
+			</a-table>
+			<a-table :columns="columns2" :data-source="res_atividades2" :pagination="false" >
+				<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
+					<tr>Valor:  R$ {{record.atividade.valor}}</tr>
+					<tr>Vagas disponíveis: {{record.atividade.quantidadeVagas}}</tr>
+					<tr>Horas de participação: {{record.atividade.horasParticipacao}}</tr>
+					<tr>Descrição: {{record.atividade.descricao}} </tr>
+					<div class="botoes">
+						<a-button type="button" class="dl"  @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
+				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
+					</div>
+				</div>
+			</a-table>
+		</div>
+	</AuthConsumer>
 </template>
 
 <script>
+import AuthConsumer from '../contexts/authConsumer';
+
 import axios from 'axios';
 import moment from "moment";
 moment.locale("pt-br");
@@ -33,15 +42,26 @@ const columns = [{
   dataIndex: 'titulo',
 	width: 1200,
 }];
+const columns2 = [{
+  title: 'Minhas atividades',
+  dataIndex: 'atividade.titulo',
+	width: 1200,
+}];
 
 export default {
 	mounted() {
-		this.pegar_tabela_atividades(this.$route.params.idEvento)
+		console.log(this.$route.params);
+		this.pegar_tabela_atividades(this.$route.params.idEvento, this.$route.params.CPF)
+		this.pegar_tabela_atividades2(this.$route.params.idEvento, this.$route.params.CPF)
 	},
+	components: {
+    AuthConsumer
+  	},
 	methods: {
-	pegar_tabela_atividades(id) {
+	pegar_tabela_atividades(idEvento, CPF) {
+		
 		axios
-			.get(`http://localhost:3000/api/atividade/` + id)
+			.get(`http://localhost:3000/api/inscAtvEventAll/${CPF}/${idEvento}`)
 			.then(response => {
 				// console.log(this.$route.params.idEvento);
 				console.log(response.data);
@@ -50,13 +70,53 @@ export default {
 			.catch(function(error) {
 				console.log(error);
 			});
+
 		},
+
+	pegar_tabela_atividades2(idEvento, CPF) {
+		axios
+			.get(`http://localhost:3000/api/inscAtvEvent/${CPF}/${idEvento}`)
+			.then(response => {
+				// console.log(this.$route.params.idEvento);
+				console.log(response.data);
+				this.res_atividades2 = response.data;
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+		},
+	inscricao(CPF, record) {
+      console.log(record);
+      axios
+        .post(`http://localhost:3000/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
+        .then((response) => {
+          console.log(response.data);
+		  document.location.reload(true);
+        })
+        .catch(function (error) {
+          alert("Não foi possível realizar a inscrição!");
+          console.log(error);
+        });
+	},
+	exclusao(CPF, record) {
+      axios
+        .delete(`http://localhost:3000/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
+        .then((response) => {
+		  console.log(response.data);
+		  document.location.reload(true);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
 	},
 	data () {
 		return { 
 			res_atividades: [],
+			res_atividades2: [],
 			idEvento: "",
 			columns,
+			columns2,
 		};
 	},
 	
@@ -77,7 +137,7 @@ export default {
 	height: 36px;
 }
 .botoes {
-	border: 1px solid red;
+	
 	width: 112px;
 	height: 34px;
 	float: right;
@@ -91,8 +151,6 @@ export default {
   cursor: pointer;
 	float: right;
 	margin-left: -50px	;
-	border: 1px solid red;
-
 }
 .ic:hover {
   color: white;
@@ -105,7 +163,8 @@ export default {
   border: 2px solid rgb(236, 69, 69);
   color: black;
   cursor: pointer;
-  padding-top: 1.3px;
+	float: right;
+	margin-left: -50px	;
 }
 .dl:hover {
   color: white;

@@ -20,7 +20,7 @@
 
               </td>
               <td style="text-align:center;" class="actions">
-                <a-button type="button" class="ic" @click="redirectAtv(res.idEvento)" > VER ATIVIDADES </a-button>
+                <a-button type="button" class="ic" @click="redirectAtv(res.idEvento, CPF)" > VER ATIVIDADES </a-button>
                 <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
                 <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button>
               </td>
@@ -69,8 +69,9 @@ export default {
     this.pegar_tabela();
   },
   methods: {
-    redirectAtv(idEvento){
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}`})
+    redirectAtv(idEvento, CPF){
+      //console.log(idEvento, CPF);
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}`})
     },
     exclusao(id) {
       axios

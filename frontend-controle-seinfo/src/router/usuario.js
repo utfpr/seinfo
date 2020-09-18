@@ -25,7 +25,7 @@ export default new Router({
           component: homeUsu
         },
         {
-          path: 'atvHome/:idEvento',
+          path: 'atvHome/:idEvento/:CPF',
           component: atvHome
         },
         {
