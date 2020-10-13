@@ -2,25 +2,19 @@
 <div class="title">
   <h5 style="text-align:center">Cadastro de Aluno</h5>
   <div class="box">
-    <form class="form" action="http://localhost:3000/api/aluno" method="post">
+    <form class="form">
       <div class="row justify-content-center">
-        <a-form-item class="space">
+        <a-form-item class="space_2">
           <label class="ant-form-item-required">Nome do Aluno:</label>
-          <a-input maxlength="255" placeholder="Nome" name="nome_aluno" type="text">
+          <a-input maxlength="255" placeholder="Nome"  v-model="obj_cadastroInterno.nome" type="text" id="disabledInput" disabled="">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
-          </a-input>
-        </a-form-item>
-        <a-form-item class="space">
-          <label class="ant-form-item-required">Senha do Aluno:</label>
-          <a-input placeholder="Senha" name="senha_aluno" type="password">
-            <a-icon slot="prefix" type="key" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
       </div>
       <div class="row justify-content-center">
       <a-form-item class="space_2">
           <label class="ant-form-item-required">RA do Aluno:</label>
-          <a-input placeholder="RA" name="ra_aluno" type="text">
+          <a-input placeholder="RA" v-model="obj_cadastroInterno.RA" type="text" id="disabledInput" disabled="">
             <a-icon slot="prefix" type="tag" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -28,7 +22,7 @@
       <div class="row justify-content-center">
       <a-form-item class="space_2">
           <label class="ant-form-item-required">Email do Aluno:</label>
-          <a-input maxlength="255" placeholder="Email" name="email_aluno" type="text">
+          <a-input maxlength="255" placeholder="Email" v-model="obj_cadastroInterno.email" type="text">
             <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
@@ -36,21 +30,63 @@
       <div class="row justify-content-center">
         <a-form-item class="space_2">
           <label class="ant-form-item-required">CPF do Aluno:</label>
-          <a-input type="text" name="cpf_aluno" class="ls-mask-cpf" placeholder="000.000.000-00" />
+          <a-input type="text" v-model="obj_cadastroInterno.cpf" class="ls-mask-cpf" placeholder="000.000.000-00" />
         </a-form-item>
       </div>
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+      <button type="submit"  @click="Btn_Cadastrar" class="btn btn-outline-primary btn-sm">Cadastrar</button>
       </div>
     </form>
   </div>
 </div>
 </template>
 
+
 <script>
-export default {
+import axios from 'axios';
+export default 
+{
+  mounted(){
+    this.obj_cadastroInterno.RA = this.$route.query.ra;
+    this.obj_cadastroInterno.nome = this.$route.query.nome;
+    this.obj_cadastroInterno.email = this.$route.query.email;
+    console.log(this.obj_cadastroInterno.RA);
+  },
+   data() {
+    return {
+      obj_cadastroInterno : 
+      {
+        nome: '',
+        RA: '',
+        cpf: '',
+        email: '',
+      },
+      
+    }
+  },
+  methods:
+  {
+    Btn_Cadastrar() 
+    {
+      console.log(this.obj_cadastroInterno)
+
+      axios
+        .post('http://localhost:3000/api/pessoa', this.obj_cadastroInterno)
+        .then(response => {
+          console.log(response)
+          alert(response.data);
+          window.location = "http://localhost:8080/";  
+           }).catch(error => {
+            alert(error);
+          });
+      console.log("FEZ O LOGIN INTERNO")
+    }
+  }
+
+
 
 };
+
 </script>
 <style scoped>
 
