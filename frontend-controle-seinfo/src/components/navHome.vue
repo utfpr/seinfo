@@ -5,7 +5,7 @@
         <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
         <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
           <a-form-item>
-          <input v-model="obj_login.username" name="username" type="text" placeholder="Número do Ra" class="lg st" required="required" />
+          <the-mask v-model="obj_login.username" placeholder="000.000.000-00" class="lg st" :mask="['###.###.###-##']" />
           </a-form-item>
           <a-form-item>
             <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />
@@ -37,7 +37,7 @@
               @cancel="handleCancel"
             >
             <p>Para recuperar sua conta, por favor digite o seu CPF para enviarmos um email com uma nova senha.</p>
-              <a-input v-model="obj_rec.cpf"  type ="text" placeholder="CPF" class="tp" required="required"/>
+              <the-mask v-model="obj_rec.cpf" placeholder="000.000.000-00" class="ant-input tp" :mask="['###.###.###-##']" />
               <br/>
         </a-modal>
 
@@ -49,6 +49,7 @@
 <script>
 import axios from 'axios';
 import AuthConsumer from '../contexts/authConsumer';
+import {TheMask} from 'vue-the-mask';
 export default {
   data() {
     return {
@@ -71,7 +72,8 @@ export default {
     }
   },
   components: {
-    AuthConsumer
+    AuthConsumer,
+    TheMask
   },
   methods: {
     passaValor(username,password)
@@ -120,6 +122,12 @@ export default {
             // console.log(response.data)
             if(response.data.message === "FUNCIONOU"){
               signIn({token: response.data.token, user: response.data.pessoa});
+              window.location.replace(
+                response.data.pessoa.nivel === 1 
+                  ? 'http://localhost:8080/usuario' 
+                  : 'http://localhost:8080/adm'
+                );
+
             }
           }).catch(error => {
             console.log(error.response)

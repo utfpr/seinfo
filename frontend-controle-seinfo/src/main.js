@@ -32,9 +32,11 @@ import Usuario from './router/usuario';
 import 'ant-design-vue/dist/antd.css';
 import Antd from 'ant-design-vue';
 import SlideUpDown from "vue-slide-up-down";
+import VueTheMask from 'vue-the-mask';
 
 Vue.component('slide-up-down', SlideUpDown);
 Vue.use(Antd);
+Vue.use(VueTheMask);
 
 
 var router; 

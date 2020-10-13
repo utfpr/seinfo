@@ -1,5 +1,6 @@
 const db = require("../models/index.js");
 const Pessoa = db.pessoa;
+const formatCPF = require('@fnando/cpf');
 
 exports.create = (req, res) => {
 
@@ -58,7 +59,7 @@ exports.create = (req, res) => {
     idPessoa: id,
     nome: req.body.nome,
     email: req.body.email,
-    CPF: req.body.cpf,
+    CPF: formatCPF.strip(req.body.cpf),
     senha: senha,
     nivel: nivel,
     classificacao: classificacao
@@ -125,7 +126,7 @@ exports.atualiza = (req, res) => {
 };
 
 exports.recuperarSenha = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } })
+  Pessoa.findOne({ where: { CPF: formatCPF.strip(req.params.CPF) } })
     .then(pessoa => {
       if (pessoa) {
         var nodemailer = require('nodemailer');

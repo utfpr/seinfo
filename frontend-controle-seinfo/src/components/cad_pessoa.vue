@@ -22,7 +22,7 @@
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <label class="ant-form-item-required">CPF:</label>
-            <a-input type="text" v-model="obj_cadastro.cpf" placeholder="000.000.000-00"/>
+            <the-mask v-model="obj_cadastro.cpf" placeholder="000.000.000-00" class="ant-input" :mask="['###.###.###-##']" />
           </a-form-item>
         </div>
         <div class="row justify-content-center">
@@ -37,6 +37,7 @@
 
 <script>
 import axios from 'axios';
+import {TheMask} from 'vue-the-mask';
 export default 
 {
    data() {
@@ -49,6 +50,9 @@ export default
       },
       
     }
+  },
+  components: {
+    TheMask
   },
   methods:
   {
@@ -104,5 +108,9 @@ label {
 .space_2 {
   padding: 2px;
   width: 444px;
+}
+
+.teste {
+  padding: 4px 11px 4px 30px;
 }
 </style>

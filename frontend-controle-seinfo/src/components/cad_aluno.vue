@@ -28,11 +28,11 @@
         </a-form-item>
       </div>
       <div class="row justify-content-center">
-        <a-form-item class="space_2">
-          <label class="ant-form-item-required">CPF do Aluno:</label>
-          <a-input type="text" v-model="obj_cadastroInterno.cpf" class="ls-mask-cpf" placeholder="000.000.000-00" />
-        </a-form-item>
-      </div>
+          <a-form-item class="space_2">
+            <label class="ant-form-item-required">CPF do Aluno:</label>
+            <the-mask v-model="obj_cadastroInterno.cpf" placeholder="000.000.000-00" class="ant-input" :mask="['###.###.###-##']" />
+          </a-form-item>
+        </div>
       <div class="row justify-content-center">
       <button type="submit"  @click="Btn_Cadastrar" class="btn btn-outline-primary btn-sm">Cadastrar</button>
       </div>
@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios';
+import {TheMask} from 'vue-the-mask';
 export default 
 {
   mounted(){
@@ -63,6 +64,9 @@ export default
       },
       
     }
+  },
+  components: {
+    TheMask
   },
   methods:
   {
