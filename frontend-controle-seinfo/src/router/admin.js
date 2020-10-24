@@ -25,7 +25,7 @@ export default new Router({
       children: [
         {
           path: '',
-          component: Logo
+          component: Cad_evento
         },
         {
           path: 'tabela',

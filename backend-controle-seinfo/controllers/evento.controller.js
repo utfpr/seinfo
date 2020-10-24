@@ -117,9 +117,9 @@ exports.atualiza = (req,res)=>{
 exports.delete = (req, res) => {  
   Evento.destroy({ where: { idEvento: req.params.idEvento } }).then(evento => {
     console.log("Deletando o evento com o ID: "+req.params.idEvento);
-    res.send(evento); //Retorna um Json para a Pagina da API
+    res.send({msg:"Evento deletado com sucesso"}); //Retorna um Json para a Pagina da API
   }).catch(err => {
-   console.send("Error -> " + err);
+    res.status(500).send("Error -> " + err);
   })
 };
 

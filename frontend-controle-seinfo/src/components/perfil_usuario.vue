@@ -6,7 +6,7 @@
         <form method="post">
           <a-form-item>
             <label>CPF:</label>
-            <a-input type="text" v-model="obj.CPF" placeholder="000.000.000-00" disabled />
+            <the-mask  v-model="obj.CPF" placeholder="000.000.000-00" class="ant-input ant-input-disabled" :mask="['###.###.###-##']" disabled />
           </a-form-item>
           <a-form-item>
             <label>RA:</label>
@@ -38,10 +38,14 @@
 import AuthConsumer from "../contexts/authConsumer";
 const axios = require("axios");
 const auth = require("../services/auth");
+import {TheMask} from 'vue-the-mask';
 
 export default {
   mounted() {
     this.pegarPerfil();
+  },
+  components: {
+    TheMask
   },
   methods: {
     async pegarPerfil() {

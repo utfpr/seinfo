@@ -269,7 +269,7 @@
                       type="date"
                       id="data_ini_eve"
                       name="data_ini_eve"
-                      v-bind:disabled="true"
+                      v-bind:disabled="false"
                     >
                       <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
                     </a-input>
@@ -281,7 +281,7 @@
                       type="time"
                       name="hora_ini_eve"
                       id="hora_ini_eve"
-                      v-bind:disabled="true"
+                      v-bind:disabled="false"
                     >
                       <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
                     </a-input>
@@ -295,7 +295,7 @@
                       type="date"
                       id="data_fim_eve"
                       name="data_fim_eve"
-                      v-bind:disabled="true"
+                      v-bind:disabled="false"
                     >
                       <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
                     </a-input>
@@ -308,7 +308,7 @@
                       v-model="modalData.hora_fim_eve"
                       type="time"
                       name="hora_fim_eve"
-                      v-bind:disabled="true"
+                      v-bind:disabled="false"
                     >
                       <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
                     </a-input>
@@ -323,7 +323,6 @@
                       placeholder="Local"
                       v-model="modalData.local_eve"
                       type="text"
-                      v-bind:disabled="true"
                     >
                       <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)" />
                     </a-input>
@@ -383,6 +382,55 @@
       </div>
     </div>
     <!-- MODAL VER EDITAR (FIM) -->
+
+    <!-- MODAL VER MAIS (EXCLUIR) -->
+    <div
+      class="modal fade bd-example-modal-lg-ver-excluir"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="text-align: center">
+            <h4>Voce realmente deseja excluir este item?</h4>
+            <br />
+            <label>ID Evento: {{modalData.idEvento}}</label>
+            <br />
+            <label>Nome do Evento: {{modalData.nome}}</label>
+            <br />
+            <label>Local do Evento: {{modalData.local_eve}}</label>
+            <br />
+            <label>Data de Início: {{modalData.data_ini_eve}}</label>
+            <br />
+            <label>Data de Fim: {{modalData.data_fim_eve}}</label>
+            <br />
+            <label>Horário de Início: {{modalData.hora_ini_eve}}</label>
+            <br />
+            <label>Horário de Fim: {{modalData.hora_fim_eve}}</label>
+            <br />      
+            <label>Status: {{modalData.status}}</label>
+            <br />
+            <label>Descrição: {{modalData.descricao}}</label>
+            <br />
+            <a-button
+              v-on:click="deletar(modalData)"
+              type="danger"
+              data-dismiss="modal"
+              block
+            >Excluir item</a-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL VER MAIS (EXCLUIR) -->
+
   </div>
 
 </template>
@@ -417,6 +465,7 @@ export default {
       descricao: "",
       pegou: false,
       modalVisible: false,
+      modalVisible2: false,
       active: false,
       nomeEvento: "",
 
@@ -427,6 +476,7 @@ export default {
         data_fim_eve: "",
         hora_ini_eve: "",
         hora_fim_eve: "",
+        status: "",
         local_eve: "",
         descricao: ""
       },
@@ -523,6 +573,7 @@ export default {
       });
       
     },
+
    
     handleSubmit(e) {
       var erros = [];
@@ -563,33 +614,71 @@ export default {
 
     patch(dados) {
       var erros = [];
-      if (!this.modalData.nome) erros.push("Nome é obrigatório!");
-      if (!this.modalData.local_eve) erros.push("Local é obrigatório!");
-      if (!this.modalData.status) erros.push("Status é obrigatório!");
-      if (!this.modalData.descricao) erros.push("Descrição é obrigatório!");
+      if (!dados.nome) erros.push("Nome é obrigatório!");
+      if (!dados.local_eve) erros.push("Local é obrigatório!");
+      if (!dados.status) erros.push("Status é obrigatório!");
+      if (!dados.descricao) erros.push("Descrição é obrigatório!");
       console.log(dados);
       if (!erros.length) {
         axios
           .patch(
-            `http://localhost:3000/api/evento/${modalData.idEvento}`, modalData
+            `http://localhost:3000/api/evento/${dados.idEvento}`, dados
           )
           .then(response => {
             console.log("Editou!");
             console.log(response);
-            // this.$router.replace("/adm/cadEvento");
-            // location.reload();
+            this.$router.replace("/adm/cadEvento");
+            location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        // this.$router.replace("/adm/cadEvento");
+        this.$router.replace("/adm/cadEvento");
       }
   },
+  deletar(dados) {
+    axios
+        .delete(
+          `http://localhost:3000/api/evento/${dados.idEvento}`
+        )
+        .then(response => {
+          console.log("Deletou!");
+          console.log(response);
+          this.$router.replace("/adm/cadEvento");
+          this.info2(response.data.msg);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+        
+    },
+    openModal2(data) {
+      this.modalData = data;
+      this.modalVisible2 = true;
+      this.modalData.idEvento = data.idEvento;
+      this.modalData.nome = data.nome;
+      this.modalData.local_eve = data.agendamento.local;
+      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
+      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
+    },
 
+    info2(msg) {
+      const h = this.$createElement
+      this.$info({
+      title: 'Excluir Evento',
+      content: h('div',{}, [
+            h('p', msg),
+        ]),
+        onOk() {location.reload();},
+      })
+    },
   },
   
 };
 
 </script>
+                                  
 <style>
 
 .ant-input {

@@ -18,14 +18,14 @@ export default new Router({
       children: [
         {
           path: '',
-          component: Logo
+          component: homeUsu
         },
         {
           path: 'homeUsu',
           component: homeUsu
         },
         {
-          path: 'atvHome',
+          path: 'atvHome/:idEvento/:CPF',
           component: atvHome
         },
         {

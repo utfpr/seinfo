@@ -2,7 +2,7 @@
   <AuthConsumer>
     <div slot-scope="{ signOut }">
       <a-layout id="components-layout-demo-custom-trigger">
-        <a-layout-sider style="height:100vh" :trigger="null" collapsible v-model="collapsed">
+        <a-layout-sider style="min-height:100vh" :trigger="null" collapsible v-model="collapsed">
           <div class="logo" />
           <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['/']">
             <a-menu-item key="1">

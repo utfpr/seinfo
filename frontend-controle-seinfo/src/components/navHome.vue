@@ -5,7 +5,7 @@
         <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
         <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
           <a-form-item>
-          <input v-model="obj_login.username" name="username" type="text" placeholder="Número do Ra" class="lg st" required="required" />
+          <the-mask v-model="obj_login.username" placeholder="000.000.000-00" class="lg st" :mask="['###.###.###-##']" />
           </a-form-item>
           <a-form-item>
             <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />
@@ -20,10 +20,10 @@
         <a-modal
             title="Cadastrar-se como aluno"
             v-model="visible"
-            @ok="handleOk"
+            @ok="passaValor"
             @cancel="handleCancel"
           >
-            <a-input v-model="obj_userInterno.username"  type ="text" placeholder="CPF" class="tp" required="required"/>
+            <a-input v-model="obj_userInterno.username"  type ="text" placeholder="RA" class="tp" required="required"/>
             <a-input v-model="obj_userInterno.password"  type ="password" placeholder="Senha" class="tp" required="required"/>
             <br/>
             <a href="cadPessoa" style=color:#3366BB>&bull; Cadastrar-se como visitante </a>
@@ -37,7 +37,7 @@
               @cancel="handleCancel"
             >
             <p>Para recuperar sua conta, por favor digite o seu CPF para enviarmos um email com uma nova senha.</p>
-              <a-input v-model="obj_rec.cpf"  type ="text" placeholder="CPF" class="tp" required="required"/>
+              <the-mask v-model="obj_rec.cpf" placeholder="000.000.000-00" class="ant-input tp" :mask="['###.###.###-##']" />
               <br/>
         </a-modal>
 
@@ -49,14 +49,17 @@
 <script>
 import axios from 'axios';
 import AuthConsumer from '../contexts/authConsumer';
+import {TheMask} from 'vue-the-mask';
 export default {
   data() {
     return {
       visible: false,
       recuperacao: false,
       obj_userInterno : {
+        nome: '',
         username: '',
-        password: ''
+        password: '',
+        email: ''
       },
       obj_login : {
         username: '',
@@ -69,9 +72,36 @@ export default {
     }
   },
   components: {
-    AuthConsumer
+    AuthConsumer,
+    TheMask
   },
   methods: {
+    passaValor(username,password)
+    {
+      //PASSA O USUÁRIO PARA A PÁGINA DE CADASTRO
+
+    axios
+    .post('http://localhost:3000/api/loginLDAP',{ username: this.obj_userInterno.username, password: this.obj_userInterno.password})
+    .then(response => {
+      console.log(response.data.name);
+            // obj_userInterno.nome = response.data.name;
+            // obj_userInterno.email = response.data.email;
+            console.log(response.data.email);
+            this.$router.push({ name: `Cad_Aluno`, query:{ra: this.obj_userInterno.username, nome: response.data.name, email: response.data.email}})
+            //mandar os outros dados do LDAP para a página de cadastro
+            //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.nome}})
+            //console.log(response.data.message);
+            console.log("VERIFICOU SE ALUNO EXISTE")
+            
+          }).catch(error => {
+            console.log(error.response)
+          });
+     
+    
+    ////window.location = "/cad_aluno?username="+username;
+    //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.username}})
+    //console.log(obj_userInterno.username);
+    },
     showModalRecuperacao()
     {
       this.recuperacao = true;
@@ -92,6 +122,12 @@ export default {
             // console.log(response.data)
             if(response.data.message === "FUNCIONOU"){
               signIn({token: response.data.token, user: response.data.pessoa});
+              window.location.replace(
+                response.data.pessoa.nivel === 1 
+                  ? 'http://localhost:8080/usuario' 
+                  : 'http://localhost:8080/adm'
+                );
+
             }
           }).catch(error => {
             console.log(error.response)
