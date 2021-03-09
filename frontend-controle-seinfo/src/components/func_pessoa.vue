@@ -5,16 +5,6 @@
       <form class="form" action="http://localhost:3000/api/pessoa" method="get">
         <div class="row justify-content-center">
           <a-form-item class="space_2">
-            <label class="ant-form-item-required">Pessoa:</label>
-            <div>
-              <a-select name="select_pessoa" defaultValue="${0}">
-                <a-select-option  v-for="(res/*,i*/) in res" :key="res.idPessoa" :value="res.idPessoa">{{res.nome}}</a-select-option>
-              </a-select>
-            </div>
-          </a-form-item>
-        </div>
-        <div class="row justify-content-center">
-          <a-form-item class="space_2">
             <label class="ant-form-item-required">Evento:</label>
             <a-select name="select_evento" defaultValue="0">
               <a-select-option value="0">Evento 1</a-select-option>
@@ -23,6 +13,17 @@
             </a-select>
           </a-form-item>
         </div>
+        <div class="row justify-content-center">
+          <a-form-item class="space_2">
+            <label class="ant-form-item-required">Pessoa:</label>
+            <div>
+              <a-select name="select_pessoa" defaultValue="${0}">
+                <a-select-option  v-for="(res/*,i*/) in res" :key="res.idPessoa" :value="res.idPessoa">{{res.nome}}</a-select-option>
+              </a-select>
+            </div>
+          </a-form-item>
+        </div>
+
         <div class="row justify-content-center">
           <a-form-item class="space_2">
             <a-radio-group v-model="value">
