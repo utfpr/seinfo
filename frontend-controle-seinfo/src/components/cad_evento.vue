@@ -111,7 +111,6 @@
           </div>
           <div class="row justify-content-center">
             <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
-             <button type="reset" class="btn btn-outline-primary btn-sm" v-on:click="toggle">Cancela</button>
           </div>
         </form>
       </div>
