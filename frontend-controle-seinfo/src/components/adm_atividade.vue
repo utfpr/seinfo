@@ -14,7 +14,19 @@
           method="post"
           enctype="multipart/form-data"
         >
-          <div class="row justify-content-center">
+<div class="row justify-content-center">
+            <a-form-item class="space">
+              <label class="ant-form-item-required">Selecione o Evento:</label>
+              <a-select v-model="idEvento" defaultValue="...">
+                <a-select-option
+                  id="idEvento"
+                  name="idEvento"
+                  v-for="evento in eventos"
+                  :key="evento.idEvento"
+                  :value="evento.idEvento"
+                >{{evento.nome}}</a-select-option>
+              </a-select>
+            </a-form-item>
             <a-form-item class="space">
               <label class="ant-form-item-required">Nome da Atividade:</label>
               <a-input
@@ -27,20 +39,6 @@
                 <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Valor da Atividade:</label>
-              <a-input
-                placeholder="Valor"
-                autocomplete="off"
-                v-model="valor"
-                type="number"
-                id="valor"
-                name="valor"
-                min="0"
-              >
-                <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)" />
-              </a-input>
-            </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
@@ -50,17 +48,17 @@
               </a-input>
             </a-form-item>
             <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Fim:</label>
-              <a-input v-model="data_fim_atv" type="date" id="data_fim_atv" name="data_fim_atv">
-                <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+              <label class="ant-form-item-required">Hora de Inicio:</label>
+              <a-input v-model="hora_ini_atv" type="time" name="hora_ini_atv" id="hora_ini_atv">
+                <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
               </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
-              <label class="ant-form-item-required">Hora de Inicio:</label>
-              <a-input v-model="hora_ini_atv" type="time" name="hora_ini_atv" id="hora_ini_atv">
-                <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+              <label class="ant-form-item-required">Data de Fim:</label>
+              <a-input v-model="data_fim_atv" type="date" id="data_fim_atv" name="data_fim_atv">
+                <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
@@ -103,16 +101,18 @@
               </a-input>
             </a-form-item>
             <a-form-item class="space">
-              <label class="ant-form-item-required">Selecione o Evento:</label>
-              <a-select v-model="idEvento" defaultValue="...">
-                <a-select-option
-                  id="idEvento"
-                  name="idEvento"
-                  v-for="evento in eventos"
-                  :key="evento.idEvento"
-                  :value="evento.idEvento"
-                >{{evento.nome}}</a-select-option>
-              </a-select>
+              <label class="ant-form-item-required">Valor da Atividade:</label>
+              <a-input
+                placeholder="Valor"
+                autocomplete="off"
+                v-model="valor"
+                type="number"
+                id="valor"
+                name="valor"
+                min="0"
+              >
+                <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)" />
+              </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center"></div>
