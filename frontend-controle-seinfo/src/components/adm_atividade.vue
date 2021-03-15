@@ -22,7 +22,7 @@
                 placeholder="Nome"
                 v-model="titulo"
                 autocomplete="off"
-                type="text"
+                type="text"               
               >
                 <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
               </a-input>
@@ -156,7 +156,8 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+            <button type="submit" class="btn btn-outline-primary mr-5">Cadastrar</button>
+            <button type="reset" class="btn btn-outline-danger btn-sm-2 reset" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>            
           </div>
         </form>
       </div>
@@ -485,11 +486,8 @@
               </div>
               <br />
               <div class="row justify-content-center">
-                <button
-                  type="submit"
-                  v-on:click="patch(modalData)"
-                  class="btn btn-outline-primary btn-sm"
-                >Editar</button>
+                <button type="submit" v-on:click="patch(modalData)" class="btn btn-outline-primary mr-5">Editar</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-outline-danger btn-sm">Cancelar</button>
               </div>
             </form>
           </div>
@@ -599,6 +597,23 @@ export default {
     this.pegar_tabela();
   },
   methods: {
+     onCancel(){
+        console.log('CANCEL SUBMIT');
+        this.show = false;
+        this.titulo = "";
+        this.valor =   "";
+        this.data_ini_atv = "";
+        this.data_fim_atv = "";
+        this.hora_ini_atv = "";
+        this.hora_fim_atv = "";
+        this.horasParticipacao = "";
+        this.quantidadeVagas = "";
+        this.local_atv = "";
+        this.idEvento = "";
+        this.idCategoria = "";
+        this.idPessoa = "";
+        this.descricao = "";
+    },
     moment: function(date) {
       return moment(date);
     },
