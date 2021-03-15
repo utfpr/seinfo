@@ -22,13 +22,15 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 1 ? 'error' : ''"
+            :help="onChangeDate() === 1 ? 'Data de Fim deve ser maior que a Data de Inicio' : ''"
+            >
               <label class="ant-form-item-required">Data de Inicio do Evento:</label>
               <a-input v-model="obj_Resource.data_ini" name="data_ini" type="date">
                 <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 2 ? 'error' : ''" :help="onChangeDate() === 2 ? 'Hora de Fim deve ser maior que a Hora de Inicio' : ''">
               <label class="ant-form-item-required">Hora de Inicio do Evento:</label>
               <a-input v-model="obj_Resource.hora_ini" name="hora_ini" type="time">
                 <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
@@ -36,13 +38,14 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 1 ? 'error' : ''"
+            :help="onChangeDate() === 1 ? 'Data de Fim deve ser maior que a Data de Inicio' : ''">
               <label class="ant-form-item-required">Data de Fim do Evento:</label>
               <a-input v-model="obj_Resource.data_fim" name="data_fim" type="date">
                 <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 2 ? 'error' : ''" :help="onChangeDate() === 2 ? 'Hora de Fim deve ser maior que a Hora de Inicio' : ''">
               <label class="ant-form-item-required">Hora de Fim do Evento:</label>
               <a-input v-model="obj_Resource.hora_fim" name="hora_fim" type="time">
                 <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
@@ -523,9 +526,6 @@ export default {
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
     },
-
-
-
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
@@ -537,7 +537,6 @@ export default {
           console.log(error);
         });
     },
-
     toggle() {
       this.active = !this.active;
     },
@@ -561,7 +560,6 @@ export default {
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
       });
     },
-
     info() {
       const h = this.$createElement
       this.$info({
@@ -573,10 +571,40 @@ export default {
       });
       
     },
-
-   
+    onChangeDate(){
+      const error = this.verifyDate();
+      return error;
+    },
+    verifyDate(){
+      const startDate = new Date(this.obj_Resource.data_ini);
+      const endDate = new Date(this.obj_Resource.data_fim);
+      if(endDate - startDate < 0){
+        return 1;
+      }else if(endDate - startDate > 0) {
+        return 0;
+      }else {
+        const completeStartDate = new Date(this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini);
+        const completeEndDate = new Date(this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim);
+        if(completeEndDate - completeStartDate < 0) {
+          return 2;
+        } else if (completeEndDate - completeStartDate > 0){
+          return 0;
+        } else {
+          return 2;
+        }
+      }
+    },
     handleSubmit(e) {
       var erros = [];
+
+      const errorDate = this.verifyDate();
+
+      if(errorDate === 1) {
+        erros.push('Data de Fim deve ser maior que Data de Início.')
+      }else if (errorDate === 2){
+        erros.push('Hora de Fim deve ser maior que Hora de Início.');
+      }
+
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
       if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
       if (!this.obj_Resource.data_fim) erros.push("Data de Fim é obrigatório!");
