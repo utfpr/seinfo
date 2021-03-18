@@ -1,9 +1,11 @@
 // Eu não me orgulho nem um pouco das gambiarras que eu fiz aqui....
 <template>
   <div class="title">
-    <h5 style="text-align:center">Controle de Atividade</h5>
+    <h5 style="text-align: center">Controle de Atividade</h5>
     <br />
-    <a-button type="primary" class="teste" v-on:click="toggle">Inserir Atividade</a-button>
+    <a-button type="primary" class="teste" v-on:click="toggle"
+      >Inserir Atividade</a-button
+    >
 
     <!-- Começo Inserção -->
     <slide-up-down :active="active">
@@ -14,7 +16,7 @@
           method="post"
           enctype="multipart/form-data"
         >
-<div class="row justify-content-center">
+          <div class="row justify-content-center">
             <a-form-item class="space">
               <label class="ant-form-item-required">Selecione o Evento:</label>
               <a-select v-model="idEvento" defaultValue="...">
@@ -24,7 +26,8 @@
                   v-for="evento in eventos"
                   :key="evento.idEvento"
                   :value="evento.idEvento"
-                >{{evento.nome}}</a-select-option>
+                  >{{ evento.nome }}</a-select-option
+                >
               </a-select>
             </a-form-item>
             <a-form-item class="space">
@@ -34,56 +37,110 @@
                 placeholder="Nome"
                 v-model="titulo"
                 autocomplete="off"
-                type="text"               
+                type="text"
               >
-                <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+                <a-icon
+                  slot="prefix"
+                  type="user"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
               <label class="ant-form-item-required">Data de Inicio:</label>
-              <a-input v-model="data_ini_atv" type="date" id="data_ini_atv" name="data_ini_atv">
-                <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+              <a-input
+                v-model="data_ini_atv"
+                type="date"
+                id="data_ini_atv"
+                name="data_ini_atv"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="calendar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
               <label class="ant-form-item-required">Hora de Inicio:</label>
-              <a-input v-model="hora_ini_atv" type="time" name="hora_ini_atv" id="hora_ini_atv">
-                <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+              <a-input
+                v-model="hora_ini_atv"
+                type="time"
+                name="hora_ini_atv"
+                id="hora_ini_atv"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="clock-circle"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
               <label class="ant-form-item-required">Data de Fim:</label>
-              <a-input v-model="data_fim_atv" type="date" id="data_fim_atv" name="data_fim_atv">
-                <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+              <a-input
+                v-model="data_fim_atv"
+                type="date"
+                id="data_fim_atv"
+                name="data_fim_atv"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="calendar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
               <label class="ant-form-item-required">Hora de Fim:</label>
-              <a-input id="hora_fim_atv" v-model="hora_fim_atv" type="time" name="hora_fim_atv">
-                <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+              <a-input
+                id="hora_fim_atv"
+                v-model="hora_fim_atv"
+                type="time"
+                name="hora_fim_atv"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="clock-circle"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
-              <label class="ant-form-item-required">Horas de Participação:</label>
+              <label class="ant-form-item-required"
+                >Horas de Participação:</label
+              >
               <a-input
                 id="horasParticipacao"
                 v-model="horasParticipacao"
                 type="time"
                 name="horasParticipacao"
               >
-                <a-icon slot="prefix" type="dashboard" style="color:rgba(0,0,0,.25)" />
+                <a-icon
+                  slot="prefix"
+                  type="dashboard"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
               <label class="ant-form-item-required">Quantidade de Vagas:</label>
-              <a-input v-model="quantidadeVagas" autocomplete="off" type="number">
-                <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)" />
+              <a-input
+                v-model="quantidadeVagas"
+                autocomplete="off"
+                type="number"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="read"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
           </div>
@@ -97,7 +154,11 @@
                 v-model="local_atv"
                 type="text"
               >
-                <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)" />
+                <a-icon
+                  slot="prefix"
+                  type="home"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
@@ -111,14 +172,20 @@
                 name="valor"
                 min="0"
               >
-                <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)" />
+                <a-icon
+                  slot="prefix"
+                  type="dollar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
               </a-input>
             </a-form-item>
           </div>
           <div class="row justify-content-center"></div>
           <div class="row justify-content-center">
             <a-form-item class="space">
-              <label class="ant-form-item-required">Selecione uma Categoria:</label>
+              <label class="ant-form-item-required"
+                >Selecione uma Categoria:</label
+              >
               <a-select v-model="idCategoria" defaultValue="...">
                 <a-select-option
                   id="idCategoria"
@@ -126,11 +193,14 @@
                   v-for="categoria in categorias"
                   :key="categoria.idCategoria"
                   :value="categoria.idCategoria"
-                >{{categoria.nome}}</a-select-option>
+                  >{{ categoria.nome }}</a-select-option
+                >
               </a-select>
             </a-form-item>
             <a-form-item class="space">
-              <label class="ant-form-item-required">Selecione um Protagonista:</label>
+              <label class="ant-form-item-required"
+                >Selecione um Protagonista:</label
+              >
               <a-select v-model="idPessoa" defaultValue="...">
                 <a-select-option
                   id="idPessoa"
@@ -138,7 +208,8 @@
                   v-for="protagonista in protagonistas"
                   :key="protagonista.idPessoa"
                   :value="protagonista.idPessoa"
-                >{{protagonista.aPes.nome}}</a-select-option>
+                  >{{ protagonista.aPes.nome }}</a-select-option
+                >
               </a-select>
             </a-form-item>
           </div>
@@ -156,8 +227,17 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary mr-5">Cadastrar</button>
-            <button type="reset" class="btn btn-outline-danger btn-sm-2 reset" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>            
+            <button type="submit" class="btn btn-outline-primary mr-5">
+              Cadastrar
+            </button>
+            <button
+              type="reset"
+              class="btn btn-outline-danger btn-sm-2 reset"
+              @click.prevent="onCancel"
+              v-on:click="toggle"
+            >
+              Cancelar
+            </button>
           </div>
         </form>
       </div>
@@ -172,29 +252,36 @@
           class="table table-striped"
           cellspacing="0"
           cellpadding="0"
-          style="text-align: center;"
+          style="text-align: center"
         >
           <thead>
             <tr>
               <th>ID</th>
-              <th style="text-align: left;">Evento</th>
-              <th style="text-align: left;">Título</th>
-              <th style="text-align: left;">Valor</th>
-              <th style="text-align: left;">Categoria</th>
-              <th style="text-align: left;">Vagas</th>
-              <th style="text-align: left;">Horas</th>
+              <th style="text-align: left">Evento</th>
+              <th style="text-align: left">Título</th>
+              <th style="text-align: left">Valor</th>
+              <th style="text-align: left">Categoria</th>
+              <th style="text-align: left">Vagas</th>
+              <th style="text-align: left">Horas</th>
               <th class="actions">Ações</th>
             </tr>
           </thead>
           <tbody v-for="resp in res" :key="resp.idAtividade">
             <tr>
-              <td>{{resp.idAtividade}}</td>
-              <td style="text-align: left;">ID:{{resp.idEvento}} | {{getEvtNome(resp.idEvento)}}</td>
-              <td style="text-align: left;">{{resp.titulo}}</td>
-              <td style="text-align: left;">R$ {{resp.valor}}</td>
-              <td style="text-align: left;">ID:{{resp.categoriaAtv.idCategoria}} | {{resp.categoriaAtv.nome}}</td>
-              <td style="text-align: left;">{{resp.quantidadeVagas}}</td>
-              <td style="text-align: left;">{{resp.horasParticipacao.slice(0, 5)}}</td>
+              <td>{{ resp.idAtividade }}</td>
+              <td style="text-align: left">
+                ID:{{ resp.idEvento }} | {{ getEvtNome(resp.idEvento) }}
+              </td>
+              <td style="text-align: left">{{ resp.titulo }}</td>
+              <td style="text-align: left">R$ {{ resp.valor }}</td>
+              <td style="text-align: left">
+                ID:{{ resp.categoriaAtv.idCategoria }} |
+                {{ resp.categoriaAtv.nome }}
+              </td>
+              <td style="text-align: left">{{ resp.quantidadeVagas }}</td>
+              <td style="text-align: left">
+                {{ resp.horasParticipacao.slice(0, 5) }}
+              </td>
               <td class="actions">
                 <a-tooltip placement="top">
                   <template slot="title">Ver Mais</template>
@@ -248,36 +335,49 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Ver Mais</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" style="text-align: center">
-            <label>ID Atividade: {{modalData.idAtividade}}</label>
+            <label>ID Atividade: {{ modalData.idAtividade }}</label>
             <br />
-            <label>Valor: R$ {{modalData.valor}}</label>
+            <label>Valor: R$ {{ modalData.valor }}</label>
             <br />
-            <label>Data de Início: {{moment(modalData.data_ini_atv).format("DD/MM/YYYY")}}</label>
+            <label
+              >Data de Início:
+              {{ moment(modalData.data_ini_atv).format("DD/MM/YYYY") }}</label
+            >
             <br />
-            <label>Data de Fim: {{moment(modalData.data_fim_atv).format("DD/MM/YYYY")}}</label>
+            <label
+              >Data de Fim:
+              {{ moment(modalData.data_fim_atv).format("DD/MM/YYYY") }}</label
+            >
             <br />
-            <label>Horário de Início: {{modalData.hora_ini_atv}}</label>
+            <label>Horário de Início: {{ modalData.hora_ini_atv }}</label>
             <br />
-            <label>Horário de Fim: {{modalData.hora_fim_atv}}</label>
+            <label>Horário de Fim: {{ modalData.hora_fim_atv }}</label>
             <br />
-            <label>Horas de Participação: {{modalData.horasParticipacao}}</label>
+            <label
+              >Horas de Participação: {{ modalData.horasParticipacao }}</label
+            >
             <br />
-            <label>Quantidade de Vagas: {{modalData.quantidadeVagas}}</label>
+            <label>Quantidade de Vagas: {{ modalData.quantidadeVagas }}</label>
             <br />
-            <label>Local da Atividade: {{modalData.local_atv}}</label>
+            <label>Local da Atividade: {{ modalData.local_atv }}</label>
             <br />
-            <label>Evento: {{nomeEvento}}</label>
+            <label>Evento: {{ nomeEvento }}</label>
             <br />
-            <label>Categoria: {{modalData.idCategoria}}</label>
+            <label>Categoria: {{ modalData.idCategoria }}</label>
             <br />
-            <label>Protagonista: {{modalData.idPessoa}}</label>
+            <label>Protagonista: {{ modalData.idPessoa }}</label>
             <br />
-            <label>Descrição: {{modalData.descricao}}</label>
+            <label>Descrição: {{ modalData.descricao }}</label>
             <br />
           </div>
         </div>
@@ -296,7 +396,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -305,7 +410,9 @@
               <div class="row justify-content-center">
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Nome da Atividade:</label>
+                    <label class="ant-form-item-required"
+                      >Nome da Atividade:</label
+                    >
                     <a-input
                       maxlength="255"
                       placeholder="Nome"
@@ -313,11 +420,17 @@
                       autocomplete="off"
                       type="text"
                     >
-                      <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="user"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Valor da Atividade:</label>
+                    <label class="ant-form-item-required"
+                      >Valor da Atividade:</label
+                    >
                     <a-input
                       placeholder="Valor"
                       autocomplete="off"
@@ -327,13 +440,19 @@
                       name="valor"
                       min="0"
                     >
-                      <a-icon slot="prefix" type="dollar" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="dollar"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Data de Inicio:</label>
+                    <label class="ant-form-item-required"
+                      >Data de Inicio:</label
+                    >
                     <a-input
                       v-model="modalData.data_ini_atv"
                       type="date"
@@ -341,7 +460,11 @@
                       name="data_ini_atv"
                       v-bind:disabled="true"
                     >
-                      <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="calendar"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                   <a-form-item class="space">
@@ -353,13 +476,19 @@
                       name="data_fim_atv"
                       v-bind:disabled="true"
                     >
-                      <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="calendar"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Hora de Inicio:</label>
+                    <label class="ant-form-item-required"
+                      >Hora de Inicio:</label
+                    >
                     <a-input
                       v-model="modalData.hora_ini_atv"
                       type="time"
@@ -367,7 +496,11 @@
                       id="hora_ini_atv"
                       v-bind:disabled="true"
                     >
-                      <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="clock-circle"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                   <a-form-item class="space">
@@ -379,34 +512,56 @@
                       name="hora_fim_atv"
                       v-bind:disabled="true"
                     >
-                      <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="clock-circle"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Horas de Participação:</label>
+                    <label class="ant-form-item-required"
+                      >Horas de Participação:</label
+                    >
                     <a-input
                       id="horasParticipacao"
                       v-model="modalData.horasParticipacao"
                       type="time"
                       name="horasParticipacao"
                     >
-                      <a-icon slot="prefix" type="dashboard" style="color:rgba(0,0,0,.25)" />
-                      {{modalData.horasParticipacao}}
+                      <a-icon
+                        slot="prefix"
+                        type="dashboard"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
+                      {{ modalData.horasParticipacao }}
                     </a-input>
                   </a-form-item>
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Quantidade de Vagas:</label>
-                    <a-input v-model="modalData.quantidadeVagas" autocomplete="off" type="number">
-                      <a-icon slot="prefix" type="read" style="color:rgba(0,0,0,.25)" />
-                      {{modalData.quantidadeVagas}}
+                    <label class="ant-form-item-required"
+                      >Quantidade de Vagas:</label
+                    >
+                    <a-input
+                      v-model="modalData.quantidadeVagas"
+                      autocomplete="off"
+                      type="number"
+                    >
+                      <a-icon
+                        slot="prefix"
+                        type="read"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
+                      {{ modalData.quantidadeVagas }}
                     </a-input>
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Local da Atividade:</label>
+                    <label class="ant-form-item-required"
+                      >Local da Atividade:</label
+                    >
                     <a-input
                       maxlength="255"
                       autocomplete="off"
@@ -415,11 +570,17 @@
                       type="text"
                       v-bind:disabled="true"
                     >
-                      <a-icon slot="prefix" type="home" style="color:rgba(0,0,0,.25)" />
+                      <a-icon
+                        slot="prefix"
+                        type="home"
+                        style="color: rgba(0, 0, 0, 0.25)"
+                      />
                     </a-input>
                   </a-form-item>
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Selecione o Evento:</label>
+                    <label class="ant-form-item-required"
+                      >Selecione o Evento:</label
+                    >
                     <a-select
                       v-model="nomeEvento"
                       v-bind:disabled="true"
@@ -431,14 +592,17 @@
                         v-for="evento in eventos"
                         :key="evento.idEvento"
                         :value="evento.idEvento"
-                      >{{evento.nome}}</a-select-option>
+                        >{{ evento.nome }}</a-select-option
+                      >
                     </a-select>
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center"></div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Selecione uma Categoria:</label>
+                    <label class="ant-form-item-required"
+                      >Selecione uma Categoria:</label
+                    >
                     <a-select
                       v-model="modalData.idCategoria"
                       defaultValue="..."
@@ -450,11 +614,14 @@
                         v-for="categoria in categorias"
                         :key="categoria.idCategoria"
                         :value="categoria.idCategoria"
-                      >{{categoria.nome}}</a-select-option>
+                        >{{ categoria.nome }}</a-select-option
+                      >
                     </a-select>
                   </a-form-item>
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Selecione um Protagonista:</label>
+                    <label class="ant-form-item-required"
+                      >Selecione um Protagonista:</label
+                    >
                     <a-select
                       v-bind:disabled="true"
                       v-model="modalData.idPessoa"
@@ -466,7 +633,8 @@
                         v-for="protagonista in protagonistas"
                         :key="protagonista.idPessoa"
                         :value="protagonista.idPessoa"
-                      >{{protagonista.aPes.nome}}</a-select-option>
+                        >{{ protagonista.aPes.nome }}</a-select-option
+                      >
                     </a-select>
                   </a-form-item>
                 </div>
@@ -480,14 +648,27 @@
                       v-model="modalData.descricao"
                       placeholder="Descrição"
                       :rows="4"
-                    >{{modalData.descricao}}</a-textarea>
+                      >{{ modalData.descricao }}</a-textarea
+                    >
                   </a-form-item>
                 </div>
               </div>
               <br />
               <div class="row justify-content-center">
-                <button type="submit" v-on:click="patch(modalData)" class="btn btn-outline-primary mr-5">Editar</button>
-                <button type="submit" data-dismiss="modal" class="btn btn-outline-danger btn-sm">Cancelar</button>
+                <button
+                  type="submit"
+                  v-on:click="patch(modalData)"
+                  class="btn btn-outline-primary mr-5"
+                >
+                  Editar
+                </button>
+                <button
+                  type="submit"
+                  data-dismiss="modal"
+                  class="btn btn-outline-danger btn-sm"
+                >
+                  Cancelar
+                </button>
               </div>
             </form>
           </div>
@@ -507,44 +688,55 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" style="text-align: center">
             <h4>Voce realmente deseja excluir este item?</h4>
             <br />
-            <label>ID Atividade: {{modalData.idAtividade}}</label>
+            <label>ID Atividade: {{ modalData.idAtividade }}</label>
             <br />
-            <label>Valor: R$ {{modalData.valor}}</label>
+            <label>Valor: R$ {{ modalData.valor }}</label>
             <br />
-            <label>Data de Início: {{moment(modalData.data_ini_atv).format("DD/MM/YYYY")}}</label>
+            <label
+              >Data de Início:
+              {{ moment(modalData.data_ini_atv).format("DD/MM/YYYY") }}</label
+            >
             <br />
-            <label>Data de Fim: {{moment(modalData.data_fim_atv).format("DD/MM/YYYY")}}</label>
+            <label
+              >Data de Fim:
+              {{ moment(modalData.data_fim_atv).format("DD/MM/YYYY") }}</label
+            >
             <br />
-            <label>Horário de Início: {{modalData.hora_ini_atv}}</label>
+            <label>Horário de Início: {{ modalData.hora_ini_atv }}</label>
             <br />
-            <label>Horário de Fim: {{modalData.hora_fim_atv}}</label>
+            <label>Horário de Fim: {{ modalData.hora_fim_atv }}</label>
             <br />
-            <label>Horas de Participação: {{modalData.horasParticipacao}}</label>
+            <label
+              >Horas de Participação: {{ modalData.horasParticipacao }}</label
+            >
             <br />
-            <label>Quantidade de Vagas: {{modalData.quantidadeVagas}}</label>
+            <label>Quantidade de Vagas: {{ modalData.quantidadeVagas }}</label>
             <br />
-            <label>Local da Atividade: {{modalData.local_atv}}</label>
+            <label>Local da Atividade: {{ modalData.local_atv }}</label>
             <br />
-            <label>Evento: {{nomeEvento}}</label>
+            <label>Evento: {{ nomeEvento }}</label>
             <br />
-            <label>Categoria: {{modalData.idCategoria}}</label>
+            <label>Categoria: {{ modalData.idCategoria }}</label>
             <br />
-            <label>Protagonista: {{modalData.idPessoa}}</label>
+            <label>Protagonista: {{ modalData.idPessoa }}</label>
             <br />
-            <label>Descrição: {{modalData.descricao}}</label>
+            <label>Descrição: {{ modalData.descricao }}</label>
             <br />
-            <a-button
-              v-on:click="deletar(modalData)"
-              type="danger"
-              block
-            >Eu desejo Excluir este item</a-button>
+            <a-button v-on:click="deletar(modalData)" type="danger" block
+              >Eu desejo Excluir este item</a-button
+            >
           </div>
         </div>
       </div>
@@ -559,7 +751,7 @@ import moment from "moment";
 moment.locale("pt-br");
 export default {
   props: {
-    disabled: Boolean
+    disabled: Boolean,
   },
   beforeCreate() {
     this.form = this.$form.createForm(this);
@@ -567,65 +759,65 @@ export default {
   created() {
     axios
       .get("http://localhost:3000/api/eventos")
-      .then(response => {
+      .then((response) => {
         this.eventos = response.data;
         // console.log(this.eventos);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
     axios
       .get("http://localhost:3000/api/categorias")
-      .then(response => {
+      .then((response) => {
         this.categorias = response.data;
         // console.log(this.categorias);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
 
     axios
       .get("http://localhost:3000/api/protagonistas")
-      .then(response => {
+      .then((response) => {
         this.protagonistas = response.data;
         // console.log(this.protagonistas);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
     this.pegar_tabela();
   },
   methods: {
-     onCancel(){
-        console.log('CANCEL SUBMIT');
-        this.show = false;
-        this.titulo = "";
-        this.valor =   "";
-        this.data_ini_atv = "";
-        this.data_fim_atv = "";
-        this.hora_ini_atv = "";
-        this.hora_fim_atv = "";
-        this.horasParticipacao = "";
-        this.quantidadeVagas = "";
-        this.local_atv = "";
-        this.idEvento = "";
-        this.idCategoria = "";
-        this.idPessoa = "";
-        this.descricao = "";
+    onCancel() {
+      console.log("CANCEL SUBMIT");
+      this.show = false;
+      this.titulo = "";
+      this.valor = "";
+      this.data_ini_atv = "";
+      this.data_fim_atv = "";
+      this.hora_ini_atv = "";
+      this.hora_fim_atv = "";
+      this.horasParticipacao = "";
+      this.quantidadeVagas = "";
+      this.local_atv = "";
+      this.idEvento = "";
+      this.idCategoria = "";
+      this.idPessoa = "";
+      this.descricao = "";
     },
-    moment: function(date) {
+    moment: function (date) {
       return moment(date);
     },
     pegar_tabela() {
       this.$router.replace("/adm/atividade");
       axios
         .get("http://localhost:3000/api/atividades/")
-        .then(response => {
+        .then((response) => {
           // console.log(response.data);
           this.res = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -697,10 +889,10 @@ export default {
           (this.obj_Resource.descricao = this.descricao),
           axios
             .post("http://localhost:3000/api/atividade", this.obj_Resource)
-            .then(response => {
+            .then((response) => {
               console.log(response);
             })
-            .catch(error => {
+            .catch((error) => {
               console.log(error.response);
             });
         this.$router.replace("/adm/atividade");
@@ -725,7 +917,7 @@ export default {
             "http://localhost:3000/api/atividade/" + dados.idAtividade,
             dados
           )
-          .then(response => {
+          .then((response) => {
             console.log("Editou!");
             console.log(response);
             this.$router.replace("/adm/atividade");
@@ -745,7 +937,7 @@ export default {
             "/" +
             dados.idEvento
         )
-        .then(response => {
+        .then((response) => {
           console.log("Deletou!");
           console.log(response);
           this.$router.replace("/adm/atividade");
@@ -754,7 +946,7 @@ export default {
     },
     toggle() {
       this.active = !this.active;
-    }
+    },
   },
   data() {
     return {
@@ -793,7 +985,7 @@ export default {
         idEvento: "",
         idCategoria: "",
         idPessoa: "",
-        descricao: ""
+        descricao: "",
       },
       obj_Resource: {
         titulo: "",
@@ -808,10 +1000,10 @@ export default {
         idEvento: "",
         idCategoria: "",
         idPessoa: "",
-        descricao: ""
-      }
+        descricao: "",
+      },
     };
-  }
+  },
 };
 </script>
 <style scoped>

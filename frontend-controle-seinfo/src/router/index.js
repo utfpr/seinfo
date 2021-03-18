@@ -23,6 +23,7 @@ import UsuPerfil from '@/components/perfil_usuario';
 import not_found from '@/components/not_found';
 import Cad_Aluno from '@/components/cad_aluno';
 import homeUsu from '@/components/home_usuario';
+import cadastroAtv from '@/component/adm/atividade/cadastro/cadastro'
 
 
 
@@ -37,6 +38,12 @@ export default new Router({
       name: 'Home',
       component: Home
     },
+    {
+      path: '/cadastroteste',
+      name: 'cadastroteste',
+      component : cadastroAtv
+    }
+
     {
       path: '/teste',
       name: 'Teste',
