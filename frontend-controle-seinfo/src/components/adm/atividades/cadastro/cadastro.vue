@@ -1,13 +1,12 @@
+// Eu não me orgulho nem um pouco das gambiarras que eu fiz aqui....
 <template>
   <div class="title">
     <h5 style="text-align: center">Controle de Atividade</h5>
     <br />
-    <a-button type="primary" class="teste" v-on:click="toggle"
-      >Inserir Atividade</a-button
-    >
+    <!-- <a-button type="primary" class="teste" v-on:click="toggle">Inserir Atividade</a-button> -->
 
     <!-- Começo Inserção -->
-    <slide-up-down :active="active">
+
       <div class="box">
         <form
           class="form"
@@ -241,10 +240,9 @@
         </form>
       </div>
       <br />
-    </slide-up-down>
     <!-- Fim Inserção -->
+  </div>
 </template>
 
 <script src="./cadastro.js"></script>
-
-<style src="./cadastro.css"scoped></style>
+<style scoped scr="./cadastro.css"></style>

@@ -62,7 +62,7 @@ export default {
       return moment(date);
     },
     pegar_tabela() {
-      this.$router.replace("/adm/atividade");
+      this.$router.replace("/teste");
       axios
         .get("http://localhost:3000/api/atividades/")
         .then((response) => {
@@ -147,7 +147,7 @@ export default {
             .catch((error) => {
               console.log(error.response);
             });
-        this.$router.replace("/adm/atividade");
+        this.$router.replace("/adm/teste");
         location.reload();
       } else {
         alert(erros.join("\n"));
