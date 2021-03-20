@@ -48,7 +48,11 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item
+              class="space"
+              :validate-status="renderDateValidateStatus()"
+              :help="renderDateHelpText()"
+            >
               <label class="ant-form-item-required">Data de Inicio:</label>
               <a-input
                 v-model="data_ini_atv"
@@ -63,7 +67,11 @@
                 />
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item
+              class="space"
+              :validate-status="renderHourValidateStatus()"
+              :help="renderHourHelpText()"
+            >
               <label class="ant-form-item-required">Hora de Inicio:</label>
               <a-input
                 v-model="hora_ini_atv"
@@ -80,7 +88,11 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item
+              class="space"
+              :validate-status="renderDateValidateStatus()"
+              :help="renderDateHelpText()"
+            >
               <label class="ant-form-item-required">Data de Fim:</label>
               <a-input
                 v-model="data_fim_atv"
@@ -95,7 +107,11 @@
                 />
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item
+              class="space"
+              :validate-status="renderHourValidateStatus()"
+              :help="renderHourHelpText()"
+            >
               <label class="ant-form-item-required">Hora de Fim:</label>
               <a-input
                 id="hora_fim_atv"
@@ -206,8 +222,13 @@
                   id="idPessoa"
                   name="idPessoa"
                   v-for="protagonista in protagonistas"
+<<<<<<< HEAD
                   :key="protagonista.idPessoa"
                   :value="protagonista.idPessoa"
+=======
+                  :key="protagonista.aPes.idPessoa"
+                  :value="protagonista.aPes.idPessoa"
+>>>>>>> master
                   >{{ protagonista.aPes.nome }}</a-select-option
                 >
               </a-select>
@@ -227,6 +248,7 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
+<<<<<<< HEAD
             <button type="submit" class="btn btn-outline-primary mr-5">
               Cadastrar
             </button>
@@ -238,6 +260,11 @@
             >
               Cancelar
             </button>
+=======
+            <button type="submit" class="btn btn-outline-primary btn-sm">
+              Cadastrar
+            </button>
+>>>>>>> master
           </div>
         </form>
       </div>
@@ -449,7 +476,19 @@
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
+<<<<<<< HEAD
                   <a-form-item class="space">
+=======
+                  <a-form-item
+                    class="space"
+                    :validate-status="onChangeDate() === 1 ? 'error' : ''"
+                    :help="
+                      onChangeDate() === 1
+                        ? 'Data de Fim deve ser maior que a Data de Inicio'
+                        : ''
+                    "
+                  >
+>>>>>>> master
                     <label class="ant-form-item-required"
                       >Data de Inicio:</label
                     >
@@ -464,6 +503,15 @@
                         slot="prefix"
                         type="calendar"
                         style="color: rgba(0, 0, 0, 0.25)"
+<<<<<<< HEAD
+=======
+                        :validate-status="onChangeDate() === 1 ? 'error' : ''"
+                        :help="
+                          onChangeDate() === 1
+                            ? 'Data de Fim deve ser maior que a Data de Inicio'
+                            : ''
+                        "
+>>>>>>> master
                       />
                     </a-input>
                   </a-form-item>
@@ -485,7 +533,19 @@
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
+<<<<<<< HEAD
                   <a-form-item class="space">
+=======
+                  <a-form-item
+                    class="space"
+                    :validate-status="onChangeHour() === 2 ? 'error' : ''"
+                    :help="
+                      onChangeHour() === 2
+                        ? 'Hora de Fim deve ser maior que a Hora de Inicio'
+                        : ''
+                    "
+                  >
+>>>>>>> master
                     <label class="ant-form-item-required"
                       >Hora de Inicio:</label
                     >
@@ -503,7 +563,15 @@
                       />
                     </a-input>
                   </a-form-item>
-                  <a-form-item class="space">
+                  <a-form-item
+                    class="space"
+                    :validate-status="onChangeHour() === 2 ? 'error' : ''"
+                    :help="
+                      onChangeHour() === 2
+                        ? 'Hora de Fim deve ser maior que a Hora de Inicio'
+                        : ''
+                    "
+                  >
                     <label class="ant-form-item-required">Hora de Fim:</label>
                     <a-input
                       id="hora_fim_atv"
@@ -631,8 +699,13 @@
                         id="idPessoa"
                         name="idPessoa"
                         v-for="protagonista in protagonistas"
+<<<<<<< HEAD
                         :key="protagonista.idPessoa"
                         :value="protagonista.idPessoa"
+=======
+                        :key="protagonista.aPes.idPessoa"
+                        :value="protagonista.aPes.idPessoa"
+>>>>>>> master
                         >{{ protagonista.aPes.nome }}</a-select-option
                       >
                     </a-select>
@@ -658,6 +731,7 @@
                 <button
                   type="submit"
                   v-on:click="patch(modalData)"
+<<<<<<< HEAD
                   class="btn btn-outline-primary mr-5"
                 >
                   Editar
@@ -669,6 +743,12 @@
                 >
                   Cancelar
                 </button>
+=======
+                  class="btn btn-outline-primary btn-sm"
+                >
+                  Editar
+                </button>
+>>>>>>> master
               </div>
             </form>
           </div>
@@ -789,6 +869,7 @@ export default {
     this.pegar_tabela();
   },
   methods: {
+<<<<<<< HEAD
     onCancel() {
       console.log("CANCEL SUBMIT");
       this.show = false;
@@ -806,6 +887,8 @@ export default {
       this.idPessoa = "";
       this.descricao = "";
     },
+=======
+>>>>>>> master
     moment: function (date) {
       return moment(date);
     },
@@ -854,6 +937,138 @@ export default {
       }
       this.modalData.idCategoria = data.categoriaAtv.nome;
       this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
+    },
+    renderHourValidateStatus() {
+      const error = this.onChangeHour();
+      if (error === 2 || error === 4) {
+        return "error";
+      }
+      return "";
+    },
+    renderHourHelpText() {
+      const error = this.onChangeHour();
+      if (error === 2) {
+        return "Hora de Fim deve ser maior que o Hora de Inicio";
+      } else if (error === 4) {
+        return "Horario da atividade deve estar entre o horário do evento";
+      }
+      return "";
+    },
+    renderDateValidateStatus() {
+      const error = this.onChangeDate();
+      if (error === 1 || error === 3) {
+        return "error";
+      }
+      return "";
+    },
+    renderDateHelpText() {
+      const error = this.onChangeDate();
+      if (error === 1) {
+        return "Data de Fim deve ser maior que a Data de Inicio";
+      } else if (error === 3) {
+        return "Data de Inicio e de Fim devem estar entre a data do evento";
+      }
+      return "";
+    },
+    onChangeDate() {
+      const error = this.verifyDate();
+      return error;
+    },
+    onChangeHour() {
+      
+      if (!this.idEvento) return 0;
+
+      const evento = this.eventos[this.idEvento];
+
+      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
+      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
+      
+      const data_ini_atv = new Date(
+        this.data_ini_atv + " " + this.hora_ini_atv
+      );
+      const data_fim_atv = new Date(
+        this.data_fim_atv + " " + this.hora_fim_atv
+      );
+      
+      const isDayEqual = moment(data_ini_atv).isSame(data_fim_atv, "day");
+
+      if (!isDayEqual) return null;
+
+      let error = 0;
+
+      const isStartHourLessThanEnd = moment(data_ini_atv).isBefore(
+        data_fim_atv,
+        "hour"
+      );
+
+      if (!isStartHourLessThanEnd) {
+        error = 2;
+      }
+
+      const isStartHoursBetweenEvent = moment(data_ini_atv).isBetween(
+        data_ini_evento,
+        data_fim_evento,
+        undefined,
+        "hour"
+      );
+
+      const isEndHoursBetweenEvent = moment(data_fim_atv).isBetween(
+        data_ini_evento,
+        data_fim_evento,
+        undefined,
+        "hour"
+      );
+      
+      if (!isStartHoursBetweenEvent || !isEndHoursBetweenEvent) {
+        error = 4;
+      }
+
+      return error;
+    },
+    verifyDate() {
+
+      if (!this.idEvento) return 0;
+
+      const evento = this.eventos[this.idEvento];
+
+      const data_ini_atv = moment(this.data_ini_atv + " " + this.hora_ini_atv);
+      const data_fim_atv = moment(this.data_fim_atv + " " + this.hora_fim_atv);
+      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
+      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
+
+      const time1 = moment(data_ini_atv).format('YYYY-MM-DD');
+      const time2 = moment(data_fim_atv).format('YYYY-MM-DD');
+      const time3 = moment(data_ini_evento).format('YYYY-MM-DD');
+      const time4 = moment(data_fim_evento).format('YYYY-MM-DD');
+
+      const isStartDateBetweenEvent = moment(time1).isBetween(
+        time3,
+        time4,
+        undefined,
+        "[]"
+      );
+      const isEndDateBetweenEvent = moment(time2).isBetween(
+        time3,
+        time4,
+        undefined,
+        "[]"
+      );
+
+      let error = 0;
+
+      if (!isStartDateBetweenEvent || !isEndDateBetweenEvent) {
+        error = 3;
+      }
+
+      const isStartDateSameOrBeforeThanEnd = moment(
+        time1
+      ).isSameOrBefore(moment(time2));
+
+      if (!isStartDateSameOrBeforeThanEnd) {
+        error = 1;
+      }
+
+      return error;
     },
     handleSubmit(e) {
       var erros = [];
@@ -956,10 +1171,10 @@ export default {
       protagonistas: [],
       titulo: "",
       valor: "",
-      data_ini_atv: "",
-      data_fim_atv: "",
-      hora_ini_atv: "",
-      hora_fim_atv: "",
+      data_ini_atv: "2020-06-17",
+      data_fim_atv: "2020-06-16",
+      hora_ini_atv: "08:04",
+      hora_fim_atv: "09:04",
       horasParticipacao: "",
       quantidadeVagas: "",
       local_atv: "",
@@ -990,10 +1205,10 @@ export default {
       obj_Resource: {
         titulo: "",
         valor: "",
-        data_ini_atv: "",
-        data_fim_atv: "",
-        hora_ini_atv: "",
-        hora_fim_atv: "",
+        data_ini_atv: "2020-06-17",
+        data_fim_atv: "2020-06-16",
+        hora_ini_atv: "08:04",
+        hora_fim_atv: "09:04",
         horasParticipacao: "",
         quantidadeVagas: "",
         local_atv: "",
