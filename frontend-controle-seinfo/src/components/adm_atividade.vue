@@ -222,13 +222,8 @@
                   id="idPessoa"
                   name="idPessoa"
                   v-for="protagonista in protagonistas"
-<<<<<<< HEAD
-                  :key="protagonista.idPessoa"
-                  :value="protagonista.idPessoa"
-=======
                   :key="protagonista.aPes.idPessoa"
                   :value="protagonista.aPes.idPessoa"
->>>>>>> master
                   >{{ protagonista.aPes.nome }}</a-select-option
                 >
               </a-select>
@@ -248,10 +243,10 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-<<<<<<< HEAD
             <button type="submit" class="btn btn-outline-primary mr-5">
               Cadastrar
             </button>
+            
             <button
               type="reset"
               class="btn btn-outline-danger btn-sm-2 reset"
@@ -260,11 +255,7 @@
             >
               Cancelar
             </button>
-=======
-            <button type="submit" class="btn btn-outline-primary btn-sm">
-              Cadastrar
-            </button>
->>>>>>> master
+            
           </div>
         </form>
       </div>
@@ -476,9 +467,6 @@
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
-<<<<<<< HEAD
-                  <a-form-item class="space">
-=======
                   <a-form-item
                     class="space"
                     :validate-status="onChangeDate() === 1 ? 'error' : ''"
@@ -488,7 +476,6 @@
                         : ''
                     "
                   >
->>>>>>> master
                     <label class="ant-form-item-required"
                       >Data de Inicio:</label
                     >
@@ -503,15 +490,12 @@
                         slot="prefix"
                         type="calendar"
                         style="color: rgba(0, 0, 0, 0.25)"
-<<<<<<< HEAD
-=======
                         :validate-status="onChangeDate() === 1 ? 'error' : ''"
                         :help="
                           onChangeDate() === 1
                             ? 'Data de Fim deve ser maior que a Data de Inicio'
                             : ''
                         "
->>>>>>> master
                       />
                     </a-input>
                   </a-form-item>
@@ -533,9 +517,6 @@
                   </a-form-item>
                 </div>
                 <div class="row justify-content-center">
-<<<<<<< HEAD
-                  <a-form-item class="space">
-=======
                   <a-form-item
                     class="space"
                     :validate-status="onChangeHour() === 2 ? 'error' : ''"
@@ -545,7 +526,6 @@
                         : ''
                     "
                   >
->>>>>>> master
                     <label class="ant-form-item-required"
                       >Hora de Inicio:</label
                     >
@@ -699,13 +679,8 @@
                         id="idPessoa"
                         name="idPessoa"
                         v-for="protagonista in protagonistas"
-<<<<<<< HEAD
-                        :key="protagonista.idPessoa"
-                        :value="protagonista.idPessoa"
-=======
                         :key="protagonista.aPes.idPessoa"
                         :value="protagonista.aPes.idPessoa"
->>>>>>> master
                         >{{ protagonista.aPes.nome }}</a-select-option
                       >
                     </a-select>
@@ -731,7 +706,6 @@
                 <button
                   type="submit"
                   v-on:click="patch(modalData)"
-<<<<<<< HEAD
                   class="btn btn-outline-primary mr-5"
                 >
                   Editar
@@ -743,12 +717,6 @@
                 >
                   Cancelar
                 </button>
-=======
-                  class="btn btn-outline-primary btn-sm"
-                >
-                  Editar
-                </button>
->>>>>>> master
               </div>
             </form>
           </div>
@@ -1259,6 +1227,6 @@ label {
 .teste {
   /* position: absolute; */
   left: 50%;
-  transform: translate(-50%, -50%);
+  
 }
 </style>

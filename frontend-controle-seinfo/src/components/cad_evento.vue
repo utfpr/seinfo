@@ -125,7 +125,8 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+            <button type="submit" class="btn btn-outline-primary btn-sm  mr-5">Cadastrar</button>
+            <button type="reset" data-dismiss="modal" class="btn btn-outline-danger btn-sm-2" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>
           </div>
         </form>
       </div>
@@ -520,6 +521,28 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
+     onCancel(){
+      console.log('CANCEL SUBMIT');
+      this.nome = "";
+      this.data_ini = "";
+      this.data_fim = "";
+      this.hora_ini = "";
+      this.hora_fim = "";
+      this.local_eve = "";
+      this.select_status = "";
+      this.descricao = "";
+      this.obj_Resource=  {
+        nome: "",
+        data_ini: "",
+        hora_ini: "",
+        data_fim: "",
+        hora_fim: "",
+        local_eve: "",
+        select_status: "",
+        urlImagem: "",
+        descricao: "",
+      };
+     },
     openModal(data) {
       this.pegar_tabela();
       this.modalData = data;
@@ -791,5 +814,8 @@ label {
   border: none;
   cursor: pointer;
   color: black;
+}
+.reset {
+  color : red;
 }
 </style>
