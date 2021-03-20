@@ -5,8 +5,6 @@
     <a-button type="primary" class="teste" v-on:click="toggle"
       >Inserir Atividade</a-button
     >
-
-    <!-- Começo Inserção -->
     <slide-up-down :active="active">
       <div class="box">
         <form
@@ -242,9 +240,8 @@
       </div>
       <br />
     </slide-up-down>
-    <!-- Fim Inserção -->
+  </div>
 </template>
 
 <script src="./cadastro.js"></script>
-
 <style src="./cadastro.css"scoped></style>

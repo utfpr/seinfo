@@ -7,7 +7,7 @@ import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Cad_Carousel from '@/components/con_carousel';
-import Cad_Atividade from '@/components/adm_atividade';
+import Atividades from '@/components/adm/atividades';
 import Cad_Categoria from '@/components/adm_categoria';
 import Logo from '@/components/logo';
 import ADMevento from '@/components/adm_evento';
@@ -53,7 +53,7 @@ export default new Router({
         },
         {
           path: 'atividade',
-          component: Cad_Atividade
+          component: Atividades
         },
         {
           path: 'categoria',
