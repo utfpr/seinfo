@@ -869,7 +869,6 @@ export default {
     this.pegar_tabela();
   },
   methods: {
-<<<<<<< HEAD
     onCancel() {
       console.log("CANCEL SUBMIT");
       this.show = false;
@@ -887,8 +886,6 @@ export default {
       this.idPessoa = "";
       this.descricao = "";
     },
-=======
->>>>>>> master
     moment: function (date) {
       return moment(date);
     },
