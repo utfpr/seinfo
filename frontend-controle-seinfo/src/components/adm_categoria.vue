@@ -158,6 +158,7 @@
               v-on:click="deletar(modalData.idCategoria)"
               type="danger"
               block
+              onClick="window.location.reload();"
             >Eu desejo Excluir este item</a-button>
           </div>
         </div>
