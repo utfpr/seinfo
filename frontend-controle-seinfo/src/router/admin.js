@@ -12,7 +12,7 @@ import Cad_Categoria from '@/components/adm_categoria';
 import Logo from '@/components/logo';
 import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
-import cadastroAtividade from '@/components/adm/atividades/cadastro/cadastro';
+import cadastroAtividade from '@/components/adm/atividades/cadastro/cadastro.vue';
 
 Vue.use(Router);
 
@@ -29,7 +29,7 @@ export default new Router({
           component: Cad_evento
         },
         {
-          path: '/teste',
+          path: 'teste',
           component: cadastroAtividade
         },
         {

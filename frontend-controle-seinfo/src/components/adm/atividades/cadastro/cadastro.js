@@ -9,6 +9,7 @@ export default {
     this.form = this.$form.createForm(this);
   },
   created() {
+    console.log("aaaaaaaaaaaa");
     axios
       .get("http://localhost:3000/api/eventos")
       .then((response) => {
@@ -33,12 +34,11 @@ export default {
       .get("http://localhost:3000/api/protagonistas")
       .then((response) => {
         this.protagonistas = response.data;
-        // console.log(this.protagonistas);
+        console.log(this.protagonistas);
       })
       .catch(function (error) {
         console.log(error);
       });
-    this.pegar_tabela();
   },
   methods: {
     onCancel() {
@@ -61,51 +61,10 @@ export default {
     moment: function (date) {
       return moment(date);
     },
-    pegar_tabela() {
-      this.$router.replace("/teste");
-      axios
-        .get("http://localhost:3000/api/atividades/")
-        .then((response) => {
-          // console.log(response.data);
-          this.res = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
     getEvtNome(idEvt) {
       for (var i = 0; i < this.eventos.length; i++) {
         if (this.eventos[i].idEvento == idEvt) return this.eventos[i].nome;
       }
-    },
-    openModal(data) {
-      this.pegar_tabela();
-      this.modalData = data;
-      this.modalVisible = true;
-      // console.log(data);
-      for (var i = 0; i < this.eventos.length; i++) {
-        if (this.eventos[i].idEvento == this.modalData.idEvento) {
-          this.nomeEvento = this.eventos[i].nome;
-          this.modalData.local_atv = this.eventos[i].agendamento.local;
-          var datahorainicio = this.eventos[i].agendamento.dataHoraInicio;
-          var datahorafim = this.eventos[i].agendamento.dataHoraFim;
-          this.modalData.data_ini_atv = moment(datahorainicio).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.data_fim_atv = moment(datahorafim).format(
-            "YYYY-MM-DD"
-          );
-          this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
-          this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
-        }
-      }
-      for (var i = 0; i < this.protagonistas.length; i++) {
-        if (this.modalData.idAtividade == this.protagonistas[i].idAtividade) {
-          this.modalData.idPessoa = this.protagonistas[i].aPes.nome;
-        }
-      }
-      this.modalData.idCategoria = data.categoriaAtv.nome;
-      this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
     },
     handleSubmit(e) {
       var erros = [];
@@ -152,49 +111,6 @@ export default {
       } else {
         alert(erros.join("\n"));
       }
-    },
-    patch(dados) {
-      var erros = [];
-      if (!this.modalData.titulo) erros.push("Título é obrigatório!");
-      if (!this.modalData.valor) erros.push("Valor é obrigatório!");
-      if (!this.modalData.horasParticipacao)
-        erros.push("Horas de Participação é obrigatório!");
-      if (!this.modalData.quantidadeVagas)
-        erros.push("Quantidade de Vagas é obrigatório!");
-      if (!this.modalData.descricao) erros.push("Descrição é obrigatório!");
-      console.log(dados);
-      if (!erros.length) {
-        axios
-          .patch(
-            "http://localhost:3000/api/atividade/" + dados.idAtividade,
-            dados
-          )
-          .then((response) => {
-            console.log("Editou!");
-            console.log(response);
-            this.$router.replace("/adm/atividade");
-            location.reload();
-          });
-      } else {
-        alert(erros.join("\n"));
-        this.$router.replace("/adm/atividade");
-      }
-    },
-    deletar(dados) {
-      console.log("ID " + dados);
-      axios
-        .delete(
-          "http://localhost:3000/api/atividade/" +
-            dados.idAtividade +
-            "/" +
-            dados.idEvento
-        )
-        .then((response) => {
-          console.log("Deletou!");
-          console.log(response);
-          this.$router.replace("/adm/atividade");
-          location.reload();
-        });
     },
     toggle() {
       this.active = !this.active;
