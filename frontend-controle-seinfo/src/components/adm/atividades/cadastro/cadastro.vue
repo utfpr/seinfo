@@ -1,4 +1,3 @@
-// Eu não me orgulho nem um pouco das gambiarras que eu fiz aqui....
 <template>
     <!-- Começo Inserção -->
 

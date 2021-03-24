@@ -1,0 +1,10 @@
+.teste {
+    /* position: absolute; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 10em  ;
+    padding: 20px;
+}
+.title {
+    margin-top: 30px;
+}
