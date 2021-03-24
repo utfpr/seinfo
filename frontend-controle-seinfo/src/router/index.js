@@ -23,6 +23,7 @@ import UsuPerfil from '@/components/perfil_usuario';
 import not_found from '@/components/not_found';
 import Cad_Aluno from '@/components/cad_aluno';
 import homeUsu from '@/components/home_usuario';
+import cadastroAtividade from '@/component/adm/atividade/cadastro/cadastro'
 
 
 
@@ -37,6 +38,12 @@ export default new Router({
       name: 'Home',
       component: Home
     },
+    {
+      path: '/cadastroteste',
+      name: 'cadastroteste',
+      component : cadastroAtv
+    }
+
     {
       path: '/teste',
       name: 'Teste',
@@ -87,57 +94,7 @@ export default new Router({
       name: 'Cad_Pessoa',
       component: Cad_Pessoa
     },
-    {
-      path: '/adm',
-      name: 'adm',
-      component: adm,
-      children: [
-        {
-          path: '',
-          component: Logo
-        },
-        {
-          path: 'tabela',
-          component: tabela
-        },
-        {
-          path: 'cadEvento',
-          component: Cad_evento
-        },
-        {
-          path: 'conCarousel',
-          component: Cad_Carousel
-        },
-        {
-          path: 'cadReceita',
-          component: Cad_Receita
-        },
-        {
-          path: 'cadDespesa',
-          component: Cad_Despesa
-        },
-        {
-          path: 'cadPessoa',
-          component: Cad_Pessoa
-        },
-        {
-          path: 'atividade',
-          component: Cad_Atividade
-        },
-        {
-          path: 'categoria',
-          component: Cad_Categoria
-        },
-        {
-          path: 'ADMevento',
-          component: ADMevento
-        },
-        {
-          path: 'funcPessoa',
-          component: funcPessoa
-        }
-      ]
-    },
+
     {
       path: '*',
       name: 'e404',

@@ -22,13 +22,21 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 1 ? 'error' : ''"
+            :help="onChangeDate() === 1 ? 'Data de Fim deve ser maior que a Data de Inicio' : ''"
+            >
               <label class="ant-form-item-required">Data de Inicio do Evento:</label>
               <a-input v-model="obj_Resource.data_ini" name="data_ini" type="date">
                 <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item class="space" 
+              :validate-status="onChangeHour() === 2 ? 'error' : ''"
+              :help="
+              onChangeHour() === 2
+                ? 'Hora de Fim deve ser maior que a Hora de Inicio'
+                : ''
+              ">
               <label class="ant-form-item-required">Hora de Inicio do Evento:</label>
               <a-input v-model="obj_Resource.hora_ini" name="hora_ini" type="time">
                 <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
@@ -36,13 +44,20 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <a-form-item class="space">
+            <a-form-item class="space" :validate-status="onChangeDate() === 1 ? 'error' : ''"
+            :help="onChangeDate() === 1 ? 'Data de Fim deve ser maior que a Data de Inicio' : ''">
               <label class="ant-form-item-required">Data de Fim do Evento:</label>
               <a-input v-model="obj_Resource.data_fim" name="data_fim" type="date">
                 <a-icon slot="prefix" type="calendar" style="color:rgba(0,0,0,.25)"/>
               </a-input>
             </a-form-item>
-            <a-form-item class="space">
+            <a-form-item class="space" 
+              :validate-status="onChangeHour() === 2 ? 'error' : ''"
+              :help="
+                onChangeHour() === 2
+                ? 'Hora de Fim deve ser maior que a Hora de Inicio'
+                : ''
+              ">
               <label class="ant-form-item-required">Hora de Fim do Evento:</label>
               <a-input v-model="obj_Resource.hora_fim" name="hora_fim" type="time">
                 <a-icon slot="prefix" type="clock-circle" style="color:rgba(0,0,0,.25)"/>
@@ -110,8 +125,8 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary mr-5">Cadastrar</button>
-            <button type="reset" data-dismiss="modal" class="btn btn-outline-danger btn-sm-2 reset" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>
+            <button type="submit" class="btn btn-outline-primary btn-sm  mr-5">Cadastrar</button>
+            <button type="reset" data-dismiss="modal" class="btn btn-outline-danger btn-sm-2" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>
           </div>
         </form>
       </div>
@@ -440,15 +455,12 @@
 import axios from 'axios'
 import moment from "moment";
 moment.locale("pt-br");
-
 let id = 0;
 let flag = 0;
 export default {
-
   mounted(){ // v
     this.pegar_tabela ()
     },
-
   props: {
     disabled: Boolean
   },
@@ -469,7 +481,6 @@ export default {
       modalVisible2: false,
       active: false,
       nomeEvento: "",
-
       modalData: {
         idEvento: "",
         nome: "",
@@ -481,7 +492,6 @@ export default {
         local_eve: "",
         descricao: ""
       },
-
       objeto_lote: [],
       formItemLayout: {
         labelCol: {
@@ -493,7 +503,6 @@ export default {
         wrapperCol: {
         },
       },
-
        obj_Resource: {
         nome: "",
         data_ini: "",
@@ -512,7 +521,7 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
     methods: {
-    onCancel(){
+     onCancel(){
       console.log('CANCEL SUBMIT');
       this.nome = "";
       this.data_ini = "";
@@ -533,14 +542,18 @@ export default {
         urlImagem: "",
         descricao: "",
       };
-
-      console.log("cansel");
-      console.log(this.obj_Resource.titulo);
-    },     
-    
-
-
-
+     },
+    openModal(data) {
+      this.pegar_tabela();
+      this.modalData = data;
+      this.modalVisible = true;
+      this.modalData.nome = data.nome;
+      this.modalData.local_eve = data.agendamento.local;
+      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
+      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
+    },
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
@@ -552,7 +565,6 @@ export default {
           console.log(error);
         });
     },
-
     toggle() {
       this.active = !this.active;
     },
@@ -576,7 +588,6 @@ export default {
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
       });
     },
-
     info() {
       const h = this.$createElement
       this.$info({
@@ -588,10 +599,76 @@ export default {
       });
       
     },
+    renderHourValidateStatus() {
+      const error = this.onChangeHour();
+      if (error === 2) return "error";
+      return "";
+    },
+    renderHourHelpText() {
+      const error = this.onChangeHour();
+      if (error === 2) return "Hora de Fim deve ser maior que o Hora de Inicio";
+      return "";
+    },  
+    onChangeHour() {
 
-   
+      if (!this.obj_Resource.hora_ini || !this.obj_Resource.hora_fim) return 0;
+
+      const data_ini_eve = new Date(
+        this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini
+      );
+      const data_fim_eve = new Date(
+        this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim
+      );
+      
+      const isDayEqual = moment(data_ini_eve).isSame(data_fim_eve, "day");
+
+      if (!isDayEqual) return null;
+
+      let error = 0;
+
+      let isStartHourLessThanEnd = undefined;
+      isStartHourLessThanEnd = moment(data_ini_eve).isBefore(
+        data_fim_eve, 
+        "hour"
+      );
+
+      if (!isStartHourLessThanEnd) {
+        error = 2;
+      }
+
+      return error;
+    },
+    onChangeDate(){
+      const error = this.verifyDate();
+      return error;
+    },
+    verifyDate(){
+      const startDate = new Date(this.obj_Resource.data_ini);
+      const endDate = new Date(this.obj_Resource.data_fim);
+      if(endDate - startDate < 0){
+        return 1;
+      }else if(endDate - startDate > 0) {
+        return 0;
+      }else {
+        const completeStartDate = new Date(this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini);
+        const completeEndDate = new Date(this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim);
+        if(completeEndDate - completeStartDate < 0) {
+          return 2;
+        } else if (completeEndDate - completeStartDate > 0){
+          return 0;
+        } else {
+          return 2;
+        }
+      }
+    },
     handleSubmit(e) {
       var erros = [];
+      const errorDate = this.verifyDate();
+      if(errorDate === 1) {
+        erros.push('Data de Fim deve ser maior que Data de Início.')
+      }else if (errorDate === 2){
+        erros.push('Hora de Fim deve ser maior que Hora de Início.');
+      }
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
       if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
       if (!this.obj_Resource.data_fim) erros.push("Data de Fim é obrigatório!");
@@ -626,7 +703,6 @@ export default {
         alert(erros.join("\n"));
       }
     },
-
     patch(dados) {
       var erros = [];
       if (!dados.nome) erros.push("Nome é obrigatório!");
@@ -677,7 +753,6 @@ export default {
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");      
     },
-
     info2(msg) {
       const h = this.$createElement
       this.$info({
@@ -691,15 +766,12 @@ export default {
   },
   
 };
-
 </script>
                                   
 <style>
-
 .ant-input {
   border-radius: 0;
 }
-
 .box {
   border: solid 1px rgba(161, 161, 161, 0.233);
   margin-left: 25%;
@@ -707,54 +779,43 @@ export default {
   margin-top: 10px;
   padding: 20px;
 }
-
 label {
   margin-bottom: 0;
 }
-
 .title {
   margin-top: 30px;
 }
-
 .ant-form-item {
   margin-bottom: 0;
 }
-
 .space {
   padding: 2px;
   width: 221px;
 }
-
 .space_2 {
   padding: 2px;
   width: 444px;
 }
-
 .ant-select-selection{
   border-radius: 0;
 }
-
 .space_3 {
   border-radius: 0;
   padding: 2px;
   width: 222px;
 }
-
 .teste {
   /* position: absolute; */
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .ic {
   background: transparent;
   border: none;
   cursor: pointer;
   color: black;
 }
-
 .reset {
   color : red;
 }
-
 </style>
