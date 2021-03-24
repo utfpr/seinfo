@@ -113,6 +113,7 @@ export default {
       }
     },
     toggle() {
+      this.$emit('child_toggle');
       this.active = !this.active;
     },
   },

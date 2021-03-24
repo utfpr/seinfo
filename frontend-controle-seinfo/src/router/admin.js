@@ -14,6 +14,7 @@ import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
 import cadastroAtividade from '@/components/adm/atividades/cadastro/cadastro.vue';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
+import Atividades from '@/components/adm/atividades/index/atividades.vue';
 
 Vue.use(Router);
 
@@ -32,6 +33,10 @@ export default new Router({
         {
           path: 'eventos',
           component: Eventos
+        },
+        {
+          path: 'atividades',
+          component: Atividades
         },
         {
           path: 'teste',

@@ -33,11 +33,7 @@ label {
   padding: 2px;
   width: 222px;
 }
-.teste {
-  /* position: absolute; */
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 .ic {
   background: transparent;
   border: none;

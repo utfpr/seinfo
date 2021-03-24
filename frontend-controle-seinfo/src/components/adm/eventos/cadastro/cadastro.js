@@ -253,9 +253,8 @@ export default {
         alert(erros.join("\n"));
         this.$router.replace("/adm/cadEvento");
       }
-  },
+    },
  
-    
   },
   
 };
