@@ -22,7 +22,9 @@
 import AuthConsumer from '../contexts/authConsumer';
 export default {
   data() {
-    return 
+    return {
+      
+    }
   },
   components: {
     AuthConsumer

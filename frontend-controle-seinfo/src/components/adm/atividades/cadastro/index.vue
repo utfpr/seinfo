@@ -238,10 +238,8 @@
           </div>
         </form>
       </div>
-      <br />
-    </slide-up-down>
-  </div>
+    <!-- Fim Inserção -->
 </template>
 
 <script src="./cadastro.js"></script>
-<style src="./cadastro.css"scoped></style>
+<style scoped src="./cadastro.css"></style>

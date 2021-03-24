@@ -9,6 +9,7 @@ export default {
     this.form = this.$form.createForm(this);
   },
   created() {
+    console.log("aaaaaaaaaaaa");
     axios
       .get("http://localhost:3000/api/eventos")
       .then((response) => {
@@ -33,12 +34,11 @@ export default {
       .get("http://localhost:3000/api/protagonistas")
       .then((response) => {
         this.protagonistas = response.data;
-        // console.log(this.protagonistas);
+        console.log(this.protagonistas);
       })
       .catch(function (error) {
         console.log(error);
       });
-    this.pegar_tabela();
   },
   methods: {
     moment: function (date) {
@@ -89,13 +89,14 @@ export default {
             .catch((error) => {
               console.log(error.response);
             });
-        this.$router.replace("/adm/atividade");
+        this.$router.replace("/adm/teste");
         location.reload();
       } else {
         alert(erros.join("\n"));
       }
     },
     toggle() {
+      this.$emit('child_toggle');
       this.active = !this.active;
     },
   },

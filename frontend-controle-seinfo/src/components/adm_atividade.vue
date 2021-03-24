@@ -1,242 +1,10 @@
-// Eu não me orgulho nem um pouco das gambiarras que eu fiz aqui....
 <template>
   <div class="title">
     <h5 style="text-align: center">Controle de Atividade</h5>
     <br />
     <!-- Começo Inserção -->
     <slide-up-down :active="active">
-      <div class="box">
-        <form
-          class="form"
-          @submit.prevent="handleSubmit"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Selecione o Evento:</label>
-              <a-select v-model="idEvento" defaultValue="...">
-                <a-select-option
-                  id="idEvento"
-                  name="idEvento"
-                  v-for="evento in eventos"
-                  :key="evento.idEvento"
-                  :value="evento.idEvento"
-                  >{{ evento.nome }}</a-select-option
-                >
-              </a-select>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Nome da Atividade:</label>
-              <a-input
-                maxlength="255"
-                placeholder="Nome"
-                v-model="titulo"
-                autocomplete="off"
-                type="text"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="user"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Inicio:</label>
-              <a-input
-                v-model="data_ini_atv"
-                type="date"
-                id="data_ini_atv"
-                name="data_ini_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="calendar"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Hora de Inicio:</label>
-              <a-input
-                v-model="hora_ini_atv"
-                type="time"
-                name="hora_ini_atv"
-                id="hora_ini_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="clock-circle"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Fim:</label>
-              <a-input
-                v-model="data_fim_atv"
-                type="date"
-                id="data_fim_atv"
-                name="data_fim_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="calendar"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Hora de Fim:</label>
-              <a-input
-                id="hora_fim_atv"
-                v-model="hora_fim_atv"
-                type="time"
-                name="hora_fim_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="clock-circle"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required"
-                >Horas de Participação:</label
-              >
-              <a-input
-                id="horasParticipacao"
-                v-model="horasParticipacao"
-                type="time"
-                name="horasParticipacao"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="dashboard"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Quantidade de Vagas:</label>
-              <a-input
-                v-model="quantidadeVagas"
-                autocomplete="off"
-                type="number"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="read"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Local da Atividade:</label>
-              <a-input
-                maxlength="255"
-                autocomplete="off"
-                placeholder="Local"
-                v-model="local_atv"
-                type="text"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="home"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Valor da Atividade:</label>
-              <a-input
-                placeholder="Valor"
-                autocomplete="off"
-                v-model="valor"
-                type="number"
-                id="valor"
-                name="valor"
-                min="0"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="dollar"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center"></div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required"
-                >Selecione uma Categoria:</label
-              >
-              <a-select v-model="idCategoria" defaultValue="...">
-                <a-select-option
-                  id="idCategoria"
-                  name="idCategoria"
-                  v-for="categoria in categorias"
-                  :key="categoria.idCategoria"
-                  :value="categoria.idCategoria"
-                  >{{ categoria.nome }}</a-select-option
-                >
-              </a-select>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required"
-                >Selecione um Protagonista:</label
-              >
-              <a-select v-model="idPessoa" defaultValue="...">
-                <a-select-option
-                  id="idPessoa"
-                  name="idPessoa"
-                  v-for="protagonista in protagonistas"
-                  :key="protagonista.idPessoa"
-                  :value="protagonista.idPessoa"
-                  >{{ protagonista.aPes.nome }}</a-select-option
-                >
-              </a-select>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space_2">
-              <label class="ant-form-item-required">Descrição:</label>
-              <a-textarea
-                autocomplete="off"
-                maxlength="5000"
-                type="text"
-                v-model="descricao"
-                placeholder="Descrição"
-                :rows="4"
-              />
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary mr-5">
-              Cadastrar
-            </button>
-            <button
-              type="reset"
-              class="btn btn-outline-danger btn-sm-2 reset"
-              @click.prevent="onCancel"
-              v-on:click="toggle"
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </div>
+      <cadastro></cadastro>
       <br />
     </slide-up-down>
     <!-- Fim Inserção -->
@@ -252,10 +20,14 @@
 <script>
 const axios = require("axios");
 import moment from "moment";
+import cadastro from "./adm/atividades/cadastro/cadastro.vue";
 moment.locale("pt-br");
 export default {
   props: {
     disabled: Boolean,
+  },
+  components: {
+    cadastro
   },
   beforeCreate() {
     this.form = this.$form.createForm(this);
@@ -359,6 +131,138 @@ export default {
       this.modalData.idCategoria = data.categoriaAtv.nome;
       this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
     },
+    renderHourValidateStatus() {
+      const error = this.onChangeHour();
+      if (error === 2 || error === 4) {
+        return "error";
+      }
+      return "";
+    },
+    renderHourHelpText() {
+      const error = this.onChangeHour();
+      if (error === 2) {
+        return "Hora de Fim deve ser maior que o Hora de Inicio";
+      } else if (error === 4) {
+        return "Horario da atividade deve estar entre o horário do evento";
+      }
+      return "";
+    },
+    renderDateValidateStatus() {
+      const error = this.onChangeDate();
+      if (error === 1 || error === 3) {
+        return "error";
+      }
+      return "";
+    },
+    renderDateHelpText() {
+      const error = this.onChangeDate();
+      if (error === 1) {
+        return "Data de Fim deve ser maior que a Data de Inicio";
+      } else if (error === 3) {
+        return "Data de Inicio e de Fim devem estar entre a data do evento";
+      }
+      return "";
+    },
+    onChangeDate() {
+      const error = this.verifyDate();
+      return error;
+    },
+    onChangeHour() {
+      
+      if (!this.idEvento) return 0;
+
+      const evento = this.eventos[this.idEvento];
+
+      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
+      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
+      
+      const data_ini_atv = new Date(
+        this.data_ini_atv + " " + this.hora_ini_atv
+      );
+      const data_fim_atv = new Date(
+        this.data_fim_atv + " " + this.hora_fim_atv
+      );
+      
+      const isDayEqual = moment(data_ini_atv).isSame(data_fim_atv, "day");
+
+      if (!isDayEqual) return null;
+
+      let error = 0;
+
+      const isStartHourLessThanEnd = moment(data_ini_atv).isBefore(
+        data_fim_atv,
+        "hour"
+      );
+
+      if (!isStartHourLessThanEnd) {
+        error = 2;
+      }
+
+      const isStartHoursBetweenEvent = moment(data_ini_atv).isBetween(
+        data_ini_evento,
+        data_fim_evento,
+        undefined,
+        "hour"
+      );
+
+      const isEndHoursBetweenEvent = moment(data_fim_atv).isBetween(
+        data_ini_evento,
+        data_fim_evento,
+        undefined,
+        "hour"
+      );
+      
+      if (!isStartHoursBetweenEvent || !isEndHoursBetweenEvent) {
+        error = 4;
+      }
+
+      return error;
+    },
+    verifyDate() {
+
+      if (!this.idEvento) return 0;
+
+      const evento = this.eventos[this.idEvento];
+
+      const data_ini_atv = moment(this.data_ini_atv + " " + this.hora_ini_atv);
+      const data_fim_atv = moment(this.data_fim_atv + " " + this.hora_fim_atv);
+      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
+      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
+
+      const time1 = moment(data_ini_atv).format('YYYY-MM-DD');
+      const time2 = moment(data_fim_atv).format('YYYY-MM-DD');
+      const time3 = moment(data_ini_evento).format('YYYY-MM-DD');
+      const time4 = moment(data_fim_evento).format('YYYY-MM-DD');
+
+      const isStartDateBetweenEvent = moment(time1).isBetween(
+        time3,
+        time4,
+        undefined,
+        "[]"
+      );
+      const isEndDateBetweenEvent = moment(time2).isBetween(
+        time3,
+        time4,
+        undefined,
+        "[]"
+      );
+
+      let error = 0;
+
+      if (!isStartDateBetweenEvent || !isEndDateBetweenEvent) {
+        error = 3;
+      }
+
+      const isStartDateSameOrBeforeThanEnd = moment(
+        time1
+      ).isSameOrBefore(moment(time2));
+
+      if (!isStartDateSameOrBeforeThanEnd) {
+        error = 1;
+      }
+
+      return error;
+    },
     handleSubmit(e) {
       var erros = [];
       if (!this.titulo) erros.push("Título é obrigatório!");
@@ -460,10 +364,10 @@ export default {
       protagonistas: [],
       titulo: "",
       valor: "",
-      data_ini_atv: "",
-      data_fim_atv: "",
-      hora_ini_atv: "",
-      hora_fim_atv: "",
+      data_ini_atv: "2020-06-17",
+      data_fim_atv: "2020-06-16",
+      hora_ini_atv: "08:04",
+      hora_fim_atv: "09:04",
       horasParticipacao: "",
       quantidadeVagas: "",
       local_atv: "",
@@ -494,10 +398,10 @@ export default {
       obj_Resource: {
         titulo: "",
         valor: "",
-        data_ini_atv: "",
-        data_fim_atv: "",
-        hora_ini_atv: "",
-        hora_fim_atv: "",
+        data_ini_atv: "2020-06-17",
+        data_fim_atv: "2020-06-16",
+        hora_ini_atv: "08:04",
+        hora_fim_atv: "09:04",
         horasParticipacao: "",
         quantidadeVagas: "",
         local_atv: "",
@@ -551,6 +455,6 @@ label {
 .teste {
   /* position: absolute; */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%)
 }
 </style>
