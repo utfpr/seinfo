@@ -1,37 +1,31 @@
-.ant-input {
-  border-radius: 0;
-}
 .box {
   border: solid 1px rgba(161, 161, 161, 0.233);
   margin-left: 25%;
-  margin-right: 25%;
   margin-top: 10px;
+  margin-right: 25%;
   padding: 20px;
 }
-label {
-  margin-bottom: 0;
-}
+
 .title {
   margin-top: 30px;
 }
-.ant-form-item {
-  margin-bottom: 0;
-}
+
 .space {
   padding: 2px;
   width: 221px;
 }
+
+label {
+  margin-bottom: 0;
+}
+
+.ant-form-item {
+  margin-bottom: 0;
+}
+
 .space_2 {
   padding: 2px;
   width: 444px;
-}
-.ant-select-selection{
-  border-radius: 0;
-}
-.space_3 {
-  border-radius: 0;
-  padding: 2px;
-  width: 222px;
 }
 
 .ic {
@@ -40,6 +34,9 @@ label {
   cursor: pointer;
   color: black;
 }
-.reset {
-  color : red;
+
+.teste {
+  /* position: absolute; */
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
