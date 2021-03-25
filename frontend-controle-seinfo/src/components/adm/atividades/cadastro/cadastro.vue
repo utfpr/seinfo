@@ -238,7 +238,8 @@
           </div>
         </form>
       </div>
-    <!-- Fim Inserção -->
+    </slide-up-down>
+  </div>
 </template>
 
 <script src="./cadastro.js"></script>

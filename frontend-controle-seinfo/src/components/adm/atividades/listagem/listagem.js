@@ -1,7 +1,9 @@
 const axios = require("axios");
 import moment from "moment";
+import modalVerMais from '../modalVerMais/modalVerMais.vue';
 moment.locale("pt-br");
 export default {
+    components: { modalVerMais },
     props: {
         disabled: Boolean,
     },
@@ -10,36 +12,34 @@ export default {
     },
     created() {
         axios
-            .get("http://localhost:3000/api/eventos")
-            .then((response) => {
-                this.eventos = response.data;
-                // console.log(this.eventos);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .get("http://localhost:3000/api/eventos")
+        .then((response) => {
+            this.eventos = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
         axios
-            .get("http://localhost:3000/api/categorias")
-            .then((response) => {
-                this.categorias = response.data;
-                // console.log(this.categorias);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .get("http://localhost:3000/api/categorias")
+        .then((response) => {
+            this.categorias = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
         axios
-            .get("http://localhost:3000/api/protagonistas")
-            .then((response) => {
-                this.protagonistas = response.data;
-                // console.log(this.protagonistas);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .get("http://localhost:3000/api/protagonistas")
+        .then((response) => {
+            this.protagonistas = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
         this.pegar_tabela();
-    },
+     },    
     methods: {
         onCancel() {
             console.log("CANCEL SUBMIT");
@@ -62,17 +62,16 @@ export default {
             return moment(date);
         },
         pegar_tabela() {
-            console.log('dentro de listagem')
-            this.$router.replace("/adm/atividade");
             axios
                 .get("http://localhost:3000/api/atividades/")
                 .then((response) => {
-                    // console.log(response.data);
                     this.res = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+
+            axios
         },
         getEvtNome(idEvt) {
             for (var i = 0; i < this.eventos.length; i++) {
@@ -128,6 +127,37 @@ export default {
         toggle() {
             this.active = !this.active;
         },
+        openModal(data) {
+            this.pegar_tabela();
+            this.modalData = data;
+            this.modalVisible = true;
+
+            this.eventos.forEach((element) => {
+                if (element.idEvento === this.modalData.idEvento) {
+                    this.modalData.nomeEvento = element.nome;
+                    this.modalData.local_atv = element.agendamento.local;
+                    var datahorainicio = element.agendamento.dataHoraInicio;
+                    var datahorafim = element.agendamento.dataHoraFim;
+                    this.modalData.data_ini_atv = moment(datahorainicio).format(
+                      "YYYY-MM-DD"
+                    );
+                    this.modalData.data_fim_atv = moment(datahorafim).format(
+                      "YYYY-MM-DD"
+                    );
+                    this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
+                    this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
+                  }
+            });
+
+            this.protagonistas.forEach((element) => {
+                if (this.modalData.idAtividade === element.idAtividade) {
+                    this.modalData.idPessoa = element.aPes.nome;
+                }
+            });
+
+            this.modalData.idCategoria = data.categoriaAtv.nome;
+            this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
+          },
     },
     data() {
         return {
@@ -168,6 +198,23 @@ export default {
                 idPessoa: "",
                 descricao: "",
             },
+            modalData: {
+                titulo: "",
+                valor: "",
+                data_ini_atv: "",
+                data_fim_atv: "",
+                hora_ini_atv: "",
+                hora_fim_atv: "",
+                horasParticipacao: "",
+                quantidadeVagas: "",
+                local_atv: "",
+                idAtividade: "",
+                idEvento: "",
+                idCategoria: "",
+                idPessoa: "",
+                descricao: "",
+                nomeEvento: "",
+              },
         };
     },
 };

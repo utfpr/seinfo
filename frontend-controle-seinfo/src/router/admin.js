@@ -7,12 +7,10 @@ import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Cad_Carousel from '@/components/con_carousel';
-import Atividades from '@/components/adm/atividades';
 import Cad_Categoria from '@/components/adm_categoria';
 import Logo from '@/components/logo';
 import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
-import cadastroAtividade from '@/components/adm/atividades/cadastro/cadastro.vue';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
 
@@ -35,12 +33,8 @@ export default new Router({
           component: Eventos
         },
         {
-          path: 'atividades',
+          path: 'atividade',
           component: Atividades
-        },
-        {
-          path: 'teste',
-          component: cadastroAtividade
         },
         {
           path: 'tabela',
@@ -65,10 +59,6 @@ export default new Router({
         {
           path: 'cadPessoa',
           component: Cad_Pessoa
-        },
-        {
-          path: 'atividade',
-          component: Atividades
         },
         {
           path: 'categoria',
