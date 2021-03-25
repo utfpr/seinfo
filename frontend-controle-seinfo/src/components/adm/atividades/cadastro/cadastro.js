@@ -5,6 +5,7 @@ export default {
   props: {
     disabled: Boolean,
   },
+  
   beforeCreate() {
     this.form = this.$form.createForm(this);
   },
@@ -12,6 +13,23 @@ export default {
     this.pegar_tabela()
   },
   methods: {
+    onCancel() {
+      console.log("CANCEL SUBMIT");
+      this.show = false;
+      this.titulo = "";
+      this.valor = "";
+      this.data_ini_atv = "";
+      this.data_fim_atv = "";
+      this.hora_ini_atv = "";
+      this.hora_fim_atv = "";
+      this.horasParticipacao = "";
+      this.quantidadeVagas = "";
+      this.local_atv = "";
+      this.idEvento = "";
+      this.idCategoria = "";
+      this.idPessoa = "";
+      this.descricao = "";
+    },
     moment: function (date) {
       return moment(date);
     },
@@ -60,7 +78,6 @@ export default {
             .catch((error) => {
               console.log(error.response);
             });
-        this.$router.replace("/adm/teste");
         location.reload();
       } else {
         alert(erros.join("\n"));
@@ -71,7 +88,7 @@ export default {
     },
     toggle() {
       this.$emit('child_toggle');
-      this.active = !this.active;
+     // this.active = !this.active;
     },
   },
   data() {
