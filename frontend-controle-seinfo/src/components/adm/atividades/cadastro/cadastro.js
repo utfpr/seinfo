@@ -8,56 +8,10 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this);
   },
-  created() {
-    console.log("aaaaaaaaaaaa");
-    axios
-      .get("http://localhost:3000/api/eventos")
-      .then((response) => {
-        this.eventos = response.data;
-        // console.log(this.eventos);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    axios
-      .get("http://localhost:3000/api/categorias")
-      .then((response) => {
-        this.categorias = response.data;
-        // console.log(this.categorias);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    axios
-      .get("http://localhost:3000/api/protagonistas")
-      .then((response) => {
-        this.protagonistas = response.data;
-        console.log(this.protagonistas);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  mounted() {
+    this.pegar_tabela()
   },
   methods: {
-    onCancel() {
-      console.log("CANCEL SUBMIT");
-      this.show = false;
-      this.titulo = "";
-      this.valor = "";
-      this.data_ini_atv = "";
-      this.data_fim_atv = "";
-      this.hora_ini_atv = "";
-      this.hora_fim_atv = "";
-      this.horasParticipacao = "";
-      this.quantidadeVagas = "";
-      this.local_atv = "";
-      this.idEvento = "";
-      this.idCategoria = "";
-      this.idPessoa = "";
-      this.descricao = "";
-    },
     moment: function (date) {
       return moment(date);
     },
@@ -111,6 +65,9 @@ export default {
       } else {
         alert(erros.join("\n"));
       }
+    },
+    pegar_tabela() {
+
     },
     toggle() {
       this.$emit('child_toggle');
