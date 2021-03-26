@@ -19,7 +19,6 @@
             </button>
           </div>
           <div class="modal-body" style="text-align: center">
-            {{  }}
             <label>ID Atividade: {{ data.idAtividade }}</label>
             <br />
             <label>Valor: R$ {{ data.valor }}</label>
@@ -63,5 +62,3 @@
 
 <script src="./modalVerMais.js"/>
 <style scoped src="./modalVerMais.css"/>
-
-<script
