@@ -43,6 +43,9 @@ export default {
         this.pegar_tabela();
     },
     methods: {
+        deletarModal(modalData){
+        this.deletar(modalData);
+        },
         onCancel() {
             console.log("CANCEL SUBMIT");
             this.show = false;
@@ -120,7 +123,6 @@ export default {
                         .catch((error) => {
                             console.log(error.response);
                         });
-                this.$router.replace("/adm/atividade");
                 location.reload();
             } else {
                 alert(erros.join("\n"));
@@ -172,7 +174,7 @@ export default {
                 .then((response) => {
                     console.log("Deletou!");
                     console.log(response);
-                    this.$router.replace("/adm/atividade");
+                    this.$router.replace("/adm/atividades");
                     location.reload();
                 });
         },

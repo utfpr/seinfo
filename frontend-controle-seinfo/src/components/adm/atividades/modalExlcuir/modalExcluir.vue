@@ -48,7 +48,7 @@
           <br />
           <label>Local da Atividade: {{ modalData.local_atv }}</label>
           <br />
-          <label>Evento: {{ nomeEvento }}</label>
+          <label>Evento: {{ modalData.nomeEvento }}</label>
           <br />
           <label>Categoria: {{ modalData.idCategoria }}</label>
           <br />

@@ -1,6 +1,8 @@
+import moment from 'moment';
+
 export default {
     props: {
-        data: Object,
+        modalData: Object,
     },
     mounted() {
     },
@@ -9,7 +11,7 @@ export default {
             return moment(date);
         },
         deletar(modalData){
-            this.$emit('deletarModal', data);
+            this.$emit('deletarModal', modalData);
         },
     },
 }
