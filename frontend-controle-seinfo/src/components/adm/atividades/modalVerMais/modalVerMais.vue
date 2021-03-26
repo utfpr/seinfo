@@ -63,5 +63,3 @@
 
 <script src="./modalVerMais.js"/>
 <style scoped src="./modalVerMais.css"/>
-
-<script

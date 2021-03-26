@@ -74,7 +74,8 @@
           </tbody>
         </table>
       </div>
-        <modal-ver-mais v-bind:data="this.modalData" />
+      <modal-ver-mais v-bind:data="this.modalData" />
+      <modal-editar v-bind:data="this.modalData" />
     </div>
 </template>
 

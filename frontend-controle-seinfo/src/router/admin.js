@@ -34,7 +34,7 @@ export default new Router({
           component: Eventos
         },
         {
-          path: 'atividades',
+          path: 'atividade',
           component: Atividades
         },
         {
