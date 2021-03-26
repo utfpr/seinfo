@@ -6,7 +6,7 @@
                 <cadastro @child_toggle="toggle"/>
             </div>
         </slide-up-down> 
-        <listagem @child_toggle="toggle" />
+        <listagem/>
     </div>
 </template>
 

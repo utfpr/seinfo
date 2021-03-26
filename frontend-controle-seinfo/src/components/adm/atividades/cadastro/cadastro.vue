@@ -2,10 +2,7 @@
   <div class="title">
     <h5 style="text-align: center">Controle de Atividade</h5>
     <br />
-    <a-button type="primary" class="teste" v-on:click="toggle"
-      >Inserir Atividade</a-button
-    >
-    <slide-up-down :active="active">
+   
       <div class="box">
         <form
           class="form"
@@ -238,7 +235,7 @@
           </div>
         </form>
       </div>
-    </slide-up-down>
+   
   </div>
 </template>
 

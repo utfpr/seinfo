@@ -14,6 +14,7 @@ import funcPessoa from '@/components/func_pessoa';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -33,7 +34,7 @@ export default new Router({
           component: Eventos
         },
         {
-          path: 'atividade',
+          path: 'atividades',
           component: Atividades
         },
         {
