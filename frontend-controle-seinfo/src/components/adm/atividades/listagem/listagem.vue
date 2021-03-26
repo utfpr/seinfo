@@ -63,7 +63,7 @@
                   <a-button
                     class="ic"
                     data-toggle="modal"
-                    data-target=".bd-example-modal-lg-ver-excluir"
+                    data-target=".bd-example-modal-lg-excluir"
                     @click="openModal(resp)"
                   >
                     <a-icon type="delete" />
@@ -75,6 +75,7 @@
         </table>
       </div>
         <modal-ver-mais v-bind:data="this.modalData" />
+        <modal-excluir v-bind:data ="this.modalData" />
     </div>
 </template>
 
