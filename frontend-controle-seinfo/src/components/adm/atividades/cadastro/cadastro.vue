@@ -1,6 +1,8 @@
 <template>
-    <!-- Começo Inserção -->
-
+  <div class="title">
+    <h5 style="text-align: center">Controle de Atividade</h5>
+    <br />
+   
       <div class="box">
         <form
           class="form"
@@ -233,7 +235,8 @@
           </div>
         </form>
       </div>
-    <!-- Fim Inserção -->
+   
+  </div>
 </template>
 
 <script src="./cadastro.js"></script>
