@@ -1,20 +1,17 @@
 import axios from 'axios'
 import moment from "moment";
 moment.locale("pt-br");
-
-import modalExcluir from '../modalExlcuir/modalExcluir.vue';
 let id = 0;
 let flag = 0;
 export default {
-  mounted() { // v
-    this.pegar_tabela()
-  },
-  components: { modalExcluir },
+  mounted(){ // v
+    this.pegar_tabela ()
+    },
   props: {
     disabled: Boolean
   },
-
-  data() {
+  
+  data () {
     return {
       res: [],
       active: false,
@@ -52,7 +49,7 @@ export default {
         wrapperCol: {
         },
       },
-      obj_Resource: {
+       obj_Resource: {
         nome: "",
         data_ini: "",
         hora_ini: "",
@@ -65,58 +62,12 @@ export default {
       },
     };
   },
-
-  beforeCreate() {
+  beforeCreate () {
     this.form = this.$form.createForm(this);
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
-  
-  pegar_tabela() { // v
-    axios
-      .get("http://localhost:3000/api/eventos")
-      .then(response => {
-        // console.log(response.data);
-        this.res = response.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },
+    methods: {
 
-  methods: {
-    onCancel() {
-      console.log('CANCEL SUBMIT');
-      this.nome = "";
-      this.data_ini = "";
-      this.data_fim = "";
-      this.hora_ini = "";
-      this.hora_fim = "";
-      this.local_eve = "";
-      this.select_status = "";
-      this.descricao = "";
-      this.obj_Resource = {
-        nome: "",
-        data_ini: "",
-        hora_ini: "",
-        data_fim: "",
-        hora_fim: "",
-        local_eve: "",
-        select_status: "",
-        urlImagem: "",
-        descricao: "",
-      };
-    },
-    openModal(data) {
-      this.pegar_tabela();
-      this.modalData = data;
-      this.modalVisible = true;
-      this.modalData.nome = data.nome;
-      this.modalData.local_eve = data.agendamento.local;
-      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
-      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
-      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
-      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
-    },
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
@@ -124,31 +75,12 @@ export default {
           // console.log(response.data);
           this.res = response.data;
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
-    toggle() {
-      this.active = !this.active;
-    },
 
-    deletar(dados) {
-      axios
-        .delete(
-          `http://localhost:3000/api/evento/${dados.idEvento}`
-        )
-        .then(response => {
-
-          console.log("Deletou!");
-          console.log(response);
-          location.reload();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
-    },
-  
+ 
   },
-
-}
+  
+};
