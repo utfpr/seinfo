@@ -170,7 +170,6 @@
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Quantidade de Vagas:</label>
                     <a-input
-                      id="quantidadeVagas"
                       v-model="data.quantidadeVagas"
                       autocomplete="off"
                       placeholder="Quantidade de Vagas"

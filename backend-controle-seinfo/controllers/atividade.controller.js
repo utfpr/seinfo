@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     valor: req.body.valor,
     descricao: req.body.descricao,
     horasParticipacao: req.body.horasParticipacao,
-    quantidadeVagas:req.body.vagas,
+    quantidadeVagas:req.body.quantidadeVagas,
     idEvento: req.body.idEvento,
     idCategoria: req.body.idCategoria
 
@@ -52,7 +52,7 @@ exports.atualiza = (req,res)=>{
       valor: req.body.valor,
       descricao: req.body.descricao,
       horasParticipacao: req.body.horasParticipacao,
-      quantidadeVagas:req.body.vagas,
+      quantidadeVagas:req.body.quantidadeVagas,
   },
     {where: {idAtividade: req.params.idAtividade}}).then(atividade=>{    
       console.log("Atualizando uma Atividade");
