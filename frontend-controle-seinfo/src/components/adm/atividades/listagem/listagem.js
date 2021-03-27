@@ -1,10 +1,12 @@
 const axios = require("axios");
 import moment from "moment";
+
+import modalExcluir from '../modalExlcuir/modalExcluir.vue';
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
 import modalEditar from '../modalEditar/modalEditar.vue';
 moment.locale("pt-br");
 export default {
-    components: { modalVerMais, modalEditar },
+    components: { modalVerMais, modalEditar, modalExcluir }, 
     props: {
         disabled: Boolean,
     },
@@ -13,35 +15,38 @@ export default {
     },
     created() {
         axios
-        .get("http://localhost:3000/api/eventos")
-        .then((response) => {
-            this.eventos = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .get("http://localhost:3000/api/eventos")
+            .then((response) => {
+                this.eventos = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         axios
-        .get("http://localhost:3000/api/categorias")
-        .then((response) => {
-            this.categorias = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .get("http://localhost:3000/api/categorias")
+            .then((response) => {
+                this.categorias = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         axios
-        .get("http://localhost:3000/api/protagonistas")
-        .then((response) => {
-            this.protagonistas = response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .get("http://localhost:3000/api/protagonistas")
+            .then((response) => {
+                this.protagonistas = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         this.pegar_tabela();
-     },    
+    },
     methods: {
+        deletarModal(modalData){
+        this.deletar(modalData);
+        },
         onCancel() {
             console.log("CANCEL SUBMIT");
             this.show = false;
@@ -91,14 +96,14 @@ export default {
                     var datahorainicio = element.agendamento.dataHoraInicio;
                     var datahorafim = element.agendamento.dataHoraFim;
                     this.modalData.data_ini_atv = moment(datahorainicio).format(
-                      "YYYY-MM-DD"
+                        "YYYY-MM-DD"
                     );
                     this.modalData.data_fim_atv = moment(datahorafim).format(
-                      "YYYY-MM-DD"
+                        "YYYY-MM-DD"
                     );
                     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
                     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
-                  }
+                }
             });
 
             this.protagonistas.forEach((element) => {
@@ -109,7 +114,23 @@ export default {
 
             this.modalData.idCategoria = data.categoriaAtv.nome;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
-          },
+        },
+        /*deletar(dados) {
+            console.log("ID " + dados);
+            axios
+                .delete(
+                    "http://localhost:3000/api/atividade/" +
+                    dados.idAtividade +
+                    "/" +
+                    dados.idEvento
+                )
+                .then((response) => {
+                    console.log("Deletou!");
+                    console.log(response);
+                    this.$router.replace("/adm/atividades");
+                    location.reload();
+                });
+        },*/
     },
     data() {
         return {
@@ -166,7 +187,7 @@ export default {
                 idPessoa: "",
                 descricao: "",
                 nomeEvento: "",
-              },
+            },
         };
     },
 };

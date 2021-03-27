@@ -1,17 +1,22 @@
-import axios from 'axios'
-import moment from "moment";
+import axios from 'axios';
+import moment from 'moment';
 moment.locale("pt-br");
+
+import modalVerMais from '../modalVerMais/modalVerMais.vue';
+import modalExcluir from '../modalExlcuir/modalExcluir.vue';
+
 let id = 0;
 let flag = 0;
 export default {
-  mounted(){ // v
-    this.pegar_tabela ()
-    },
+  components: { modalExcluir, modalVerMais },
+  mounted() {
+    this.pegar_tabela()
+  },
   props: {
     disabled: Boolean
   },
-  
-  data () {
+
+  data() {
     return {
       res: [],
       active: false,
@@ -49,7 +54,7 @@ export default {
         wrapperCol: {
         },
       },
-       obj_Resource: {
+      obj_Resource: {
         nome: "",
         data_ini: "",
         hora_ini: "",
@@ -62,11 +67,22 @@ export default {
       },
     };
   },
-  beforeCreate () {
+  beforeCreate() {
     this.form = this.$form.createForm(this);
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
-    methods: {
+  methods: {
+    openModal(data) {
+      this.pegar_tabela();
+      this.modalData = data;
+      this.modalVisible = true;
+      this.modalData.nome = data.nome;
+      this.modalData.local_eve = data.agendamento.local;
+      this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+      this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+      this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
+      this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
+    },
 
     pegar_tabela() { // v
       axios
@@ -75,12 +91,31 @@ export default {
           // console.log(response.data);
           this.res = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
 
- 
-  },
+    deletarModal(data){
+      this.deletar(data);
+    },
   
+    deletar(dados) {
+      axios
+        .delete(
+          `http://localhost:3000/api/evento/${dados.idEvento}`
+        )
+        .then(response => {
+
+          console.log("Deletou!");
+          console.log(response);
+          location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+  },
+
 };
