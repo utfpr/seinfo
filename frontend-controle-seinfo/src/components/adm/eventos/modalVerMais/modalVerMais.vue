@@ -39,6 +39,4 @@
 </template>
 
 
-<script src="./modalVerMais.js">
-                                  
-<style src="./modalVerMais.css" />
+<script src="./modalVerMais.js" />
