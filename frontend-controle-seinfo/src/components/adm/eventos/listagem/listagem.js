@@ -2,12 +2,13 @@ import axios from 'axios';
 import moment from 'moment';
 moment.locale("pt-br");
 
+import modalVerMais from '../modalVerMais/modalVerMais.vue';
 import modalExcluir from '../modalExlcuir/modalExcluir.vue';
 
 let id = 0;
 let flag = 0;
 export default {
-  components: { modalExcluir },
+  components: { modalExcluir, modalVerMais },
   mounted() {
     this.pegar_tabela()
   },
