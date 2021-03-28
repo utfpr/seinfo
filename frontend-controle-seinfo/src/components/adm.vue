@@ -14,7 +14,7 @@
           </span>
           <a-menu-item key="13">
             Atividade
-            <router-link to="/adm/atividades"></router-link>
+            <router-link to="/adm/atividade"></router-link>
           </a-menu-item>
           <a-menu-item key="10">
             Categoria

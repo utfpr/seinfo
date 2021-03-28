@@ -78,6 +78,9 @@
       <modal-ver-mais v-bind:data="this.modalData" />
     </div>
     <div>
+      <modal-editar v-bind:data="this.modalData" />
+    </div>
+    <div>
       <modal-excluir v-bind:modalData="this.modalData" v-on:deletarModal="deletarModal"/>
     </div>
   </div>
