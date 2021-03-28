@@ -3,12 +3,13 @@ import moment from 'moment';
 moment.locale("pt-br");
 
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
+import modalEditar from '../modalEditar/modalEditar.vue';
 import modalExcluir from '../modalExlcuir/modalExcluir.vue';
 
 let id = 0;
 let flag = 0;
 export default {
-  components: { modalExcluir, modalVerMais },
+  components: { modalExcluir, modalVerMais, modalEditar },
   mounted() {
     this.pegar_tabela()
   },
@@ -84,11 +85,10 @@ export default {
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
     },
 
-    pegar_tabela() { // v
+    pegar_tabela() { 
       axios
         .get("http://localhost:3000/api/eventos")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function (error) {
