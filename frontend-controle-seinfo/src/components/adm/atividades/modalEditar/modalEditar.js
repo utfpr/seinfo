@@ -12,16 +12,36 @@ export default {
     moment: function (date) {
       return moment(date);
     },
-    pegar_tabela() {
-      this.$router.replace("/adm/atividade");
-      axios
-        .get("http://localhost:3000/api/atividades/")
-        .then((response) => {
-          this.res = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    verifyDate() {
+
+      if (!this.idEvento) return 0;
+
+      const evento = this.eventos[this.idEvento];
+
+      const data_ini_atv = moment(this.data_ini_atv + " " + this.hora_ini_atv);
+      const data_fim_atv = moment(this.data_fim_atv + " " + this.hora_fim_atv);
+      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
+      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
+
+      const time1 = moment(data_ini_atv).format('YYYY-MM-DD');
+      const time2 = moment(data_fim_atv).format('YYYY-MM-DD');
+      const time3 = moment(data_ini_evento).format('YYYY-MM-DD');
+      const time4 = moment(data_fim_evento).format('YYYY-MM-DD');
+
+      const isStartDateBetweenEvent = moment(time1).isBetween(time3, time4, undefined, "[]");
+      const isEndDateBetweenEvent = moment(time2).isBetween(time3, time4, undefined, "[]");
+
+      let error = 0;
+      if (!isStartDateBetweenEvent || !isEndDateBetweenEvent) {
+        error = 3;
+      }
+
+      const isStartDateSameOrBeforeThanEnd = moment(time1).isSameOrBefore(moment(time2));
+
+      if (!isStartDateSameOrBeforeThanEnd) {
+        error = 1;
+      }
+      return error;
     },
     onChangeDate() {
       const error = this.verifyDate();
@@ -57,37 +77,6 @@ export default {
         error = 4;
       }
 
-      return error;
-    },
-    verifyDate() {
-
-      if (!this.idEvento) return 0;
-
-      const evento = this.eventos[this.idEvento];
-
-      const data_ini_atv = moment(this.data_ini_atv + " " + this.hora_ini_atv);
-      const data_fim_atv = moment(this.data_fim_atv + " " + this.hora_fim_atv);
-      const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
-      const data_fim_evento = moment(evento.agendamento.dataHoraFim);
-
-      const time1 = moment(data_ini_atv).format('YYYY-MM-DD');
-      const time2 = moment(data_fim_atv).format('YYYY-MM-DD');
-      const time3 = moment(data_ini_evento).format('YYYY-MM-DD');
-      const time4 = moment(data_fim_evento).format('YYYY-MM-DD');
-
-      const isStartDateBetweenEvent = moment(time1).isBetween(time3, time4, undefined, "[]");
-      const isEndDateBetweenEvent = moment(time2).isBetween(time3, time4, undefined, "[]");
-
-      let error = 0;
-      if (!isStartDateBetweenEvent || !isEndDateBetweenEvent) {
-        error = 3;
-      }
-
-      const isStartDateSameOrBeforeThanEnd = moment(time1).isSameOrBefore(moment(time2));
-
-      if (!isStartDateSameOrBeforeThanEnd) {
-        error = 1;
-      }
       return error;
     },
     patch(dados) {
