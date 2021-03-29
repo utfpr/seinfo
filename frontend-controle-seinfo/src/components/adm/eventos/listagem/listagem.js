@@ -83,6 +83,9 @@ export default {
       this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
+      
+      //Chamar funcao do componente modalVerMais
+      this.$root.$emit('loadAtividades', this.modalData.idEvento);
     },
 
     pegar_tabela() { 

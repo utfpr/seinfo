@@ -32,6 +32,7 @@
             <br />
             <label>Descrição: {{data.descricao }}</label>
             <br />
+            <listagem v-bind:listData="this.res"/>
           </div>
         </div>
       </div>

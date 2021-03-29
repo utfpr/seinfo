@@ -19,7 +19,7 @@
             <th class="actions">Ações</th>
           </tr>
         </thead>
-        <tbody v-for="resp in res" :key="resp.idAtividade">
+        <tbody v-for="resp in listData" :key="resp.idAtividade">
           <tr>
             <td>{{ resp.idAtividade }}</td>
             <td style="text-align: left">

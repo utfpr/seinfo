@@ -8,6 +8,7 @@ export default {
     components: { modalVerMais, modalEditar, modalExcluir },
     props: {
         disabled: Boolean,
+        listData: Array
     },
     beforeCreate() {
         this.form = this.$form.createForm(this);
@@ -47,16 +48,7 @@ export default {
             return moment(date);
         },
         pegar_tabela() {
-            axios
-                .get("http://localhost:3000/api/atividades/")
-                .then((response) => {
-                    this.res = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-            axios
+            this.res = this.listData;
         },
         getEvtNome(idEvt) {
             for (var i = 0; i < this.eventos.length; i++) {
