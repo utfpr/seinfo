@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import listInscricoes from '@/components/list_inscricoes';
-import Logo from '@/components/logo';
 import Usuario from '@/components/usuario';
 import atvHome from '@/components/atv_usuario';
 import UsuPerfil from '@/components/perfil_usuario';

@@ -4,7 +4,6 @@ import Home from '@/components/home';
 import Registrar from '@/components/registrar';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Evento from '@/components/evento';
-import Teste from '@/components/teste';
 import not_found from '@/components/not_found';
 import Cad_Aluno from '@/components/cad_aluno';
 
@@ -15,13 +14,7 @@ const login = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/teste',
-    name: 'Teste',
-    component: Teste
-  },
-  
+  },  
   {
     path: '/registrar',
     name: 'Registrar',
@@ -40,7 +33,6 @@ const login = [
     name: 'Cad_Pessoa',
     component: Cad_Pessoa
   },
-  
   {
     path: '*',
     name: 'e404',
