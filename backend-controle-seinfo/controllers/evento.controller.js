@@ -97,9 +97,9 @@ exports.atualiza = (req,res)=>{
     {
     nome: req.body.nome,
     descricao: req.body.descricao,
-    status: req.body.status,
+    status: req.body.select_status,
 
-    //data_horario_inicio: data_ini_full ,
+    // data_horario_inicio: data_ini_full ,
     //data_hora_fim: data_fim_full,
     //urlImagem: req.body.urlImagem
   
