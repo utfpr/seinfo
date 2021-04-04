@@ -11,11 +11,8 @@ exports.create = (req, res) => {
     valor: req.body.valor,
     descricao: req.body.descricao,
     horasParticipacao: req.body.horasParticipacao,
-<<<<<<< Updated upstream
-    quantidadeVagas:req.body.vagas,
-=======
-    quantidadeVagas: req.body.vagas,
->>>>>>> Stashed changes
+    // quantidadeVagas:req.body.vagas,
+    quantidadeVagas:req.body.quantidadeVagas,
     idEvento: req.body.idEvento,
     idCategoria: req.body.idCategoria,
 
@@ -45,30 +42,24 @@ exports.findAll = (req, res) => {
   })
 };
 
-exports.atualiza = (req, res) => {
+exports.atualiza = (req,res)=>{
 
   Atividades.update(
     {
-      titulo: req.body.titulo,
+      titulo:req.body.titulo,
       valor: req.body.valor,
       descricao: req.body.descricao,
       horasParticipacao: req.body.horasParticipacao,
-<<<<<<< Updated upstream
-      quantidadeVagas:req.body.vagas,
+      quantidadeVagas:req.body.quantidadeVagas,
   },
     {where: {idAtividade: req.params.idAtividade}}).then(atividade=>{    
-=======
-      quantidadeVagas: req.body.vagas,
-    },
-    { where: { idAtividade: req.params.idAtividade } }).then(atividade => {
->>>>>>> Stashed changes
       console.log("Atualizando uma Atividade");
       res.send(atividade);
-    }).catch(err => {
-      res.status(500).send("Error " + err);
+    }).catch(err=>{
+      res.status(500).send("Error "+err);
     })
-
-},
+    
+  },
 
 
   exports.delete = (req, res) => {

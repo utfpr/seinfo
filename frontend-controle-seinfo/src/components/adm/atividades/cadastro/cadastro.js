@@ -92,9 +92,8 @@ export default {
         (this.obj_Resource.local_atv = this.local_atv),
         (this.obj_Resource.idEvento = this.idEvento),
         (this.obj_Resource.idCategoria = this.idCategoria),
-        (this.obj_Resource.descricao = this.descricao)
-        
-        console.log(this.obj_Resource)
+        (this.obj_Resource.idPessoa = this.idPessoa),
+        (this.obj_Resource.descricao = this.descricao),
         axios
           .post("http://localhost:3000/api/atividade", this.obj_Resource)
           .then((response) => {

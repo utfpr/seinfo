@@ -1,4 +1,3 @@
-// Tinha jeito melhor de fazer? CLARO! Mas eu optei por fazer assim pq sou idiota :^)
 <template>
   <div class="title">
     <h5 style="text-align:center">Controle de Categoria</h5>

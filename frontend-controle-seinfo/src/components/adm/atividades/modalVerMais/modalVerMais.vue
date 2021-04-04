@@ -49,7 +49,7 @@
             <br />
             <label>Categoria: {{ data.idCategoria }}</label>
             <br />
-            <label>Protagonista: {{ data.protagonistas }}</label>
+            <label>Protagonista: {{ data.idPessoa }}</label>
             <br />
             <label>Descrição: {{ data.descricao }}</label>
             <br />

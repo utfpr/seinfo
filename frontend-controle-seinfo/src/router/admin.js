@@ -2,16 +2,15 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import adm from '@/components/adm';
 import tabela from '@/components/tabela';
-import Cad_evento from '@/components/cad_evento';
 import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
 import Cad_Carousel from '@/components/con_carousel';
-import Cad_Atividade from '@/components/adm_atividade';
 import Cad_Categoria from '@/components/adm_categoria';
-import Logo from '@/components/logo';
-import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
+import Eventos from '@/components/adm/eventos/index/eventos.vue';
+import Atividades from '@/components/adm/atividades/index/atividades.vue';
+
 
 Vue.use(Router);
 
@@ -25,15 +24,19 @@ export default new Router({
       children: [
         {
           path: '',
-          component: Cad_evento
+          component: Eventos
+        },
+        {
+          path: 'eventos',
+          component: Eventos
+        },
+        {
+          path: 'atividades',
+          component: Atividades
         },
         {
           path: 'tabela',
           component: tabela
-        },
-        {
-          path: 'cadEvento',
-          component: Cad_evento
         },
         {
           path: 'conCarousel',
@@ -52,16 +55,8 @@ export default new Router({
           component: Cad_Pessoa
         },
         {
-          path: 'atividade',
-          component: Cad_Atividade
-        },
-        {
           path: 'categoria',
           component: Cad_Categoria
-        },
-        {
-          path: 'ADMevento',
-          component: ADMevento
         },
         {
           path: 'funcPessoa',
