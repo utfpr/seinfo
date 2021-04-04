@@ -3,8 +3,8 @@ const Atividades = db.atividade;
  
 // Post do Atividade
 exports.create = (req, res) => {
-  const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
-  const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
+  const data_ini_full = req.body.data_ini_atv+"T"+req.body.hora_ini_atv;
+  const data_fim_full = req.body.data_fim_atv+"T"+req.body.hora_fim_atv;
     Atividades.create({  
     titulo:req.body.titulo,
     valor: req.body.valor,
@@ -15,9 +15,9 @@ exports.create = (req, res) => {
     idCategoria: req.body.idCategoria
 
   }).then(atividade => {
-    atividade.createAtvAgenda({'dataHoraInicio':data_ini_full,'dataHoraFim':data_fim_full,'local':req.body.local})    
+    atividade.createAtvAgenda({'dataHoraInicio':data_ini_full,'dataHoraFim':data_fim_full,'local':req.body.local_atv})    
     // Cria um Evento
-    console.log("Criado uma categoria!")
+    console.log("Criado uma Agenda de evento")
     res.send(atividade);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
