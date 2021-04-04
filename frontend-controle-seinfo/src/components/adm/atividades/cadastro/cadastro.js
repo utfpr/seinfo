@@ -1,9 +1,17 @@
 const axios = require("axios");
 import moment from "moment";
+import ModalAdicionarCategoria from '../../categoria/modalAdicionarCategoria/modalAdicionarCategoria.vue';
 moment.locale("pt-br");
 export default {
   props: {
     disabled: Boolean,
+  },
+  components: {
+    VNodes: {
+      functional: true,
+      render: (h, ctx) => ctx.props.vnodes,
+    },
+    ModalAdicionarCategoria
   },
   beforeCreate() {
     this.form = this.$form.createForm(this);
@@ -54,8 +62,11 @@ export default {
       this.idPessoa = "";
       this.descricao = "";
     },
-    moment: function (date) {
-      return moment(date);
+    moment: { 
+      moment 
+    },
+    onChangeTimePicker(time, timeString) {
+      console.log(time, timeString);
     },
     getEvtNome(idEvt) {
       for (var i = 0; i < this.eventos.length; i++) {
@@ -82,26 +93,26 @@ export default {
       e.preventDefault();
       if (!erros.length) {
         (this.obj_Resource.titulo = this.titulo),
-        (this.obj_Resource.valor = this.valor),
-        (this.obj_Resource.data_ini_atv = this.data_ini_atv),
-        (this.obj_Resource.data_fim_atv = this.data_fim_atv),
-        (this.obj_Resource.hora_ini_atv = this.hora_ini_atv),
-        (this.obj_Resource.hora_fim_atv = this.hora_fim_atv),
-        (this.obj_Resource.horasParticipacao = this.horasParticipacao),
-        (this.obj_Resource.quantidadeVagas = this.quantidadeVagas),
-        (this.obj_Resource.local_atv = this.local_atv),
-        (this.obj_Resource.idEvento = this.idEvento),
-        (this.obj_Resource.idCategoria = this.idCategoria),
-        (this.obj_Resource.idPessoa = this.idPessoa),
-        (this.obj_Resource.descricao = this.descricao),
-        axios
-          .post("http://localhost:3000/api/atividade", this.obj_Resource)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
+          (this.obj_Resource.valor = this.valor),
+          (this.obj_Resource.data_ini_atv = this.data_ini_atv),
+          (this.obj_Resource.data_fim_atv = this.data_fim_atv),
+          (this.obj_Resource.hora_ini_atv = this.hora_ini_atv),
+          (this.obj_Resource.hora_fim_atv = this.hora_fim_atv),
+          (this.obj_Resource.horasParticipacao = this.horasParticipacao),
+          (this.obj_Resource.quantidadeVagas = this.quantidadeVagas),
+          (this.obj_Resource.local_atv = this.local_atv),
+          (this.obj_Resource.idEvento = this.idEvento),
+          (this.obj_Resource.idCategoria = this.idCategoria),
+          (this.obj_Resource.idPessoa = this.idPessoa),
+          (this.obj_Resource.descricao = this.descricao),
+          axios
+            .post("http://localhost:3000/api/atividade", this.obj_Resource)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
         location.reload();
       } else {
         alert(erros.join("\n"));
@@ -109,6 +120,10 @@ export default {
     },
     toggle() {
       this.$emit('child_toggle');
+    },
+    formatInputDate(value) {
+      console.log('formatInputNumber', value);
+      return value;
     },
   },
   data() {
@@ -123,7 +138,7 @@ export default {
       data_fim_atv: "",
       hora_ini_atv: "",
       hora_fim_atv: "",
-      horasParticipacao: "",
+      horasParticipacao: null,
       quantidadeVagas: "",
       local_atv: "",
       idEvento: "",
