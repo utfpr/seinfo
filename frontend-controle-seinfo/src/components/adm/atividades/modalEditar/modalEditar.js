@@ -80,14 +80,12 @@ export default {
       return error;
     },
     patch(dados) {
-      console.log(dados);
       var erros = [];
       if (!this.data.titulo) erros.push("Título é obrigatório!");
       if (!this.data.valor) erros.push("Valor é obrigatório!");
       if (!this.data.horasParticipacao) erros.push("Horas de Participação é obrigatório!");
       if (!this.data.quantidadeVagas) erros.push("Quantidade de Vagas é obrigatório!");
       if (!this.data.descricao) erros.push("Descrição é obrigatório!");
-      console.log(dados);
       if (!erros.length) {
         axios
           .patch(

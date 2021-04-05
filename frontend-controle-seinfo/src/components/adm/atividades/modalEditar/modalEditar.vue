@@ -218,21 +218,18 @@
                 <div class="row justify-content-center"></div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Selecione uma Categoria:</label>
-                    <a-select
-                      v-model="data.idCategoria"
-                      defaultValue="..."
-                    >
-                      <a-select-option
-                        id="idCategoria"
-                        name="idCategoria"
-                        v-for="categoria in categorias"
-                        :key="categoria.idCategoria"
-                        :value="categoria.idCategoria">
-                        {{ categoria.nome }}
-                      </a-select-option>
-                    </a-select>
-                  </a-form-item>
+          <label class="ant-form-item-required">Selecione uma Categoria:</label>
+          <a-select v-model="idCategoria" defaultValue="...">
+            <a-select-option
+              id="idCategoria"
+              name="idCategoria"
+              v-for="categoria in categorias"
+              :key="categoria.idCategoria"
+              :value="categoria.idCategoria"
+              >{{ categoria.nome }}</a-select-option
+            >
+          </a-select>
+        </a-form-item>
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Selecione um Protagonista:</label>
                     <a-select
@@ -245,8 +242,8 @@
                         v-for="protagonista in protagonistas"
                         :key="protagonista.aPes.idPessoa"
                         :value="protagonista.aPes.idPessoa"
-                        >{{ protagonista.aPes.nome }}</a-select-option
-                      >
+                        >{{ protagonista.aPes.nome }}
+                      </a-select-option>
                     </a-select>
                   </a-form-item>
                 </div>
