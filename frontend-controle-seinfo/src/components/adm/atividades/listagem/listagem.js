@@ -79,7 +79,6 @@ export default {
             this.pegar_tabela();
             this.modalData = data;
             this.modalVisible = true;
-
             this.eventos.forEach((element) => {
                 if (element.idEvento === this.modalData.idEvento) {
                     this.modalData.nomeEvento = element.nome;

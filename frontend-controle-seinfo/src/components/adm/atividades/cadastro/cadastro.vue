@@ -127,6 +127,7 @@
                 v-model="quantidadeVagas"
                 autocomplete="off"
                 type="number"
+                min="0"
               >
                 <a-icon
                   slot="prefix"

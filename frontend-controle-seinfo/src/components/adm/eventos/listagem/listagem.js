@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+
 moment.locale("pt-br");
 
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
@@ -16,7 +17,6 @@ export default {
   props: {
     disabled: Boolean
   },
-
   data() {
     return {
       res: [],
