@@ -68,7 +68,6 @@
                       type="date"
                       id="data_ini_atv"
                       name="data_ini_atv"
-                      v-bind:disabled="true"
                     >
                       <a-icon
                         slot="prefix"
@@ -90,7 +89,6 @@
                       type="date"
                       id="data_fim_atv"
                       name="data_fim_atv"
-                      v-bind:disabled="true"
                     >
                       <a-icon
                         slot="prefix"
@@ -116,7 +114,6 @@
                       type="time"
                       name="hora_ini_atv"
                       id="hora_ini_atv"
-                      v-bind:disabled="true"
                     >
                       <a-icon
                         slot="prefix"
@@ -140,7 +137,6 @@
                       v-model="data.hora_fim_atv"
                       type="time"
                       name="hora_fim_atv"
-                      v-bind:disabled="true"
                     >
                       <a-icon
                         slot="prefix"
@@ -194,7 +190,6 @@
                       placeholder="Local"
                       v-model="data.local_atv"
                       type="text"
-                      v-bind:disabled="true"
                     >
                       <a-icon
                         slot="prefix"
@@ -207,7 +202,6 @@
                     <label class="ant-form-item-required">Selecione o Evento:</label>
                     <a-select
                       v-model="nomeEvento"
-                      v-bind:disabled="true"
                       defaultValue="..."
                     >
                       <a-select-option
@@ -224,26 +218,21 @@
                 <div class="row justify-content-center"></div>
                 <div class="row justify-content-center">
                   <a-form-item class="space">
-                    <label class="ant-form-item-required">Selecione uma Categoria:</label>
-                    <a-select
-                      v-model="data.idCategoria"
-                      defaultValue="..."
-                      v-bind:disabled="true"
-                    >
-                      <a-select-option
-                        id="idCategoria"
-                        name="idCategoria"
-                        v-for="categoria in categorias"
-                        :key="categoria.idCategoria"
-                        :value="categoria.idCategoria">
-                        {{ categoria.nome }}
-                      </a-select-option>
-                    </a-select>
-                  </a-form-item>
+          <label class="ant-form-item-required">Selecione uma Categoria:</label>
+          <a-select v-model="idCategoria" defaultValue="...">
+            <a-select-option
+              id="idCategoria"
+              name="idCategoria"
+              v-for="categoria in categorias"
+              :key="categoria.idCategoria"
+              :value="categoria.idCategoria"
+              >{{ categoria.nome }}</a-select-option
+            >
+          </a-select>
+        </a-form-item>
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Selecione um Protagonista:</label>
                     <a-select
-                      v-bind:disabled="true"
                       v-model="data.idPessoa"
                       defaultValue="..."
                     >
@@ -253,8 +242,8 @@
                         v-for="protagonista in protagonistas"
                         :key="protagonista.aPes.idPessoa"
                         :value="protagonista.aPes.idPessoa"
-                        >{{ protagonista.aPes.nome }}</a-select-option
-                      >
+                        >{{ protagonista.aPes.nome }}
+                      </a-select-option>
                     </a-select>
                   </a-form-item>
                 </div>

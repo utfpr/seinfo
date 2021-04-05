@@ -32,12 +32,10 @@
             <br />
             <label>Descrição: {{data.descricao }}</label>
             <br />
-            <listagem v-bind:listData="this.res"/>
           </div>
         </div>
       </div>
     </div>
 </template>
-
 
 <script src="./modalVerMais.js" />
