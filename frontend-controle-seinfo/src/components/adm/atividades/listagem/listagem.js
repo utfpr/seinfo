@@ -8,7 +8,8 @@ export default {
     components: { modalVerMais, modalEditar, modalExcluir },
     props: {
         disabled: Boolean,
-        listData: Array
+        listData: Array,
+        showActions: Boolean
     },
     beforeCreate() {
         this.form = this.$form.createForm(this);
