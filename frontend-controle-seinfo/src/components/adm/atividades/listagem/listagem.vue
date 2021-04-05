@@ -78,10 +78,18 @@
       <modal-ver-mais v-bind:data="this.modalData" />
     </div>
     <div>
-      <modal-editar v-bind:data="this.modalData" />
+      <modal-editar
+        v-bind:data="this.modalData"
+        v-bind:eventos="this.eventos"
+        v-bind:categorias="this.categorias"
+        v-bind:protagonistas="this.protagonistas"
+      />
     </div>
     <div>
-      <modal-excluir v-bind:modalData="this.modalData" v-on:deletarModal="deletarModal"/>
+      <modal-excluir
+        v-bind:modalData="this.modalData"
+        v-on:deletarModal="deletarModal"
+      />
     </div>
   </div>
 </template>
