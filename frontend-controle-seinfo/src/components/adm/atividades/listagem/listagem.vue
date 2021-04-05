@@ -16,7 +16,7 @@
             <th style="text-align: left">Categoria</th>
             <th style="text-align: left">Vagas</th>
             <th style="text-align: left">Horas</th>
-            <th class="actions">Ações</th>
+            <th v-if="showActions" class="actions">Ações</th>
           </tr>
         </thead>
         <tbody v-for="resp in listData" :key="resp.idAtividade">
@@ -35,7 +35,7 @@
             <td style="text-align: left">
               {{ resp.horasParticipacao.slice(0, 5) }}
             </td>
-            <td class="actions">
+            <td v-if="showActions" class="actions">
               <a-tooltip placement="top">
                 <template slot="title">Ver Mais</template>
                 <a-button
@@ -74,10 +74,10 @@
         </tbody>
       </table>
     </div>
-    <div>
+    <div v-if="showActions">
       <modal-ver-mais v-bind:data="this.modalData" />
     </div>
-    <div>
+    <div v-if="showActions">
       <modal-editar
         v-bind:data="this.modalData"
         v-bind:eventos="this.eventos"
@@ -85,7 +85,7 @@
         v-bind:protagonistas="this.protagonistas"
       />
     </div>
-    <div>
+    <div v-if="showActions">
       <modal-excluir
         v-bind:modalData="this.modalData"
         v-on:deletarModal="deletarModal"

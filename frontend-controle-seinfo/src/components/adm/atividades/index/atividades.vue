@@ -6,7 +6,7 @@
                 <cadastro @child_toggle="toggle"/>
             </div>
         </slide-up-down> 
-        <listagem v-bind:listData="this.res"/>
+        <listagem v-bind:listData="this.res" v-bind:showActions="true"/>
     </div>
 </template>
 
