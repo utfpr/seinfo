@@ -83,14 +83,15 @@
               <label class="ant-form-item-required">Lotes:</label>
               <a-form-item
                 v-for="(k, index) in form.getFieldValue('keys')"
-                :key="k"
+                :key="index"
                 v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
                 :label="index === 0 ? '' : ''"
                 :required="false"
               >
-              <a-input type="date" v-decorator="[`data_inicio_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Inicio do Lote " style="width: 49%; margin-right: 4px"/>
-              <a-input type="date" v-decorator="[`data_fim_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Fim do Lote " style="width: 50%; margin-right: 0px"/>
-              <a-input v-decorator="[`valor_lote[${k}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Valor do Lote R$:00,0" />
+              <a-input type="date" v-decorator="[`data_inicio_lote[${index}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Inicio do Lote " style="width: 49%; margin-right: 4px"/>
+              <a-input type="date" v-decorator="[`data_fim_lote[${index}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Data Fim do Lote " style="width: 50%; margin-right: 0px"/>
+              <a-input v-decorator="[`valor_lote[${index}]`, {validateTrigger: ['change', 'blur'],preserve: true}]" placeholder="Valor do Lote R$:00,0" />
+              <a-button type="default" style="width: 50%" @click="cancelLote(index)">Cancelar Lote</a-button>
               <hr/>
               </a-form-item>
               <a-form-item v-bind="formItemLayoutWithOutLabel">

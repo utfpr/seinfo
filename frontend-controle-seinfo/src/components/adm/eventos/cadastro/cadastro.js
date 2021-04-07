@@ -79,6 +79,8 @@ export default {
       this.local_eve = "";
       this.select_status = "";
       this.descricao = "";
+      this.form.resetFields();
+      id = 0;
       this.obj_Resource=  {
         nome: "",
         data_ini: "",
@@ -115,6 +117,33 @@ export default {
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
       });
+    },
+    //o metodo remove um lote no form
+    cancelLote(k) {
+      const { form } = this;
+      
+      var loteVals = {
+        keys: form.getFieldValue('keys'),
+        data_fim_lote: form.getFieldValue('data_fim_lote'),
+        valor_lote: form.getFieldValue('valor_lote'),
+        data_inicio_lote: form.getFieldValue('data_inicio_lote')
+      };
+
+      loteVals.data_fim_lote.splice(k, 1);
+      loteVals.data_inicio_lote.splice(k, 1);
+      loteVals.keys.splice(k , 1);
+      loteVals.valor_lote.splice(k, 1);
+
+      loteVals.valor_lote[loteVals.valor_lote.length] = null;
+      loteVals.data_fim_lote[loteVals.data_fim_lote.length] = null;
+      loteVals.data_inicio_lote[loteVals.data_inicio_lote.length] = null;
+
+      for(var i = k; i < loteVals.keys.length; i++){
+        loteVals.keys[i]--;
+      }
+      
+      id--;
+      form.setFieldsValue(loteVals);
     },
     info() {
       const h = this.$createElement
@@ -210,7 +239,7 @@ export default {
         this.form.validateFields((err, values) => {
           if (!err) {
             var i = 0;
-            for(i = 1; i < values.keys.length+1; i++){
+            for(i = 0; i < values.keys.length; i++){
               var obj_temp = {
                 data_inicio_lote : '',
                 data_fim_lote : '',
