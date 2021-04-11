@@ -201,7 +201,7 @@
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Selecione o Evento:</label>
                     <a-select
-                      v-model="nomeEvento"
+                      v-model="data.idEvento"
                       defaultValue="..."
                     >
                       <a-select-option
@@ -219,7 +219,10 @@
                 <div class="row justify-content-center">
                   <a-form-item class="space">
           <label class="ant-form-item-required">Selecione uma Categoria:</label>
-          <a-select v-model="idCategoria" defaultValue="...">
+          <a-select 
+            v-model="data.idCategoria" 
+            defaultValue="..."
+          >
             <a-select-option
               id="idCategoria"
               name="idCategoria"

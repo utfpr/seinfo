@@ -54,25 +54,25 @@ export default {
 
       const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
       const data_fim_evento = moment(evento.agendamento.dataHoraFim);
-      
+
       const data_ini_atv = new Date(this.data_ini_atv + " " + this.hora_ini_atv);
       const data_fim_atv = new Date(this.data_fim_atv + " " + this.hora_fim_atv);
-      
+
       const isDayEqual = moment(data_ini_atv).isSame(data_fim_atv, "day");
 
       if (!isDayEqual) return null;
 
       let error = 0;
 
-      const isStartHourLessThanEnd = moment(data_ini_atv).isBefore(data_fim_atv,"hour");
+      const isStartHourLessThanEnd = moment(data_ini_atv).isBefore(data_fim_atv, "hour");
 
       if (!isStartHourLessThanEnd) {
         error = 2;
       }
 
-      const isStartHoursBetweenEvent = moment(data_ini_atv).isBetween(data_ini_evento,data_fim_evento,undefined,"hour");
-      const isEndHoursBetweenEvent = moment(data_fim_atv).isBetween(data_ini_evento,data_fim_evento,undefined,"hour");
-      
+      const isStartHoursBetweenEvent = moment(data_ini_atv).isBetween(data_ini_evento, data_fim_evento, undefined, "hour");
+      const isEndHoursBetweenEvent = moment(data_fim_atv).isBetween(data_ini_evento, data_fim_evento, undefined, "hour");
+
       if (!isStartHoursBetweenEvent || !isEndHoursBetweenEvent) {
         error = 4;
       }
