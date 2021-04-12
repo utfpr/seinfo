@@ -1,5 +1,5 @@
 <template>
-    <div id="list" class="row">
+    <div class="row">
         <div class="table-responsive">
             <table
                 class="table table-striped"
@@ -9,11 +9,22 @@
             >
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th style="text-align: left">Nome</th>
+                        <th style="text-align: left">Email</th>
+                        <th style="text-align: left">Data da inscrição</th>
                     </tr>
                 </thead>
-                
+                <tbody v-for="resp in participantes" :key="resp.dataInscricao" >
+                    <td style="text-align: left">
+                        {{resp.eventoInsc.pessoaInsc.nome}}
+                    </td>
+                    <td style="text-align: left">
+                        {{resp.eventoInsc.pessoaInsc.email}}
+                    </td>
+                    <td style="text-align: left">
+                        {{resp.eventoInsc.dataInscricao}}
+                    </td>
+                </tbody>
             </table>
         </div>
     </div>

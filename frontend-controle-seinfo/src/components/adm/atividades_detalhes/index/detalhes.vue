@@ -40,7 +40,11 @@
     </div>
     <div>
       <br/>
-      <listagemParticipantes />
+      <listagemParticipantes 
+        v-if="this.dataDetalhes.idEvento"
+        v-bind:idEvento="this.dataDetalhes.idEvento.toString()"
+        v-bind:idAtividade="this.dataDetalhes.idAtividade.toString()"
+      />
     </div>
   </div>
 </template>

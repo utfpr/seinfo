@@ -5,10 +5,13 @@ import moment from "moment";
 import listagemParticipantes from '../listagem_participantes/listagem_participantes.vue';
 
 export default {
+    components: {
+        listagemParticipantes,
+    },
     async mounted(){
         if(this.$route.params.data){
-            this.dataDetalhes.nomeCategoria = this.$route.params.data.idCategoria;//não sei pq, mas o nome da categoria sai de modalVerMais como idCategoria
             this.dataDetalhes = this.$route.params.data;
+            this.dataDetalhes.nomeCategoria = this.dataDetalhes.idCategoria;//não sei pq, mas o nome da categoria sai de modalVerMais como idCategoria
         }
         else{
             //quando é feito o reload da pagina é perdido toda informação vindo de "modalVerMais.vue" então tem que ser feito a requisição
@@ -33,7 +36,6 @@ export default {
                 .catch(function (error) {
                     console.log(error);
             });
-            console.log(this.res);console.log(this.evento);
             this.dataDetalhes.valor = this.res.valor;
             this.dataDetalhes.data_ini_atv = moment(this.evento.agendamento.dataHoraInicio).format("YYYY-MM-DD");
             this.dataDetalhes.data_fim_atv = moment(this.evento.agendamento.dataHoraFim).format("YYYY-MM-DD");
@@ -42,20 +44,18 @@ export default {
             this.dataDetalhes.horasParticipacao = this.res.horasParticipacao.slice(0, 5);
             this.dataDetalhes.quantidadeVagas = this.res.quantidadeVagas;
             this.dataDetalhes.local_atv = this.evento.agendamento.local;
-            this.dataDetalhes.idAtividade = this.$route.params.idAtividade;
-            this.dataDetalhes.idCategoria = this.res.idCategoria;
+            this.dataDetalhes.idAtividade = this.$route.params.idAtividade.toString();
+            this.dataDetalhes.idEvento = this.res.idEvento.toString();
+            this.dataDetalhes.idCategoria = this.res.idCategoria.toString();
             this.dataDetalhes.descricao = this.res.descricao;
             this.dataDetalhes.nomeEvento = this.evento.nome;
             this.dataDetalhes.nomeCategoria = this.res.categoriaAtv.nome;
             this.protagonistas.forEach((element) => {
                 if(this.dataDetalhes.idAtividade == element.idAtividade){
                     this.dataDetalhes.idPessoa = element.aPes.nome;
-                } 
+                }
             });
         }
-    },
-    components: {
-        listagemParticipantes,
     },
     data() {
         return {
