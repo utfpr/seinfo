@@ -13,7 +13,7 @@ import ADMevento from '@/components/adm_evento';
 import funcPessoa from '@/components/func_pessoa';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
-
+import Detalhes from '@/components/adm/atividades_detalhes/index/detalhes.vue';
 
 Vue.use(Router);
 
@@ -34,8 +34,13 @@ export default new Router({
           component: Eventos
         },
         {
-          path: 'atividade',
-          component: Atividades
+          path: 'atividades',
+          component: Atividades,
+        },
+        {
+          path: 'detalhes/:idAtividade/:idEvento',
+          name: 'detalhes',
+          component: Detalhes
         },
         {
           path: 'tabela',
