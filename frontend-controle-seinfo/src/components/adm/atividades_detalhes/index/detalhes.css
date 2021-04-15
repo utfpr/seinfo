@@ -9,6 +9,7 @@
     text-align: center;
 }
 .line{
-    height: 30px;
-    border-bottom: 1px solid LightGray;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: rgba(161, 161, 161, 0.233);
 }

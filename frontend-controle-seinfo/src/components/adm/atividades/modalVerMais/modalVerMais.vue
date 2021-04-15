@@ -1,5 +1,5 @@
 <template>
-    <div
+     <div
       class="modal fade bd-example-modal-lg-ver-mais"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
@@ -8,10 +8,8 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Ver Mais
-            </h5>
-          <button
+            <h5 class="modal-title" id="exampleModalLabel">Ver Mais</h5>
+            <button
               type="button"
               class="close"
               data-dismiss="modal"
@@ -57,7 +55,7 @@
             <br />
           </div>
           <div class="row justify-content-center">
-            <router-link :to="{name: 'detalhes', params:{idAtividade:data.idAtividade, idEvento:data.idEvento, data:data}}"
+            <router-link :to="{name: 'detalhes', params:{idEvento:data.idEvento, idAtividade:data.idAtividade, data:data}}"
               data-dismiss="modal"
               class="router-link">
               <button type="button" class="btn">Detalhes da atividade</button>

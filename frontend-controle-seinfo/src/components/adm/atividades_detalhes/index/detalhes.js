@@ -14,55 +14,43 @@ export default {
             this.dataDetalhes.nomeCategoria = this.dataDetalhes.idCategoria;//não sei pq, mas o nome da categoria sai de modalVerMais como idCategoria
         }
         else{
-            //quando é feito o reload da pagina é perdido toda informação vindo de "modalVerMais.vue" então tem que ser feito a requisição
+            //quando é feito o reload da pagina, se perde toda informação vindo de "modalVerMais.vue" então tem que ser feito a requisição novamente
             await axios.get(`http://localhost:3000/api/atividade/${this.$route.params.idAtividade}/${this.$route.params.idEvento}`)
                 .then((response) => {
-                    this.res = response.data;
+                    this.dataDetalhes = response.data;
+                    this.dataDetalhes.nomeCategoria = response.data.categoriaAtv.nome;
                 })
-                .catch(function (error){
+                .catch(function (error) {
                     console.log(error);
             });
             await axios.get(`http://localhost:3000/api/evento/${this.$route.params.idEvento}`)
                 .then((response) => {
-                    this.evento = response.data;
+                    this.dataDetalhes.data_ini_atv = moment(response.data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
+                    this.dataDetalhes.data_fim_atv = moment(response.data.agendamento.dataHoraFim).format("YYYY-MM-DD");
+                    this.dataDetalhes.hora_ini_atv = moment(response.data.agendamento.dataHoraInicio).format("HH:mm");
+                    this.dataDetalhes.hora_fim_atv = moment(response.data.agendamento.dataHoraFim).format("HH:mm");
+                    this.dataDetalhes.local_atv = response.data.agendamento.local;
+                    this.dataDetalhes.nomeEvento = response.data.nome;
                 })
                 .catch(function (error) {
                     console.log(error);
             });
             await axios.get("http://localhost:3000/api/protagonistas")
                 .then((response) => {
-                    this.protagonistas = response.data;
+                    response.data.forEach((element) => {
+                        if(this.dataDetalhes.idAtividade == element.idAtividade){
+                            this.dataDetalhes.idPessoa = element.aPes.nome;
+                        }
+                    });
                 })
                 .catch(function (error) {
                     console.log(error);
             });
-            this.dataDetalhes.valor = this.res.valor;
-            this.dataDetalhes.data_ini_atv = moment(this.evento.agendamento.dataHoraInicio).format("YYYY-MM-DD");
-            this.dataDetalhes.data_fim_atv = moment(this.evento.agendamento.dataHoraFim).format("YYYY-MM-DD");
-            this.dataDetalhes.hora_ini_atv = moment(this.evento.agendamento.dataHoraInicio).format("HH:mm");
-            this.dataDetalhes.hora_fim_atv = moment(this.evento.agendamento.dataHoraFim).format("HH:mm");
-            this.dataDetalhes.horasParticipacao = this.res.horasParticipacao.slice(0, 5);
-            this.dataDetalhes.quantidadeVagas = this.res.quantidadeVagas;
-            this.dataDetalhes.local_atv = this.evento.agendamento.local;
             this.dataDetalhes.idAtividade = this.$route.params.idAtividade.toString();
-            this.dataDetalhes.idEvento = this.res.idEvento.toString();
-            this.dataDetalhes.idCategoria = this.res.idCategoria.toString();
-            this.dataDetalhes.descricao = this.res.descricao;
-            this.dataDetalhes.nomeEvento = this.evento.nome;
-            this.dataDetalhes.nomeCategoria = this.res.categoriaAtv.nome;
-            this.protagonistas.forEach((element) => {
-                if(this.dataDetalhes.idAtividade == element.idAtividade){
-                    this.dataDetalhes.idPessoa = element.aPes.nome;
-                }
-            });
         }
     },
     data() {
         return {
-            res: {},
-            evento: {},
-            categorias: [],
-            protagonistas: [],
             dataDetalhes: {
                 titulo: "",
                 valor: "",
