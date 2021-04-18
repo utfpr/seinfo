@@ -34,6 +34,7 @@ export default {
       active: false,
       nomeEvento: "",
       modalData: {
+        cpfOrganizador: "",
         idEvento: "",
         nome: "",
         data_ini_eve: "",
@@ -83,7 +84,6 @@ export default {
       this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
-      
       //Chamar funcao do componente modalVerMais
       this.$root.$emit('loadAtividades', this.modalData.idEvento);
     },
@@ -93,32 +93,15 @@ export default {
         .get("http://localhost:3000/api/eventos")
         .then(response => {
           this.res = response.data;
+          console.log("maiolino", response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-
-    deletarModal(data){
-      this.deletar(data);
-    },
-  
-    deletar(dados) {
-      axios
-        .delete(
-          `http://localhost:3000/api/evento/${dados.idEvento}`
-        )
-        .then(response => {
-
-          console.log("Deletou!");
-          console.log(response);
-          location.reload();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-
+    deletarModal(modalData){
+      console.log(modalData);
+    }, 
   },
 
 };

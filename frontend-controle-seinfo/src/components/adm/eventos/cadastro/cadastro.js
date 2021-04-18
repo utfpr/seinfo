@@ -1,21 +1,32 @@
 import axios from 'axios'
 import moment from "moment";
 
-
 moment.locale("pt-br");
 let id = 0;
-let flag = 0;
+
 export default {
-  mounted(){ // v
-    this.pegar_tabela ()
-    },
   props: {
     disabled: Boolean
   },
-  
-  data () {
+  beforeCreate() {
+    this.form = this.$form.createForm(this);
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
+  },
+  created() {
+    axios.get('http://localhost:3000/api/pessoas').then(response => {
+      this.pessoas = response.data;
+      console.log(this.pessoas)
+    }).catch(error => {
+      console.log(error);
+    })
+  },
+  mounted() {
+    this.pegar_tabela()
+  },
+  data() {
     return {
       res: [],
+      pessoas: [],
       active: false,
       data_ini_eve: "",
       data_fim_eve: "",
@@ -51,8 +62,9 @@ export default {
         wrapperCol: {
         },
       },
-       obj_Resource: {
+      obj_Resource: {
         nome: "",
+        cpfOrganizador: "",
         data_ini: "",
         hora_ini: "",
         data_fim: "",
@@ -64,12 +76,8 @@ export default {
       },
     };
   },
-  beforeCreate () {
-    this.form = this.$form.createForm(this);
-    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
-  },
-    methods: {
-     onCancel(){
+  methods: {
+    onCancel() {
       console.log('CANCEL SUBMIT');
       this.nome = "";
       this.data_ini = "";
@@ -81,7 +89,7 @@ export default {
       this.descricao = "";
       this.form.resetFields();
       id = 0;
-      this.obj_Resource=  {
+      this.obj_Resource = {
         nome: "",
         data_ini: "",
         hora_ini: "",
@@ -92,7 +100,7 @@ export default {
         urlImagem: "",
         descricao: "",
       };
-     },
+    },
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
@@ -100,16 +108,16 @@ export default {
           // console.log(response.data);
           this.res = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
     toggle() {
-        this.$emit('child_toggle');
+      this.$emit('child_toggle');
     },
 
     //o metodo add aciona um novo campo no form
-    add  () {
+    add() {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
       // console.log("hello", keys);
@@ -121,7 +129,7 @@ export default {
     //o metodo remove um lote no form
     cancelLote(k) {
       const { form } = this;
-      
+
       var loteVals = {
         keys: form.getFieldValue('keys'),
         data_fim_lote: form.getFieldValue('data_fim_lote'),
@@ -131,17 +139,17 @@ export default {
 
       loteVals.data_fim_lote.splice(k, 1);
       loteVals.data_inicio_lote.splice(k, 1);
-      loteVals.keys.splice(k , 1);
+      loteVals.keys.splice(k, 1);
       loteVals.valor_lote.splice(k, 1);
 
       loteVals.valor_lote[loteVals.valor_lote.length] = null;
       loteVals.data_fim_lote[loteVals.data_fim_lote.length] = null;
       loteVals.data_inicio_lote[loteVals.data_inicio_lote.length] = null;
 
-      for(var i = k; i < loteVals.keys.length; i++){
+      for (var i = k; i < loteVals.keys.length; i++) {
         loteVals.keys[i]--;
       }
-      
+
       id--;
       form.setFieldsValue(loteVals);
     },
@@ -149,12 +157,12 @@ export default {
       const h = this.$createElement
       this.$info({
         title: 'Cadastrar Evento',
-        content: h('div',{}, [
+        content: h('div', {}, [
           h('p', 'Cadastro feito com Sucesso!'),
         ]),
-        onOk() {location.reload();},
+        onOk() { location.reload(); },
       });
-      
+
     },
     renderHourValidateStatus() {
       const error = this.onChangeHour();
@@ -165,7 +173,7 @@ export default {
       const error = this.onChangeHour();
       if (error === 2) return "Hora de Fim deve ser maior que o Hora de Inicio";
       return "";
-    },  
+    },
     onChangeHour() {
 
       if (!this.obj_Resource.hora_ini || !this.obj_Resource.hora_fim) return 0;
@@ -176,7 +184,7 @@ export default {
       const data_fim_eve = new Date(
         this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim
       );
-      
+
       const isDayEqual = moment(data_ini_eve).isSame(data_fim_eve, "day");
 
       if (!isDayEqual) return null;
@@ -185,7 +193,7 @@ export default {
 
       let isStartHourLessThanEnd = undefined;
       isStartHourLessThanEnd = moment(data_ini_eve).isBefore(
-        data_fim_eve, 
+        data_fim_eve,
         "hour"
       );
 
@@ -195,23 +203,23 @@ export default {
 
       return error;
     },
-    onChangeDate(){
+    onChangeDate() {
       const error = this.verifyDate();
       return error;
     },
-    verifyDate(){
+    verifyDate() {
       const startDate = new Date(this.obj_Resource.data_ini);
       const endDate = new Date(this.obj_Resource.data_fim);
-      if(endDate - startDate < 0){
+      if (endDate - startDate < 0) {
         return 1;
-      }else if(endDate - startDate > 0) {
+      } else if (endDate - startDate > 0) {
         return 0;
-      }else {
+      } else {
         const completeStartDate = new Date(this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini);
         const completeEndDate = new Date(this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim);
-        if(completeEndDate - completeStartDate < 0) {
+        if (completeEndDate - completeStartDate < 0) {
           return 2;
-        } else if (completeEndDate - completeStartDate > 0){
+        } else if (completeEndDate - completeStartDate > 0) {
           return 0;
         } else {
           return 2;
@@ -221,9 +229,9 @@ export default {
     handleSubmit(e) {
       var erros = [];
       const errorDate = this.verifyDate();
-      if(errorDate === 1) {
+      if (errorDate === 1) {
         erros.push('Data de Fim deve ser maior que Data de Início.')
-      }else if (errorDate === 2){
+      } else if (errorDate === 2) {
         erros.push('Hora de Fim deve ser maior que Hora de Início.');
       }
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
@@ -239,11 +247,11 @@ export default {
         this.form.validateFields((err, values) => {
           if (!err) {
             var i = 0;
-            for(i = 0; i < values.keys.length; i++){
+            for (i = 0; i < values.keys.length; i++) {
               var obj_temp = {
-                data_inicio_lote : '',
-                data_fim_lote : '',
-                valor_lote : ''
+                data_inicio_lote: '',
+                data_fim_lote: '',
+                valor_lote: ''
               }
               obj_temp.data_inicio_lote = values.data_inicio_lote[i]
               obj_temp.data_fim_lote = values.data_fim_lote[i]
@@ -251,9 +259,10 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => {console.log(response);this.info();this.toggle()}).catch(error => {console.log(error.response)});
-            
-            }
+            console.log('Debugando o objeto', this.obj_Resource);
+            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
+
+          }
         });
       }
       else {
@@ -283,7 +292,5 @@ export default {
         this.$router.replace("/adm/cadEvento");
       }
     },
- 
   },
-  
 };
