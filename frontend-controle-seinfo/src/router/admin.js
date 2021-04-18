@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import adm from '@/components/adm';
+import adm from '@/components/navAdm';
 import tabela from '@/components/tabela';
 import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
