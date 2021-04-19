@@ -1,8 +1,6 @@
 <template>
-  <div class="title">
-    <h5 style="text-align: center">Controle de Atividade</h5>
-    <br />
-   
+    <!-- Começo Inserção -->
+
       <div class="box">
         <form
           class="form"
@@ -129,6 +127,7 @@
                 v-model="quantidadeVagas"
                 autocomplete="off"
                 type="number"
+                min="0"
               >
                 <a-icon
                   slot="prefix"
@@ -200,8 +199,8 @@
                   id="idPessoa"
                   name="idPessoa"
                   v-for="protagonista in protagonistas"
-                  :key="protagonista.idPessoa"
-                  :value="protagonista.idPessoa"
+                  :key="protagonista.aPes.idPessoa"
+                  :value="protagonista.aPes.idPessoa"
                   >{{ protagonista.aPes.nome }}</a-select-option
                 >
               </a-select>
@@ -235,8 +234,7 @@
           </div>
         </form>
       </div>
-   
-  </div>
+    <!-- Fim Inserção -->
 </template>
 
 <script src="./cadastro.js"></script>

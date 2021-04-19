@@ -4,43 +4,22 @@ import moment from "moment";
 moment.locale("pt-br");
 
 export default {
-    mounted(){ 
-        this.pegar_tabela ()
-    },
     props: {
         data: Object,
-    },
-    data() {
-        return {
-            obj_Resource: {
-                nome: "",
-                data_ini: "",
-                hora_ini: "",
-                data_fim: "",
-                hora_fim: "",
-                local_eve: "",
-                select_lote: "",
-                select_status: "",
-                urlImagem: "",
-                descricao: "",
-            },
-        };
     },
     beforeCreate() {
         this.form = this.$form.createForm(this);
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
+        console.log(this.data); 
+    },
+    created() {
+        axios.get('http://localhost:3000/api/pessoas').then(response => {
+            this.pessoas = response.data;
+        }).catch(error => {
+            console.log(error);
+        })
     },
     methods: {
-        pegar_tabela() { 
-            axios
-              .get(`http://localhost:3000/api/eventos/:${data.idEvento}`)
-              .then(response => {
-                console.log(response.data);
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
-        },
         renderHourValidateStatus() {
             const error = this.onChangeHour();
             if (error === 2) return "error";
@@ -52,13 +31,13 @@ export default {
             return "";
         },
         onChangeHour() {
-            if (!this.obj_Resource.hora_ini || !this.obj_Resource.hora_fim) return 0;
+            if (!this.data.hora_ini_eve || !this.data.hora_fim_eve) return 0;
 
             const data_ini_eve = new Date(
-                this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini
+                this.data.data_ini_eve + " " + this.data.hora_ini_eve
             );
             const data_fim_eve = new Date(
-                this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim
+                this.data.data_fim_eve + " " + this.data.hora_fim_eve
             );
 
             const isDayEqual = moment(data_ini_eve).isSame(data_fim_eve, "day");
@@ -84,18 +63,18 @@ export default {
             return error;
         },
         verifyDate() {
-            const startDate = new Date(this.obj_Resource.data_ini);
-            const endDate = new Date(this.obj_Resource.data_fim);
+            const startDate = new Date(this.data.data_ini_eve);
+            const endDate = new Date(this.data.data_fim_eve);
             if (endDate - startDate < 0) {
                 return 1;
             } else if (endDate - startDate > 0) {
                 return 0;
             } else {
                 const completeStartDate = new Date(
-                    this.obj_Resource.data_ini + " " + this.obj_Resource.hora_ini
+                    this.data.data_ini_eve + " " + this.data.hora_ini_eve
                 );
                 const completeEndDate = new Date(
-                    this.obj_Resource.data_fim + " " + this.obj_Resource.hora_fim
+                    this.data.data_fim_eve + " " + this.data.hora_fim_eve
                 );
                 if (completeEndDate - completeStartDate < 0) {
                     return 2;
@@ -109,10 +88,10 @@ export default {
         patch(dados) {
             var erros = [];
             if (!dados.nome) erros.push("Nome é obrigatório!");
+            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!dados.local_eve) erros.push("Local é obrigatório!");
             if (!dados.status) erros.push("Status é obrigatório!");
             if (!dados.descricao) erros.push("Descrição é obrigatório!");
-            console.log(dados);
             if (!erros.length) {
                 axios
                     .patch(`http://localhost:3000/api/evento/${dados.idEvento}`, dados)

@@ -13,11 +13,11 @@
             <span>Atividades/Categorias</span>
           </span>
           <a-menu-item key="13">
-            Atividade
+            Atividades
             <router-link to="/adm/atividades"></router-link>
           </a-menu-item>
           <a-menu-item key="10">
-            Categoria
+            Categorias
             <router-link to="/adm/categoria"></router-link>
           </a-menu-item>
         </a-sub-menu>

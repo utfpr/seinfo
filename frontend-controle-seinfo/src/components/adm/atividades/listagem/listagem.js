@@ -8,6 +8,8 @@ export default {
     components: { modalVerMais, modalEditar, modalExcluir },
     props: {
         disabled: Boolean,
+        listData: Array,
+        showActions: Boolean
     },
     beforeCreate() {
         this.form = this.$form.createForm(this);
@@ -46,17 +48,27 @@ export default {
         moment: function (date) {
             return moment(date);
         },
-        pegar_tabela() {
+        deletarModal(modalData){
+            this.deletar(modalData);
+        },
+        deletar(dados) {
+            console.log("ID " + dados);
             axios
-                .get("http://localhost:3000/api/atividades/")
+                .delete(
+                    "http://localhost:3000/api/atividade/" +
+                    dados.idAtividade +
+                    "/" +
+                    dados.idEvento
+                )
                 .then((response) => {
-                    this.res = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
+                    console.log("Deletou!");
+                    console.log(response);
+                    this.$router.replace("/adm/atividade");
+                    location.reload();
                 });
-
-            axios
+        },
+        pegar_tabela() {
+            this.res = this.listData;
         },
         getEvtNome(idEvt) {
             for (var i = 0; i < this.eventos.length; i++) {
@@ -67,7 +79,6 @@ export default {
             this.pegar_tabela();
             this.modalData = data;
             this.modalVisible = true;
-
             this.eventos.forEach((element) => {
                 if (element.idEvento === this.modalData.idEvento) {
                     this.modalData.nomeEvento = element.nome;

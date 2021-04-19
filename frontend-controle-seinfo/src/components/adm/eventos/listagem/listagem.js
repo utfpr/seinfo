@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+
 moment.locale("pt-br");
 
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
@@ -16,7 +17,6 @@ export default {
   props: {
     disabled: Boolean
   },
-
   data() {
     return {
       res: [],
@@ -36,6 +36,7 @@ export default {
       modalData: {
         idEvento: "",
         nome: "",
+        cpfOrganizador: "",
         data_ini_eve: "",
         data_fim_eve: "",
         hora_ini_eve: "",
@@ -83,6 +84,9 @@ export default {
       this.modalData.data_fim_eve = moment(data.agendamento.dataHoraFim).format("YYYY-MM-DD");
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).format("HH:mm");
+      
+      //Chamar funcao do componente modalVerMais
+      this.$root.$emit('loadAtividades', this.modalData.idEvento);
     },
 
     pegar_tabela() { 

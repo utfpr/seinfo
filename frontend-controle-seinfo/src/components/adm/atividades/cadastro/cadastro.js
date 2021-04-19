@@ -5,12 +5,36 @@ export default {
   props: {
     disabled: Boolean,
   },
-  
   beforeCreate() {
     this.form = this.$form.createForm(this);
   },
-  mounted() {
-    this.pegar_tabela()
+  created() {
+    axios
+      .get("http://localhost:3000/api/eventos")
+      .then((response) => {
+        this.eventos = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:3000/api/categorias")
+      .then((response) => {
+        this.categorias = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:3000/api/protagonistas")
+      .then((response) => {
+        this.protagonistas = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
   methods: {
     onCancel() {
@@ -58,37 +82,33 @@ export default {
       e.preventDefault();
       if (!erros.length) {
         (this.obj_Resource.titulo = this.titulo),
-          (this.obj_Resource.valor = this.valor),
-          (this.obj_Resource.data_ini_atv = this.data_ini_atv),
-          (this.obj_Resource.data_fim_atv = this.data_fim_atv),
-          (this.obj_Resource.hora_ini_atv = this.hora_ini_atv),
-          (this.obj_Resource.hora_fim_atv = this.hora_fim_atv),
-          (this.obj_Resource.horasParticipacao = this.horasParticipacao),
-          (this.obj_Resource.quantidadeVagas = this.quantidadeVagas),
-          (this.obj_Resource.local_atv = this.local_atv),
-          (this.obj_Resource.idEvento = this.idEvento),
-          (this.obj_Resource.idCategoria = this.idCategoria),
-          (this.obj_Resource.idPessoa = this.idPessoa),
-          (this.obj_Resource.descricao = this.descricao),
-          axios
-            .post("http://localhost:3000/api/atividade", this.obj_Resource)
-            .then((response) => {
-              console.log(response);
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
+        (this.obj_Resource.valor = this.valor),
+        (this.obj_Resource.data_ini_atv = this.data_ini_atv),
+        (this.obj_Resource.data_fim_atv = this.data_fim_atv),
+        (this.obj_Resource.hora_ini_atv = this.hora_ini_atv),
+        (this.obj_Resource.hora_fim_atv = this.hora_fim_atv),
+        (this.obj_Resource.horasParticipacao = this.horasParticipacao),
+        (this.obj_Resource.quantidadeVagas = this.quantidadeVagas),
+        (this.obj_Resource.local_atv = this.local_atv),
+        (this.obj_Resource.idEvento = this.idEvento),
+        (this.obj_Resource.idCategoria = this.idCategoria),
+        (this.obj_Resource.idPessoa = this.idPessoa),
+        (this.obj_Resource.descricao = this.descricao),
+        axios
+          .post("http://localhost:3000/api/atividade", this.obj_Resource)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
         location.reload();
       } else {
         alert(erros.join("\n"));
       }
     },
-    pegar_tabela() {
-
-    },
     toggle() {
       this.$emit('child_toggle');
-     // this.active = !this.active;
     },
   },
   data() {
