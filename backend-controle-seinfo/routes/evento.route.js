@@ -13,7 +13,6 @@ const  multer = require('multer')
             });
 const upload = multer({storage});
 
-
 module.exports = function(app) {
  
   const eventos = require('../controllers/evento.controller.js');
@@ -24,9 +23,7 @@ module.exports = function(app) {
     //console.log(obj_Resource.nome);
     //eventos.create(req,res,nomedoarquivo);
   }) */
-
   
-
   app.post('/api/evento', eventos.create);
 
 
