@@ -36,6 +36,7 @@ export default {
       modalData: {
         idEvento: "",
         nome: "",
+        cpfOrganizador: "",
         data_ini_eve: "",
         data_fim_eve: "",
         hora_ini_eve: "",

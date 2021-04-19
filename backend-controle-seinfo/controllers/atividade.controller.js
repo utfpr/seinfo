@@ -1,8 +1,9 @@
 const db = require('../models/index.js');
+
 const Atividades = db.atividade;
-const Pessoas = db.pessoa;
 
 // Post do Atividade
+
 exports.create = (req, res) => {
   const data_ini_full = req.body.data_ini_atv+"T"+req.body.hora_ini_atv;
   const data_fim_full = req.body.data_fim_atv+"T"+req.body.hora_fim_atv;
@@ -44,24 +45,26 @@ exports.findAll = (req, res) => {
   })
 };
 
-exports.atualiza = (req,res)=>{
+exports.atualiza = (req, res) => {
 
   Atividades.update(
     {
-      titulo:req.body.titulo,
+      titulo: req.body.titulo,
       valor: req.body.valor,
       descricao: req.body.descricao,
       horasParticipacao: req.body.horasParticipacao,
-      quantidadeVagas:req.body.quantidadeVagas,
-  },
-    {where: {idAtividade: req.params.idAtividade}}).then(atividade=>{    
+      quantidadeVagas: req.body.quantidadeVagas,
+      idCategoria: req.body.idCategoria,
+      idEvento: req.body.idEvento
+    },
+    { where: { idAtividade: req.params.idAtividade } }).then(atividade => {
       console.log("Atualizando uma Atividade");
       res.send(atividade);
-    }).catch(err=>{
-      res.status(500).send("Error "+err);
+    }).catch(err => {
+      res.status(500).send("Error " + err);
     })
-    
-  },
+
+},
 
 
   exports.delete = (req, res) => {
