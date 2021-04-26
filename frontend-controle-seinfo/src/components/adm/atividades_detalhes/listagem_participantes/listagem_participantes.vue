@@ -10,21 +10,21 @@
                 cellpadding="0"
                 style="text-align: center"
             >
-                <thead>
+                <thead class="table-active">
                     <tr>
-                        <th style="text-align: left">Nome</th>
-                        <th style="text-align: left">Email</th>
-                        <th style="text-align: left">Data da inscrição</th>
+                        <th style="text-align: center">Nome</th>
+                        <th style="text-align: center">Email</th>
+                        <th style="text-align: center">Data Inscrição</th>
                     </tr>
                 </thead>
                 <tbody v-for="listData in participantes" :key="listData.dataInscricao" >
-                    <td style="text-align: left">
+                    <td style="text-align: center">
                         {{listData.eventoInsc.pessoaInsc.nome}}
                     </td>
-                    <td style="text-align: left">
+                    <td style="text-align: center">
                         {{listData.eventoInsc.pessoaInsc.email}}
                     </td>
-                    <td style="text-align: left">
+                    <td style="text-align: center">
                         {{listData.eventoInsc.dataInscricao}}
                     </td>
                 </tbody>
