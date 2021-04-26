@@ -46,7 +46,7 @@
                   <label class="ant-form-item-required"
                     >Selecione um Organizador:
                   </label>
-                  <a-select v-model="data.cpfOrganizador" defaultValue="...">
+                  <a-select mode="multiple" v-model="data.cpfOrganizador" defaultValue="...">
                     <a-select-option
                       id="cpfOrganizador"
                       name="cpfOrganizador"
