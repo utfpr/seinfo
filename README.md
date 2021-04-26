@@ -50,6 +50,12 @@ const env = {
 module.exports = env;
 
 ```
-
+Criar o arquivo dotenv.env.js como o dotenv.env.js.example no frontend.
+~~~
+'use strict'
+module.exports = {
+  VUE_APP_URL: '"ULR_API"'
+}
+~~~
 ## Licença
 Este projeto se encontra sob a licença [MIT](http://opensource.org/licenses/MIT)
