@@ -63,7 +63,7 @@ export default {
       },
       obj_Resource: {
         nome: "",
-        cpfOrganizador: [],
+        cpfOrganizador: "",
         data_ini: "",
         hora_ini: "",
         data_fim: "",

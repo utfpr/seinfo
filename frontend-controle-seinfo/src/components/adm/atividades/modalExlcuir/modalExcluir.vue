@@ -56,7 +56,7 @@
           <br />
           <label>Descrição: {{ modalData.descricao }}</label>
           <br />
-          <a-button v-on:click="deletar(modalData)" type="danger" block
+          <a-button @click="deletar" type="danger" block
             >Eu desejo Excluir este item</a-button
           >
         </div>

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import axios from "axios";
 
 export default {
     props: {
@@ -10,7 +11,20 @@ export default {
         moment: function (date) {
             return moment(date);
         },
-        deletar(modalData){
+        deletar(modalData) {
+            axios
+                .delete(
+                    `http://localhost:3000/api/evento/${modalData.idEvento}`
+                )
+                .then(response => {
+
+                    console.log("Deletou!");
+                    console.log(response);
+                    location.reload();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             this.$emit('deletarModal', modalData);
         },
     },
