@@ -54,11 +54,17 @@
             <label>Descrição: {{ data.descricao }}</label>
             <br />
           </div>
+          <div class="row justify-content-center">
+            <router-link :to="{name: 'detalhes', params:{idEvento:data.idEvento, idAtividade:data.idAtividade, data:data}}"
+              data-dismiss="modal"
+              class="router-link">
+              <button type="button" class="btn">Detalhes da atividade</button>
+            </router-link>
+          </div>
+          <br/>
         </div>
       </div>
     </div>
 </template>
-
-
 <script src="./modalVerMais.js"/>
 <style scoped src="./modalVerMais.css"/>

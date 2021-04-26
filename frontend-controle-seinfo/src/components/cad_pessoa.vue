@@ -38,6 +38,7 @@
 <script>
 import axios from 'axios';
 import {TheMask} from 'vue-the-mask';
+import app_url from '../main';
 export default 
 {
    data() {
@@ -65,7 +66,7 @@ export default
         .then(response => {
           console.log(response)
           alert(response.data);
-          window.location = "http://localhost:8080/";  
+          window.location = app_url;  
            }).catch(error => {
             alert(error);
           });

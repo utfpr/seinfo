@@ -10,6 +10,14 @@ export default {
     beforeCreate() {
         this.form = this.$form.createForm(this);
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
+        console.log(this.data); 
+    },
+    created() {
+        axios.get('http://localhost:3000/api/pessoas').then(response => {
+            this.pessoas = response.data;
+        }).catch(error => {
+            console.log(error);
+        })
     },
     methods: {
         renderHourValidateStatus() {
@@ -80,6 +88,7 @@ export default {
         patch(dados) {
             var erros = [];
             if (!dados.nome) erros.push("Nome é obrigatório!");
+            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!dados.local_eve) erros.push("Local é obrigatório!");
             if (!dados.status) erros.push("Status é obrigatório!");
             if (!dados.descricao) erros.push("Descrição é obrigatório!");
