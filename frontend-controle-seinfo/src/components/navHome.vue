@@ -50,6 +50,7 @@
 import axios from 'axios';
 import AuthConsumer from '../contexts/authConsumer';
 import {TheMask} from 'vue-the-mask';
+import app_url from '../main';
 export default {
   data() {
     return {
@@ -124,8 +125,8 @@ export default {
               signIn({token: response.data.token, user: response.data.pessoa});
               window.location.replace(
                 response.data.pessoa.nivel === 1 
-                  ? 'http://localhost:8080/usuario' 
-                  : 'http://localhost:8080/adm'
+                  ? app_url + '/usuario' 
+                  : app_url + '/adm'
                 );
 
             }

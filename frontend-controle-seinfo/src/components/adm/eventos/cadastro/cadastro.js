@@ -15,7 +15,6 @@ export default {
   created() {
     axios.get('http://localhost:3000/api/pessoas').then(response => {
       this.pessoas = response.data;
-      console.log(this.pessoas)
     }).catch(error => {
       console.log(error);
     })
@@ -64,7 +63,7 @@ export default {
       },
       obj_Resource: {
         nome: "",
-        cpfOrganizador: "",
+        cpfOrganizador: [],
         data_ini: "",
         hora_ini: "",
         data_fim: "",
