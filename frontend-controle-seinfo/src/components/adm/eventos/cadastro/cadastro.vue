@@ -33,18 +33,19 @@
           <a-form-item class="space_2">
             <label class="ant-form-item-required"
               >Selecione um Organizador:</label
-            >
-              <a-select v-model="obj_Resource.cpfOrganizador" defaultValue="...">
+            > 
+            <a-select v-model="obj_Resource.cpfOrganizacao" defaultValue="...">
               <a-select-option
                 id="cpfOrganizador"
                 name="cpfOrganizador"
                 v-for="pessoa in pessoas"
                 :key="pessoa.CPF"
                 :value="pessoa.CPF"
-                >{{ pessoa.nome }}</a-select-option
-              >
+                >
+              {{ pessoa.nome }}
+              </a-select-option>
             </a-select>
-          </a-form-item>
+          </a-form-item>  
         </div>
 
         <div class="row justify-content-center">
@@ -120,7 +121,7 @@
               />
             </a-input>
           </a-form-item>
-          <a-form-item
+          <a-form-item  
             class="space"
             :validate-status="onChangeHour() === 2 ? 'error' : ''"
             :help="

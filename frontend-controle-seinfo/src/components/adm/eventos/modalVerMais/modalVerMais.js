@@ -1,5 +1,9 @@
 const axios = require("axios");
+import listagem from '../../atividades/listagem/listagem.vue';
 export default {
+  components: {
+    listagem
+  },
   props: {
     data: Object,
   },

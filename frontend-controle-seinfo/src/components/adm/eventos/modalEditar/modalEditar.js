@@ -19,6 +19,13 @@ export default {
             console.log(error);
         })
     },
+    created() {
+        axios.get('http://localhost:3000/api/pessoas').then(response => {
+          this.pessoas = response.data;
+        }).catch(error => {
+          console.log(error);
+        })
+    },
     methods: {
         renderHourValidateStatus() {
             const error = this.onChangeHour();
@@ -92,6 +99,7 @@ export default {
             if (!dados.local_eve) erros.push("Local é obrigatório!");
             if (!dados.status) erros.push("Status é obrigatório!");
             if (!dados.descricao) erros.push("Descrição é obrigatório!");
+            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!erros.length) {
                 axios
                     .patch(`http://localhost:3000/api/evento/${dados.idEvento}`, dados)

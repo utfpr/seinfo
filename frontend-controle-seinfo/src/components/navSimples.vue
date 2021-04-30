@@ -5,7 +5,7 @@
     </div>
     <nav class="navbar navbar-expand-sm navi">
       <div class="navbar-collapse justify-content-center">
-        <a :href="'/'"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a> 
+        <a :href="'/'"><img src="../assets/logo_com_nome.jpg" style="height:50px; margin-left:74px;"></a> 
       </div>
       <div class="logOut" >
         <button type="submit"  class="buttonInvisible"  @click="logOut(signOut)">
@@ -20,6 +20,7 @@
 
 <script>
 import AuthConsumer from '../contexts/authConsumer';
+import app_url from '../main';
 export default {
   data() {
     return {
@@ -32,7 +33,7 @@ export default {
   methods: {
     logOut(signOut){
       signOut();
-      window.location.replace('http://localhost:8080/');
+      window.location.replace(app_url);
     }
   }
 };

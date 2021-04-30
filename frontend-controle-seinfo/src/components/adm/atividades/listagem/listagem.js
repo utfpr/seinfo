@@ -48,25 +48,10 @@ export default {
         moment: function (date) {
             return moment(date);
         },
-        deletarModal(modalData){
-            this.deletar(modalData);
+        deletarModal(){
+            location.reload();
         },
-        deletar(dados) {
-            console.log("ID " + dados);
-            axios
-                .delete(
-                    "http://localhost:3000/api/atividade/" +
-                    dados.idAtividade +
-                    "/" +
-                    dados.idEvento
-                )
-                .then((response) => {
-                    console.log("Deletou!");
-                    console.log(response);
-                    this.$router.replace("/adm/atividade");
-                    location.reload();
-                });
-        },
+
         pegar_tabela() {
             this.res = this.listData;
         },

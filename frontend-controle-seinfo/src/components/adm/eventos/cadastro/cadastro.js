@@ -15,7 +15,6 @@ export default {
   created() {
     axios.get('http://localhost:3000/api/pessoas').then(response => {
       this.pessoas = response.data;
-      console.log(this.pessoas)
     }).catch(error => {
       console.log(error);
     })
