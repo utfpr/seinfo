@@ -1,10 +1,10 @@
 <template>
   <a-modal
-    class="modal-dialog modal-lg"
     v-model="this.isModalVisible"
     title="Adicionar categoria"
     :footer="null"
     style="z-index: 999"
+    @cancel="this.closeModal"
   >
     <form
       class="form"
@@ -39,6 +39,7 @@
         <button
           type="reset"
           class="btn btn-outline-danger btn-sm-2 reset"
+          @click="closeModal()"
           data-dismiss="modal"
         >
           Cancelar
