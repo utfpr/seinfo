@@ -1,8 +1,12 @@
-
-import moment from 'moment';
 import axios from 'axios';
 
 export default {
+    name: 'ModalAdicionarCategoria',
+    props: {
+        isModalVisible: Boolean,
+        closeModal: Function,
+        getCategorias: Function,
+    },
     methods: {
         beforeCreate() {
             this.form = this.$form.createForm(this);
@@ -14,7 +18,9 @@ export default {
             axios
                 .post("http://localhost:3000/api/categoria", { nome: this.nome })
                 .then(response => {
-                    console.log(response);
+                    this.closeModal();
+                    this.getCategorias();
+                    console.log('response', response);
                 })
                 .catch(error => {
                     console.log(error.response);

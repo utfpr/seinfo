@@ -1,6 +1,8 @@
 const axios = require("axios");
 import moment from "moment";
-import ModalAdicionarCategoria from '../../categoria/modalAdicionarCategoria/modalAdicionarCategoria.vue';
+import ModalAdicionarCategoria from '../../../select_categoria/modalAdicionarCategoria/modalAdicionarCategoria';
+import SelectCategoria from '../../../select_categoria/selectCategoria.vue';
+
 moment.locale("pt-br");
 export default {
   props: {
@@ -11,7 +13,8 @@ export default {
       functional: true,
       render: (h, ctx) => ctx.props.vnodes,
     },
-    ModalAdicionarCategoria
+    ModalAdicionarCategoria,
+    SelectCategoria,
   },
   beforeCreate() {
     this.form = this.$form.createForm(this);

@@ -161,33 +161,7 @@
       <div class="row justify-content-center" style="z-index:998">
         <a-form-item class="space" style="z-index:998">
           <label class="ant-form-item-required">Selecione uma Categoria:</label>
-
-          <a-select v-model="idCategoria" defaultValue="..." style="z-index:998">
-            <div slot="dropdownRender" slot-scope="categoria" style="z-index:998">
-              <v-nodes :vnodes="categoria" />
-              <a-divider style="margin: 4px 0" />
-              <div
-              class="ic"
-              data-toggle="modal"
-              data-target=".bd-example-modal-lg-adicionar-categoria" 
-              style="padding: 4px 8px; cursor: pointer"
-              @mousedown="e => e.preventDefault()"
-              >
-                <a-icon type="plus" /> Adicionar categoria
-              </div>
-            </div>
-
-            <a-select-option
-              style="z-index:998"
-              id="idCategoria"
-              name="idCategoria"
-              v-for="categoria in categorias"
-              :key="categoria.idCategoria"
-              :value="categoria.idCategoria"
-            >
-              {{ categoria.nome }}
-            </a-select-option>
-          </a-select>
+          <SelectCategoria />
         </a-form-item>
         <a-form-item class="space">
           <label class="ant-form-item-required"
@@ -233,7 +207,7 @@
       </div>
     </form>
     <div>
-      <modal-adicionar-categoria />
+      <ModalAdicionarCategoria />
     </div>
   </div>
 </template>
