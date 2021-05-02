@@ -37,33 +37,30 @@ module.exports = (sequelize, Sequelize) => {
             timestamps: false,
             createdAt: false,
         });
-
     AgAtividade.associate = models => {
 
         models.atividade.belongsToMany(models.agenda, {
             as: 'atvAgenda',
-            through: models.agendamentoAtividade,
+            through: models.subAtividade,
             foreignKey: 'idAtividade',
             onUpdate: 'cascade',
             onDelete: 'cascade',
         }),
 
-            models.agenda.belongsToMany(models.atividade, {
-                as: 'agendaAtv',
-                through: models.agendamentoAtividade,
-                foreignKey: 'idAgenda',
-                onUpdate: 'cascade',
-                onDelete: 'cascade',
-            })
         models.agenda.belongsToMany(models.atividade, {
             as: 'agendaAtv',
-            through: models.agendamentoAtividade,
+            through: models.subAtividade,
             foreignKey: 'idAgenda',
             onUpdate: 'cascade',
             onDelete: 'cascade',
         })
+        models.agenda.belongsToMany(models.pessoa, {
+            as: 'idParticipante',
+            through: models.subAtividade,
+            foreignKey: 'idPessoa:',
+            onUpdate: 'cascade',
+            onDelete: 'cascade',
+        })
     };
-
-
     return SubAtividade;
 }
