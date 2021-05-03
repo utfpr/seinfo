@@ -88,7 +88,9 @@ export default {
       //Chamar funcao do componente modalVerMais
       this.$root.$emit('loadAtividades', this.modalData.idEvento);
     },
-
+    renderData(data){
+      return moment(data).format("DD/MM/YYYY")
+    },
     pegar_tabela() { 
       axios
         .get("http://localhost:3000/api/eventos")
