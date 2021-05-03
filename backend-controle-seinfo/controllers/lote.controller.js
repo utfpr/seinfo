@@ -41,8 +41,9 @@ exports.findAll = (req, res) => {
 
 exports.loteEvento=(req,res)=>{
   //todos lotes de um evento
-  Lotes.findAll({where:{idEvento:req.params.idEvento}}).then(ltev=>{
-    console.log("DEU: "+ltev)
+  Lotes.findAll({where:{idEvento:req.params.idEvento}, include:[{model: db.evento, attributes: ['nome'], as: 'evento'}] }).then(lotes=>{
+    console.log("Listou todos os lotes!");
+    res.send(lotes);
   }).catch(err=>{
     console.log("Error -> " + err);
   })
