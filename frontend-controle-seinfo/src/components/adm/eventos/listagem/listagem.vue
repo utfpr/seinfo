@@ -13,6 +13,7 @@
               <th>ID</th>
               <th style="text-align: left;">Nome</th>
               <th style="text-align: left;">Descrição</th>
+              <th style="text-align: left;">Data Inicial</th>
               <th style="text-align: left;">Status</th>
               <th style="text-align: left;">ID Agenda</th>
               <th class="actions">Ações</th>
@@ -23,6 +24,7 @@
               <td>{{resp.idEvento}}</td>
               <td style="text-align: left;">{{resp.nome}}</td>
               <td style="text-align: left;">{{resp.descricao}}</td>
+               <td style="text-align: left;">{{renderData(resp.agendamento.dataHoraInicio) }}</td>
               <td style="text-align: left;">{{resp.status}}</td>
               <td style="text-align: left;">{{resp.idAgenda}}</td>
               <td class="actions">
