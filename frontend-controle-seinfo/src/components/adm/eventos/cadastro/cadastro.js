@@ -61,6 +61,7 @@ export default {
         wrapperCol: {
         },
       },
+      fileList: [],
       obj_Resource: {
         nome: "",
         cpfOrganizador: "",
@@ -78,15 +79,24 @@ export default {
   },
   methods: {
     handleChange(info) {
-      const status = info.file.status;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
+      if(this.fileList.length > 0){
+        this.fileList[this.fileList.length-1].status = "done";
       }
-      if (status === 'done') {
-        this.$message.success(`${info.file.name} Arquivo carregado com sucesso!.`);
-      } else if (status === 'error') {
-        this.$message.error(`${info.file.name} Falha ao carregar o arquivo!.`);
-      }
+
+      console.log(this.fileList);
+
+      let fileList = [...info.fileList];
+
+      fileList = fileList.slice(-6);
+
+      fileList = fileList.map(file => {
+        if (file.response) {
+          file.url = file.response.url;
+        }
+        return file;
+      });
+
+      this.fileList = fileList;
     },
     onCancel() {
       console.log('CANCEL SUBMIT');
@@ -248,6 +258,7 @@ export default {
       } else if (errorDate === 2) {
         erros.push('Hora de Fim deve ser maior que Hora de Início.');
       }
+      if (this.fileList.length <= 0) erros.push("Imagem é obrigatório!");
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
       if (!this.obj_Resource.cpfOrganizador) erros.push("Organizador é obrigatório!");
       if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
