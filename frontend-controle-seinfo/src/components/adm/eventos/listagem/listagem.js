@@ -94,7 +94,6 @@ export default {
         .get("http://localhost:3000/api/eventos")
         .then(response => {
           this.res = response.data;
-          console.log("maiolino", response.data);
         })
         .catch(function (error) {
           console.log(error);
