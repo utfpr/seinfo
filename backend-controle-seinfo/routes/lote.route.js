@@ -11,12 +11,12 @@ module.exports = function(app) {
     // Procura todos os lotes
     app.get('/api/lotes', lotes.findAll);
 
-    app.get('/api/loteEvento',lotes.loteEvento)
+    //Procura todos os Lotes de um evento pelo ID
+    app.get('/api/loteEvento/:idEvento',lotes.loteEvento);
   
     // Update de um lote pelo ID 
     app.patch('/api/lote/:loteId', lotes.atualiza);
   
     // Deleta um lote pelo ID
     app.delete('/api/lote/:loteId', lotes.delete);
-  }
-  
+}
