@@ -72,10 +72,22 @@ export default {
         select_status: "",
         urlImagem: "",
         descricao: "",
+        imagens: [],
       },
     };
   },
   methods: {
+    handleChange(info) {
+      const status = info.file.status;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        this.$message.success(`${info.file.name} Arquivo carregado com sucesso!.`);
+      } else if (status === 'error') {
+        this.$message.error(`${info.file.name} Falha ao carregar o arquivo!.`);
+      }
+    },
     onCancel() {
       console.log('CANCEL SUBMIT');
       this.nome = "";
@@ -228,6 +240,9 @@ export default {
     handleSubmit(e) {
       var erros = [];
       const errorDate = this.verifyDate();
+
+      console.log(this.obj_Resource.imagens)
+
       if (errorDate === 1) {
         erros.push('Data de Fim deve ser maior que Data de Início.')
       } else if (errorDate === 2) {

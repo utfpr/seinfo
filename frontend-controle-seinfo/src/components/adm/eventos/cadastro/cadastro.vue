@@ -223,6 +223,25 @@
             </a-form-item>
           </a-form>
         </div>
+        <center>
+          <div class="row justify-content-center">      
+            <a-form-item class="space_2">
+              <a-upload 
+                accept="image/*"
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                list-type="picture"
+                :multiple="true"
+                :default-file-list="obj_Resource.imagens"
+                @change="handleChange"    
+              >
+                <a-button> 
+                  <a-icon type="upload" /> 
+                  Adicionar Imagem 
+                </a-button>
+              </a-upload>
+            </a-form-item>  
+          </div>
+        </center>
         <!--
             <div class="row justify-content-center" >
               <a-form-item class="space_2" >
