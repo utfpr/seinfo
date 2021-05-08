@@ -7,10 +7,14 @@ export default {
     props: {
         data: Object,
     },
+    data() {
+        return {
+            imageList: [],
+        }
+    },
     beforeCreate() {
         this.form = this.$form.createForm(this);
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
-        console.log(this.data); 
     },
     created() {
         axios.get('http://localhost:3000/api/pessoas').then(response => {
@@ -27,6 +31,21 @@ export default {
         })
     },
     methods: {
+        handleChange(info) {
+            if(this.imageList.length > 0)
+              this.imageList[this.imageList.length-1].status = "done";
+      
+            let fileList = [...info.fileList];
+      
+            fileList = fileList.slice(-6);
+      
+            fileList = fileList.map(file => {
+              if (file.response) file.url = file.response.url;
+              return file;
+            });
+      
+            this.imageList = fileList;
+        },
         renderHourValidateStatus() {
             const error = this.onChangeHour();
             if (error === 2) return "error";
@@ -94,6 +113,7 @@ export default {
         },
         patch(dados) {
             var erros = [];
+            if (this.imageList.length <= 0) erros.push("Imagem é obrigatório!");
             if (!dados.nome) erros.push("Nome é obrigatório!");
             if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!dados.local_eve) erros.push("Local é obrigatório!");

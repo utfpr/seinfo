@@ -61,10 +61,10 @@ export default {
         wrapperCol: {
         },
       },
-      fileList: [],
       obj_Resource: {
         nome: "",
         cpfOrganizador: "",
+        imageList: [],
         data_ini: "",
         hora_ini: "",
         data_fim: "",
@@ -73,30 +73,24 @@ export default {
         select_status: "",
         urlImagem: "",
         descricao: "",
-        imagens: [],
       },
     };
   },
   methods: {
     handleChange(info) {
-      if(this.fileList.length > 0){
-        this.fileList[this.fileList.length-1].status = "done";
-      }
-
-      console.log(this.fileList);
+      if(this.obj_Resource.imageList.length > 0)
+        this.obj_Resource.imageList[this.obj_Resource.imageList.length-1].status = "done";
 
       let fileList = [...info.fileList];
 
       fileList = fileList.slice(-6);
 
       fileList = fileList.map(file => {
-        if (file.response) {
-          file.url = file.response.url;
-        }
+        if (file.response) file.url = file.response.url;
         return file;
       });
 
-      this.fileList = fileList;
+      this.obj_Resource.imageList = fileList;
     },
     onCancel() {
       console.log('CANCEL SUBMIT');
@@ -120,13 +114,13 @@ export default {
         select_status: "",
         urlImagem: "",
         descricao: "",
+        imageList: [],
       };
     },
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function (error) {
@@ -251,14 +245,12 @@ export default {
       var erros = [];
       const errorDate = this.verifyDate();
 
-      console.log(this.obj_Resource.imagens)
-
       if (errorDate === 1) {
         erros.push('Data de Fim deve ser maior que Data de Início.')
       } else if (errorDate === 2) {
         erros.push('Hora de Fim deve ser maior que Hora de Início.');
       }
-      if (this.fileList.length <= 0) erros.push("Imagem é obrigatório!");
+      if (this.obj_Resource.imageList.length <= 0) erros.push("Imagem é obrigatório!");
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
       if (!this.obj_Resource.cpfOrganizador) erros.push("Organizador é obrigatório!");
       if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
@@ -268,6 +260,7 @@ export default {
       if (!this.obj_Resource.local_eve) erros.push("Local do Evento é obrigatório!");
       if (!this.obj_Resource.select_status) erros.push("Status é obrigatório!");
       if (!this.obj_Resource.descricao) erros.push("Descrição é obrigatório!");
+
       e.preventDefault();
       if (!erros.length) {
         this.form.validateFields((err, values) => {
@@ -286,7 +279,6 @@ export default {
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
             axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
-
           }
         });
       }
