@@ -11,6 +11,7 @@ import funcPessoa from '@/components/func_pessoa';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
 import Detalhes from '@/components/adm/atividades_detalhes/index/detalhes.vue';
+import Relatorios from '@/components/adm/relatorios/index/relatorios.vue';
 
 Vue.use(Router);
 
@@ -41,7 +42,7 @@ export default new Router({
         },
         {
           path: 'tabela',
-          component: tabela
+          component: Relatorios
         },
         {
           path: 'conCarousel',
