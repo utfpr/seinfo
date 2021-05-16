@@ -1,6 +1,4 @@
 <template>
-    <!-- Começo Inserção -->
-
       <div class="box">
         <form
           class="form"
@@ -41,70 +39,6 @@
           </div>
           <div class="row justify-content-center">
             <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Inicio:</label>
-              <a-input
-                v-model="data_ini_atv"
-                type="date"
-                id="data_ini_atv"
-                name="data_ini_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="calendar"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Hora de Inicio:</label>
-              <a-input
-                v-model="hora_ini_atv"
-                type="time"
-                name="hora_ini_atv"
-                id="hora_ini_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="clock-circle"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Fim:</label>
-              <a-input
-                v-model="data_fim_atv"
-                type="date"
-                id="data_fim_atv"
-                name="data_fim_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="calendar"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Hora de Fim:</label>
-              <a-input
-                id="hora_fim_atv"
-                v-model="hora_fim_atv"
-                type="time"
-                name="hora_fim_atv"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="clock-circle"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
               <label class="ant-form-item-required"
                 >Horas de Participação:</label
               >
@@ -132,42 +66,6 @@
                 <a-icon
                   slot="prefix"
                   type="read"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-          </div>
-          <div class="row justify-content-center">
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Local da Atividade:</label>
-              <a-input
-                maxlength="255"
-                autocomplete="off"
-                placeholder="Local"
-                v-model="local_atv"
-                type="text"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="home"
-                  style="color: rgba(0, 0, 0, 0.25)"
-                />
-              </a-input>
-            </a-form-item>
-            <a-form-item class="space">
-              <label class="ant-form-item-required">Valor da Atividade:</label>
-              <a-input
-                placeholder="Valor"
-                autocomplete="off"
-                v-model="valor"
-                type="number"
-                id="valor"
-                name="valor"
-                min="0"
-              >
-                <a-icon
-                  slot="prefix"
-                  type="dollar"
                   style="color: rgba(0, 0, 0, 0.25)"
                 />
               </a-input>
@@ -207,6 +105,96 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
+            <a-form-item class="space">
+              <label class="ant-form-item-required">Valor da Atividade:</label>
+              <a-input
+                placeholder="Valor"
+                autocomplete="off"
+                v-model="valor"
+                type="number"
+                id="valor"
+                name="valor"
+                min="0"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="dollar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
+              </a-input>
+            </a-form-item>
+          </div>
+
+          <div class="row justify-content-center">
+            <a-form :form="form" class="space_2">
+              <label class="ant-form-item-required">SubAtividades:</label>
+              <a-form-item
+                v-for="(k, index) in form.getFieldValue('keys')"
+                :key="index"
+                v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
+                :label="index === 0 ? '' : ''"
+                :required="false"
+              >
+                <a-input
+                  type="date"
+                  v-decorator="[
+                    `data_inicio_subatividade[${index}]`,
+                    { validateTrigger: ['change', 'blur'], preserve: true },
+                  ]"
+                  placeholder="Data Inicio da subAtividade "
+                  style="width: 49%; margin-right: 4px"
+                />
+                <a-input
+                  type="time"
+                  v-decorator="[
+                    `hora_inicio_subatividade[${index}]`,
+                    { validateTrigger: ['change', 'blur'], preserve: true },
+                  ]"
+                  placeholder="Hora Inicio da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  type="date"
+                  v-decorator="[
+                    `data_fim_subatividade[${index}]`,
+                    { validateTrigger: ['change', 'blur'], preserve: true },
+                  ]"
+                  placeholder="Data Fim da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  type="time"
+                  v-decorator="[
+                    `hora_fim_subatividade[${index}]`,
+                    { validateTrigger: ['change', 'blur'], preserve: true },
+                  ]"
+                  placeholder="Hora Fim da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  v-decorator="[
+                    `local_subatividade[${index}]`,
+                    { validateTrigger: ['change', 'blur'], preserve: true },
+                  ]"
+                  placeholder="Local da subAtividade"
+                />
+                <a-button
+                  type="default"
+                  style="width: 50%"
+                  @click="cancelSubatividade(index)"
+                  >Cancelar SubAtividade
+                </a-button>
+                <hr />
+              </a-form-item>
+              <a-form-item v-bind="formItemLayoutWithOutLabel">
+                <a-button type="default" style="width: 100%" @click="addSubatividade"
+                  >Adicionar SubAtividade
+                </a-button>
+              </a-form-item>
+            </a-form>
+          </div>
+
+          <div class="row justify-content-center">
             <a-form-item class="space_2">
               <label class="ant-form-item-required">Descrição:</label>
               <a-textarea
@@ -234,7 +222,6 @@
           </div>
         </form>
       </div>
-    <!-- Fim Inserção -->
 </template>
 
 <script src="./cadastro.js"></script>

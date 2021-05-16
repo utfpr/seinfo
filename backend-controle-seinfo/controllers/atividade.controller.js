@@ -1,13 +1,9 @@
 const db = require('../models/index.js');
-
 const Atividades = db.atividade;
 
 // Post do Atividade
-
 exports.create = (req, res) => {
-  const data_ini_full = req.body.data_ini_atv+"T"+req.body.hora_ini_atv;
-  const data_fim_full = req.body.data_fim_atv+"T"+req.body.hora_fim_atv;
-    Atividades.create({  
+  Atividades.create({
     titulo:req.body.titulo,
     valor: req.body.valor,
     descricao: req.body.descricao,
@@ -17,11 +13,18 @@ exports.create = (req, res) => {
     idEvento: req.body.idEvento,
     idCategoria: req.body.idCategoria,
 
-  }).then(atividade => {
-    atividade.createAtvAgenda({'dataHoraInicio':data_ini_full,'dataHoraFim':data_fim_full,'local':req.body.local_atv})    
-    // Cria um Evento
-    console.log("Criado uma Agenda de evento")
-    res.send(atividade);
+  }).then(agenda => {
+    //cria a subAtividade
+    for(i = 0; i < req.body.subatividade.length; i++){
+      agenda.createAtvAgenda({
+        "local":req.body.subatividade[i].local_subatividade,
+        "dataHoraInicio":req.body.subatividade[i].data_inicio_subatividade+"T"+req.body.subatividade[i].hora_inicio_subatividade,
+        "dataHoraFim":req.body.subatividade[i].data_fim_subatividade+"T"+req.body.subatividade[i].hora_fim_subatividade
+      });
+    }
+    // Cria agenda / Subatividade
+    console.log("Criado SubAtividades")
+    res.send(agenda);
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
