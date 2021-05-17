@@ -1,5 +1,5 @@
 import moment from 'moment';
-import listagemSubatividades from "./listagemSubatividades/listagemSubatividades.vue";
+import listagemSubatividades from "../listagemSubatividades/listagemSubatividades.vue";
 moment.locale("pt-br");
 export default {
     components: { listagemSubatividades },
