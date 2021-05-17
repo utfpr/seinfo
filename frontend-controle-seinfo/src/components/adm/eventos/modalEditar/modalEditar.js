@@ -9,6 +9,7 @@ export default {
     },
     data() {
         return {
+            preview_list: [],
             imageList: [],
         }
     },
@@ -18,33 +19,35 @@ export default {
     },
     created() {
         axios.get('http://localhost:3000/api/pessoas').then(response => {
-            this.pessoas = response.data;
-        }).catch(error => {
-            console.log(error);
-        })
-    },
-    created() {
-        axios.get('http://localhost:3000/api/pessoas').then(response => {
           this.pessoas = response.data;
         }).catch(error => {
           console.log(error);
         })
     },
     methods: {
+        delete_preview(index){
+            this.preview_list.splice(index, 1);
+            this.imageList.splice(index, 1);
+        },
+        previewMultiImage(event) {
+          var input = event.target;
+          var count = input.files.length;
+          var index = 0;
+          if (input.files) {
+            while(count--) {
+              var reader = new FileReader();
+              reader.onload = (e) => {
+                this.preview_list.push(e.target.result);
+              }
+              this.imageList.push(input.files[index]);
+              reader.readAsDataURL(input.files[index]);
+              index++;
+            }
+          }
+        },
         handleChange(info) {
-            if(this.imageList.length > 0)
-              this.imageList[this.imageList.length-1].status = "done";
-      
-            let fileList = [...info.fileList];
-      
-            fileList = fileList.slice(-6);
-      
-            fileList = fileList.map(file => {
-              if (file.response) file.url = file.response.url;
-              return file;
-            });
-      
-            this.imageList = fileList;
+          this.previewMultiImage(info);
+          this.imageList = Array.from(info.path[0].files);
         },
         renderHourValidateStatus() {
             const error = this.onChangeHour();

@@ -54,7 +54,6 @@
                     id="cpfOrganizador"
                     name="cpfOrganizador"
                     v-for="pessoa in pessoas"
-                    multiple
                     :key="pessoa.CPF"
                     :value="pessoa.CPF"
                     >{{ pessoa.nome }}</a-select-option
@@ -198,25 +197,21 @@
               </div>
               <div class="row justify-content-center"></div>
 
-              <center>
-                <div class="row justify-content-center">
-                  <a-form-item class="space_2">
-                    <a-upload
-                      accept="image/*"
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                      list-type="picture"
-                      :file-list="imageList"
-                      @change="handleChange"
-                      :transform-file="transformFile"
-                    >
-                      <a-button>
-                        <a-icon type="upload" />
-                        Adicionar Imagem
-                      </a-button>
-                    </a-upload>
-                  </a-form-item>
+               <div class="row justify-content-center">
+                <a-form-item class="space_2">
+                  <input 
+                    accept="image/*"
+                    type="file" 
+                    v-on:change="handleChange"
+                    multiple 
+                  />
+                </a-form-item>
+                <div v-for="item, index in preview_list" :key="index" class="block-image-preview">
+                  <img :src="item" class="image-preview"/>
+                  <p class="image_preview_text">{{ imageList[index].name }}</p>
+                  <a-icon type="rest" class="trash-image-preview" @click="delete_preview(index)"/>
                 </div>
-              </center>
+              </div>
 
               <div class="row justify-content-center">
                 <a-form-item class="space_2">
