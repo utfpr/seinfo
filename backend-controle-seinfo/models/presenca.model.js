@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Presenca = sequelize.define('agendamentoAtividade', {
+  const Presenca = sequelize.define('presenca', {
     idAtividade: {
       type: Sequelize.INTEGER(11),
       allowNull: false,
