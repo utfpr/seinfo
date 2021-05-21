@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="text-align: center">
         <br />
         SubAtividades:
         <div>
@@ -13,7 +13,7 @@
                         Excluir
                         </button>
                         <button type="reset" class="btn btn-outline-danger btn-sm-2 reset"
-                        v-on:click="toggleExcluir(this.dataEdita)"
+                        v-on:click="toggleExcluir"
                         >
                         Cancelar
                         </button>
@@ -21,7 +21,6 @@
                 </div>
             </slide-up-down>
         </div>
-        <br/>
         <div id="list" class="row">
             <table class="table table-striped"
                     cellspacing="0"
@@ -64,5 +63,5 @@
     </div>
 </template>
 
-<script src="./listagemSubatividades.js"/>
-<style scoped src="./listagemSubatividades.css"></style>
+<script src="./listagemSubAtividades.js"/>
+<style scoped src="./listagemSubAtividades.css"></style>

@@ -37,6 +37,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <listagemSubAtividades v-bind:modalData="this.dataDetalhes"/>
+    </div>
     <br/><br/>
     <listagemParticipantes 
       v-if="this.dataDetalhes.idEvento"

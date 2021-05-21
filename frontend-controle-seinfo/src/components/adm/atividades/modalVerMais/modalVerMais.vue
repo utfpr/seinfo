@@ -57,7 +57,7 @@
             <a-button type="button" class="btn" @click="toggle">Mostrar Subatividades</a-button>
             <slide-up-down :active="this.active">
               <div>
-                <listagemSubatividades v-bind:modalData="this.data"/>
+                <listagemSubAtividades v-bind:modalData="this.data"/>
               </div>
             </slide-up-down>
           </div>

@@ -1,8 +1,8 @@
 import moment from 'moment';
-import listagemSubatividades from "../listagemSubatividades/listagemSubatividades.vue";
+import listagemSubAtividades from "../listagemSubAtividades/listagemSubAtividades.vue";
 moment.locale("pt-br");
 export default {
-    components: { listagemSubatividades },
+    components: { listagemSubAtividades },
     props: {
       data: Object,
     },
