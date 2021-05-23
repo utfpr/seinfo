@@ -32,30 +32,3 @@
 .reset {
   color : red;
 }
-.block-image-preview{
-  padding: 8px;
-  height: 66px;
-  width: 70%;
-  margin: auto;
-  position: relative;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-}
-.image-preview {
-  width: 60px;
-  height: 50px;
-  border-radius: 8px;
-  display: block;
-  background-size: cover;
-}
-.image_preview_text { 
-  margin-left: 4%;
-  color: #1890ff;
-}
-.trash-image-preview{
-  margin-left: auto;
-  cursor: pointer;
-}

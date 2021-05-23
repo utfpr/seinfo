@@ -7,15 +7,17 @@ export default {
     props: {
         data: Object,
     },
-    data() {
-        return {
-            preview_list: [],
-            imageList: [],
-        }
-    },
     beforeCreate() {
         this.form = this.$form.createForm(this);
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
+        console.log(this.data); 
+    },
+    created() {
+        axios.get('http://localhost:3000/api/pessoas').then(response => {
+            this.pessoas = response.data;
+        }).catch(error => {
+            console.log(error);
+        })
     },
     created() {
         axios.get('http://localhost:3000/api/pessoas').then(response => {
@@ -25,30 +27,6 @@ export default {
         })
     },
     methods: {
-        delete_preview(index){
-            this.preview_list.splice(index, 1);
-            this.imageList.splice(index, 1);
-        },
-        previewMultiImage(event) {
-          var input = event.target;
-          var count = input.files.length;
-          var index = 0;
-          if (input.files) {
-            while(count--) {
-              var reader = new FileReader();
-              reader.onload = (e) => {
-                this.preview_list.push(e.target.result);
-              }
-              this.imageList.push(input.files[index]);
-              reader.readAsDataURL(input.files[index]);
-              index++;
-            }
-          }
-        },
-        handleChange(info) {
-          this.previewMultiImage(info);
-          this.imageList = Array.from(info.path[0].files);
-        },
         renderHourValidateStatus() {
             const error = this.onChangeHour();
             if (error === 2) return "error";
@@ -116,7 +94,6 @@ export default {
         },
         patch(dados) {
             var erros = [];
-            if (this.imageList.length <= 0) erros.push("Imagem é obrigatório!");
             if (!dados.nome) erros.push("Nome é obrigatório!");
             if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!dados.local_eve) erros.push("Local é obrigatório!");

@@ -62,6 +62,24 @@
               </a-form-item>
 
               <div class="row justify-content-center">
+                <a-form-item class="space_2">
+                  <label class="ant-form-item-required"
+                    >Selecione um Organizador:
+                  </label>
+                  <a-select mode="multiple" v-model="data.cpfOrganizador" defaultValue="...">
+                    <a-select-option
+                      id="cpfOrganizador"
+                      name="cpfOrganizador"
+                      v-for="pessoa in pessoas"
+                      :key="pessoa.CPF"
+                      :value="pessoa.CPF"
+                      >{{ pessoa.nome }}</a-select-option
+                    >
+                  </a-select>
+                </a-form-item>
+              </div>
+
+              <div class="row justify-content-center">
                 <a-form-item
                   class="space"
                   :validate-status="onChangeDate() === 1 ? 'error' : ''"
@@ -196,22 +214,6 @@
                 </a-form-item>
               </div>
               <div class="row justify-content-center"></div>
-
-               <div class="row justify-content-center">
-                <a-form-item class="space_2">
-                  <input 
-                    accept="image/*"
-                    type="file" 
-                    v-on:change="handleChange"
-                    multiple 
-                  />
-                </a-form-item>
-                <div v-for="item, index in preview_list" :key="index" class="block-image-preview">
-                  <img :src="item" class="image-preview"/>
-                  <p class="image_preview_text">{{ imageList[index].name }}</p>
-                  <a-icon type="rest" class="trash-image-preview" @click="delete_preview(index)"/>
-                </div>
-              </div>
 
               <div class="row justify-content-center">
                 <a-form-item class="space_2">

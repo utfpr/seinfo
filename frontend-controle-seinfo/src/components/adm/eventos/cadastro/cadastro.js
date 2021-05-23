@@ -61,8 +61,6 @@ export default {
         wrapperCol: {
         },
       },
-      preview_list: [],
-      imageList: [],
       obj_Resource: {
         nome: "",
         cpfOrganizador: "",
@@ -72,35 +70,12 @@ export default {
         hora_fim: "",
         local_eve: "",
         select_status: "",
+        urlImagem: "",
         descricao: "",
       },
     };
   },
   methods: {
-    delete_preview(index){
-      this.preview_list.splice(index, 1);
-      this.imageList.splice(index, 1);
-    },
-    previewMultiImage(event) {
-      var input = event.target;
-      var count = input.files.length;
-      var index = 0;
-      if (input.files) {
-        while(count--) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            this.preview_list.push(e.target.result);
-          }
-          this.imageList.push(input.files[index]);
-          reader.readAsDataURL(input.files[index]);
-          index++;
-        }
-      }
-    },
-    handleChange(info) {
-      this.previewMultiImage(info);
-      this.imageList = Array.from(info.path[0].files);
-    },
     onCancel() {
       console.log('CANCEL SUBMIT');
       this.nome = "";
@@ -123,13 +98,13 @@ export default {
         select_status: "",
         urlImagem: "",
         descricao: "",
-        imageList: [],
       };
     },
     pegar_tabela() { // v
       axios
         .get("http://localhost:3000/api/eventos")
         .then(response => {
+          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function (error) {
@@ -253,13 +228,11 @@ export default {
     handleSubmit(e) {
       var erros = [];
       const errorDate = this.verifyDate();
-
       if (errorDate === 1) {
         erros.push('Data de Fim deve ser maior que Data de Início.')
       } else if (errorDate === 2) {
         erros.push('Hora de Fim deve ser maior que Hora de Início.');
       }
-      if (this.imageList.length <= 0) erros.push("Imagem é obrigatório!");
       if (!this.obj_Resource.nome) erros.push("Nome é obrigatório!");
       if (!this.obj_Resource.cpfOrganizador) erros.push("Organizador é obrigatório!");
       if (!this.obj_Resource.data_ini) erros.push("Data de Início é obrigatório!");
@@ -269,7 +242,6 @@ export default {
       if (!this.obj_Resource.local_eve) erros.push("Local do Evento é obrigatório!");
       if (!this.obj_Resource.select_status) erros.push("Status é obrigatório!");
       if (!this.obj_Resource.descricao) erros.push("Descrição é obrigatório!");
-
       e.preventDefault();
       if (!erros.length) {
         this.form.validateFields((err, values) => {
@@ -287,30 +259,8 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
+            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
 
-            var formData = new FormData();
-            for(let i = 0; i < this.imageList.length; i++){
-              formData.append("file", this.imageList[i]);
-            }
-
-            const formItems = Object.entries(this.obj_Resource);
-
-            formItems.forEach(([key, value]) => {
-              formData.append(key, value);
-            }) 
-
-            axios.post('http://localhost:3000/api/evento', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              },
-            }
-            ).then(response => {
-              console.log(response); 
-              this.info(); this.toggle() 
-            }).catch(error => { 
-              console.log(error.response) 
-            });
-            location.reload();
           }
         });
       }
