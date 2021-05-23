@@ -1,52 +1,40 @@
 const db = require('../models/index.js');
 const Evento = db.evento;
-const EventoImagem = db.eventoImagem;
 const Agenda = db.agenda;
 const Imagem = db.imagem;
-
 const evImagem = require('../controllers/eventoImagem.controller.js');
 const lote = require('../controllers/lote.controller.js');
 
 // Post do Evento
 exports.create = (req, res, nomedoarquivo) => {
 
-  console.log(req.body);
-  
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
 
-  return Agenda.create({  
+  const imagem_url = "";
+  
+  Agenda.create({  
     dataHoraInicio: data_ini_full,
     dataHoraFim: data_fim_full,
     local: local,
   }).then(agenda => {
-    console.log("Criado o Agenda! " + agenda.idAgenda);
+    console.log("Criado o Agenda! "+agenda.idAgenda);
 
     Evento.create({  
       nome: req.body.nome,
       descricao: req.body.descricao,
       status: req.body.select_status,
       idAgenda: agenda.idAgenda
-    }).then(evento => {
-      for(let i = 0; i < req.body.lote.length; i++)
-        lote.create({"evento":evento.idEvento,"valor":req.body.lote[i].valor_lote,"dataAbertura":req.body.lote[i].data_inicio_lote,"dataFechamento":req.body.lote[i].data_fim_lote});
 
-      for(let i = 0; i < req.files.length; i++){
-        Imagem.create({
-          url: req.files[i].destination + '/' + req.files[i].originalname,
-        }).then(imagem => {
-          EventoImagem.create({
-            idImagem: imagem.idImagem,
-            idEvento: evento.idEvento
-          }).then(evImagem => {
-            console.log(evImagem);
-          })
-        })
+    }).then(evento => {
+      for(i = 0; i < req.body.lote.length; i++){
+        lote.create({"evento":evento.idEvento,"valor":req.body.lote[i].valor_lote,"dataAbertura":req.body.lote[i].data_inicio_lote,"dataFechamento":req.body.lote[i].data_fim_lote});
       }
-      
+
       db.pessoa.findOne({where:{CPF: req.body.cpfOrganizador}}).then(pessoa => {
         db.organizacao.create({
+          // 'horasParticipacao': req.body.horasParticipacao,
           'idEvento': evento.idEvento,
           'CPF': pessoa.CPF
         })
@@ -59,7 +47,7 @@ exports.create = (req, res, nomedoarquivo) => {
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
-}; 
+};
 
 exports.findById = (req, res) => {  
   Evento.findOne({where:{idEvento:req.params.idEvento},include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
@@ -80,6 +68,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req,res)=>{
+  console.log("aaaaaaaaa",req.body);
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   Evento.update(
