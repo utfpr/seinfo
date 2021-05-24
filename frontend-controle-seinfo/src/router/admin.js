@@ -9,11 +9,12 @@ import Cad_Carousel from '@/components/con_carousel';
 import Cad_Categoria from '@/components/adm_categoria';
 import funcPessoa from '@/components/func_pessoa';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
+import Relatorios from '@/components/adm/relatorios/index/relatorios.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
 import Detalhes from '@/components/adm/atividades_detalhes/index/detalhes.vue';
 
-Vue.use(Router);
 
+Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
@@ -40,12 +41,12 @@ export default new Router({
           component: Detalhes
         },
         {
-          path: 'tabela',
-          component: tabela
-        },
-        {
           path: 'conCarousel',
           component: Cad_Carousel
+        },
+        {
+          path: 'tabela',
+          component: Relatorios
         },
         {
           path: 'cadReceita',
