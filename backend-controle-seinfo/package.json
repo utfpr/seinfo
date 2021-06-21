@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@fnando/cpf": "^1.0.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
