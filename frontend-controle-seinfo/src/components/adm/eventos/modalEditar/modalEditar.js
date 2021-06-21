@@ -10,7 +10,6 @@ export default {
     beforeCreate() {
         this.form = this.$form.createForm(this);
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
-        console.log(this.data); 
     },
     created() {
         axios.get('http://localhost:3000/api/pessoas').then(response => {

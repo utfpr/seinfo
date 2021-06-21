@@ -1,12 +1,13 @@
 const axios = require("axios");
 
 import moment from "moment";
-
 import listagemParticipantes from '../listagem_participantes/listagem_participantes.vue';
+import listagemSubAtividades from "../../atividades/listagemSubAtividades/listagemSubAtividades.vue";
 
 export default {
     components: {
         listagemParticipantes,
+        listagemSubAtividades,
     },
     async mounted(){
         if(this.$route.params.data){
