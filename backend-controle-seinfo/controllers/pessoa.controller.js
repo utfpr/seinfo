@@ -337,7 +337,7 @@ exports.selectInscritoAtv = (req, res) => {
 
 exports.selectInscricoesNaAtividade = (req, res) => {
   //seleciona as pessoas inscritas na ativdade
-  db.inscricaoAtividade.findAll({ where: { idAtividade: req.params.idAtividade, idEvento: req.params.idEvento }, include: [{ model: db.inscricaoEvento, as: 'eventoInsc', include: [{ model: db.evento, as: 'eventoInsc' }, { model: db.pessoa, as: 'pessoaInsc' }] }] }).then(insc => {
+  db.inscricaoAtividade.findAll({ where: { idAtividade: req.params.idAtividade, idEvento: req.params.idEvento }, include: [{ model: db.inscricaoEvento, as: 'eventoInsc', include: [{ model: db.evento, as: 'eventoInsc' }, { model: db.pessoa, attributes: ['nome', 'email', 'CPF', 'nivel', 'classificacao'], as: 'pessoaInsc' }] }] }).then(insc => {
     res.send(insc)
   }).catch(err => {
     res.status(500).send("Error -> " + err);

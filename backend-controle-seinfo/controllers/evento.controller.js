@@ -5,26 +5,20 @@ const Imagem = db.imagem;
 const evImagem = require('../controllers/eventoImagem.controller.js');
 const lote = require('../controllers/lote.controller.js');
 
- 
 // Post do Evento
 exports.create = (req, res, nomedoarquivo) => {
 
-  //Concatenando para ser inserido no Banco de Dados
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   const local = req.body.local_eve;
-  //const imagem_url = nomedoarquivo;
 
   const imagem_url = "";
   
   Agenda.create({  
-
     dataHoraInicio: data_ini_full,
     dataHoraFim: data_fim_full,
     local: local,
-  
   }).then(agenda => {
-    // Cria uma Agenda 
     console.log("Criado o Agenda! "+agenda.idAgenda);
 
     Evento.create({  
@@ -32,45 +26,28 @@ exports.create = (req, res, nomedoarquivo) => {
       descricao: req.body.descricao,
       status: req.body.select_status,
       idAgenda: agenda.idAgenda
-  
-    }).then( evento => {
-      // Cria um Evento
-      console.log("\nCriado o evento com o id: "+evento.idEvento);
-      
-     /* Imagem.create({  
-        //url: imagem_url
-    
-      }).then( imagem => {
-        // Cria uma Imagem
-        console.log("\nCriado a Imagem com o id: "+imagem.idImagem);
-        
-        //Cria o vingulo entre IdEvento e idImagem
-        evImagem.create({"imagem":imagem.idImagem,"evento":evento.idEvento});
-  
-      }).catch(err => {
-        res.status(500).send("Error -> " + err);
-      })
-      */
 
-
-      for(i = 0; i< req.body.lote.length;i++){
-       //Cria o vingulo entre IdEvento e Lote
-       lote.create({"evento":evento.idEvento,"valor":req.body.lote[i].valor_lote,"dataAbertura":req.body.lote[i].data_inicio_lote,"dataFechamento":req.body.lote[i].data_fim_lote});
+    }).then(evento => {
+      for(i = 0; i < req.body.lote.length; i++){
+        lote.create({"evento":evento.idEvento,"valor":req.body.lote[i].valor_lote,"dataAbertura":req.body.lote[i].data_inicio_lote,"dataFechamento":req.body.lote[i].data_fim_lote});
       }
-  
-      res.send(evento); 
-      //res.redirect("http://localhost:8080/adm/cadEvento"); 
-      //console.log("\nDepois do redirect");
-  
+
+      db.pessoa.findOne({where:{CPF: req.body.cpfOrganizador}}).then(pessoa => {
+        db.organizacao.create({
+          // 'horasParticipacao': req.body.horasParticipacao,
+          'idEvento': evento.idEvento,
+          'CPF': pessoa.CPF
+        })
+      })
+      
+      res.send(evento)
     }).catch(err => {
       res.status(500).send("Error -> " + err);
     })
-
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
 };
- 
 
 exports.findById = (req, res) => {  
   Evento.findOne({where:{idEvento:req.params.idEvento},include:[{model:db.lote,as:'lotes'},{model:db.agenda,as:'agendamento'}]}).then(evento => {
@@ -91,20 +68,19 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req,res)=>{
+  console.log("aaaaaaaaa",req.body);
   const data_ini_full = req.body.data_ini+"T"+req.body.hora_ini;
   const data_fim_full = req.body.data_fim+"T"+req.body.hora_fim;
   Evento.update(
     {
-    nome: req.body.nome,
-    descricao: req.body.descricao,
-    status: req.body.status,
-
-    //data_horario_inicio: data_ini_full ,
-    //data_hora_fim: data_fim_full,
-    //urlImagem: req.body.urlImagem
-  
+      nome: req.body.nome,
+      descricao: req.body.descricao,
+      status: req.body.select_status,
+      // data_horario_inicio: data_ini_full ,
+      //data_hora_fim: data_fim_full,
+      //urlImagem: req.body.urlImagem
     },
-    {where: {idEvento: req.params.idEvento}}).then(evento=>{
+    {where: {idEvento: req.params.idEvento}}).then(evento => {
       console.log("Atualizando evento");
       res.send(evento);
     }).catch(err=>{
@@ -165,9 +141,9 @@ exports.DespEv=(req,res)=>{
 //foi trocado IDPessoa para CPF
 
 
-exports.criaOrganizacao =(req,res)=>{
+exports.criaOrganizacao = (req,res)=>{
   Evento.findOne({where:{idEvento:req.params.idEvento}}).then(evento=>{
-    db.pessoa.findOne({where:{CPF:req.params.CPF}}).then(pessoa=>{
+    db.pessoa.findOne({where:{CPF:req.params.CPF}}).then(pessoa => {
       db.organizacao.create({'horasParticipacao':req.body.horasParticipacao,'idEvento':evento.idEvento,'CPF':pessoa.CPF}).then(org=>{
         res.send(org)
       }).catch(err=>{
@@ -188,7 +164,6 @@ exports.selectOrganizacao=(req,res)=>{
   }).catch(err => {
     res.status(500).send("Error -> " + err);
   })
-  
 }
 
 exports.selectUmOrganizador=(req,res)=>{

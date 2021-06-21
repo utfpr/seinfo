@@ -1,4 +1,3 @@
-// Tinha jeito melhor de fazer? CLARO! Mas eu optei por fazer assim pq sou idiota :^)
 <template>
   <div class="title">
     <h5 style="text-align:center">Controle de Categoria</h5>
@@ -30,7 +29,8 @@
             </a-form-item>
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn btn-outline-primary btn-sm">Cadastrar</button>
+            <button type="submit" class="btn btn-outline-primary mr-5">Cadastrar</button>
+            <button type="reset" class="btn btn-outline-danger btn-sm-2 reset" @click.prevent="onCancel" v-on:click="toggle">Cancelar</button>
           </div>
         </form>
       </div>
@@ -120,12 +120,9 @@
               </div>
 
               <div class="row justify-content-center">
-                <button
-                  type="submit"
-                  v-on:click="patch(modalData)"
-                  class="btn btn-outline-primary btn-sm"
-                >Cadastrar</button>
-              </div>
+                <button type="submit" v-on:click="patch(modalData)" class="btn btn-outline-primary mr-5">Cadastrar</button>
+                <button type="submit" data-dismiss="modal" class="btn btn-outline-danger btn-sm">Cancelar</button>
+              </div>             
             </form>
           </div>
         </div>
@@ -161,6 +158,7 @@
               v-on:click="deletar(modalData.idCategoria)"
               type="danger"
               block
+              onClick="window.location.reload();"
             >Eu desejo Excluir este item</a-button>
           </div>
         </div>
@@ -181,6 +179,10 @@ export default {
     this.pegar_tabela();
   },
   methods: {
+    onCancel(){
+      console.log('CANCEL SUBMIT');
+      this.nome = "";
+  },
     openModal(data) {
       this.pegar_tabela();
       this.modalData = data;

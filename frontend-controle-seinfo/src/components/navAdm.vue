@@ -5,7 +5,7 @@
       <a-menu class="menu" mode="horizontal">
         <a-menu-item key="14">
           <a-icon type="global"/>Eventos
-          <router-link to="/adm/cadEvento"></router-link>
+          <router-link to="/adm/eventos"></router-link>
         </a-menu-item>
         <a-sub-menu key="sub3">
           <span slot="title">
@@ -13,11 +13,11 @@
             <span>Atividades/Categorias</span>
           </span>
           <a-menu-item key="13">
-            Atividade
-            <router-link to="/adm/atividade"></router-link>
+            Atividades
+            <router-link to="/adm/atividades"></router-link>
           </a-menu-item>
           <a-menu-item key="10">
-            Categoria
+            Categorias
             <router-link to="/adm/categoria"></router-link>
           </a-menu-item>
         </a-sub-menu>
