@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: "seInfo-back-end",
-    script: "./app.js",
+    script: "./server.js",
     watch:true,
     max_memory_restart:"200M",
     instance:1,
