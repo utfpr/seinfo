@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const config = require('../config/env');
 
 const db = {};
-const sequelize = new Sequelize(config.env);
+const sequelize = new Sequelize(config);
 
 fs
   .readdirSync(__dirname)
