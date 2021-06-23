@@ -20,5 +20,4 @@ package-lock.json
 *.njsproj
 *.sln
 
-controllers/autenticacao.controller.js
 .env
