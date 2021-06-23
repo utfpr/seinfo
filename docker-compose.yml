@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  database:
+    image: mysql
+    restart: always
+    container_name: "SEINFO"
+    environment:
+      MYSQL_DATABASE: "seinfo"
+      MYSQL_USER: "normalUser"
+      MYSQL_PASSWORD: "normalUser"
+      MYSQL_ROOT_USER: "admin"
+      MYSQL_ROOT_PASSWORD: "admin"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - /home/ricardo/Documentos/docker-files/BD_MYSQL:/var/lib/mysql
