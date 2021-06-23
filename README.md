@@ -46,6 +46,14 @@ DB_POOL_MIN="0"
 DB_POOL_ACQUIRE="3000"
 DB_POOL_IDLE="10000"
 
+#LDAP
+URL_LDAP="URL E ROTA AQUI"
+LOGIN_URL_LDAP="URL E ROTA AQUI"
+LOGIN_LDAP_USERNAME="usuario"
+LOGIN_LDAP_PASSWORD="senha"
+
+#SECRET
+SECRET="escreva o secret aqui"
 ```
 Criar o arquivo dotenv.env.js como o dotenv.env.js.example no frontend.
 ~~~
