@@ -18,5 +18,3 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
-
-controllers/autenticacao.controller.js
