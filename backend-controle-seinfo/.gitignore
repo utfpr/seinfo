@@ -21,3 +21,4 @@ package-lock.json
 *.sln
 
 controllers/autenticacao.controller.js
+.env
