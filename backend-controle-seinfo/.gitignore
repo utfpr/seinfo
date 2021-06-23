@@ -5,11 +5,12 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
-package-lock.json
+yarn,lock
 *.log
-.env
-
+/config/env.js*
+config/env.js*
+env.js*
+package-lock.json
 
 # Editor directories and files
 .idea
@@ -18,3 +19,5 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
+
+controllers/autenticacao.controller.js
