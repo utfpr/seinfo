@@ -11,11 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "@fnando/cpf": "^1.0.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.16.4",
+    "glob-parent": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.1",
     "mysql": "^2.16.0",
