@@ -13,7 +13,7 @@
 <script>
 import navHome from "./navHome.vue";
 import evento from "./evento_component.vue";
-import ft from "./footer.vue";
+import ft from "./footer.vue"; 
 export default {
   components: {
     navHome,
@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 #layout {
   height: 100%;
 }
