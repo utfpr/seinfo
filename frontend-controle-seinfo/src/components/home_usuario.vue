@@ -1,102 +1,100 @@
 <template>
   <AuthConsumer>
     <div slot-scope="{ getUser }">
-        <a-table :columns="columns" :data-source="res_localizar" :pagination="false">
-          <div slot="expandedRowRender" slot-scope="record" style="margin: 0">
-            <div class="table-responsive col-md-12">
-              <p class="atividade">Atividades: {{record.nome}} <a-button type="button" class="ic" @click="inscricao(getUser.CPF, record.idEvento)" > INSCREVER-SE  </a-button></p>
-              <table class="table table-striped" cellspacing="0" cellpadding="0">
-                <thead>
-                  <tr>
-                    <th style="width:25%">Nome</th>
-                    <th style="text-align: left;">Valor</th>
-                    <th style="text-align: left;">Vagas</th>
-                    <th style="text-align: left;">Horas de participação</th>
-                    <th style="text-align: left; width:40%">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody v-for="response in res_atividades" :key="response.idEvento">
-                  <tr style="background-color:white;" v-if="response.idEvento == record.idEvento">
-                    <td>{{response.titulo}}</td>
-                    <td>R$ {{response.valor}}</td>
-                    <td style="padding-left:20px;">{{response.quantidadeVagas}}</td>
-                    <td style="padding-left:54px;">{{response.horasParticipacao}}</td>
-                    <td>{{response.descricao}}</td>
-                  </tr>          
-                </tbody>
-              </table>
-            </div>
-
+      <a-table
+        :columns="columns"
+        :data-source="res_localizar"
+        :pagination="false"
+      >
+        <div
+          slot="expandedRowRender"
+          slot-scope="record"
+          style="margin: 0"
+        >
+          <div class="table-responsive col-md-12">
+            <p class="atividade">
+              Atividades: {{ record.nome }} <a-button
+                type="button"
+                class="ic"
+                @click="inscricao(getUser.CPF, record.idEvento)"
+              >
+                INSCREVER-SE
+              </a-button>
+            </p>
+            <table
+              class="table table-striped"
+              cellspacing="0"
+              cellpadding="0"
+            >
+              <thead>
+                <tr>
+                  <th style="width:25%">
+                    Nome
+                  </th>
+                  <th style="text-align: left;">
+                    Valor
+                  </th>
+                  <th style="text-align: left;">
+                    Vagas
+                  </th>
+                  <th style="text-align: left;">
+                    Horas de participação
+                  </th>
+                  <th style="text-align: left; width:40%">
+                    Descrição
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                v-for="response in res_atividades"
+                :key="response.idEvento"
+              >
+                <tr
+                  v-if="response.idEvento == record.idEvento"
+                  style="background-color:white;"
+                >
+                  <td>{{ response.titulo }}</td>
+                  <td>R$ {{ response.valor }}</td>
+                  <td style="padding-left:20px;">
+                    {{ response.quantidadeVagas }}
+                  </td>
+                  <td style="padding-left:54px;">
+                    {{ response.horasParticipacao }}
+                  </td>
+                  <td>{{ response.descricao }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </a-table>
-
     </div>
   </AuthConsumer>
 </template>
 
-
 <script>
 
-import AuthConsumer from '../contexts/authConsumer';
+import AuthConsumer from '../contexts/authConsumer.vue';
 
 const axios = require('axios');
+
 const columns = [{
   title: 'Nome do Evento',
   dataIndex: 'nome',
   width: 600,
-},{
+}, {
   title: 'Local do Evento',
   dataIndex: 'agendamento.local',
-},{
+}, {
   title: 'Descrição',
-  dataIndex: 'descricao'
+  dataIndex: 'descricao',
 }];
 
 export default {
-  mounted(){
-    this.pegar_tabela_eventos ("eventosD")
-    this.pegar_tabela_atividades ("atividades")
-  },
   components: {
-    AuthConsumer
+    AuthConsumer,
   },
-  methods: {
-    redirectAtv(idEvento, CPF){
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}`})
-    },
-    pegar_tabela_eventos (name) {
-      axios.get('http://localhost:3000/api/' + name)
-      .then((response) => {
-        // console.log("Listou " + name);
-        // console.log(response.data);
-        this.res_localizar = response.data
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    },
-    pegar_tabela_atividades (name) {
-      axios.get('http://localhost:3000/api/' + name)
-      .then((response) => {
-        this.res_atividades = response.data
-      })
-    },
-    inscricao(CPF, idEvento) {
-      console.log(CPF, idEvento);
-      axios
-        .post(`http://localhost:3000/api/inscEv/${idEvento}/${CPF}` , {dataInscricao:'2020-08-09'})
-        .then((response) => {
-          this.redirectAtv(idEvento, CPF);
-          console.log(response.data);
-          //this.pegar_tabela("eventosD");
-        })
-        .catch(function (error) {
-          alert("Você já está inscrito nesse evento!");
-          console.log(error);
-        });
-    },
-  },
-    
+
   data() {
     return {
       res_localizar: [],
@@ -104,9 +102,49 @@ export default {
       columns,
       loading: false,
       confirmLoading: false,
-    }
-  }
-}
+    };
+  },
+  mounted() {
+    this.pegar_tabela_eventos('eventosD');
+    this.pegar_tabela_atividades('atividades');
+  },
+  methods: {
+    redirectAtv(idEvento, CPF) {
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
+    },
+    pegar_tabela_eventos(name) {
+      axios.get(`http://localhost:3000/api/${name}`)
+        .then((response) => {
+        // console.log("Listou " + name);
+          console.log('eventos', response.data);
+          this.res_localizar = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    pegar_tabela_atividades(name) {
+      axios.get(`http://localhost:3000/api/${name}`)
+        .then((response) => {
+          this.res_atividades = response.data;
+        });
+    },
+    inscricao(CPF, idEvento) {
+      console.log(CPF, idEvento);
+      axios
+        .post(`http://localhost:3000/api/inscEv/${idEvento}/${CPF}`, { dataInscricao: '2020-08-09' })
+        .then((response) => {
+          this.redirectAtv(idEvento, CPF);
+          console.log(response.data);
+          // this.pegar_tabela("eventosD");
+        })
+        .catch((error) => {
+          alert('Você já está inscrito nesse evento!');
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -119,7 +157,7 @@ export default {
   border: 2px solid rgb(64, 212, 64);
   color: black;
   cursor: pointer;
-} 
+}
 .ic:hover{
   color: white;
   background-color: rgb(64, 212, 64);

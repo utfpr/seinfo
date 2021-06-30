@@ -59,7 +59,7 @@ exports.loteEvento = (req, res) => {
     });
 };
 
-(exports.atualiza = (req, res) => {
+exports.atualiza = (req, res) => {
   Lotes.update(
     {
       valor: req.body.valor,
@@ -76,14 +76,15 @@ exports.loteEvento = (req, res) => {
     .catch((err) => {
       res.status(500).send(`Error ${err}`);
     });
-}),
-  (exports.delete = (req, res) => {
-    Lotes.destroy({ where: { idLote: req.params.loteId } })
-      .then((lote) => {
-        console.log(`Deletando o lote com o ID: ${req.params.loteId}`);
-        res.send(lote); // Retorna um Json para a Pagina da API
-      })
-      .catch((err) => {
-        res.status(500).send(`Error -> ${err}`);
-      });
-  });
+};
+
+exports.delete = (req, res) => {
+  Lotes.destroy({ where: { idLote: req.params.loteId } })
+    .then((lote) => {
+      console.log(`Deletando o lote com o ID: ${req.params.loteId}`);
+      res.send(lote); // Retorna um Json para a Pagina da API
+    })
+    .catch((err) => {
+      res.status(500).send(`Error -> ${err}`);
+    });
+};

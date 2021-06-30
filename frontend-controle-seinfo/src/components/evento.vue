@@ -1,25 +1,29 @@
 <template>
-  <a-layout id="components-layout-demo-top" class="layout">
+  <a-layout
+    id="components-layout-demo-top"
+    class="layout"
+  >
     <div>
-      <navHome></navHome>
+      <navHome />
     </div>
     <a-layout-content>
-      <evento></evento>
-      <ft></ft>
+      <evento />
+      <ft />
     </a-layout-content>
   </a-layout>
 </template>
 
 <script>
-import navHome from "./navHome.vue";
-import evento from "./evento_component.vue";
-import ft from "./footer.vue"; 
+import navHome from './navHome.vue';
+import evento from './evento_component.vue';
+import ft from './footer.vue';
+
 export default {
   components: {
     navHome,
     evento,
-    ft
-  }
+    ft,
+  },
 };
 </script>
 

@@ -1,28 +1,66 @@
 <template>
   <div>
     <h3>Meus eventos</h3>
-    <div id="list" class="row">
+    <div
+      id="list"
+      class="row"
+    >
       <div class="table-responsive col-md-12">
-        <table class="table table-striped" cellspacing="0" cellpadding="0">
+        <table
+          class="table table-striped"
+          cellspacing="0"
+          cellpadding="0"
+        >
           <thead>
             <tr>
-              <th style="width:35%">Nome</th>
-              <th style="text-align: left;">Status</th>
-              <th style="text-align:center" class="actions">Ações</th>
+              <th style="width:35%">
+                Nome
+              </th>
+              <th style="text-align: left;">
+                Status
+              </th>
+              <th
+                style="text-align:center"
+                class="actions"
+              >
+                Ações
+              </th>
             </tr>
           </thead>
-          <tbody v-for="(res/*,i*/) in res_localizar" :key="res.idEvento">
+          <tbody
+            v-for="(res) in res_localizar"
+            :key="res.idEvento"
+          >
             <tr style="background-color:white;">
-              <td>{{res.eventoInsc.nome}}</td>
+              <td>{{ res.eventoInsc.nome }}</td>
               <td>
                 <!-- <a-progress type="circle" :percent="100" status="success" :width="33" /> -->
-                <a-icon type="check-circle" theme="twoTone" two-tone-color="#52c41a" style="font-size: 32px; margin-left: 5px;" />
-
+                <a-icon
+                  type="check-circle"
+                  theme="twoTone"
+                  two-tone-color="#52c41a"
+                  style="font-size: 32px; margin-left: 5px;"
+                />
               </td>
-              <td style="text-align:center;" class="actions">
-                <a-button type="button" class="ic" @click="redirectAtv(res.idEvento, CPF)" > VER ATIVIDADES </a-button>
+              <td
+                style="text-align:center;"
+                class="actions"
+              >
+                <a-button
+                  type="button"
+                  class="ic"
+                  @click="redirectAtv(res.idEvento, CPF)"
+                >
+                  VER ATIVIDADES
+                </a-button>
                 <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
-                <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button>
+                <a-button
+                  type="button"
+                  class="dl"
+                  @click="showDeleteConfirm(res.idEvento)"
+                >
+                  CANCELAR INSCRIÇÃO
+                </a-button>
               </td>
             </tr>
           </tbody>
@@ -32,74 +70,85 @@
   </div>
 </template>
 
-
 <script>
-const axios = require("axios");
+const axios = require('axios');
+
 const columns = [
   {
-    title: "Nome do Evento",
-    dataIndex: "nome",
-    width: 200, //test
+    title: 'Nome do Evento',
+    dataIndex: 'nome',
+    width: 200, // test
   },
   {
-    title: "Data do Evento",
-    dataIndex: "data",
+    title: 'Data do Evento',
+    dataIndex: 'data',
     width: 200,
   },
   {
-    title: "Status do Evento",
-    dataIndex: "status",
+    title: 'Status do Evento',
+    dataIndex: 'status',
   },
   {
-    title: "Action",
-    key: "operation",
-    fixed: "right",
+    title: 'Action',
+    key: 'operation',
+    fixed: 'right',
     width: 200,
-    scopedSlots: { customRender: "action" },
+    scopedSlots: { customRender: 'action' },
   },
   {
-    title: "Valor",
-    dataIndex: "",
+    title: 'Valor',
+    dataIndex: '',
   },
 ];
-const auth = require("../services/auth");
+const auth = require('../services/auth');
+
 export default {
+  data() {
+    return {
+      res_localizar: [],
+      columns,
+      tabelas: [],
+      modalVisible: false,
+      modalData: '',
+      CPF: '',
+    };
+  },
   mounted() {
     this.pegarPerfil();
     this.pegar_tabela();
   },
   methods: {
-    redirectAtv(idEvento, CPF){
-      //console.log(idEvento, CPF);
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}`})
+    redirectAtv(idEvento, CPF) {
+      // console.log(idEvento, CPF);
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
     },
     exclusao(id) {
       axios
         .delete(`http://localhost:3000/api/inscEv/${id}/${this.CPF}`)
         .then((response) => {
           console.log(response.data);
-          this.pegar_tabela("eventosD");
+          this.pegar_tabela('eventosD');
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     },
     async pegarPerfil() {
-      await auth.default.getUser().then(res => {
+      await auth.default.getUser().then((res) => {
         this.CPF = res.CPF;
         this.pegar_tabela();
-      })
-      //console.log("USER:", user)
-      //this.CPF = user.CPF;
+      });
+      // console.log("USER:", user)
+      // this.CPF = user.CPF;
     },
     showDeleteConfirm(id) {
-        var cpfPessoa = this.CPF;
-        this.$confirm({
-        title: "Deseja remover sua inscrição?",
-        content: "Essa ação não poderá ser desfeita!",
-        okText: "Sim",
-        okType: "danger",
-        cancelText: "Voltar",
+      const cpfPessoa = this.CPF;
+      this.$confirm({
+        title: 'Deseja remover sua inscrição?',
+        content: 'Essa ação não poderá ser desfeita!',
+        okText: 'Sim',
+        okType: 'danger',
+        cancelText: 'Voltar',
         onOk() {
           axios
             .delete(`http://localhost:3000/api/inscEv/${id}/${cpfPessoa}`)
@@ -107,13 +156,12 @@ export default {
               console.log(response.data);
               document.location.reload(true);
             })
-            .catch(function (error) {
+            .catch((error) => {
               console.log(error);
             });
-          
         },
         onCancel() {
-          console.log("Cancel");
+          console.log('Cancel');
         },
       });
     },
@@ -125,24 +173,14 @@ export default {
       axios
         .get(`http://localhost:3000/api/inscEvP/${this.CPF}`)
         .then((response) => {
-          console.log("Listou ");
+          console.log('Listou ');
           console.log(response.data);
           this.res_localizar = response.data;
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     },
-  },
-  data() {
-    return {
-      res_localizar: [],
-      columns,
-      tabelas: [],
-      modalVisible: false,
-      modalData: "",
-      CPF: "",
-    };
   },
 };
 </script>
