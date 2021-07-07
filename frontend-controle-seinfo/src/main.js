@@ -9,7 +9,6 @@ import Antd from 'ant-design-vue';
 import SlideUpDown from "vue-slide-up-down";
 import VueTheMask from 'vue-the-mask';
 
-const app_url = process.env.VUE_APP_URL;
 
 Vue.component('slide-up-down', SlideUpDown);
 Vue.use(Antd);
@@ -20,7 +19,7 @@ var router;
 Vue.config.productionTip = false;
 
 setTimeout(() => {
-  teste.userData().then((res, err) => {
+  teste.userData().then((res) => {
     router = res !== null ? (res.nivel === 1 ? Usuario : Admin) : Login;
     new Vue({
       el: '#app',
@@ -31,4 +30,3 @@ setTimeout(() => {
   })
 }, 500);
 
-export default app_url;

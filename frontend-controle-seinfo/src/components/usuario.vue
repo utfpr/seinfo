@@ -47,7 +47,6 @@
 </template>
 <script>
 import AuthConsumer from '../contexts/authConsumer';
-import app_url from '../main';
 export default {
   data() {
     return {
@@ -60,7 +59,7 @@ export default {
   methods: {
     logOut(signOut){
       signOut();
-      window.location.replace(app_url);
+      window.location.replace('/');
     }
   }
 };

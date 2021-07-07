@@ -50,7 +50,6 @@
 import axios from 'axios';
 import AuthConsumer from '../contexts/authConsumer';
 import {TheMask} from 'vue-the-mask';
-import app_url from '../main';
 export default {
   data() {
     return {
@@ -77,18 +76,24 @@ export default {
     TheMask
   },
   methods: {
-    passaValor(username,password)
+    passaValor()
     {
       //PASSA O USUÁRIO PARA A PÁGINA DE CADASTRO
 
     axios
-    .post('http://localhost:3000/api/loginLDAP',{ username: this.obj_userInterno.username, password: this.obj_userInterno.password})
+    .post('http://localhost:3000/api/loginLDAP',{ 
+      username: this.obj_userInterno.username, 
+      password: this.obj_userInterno.password
+      })
     .then(response => {
       console.log(response.data.name);
             // obj_userInterno.nome = response.data.name;
             // obj_userInterno.email = response.data.email;
             console.log(response.data.email);
-            this.$router.push({ name: `Cad_Aluno`, query:{ra: this.obj_userInterno.username, nome: response.data.name, email: response.data.email}})
+            this.$router.push({ name: `Cad_Aluno`, query:{
+              ra: this.obj_userInterno.username, 
+              nome: response.data.name, email: response.data.email
+            }}) 
             //mandar os outros dados do LDAP para a página de cadastro
             //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.nome}})
             //console.log(response.data.message);
@@ -125,8 +130,8 @@ export default {
               signIn({token: response.data.token, user: response.data.pessoa});
               window.location.replace(
                 response.data.pessoa.nivel === 1 
-                  ? app_url + '/usuario' 
-                  : app_url + '/adm'
+                  ? '/usuario' 
+                  : '/adm'
                 );
 
             }
@@ -136,7 +141,7 @@ export default {
 
       console.log("FEZ O LOGIN")
     },
-    handleOk(e) {
+    handleOk() {
       this.visible = false
       console.log("LOGIN - OK")
 
@@ -150,12 +155,12 @@ export default {
 
       console.log("FEZ O LOGIN")
     },
-    handleCancel(e) {
+    handleCancel() {
       console.log('Clicked cancel button');
       this.visible = false
       this.recuperacao = false
     },
-    handleOkRecuperacao(e) 
+    handleOkRecuperacao() 
     {
       this.recuperacao = false
       
