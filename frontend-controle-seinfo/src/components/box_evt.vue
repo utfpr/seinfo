@@ -7,7 +7,7 @@
           <h5 class="card-title">{{res.nome}}</h5>
           <p class="card-text">{{res.descricao}}</p>
           <a-divider />
-          <a-button :href="'/evento/'+ res.idEvento" class="bt" style="margin-left:33%;">
+          <a-button :href="'/evento/'+ res.idEvento" class="bt">
             <a-icon type="plus" />SAIBA MAIS
           </a-button>
         </div>
@@ -49,6 +49,9 @@ export default {
 
 <style scoped>
 #work {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   background: #092756;
   background: -moz-radial-gradient(
       0% 100%,
@@ -112,10 +115,8 @@ export default {
 
 .card-title {
   display: inline-block;
-  max-width: 410px;
-  min-width: 410px;
-  max-height: 30px;
-  min-height: 30px;
+  width: 410px;
+  height: 30px;
   overflow: hidden;
 }
 
@@ -128,18 +129,15 @@ export default {
 }
 
 .card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: rgb(255, 255, 255);
-  float: left;
-  max-height: 280px;
-  min-height: 280px;
-  margin: 40px;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
+  height: 280px;
 }
 
 .box-1 {
-  height: 450px;
+  height: 100%;
   width: 450px;
   margin: 50px;
   margin-top: 30px;
@@ -153,9 +151,8 @@ export default {
 }
 
 .box-2 {
+  width: 100%;
   min-height: 260px;
   max-height: 260px;
-  min-width: 450px;
-  max-width: 450px;
 }
 </style>
