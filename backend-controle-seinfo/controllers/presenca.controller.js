@@ -1,6 +1,8 @@
 const db = require('../models/index.js');
 
-const { Presenca } = db;
+const Presenca = db.presenca;
+const Atividade = db.atividade;
+const Pessoa = db.pessoa;
 
 exports.create = (req, res) => {
   const { idAtividade, idAgenda, idEvento, CPF } = req.params;
@@ -64,5 +66,20 @@ exports.delete = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send(err);
+    });
+};
+
+exports.listPresenca = (req, res) => {
+  Presenca.findAll({
+    include: [Atividade, Pessoa],
+    where: {
+      presenca: 1,
+    },
+  })
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err.toString());
     });
 };
