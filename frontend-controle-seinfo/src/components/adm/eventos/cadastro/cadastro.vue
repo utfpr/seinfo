@@ -34,7 +34,7 @@
             <label class="ant-form-item-required"
               >Selecione um Organizador:</label
             > 
-            <a-select v-model="obj_Resource.cpfOrganizacao" defaultValue="...">
+            <a-select v-model="obj_Resource.cpfOrganizador" defaultValue="...">
               <a-select-option
                 id="cpfOrganizador"
                 name="cpfOrganizador"
