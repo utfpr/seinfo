@@ -20,7 +20,7 @@ var router;
 Vue.config.productionTip = false;
 
 setTimeout(() => {
-  teste.userData().then((res, err) => {
+  teste.userData().then((res) => {
     router = res !== null ? (res.nivel === 1 ? Usuario : Admin) : Login;
     new Vue({
       el: '#app',
