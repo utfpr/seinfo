@@ -71,7 +71,16 @@ exports.delete = (req, res) => {
 
 exports.listPresenca = (req, res) => {
   Presenca.findAll({
-    include: [Atividade, Pessoa],
+    include: [
+      {
+        model:Atividade,
+        attributes:['titulo', 'horasParticipacao']
+      },
+      {
+        model:Pessoa,
+        attributes:['nome']
+      }
+    ],
     where: {
       presenca: 1,
     },
