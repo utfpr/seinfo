@@ -2,14 +2,14 @@
 <div>
   <a-carousel effect="fade" autoplay arrows >
     <div
-      slot="prevArrow" slot-scope="props"
+      slot="prevArrow"
       class="custom-slick-arrow"
       style="left: 10px;zIndex: 1"
     >
       <a-icon type="left"/>
     </div>
     <div
-      slot="nextArrow" slot-scope="props"
+      slot="nextArrow" 
       class="custom-slick-arrow"
       style="right: 10px"
     >
@@ -44,7 +44,6 @@ export default {
 }
 
 .ant-carousel{
-  margin-top: 60px;
   border: 1px solid rgba(12, 12, 12, 0.863);
 }
 

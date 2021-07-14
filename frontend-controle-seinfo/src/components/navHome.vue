@@ -208,6 +208,9 @@ export default {
 }
 
 .navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   position: fixed;
   z-index: 1050;
