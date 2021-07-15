@@ -1,5 +1,5 @@
 import moment from 'moment';
-import axios from "axios";
+const axios = require('../../../../config/axiosConfig');
 
 export default {
     props: {
@@ -14,7 +14,7 @@ export default {
         deletar(modalData) {
             axios
                 .delete(
-                    `http://localhost:3000/api/evento/${modalData.idEvento}`
+                    `/api/evento/${modalData.idEvento}`
                 )
                 .then(response => {
 

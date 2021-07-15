@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+const axios = require('../config/axiosConfig.js');
 import {TheMask} from 'vue-the-mask';
 export default 
 {
@@ -61,7 +61,7 @@ export default
       console.log(this.obj_cadastro)
 
       axios
-        .post('http://localhost:3000/api/pessoa', this.obj_cadastro)
+        .post('/api/pessoa', this.obj_cadastro)
         .then(response => {
           console.log(response)
           alert(response.data);

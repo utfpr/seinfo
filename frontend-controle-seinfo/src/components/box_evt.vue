@@ -17,7 +17,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+const axios = require('../config/axiosConfig.js');
 
 export default {
   mounted() {
@@ -26,7 +26,7 @@ export default {
   methods: {
     pegar_tabela(name) {
       axios
-        .get("http://localhost:3000/api/" + name)
+        .get("/api/" + name)
         .then(response => {
           // console.log("Listou " + name);
           // console.log(response.data);

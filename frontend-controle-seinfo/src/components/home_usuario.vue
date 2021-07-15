@@ -76,7 +76,7 @@
 
 import AuthConsumer from '../contexts/authConsumer.vue';
 
-const axios = require('axios');
+const axios = require('../config/axiosConfig.js');
 
 const columns = [{
   title: 'Nome do Evento',
@@ -113,7 +113,7 @@ export default {
       this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
     },
     pegar_tabela_eventos(name) {
-      axios.get(`http://localhost:3000/api/${name}`)
+      axios.get(`/api/${name}`)
         .then((response) => {
         // console.log("Listou " + name);
           console.log('eventos', response.data);
@@ -124,7 +124,7 @@ export default {
         });
     },
     pegar_tabela_atividades(name) {
-      axios.get(`http://localhost:3000/api/${name}`)
+      axios.get(`/api/${name}`)
         .then((response) => {
           this.res_atividades = response.data;
         });
@@ -132,7 +132,7 @@ export default {
     inscricao(CPF, idEvento) {
       console.log(CPF, idEvento);
       axios
-        .post(`http://localhost:3000/api/inscEv/${idEvento}/${CPF}`, { dataInscricao: '2020-08-09' })
+        .post(`/api/inscEv/${idEvento}/${CPF}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
           this.redirectAtv(idEvento, CPF);
           console.log(response.data);

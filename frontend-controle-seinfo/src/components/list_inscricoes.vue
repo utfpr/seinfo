@@ -71,7 +71,7 @@
 </template>
 
 <script>
-const axios = require('axios');
+const axios = require('../config/axiosConfig.js');
 
 const columns = [
   {
@@ -124,7 +124,7 @@ export default {
     },
     exclusao(id) {
       axios
-        .delete(`http://localhost:3000/api/inscEv/${id}/${this.CPF}`)
+        .delete(`/api/inscEv/${id}/${this.CPF}`)
         .then((response) => {
           console.log(response.data);
           this.pegar_tabela('eventosD');
@@ -151,7 +151,7 @@ export default {
         cancelText: 'Voltar',
         onOk() {
           axios
-            .delete(`http://localhost:3000/api/inscEv/${id}/${cpfPessoa}`)
+            .delete(`/api/inscEv/${id}/${cpfPessoa}`)
             .then((response) => {
               console.log(response.data);
               document.location.reload(true);
@@ -171,7 +171,7 @@ export default {
     },
     pegar_tabela() {
       axios
-        .get(`http://localhost:3000/api/inscEvP/${this.CPF}`)
+        .get(`/api/inscEvP/${this.CPF}`)
         .then((response) => {
           console.log('Listou ');
           console.log(response.data);

@@ -109,9 +109,9 @@
 import e404 from "./not_found.vue";
 import moment from "moment";
 moment.locale("pt-br");
-const axios = require("axios");
+const axios = require('../config/axiosConfig.js');
 
-var i = 0;
+
 const columns = [
   {
     title: "Horários",
@@ -211,7 +211,7 @@ export default {
     this.pegar_tabela("evento/" + this.$route.params.id);
     // pegar atividades
     axios
-      .get("http://localhost:3000/api/atividade/" + this.$route.params.id)
+      .get("/api/atividade/" + this.$route.params.id)
       .then(response => {
         // console.log("atividades");
         // console.log(response.data);
@@ -246,7 +246,7 @@ export default {
 
     pegar_tabela(name) {
       axios
-        .get("http://localhost:3000/api/" + name)
+        .get("/api/" + name)
         .then(response => {
           // console.log("Listou " + name);
           // console.log(response.data);

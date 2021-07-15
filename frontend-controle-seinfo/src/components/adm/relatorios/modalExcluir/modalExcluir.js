@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('../../../../config/axiosConfig');
 
 export default {
   props: {
@@ -11,7 +11,7 @@ export default {
     },
     deletar_evento(pos) {
       console.log("ID " + pos);
-      axios.delete('http://localhost:3000/api/evento/' + pos)
+      axios.delete('/api/evento/' + pos)
         .then(response => {
           console.log("Deletou!");
           console.log(response);

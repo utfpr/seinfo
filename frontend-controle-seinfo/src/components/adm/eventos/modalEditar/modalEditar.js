@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require('../../../../config/axiosConfig');
 import moment from "moment";
 
 moment.locale("pt-br");
@@ -12,14 +12,14 @@ export default {
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
     },
     created() {
-        axios.get('http://localhost:3000/api/pessoas').then(response => {
+        axios.get('/api/pessoas').then(response => {
             this.pessoas = response.data;
         }).catch(error => {
             console.log(error);
         })
     },
     created() {
-        axios.get('http://localhost:3000/api/pessoas').then(response => {
+        axios.get('/api/pessoas').then(response => {
           this.pessoas = response.data;
         }).catch(error => {
           console.log(error);
@@ -101,7 +101,7 @@ export default {
             if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
             if (!erros.length) {
                 axios
-                    .patch(`http://localhost:3000/api/evento/${dados.idEvento}`, dados)
+                    .patch(`/api/evento/${dados.idEvento}`, dados)
                     .then((response) => {
                         console.log("Editou!");
                         console.log(response);

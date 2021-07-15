@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('../../../../config/axiosConfig');
 import moment from "moment";
 moment.locale("pt-br");
 let id = 0;
@@ -12,7 +12,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:3000/api/eventos")
+      .get("/api/eventos")
       .then((response) => {
         this.eventos = response.data;
       })
@@ -21,7 +21,7 @@ export default {
       });
 
     axios
-      .get("http://localhost:3000/api/categorias")
+      .get("/api/categorias")
       .then((response) => {
         this.categorias = response.data;
       })
@@ -30,7 +30,7 @@ export default {
       });
 
     axios
-      .get("http://localhost:3000/api/protagonistas")
+      .get("/api/protagonistas")
       .then((response) => {
         this.protagonistas = response.data;
       })
@@ -107,7 +107,7 @@ export default {
         (this.obj_Resource.idPessoa = this.idPessoa),
         (this.obj_Resource.descricao = this.descricao),
         axios
-          .post("http://localhost:3000/api/atividade", this.obj_Resource)
+          .post("/api/atividade", this.obj_Resource)
           .then((response) => {
             console.log(response);
           })

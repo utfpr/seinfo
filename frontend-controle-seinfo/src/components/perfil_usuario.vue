@@ -77,14 +77,12 @@
 import { TheMask } from 'vue-the-mask';
 import AuthConsumer from '../contexts/authConsumer';
 
-const axios = require('axios');
+const axios = require('../config/axiosConfig.js');
 const auth = require('../services/auth');
 
 export default {
   components: {
     TheMask,
-  },
-  components: {
     AuthConsumer,
   },
   data() {
@@ -114,7 +112,7 @@ export default {
       this.obj.nivel = user.nivel;
     },
     alterarPerfil(atualizaDados, token) {
-      axios.patch(`http://localhost:3000/api/pessoa/${this.obj.CPF}`, {
+      axios.patch(`/api/pessoa/${this.obj.CPF}`, {
         nome: this.obj.nome,
         email: this.obj.email,
       })
