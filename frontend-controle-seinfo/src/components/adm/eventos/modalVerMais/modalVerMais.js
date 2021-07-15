@@ -1,4 +1,4 @@
-const axios = require('../../../../config/axiosConfig');
+import axios from '../../../../config/axiosConfig';
 import lotes from "./listagemLotes/listagemLotes.vue";
 import listagem from '../../atividades/listagem/listagem.vue';
 export default {

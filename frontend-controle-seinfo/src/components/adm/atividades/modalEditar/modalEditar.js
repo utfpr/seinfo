@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 export default {
@@ -89,7 +89,7 @@ export default {
       if (!erros.length) {
         axios
           .patch(
-            "http://localhost:3000/api/atividade/" + dados.idAtividade,
+            "/api/atividade/" + dados.idAtividade,
             dados
           )
           .then((response) => {

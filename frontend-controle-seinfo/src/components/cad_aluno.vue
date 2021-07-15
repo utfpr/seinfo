@@ -43,7 +43,7 @@
 
 
 <script>
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import {TheMask} from 'vue-the-mask';
 export default 
 {

@@ -32,7 +32,7 @@
 
 <script>
 import AuthConsumer from '../contexts/authConsumer';
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 
@@ -55,7 +55,7 @@ export default {
 	},
 	components: {
     AuthConsumer
-  	},
+	},
 	methods: {
 	pegar_tabela_atividades(idEvento, CPF) {
 		
@@ -89,9 +89,9 @@ export default {
       axios
         .post(`/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
         .then((response) => {
-          console.log(response.data);
-		  document.location.reload(true);
-        })
+			console.log(response.data);
+			document.location.reload(true);
+		})
         .catch(function (error) {
           alert("Não foi possível realizar a inscrição!");
           console.log(error);
@@ -101,11 +101,11 @@ export default {
       axios
         .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
         .then((response) => {
-		  console.log(response.data);
-		  document.location.reload(true);
+			console.log(response.data);
+			document.location.reload(true);
         })
         .catch(function (error) {
-          console.log(error);
+			console.log(error);
         });
     },
 	},

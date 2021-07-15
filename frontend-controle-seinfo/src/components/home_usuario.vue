@@ -76,7 +76,7 @@
 
 import AuthConsumer from '../contexts/authConsumer.vue';
 
-const axios = require('../config/axiosConfig.js');
+import axios from '../config/axiosConfig';
 
 const columns = [{
   title: 'Nome do Evento',

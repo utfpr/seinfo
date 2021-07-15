@@ -127,7 +127,7 @@
 </template>
 
 <script>
-const axios = require('../config/axiosConfig.js');
+import axios from '../config/axiosConfig';
 
 export default {
   data() {

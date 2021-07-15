@@ -1,5 +1,5 @@
 import moment from 'moment';
-const axios = require('../../../../config/axiosConfig');
+import axios from '../../../../config/axiosConfig';
 
 export default {
     props: {

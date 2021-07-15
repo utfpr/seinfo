@@ -77,7 +77,7 @@
 import { TheMask } from 'vue-the-mask';
 import AuthConsumer from '../contexts/authConsumer';
 
-const axios = require('../config/axiosConfig.js');
+import axios from '../config/axiosConfig';
 const auth = require('../services/auth');
 
 export default {

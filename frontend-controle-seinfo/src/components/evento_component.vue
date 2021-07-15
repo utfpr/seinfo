@@ -109,7 +109,7 @@
 import e404 from "./not_found.vue";
 import moment from "moment";
 moment.locale("pt-br");
-const axios = require('../config/axiosConfig.js');
+import axios from '../config/axiosConfig';
 
 
 const columns = [

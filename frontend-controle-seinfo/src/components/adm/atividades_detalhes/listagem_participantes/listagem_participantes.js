@@ -1,4 +1,4 @@
-const axios = require('../../../../config/axiosConfig');
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 export default {
