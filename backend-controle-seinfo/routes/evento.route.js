@@ -1,30 +1,7 @@
 const eventos = require('../controllers/evento.controller');
 const presenca = require('../controllers/presenca.controller');
 
-let nomedoarquivo;
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, '../frontend-controle-seinfo/src/assets');
-    console.log('Teste!\n');
-  },
-  filename(req, file, cb) {
-    nomedoarquivo = file.originalname;
-    cb(null, file.originalname);
-    console.log('Teste!\n');
-  },
-});
-const upload = multer({ storage });
-
-module.exports = function (app) {
-  /* app.post('/api/evento', upload.single('urlImagem'), function (req, res, next) {
-    console.log("POST DO EVENTO!\n");
-    //console.log(nomedoarquivo);
-    //console.log(obj_Resource.nome);
-    //eventos.create(req,res,nomedoarquivo);
-  }) */
-
+module.exports = (app) => {
   app.post('/api/evento', eventos.create);
 
   // Insere um Novo Evento
@@ -83,7 +60,6 @@ module.exports = function (app) {
 
       res.json(resp);
     } catch (error) {
-      console.log(error);
       res.status(500).send(error);
     }
   });
@@ -96,34 +72,37 @@ module.exports = function (app) {
 
       res.json(resp);
     } catch (error) {
-      console.log(error);
       res.status(500).send(error);
     }
   });
 
   // cria presença de uma pessoa em um evento
-  app.post('/api/presenca/pessoa/:idAtividade/:idAgenda/:idEvento/:CPF', (req, res) => {
-    try {
-      const { idAtividade, idAgenda, idEvento, CPF } = req.params;
-      const resp = presenca.create(idAtividade, idAgenda, idEvento, CPF);
+  app.post(
+    '/api/presenca/pessoa/:idAtividade/:idAgenda/:idEvento/:CPF',
+    (req, res) => {
+      try {
+        const { idAtividade, idAgenda, idEvento, CPF } = req.params;
+        const resp = presenca.create(idAtividade, idAgenda, idEvento, CPF);
 
-      res.json(resp);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+        res.json(resp);
+      } catch (error) {
+        res.status(500).send(error);
+      }
     }
-  });
+  );
 
   // deleta presença
-  app.delete('/api/presenca/pessoa/:idAtividade/:idAgenda/:idEvento/:CPF', (req, res) => {
-    try {
-      const { idAtividade, idAgenda, idEvento, CPF } = req.params;
-      const resp = presenca.delete(idAtividade, idAgenda, idEvento, CPF);
+  app.delete(
+    '/api/presenca/pessoa/:idAtividade/:idAgenda/:idEvento/:CPF',
+    (req, res) => {
+      try {
+        const { idAtividade, idAgenda, idEvento, CPF } = req.params;
+        const resp = presenca.delete(idAtividade, idAgenda, idEvento, CPF);
 
-      res.json(resp);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+        res.json(resp);
+      } catch (error) {
+        res.status(500).send(error);
+      }
     }
-  });
+  );
 };
