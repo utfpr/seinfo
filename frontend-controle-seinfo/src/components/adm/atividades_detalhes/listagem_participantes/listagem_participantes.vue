@@ -15,6 +15,7 @@
                         <th style="text-align: center">Nome</th>
                         <th style="text-align: center">Email</th>
                         <th style="text-align: center">Data Inscrição</th>
+                        <th style="text-align: center">Status</th>
                     </tr>
                 </thead>
                 <tbody v-for="listData in participantes" :key="listData.dataInscricao" >
@@ -22,6 +23,7 @@
                         <td style="text-align: center">{{listData.eventoInsc.pessoaInsc.nome}}</td>
                         <td style="text-align: center">{{listData.eventoInsc.pessoaInsc.email}}</td>
                         <td style="text-align: center">{{listData.eventoInsc.dataInscricao}}</td>
+                        <td style="text-align: center"><a-button type="primary" @click="confirmarPresenca(listData.eventoInsc.pessoaInsc.email)">Confirmar Presença</a-button></td>
                     </tr>
                 </tbody>
             </table>
