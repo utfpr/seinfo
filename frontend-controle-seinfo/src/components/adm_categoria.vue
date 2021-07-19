@@ -169,7 +169,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+import axios from '../config/axiosConfig';
 
 export default {
   beforeCreate() {
@@ -198,7 +198,7 @@ export default {
           } else {
             this.obj_Resource.nome = this.nome;
             axios
-              .post("http://localhost:3000/api/categoria", this.obj_Resource)
+              .post("/api/categoria", this.obj_Resource)
               .then(response => {
                 console.log(response);
                 this.$router.push("1");
@@ -215,7 +215,7 @@ export default {
       this.$router.push("1");
       this.$router.replace("/adm/categoria");
       axios
-        .get("http://localhost:3000/api/categorias")
+        .get("/api/categorias")
         .then(response => {
           // console.log(response.data);
           this.res = response.data;
@@ -228,7 +228,7 @@ export default {
       console.log(dados);
       axios
         .patch(
-          "http://localhost:3000/api/categoria/" + dados.idCategoria,
+          "/api/categoria/" + dados.idCategoria,
           dados
         )
         .then(response => {
@@ -240,7 +240,7 @@ export default {
     deletar(pos) {
       console.log("ID " + pos);
       axios
-        .delete("http://localhost:3000/api/categoria/" + pos)
+        .delete("/api/categoria/" + pos)
         .then(response => {
           console.log(response);
           this.$router.push("1");

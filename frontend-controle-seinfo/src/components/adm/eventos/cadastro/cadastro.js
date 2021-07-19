@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 
 moment.locale("pt-br");
@@ -13,7 +13,7 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   created() {
-    axios.get('http://localhost:3000/api/pessoas').then(response => {
+    axios.get('/api/pessoas').then(response => {
       this.pessoas = response.data;
     }).catch(error => {
       console.log(error);
@@ -37,7 +37,6 @@ export default {
       pegou: false,
       modalVisible: false,
       modalVisible2: false,
-      active: false,
       nomeEvento: "",
       modalData: {
         idEvento: "",
@@ -102,7 +101,7 @@ export default {
     },
     pegar_tabela() { // v
       axios
-        .get("http://localhost:3000/api/eventos")
+        .get("/api/eventos")
         .then(response => {
           // console.log(response.data);
           this.res = response.data;
@@ -259,7 +258,7 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
+            axios.post('/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
 
           }
         });
@@ -278,7 +277,7 @@ export default {
       if (!erros.length) {
         axios
           .patch(
-            `http://localhost:3000/api/evento/${dados.idEvento}`, dados
+            `/api/evento/${dados.idEvento}`, dados
           )
           .then(response => {
             console.log("Editou!");

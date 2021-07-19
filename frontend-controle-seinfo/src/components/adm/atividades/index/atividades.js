@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 //imports dos componentes
@@ -9,7 +9,7 @@ export default{
     components: { cadastro, listagem },
     created(){
         axios
-            .get("http://localhost:3000/api/atividades/")
+            .get("/api/atividades/")
             .then((response) => {
                 this.res = response.data;
             })

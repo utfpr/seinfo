@@ -1,6 +1,8 @@
 const db = require('../models/index.js');
 
-const { Presenca } = db;
+const Presenca = db.presenca;
+const Atividade = db.atividade;
+const Pessoa = db.pessoa;
 
 exports.create = (req, res) => {
   const { idAtividade, idAgenda, idEvento, CPF } = req.params;
@@ -67,16 +69,26 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.getByCpf = (cpf) =>
-  Presenca.findOne({
+exports.listPresenca = (req, res) => {
+  Presenca.findAll({
+    include: [
+      {
+        model: Atividade,
+        attributes: ['titulo', 'horasParticipacao'],
+      },
+      {
+        model: Pessoa,
+        attributes: ['nome'],
+      },
+    ],
     where: {
-      cpf,
+      presenca: true,
     },
-  });
-
-exports.getByIdEvento = (idEvento) =>
-  Presenca.findOne({
-    where: {
-      idEvento,
-    },
-  });
+  })
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err.toString());
+    });
+};

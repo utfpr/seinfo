@@ -1,5 +1,5 @@
 import moment from 'moment';
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 moment.locale("pt-br");
 
 export default {
@@ -20,7 +20,7 @@ export default {
         this.active = false;
       },
       excluir(){
-        axios.delete("http://localhost:3000/api/agenda/"+ this.dataEdita.idAgenda)
+        axios.delete("/api/agenda/"+ this.dataEdita.idAgenda)
         .then((response) => {
           console.log("Deletou!",response);
           location.reload();
