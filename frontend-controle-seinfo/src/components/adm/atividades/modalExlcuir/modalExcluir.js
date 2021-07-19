@@ -11,7 +11,7 @@ export default {
         moment: function (date) {
             return moment(date);
         },
-        deletar(modalData) {
+        deletar() {
             console.log("ID " + this.modalData.idAtividade);
             axios
                 .delete(

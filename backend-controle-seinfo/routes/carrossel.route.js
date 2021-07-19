@@ -1,9 +1,7 @@
 let nomedoarquivo;
-const express = require('express');
-
-const app = express();
 const multer = require('multer');
-const path = require('path');
+const carossel = require('../controllers/carrossel.controller');
+const imagem = require('../controllers/imagem.controller');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -16,15 +14,14 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-module.exports = function (app) {
-  const carossel = require('../controllers/carrossel.controller.js');
-  const imagem = require('../controllers/imagem.controller.js');
-
+module.exports = (app) => {
   // cria um carrossel
   app.post('/api/carrossel', upload.single('urlImagem'), (req, res, next) => {
     console.log('POST DO carossel!\n');
     console.log(`\n\n\n STATUS: ${req.body.select_status}`);
     imagem.create(req, res, nomedoarquivo);
+
+    // next();
   });
 
   app.delete('/api/carrossel/:idCarrossel', carossel.delete);

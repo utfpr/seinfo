@@ -18,13 +18,6 @@ export default {
             console.log(error);
         })
     },
-    created() {
-        axios.get('/api/pessoas').then(response => {
-          this.pessoas = response.data;
-        }).catch(error => {
-          console.log(error);
-        })
-    },
     methods: {
         renderHourValidateStatus() {
             const error = this.onChangeHour();

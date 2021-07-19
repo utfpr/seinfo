@@ -192,7 +192,7 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          if (nome.value.length == 0) {
+          if (values.nome.value.length == 0) {
             alert("Nome da Categoria não pode ser vazio!");
             return;
           } else {

@@ -7,8 +7,6 @@ import modalVerMais from '../modalVerMais/modalVerMais.vue';
 import modalEditar from '../modalEditar/modalEditar.vue';
 import modalExcluir from '../modalExlcuir/modalExcluir.vue';
 
-let id = 0;
-let flag = 0;
 export default {
   components: { modalExcluir, modalVerMais, modalEditar },
   mounted() {
@@ -31,13 +29,11 @@ export default {
       pegou: false,
       modalVisible: false,
       modalVisible2: false,
-      active: false,
       nomeEvento: "",
       modalData: {
         cpfOrganizador: "",
         idEvento: "",
         nome: "",
-        cpfOrganizador: "",
         data_ini_eve: "",
         data_fim_eve: "",
         hora_ini_eve: "",
