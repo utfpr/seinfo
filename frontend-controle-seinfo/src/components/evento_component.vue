@@ -11,31 +11,48 @@
             <!-- pegar imagem do evento -->
             <img class="child" src="../assets/banner.png" />
           </div>
-          <div class="box">
-            <a-row :gutter="16">
-              <a-col :span="8">
-                <a-card class="title" title="Data de Inicio" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraInicio).format('dddd, D [de] MMMM [de] YYYY')}}</p>
-                  <p>{{moment(res.agendamento.dataHoraInicio).format('[Horário de Início:] hh:mm')}}</p>
-                </a-card>
-              </a-col>
-              <a-col :span="8">
-                <a-card class="title" title="Data de Fim" :bordered="false">
-                  <p>{{moment(res.agendamento.dataHoraFim).format('dddd, D [de] MMMM [de] YYYY')}}</p>
-                  <p>{{moment(res.agendamento.dataHoraFim).format('[Horário de Fim:] hh:mm')}}</p>
-                  <p></p>
-                </a-card>
-              </a-col>
-              <a-col :span="8">
-                <a-card class="title" title="Local" :bordered="false">
-                  <p>{{res.agendamento.local}}</p>
-                </a-card>
-              </a-col>
-            </a-row>
-          </div>
+          
+
           <a-card class="layer" title="Título do evento">
             <p class="para" style="text-align: center">{{res.nome}}</p>
-          </a-card>
+          </a-card >
+
+          <div class="card-deck" style="padding: 20px; margin-left: 3em; margin-right: 3em;">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Data de Inicio</h5>
+                <p class="card-text">
+                  {{
+                    moment(res.agendamento.dataHoraInicio).format(
+                      "dddd, D [de] MMMM [de] YYYY"
+                    )
+                  }}
+                </p>
+                <p>
+                  {{
+                    moment(res.agendamento.dataHoraInicio).format(
+                      "[Horário de Início:] hh:mm"
+                    )
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Data de Fim</h5>
+                <p>{{moment(res.agendamento.dataHoraFim).format('dddd, D [de] MMMM [de] YYYY')}}</p>
+                <p>{{moment(res.agendamento.dataHoraFim).format('[Horário de Fim:] hh:mm')}}</p>
+                <p></p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Local</h5>
+                <p>{{res.agendamento.local}}</p>
+              </div>
+            </div>
+          </div>
+
           <a-card class="layer" title="Lotes" :bordered="false">
             <p v-for="(lotes, i) in lotes" :key="i">
               <span
@@ -106,12 +123,10 @@
 </template>
 
 <script>
-import e404 from "./not_found.vue";
 import moment from "moment";
 moment.locale("pt-br");
 const axios = require("axios");
 
-var i = 0;
 const columns = [
   {
     title: "Horários",
@@ -282,7 +297,7 @@ export default {
   },
 
   components: {
-    e404
+
   }
 };
 </script>
