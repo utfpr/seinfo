@@ -66,3 +66,17 @@ exports.delete = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+exports.getByCpf = (cpf) =>
+  Presenca.findOne({
+    where: {
+      cpf,
+    },
+  });
+
+exports.getByIdEvento = (idEvento) =>
+  Presenca.findOne({
+    where: {
+      idEvento,
+    },
+  });
