@@ -15,9 +15,12 @@ export default {
                 console.log(error);
         });
     },
-    method: {
+    methods: {
         moment: function (date) {
             return moment(date);
+        },
+        confirmarPresenca (dados) {
+            console.log(dados)
         },
     },
     data(){
