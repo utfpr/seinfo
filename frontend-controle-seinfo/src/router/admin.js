@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import adm from '@/components/navAdm';
-import tabela from '@/components/tabela';
 import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
@@ -12,7 +11,7 @@ import Eventos from '@/components/adm/eventos/index/eventos.vue';
 import Relatorios from '@/components/adm/relatorios/index/relatorios.vue';
 import Atividades from '@/components/adm/atividades/index/atividades.vue';
 import Detalhes from '@/components/adm/atividades_detalhes/index/detalhes.vue';
-
+import perfil_adm from '@/components/perfil_adm';
 
 Vue.use(Router);
 export default new Router({
@@ -67,6 +66,10 @@ export default new Router({
         {
           path: 'funcPessoa',
           component: funcPessoa
+        },
+        {
+          path: 'perfil',
+          component: perfil_adm
         }
       ]
     }, {

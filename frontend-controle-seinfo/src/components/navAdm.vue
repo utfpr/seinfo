@@ -57,6 +57,11 @@
             <router-link to="/adm/funcPessoa"></router-link>
           </a-menu-item>
         </a-sub-menu>
+      <a-menu-item>
+        <a-icon type="user" />
+        Seu Perfil
+        <router-link to="/adm/perfil"> </router-link>    
+        </a-menu-item>
       </a-menu>
       <a-layout>
         <a-layout-content>
