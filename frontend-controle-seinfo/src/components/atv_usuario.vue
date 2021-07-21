@@ -7,7 +7,7 @@
 					<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
 					<tr>Horas de participação: {{record.horasParticipacao}}</tr>
 					<tr>Categoria : {{record.categoriaAtv.nome}}</tr> 
-				    <tr>Descrição: {{record.descricao}} </tr>
+					<tr>Descrição: {{record.descricao}} </tr>
 					<div class="botoes">
 						<a-button type="button" class="ic" @click="inscricao(getUser.CPF, record)"> INSCREVER-SE </a-button>
 				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
@@ -32,8 +32,7 @@
 
 <script>
 import AuthConsumer from '../contexts/authConsumer';
-
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 
@@ -56,12 +55,12 @@ export default {
 	},
 	components: {
     AuthConsumer
-  	},
+	},
 	methods: {
 	pegar_tabela_atividades(idEvento, CPF) {
 		
 		axios
-			.get(`http://localhost:3000/api/inscAtvEventAll/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEventAll/${CPF}/${idEvento}`)
 			.then(response => {
 				// console.log(this.$route.params.idEvento);
 				console.log(response.data);
@@ -75,7 +74,7 @@ export default {
 
 	pegar_tabela_atividades2(idEvento, CPF) {
 		axios
-			.get(`http://localhost:3000/api/inscAtvEvent/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEvent/${CPF}/${idEvento}`)
 			.then(response => {
 				// console.log(this.$route.params.idEvento);
 				console.log(response.data);
@@ -88,11 +87,11 @@ export default {
 	inscricao(CPF, record) {
       console.log(record);
       axios
-        .post(`http://localhost:3000/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
+        .post(`/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
         .then((response) => {
-          console.log(response.data);
-		  document.location.reload(true);
-        })
+			console.log(response.data);
+			document.location.reload(true);
+		})
         .catch(function (error) {
           alert("Não foi possível realizar a inscrição!");
           console.log(error);
@@ -100,13 +99,13 @@ export default {
 	},
 	exclusao(CPF, record) {
       axios
-        .delete(`http://localhost:3000/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
+        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
         .then((response) => {
-		  console.log(response.data);
-		  document.location.reload(true);
+			console.log(response.data);
+			document.location.reload(true);
         })
         .catch(function (error) {
-          console.log(error);
+			console.log(error);
         });
     },
 	},

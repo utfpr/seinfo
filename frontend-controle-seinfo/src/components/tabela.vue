@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <a-select defaultValue="Selecione uma Opção" class="space">
@@ -20,7 +21,7 @@
                       <th class="actions">Ações</th>
                     </tr>
                   </thead>
-                  <tbody v-for="(res, i) in res_localizar" :key="res.idEvento">
+                  <tbody v-for="(res) in res_localizar" :key="res.idEvento">
                     <tr>
                       <td>{{res.idEvento}}</td>
                       <td>{{res.nome}}</td>
@@ -193,26 +194,7 @@
 
 
 <script>
-const axios = require('axios');
-const columns = [{
-  title: 'Nome do Evento',
-  dataIndex: 'nome',
-  width: 200,
-}, {
-  title: 'Data do Evento',
-  dataIndex: 'data',
-  width: 200,
-}, {
-  title: 'Status do Evento',
-  dataIndex: 'status',
-},{
-    title: 'Action',
-    key: 'operation',
-    fixed: 'right',
-    width: 200,
-    scopedSlots: { customRender: 'action' },
-  },
-];
+import axios from '../config/axiosConfig';
 
 export default {
   methods: {
@@ -222,7 +204,7 @@ export default {
     },
     deletar_evento(pos) {
       console.log("ID "+pos);
-      axios.delete('http://localhost:3000/api/evento/'+pos)
+      axios.delete('/api/evento/'+pos)
             .then(response => {
                 console.log("Deletou!");
                 console.log(response);
@@ -232,7 +214,7 @@ export default {
     },
   
     pegar_tabela (name) {
-      axios.get('http://localhost:3000/api/' + name)
+      axios.get('/api/' + name)
       .then((response) => {
        console.log("Listou " + name);
        console.log(response.data);

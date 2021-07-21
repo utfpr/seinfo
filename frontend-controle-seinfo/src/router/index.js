@@ -23,11 +23,6 @@ export default new Router({
       component: Home
     },
     {
-      path: '/cadastroteste',
-      name: 'cadastroteste',
-      component : cadastroAtv
-    },
-    {
       path: '/usuario',
       name: 'Usuario',
       component: Usuario,

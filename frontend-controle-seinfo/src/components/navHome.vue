@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import AuthConsumer from '../contexts/authConsumer';
 import {TheMask} from 'vue-the-mask';
 export default {
@@ -81,7 +81,7 @@ export default {
       //PASSA O USUÁRIO PARA A PÁGINA DE CADASTRO
 
     axios
-    .post('http://localhost:3000/api/loginLDAP',{ 
+    .post('/api/loginLDAP',{ 
       username: this.obj_userInterno.username, 
       password: this.obj_userInterno.password
       })
@@ -123,7 +123,7 @@ export default {
       console.log("LOGIN - OK")
 
       axios
-        .post('http://localhost:3000/api/login', this.obj_login)
+        .post('/api/login', this.obj_login)
         .then(response => {
             // console.log(response.data)
             if(response.data.message === "FUNCIONOU"){
@@ -146,7 +146,7 @@ export default {
       console.log("LOGIN - OK")
 
       axios
-        .post('http://localhost:3000/api/login', this.obj_userInterno)
+        .post('/api/login', this.obj_userInterno)
         .then(response => {
             console.log(response.data)
           }).catch(error => {
@@ -167,7 +167,7 @@ export default {
 
       axios
       
-        .post('http://localhost:3000/api/recuperarSenha/'+this.obj_rec.cpf)
+        .post('/api/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
             alert("Sua nova senha foi enviada ao email cadastrado.");

@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
 import modalEditar from '../modalEditar/modalEditar.vue';
@@ -16,7 +16,7 @@ export default {
     },
     created() {
         axios
-            .get("http://localhost:3000/api/eventos")
+            .get("/api/eventos")
             .then((response) => {
                 this.eventos = response.data;
             })
@@ -25,7 +25,7 @@ export default {
             });
 
         axios
-            .get("http://localhost:3000/api/categorias")
+            .get("/api/categorias")
             .then((response) => {
                 this.categorias = response.data;
             })
@@ -34,7 +34,7 @@ export default {
             });
 
         axios
-            .get("http://localhost:3000/api/protagonistas")
+            .get("/protagonistas")
             .then((response) => {
                 this.protagonistas = response.data;
             })

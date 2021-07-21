@@ -71,13 +71,16 @@
         </form>
       </div>
     </div>
+    
   </AuthConsumer>
+
 </template>
+
 <script>
 import { TheMask } from 'vue-the-mask';
 import AuthConsumer from '../contexts/authConsumer';
 
-import axios from '../config/axiosConfig';
+const axios = require('axios');
 const auth = require('../services/auth');
 
 export default {
@@ -109,10 +112,10 @@ export default {
       this.obj.email = user.email;
       this.obj.idPessoa = user.idPessoa;
       this.obj.classificacao = user.classificacao;
-      this.obj.nivel = user.nivel;
+      this.obj.nivel = user.nivel; 
     },
     alterarPerfil(atualizaDados, token) {
-      axios.patch(`/api/pessoa/${this.obj.CPF}`, {
+      axios.patch(`http://localhost:3000/api/pessoa/${this.obj.CPF}`, {
         nome: this.obj.nome,
         email: this.obj.email,
       })
@@ -129,6 +132,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .box {
   border: solid 1px rgba(161, 161, 161, 0.233);

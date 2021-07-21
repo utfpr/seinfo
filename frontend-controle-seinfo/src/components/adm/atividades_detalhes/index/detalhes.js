@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 
 import moment from "moment";
 import listagemParticipantes from '../listagem_participantes/listagem_participantes.vue';
@@ -16,7 +16,7 @@ export default {
         }
         else{
             //quando é feito o reload da pagina, se perde toda informação vindo de "modalVerMais.vue" então tem que ser feito a requisição novamente
-            await axios.get(`http://localhost:3000/api/atividade/${this.$route.params.idAtividade}/${this.$route.params.idEvento}`)
+            await axios.get(`/api/atividade/${this.$route.params.idAtividade}/${this.$route.params.idEvento}`)
                 .then((response) => {
                     this.dataDetalhes = response.data;
                     this.dataDetalhes.nomeCategoria = response.data.categoriaAtv.nome;
@@ -24,7 +24,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
             });
-            await axios.get(`http://localhost:3000/api/evento/${this.$route.params.idEvento}`)
+            await axios.get(`/api/evento/${this.$route.params.idEvento}`)
                 .then((response) => {
                     this.dataDetalhes.data_ini_atv = moment(response.data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
                     this.dataDetalhes.data_fim_atv = moment(response.data.agendamento.dataHoraFim).format("YYYY-MM-DD");
@@ -36,7 +36,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
             });
-            await axios.get("http://localhost:3000/api/protagonistas")
+            await axios.get("/api/protagonistas")
                 .then((response) => {
                     response.data.forEach((element) => {
                         if(this.dataDetalhes.idAtividade == element.idAtividade){
