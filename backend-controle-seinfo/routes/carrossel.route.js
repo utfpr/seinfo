@@ -16,13 +16,7 @@ const upload = multer({ storage });
 
 module.exports = (app) => {
   // cria um carrossel
-  app.post('/api/carrossel', upload.single('urlImagem'), (req, res, next) => {
-    console.log('POST DO carossel!\n');
-    console.log(`\n\n\n STATUS: ${req.body.select_status}`);
-    imagem.create(req, res, nomedoarquivo);
-
-    // next();
-  });
+  app.post('/api/carrossel', upload.single('urlImagem'), carossel.create);
 
   app.delete('/api/carrossel/:idCarrossel', carossel.delete);
 

@@ -1,21 +1,31 @@
-const db = require('../models/index.js');
+const db = require('../models');
 
 const Carrossel = db.carrossel;
+// const Imagem = db.carrossel;
 
 // Post do Evento
 exports.create = (req, res) => {
-  Carrossel.create({
-    status: req.status,
-    idImagem: req.imagem,
-  })
-    .then((agevento) => {
-      // Cria um Evento
-      console.log('Criado o Carrossel!');
-      res.send(agevento);
-    })
-    .catch((err) => {
-      console.log(`Console -> ${err}`);
-    });
+  try {
+    const { body, file } = req;
+
+    console.log(body, file);
+
+    return res.status(200).json({ body, file });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+  // Carrossel.create({
+  //   status: req.status,
+  //   idImagem: req.imagem,
+  // })
+  //   .then((agevento) => {
+  //     // Cria um Evento
+  //     console.log('Criado o Carrossel!');
+  //     res.send(agevento);
+  //   })
+  //   .catch((err) => {
+  //     console.log(`Console -> ${err}`);
+  //   });
 };
 
 exports.delete = (req, res) => {
