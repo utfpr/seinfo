@@ -3,15 +3,18 @@ const multer = require('multer');
 const carossel = require('../controllers/carrossel.controller');
 const imagem = require('../controllers/imagem.controller');
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, '../frontend-controle-seinfo/src/assets');
-  },
-  filename(req, file, cb) {
-    nomedoarquivo = file.originalname;
-    cb(null, file.originalname);
-  },
-});
+const storage = require('../config/multerConfig');
+
+// const storage = multer.diskStorage({
+//   destination(req, file, cb) {
+//     cb(null, '../frontend-controle-seinfo/src/assets');
+//   },
+//   filename(req, file, cb) {
+//     nomedoarquivo = file.originalname;
+//     cb(null, file.originalname);
+//   },
+// });
+
 const upload = multer({ storage });
 
 module.exports = (app) => {
