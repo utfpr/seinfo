@@ -10,7 +10,7 @@
       >
         <div class="row justify-content-center">
           <a-form-item class="space_2">
-            <label class="ant-form-item-required">Imagem do carousel:</label>
+            <label class="ant-form-item-required">Cadastrar Imagem:</label>
             <a-input name="urlImagem" type="file"></a-input>
           </a-form-item>
 
@@ -27,12 +27,46 @@
         </div>
       </form>
     </div>
+    
+  <div>
+    <table
+      class="table table-striped"
+      cellspacing="0"
+      cellpadding="0"
+      style="text-align: center;"
+      >
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Imagem</th>
+            <th>status</th>
+          </tr>
+        </thead>
+
+        <tbody v-for="resp in res" :key="resp.idCarrossel">
+          <tr>
+            <td>{{resp.idCarrossel}}</td>
+            <td><img src="../.././../assets/test.jpg" alt="CSGO>VALORANT"></td>
+            <td>{{formatarStatus(resp.status)}}</td>
+          </tr>
+
+        </tbody>
+
+
+
+
+    </table>
+    
+  </div>
   </div>
 </template>
 
 <script>
-export default {};
+// export default {};
 </script>
+<script src="./con_carousel.js"/>
+
 <style scoped>
 .box {
   border: solid 1px rgba(161, 161, 161, 0.233);
