@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -9,8 +10,10 @@ app.use(
     origin: ['http://localhost:8080'],
   })
 );
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use('/tmp/upload', express.static(path.join(__dirname, '/tmp/upload')));
 
 const router = express.Router();
 
