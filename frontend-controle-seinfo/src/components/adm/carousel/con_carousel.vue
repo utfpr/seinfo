@@ -44,7 +44,7 @@
           </tr>
         </thead>
 
-        <tbody v-for="resp in res" :key="resp.idCarrossel">
+        <tbody v-for="resp in carrossel" :key="resp.idCarrossel">
           <tr>
             <td>{{resp.idCarrossel}}</td>
             <td><img src="../.././../assets/test.jpg" alt="CSGO>VALORANT"></td>
@@ -62,9 +62,6 @@
   </div>
 </template>
 
-<script>
-// export default {};
-</script>
 <script src="./con_carousel.js"/>
 
 <style scoped>
