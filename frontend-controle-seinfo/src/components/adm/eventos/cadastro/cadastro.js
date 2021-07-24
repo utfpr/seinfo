@@ -282,12 +282,12 @@ export default {
           .then(response => {
             console.log("Editou!");
             console.log(response);
-            this.$router.replace("/adm/cadEvento");
+            this.$router.replace("./cadEvento");
             location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        this.$router.replace("/adm/cadEvento");
+        this.$router.replace("./cadEvento");
       }
     },
   },

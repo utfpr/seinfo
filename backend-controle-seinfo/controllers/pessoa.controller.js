@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer');
 const formatCPF = require('@fnando/cpf');
 const db = require('../models/index');
 
@@ -31,8 +32,6 @@ exports.create = (req, res) => {
     classificacao = 1;
   }
 
-  const nodemailer = require('nodemailer');
-
   const remetente = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     // service: 'smtp.gmail.com',
@@ -59,7 +58,7 @@ exports.create = (req, res) => {
     nivel,
     classificacao,
   })
-    .then((pessoa) => {
+    .then(() => {
       console.log('Criado uma Pessoa!');
       remetente.sendMail(emailConfCadastro, (error) => {
         if (error) {
@@ -104,18 +103,22 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req, res) => {
+  const { nome, email, nivel } = req.body;
+  const { CPF } = req.params;
   Pessoa.update(
     {
-      nome: req.body.nome,
-      email: req.body.email,
+      nome,
+      email,
+      nivel,
     },
-    { where: { CPF: req.params.CPF } }
+    { where: { CPF } }
   )
     .then((pessoa) => {
       console.log('Atualizando uma Pessoa', pessoa);
-      res.send('Seu perfil foi atualizado !');
+      res.send('Dados atualizados com sucesso!');
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send(`Error ${err}`);
     });
 };
@@ -124,7 +127,6 @@ exports.recuperarSenha = (req, res) => {
   Pessoa.findOne({ where: { CPF: formatCPF.strip(req.params.CPF) } })
     .then((pessoa) => {
       if (pessoa) {
-        const nodemailer = require('nodemailer');
         const senha = Math.random().toString(36).slice(-8);
         const remetente = nodemailer.createTransport({
           host: 'smtp.gmail.com',
@@ -155,6 +157,7 @@ exports.recuperarSenha = (req, res) => {
           .send(`Email de recuperação enviado para:${pessoa.email}`);
       }
       res.status(404).send('Usuário não cadastrado');
+      return undefined;
     })
     .catch((err) => {
       res.status(404).send(`Error ${err}`);
@@ -163,7 +166,7 @@ exports.recuperarSenha = (req, res) => {
 
 exports.delete = (req, res) => {
   Pessoa.destroy({ where: { CPF: req.params.CPF } })
-    .then((pessoa) => {
+    .then(() => {
       console.log(`Deletando uma Pessoa com o ID: ${req.params.CPF}`);
       res.send(`${req.params.CPF} foi deletado`); // Retorna um Json para a Pagina da API
     })
@@ -216,7 +219,7 @@ exports.deletaInscricaoEvento = (req, res) => {
     .destroy({
       where: { idEvento: req.params.idEvento, CPF: req.params.CPF },
     })
-    .then((delteInsc) => {
+    .then(() => {
       res.send('deletou');
     })
     .catch((err) => {
@@ -331,7 +334,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
         CPF: req.params.CPF,
       },
     })
-    .then((deleteInsc) => {
+    .then(() => {
       res.send('deletou');
     })
     .catch((err) => {
@@ -479,14 +482,16 @@ exports.selectInscriAtvEventAll = (req, res) => {
           const auxAtv = atividade.map((Atv1) => Atv1.dataValues.idAtividade);
 
           // Monta um array com todos os idsAtividade na quala pessoa não esta inscrita
-          const vetAtividade = auxAtv.filter((element, index, array) => {
-            if (auxInsc.indexOf(element) == -1) return element;
+          const vetAtividade = auxAtv.filter((element) => {
+            if (auxInsc.indexOf(element) === -1) return element;
+            return undefined;
           });
 
           // Monta um array com todos os valores da atividade de acordo com o idAtividade
-          atividade.filter((element, index, array) => {
-            if (vetAtividade.indexOf(element.dataValues.idAtividade) != -1)
+          atividade.filter((element) => {
+            if (vetAtividade.indexOf(element.dataValues.idAtividade) !== -1)
               vetAtvEvt.push(element);
+            return undefined;
           });
 
           res.send(vetAtvEvt);

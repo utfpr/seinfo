@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App";
 import teste from "./router/teste";
 import Admin from "./router/admin";
+import Supervisor from "./router/supervisor";
 import Login from "./router/login";
 import "ant-design-vue/dist/antd.css";
 import Antd from "ant-design-vue";
@@ -17,9 +18,8 @@ Vue.use(VueTheMask);
 
 let router;
 
-const superVisor = () => {}
 
-const perm = [Usuario,superVisor,Admin]
+const perm = [Usuario,Supervisor,Admin]
 
 Vue.config.productionTip = false;
 
