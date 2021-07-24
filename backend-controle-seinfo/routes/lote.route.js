@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.post('/api/lote', lotes.create);
 
   // Procura um lote pelo ID
-  app.get('/api/lote/:loteId', lotes.findById);
+  app.get('/api/lote/:loteId',lotes.findById);
 
   // Procura todos os lotes
   app.get('/api/lotes', lotes.findAll);

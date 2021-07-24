@@ -1,66 +1,84 @@
-require("dotenv").config();
-const db = require('../models/index.js');
+require('dotenv').config();
+const db = require('../models');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const formatCPF = require('@fnando/cpf');
 
-global.authorization = ''
+let authorization = '';
 
-async function criaTokens(object) {
-  return jwt.sign(object, process.env.SECRET)
-}
-
-exports.autenticar =  async (req, res) => {
-  await axios.post(process.env.URL_LDAP, {
-      username: process.env.LOGIN_LDAP_USERNAME,
-      password: process.env.LOGIN_LDAP_PASSWORD,
-  }).then(response => {
-    authorization = response.data.token;
-    return authorization
-  }).catch(ex => console.warn(ex));
+const criaTokens = async (object) => {
+  return jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
 };
 
+exports.autenticar = async (req, res) => {
+  await axios
+    .post(process.env.URL_LDAP, {
+      username: process.env.LOGIN_LDAP_USERNAME,
+      password: process.env.LOGIN_LDAP_PASSWORD,
+    })
+    .then((response) => {
+      authorization = response.data.token;
+      return authorization;
+    })
+    .catch((err) => console.warn(err));
+};
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
-
-    db.pessoa.findOne({
+  const { username, password } = req.body;
+  return  db.pessoa
+    .findOne({
       where: {
-        CPF: formatCPF.strip(username)
-      }}).then(async pessoa => {
-        if(!pessoa) return res.status(400).send({message: "Usuário não encontrado"});
+        CPF: formatCPF.strip(username),
+      },
+    })
+    .then(async (pessoa) => {
+      if (!pessoa)
+        return res.status(404).send({ message: 'Usuário não encontrado' });
+      const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
+        pessoa.dataValues;
 
-        if(pessoa.senha === password){
-          const token = await criaTokens({idPessoa: pessoa.idPessoa, CPF: pessoa.cpf})
-          return res.status(200).send({pessoa: {
-            CPF: pessoa.dataValues.CPF, 
-            nome: pessoa.dataValues.nome,
-            email: pessoa.dataValues.email,
-            nivel: pessoa.dataValues.nivel,
-            classificacao: pessoa.dataValues.classificacao,
-            idPessoa: pessoa.dataValues.idPessoa,
-          }, message: "FUNCIONOU", token: token})
-        }
-
-        return res.status(400).send({message: "Senha incorreta"});
-      }).catch(err => {
-        return res.status(500).send("Error -> " + err);
-      })
-}
+      if (senha === password) {
+        const token = await criaTokens({
+          idPessoa,
+          CPF: pessoa.cpf,
+        });
+        return res.send({
+          pessoa: {
+            CPF,
+            nome,
+            email,
+            nivel,
+            classificacao,
+            idPessoa,
+          },
+          token,
+        });
+      }
+      return res.status(401).send({ message: 'Senha incorreta' });
+    })
+    .catch((err) => {
+      return res.status(500).send(err);
+    });
+};
 
 exports.loginLDAP = async (req, res) => {
   const { username, password } = req.body;
-  
-  await axios.post(process.env.LOGIN_URL_LDAP, {
-      username: username,
-      password: password,
-  }, { headers: { Authorization:` Bearer ${authorization}` } }).then(response => {
-      console.log(response.data);
+
+  return await axios
+    .post(
+      process.env.LOGIN_URL_LDAP,
+      {
+        username,
+        password,
+      },
+      { headers: { Authorization: ` Bearer ${authorization}` } }
+    )
+    .then((response) => {
       res.send(response.data);
-      return(response.data);
-  }).catch(ex => {
+      return response.data;
+    })
+    .catch((err) => {
       console.log(ex.response.data.status);
-      alert("RA ou senha incorretos.");
-      return res.status(500).send("Error -> " + ex);
-      //Colocar um alerta que senha ou usuário estão errados e enviar ele para a mesma página
-  });
-}
+      alert('RA ou senha incorretos.');
+      return res.status(500).send(err);
+    });
+};

@@ -104,18 +104,28 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req, res) => {
+  const { nome, email, nivel } = req.body;
+  const CPF = req.params.CPF;
+
+  console.log(nome),
+  console.log(email)
+  console.log(nivel)
+
+
   Pessoa.update(
     {
-      nome: req.body.nome,
-      email: req.body.email,
+      nome,
+      email,
+      nivel,
     },
-    { where: { CPF: req.params.CPF } }
+    { where: { CPF } }
   )
     .then((pessoa) => {
       console.log('Atualizando uma Pessoa', pessoa);
       res.send('Seu perfil foi atualizado !');
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).send(`Error ${err}`);
     });
 };
