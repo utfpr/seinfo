@@ -27,6 +27,7 @@
                 v-else
                 type="button"
                 class="ic"
+                @click="redirectAtv(record.idEvento, getUser.CPF)"
               >
                 VER DETALHES
               </a-button>
