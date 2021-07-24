@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.get('/api/eventos', eventos.findAll);
 
   // todos eventos disponiveis
-  app.get('/api/eventosD', eventos.EvDisponivel);
+  app.post('/api/eventosD', eventos.EventosDisponiveis);
 
   // receitas de um evento
   app.get('/api/eventoReceita/:idEvento', eventos.EvReceita);
