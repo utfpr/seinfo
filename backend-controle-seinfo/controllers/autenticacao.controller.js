@@ -24,7 +24,7 @@ exports.autenticar = async (req, res) => {
 };
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-  return  db.pessoa
+  return db.pessoa
     .findOne({
       where: {
         CPF: formatCPF.strip(username),

@@ -30,7 +30,7 @@ require('./routes/autenticacao.route')(app);
 require('./routes/pessoa.route')(app);
 require('./routes/presenca.route')(app);
 
-app.use('/agendas', agenda);
+app.use('/api/agendas', agenda);
 
 app.use('/', router);
 

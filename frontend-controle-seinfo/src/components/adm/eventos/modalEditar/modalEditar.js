@@ -98,12 +98,12 @@ export default {
                     .then((response) => {
                         console.log("Editou!");
                         console.log(response);
-                        this.$router.replace("/adm/eventos");
+                        this.$router.replace("./eventos");
                         location.reload();
                     });
             } else {
                 alert(erros.join("\n"));
-                this.$router.replace("/adm/eventos");
+                this.$router.replace("./eventos");
             }
         },
     },

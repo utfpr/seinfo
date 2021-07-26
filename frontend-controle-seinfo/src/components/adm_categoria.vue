@@ -202,7 +202,7 @@ export default {
               .then(response => {
                 console.log(response);
                 this.$router.push("1");
-                this.$router.replace("/adm/categoria");
+                this.$router.replace("./categoria");
               })
               .catch(error => {
                 console.log(error.response);
@@ -213,7 +213,7 @@ export default {
     },
     pegar_tabela() {
       this.$router.push("1");
-      this.$router.replace("/adm/categoria");
+      this.$router.replace("./categoria");
       axios
         .get("/api/categorias")
         .then(response => {
@@ -234,7 +234,7 @@ export default {
         .then(response => {
           console.log(response);
           this.$router.push("1");
-          this.$router.replace("/adm/categoria");
+          this.$router.replace("./categoria");
         });
     },
     deletar(pos) {
@@ -244,7 +244,7 @@ export default {
         .then(response => {
           console.log(response);
           this.$router.push("1");
-          this.$router.replace("/adm/categoria");
+          this.$router.replace("./categoria");
         });
     },
     toggle() {
