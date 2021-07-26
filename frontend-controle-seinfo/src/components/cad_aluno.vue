@@ -43,7 +43,7 @@
 
 
 <script>
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import {TheMask} from 'vue-the-mask';
 export default 
 {
@@ -75,7 +75,7 @@ export default
       console.log(this.obj_cadastroInterno)
 
       axios
-        .post('http://localhost:3000/api/pessoa', this.obj_cadastroInterno)
+        .post('/api/pessoa', this.obj_cadastroInterno)
         .then(response => {
           console.log(response)
           alert(response.data);

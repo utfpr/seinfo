@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../../../config/axiosConfig';
 import moment from 'moment';
 
 moment.locale("pt-br");
@@ -93,7 +93,7 @@ export default {
     },
     pegar_tabela() { 
       axios
-        .get("http://localhost:3000/api/eventos")
+        .get("/api/eventos")
         .then(response => {
           this.res = response.data;
         })

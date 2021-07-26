@@ -195,7 +195,7 @@ INSERT INTO lote(idLote, valor, dataAbertura, dataFechamento, idEvento) VALUES
 
 
 -- Inserting data into table participaatividade
-INSERT INTO participaAtividade(CPF, idEvento, idAtividade, presenca) VALUES
+INSERT INTO presenca(CPF, idEvento, idAtividade, presenca) VALUES
 ('60025354451', 1, 1, 0),
 ('33640892777', 2, 2, 1),
 ('34081245285', 3, 3, 2),

@@ -18,6 +18,7 @@ import carousel from './carousel.vue';
 import box from './box_evt.vue';
 import ft from './footer.vue';
 
+
 export default {
   components: {
     navHome,
