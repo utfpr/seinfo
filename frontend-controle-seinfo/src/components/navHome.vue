@@ -120,24 +120,21 @@ export default {
       this.obj_userInterno.password = "";
       this.visible = true;
     },
-    LoginUser(signIn) {
-      console.log("LOGIN - OK")
+    async LoginUser(signIn) {
 
-      axios
-        .post('/api/login', this.obj_login)
-        .then(response => {
-            // console.log(response.data)
-            if(response.data.message === "FUNCIONOU"){
-              signIn({token: response.data.token, user: response.data.pessoa});
-              window.location.replace(
-                response.data.pessoa.nivel ? perm[response.data.pessoa.nivel]: 'usuario'
-                );
+      try {
+        console.log(signIn)
+        const response = await axios.post('/api/login', this.obj_login)
+        signIn({token: response.data.token, user: response.data.pessoa});
+        window.location.replace(
+          response.data.pessoa.nivel ? perm[response.data.pessoa.nivel]: 'usuario'
+        );  
+      } catch (error) {
+        console.log(error)
+      }
 
-            }
-          }).catch(error => {
-            console.log(error.response)
-          });
-
+            
+          
       console.log("FEZ O LOGIN")
     },
     handleOk() {
