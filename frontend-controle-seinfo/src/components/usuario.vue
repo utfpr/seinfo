@@ -8,7 +8,7 @@
             <a-menu-item key="1">
               <a-icon type="home" />
               <span>Home</span>
-              <router-link to="/usuario/homeUsu"></router-link>
+              <router-link to="/usuario"></router-link>
             </a-menu-item>
             <a-menu-item key="2">
               <a-icon type="user" />

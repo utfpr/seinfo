@@ -4,7 +4,7 @@ import adm from '@/components/navAdm';
 import Cad_Receita from '@/components/cad_receita';
 import Cad_Despesa from '@/components/cad_despesa';
 import Cad_Pessoa from '@/components/cad_pessoa';
-import Cad_Carousel from '@/components/con_carousel';
+import Cad_Carousel from '@/components/adm/carousel/con_carousel.vue';
 import Cad_Categoria from '@/components/adm_categoria';
 import funcPessoa from '@/components/func_pessoa';
 import Eventos from '@/components/adm/eventos/index/eventos.vue';
@@ -40,7 +40,7 @@ export default new Router({
           component: Detalhes
         },
         {
-          path: 'conCarousel',
+          path: '/adm/conCarousel',
           component: Cad_Carousel
         },
         {

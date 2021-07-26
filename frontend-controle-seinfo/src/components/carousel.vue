@@ -1,6 +1,6 @@
 <template>
 <div>
-  <a-carousel effect="fade" autoplay arrows >
+  <a-carousel effect="fade" autoplay arrows  >
     <div
       slot="prevArrow"
       class="custom-slick-arrow"
@@ -15,19 +15,42 @@
     >
       <a-icon type="right" />
     </div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
+
+
+    <div v-for="img in imagens" :key="img.idImagem">
+      <img :src="img.Imagem.url">
+    </div>
   </a-carousel>
 </div>
 </template>
-<script>
-export default {
-}
-</script>
-<style scoped>
 
+
+
+<script>
+import axios from '../config/axiosConfig';
+export default {
+  data() {
+    return {
+      imagens: [],
+    }
+  },
+  mounted() {
+    this.getAllImages();
+  },
+  methods: {
+    async getAllImages(){
+      try {
+        const {data} = await axios.get('/api/getAllCarrosselAvailables');
+        this.imagens = data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
 .ant-carousel >>> .custom-slick-arrow {
   width: 25px;
   height: 25px;
