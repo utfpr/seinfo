@@ -21,5 +21,11 @@ module.exports = {
     camelcase: 'off',
     'linebreak-style': 0,
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
