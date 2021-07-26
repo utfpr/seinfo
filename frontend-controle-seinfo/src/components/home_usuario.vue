@@ -26,7 +26,7 @@
               <a-button
                 v-else
                 type="button"
-                class="ic"
+                class="ic-yellow"
                 @click="redirectAtv(record.idEvento, getUser.CPF)"
               >
                 VER DETALHES
@@ -177,9 +177,24 @@ export default {
   color: black;
   cursor: pointer;
 }
+.ic-yellow{
+  float: right;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  background-color: rgba(251, 253, 100, 0.5);
+  border: 2px solid rgb(212, 202, 64);
+  color: black;
+  cursor: pointer;
+}
+.ic-yellow:hover{
+  color: white;
+  background-color: rgba(236, 87, 28, 0.5);
+  border: 2px solid rgb(223, 104, 89);
+
+}
 .ic:hover{
   color: white;
-  background-color: rgb(64, 212, 64);
+  background-color: rgb(127, 206, 127);
 }
 .ic-close {
   background-color: rgb(255, 99, 99);

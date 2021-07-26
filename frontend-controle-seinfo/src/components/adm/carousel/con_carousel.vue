@@ -53,7 +53,13 @@
             </td>
             <td>
               <div class="row justify-content-center">
-                <button type="button" v-on:click="deleteCarrossel(resp.idCarrossel)" class="btn btn-outline-primary btn-sm">DELETAR</button>
+                <button 
+                  type="button" 
+                  v-on:click="deleteCarrossel(resp.idCarrossel)" 
+                  class="btn btn-outline-primary btn-sm"
+                >
+                  Remover
+                </button>
               </div>
             </td>
           </tr>
