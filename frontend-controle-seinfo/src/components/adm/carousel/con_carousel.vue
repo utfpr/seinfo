@@ -41,14 +41,24 @@
             <th>ID</th>
             <th>Imagem</th>
             <th>status</th>
+            <th>Salvar</th>
           </tr>
         </thead>
 
         <tbody v-for="resp in carrossel" :key="resp.idCarrossel">
-          <tr>
+          <tr class="linhaCarrossel">
             <td>{{resp.idCarrossel}}</td>
-            <td><img src="../.././../assets/test.jpg" alt="CSGO>VALORANT"></td>
-            <td>{{formatarStatus(resp.status)}}</td>
+            <td><img class="imgCarrossel" :src="resp.Imagem.url" alt=""></td>
+            <td> <select name="select_status" :value="resp.status" :id="resp.idCarrossel">
+              <option value="1">Disponivel</option>
+              <option value="0">Indisponivel</option>
+            </select>
+            </td>
+            <td>
+              <div class="row justify-content-center">
+                <button type="submit" class="btn btn-outline-primary btn-sm" v-on:click="salvar(resp.idCarrossel, resp.idImagem)">Cadastrar</button>
+              </div>
+            </td>
           </tr>
 
         </tbody>
@@ -64,34 +74,4 @@
 
 <script src="./con_carousel.js"/>
 
-<style scoped>
-.box {
-  border: solid 1px rgba(161, 161, 161, 0.233);
-  margin-left: 25%;
-  margin-top: 10px;
-  margin-right: 25%;
-  padding: 20px;
-}
-
-.title {
-  margin-top: 30px;
-}
-
-.space {
-  padding: 2px;
-  width: 221px;
-}
-
-label {
-  margin-bottom: 0;
-}
-
-.ant-form-item {
-  margin-bottom: 0;
-}
-
-.space_2 {
-  padding: 2px;
-  width: 444px;
-}
-</style>
+<style scoped src="./con_carousel.css" />

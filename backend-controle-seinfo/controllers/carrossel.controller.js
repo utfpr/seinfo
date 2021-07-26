@@ -69,9 +69,6 @@ exports.update = async (req, res) => {
 exports.show = async (req, res) => {
   try {
     const carrossel = await Carrossel.findAll({
-      where: {
-        status: true,
-      },
       include: [
         {
           model: Imagem,
@@ -79,8 +76,8 @@ exports.show = async (req, res) => {
           attributes: ['url'],
         },
       ],
-      raw: true,
-      attributes: ['idImagem', 'idCarrossel'],
+      // raw: true,
+      attributes: ['idImagem', 'idCarrossel', 'status'],
     });
 
     return res.status(200).json(carrossel);
