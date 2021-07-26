@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
   // '/api/recuperarSenha/'+CPF
 
-  // Procura um pessoa pelo CPF
+  // Procura um pesso a pelo CPF
   app.get('/api/pessoa/:CPF', pessoa.findById);
 
   // Procura todos os pessoa
