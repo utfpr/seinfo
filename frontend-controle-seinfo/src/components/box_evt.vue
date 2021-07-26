@@ -20,20 +20,16 @@
 import axios from '../config/axiosConfig';
 export default {
   mounted() {
-    this.pegar_tabela("eventosD");
+    this.pegar_tabela();
   },
   methods: {
-    pegar_tabela(name) {
-      axios
-        .get("/api/" + name)
-        .then(response => {
-          // console.log("Listou " + name);
-          // console.log(response.data);
-          this.res = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    async pegar_tabela() {
+      try {
+        const response = await axios.get("/api/getAllAvailableEvents");
+        this.res = response.data;
+      } catch (error) {
+        console.log(error); 
+      }
     }
   },
   data() {
