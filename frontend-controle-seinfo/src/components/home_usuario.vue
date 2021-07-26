@@ -13,12 +13,23 @@
         >
           <div class="table-responsive col-md-12">
             <p class="atividade">
-              Atividades: {{ record.nome }} <a-button
+              ATIVIDADES 
+
+              <a-button
+                v-if="!record.estaInscrito"
                 type="button"
                 class="ic"
                 @click="inscricao(getUser.CPF, record.idEvento)"
               >
                 INSCREVER-SE
+              </a-button>
+              <a-button
+                v-else
+                type="button"
+                class="ic"
+                @click="redirectAtv(record.idEvento, getUser.CPF)"
+              >
+                VER DETALHES
               </a-button>
             </p>
             <table
@@ -76,6 +87,7 @@
 
 import AuthConsumer from '../contexts/authConsumer.vue';
 
+import auth from '../services/auth';
 import axios from '../config/axiosConfig';
 
 const columns = [{
@@ -102,6 +114,9 @@ export default {
       columns,
       loading: false,
       confirmLoading: false,
+      obj: {
+        CPF: '',
+      }
     };
   },
   mounted() {
@@ -112,16 +127,20 @@ export default {
     redirectAtv(idEvento, CPF) {
       this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
     },
-    pegar_tabela_eventos(name) {
-      axios.get(`/api/${name}`)
-        .then((response) => {
-        // console.log("Listou " + name);
-          console.log('eventos', response.data);
-          this.res_localizar = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async pegarPerfil() {
+      const user = await auth.getUser();
+      this.obj.CPF = user.CPF;
+    },
+    async pegar_tabela_eventos(name) {
+      try{
+      await this.pegarPerfil()
+        const response = await axios.post(`/api/${name}`, {CPF: this.obj.CPF})
+          // console.log("Listou " + name);
+            this.res_localizar = response.data;
+            console.log(this.res_localizar);
+         } catch(error) {
+            console.log(error);
+          }
     },
     pegar_tabela_atividades(name) {
       axios.get(`/api/${name}`)
