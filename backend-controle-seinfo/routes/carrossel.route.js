@@ -12,4 +12,6 @@ module.exports = (app) => {
   app.put('/api/carrossel/:idCarrossel', carossel.update);
 
   app.get('/api/getAllCarrossel', carossel.show);
+
+  app.get('/api/getAllCarrosselAvailables', carossel.showAllAvailables);
 };

@@ -11,9 +11,10 @@ export default {
   data() {
     return {
       carrossel: [],
-      // imagemUrl: "",
-      // status: '',
-      // asd: [],
+      requestData: {
+        file: "",
+        status: 1,
+      },
     };
   },
 
@@ -31,53 +32,64 @@ export default {
         console.log(error);
       }
     },
+    imageChange(file){
+      this.requestData.file = file[0];
+    },
 
-    async salvar(idCarrossel, idImagem) {
+    async handleSubmit() {
       try {
-        const novoStatus = document.getElementById(idCarrossel).value;
+        
+        if(!this.requestData.file) 
+        return alert("Insira uma Imagem");
 
-        await axios.post(
-          "/api/carrossel/",
-          { status: novoStatus, idImagem: idImagem, idCarrossel: idCarrossel },
-          { params: idCarrossel }
-        );
+        const image = new FormData();
+        image.append('urlImagem', this.requestData.file);
+        image.append("select_status", this.requestData.status);
+
+        const response = await axios.post('/api/carrossel', image)
+
+        if(response.status === 200) 
+          return alert("Imagem cadastrada com sucesso!");
+        else 
+          return alert("Houve um erro durante o cadastro!");
+
       } catch (error) {
         console.log(error);
       }
     },
 
-    // async cadastrarImagem() {
-    //   console.log(this.imagemUrl);
-    //   console.log(this.status);
+    async handleChangeStatus(newStatus, idCarrossel) {
+      try {
+        const response  = await axios.put(`/api/carrossel/${idCarrossel}`, {
+          status: newStatus,
+          idCarrossel
+        });
 
-    //   const body = {
-    //     select_status: this.status,
-    //     body: this.imagemUrl
-    //   }
+        if(response.status === 200) 
+          return alert("Status alterado com sucesso!");
+        else 
+          return alert("Houve um erro durante o processo!");
+        } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteCarrossel(idCarrossel) {
+      try {
+        const response  = await axios.delete(`/api/carrossel/${idCarrossel}`, {
+          idCarrossel
+        });
 
-    //   const { data } = await axios.post("/api/carrossel", body)
+        if(response.status === 200) 
+          return alert("Imagem deletada com sucesso!");
+        else 
+          return alert("Houve um erro durante o processo!");
 
-    // const form_data = new FormData();
-    // form_data.append("file", this.imagemUrl);
-    // const request_config = {
-    //   method: "post",
-    //   url: "/api/carrossel",
-    //   data: {file:form_data, select_status:this.status},
-    // };
-    // await axios(request_config);
+      } catch (error) {
+        console.log(error);
 
-    // await axios.post(
-    //   "/api/carrossel",
-    //   {
-    //     file: this.imagemUrl,
-    //     select_status: this.status,
-    //   },
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }
-    // );
-    // },
+      }
+    }
+
+    
   },
 };

@@ -46,12 +46,12 @@ exports.delete = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { status, idImagem, idCarrossel } = req.body;
+    const { status } = req.body;
+    const { idCarrossel } = req.params;
 
     const carrossel = Carrossel.update(
       {
         status,
-        idImagem,
       },
       {
         where: {
@@ -69,6 +69,29 @@ exports.update = async (req, res) => {
 exports.show = async (req, res) => {
   try {
     const carrossel = await Carrossel.findAll({
+      include: [
+        {
+          model: Imagem,
+          as: 'Imagem',
+          attributes: ['url'],
+        },
+      ],
+      // raw: true,
+      attributes: ['idImagem', 'idCarrossel', 'status'],
+    });
+
+    return res.status(200).json(carrossel);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.showAllAvailables = async (req, res) => {
+  try {
+    const carrossel = await Carrossel.findAll({
+      where: {
+        status: 1,
+      },
       include: [
         {
           model: Imagem,
