@@ -21,7 +21,4 @@ package-lock.json
 *.sln
 
 .env
-tmp/upload/*.png
-tmp/upload/*.jpg
-tmp/upload/*.gif
-tmp/upload/*.svg
+tmp/upload/
