@@ -29,18 +29,18 @@ exports.findById = async (req, res) => {
     if (lote) {
       return res.status(200).send({ lote });
     }
-    res.status(404).send({ message: 'Lote não encontrado' });
+    return res.status(404).send({ message: 'Lote não encontrado' });
   } catch (err) {
-    res.status(500).send(err.message);
+    return res.status(500).send(err.message);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
     const lotes = await Lotes.findAll();
-    res.status(200).send(lotes);
+    return res.status(200).send(lotes);
   } catch (err) {
-    res.status(500).send(err.message);
+    return res.status(500).send(err.message);
   }
 };
 
@@ -57,9 +57,9 @@ exports.loteEvento = async (req, res) => {
     if (lotes.length) {
       return res.status(200).send({ lotes });
     }
-    res.status(404).send({ message: 'Evento não encontrado' });
+    return res.status(404).send({ message: 'Evento não encontrado' });
   } catch (err) {
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 };
 
@@ -88,9 +88,9 @@ exports.atualiza = async (req, res) => {
       }
     );
 
-    res.status(200).send(lote);
+    return res.status(200).send(lote);
   } catch (err) {
-    res.status(500).send(err.message);
+    return res.status(500).send(err.message);
   }
 };
 
@@ -103,8 +103,8 @@ exports.delete = async (req, res) => {
     if (lote) {
       return res.status(200).send({ sucess: true });
     }
-    res.status(404).send({ message: 'Lote não encontrado' });
+    return res.status(404).send({ message: 'Lote não encontrado' });
   } catch (err) {
-    res.status(500).send(err.message);
+    return res.status(500).send(err.message);
   }
 };
