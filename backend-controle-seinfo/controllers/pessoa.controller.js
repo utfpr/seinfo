@@ -104,17 +104,7 @@ exports.findAll = (req, res) => {
 
 exports.atualiza = (req, res) => {
   const { nome, email, nivel } = req.body;
-<<<<<<< HEAD
-  const CPF = req.params.CPF;
-
-  console.log(nome),
-  console.log(email)
-  console.log(nivel)
-
-
-=======
   const { CPF } = req.params;
->>>>>>> d599220e8fb9d104a55135b18f73c5860d92093f
   Pessoa.update(
     {
       nome,
@@ -128,11 +118,7 @@ exports.atualiza = (req, res) => {
       res.send('Dados atualizados com sucesso!');
     })
     .catch((err) => {
-<<<<<<< HEAD
-      console.log(err)
-=======
       console.log(err);
->>>>>>> d599220e8fb9d104a55135b18f73c5860d92093f
       res.status(500).send(`Error ${err}`);
     });
 };
