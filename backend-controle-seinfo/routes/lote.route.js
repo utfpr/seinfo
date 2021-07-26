@@ -1,6 +1,6 @@
-module.exports = function (app) {
-  const lotes = require('../controllers/lote.controller.js');
+const lotes = require('../controllers/lote.controller.js');
 
+module.exports = function (app) {
   // Insere um Novo lote
   app.post('/api/lote', lotes.create);
 
@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.get('/api/lote/:loteId', lotes.findById);
 
   // Procura todos os lotes
-  app.get('/api/lotes', lotes.findAll);
+  app.get('/api/lote', lotes.findAll);
 
   // Procura todos os Lotes de um evento pelo ID
   app.get('/api/loteEvento/:idEvento', lotes.loteEvento);
