@@ -50,6 +50,7 @@
 import axios from '../config/axiosConfig';
 import AuthConsumer from '../contexts/authConsumer';
 import {TheMask} from 'vue-the-mask';
+const perm = ['usuario','supervisor','adm']
 export default {
   data() {
     return {
@@ -129,9 +130,7 @@ export default {
             if(response.data.message === "FUNCIONOU"){
               signIn({token: response.data.token, user: response.data.pessoa});
               window.location.replace(
-                response.data.pessoa.nivel === 1 
-                  ? '/usuario' 
-                  : '/adm'
+                response.data.pessoa.nivel ? perm[response.data.pessoa.nivel]: 'usuario'
                 );
 
             }

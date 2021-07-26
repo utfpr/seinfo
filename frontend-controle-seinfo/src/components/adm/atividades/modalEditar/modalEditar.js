@@ -95,12 +95,12 @@ export default {
           .then((response) => {
             console.log("Editou!");
             console.log(response);
-            this.$router.replace("/adm/atividade");
+            this.$router.replace("./atividades");
             location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        this.$router.replace("/adm/atividade");
+        this.$router.replace("./atividades");
       }
     },
   },
