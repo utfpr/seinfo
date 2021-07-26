@@ -27,5 +27,11 @@ module.exports = {
         argsIgnorePattern: 'next',
       },
     ],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
