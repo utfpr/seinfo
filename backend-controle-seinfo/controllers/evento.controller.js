@@ -47,7 +47,10 @@ exports.create = async (req, res) => {
       })
     );
 
-    const pessoa = await Pessoa.findOne({ where: { CPF: cpfOrganizador } });
+    const pessoa = await Pessoa.findOne({
+      where: { CPF: cpfOrganizador },
+    });
+
     await Organizacao.create({
       // 'horasParticipacao': req.body.horasParticipacao,
       idEvento: evento.idEvento,
@@ -114,6 +117,7 @@ exports.atualiza = (req, res) => {
       res.status(500).send(`Error ${err}`);
     });
 };
+
 exports.delete = (req, res) => {
   Evento.destroy({ where: { idEvento: req.params.idEvento } })
     .then(() => {
@@ -125,10 +129,10 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.EventosDisponiveis = async (req, res) => {
+exports.getAllEventosCPF = async (req, res) => {
   try {
     const { CPF } = req.body;
-
+    console.log(CPF);
     const eventos = await Evento.findAll({
       where: { status: 1 },
       include: [
@@ -153,6 +157,25 @@ exports.EventosDisponiveis = async (req, res) => {
     }));
 
     return res.status(200).json(eventosVerificados);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.getAllAvailableEvents = async (req, res) => {
+  try {
+    const eventos = await Evento.findAll({
+      where: { status: 1 },
+      include: [
+        { model: db.lote, as: 'lotes' },
+        { model: db.agenda, as: 'agendamento' },
+      ],
+    });
+
+    if (!eventos)
+      return res.status(404).json('Não existe nenhum evento disponivel');
+
+    return res.status(200).json(eventos);
   } catch (error) {
     return res.status(500).json(error);
   }

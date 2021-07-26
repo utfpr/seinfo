@@ -13,7 +13,9 @@ module.exports = (app) => {
   app.get('/api/eventos', eventos.findAll);
 
   // todos eventos disponiveis
-  app.post('/api/eventosD', eventos.EventosDisponiveis);
+  app.post('/api/eventosD', eventos.getAllEventosCPF);
+
+  app.get('/api/getAllAvailableEvents', eventos.getAllAvailableEvents);
 
   // receitas de um evento
   app.get('/api/eventoReceita/:idEvento', eventos.EvReceita);

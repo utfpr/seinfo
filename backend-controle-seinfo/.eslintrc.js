@@ -21,6 +21,11 @@ module.exports = {
     'no-console': 'off',
     camelcase: 'off',
     'linebreak-style': 0,
-    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: 'next',
+      },
+    ],
   },
 };
