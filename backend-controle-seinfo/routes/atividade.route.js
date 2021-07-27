@@ -5,14 +5,14 @@ module.exports = function (app) {
   // Insere uma atividade
   app.post('/api/atividade', atividades.create);
 
-  //Procura uma atividade pelo id
-  app.get('/api/atividade/:idAtividade/:idEvento', atividades.findById);
+  //Procura uma atividade pelo id PUBLIC
+  // app.get('/api/atividade/:idAtividade/:idEvento', atividades.findById);
 
-  // Procura todas as atividades
-  app.get('/api/atividades', atividades.findAll);
+  // Procura todas as atividades PUBLIC
+  // app.get('/api/atividades', atividades.findAll);
 
-  //seleciona as atividades de um evento especifico
-  app.get('/api/atividade/:idEvento', atividades.AtividadeEvento);
+  //seleciona as atividades de um evento especifico PUBLIC
+  // app.get('/api/atividade/:idEvento', atividades.AtividadeEvento);
 
   // Update de uma atividade pelo ID
   app.patch('/api/atividade/:idAtividade', atividades.atualiza);

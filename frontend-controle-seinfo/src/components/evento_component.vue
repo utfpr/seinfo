@@ -227,7 +227,7 @@ export default {
     this.pegar_tabela("evento/" + this.$route.params.id);
     // pegar atividades
     axios
-      .get("/api/atividade/" + this.$route.params.id)
+      .get("/public/atividade/" + this.$route.params.id)
       .then(response => {
         // console.log("atividades");
         // console.log(response.data);
@@ -262,9 +262,9 @@ export default {
 
     pegar_tabela(name) {
       axios
-        .get("/api/" + name)
+        .get("/public/" + name)
         .then(response => {
-          // console.log("Listou " + name);
+          console.log("Listou " + name);
           // console.log(response.data);
           this.res = response.data;
           this.fetch = true;

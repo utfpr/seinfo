@@ -1,5 +1,6 @@
 const presencas = require('../controllers/presenca.controller');
+const app = require('express').Router();
 
-module.exports = (app) => {
-  app.get('/api/presenca/listPresenca', presencas.listPresenca);
-};
+app.get('/listPresenca', presencas.listPresenca);
+
+module.exports = app;

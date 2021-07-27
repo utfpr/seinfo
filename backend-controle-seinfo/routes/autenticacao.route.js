@@ -7,7 +7,7 @@ module.exports = function (app) {
   }
   setTimeout(autenticar_API, 1);
   setInterval(autenticar_API, 1000 * 60 * 60 * 23);
-  app.post('/api/autentication/', login.autenticar);
-  app.post('/api/login/', login.login);
-  app.post('/api/loginLDAP/', login.loginLDAP);
+  // app.post('/api/autentication/', login.autenticar);
+  // app.post('/api/login/', login.login);
+  // app.post('/api/loginLDAP/', login.loginLDAP);
 };

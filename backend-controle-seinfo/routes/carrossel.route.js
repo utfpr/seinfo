@@ -1,17 +1,24 @@
+const carossel = require('../controllers/carrossel.controller');
+const app = require('express').Router();
+
 const multer = require('multer');
 const multerConfig = require('../config/multerConfig');
-const carossel = require('../controllers/carrossel.controller');
-
 const upload = multer(multerConfig);
 
-module.exports = (app) => {
-  app.post('/api/carrossel', upload.single('urlImagem'), carossel.store);
+// store
+app.post('/', upload.single('urlImagem'), carossel.store);
+// /api/carrossel
 
-  app.delete('/api/carrossel/:idCarrossel', carossel.delete);
+// delete
+app.delete('/:idCarrossel', carossel.delete);
+// /api/carrossel/:idCarrossel
 
-  app.put('/api/carrossel/:idCarrossel', carossel.update);
+// update
+app.put('/:idCarrossel', carossel.update);
+// /api/carrossel/
 
-  app.get('/api/getAllCarrossel', carossel.show);
+// show
+app.get('/getAllCarrossel', carossel.show);
+// /api/getAllCarrossel
 
-  app.get('/api/getAllCarrosselAvailables', carossel.showAllAvailables);
-};
+module.exports = app;

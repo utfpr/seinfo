@@ -61,7 +61,7 @@ export default
       console.log(this.obj_cadastro)
 
       axios
-        .post('/api/pessoa', this.obj_cadastro)
+        .post('/public/pessoa', this.obj_cadastro)
         .then(response => {
           console.log(response)
           alert(response.data);

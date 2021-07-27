@@ -26,7 +26,7 @@ export default {
 
     async listar_carousel() {
       try {
-        const response = await axios.get("/api/getAllCarrossel");
+        const response = await axios.get("/public/carrossel/getAllCarrossel");
         this.carrossel = response.data;
       } catch (error) {
         console.log(error);

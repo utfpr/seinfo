@@ -40,7 +40,7 @@ export default {
   methods: {
     async getAllImages(){
       try {
-        const {data} = await axios.get('/api/getAllCarrosselAvailables');
+        const {data} = await axios.get('/public/getAllCarrosselAvailables');
         this.imagens = data;
       } catch (error) {
         console.log(error);

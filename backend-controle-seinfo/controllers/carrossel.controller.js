@@ -5,10 +5,11 @@ const Imagem = db.imagem;
 
 exports.store = async (req, res) => {
   try {
+    const urlAPI = process.env.URL_API || 'http://localhost:3000';
     const { select_status } = req.body;
     const { path } = req.file;
     const pathImage = path.slice(path.indexOf('tmp'), path.length);
-    const urlImage = `${process.env.URL_API}/${pathImage}`;
+    const urlImage = `${urlAPI}/${pathImage}`;
 
     const imagem = await Imagem.create({
       url: urlImage,

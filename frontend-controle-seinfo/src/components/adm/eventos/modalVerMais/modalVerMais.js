@@ -13,7 +13,7 @@ export default {
     //Funcao chamada quando OpenModal() é chamada em evento/listagem.js
     this.$root.$on('loadAtividades', (idEvento) => {
       axios
-        .get("/api/atividade/" + idEvento)
+        .get("/public/atividade/" + idEvento)
         .then((response) => {
           this.res = response.data;
         })

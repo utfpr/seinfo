@@ -13,6 +13,7 @@ const env = {
     min: parseInt(process.env.DB_POOL_MIN, 10),
     acquire: parseInt(process.env.DB_POOL_ACQUIRE, 10),
     idle: parseInt(process.env.DB_POOL_IDLE, 10)
-  }
+  },
+  logging: false
 };
 module.exports = env;

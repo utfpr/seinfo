@@ -12,7 +12,7 @@ export default {
   },
   created() {
     axios
-      .get("/api/eventos")
+      .get("/public/eventos")
       .then((response) => {
         this.eventos = response.data;
       })
