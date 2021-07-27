@@ -132,7 +132,6 @@ exports.delete = (req, res) => {
 exports.getAllEventosCPF = async (req, res) => {
   try {
     const { CPF } = req.body;
-    console.log(CPF);
     const eventos = await Evento.findAll({
       where: { status: 1 },
       include: [

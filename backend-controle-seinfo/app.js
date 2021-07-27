@@ -17,10 +17,11 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/tmp/upload', express.static(path.join(__dirname, '/tmp/upload')));
 
 const router = express.Router();
-app.use(auth);
 
+app.use(auth);
 // Chamo todas as minhas Rotas aqui
 require('./routes/evento.route')(app);
 require('./routes/lote.route')(app);

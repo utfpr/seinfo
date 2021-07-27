@@ -1,12 +1,11 @@
-module.exports = function (app) {
-  const pessoa = require('../controllers/pessoa.controller.js');
+const pessoa = require('../controllers/pessoa.controller');
 
+module.exports = (app) => {
   // Insere um Novo pessoa
   app.post('/api/pessoa', pessoa.create);
 
   // Recuperar senha pelo CPF
   app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
-  // '/api/recuperarSenha/'+CPF
 
   // Procura um pesso a pelo CPF
   app.get('/api/pessoa/:CPF', pessoa.findById);
