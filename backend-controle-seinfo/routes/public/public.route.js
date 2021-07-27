@@ -1,11 +1,13 @@
 const app = require('express').Router();
 
-//const login = require('../../controllers/autenticacao.controller.js');
+// controllers
 const login = require('../../controllers/autenticacao.controller');
 const carrossel = require('../../controllers/carrossel.controller');
 const eventos = require('../../controllers/evento.controller');
 const atividades = require('../../controllers/atividade.controller');
 const pessoa = require('../../controllers/pessoa.controller.js');
+
+// ROTAS --------------------------------------------------------------
 
 // login
 app.post('/autentication/', login.autenticar);
@@ -18,7 +20,7 @@ app.get('/getAllCarrosselAvailables', carrossel.showAllAvailables);
 // eventos
 app.get('/getAllAvailableEvents', eventos.getAllAvailableEvents);
 app.get('/evento/:idEvento', eventos.findById);
-app.get('/eventos', eventos.findAll)
+app.get('/evento', eventos.findAll)
 
 // Atividades
 app.get('/atividades', atividades.findAll);

@@ -1,5 +1,4 @@
 const atividades = require('../controllers/atividade.controller.js');
-const auth = require('../auth');
 
 module.exports = function (app) {
   // Insere uma atividade

@@ -115,7 +115,7 @@ export default {
       this.obj.nivel = user.nivel; 
     },
     alterarPerfil(atualizaDados, token) {
-      axios.patch(`http://localhost:3000/api/pessoa/${this.obj.CPF}`, {
+      axios.patch(`/api/pessoa/${this.obj.CPF}`, {
         nome: this.obj.nome,
         email: this.obj.email,
       })

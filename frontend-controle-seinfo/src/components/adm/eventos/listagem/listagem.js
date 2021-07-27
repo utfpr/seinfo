@@ -89,7 +89,7 @@ export default {
     },
     pegar_tabela() { 
       axios
-        .get("/public/eventos")
+        .get("/public/evento")
         .then(response => {
           this.res = response.data;
         })

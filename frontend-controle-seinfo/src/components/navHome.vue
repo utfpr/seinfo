@@ -163,7 +163,7 @@ export default {
 
       axios
       
-        .post('/api/recuperarSenha/'+this.obj_rec.cpf)
+        .post('/public/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
             alert("Sua nova senha foi enviada ao email cadastrado.");

@@ -215,7 +215,7 @@ export default {
       this.$router.push("1");
       this.$router.replace("./categoria");
       axios
-        .get("/api/categorias")
+        .get("/api/categoria")
         .then(response => {
           // console.log(response.data);
           this.res = response.data;

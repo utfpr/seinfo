@@ -9,6 +9,8 @@ const agenda = require('./routes/agenda.route');
 const public = require('./routes/public/public.route');
 const presenca = require('./routes/presenca.route');
 const carrossel = require('./routes/carrossel.route');
+const lote = require('./routes/lote.route');
+const categoria = require('./routes/categoria.route');
 
 // Chamada do express
 const app = express();
@@ -31,14 +33,14 @@ app.use('/api', auth);
 
 // Chamo todas as minhas Rotas aqui
 require('./routes/evento.route')(app);
-require('./routes/lote.route')(app);
-require('./routes/categoria.route')(app);
 require('./routes/atividade.route')(app);
 require('./routes/pessoa.route')(app);
 
 app.use('/api/agendas', agenda);
 app.use('/api/presenca', presenca);
 app.use('/api/carrossel', carrossel);
+app.use('/api/lote', lote);
+app.use('/api/categoria', categoria);
 app.use('/public', public);
 
 // Expirar login (O token já está fazendo isso)

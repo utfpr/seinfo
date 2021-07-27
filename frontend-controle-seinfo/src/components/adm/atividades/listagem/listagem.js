@@ -16,7 +16,7 @@ export default {
     },
     created() {
         axios
-            .get("/public/eventos")
+            .get("/public/evento")
             .then((response) => {
                 this.eventos = response.data;
             })
@@ -25,7 +25,7 @@ export default {
             });
 
         axios
-            .get("/api/categorias")
+            .get("/api/categoria")
             .then((response) => {
                 this.categorias = response.data;
             })

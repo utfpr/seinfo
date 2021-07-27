@@ -1,5 +1,4 @@
 const agendas = require('../controllers/agenda.controller');
-const auth = require('../auth');
 const app = require('express').Router();
 
 // Insere uma nova Agenda

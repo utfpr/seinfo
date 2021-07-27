@@ -8,7 +8,7 @@ module.exports = (app) => {
   // app.get('/api/evento/:idEvento', eventos.findById);
 
   // Procura todos os Eventos PUBLIC
-  // app.get('/api/eventos', eventos.findAll);
+  // app.get('/api/evento', eventos.findAll);
 
   // todos eventos disponiveis
   app.post('/api/eventosD', eventos.getAllEventosCPF);

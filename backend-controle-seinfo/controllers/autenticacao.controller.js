@@ -4,7 +4,7 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const formatCPF = require('@fnando/cpf');
 
-let authorization = '';
+//let authorization = '';
 
 const criaTokens = async (object) => {
   return jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
@@ -22,6 +22,7 @@ exports.autenticar = async (req, res) => {
     })
     .catch((err) => console.warn(err));
 };
+
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   return db.pessoa
@@ -62,6 +63,10 @@ exports.login = async (req, res) => {
 
 exports.loginLDAP = async (req, res) => {
   const { username, password } = req.body;
+  const { data } = await axios.post(`${process.env.URL_LDAP}`, {
+    username: process.env.LOGIN_LDAP_USERNAME,
+    password: process.env.LOGIN_LDAP_PASSWORD,
+  });
 
   return await axios
     .post(
@@ -70,15 +75,15 @@ exports.loginLDAP = async (req, res) => {
         username,
         password,
       },
-      { headers: { Authorization: ` Bearer ${authorization}` } }
+      { headers: { Authorization: `Bearer ${data.token}` } }
     )
     .then((response) => {
       res.send(response.data);
       return response.data;
     })
     .catch((err) => {
-      console.log(ex.response.data.status);
-      alert('RA ou senha incorretos.');
-      return res.status(500).send(err);
+      console.log(err.data);
+      console.log('RA ou senha incorretos.');
+      return res.status(401).send(err);
     });
 };

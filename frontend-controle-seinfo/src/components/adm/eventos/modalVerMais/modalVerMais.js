@@ -22,7 +22,7 @@ export default {
       });
 
       //chama os lotes pelo id do evento
-      axios.get("/api/loteEvento/" + idEvento)
+      axios.get("/api/lote/evento/" + idEvento)
       .then((response) => {
         this.dataLotes = response.data;
       })

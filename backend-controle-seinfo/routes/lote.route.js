@@ -1,21 +1,28 @@
 const lotes = require('../controllers/lote.controller.js');
+const app = require('express').Router();
 
-module.exports = function (app) {
-  // Insere um Novo lote
-  app.post('/api/lote', lotes.create);
+// Insere um Novo lote
+app.post('/', lotes.create);
+// /api/lote
 
-  // Procura um lote pelo ID
-  app.get('/api/lote/:loteId',lotes.findById);
+// Procura um lote pelo ID
+app.get('/:loteId',lotes.findById);
+// /api/lote/:loteId
 
-  // Procura todos os lotes
-  app.get('/api/lote', lotes.findAll);
+// Procura todos os lotes
+app.get('/', lotes.findAll);
+// /api/lote
 
-  // Procura todos os Lotes de um evento pelo ID
-  app.get('/api/loteEvento/:idEvento', lotes.loteEvento);
+// Procura todos os Lotes de um evento pelo ID
+app.get('/evento/:idEvento', lotes.loteEvento);
+// /api/lote/evento/:idEvento
 
-  // Update de um lote pelo ID
-  app.patch('/api/lote/:loteId', lotes.atualiza);
+// Update de um lote pelo ID
+app.patch('/:loteId', lotes.atualiza);
+// /api/lote/:loteId
 
-  // Deleta um lote pelo ID
-  app.delete('/api/lote/:loteId', lotes.delete);
-};
+// Deleta um lote pelo ID
+app.delete('/:loteId', lotes.delete);
+// /api/lote/:loteId
+
+module.exports = app;
