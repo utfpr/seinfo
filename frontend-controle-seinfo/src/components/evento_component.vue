@@ -1,24 +1,16 @@
 <template>
-  <div style="margin-top: 60px">
     <div id="work" v-if="fetch">
       <span v-if="!this.res">{{sair404()}}</span>
 
-      <a-layout-content v-else-if="this.res.status===1">
-        <div>
-          <div>
-            <br />
-            <br />
-            <!-- pegar imagem do evento -->
-            <img class="child" src="../assets/banner.png" />
-          </div>
-          
+      <a-layout-content id="container" v-else-if="this.res.status===1">
+          <img class="banner" src="../assets/banner.png" />
 
-          <a-card class="layer" title="Título do evento">
-            <p class="para" style="text-align: center">{{res.nome}}</p>
-          </a-card >
+          <a-card class="layer" :title="res.nome">
+            <a-card-grid style="width:100%;text-align:center">
+              <p class="para" style="text-align: center">{{res.descricao}}</p>
+            </a-card-grid>
 
-          <div class="card-deck" style="padding: 20px; margin-left: 3em; margin-right: 3em;">
-            <div class="card">
+            <a-card-grid style="width:50%;text-align:center">
               <div class="card-body">
                 <h5 class="card-title">Data de Inicio</h5>
                 <p class="card-text">
@@ -36,93 +28,99 @@
                   }}
                 </p>
               </div>
-            </div>
-            <div class="card">
+            </a-card-grid>
+
+            <a-card-grid style="width:50%;text-align:center">
               <div class="card-body">
                 <h5 class="card-title">Data de Fim</h5>
                 <p>{{moment(res.agendamento.dataHoraFim).format('dddd, D [de] MMMM [de] YYYY')}}</p>
                 <p>{{moment(res.agendamento.dataHoraFim).format('[Horário de Fim:] hh:mm')}}</p>
-                <p></p>
               </div>
-            </div>
-            <div class="card">
+            </a-card-grid>
+
+            <a-card-grid style="width:100%;text-align:center">
               <div class="card-body">
                 <h5 class="card-title">Local</h5>
                 <p>{{res.agendamento.local}}</p>
-              </div>
-            </div>
-          </div>
+              </div>            
+            </a-card-grid>
 
-          <a-card class="layer" title="Lotes" :bordered="false">
-            <p v-for="(lotes, i) in lotes" :key="i">
-              <span
-                v-if="res.lotes[i].dataAbertura !== res.lotes[i].dataFechamento"
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de] MMMM [de] YYYY')}} até {{moment(res.lotes[i].dataFechamento).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
-              <span
-                v-else-if="i!== res.lotes.length-1"
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} até {{moment(res.lotes[i+1].dataAbertura).subtract(1, 'days').format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
-              <span
-                v-else
-              >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
-            </p>
-          </a-card>
-          <a-card class="layer" title="Descrição do evento">
-            <p class="para">{{res.descricao}}</p>
-          </a-card>
+            <a-card-grid style="width:100%;text-align:center">
+              <div class="card-body">
+              <h5 class="card-title">Lotes</h5>
+              <p v-for="(lotes, i) in lotes" :key="i">
+                <span
+                  v-if="res.lotes[i].dataAbertura !== res.lotes[i].dataFechamento"
+                >{{moment(res.lotes[i].dataAbertura).format('DD [de] MMMM [de] YYYY')}} até {{moment(res.lotes[i].dataFechamento).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+                <span
+                  v-else-if="i!== res.lotes.length-1"
+                >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} até {{moment(res.lotes[i+1].dataAbertura).subtract(1, 'days').format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+                <span
+                  v-else
+                >{{moment(res.lotes[i].dataAbertura).format('DD [de] [de] YYYY')}} - Valor R$: {{res.lotes[i].valor}}</span>
+              </p>
+              </div>        
+            </a-card-grid>
 
-          <!-- manter palestras e atividades ou só atividades? o que diferencia?
-          listar tudo?-->
-          <a-card class="layer" title="Palestras" v-if="palestras.length!==0">
-            <p
-              class="para"
-              v-for="(atv, i) in palestras"
-              :key="i"
-            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
-          </a-card>
-          <a-card class="layer" title="Minicursos" v-if="minicursos.length!==0">
-            <p
-              class="para"
-              v-for="(atv, i) in minicursos"
-              :key="i"
-            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
-          </a-card>
 
-          <a-card class="layer" title="Atividades">
-            <p
-              class="para"
-              v-for="(atv, i) in atividades"
-              :key="i"
-            >{{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}</p>
-            <p class="para" v-if="atividades.length == 0">Nenhuma atividade cadastrada!</p>
-          </a-card>
 
-          <a-card class="layer" title="Cronograma">
-            <p>
-              <a-table
-                :columns="columns"
-                :dataSource="data"
-                :scroll="{ x: 1300 }"
-                :bordered="true"
-                :pagination="false"
-              ></a-table>
-            </p>
-          </a-card>
+             <!-- manter palestras e atividades ou só atividades? o que diferencia?
+              listar tudo?-->
+            <a-card-grid style="width:100%;text-align:center" v-if="palestras.length!==0">
+              <div class="card-body">
+              <h5 class="card-title">Palestras</h5>
+              <p
+                v-for="(atv, i) in palestras"
+                :key="i"
+              >
+                {{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}
+              </p>
+              </div>        
+            </a-card-grid>
 
-          <br />
-          <br />
-        </div>
+            <a-card-grid style="width:100%;text-align:center">
+              <div class="card-body">
+              <h5 class="card-title">Atividades</h5>
+              <p
+                v-for="(atv, i) in atividades"
+                :key="i"
+              >
+                {{atv.titulo}} ({{atv.categoriaAtv.nome}}) - {{atv.descricao}} 
+                Vagas: {{atv.quantidadeVagas}} R${{atv.valor}}
+              </p>
+              <p v-if="atividades.length == 0">
+                Nenhuma atividade cadastrada!
+              </p>
+              </div>        
+            </a-card-grid>
+
+            <a-card-grid style="width:100%;text-align:center">
+              <div class="card-body">
+              <h5 class="card-title">Cronograma</h5>
+              <p>
+                <a-table
+                  :columns="columns"
+                  :dataSource="data"
+                  :bordered="true"
+                  :pagination="false"
+                ></a-table>
+              </p>
+              </div>        
+            </a-card-grid>
+
+          </a-card >
+          
       </a-layout-content>
-
       <a-layout-content
-        v-else-if="this.res.status!==1"
+        v-else-if="this.res.status !== 1"
         id="work"
         style="height: 100vh;"
       >{{sairHome()}}</a-layout-content>
     </div>
-  </div>
 </template>
 
 <script>
+
 import moment from "moment";
 moment.locale("pt-br");
 import axios from '../config/axiosConfig';
@@ -133,8 +131,7 @@ const columns = [
     title: "Horários",
     dataIndex: "horarios",
     key: "horarios",
-    width: "5%",
-    fixed: "left",
+    width: 150,
     scopedSlots: { customRender: "horarios" }
   },
   {
@@ -166,7 +163,7 @@ const columns = [
 const data = [
   {
     key: "1",
-    horarios: "13h00",
+    horarios: "13:00hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -175,7 +172,7 @@ const data = [
   },
   {
     key: "2",
-    horarios: "13h50",
+    horarios: "13:50hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -184,7 +181,7 @@ const data = [
   },
   {
     key: "3",
-    horarios: "15h30",
+    horarios: "15:30hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -193,7 +190,7 @@ const data = [
   },
   {
     key: "4",
-    horarios: "17h30",
+    horarios: "17:30hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -202,7 +199,7 @@ const data = [
   },
   {
     key: "5",
-    horarios: "19h30",
+    horarios: "19:30hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -211,7 +208,7 @@ const data = [
   },
   {
     key: "6",
-    horarios: "21h10",
+    horarios: "21:10hrs",
     segunda: "a",
     terca: "a",
     quarta: "a",
@@ -304,6 +301,9 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 #work {
   background: #092756;
   background: -moz-radial-gradient(
@@ -363,8 +363,10 @@ export default {
   height: auto;
 }
 
-.para {
-  text-align: left;
+#container{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  width: 100%;
 }
 
 .layer {
@@ -374,29 +376,13 @@ export default {
   text-align: center;
 }
 
-.child {
+.banner {
   max-width: 70%;
   min-width: 70%;
   max-height: 70%;
   min-height: 70%;
   margin-left: 15%;
+  margin-top: 20px;
 }
 
-.paraCale {
-  max-height: 200px;
-}
-
-.title {
-  text-align: center;
-  border: 0.1px solid black;
-  position: relative;
-  min-height: 176px;
-  max-height: auto;
-}
-
-.box {
-  margin-top: 3%;
-  width: 90%;
-  margin-left: 5%;
-}
 </style>
