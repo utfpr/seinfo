@@ -88,7 +88,6 @@ exports.findAll = (req, res) => {
     ],
   })
     .then((evento) => {
-      console.log('Listou Todos os Eventos!');
       res.send(evento); // Retorna um Json para a Pagina da API
     })
     .catch((err) => {
@@ -97,7 +96,6 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req, res) => {
-  console.log('req:', req.body);
   Evento.update(
     {
       nome: req.body.nome,
@@ -110,7 +108,6 @@ exports.atualiza = (req, res) => {
     { where: { idEvento: req.params.idEvento } }
   )
     .then((evento) => {
-      console.log('Atualizando evento');
       res.send(evento);
     })
     .catch((err) => {
@@ -121,7 +118,6 @@ exports.atualiza = (req, res) => {
 exports.delete = (req, res) => {
   Evento.destroy({ where: { idEvento: req.params.idEvento } })
     .then(() => {
-      console.log(`Deletando o evento com o ID: ${req.params.idEvento}`);
       res.send({ msg: 'Evento deletado com sucesso' }); // Retorna um Json para a Pagina da API
     })
     .catch((err) => {

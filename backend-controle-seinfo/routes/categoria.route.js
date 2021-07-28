@@ -1,22 +1,28 @@
-module.exports = function(app) {
- 
-  const categorias = require('../controllers/categoria.controller.js');
+const categorias = require('../controllers/categoria.controller.js');
+const app = require('express').Router();
 
-  // Insere uma nova categoria
-  app.post('/api/categoria', categorias.create);
+// Insere uma nova categoria
+app.post('/', categorias.create);
+// /api/categoria
 
-  //Procura uma categoria pelo ID
-  app.get('/api/categoria/:categoriaId', categorias.findById);
+//Procura uma categoria pelo ID
+app.get('/:categoriaId', categorias.findById);
+// /api/categoria/:categoriaId
 
-  // Procura todos as categorias
-  app.get('/api/categorias', categorias.findAll);
+// Procura todos as categorias
+app.get('/', categorias.findAll);
+// /api/categoria
 
-  //seleciona todas atividades de uma categoria especifica
-  app.get('/api/cateAtv/:idCategoria',categorias.AtividadesCategoria);
+//seleciona todas atividades de uma categoria especifica
+app.get('/atividades/:idCategoria',categorias.AtividadesCategoria);
+// /api/categoria/atividades/:idCategoria
 
-  // Update de uma categoria pelo ID
-  app.patch('/api/categoria/:categoriaId', categorias.atualiza);
+// Update de uma categoria pelo ID
+app.patch('/:categoriaId', categorias.atualiza);
+// /api/categoria/:categoriaId
 
-  // Deleta uma categoria pelo ID
-  app.delete('/api/categoria/:categoriaId', categorias.delete);
-}
+// Deleta uma categoria pelo ID
+app.delete('/:categoriaId', categorias.delete);
+// /api/categoria/:categoriaId
+
+module.exports = app;

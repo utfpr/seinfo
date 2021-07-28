@@ -82,7 +82,7 @@ export default {
       //PASSA O USUÁRIO PARA A PÁGINA DE CADASTRO
 
     axios
-    .post('/api/loginLDAP',{ 
+    .post('/public/loginLDAP',{ 
       username: this.obj_userInterno.username, 
       password: this.obj_userInterno.password
       })
@@ -124,7 +124,7 @@ export default {
 
       try {
         console.log(signIn)
-        const response = await axios.post('/api/login', this.obj_login)
+        const response = await axios.post('/public/login', this.obj_login)
         signIn({token: response.data.token, user: response.data.pessoa});
         window.location.replace(
           response.data.pessoa.nivel ? perm[response.data.pessoa.nivel]: 'usuario'
@@ -142,7 +142,7 @@ export default {
       console.log("LOGIN - OK")
 
       axios
-        .post('/api/login', this.obj_userInterno)
+        .post('/public/login', this.obj_userInterno)
         .then(response => {
             console.log(response.data)
           }).catch(error => {
@@ -163,7 +163,7 @@ export default {
 
       axios
       
-        .post('/api/recuperarSenha/'+this.obj_rec.cpf)
+        .post('/public/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
             alert("Sua nova senha foi enviada ao email cadastrado.");

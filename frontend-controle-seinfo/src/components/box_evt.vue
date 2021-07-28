@@ -25,7 +25,7 @@ export default {
   methods: {
     async pegar_tabela() {
       try {
-        const response = await axios.get("/api/getAllAvailableEvents");
+        const response = await axios.get("/public/getAllAvailableEvents");
         this.res = response.data;
       } catch (error) {
         console.log(error); 

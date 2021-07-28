@@ -101,7 +101,7 @@ export default {
     },
     pegar_tabela() { // v
       axios
-        .get("/api/eventos")
+        .get("/public/evento")
         .then(response => {
           // console.log(response.data);
           this.res = response.data;

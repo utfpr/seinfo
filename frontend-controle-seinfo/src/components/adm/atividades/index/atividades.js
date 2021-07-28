@@ -9,7 +9,7 @@ export default{
     components: { cadastro, listagem },
     created(){
         axios
-            .get("/api/atividades/")
+            .get("/public/atividades/")
             .then((response) => {
                 this.res = response.data;
             })

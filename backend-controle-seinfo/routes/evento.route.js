@@ -1,23 +1,19 @@
 const eventos = require('../controllers/evento.controller');
 
 module.exports = (app) => {
+  // Insere um Novo Evento
   app.post('/api/evento', eventos.create);
 
-  // Insere um Novo Evento
-  // app.post('/api/evento', eventos.create);
+  // Procura um evento pelo ID public
+  // app.get('/api/evento/:idEvento', eventos.findById);
 
-  // Procura um evento pelo ID
-  app.get('/api/evento/:idEvento', eventos.findById);
-
-  // Procura todos os Eventos
-  app.get('/api/eventos', eventos.findAll);
+  // Procura todos os Eventos PUBLIC
+  // app.get('/api/evento', eventos.findAll);
 
   // todos eventos disponiveis
   app.post('/api/eventosD', eventos.getAllEventosCPF);
 
-  app.get('/api/getAllAvailableEvents', eventos.getAllAvailableEvents);
-
-  // receitas de um evento
+    // receitas de um evento
   app.get('/api/eventoReceita/:idEvento', eventos.EvReceita);
 
   // receita de inscricoes no evento

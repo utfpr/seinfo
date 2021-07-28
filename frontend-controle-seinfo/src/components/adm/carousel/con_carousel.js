@@ -26,10 +26,10 @@ export default {
 
     async listar_carousel() {
       try {
-        const response = await axios.get("/api/getAllCarrossel");
+        const response = await axios.get("/api/carrossel/getAllCarrossel");
         this.carrossel = response.data;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     imageChange(file){

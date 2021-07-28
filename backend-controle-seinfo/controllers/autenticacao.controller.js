@@ -1,14 +1,13 @@
 require('dotenv').config();
-const db = require('../models');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const formatCPF = require('@fnando/cpf');
+const db = require('../models');
 
 let authorization = '';
 
-const criaTokens = async (object) => {
-  return jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
-};
+const criaTokens = async (object) =>
+  jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
 
 exports.autenticar = async (req, res) => {
   await axios
@@ -22,6 +21,7 @@ exports.autenticar = async (req, res) => {
     })
     .catch((err) => console.warn(err));
 };
+
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   return db.pessoa
@@ -55,30 +55,32 @@ exports.login = async (req, res) => {
       }
       return res.status(401).send({ message: 'Senha incorreta' });
     })
-    .catch((err) => {
-      return res.status(500).send(err);
-    });
+    .catch((err) => res.status(500).send(err));
 };
 
 exports.loginLDAP = async (req, res) => {
   const { username, password } = req.body;
+  const { data } = await axios.post(`${process.env.URL_LDAP}`, {
+    username: process.env.LOGIN_LDAP_USERNAME,
+    password: process.env.LOGIN_LDAP_PASSWORD,
+  });
 
-  return await axios
+  axios
     .post(
       process.env.LOGIN_URL_LDAP,
       {
         username,
         password,
       },
-      { headers: { Authorization: ` Bearer ${authorization}` } }
+      { headers: { Authorization: `Bearer ${data.token}` } }
     )
     .then((response) => {
       res.send(response.data);
       return response.data;
     })
     .catch((err) => {
-      console.log(ex.response.data.status);
-      alert('RA ou senha incorretos.');
-      return res.status(500).send(err);
+      console.log(err.data);
+      console.log('RA ou senha incorretos.');
+      return res.status(401).send(err);
     });
 };

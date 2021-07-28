@@ -75,7 +75,7 @@ export default
       console.log(this.obj_cadastroInterno)
 
       axios
-        .post('/api/pessoa', this.obj_cadastroInterno)
+        .post('/public/pessoa', this.obj_cadastroInterno)
         .then(response => {
           console.log(response)
           alert(response.data);
