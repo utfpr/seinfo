@@ -3,7 +3,7 @@
     <div slot-scope="{ signOut }">
       <a-layout id="components-layout-demo-custom-trigger">
         <a-layout-sider style="min-height:100vh" :trigger="null" collapsible v-model="collapsed">
-          <div class="logo" />
+          <div class="logo"> <img src="../assets/logo_com_nome.jpg" style="height:60px;"></div>
           <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['/']">
             <a-menu-item key="1">
               <a-icon type="home" />
@@ -78,8 +78,8 @@ export default {
 }
 
 #components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 45px;
+  background: transparent;
   margin: 16px;
 }
 </style>
