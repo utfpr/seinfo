@@ -63,21 +63,39 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.findById = (req, res) => {
-  Evento.findOne({
-    where: { idEvento: req.params.idEvento },
-    include: [
-      { model: db.lote, as: 'lotes' },
-      { model: db.agenda, as: 'agendamento' },
-    ],
-  })
-    .then((evento) => {
-      console.log(`Achou o evento pelo ID ${req.params.idEvento}`);
-      res.send(evento); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.findById = async (req, res) => {
+  try {
+    const evento = await Evento.findOne({
+      where: { idEvento: req.params.idEvento },
+      include: [
+        { model: db.lote, as: 'lotes' },
+        { model: db.agenda, as: 'agendamento' },
+        {
+          model: db.atividade,
+          as: 'atividades',
+          include: [
+            { model: db.categoria, as: 'categoriaAtv' },
+            { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } },
+          ],
+        },
+      ],
     });
+    // const data = new Date();
+    // const test = '2020-04-25';
+    // const dataFormatada = `${data.getFullYear()}-${
+    //   data.getMonth() + 1
+    // }-${data.getDate()}`;
+    // console.log(dataFormatada);
+    // // evento.push();
+    // if (dataFormatada >= test) {
+    //   console.log('Vencido');
+    // }
+
+    return res.status(200).json(evento);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
 };
 
 exports.findAll = (req, res) => {
