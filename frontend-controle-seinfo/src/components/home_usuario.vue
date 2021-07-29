@@ -12,9 +12,7 @@
           style="margin: 0"
         >
           <div class="table-responsive col-md-12">
-            <p class="atividade">
-              ATIVIDADES 
-
+            <div class="button-wrapper">
               <a-button
                 v-if="!record.estaInscrito"
                 type="button"
@@ -29,53 +27,10 @@
                 class="ic-yellow"
                 @click="redirectAtv(record.idEvento, getUser.CPF)"
               >
-                VER DETALHES
+                VER INSCRIÇÕES EM ATIVIDADES
               </a-button>
-            </p>
-            <table
-              class="table table-striped"
-              cellspacing="0"
-              cellpadding="0"
-            >
-              <thead>
-                <tr>
-                  <th style="width:25%">
-                    Nome
-                  </th>
-                  <th style="text-align: left;">
-                    Valor
-                  </th>
-                  <th style="text-align: left;">
-                    Vagas
-                  </th>
-                  <th style="text-align: left;">
-                    Horas de participação
-                  </th>
-                  <th style="text-align: left; width:40%">
-                    Descrição
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                v-for="response in res_atividades"
-                :key="response.idEvento"
-              >
-                <tr
-                  v-if="response.idEvento == record.idEvento"
-                  style="background-color:white;"
-                >
-                  <td>{{ response.titulo }}</td>
-                  <td>R$ {{ response.valor }}</td>
-                  <td style="padding-left:20px;">
-                    {{ response.quantidadeVagas }}
-                  </td>
-                  <td style="padding-left:54px;">
-                    {{ response.horasParticipacao }}
-                  </td>
-                  <td>{{ response.descricao }}</td>
-                </tr>
-              </tbody>
-            </table>
+            </div>
+            <DetalhesEvento v-bind:id="record.idEvento" />
           </div>
         </div>
       </a-table>
@@ -86,6 +41,7 @@
 <script>
 
 import AuthConsumer from '../contexts/authConsumer.vue';
+import DetalhesEvento from './eventoCard.vue'
 
 import auth from '../services/auth';
 import axios from '../config/axiosConfig';
@@ -105,6 +61,7 @@ const columns = [{
 export default {
   components: {
     AuthConsumer,
+    DetalhesEvento
   },
 
   data() {
@@ -168,22 +125,27 @@ export default {
 
 <style scoped>
 
+.button-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
 .ic{
-  float: right;
   font-weight: 600;
   letter-spacing: 0.8px;
   background-color: rgba(157, 211, 157, 0.5);
   border: 2px solid rgb(64, 212, 64);
   color: black;
   cursor: pointer;
+  height: 60px;
 }
 .ic-yellow{
-  float: right;
   font-weight: 600;
   letter-spacing: 0.8px;
   background-color: rgba(251, 253, 100, 0.5);
   border: 2px solid rgb(212, 202, 64);
   color: black;
+  height: 60px;
   cursor: pointer;
 }
 .ic-yellow:hover{
@@ -211,12 +173,6 @@ export default {
 }
 .article button {
   margin-top: 16px;
-}
-.atividade {
-  margin-bottom: 18px;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: .8px;
 }
 
 </style>
