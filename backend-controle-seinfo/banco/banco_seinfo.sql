@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `seinfo`.`atividade` (
   `quantidadeVagas` INT(11) NOT NULL DEFAULT '0',
   `idCategoria` INT(11) NOT NULL,
   `idEvento` INT(11) NOT NULL,
+  `dataInicio` DATETIME NOT NULL,
   PRIMARY KEY (`idAtividade`),
   INDEX `fk_categoria1_idx` (`idCategoria` ASC) ,
   INDEX `fk_atividade_evento1_idx` (`idEvento` ASC) ,

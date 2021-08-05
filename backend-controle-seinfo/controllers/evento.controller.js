@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
     await Promise.all(
       lote.forEach(async (loteItem) => {
         await Lote.create({
-          evento: evento.idEvento,
+          idEvento: evento.idEvento,
           valor: loteItem.valor_lote,
           dataAbertura: loteItem.data_inicio_lote,
           dataFechamento: loteItem.data_fim_lote,
@@ -68,30 +68,50 @@ exports.findById = async (req, res) => {
     const evento = await Evento.findOne({
       where: { idEvento: req.params.idEvento },
       include: [
-        { model: db.lote, as: 'lotes' },
-        { model: db.agenda, as: 'agendamento' },
+        {
+          model: db.agenda,
+          as: 'agendamento',
+        },
         {
           model: db.atividade,
           as: 'atividades',
           include: [
-            { model: db.categoria, as: 'categoriaAtv' },
-            { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } },
+            {
+              model: db.categoria,
+              as: 'categoriaAtv',
+            },
+            {
+              model: db.agenda,
+              as: 'atvAgenda',
+              through: { attributes: [] },
+            },
           ],
         },
       ],
     });
-    // const data = new Date();
-    // const test = '2020-04-25';
-    // const dataFormatada = `${data.getFullYear()}-${
-    //   data.getMonth() + 1
-    // }-${data.getDate()}`;
-    // console.log(dataFormatada);
-    // // evento.push();
-    // if (dataFormatada >= test) {
-    //   console.log('Vencido');
-    // }
 
-    return res.status(200).json(evento);
+    const lotes = await evento.getLotes();
+    const lotesVencidos = [];
+    const lotesDisponiveis = [];
+    const dataAtual = new Date();
+
+    lotes.forEach((lote) => {
+      const dataLote = new Date(lote.dataFechamento);
+
+      if (dataLote < dataAtual) {
+        lotesVencidos.push(lote);
+      } else {
+        lotesDisponiveis.push(lote);
+      }
+    });
+
+    const eventosFormatados = {
+      ...evento.dataValues,
+      lotesDisponiveis,
+      lotesVencidos,
+    };
+
+    return res.status(200).json(eventosFormatados);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

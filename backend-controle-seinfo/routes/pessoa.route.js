@@ -8,6 +8,8 @@ module.exports = (app) => {
   // app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
   // '/api/recuperarSenha/'+CPF
 
+  app.get('/api/obtemTodasAsPessoas', pessoa.index);
+
   // Procura um pesso a pelo CPF
   app.get('/api/pessoa/:CPF', pessoa.findById);
 

@@ -1,35 +1,53 @@
-const db = require('../models/index.js');
+const db = require('../models');
 
 const Atividades = db.atividade;
 
 // Post do Atividade
-exports.create = (req, res) => {
-  Atividades.create({
-    titulo: req.body.titulo,
-    valor: req.body.valor,
-    descricao: req.body.descricao,
-    horasParticipacao: req.body.horasParticipacao,
-    // quantidadeVagas:req.body.vagas,
-    quantidadeVagas: req.body.quantidadeVagas,
-    idEvento: req.body.idEvento,
-    idCategoria: req.body.idCategoria,
-  })
-    .then((agenda) => {
-      // cria a subAtividade
-      for (i = 0; i < req.body.subatividade.length; i++) {
-        agenda.createAtvAgenda({
-          local: req.body.subatividade[i].local_subatividade,
-          dataHoraInicio: `${req.body.subatividade[i].data_inicio_subatividade}T${req.body.subatividade[i].hora_inicio_subatividade}`,
-          dataHoraFim: `${req.body.subatividade[i].data_fim_subatividade}T${req.body.subatividade[i].hora_fim_subatividade}`,
-        });
-      }
-      // Cria agenda / Subatividade
-      console.log('Criado SubAtividades');
-      res.send(agenda);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.create = async (req, res) => {
+  try {
+    const {
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      subatividade,
+      dataInicio,
+      horaInicio,
+    } = req.body;
+
+    const dataAtividade = `${dataInicio}T${horaInicio}`;
+
+    console.log(dataAtividade);
+
+    const atividade = await Atividades.create({
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      dataInicio: dataAtividade,
     });
+
+    // cria a subAtividade
+    await Promise.all(
+      subatividade.map((item) =>
+        atividade.createAtvAgenda({
+          local: item.local_subatividade,
+          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}`,
+          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}`,
+        })
+      )
+    );
+
+    res.status(200).json(atividade);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 exports.findById = (req, res) => {
@@ -68,7 +86,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-(exports.atualiza = (req, res) => {
+exports.atualiza = (req, res) => {
   Atividades.update(
     {
       titulo: req.body.titulo,
@@ -88,21 +106,22 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       res.status(500).send(`Error ${err}`);
     });
-}),
-  (exports.delete = (req, res) => {
-    Atividades.destroy({
-      where: {
-        idAtividade: req.params.idAtividade,
-        idEvento: req.params.idEvento,
-      },
+};
+
+exports.delete = (req, res) => {
+  Atividades.destroy({
+    where: {
+      idAtividade: req.params.idAtividade,
+      idEvento: req.params.idEvento,
+    },
+  })
+    .then((atv) => {
+      res.send('deletou');
     })
-      .then((atv) => {
-        res.send('deletou');
-      })
-      .catch((err) => {
-        res.status(500).send(`Error -> ${err}`);
-      });
-    /*
+    .catch((err) => {
+      res.status(500).send(`Error -> ${err}`);
+    });
+  /*
     Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atividade => {
       db.agendamentoAtividade.findOne({where:{idAtividade:req.params.idAtividade}}).then(agenda=>{
         db.agenda.destroy({where:{idAgenda:agenda.idAgenda}})
@@ -117,7 +136,7 @@ exports.findAll = (req, res) => {
       res.status(500).send("Error -> " + err);
     })
     */
-  });
+};
 
 exports.AtividadeEvento = (req, res) => {
   // seleciona as atividades de um unico evento
@@ -182,6 +201,7 @@ exports.selectProtagonista = (req, res) => {
       ],
     })
     .then((prot) => {
+      console.log(prot);
       res.send(prot);
     })
     .catch((err) => {
