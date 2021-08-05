@@ -34,7 +34,7 @@ export default {
             });
 
         axios
-            .get("/protagonistas")
+            .get("/api/protagonistas")
             .then((response) => {
                 this.protagonistas = response.data;
             })

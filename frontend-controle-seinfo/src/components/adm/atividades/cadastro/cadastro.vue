@@ -97,9 +97,9 @@
                   id="idPessoa"
                   name="idPessoa"
                   v-for="protagonista in protagonistas"
-                  :key="protagonista.aPes.idPessoa"
-                  :value="protagonista.aPes.idPessoa"
-                  >{{ protagonista.aPes.nome }}</a-select-option
+                  :key="protagonista.idPessoa"
+                  :value="protagonista.idPessoa"
+                  >{{ protagonista.nome }}</a-select-option
                 >
               </a-select>
             </a-form-item>
@@ -115,6 +115,42 @@
                 id="valor"
                 name="valor"
                 min="0"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="dollar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
+              </a-input>
+            </a-form-item>
+          </div>
+          <div class="row justify-content-center">
+            <a-form-item class="space">
+              <label class="ant-form-item-required">Data de Inicio:</label>
+              <a-input
+                placeholder="Data de Inicio"
+                autocomplete="off"
+                v-model="dataInicio"
+                type="date"
+                id="dataInicio"
+                name="dataInicio"
+              >
+                <a-icon
+                  slot="prefix"
+                  type="dollar"
+                  style="color: rgba(0, 0, 0, 0.25)"
+                />
+              </a-input>
+            </a-form-item>
+            <a-form-item class="space">
+              <label class="ant-form-item-required">Data de Inicio:</label>
+              <a-input
+                placeholder="Hora de Inicio"
+                autocomplete="off"
+                v-model="horaInicio"
+                type="time"
+                id="horaInicio"
+                name="horaInicio"
               >
                 <a-icon
                   slot="prefix"
