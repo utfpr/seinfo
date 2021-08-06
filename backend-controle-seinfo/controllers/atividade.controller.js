@@ -18,9 +18,7 @@ exports.create = async (req, res) => {
       horaInicio,
     } = req.body;
 
-    const dataAtividade = `${dataInicio}T${horaInicio}`;
-
-    console.log(dataAtividade);
+    const dataAtividade = new Date(`${dataInicio}T${horaInicio}:00.003Z`);
 
     const atividade = await Atividades.create({
       titulo,
@@ -33,19 +31,22 @@ exports.create = async (req, res) => {
       dataInicio: dataAtividade,
     });
 
+    console.log(atividade, subatividade);
+
     // cria a subAtividade
     await Promise.all(
       subatividade.map((item) =>
         atividade.createAtvAgenda({
           local: item.local_subatividade,
-          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}`,
-          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}`,
+          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}:00.003Z`,
+          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}:00.003Z`,
         })
       )
     );
 
     res.status(200).json(atividade);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };

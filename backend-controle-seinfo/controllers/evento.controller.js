@@ -24,10 +24,12 @@ exports.create = async (req, res) => {
     } = req.body;
 
     const agenda = await Agenda.create({
-      dataHoraInicio: `${data_ini}T${hora_ini}`,
-      dataHoraFim: `${data_fim}T${hora_fim}`,
+      dataHoraInicio: new Date(`${data_ini}T${hora_ini}:00.003Z`),
+      dataHoraFim: new Date(`${data_fim}T${hora_fim}:00.003Z`),
       local: local_eve,
     });
+
+    console.log(agenda);
 
     const evento = await Evento.create({
       nome,
@@ -67,30 +69,43 @@ exports.findById = async (req, res) => {
   try {
     const evento = await Evento.findOne({
       where: { idEvento: req.params.idEvento },
+      attributes: ['idEvento', 'nome', 'descricao', 'status'],
       include: [
         {
           model: db.agenda,
           as: 'agendamento',
-        },
-        {
-          model: db.atividade,
-          as: 'atividades',
-          include: [
-            {
-              model: db.categoria,
-              as: 'categoriaAtv',
-            },
-            {
-              model: db.agenda,
-              as: 'atvAgenda',
-              through: { attributes: [] },
-            },
-          ],
+          attributes: ['dataHoraInicio', 'dataHoraFim', 'local'],
         },
       ],
     });
 
-    const lotes = await evento.getLotes();
+    const atividades = await evento.getAtividades({
+      attributes: [
+        'idAtividade',
+        'titulo',
+        'valor',
+        'descricao',
+        'horasParticipacao',
+        'quantidadeVagas',
+        'dataInicio',
+      ],
+      include: [
+        {
+          model: db.categoria,
+          as: 'categoriaAtv',
+          attributes: ['nome'],
+        },
+        {
+          model: db.agenda,
+          as: 'atvAgenda',
+          through: { attributes: [] },
+        },
+      ],
+      order: [['dataInicio', 'ASC']],
+    });
+    const lotes = await evento.getLotes({
+      attributes: ['idLote', 'valor', 'dataAbertura', 'dataFechamento'],
+    });
     const lotesVencidos = [];
     const lotesDisponiveis = [];
     const dataAtual = new Date();
@@ -105,8 +120,18 @@ exports.findById = async (req, res) => {
       }
     });
 
+    // eslint-disable-next-line prefer-const
+    let atividadesPorCategorias = {};
+    atividades.forEach((atividade) => {
+      atividadesPorCategorias[atividade.categoriaAtv.nome] = {
+        ...atividadesPorCategorias[atividade.categoriaAtv.nome],
+        [atividade.titulo]: atividade,
+      };
+    });
+
     const eventosFormatados = {
       ...evento.dataValues,
+      atividades: atividadesPorCategorias,
       lotesDisponiveis,
       lotesVencidos,
     };
