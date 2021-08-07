@@ -1,6 +1,7 @@
-const db = require('../models/index.js');
+const db = require('../models/index');
 
 const Atividades = db.atividade;
+const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
 
 // Post do Atividade
 exports.create = (req, res) => {
@@ -16,7 +17,7 @@ exports.create = (req, res) => {
   })
     .then((agenda) => {
       // cria a subAtividade
-      for (i = 0; i < req.body.subatividade.length; i++) {
+      for (let i = 0; i < req.body.subatividade.length; i += 1) {
         agenda.createAtvAgenda({
           local: req.body.subatividade[i].local_subatividade,
           dataHoraInicio: `${req.body.subatividade[i].data_inicio_subatividade}T${req.body.subatividade[i].hora_inicio_subatividade}`,
@@ -68,7 +69,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-(exports.atualiza = (req, res) => {
+exports.atualiza = (req, res) => {
   Atividades.update(
     {
       titulo: req.body.titulo,
@@ -88,21 +89,21 @@ exports.findAll = (req, res) => {
     .catch((err) => {
       res.status(500).send(`Error ${err}`);
     });
-}),
-  (exports.delete = (req, res) => {
-    Atividades.destroy({
-      where: {
-        idAtividade: req.params.idAtividade,
-        idEvento: req.params.idEvento,
-      },
+};
+exports.delete = (req, res) => {
+  Atividades.destroy({
+    where: {
+      idAtividade: req.params.idAtividade,
+      idEvento: req.params.idEvento,
+    },
+  })
+    .then(() => {
+      res.send('deletou');
     })
-      .then((atv) => {
-        res.send('deletou');
-      })
-      .catch((err) => {
-        res.status(500).send(`Error -> ${err}`);
-      });
-    /*
+    .catch((err) => {
+      res.status(500).send(`Error -> ${err}`);
+    });
+  /*
     Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atividade => {
       db.agendamentoAtividade.findOne({where:{idAtividade:req.params.idAtividade}}).then(agenda=>{
         db.agenda.destroy({where:{idAgenda:agenda.idAgenda}})
@@ -117,7 +118,7 @@ exports.findAll = (req, res) => {
       res.status(500).send("Error -> " + err);
     })
     */
-  });
+};
 
 exports.AtividadeEvento = (req, res) => {
   // seleciona as atividades de um unico evento
@@ -143,7 +144,7 @@ exports.criarProtagonista = (req, res) => {
   Atividades.findOne({ where: { idAtividade: req.params.idAtividade } })
     .then((atividade) => {
       db.pessoa
-        .findOne({ where: { CPF: req.params.CPF } })
+        .findOne({ where: { CPF: atob(req.params.cpf) } })
         .then((pessoa) => {
           db.protagonista
             .create({
@@ -193,7 +194,7 @@ exports.selectUmProtagonista = (req, res) => {
   // seleciona um protagonista de uma atividade
   db.protagonista
     .findOne({
-      where: { idAtividade: req.params.idAtividade, CPF: req.params.CPF },
+      where: { idAtividade: req.params.idAtividade, CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'aPes' },
         {
@@ -237,7 +238,7 @@ exports.AtividadesDoProtagonista = (req, res) => {
   // seleciona as atividades em que essa pessoa é protagonista
   db.protagonista
     .findAll({
-      where: { CPF: req.params.CPF },
+      where: { CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'aPes' },
         {
@@ -258,9 +259,9 @@ exports.AtividadesDoProtagonista = (req, res) => {
 exports.deletaProtagonista = (req, res) => {
   db.protagonista
     .destroy({
-      where: { idAtividade: req.params.idAtividade, CPF: req.params.CPF },
+      where: { idAtividade: req.params.idAtividade, CPF: atob(req.params.CPF) },
     })
-    .then((prot) => {
+    .then(() => {
       res.send('sumiu');
     })
     .catch((err) => {

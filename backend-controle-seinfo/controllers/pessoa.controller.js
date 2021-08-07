@@ -4,6 +4,8 @@ const db = require('../models/index');
 
 const Pessoa = db.pessoa;
 
+const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
+
 exports.create = (req, res) => {
   let id;
   let senha;
@@ -53,7 +55,7 @@ exports.create = (req, res) => {
     idPessoa: id,
     nome: req.body.nome,
     email: req.body.email,
-    CPF: formatCPF.strip(req.body.cpf),
+    CPF: req.body.CPF,
     senha,
     nivel,
     classificacao,
@@ -78,7 +80,7 @@ exports.create = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } })
+  Pessoa.findOne({ where: { CPF: atob(req.params.CPF) } })
     .then((pessoa) => {
       if (!pessoa) {
         res.send('Pessoa não encontrada'); // Retorna um Json para a Pagina da API
@@ -104,7 +106,7 @@ exports.findAll = (req, res) => {
 
 exports.atualiza = (req, res) => {
   const { nome, email, nivel } = req.body;
-  const { CPF } = req.params;
+  const CPF = atob(req.params.CPF);
   Pessoa.update(
     {
       nome,
@@ -124,7 +126,7 @@ exports.atualiza = (req, res) => {
 };
 
 exports.recuperarSenha = (req, res) => {
-  Pessoa.findOne({ where: { CPF: formatCPF.strip(req.params.CPF) } })
+  Pessoa.findOne({ where: { CPF: formatCPF.strip(atob(req.params.CPF)) } })
     .then((pessoa) => {
       if (pessoa) {
         const senha = Math.random().toString(36).slice(-8);
@@ -165,9 +167,9 @@ exports.recuperarSenha = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  Pessoa.destroy({ where: { CPF: req.params.CPF } })
+  Pessoa.destroy({ where: { CPF: atob(req.params.CPF) } })
     .then(() => {
-      console.log(`Deletando uma Pessoa com o ID: ${req.params.CPF}`);
+      // console.log(`Deletando uma Pessoa com o ID: ${req.params.CPF}`);
       res.send(`${req.params.CPF} foi deletado`); // Retorna um Json para a Pagina da API
     })
     .catch((err) => {
@@ -176,7 +178,7 @@ exports.delete = (req, res) => {
 };
 
 exports.PessoaExistente = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } })
+  Pessoa.findOne({ where: { CPF: atob(req.params.CPF) } })
     .then((pessoa) => {
       if (pessoa) {
         res.send(true);
@@ -194,7 +196,7 @@ exports.PessoaExistente = (req, res) => {
 //----------------------------------------------------------------------------------------------------
 
 exports.cadastrarEmEvento = (req, res) => {
-  Pessoa.findOne({ where: { CPF: req.params.CPF } }).then((pessoa) => {
+  Pessoa.findOne({ where: { CPF: atob(req.params.CPF) } }).then((pessoa) => {
     db.evento
       .findOne({ where: { idEvento: req.params.idEvento } })
       .then((evento) => {
@@ -217,7 +219,7 @@ exports.cadastrarEmEvento = (req, res) => {
 exports.deletaInscricaoEvento = (req, res) => {
   db.inscricaoEvento
     .destroy({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF },
+      where: { idEvento: req.params.idEvento, CPF: atob(req.params.CPF) },
     })
     .then(() => {
       res.send('deletou');
@@ -248,7 +250,7 @@ exports.selectInscrito = (req, res) => {
   // seleciona um inscrito em um evento
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF },
+      where: { idEvento: req.params.idEvento, CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'pessoaInsc' },
         { model: db.evento, as: 'eventoInsc' },
@@ -284,7 +286,7 @@ exports.InscricoesPessoa = (req, res) => {
   // seleciona todos eventos que a pessoa se inscreveu
   db.inscricaoEvento
     .findAll({
-      where: { CPF: req.params.CPF },
+      where: { CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'pessoaInsc' },
         { model: db.evento, as: 'eventoInsc' },
@@ -303,7 +305,7 @@ exports.InscricoesPessoa = (req, res) => {
 exports.cadastrarEmAtividade = (req, res) => {
   db.inscricaoEvento
     .findOne({
-      where: { idEvento: req.params.idEvento, CPF: req.params.CPF },
+      where: { idEvento: req.params.idEvento, CPF: atob(req.params.CPF) },
     })
     .then((inscricao) => {
       db.inscricaoAtividade
@@ -331,7 +333,7 @@ exports.deletaInscricaoAtividade = (req, res) => {
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        CPF: req.params.CPF,
+        CPF: atob(req.params.CPF),
       },
     })
     .then(() => {
@@ -373,7 +375,7 @@ exports.selectInscritoAtv = (req, res) => {
       where: {
         idEvento: req.params.idEvento,
         idAtividade: req.params.idAtividade,
-        CPF: req.params.CPF,
+        CPF: atob(req.params.CPF),
       },
       include: [
         { model: db.atividade, as: 'atividade' },
@@ -430,7 +432,7 @@ exports.selectInscricoesPessoa = (req, res) => {
   // seleciona as atividades que a pessoa se inscreveu
   db.inscricaoAtividade
     .findAll({
-      where: { CPF: req.params.CPF },
+      where: { CPF: atob(req.params.CPF) },
       include: [{ model: db.atividade, as: 'atividade' }],
     })
     .then((insc) => {
@@ -445,7 +447,7 @@ exports.selectInscriAtvEvent = (req, res) => {
   // seleciona as atividades que a pessoa se inscreveu de um evento em especifico
   db.inscricaoAtividade
     .findAll({
-      where: { CPF: req.params.CPF, idEvento: req.params.idEvento },
+      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
       include: [{ model: db.atividade, as: 'atividade' }],
     })
     .then((insc) => {
@@ -462,7 +464,7 @@ exports.selectInscriAtvEventAll = (req, res) => {
 
   db.inscricaoAtividade
     .findAll({
-      where: { CPF: req.params.CPF, idEvento: req.params.idEvento },
+      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
       include: [{ model: db.atividade, as: 'atividade' }],
     })
     .then((insc) => {

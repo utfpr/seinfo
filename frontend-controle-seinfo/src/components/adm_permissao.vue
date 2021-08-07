@@ -67,7 +67,7 @@ export default {
         this.isActive = true;
         alert("CPF é um campo obrigatório");
       }
-      axios.get(`/api/pessoa/${this.obj.CPF}`).then((response) => {
+      axios.get(`/api/pessoa/${btoa(this.obj.CPF)}`).then((response) => {
         if (!response.data.idPessoa) {
           this.isActive = true;
           alert("CPF não cadastrado no sistema");
@@ -86,7 +86,7 @@ export default {
         alert("Nivel é um campo obrigatório");
       } else {
         axios
-          .patch(`/api/pessoa/${this.obj.CPF}`, {
+          .patch(`/api/pessoa/${btoa(this.obj.CPF)}`, {
             nivel: this.obj.nivel,
           })
           .then((response) => {

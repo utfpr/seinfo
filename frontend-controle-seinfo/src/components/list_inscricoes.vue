@@ -120,11 +120,11 @@ export default {
   methods: {
     redirectAtv(idEvento, CPF) {
       // console.log(idEvento, CPF);
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}` });
     },
     exclusao(id) {
       axios
-        .delete(`/api/inscEv/${id}/${this.CPF}`)
+        .delete(`/api/inscEv/${id}/${btoa(this.CPF)}`)
         .then((response) => {
           console.log(response.data);
           this.pegar_tabela('eventosD');
@@ -151,7 +151,7 @@ export default {
         cancelText: 'Voltar',
         onOk() {
           axios
-            .delete(`/api/inscEv/${id}/${cpfPessoa}`)
+            .delete(`/api/inscEv/${id}/${btoa(cpfPessoa)}`)
             .then((response) => {
               console.log(response.data);
               document.location.reload(true);
@@ -171,7 +171,7 @@ export default {
     },
     pegar_tabela() {
       axios
-        .get(`/api/inscEvP/${this.CPF}`)
+        .get(`/api/inscEvP/${btoa(this.CPF)}`)
         .then((response) => {
           console.log('Listou ');
           console.log(response.data);

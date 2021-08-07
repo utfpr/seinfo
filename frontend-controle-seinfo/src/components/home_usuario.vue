@@ -125,7 +125,7 @@ export default {
   },
   methods: {
     redirectAtv(idEvento, CPF) {
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}` });
     },
     async pegarPerfil() {
       const user = await auth.getUser();
@@ -134,7 +134,7 @@ export default {
     async pegar_tabela_eventos(name) {
       try{
       await this.pegarPerfil()
-        const response = await axios.post(`/api/${name}`, {CPF: this.obj.CPF})
+        const response = await axios.post(`/api/${name}`, {CPF: btoa(this.obj.CPF)})
           // console.log("Listou " + name);
             this.res_localizar = response.data;
             console.log(this.res_localizar);
@@ -151,7 +151,7 @@ export default {
     inscricao(CPF, idEvento) {
       console.log(CPF, idEvento);
       axios
-        .post(`/api/inscEv/${idEvento}/${CPF}`, { dataInscricao: '2020-08-09' })
+        .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
           this.redirectAtv(idEvento, CPF);
           console.log(response.data);

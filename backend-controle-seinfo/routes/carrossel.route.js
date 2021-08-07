@@ -1,5 +1,4 @@
 const app = require('express').Router();
-
 const multer = require('multer');
 const carossel = require('../controllers/carrossel.controller');
 const multerConfig = require('../config/multerConfig');

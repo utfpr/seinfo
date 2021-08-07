@@ -7,6 +7,8 @@ const Lote = db.lote;
 const Pessoa = db.pessoa;
 const Organizacao = db.organizacao;
 
+const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
+
 // Post do Evento
 exports.create = async (req, res) => {
   try {
@@ -54,7 +56,7 @@ exports.create = async (req, res) => {
     await Organizacao.create({
       // 'horasParticipacao': req.body.horasParticipacao,
       idEvento: evento.idEvento,
-      CPF: pessoa.CPF,
+      CPF: atob(pessoa.CPF),
     });
 
     return res.status(200).json(evento);
@@ -138,7 +140,7 @@ exports.getAllEventosCPF = async (req, res) => {
 
     if (!eventos)
       return res.status(404).json('Não existe nenhum evento disponivel');
-
+    console.log(CPF);
     const idEventosInscrito = (
       await Inscricao.findAll({
         attributes: ['idEvento'],
@@ -219,7 +221,7 @@ exports.criaOrganizacao = (req, res) => {
   Evento.findOne({ where: { idEvento: req.params.idEvento } })
     .then((evento) => {
       db.pessoa
-        .findOne({ where: { CPF: req.params.CPF } })
+        .findOne({ where: { CPF: atob(req.params.CPF) } })
         .then((pessoa) => {
           db.organizacao
             .create({
@@ -264,7 +266,7 @@ exports.selectUmOrganizador = (req, res) => {
   // seleciona um organizdor de um evento
   db.organizacao
     .findOne({
-      where: { CPF: req.params.CPF, idEvento: req.params.idEvento },
+      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
@@ -300,7 +302,7 @@ exports.selectEventoOrganizador = (req, res) => {
   // seleciona os eventos onde a pessoa é organizadora
   db.organizacao
     .findAll({
-      where: { CPF: req.params.CPF },
+      where: { CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
@@ -316,7 +318,9 @@ exports.selectEventoOrganizador = (req, res) => {
 
 exports.deleteOrganizacao = (req, res) => {
   db.organizacao
-    .destroy({ where: { CPF: req.params.CPF, idEvento: req.params.idEvento } })
+    .destroy({
+      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
+    })
     .then(() => {
       res.send('deletou');
     })
