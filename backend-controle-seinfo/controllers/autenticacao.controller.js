@@ -9,7 +9,7 @@ let authorization = '';
 const criaTokens = async (object) =>
   jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
 
-exports.autenticar = async (req, res) => {
+exports.autenticar = async () => {
   await axios
     .post(process.env.URL_LDAP, {
       username: process.env.LOGIN_LDAP_USERNAME,

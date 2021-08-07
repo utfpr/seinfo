@@ -1,12 +1,12 @@
-const lotes = require('../controllers/lote.controller.js');
 const app = require('express').Router();
+const lotes = require('../controllers/lote.controller');
 
 // Insere um Novo lote
 app.post('/', lotes.create);
 // /api/lote
 
 // Procura um lote pelo ID
-app.get('/:loteId',lotes.findById);
+app.get('/:loteId', lotes.findById);
 // /api/lote/:loteId
 
 // Procura todos os lotes
