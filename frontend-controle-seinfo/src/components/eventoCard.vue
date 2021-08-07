@@ -67,7 +67,7 @@
               <h5 class="card-title">Cronograma</h5>
                 <div>
                   <a-collapse >
-                    <a-collapse-panel v-for="(cat,key) in res.atividades" v-bind:key="key" :header="key">
+                    <a-collapse-panel v-for="(cat,key) in res.atividades" v-bind:key="key" :header="key+ 'S'">
                       <p v-for="(atv,j) in cat" v-bind:key="j">
 
                         <a-descriptions bordered>
@@ -77,13 +77,13 @@
                           <a-descriptions-item label="Descrição" :span="3">
                             {{atv.descricao}}
                           </a-descriptions-item>
-                          <a-descriptions-item label="Horas participação" :span="1">
+                          <a-descriptions-item label="Horas participação" :span="3">
                             {{atv.horasParticipacao.slice(0, -3)}} horas
                           </a-descriptions-item>
-                          <a-descriptions-item label="Quantidade de vagas" :span="2">
+                          <a-descriptions-item label="Quantidade de vagas" :span="3">
                             {{atv.quantidadeVagas}}
                           </a-descriptions-item>
-                          <a-descriptions-item label="Data de início" ::span="1.5">
+                          <a-descriptions-item label="Data de início" ::span="3">
                             {{moment(atv.dataInicio).format('DD [de] MMMM [de] YYYY')}} 
                           </a-descriptions-item>
                         </a-descriptions>
