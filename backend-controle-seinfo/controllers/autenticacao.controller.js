@@ -3,6 +3,7 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const formatCPF = require('@fnando/cpf');
 const db = require('../models');
+const { generateHash } = require('../utils/hash');
 
 let authorization = '';
 
@@ -36,7 +37,7 @@ exports.login = async (req, res) => {
       const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
         pessoa.dataValues;
 
-      if (senha === password) {
+      if (senha === generateHash(password)) {
         const token = await criaTokens({
           idPessoa,
           CPF: pessoa.cpf,

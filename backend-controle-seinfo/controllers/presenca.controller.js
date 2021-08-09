@@ -4,8 +4,6 @@ const Presenca = db.presenca;
 const Atividade = db.atividade;
 const Pessoa = db.pessoa;
 
-const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
-
 exports.create = (req, res) => {
   const { idAtividade, idAgenda, idEvento, CPF } = req.params;
 

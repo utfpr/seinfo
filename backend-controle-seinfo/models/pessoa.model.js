@@ -1,6 +1,8 @@
 /* Referencia para os Tipos e Dados:
  https://sequelize.readthedocs.io/en/v3/docs/models-definition/ */
 
+const { generateHash } = require('../utils/hash');
+
 module.exports = (sequelize, Sequelize) => {
   const Pessoa = sequelize.define(
     'pessoa',
@@ -49,6 +51,12 @@ module.exports = (sequelize, Sequelize) => {
       tableName: 'pessoa',
       timestamps: false,
       createdAt: false,
+
+      setterMethods: {
+        senha(value) {
+          if (value) this.setDataValue('senha', generateHash(value));
+        },
+      },
     }
   );
 
