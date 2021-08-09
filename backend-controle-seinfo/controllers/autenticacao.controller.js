@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-const formatCPF = require('@fnando/cpf');
+// const formatCPF = require('@fnando/cpf');
 const db = require('../models');
 const { generateHash } = require('../utils/hash');
 
@@ -28,10 +28,11 @@ exports.login = async (req, res) => {
   return db.pessoa
     .findOne({
       where: {
-        CPF: formatCPF.strip(username),
+        CPF: username,
       },
     })
     .then(async (pessoa) => {
+      console.log(pessoa);
       if (!pessoa)
         return res.status(404).send({ message: 'Usuário não encontrado' });
       const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =

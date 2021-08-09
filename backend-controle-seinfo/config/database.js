@@ -13,6 +13,6 @@ const env = {
     acquire: parseInt(process.env.DB_POOL_ACQUIRE, 10),
     idle: parseInt(process.env.DB_POOL_IDLE, 10),
   },
-  logging: false,
+  logging: true,
 };
 module.exports = env;

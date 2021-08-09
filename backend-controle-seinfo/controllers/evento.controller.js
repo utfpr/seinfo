@@ -26,10 +26,12 @@ exports.create = async (req, res) => {
     } = req.body;
 
     const agenda = await Agenda.create({
-      dataHoraInicio: `${data_ini}T${hora_ini}`,
-      dataHoraFim: `${data_fim}T${hora_fim}`,
+      dataHoraInicio: new Date(`${data_ini}T${hora_ini}:00.003Z`),
+      dataHoraFim: new Date(`${data_fim}T${hora_fim}:00.003Z`),
       local: local_eve,
     });
+
+    console.log(agenda);
 
     const evento = await Evento.create({
       nome,
@@ -41,7 +43,7 @@ exports.create = async (req, res) => {
     await Promise.all(
       lote.forEach(async (loteItem) => {
         await Lote.create({
-          evento: evento.idEvento,
+          idEvento: evento.idEvento,
           valor: loteItem.valor_lote,
           dataAbertura: loteItem.data_inicio_lote,
           dataFechamento: loteItem.data_fim_lote,
@@ -65,21 +67,82 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.findById = (req, res) => {
-  Evento.findOne({
-    where: { idEvento: req.params.idEvento },
-    include: [
-      { model: db.lote, as: 'lotes' },
-      { model: db.agenda, as: 'agendamento' },
-    ],
-  })
-    .then((evento) => {
-      console.log(`Achou o evento pelo ID ${req.params.idEvento}`);
-      res.send(evento); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.findById = async (req, res) => {
+  try {
+    const evento = await Evento.findOne({
+      where: { idEvento: req.params.idEvento },
+      attributes: ['idEvento', 'nome', 'descricao', 'status'],
+      include: [
+        {
+          model: db.agenda,
+          as: 'agendamento',
+          attributes: ['dataHoraInicio', 'dataHoraFim', 'local'],
+        },
+      ],
     });
+
+    const atividades = await evento.getAtividades({
+      attributes: [
+        'idAtividade',
+        'titulo',
+        'valor',
+        'descricao',
+        'horasParticipacao',
+        'quantidadeVagas',
+        'dataInicio',
+      ],
+      include: [
+        {
+          model: db.categoria,
+          as: 'categoriaAtv',
+          attributes: ['nome'],
+        },
+        {
+          model: db.agenda,
+          as: 'atvAgenda',
+          through: { attributes: [] },
+        },
+      ],
+      order: [['dataInicio', 'ASC']],
+    });
+    const lotes = await evento.getLotes({
+      attributes: ['idLote', 'valor', 'dataAbertura', 'dataFechamento'],
+    });
+    const lotesVencidos = [];
+    const lotesDisponiveis = [];
+    const dataAtual = new Date();
+
+    lotes.forEach((lote) => {
+      const dataLote = new Date(lote.dataFechamento);
+
+      if (dataLote < dataAtual) {
+        lotesVencidos.push(lote);
+      } else {
+        lotesDisponiveis.push(lote);
+      }
+    });
+
+    // eslint-disable-next-line prefer-const
+    let atividadesPorCategorias = {};
+    atividades.forEach((atividade) => {
+      atividadesPorCategorias[atividade.categoriaAtv.nome] = {
+        ...atividadesPorCategorias[atividade.categoriaAtv.nome],
+        [atividade.titulo]: atividade,
+      };
+    });
+
+    const eventosFormatados = {
+      ...evento.dataValues,
+      atividades: atividadesPorCategorias,
+      lotesDisponiveis,
+      lotesVencidos,
+    };
+
+    return res.status(200).json(eventosFormatados);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
 };
 
 exports.findAll = (req, res) => {

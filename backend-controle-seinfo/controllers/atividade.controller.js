@@ -1,36 +1,55 @@
-const db = require('../models/index');
+const db = require('../models');
 
 const Atividades = db.atividade;
 const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
 
 // Post do Atividade
-exports.create = (req, res) => {
-  Atividades.create({
-    titulo: req.body.titulo,
-    valor: req.body.valor,
-    descricao: req.body.descricao,
-    horasParticipacao: req.body.horasParticipacao,
-    // quantidadeVagas:req.body.vagas,
-    quantidadeVagas: req.body.quantidadeVagas,
-    idEvento: req.body.idEvento,
-    idCategoria: req.body.idCategoria,
-  })
-    .then((agenda) => {
-      // cria a subAtividade
-      for (let i = 0; i < req.body.subatividade.length; i += 1) {
-        agenda.createAtvAgenda({
-          local: req.body.subatividade[i].local_subatividade,
-          dataHoraInicio: `${req.body.subatividade[i].data_inicio_subatividade}T${req.body.subatividade[i].hora_inicio_subatividade}`,
-          dataHoraFim: `${req.body.subatividade[i].data_fim_subatividade}T${req.body.subatividade[i].hora_fim_subatividade}`,
-        });
-      }
-      // Cria agenda / Subatividade
-      console.log('Criado SubAtividades');
-      res.send(agenda);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.create = async (req, res) => {
+  try {
+    const {
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      subatividade,
+      dataInicio,
+      horaInicio,
+    } = req.body;
+
+    const dataAtividade = new Date(`${dataInicio}T${horaInicio}:00.003Z`);
+
+    const atividade = await Atividades.create({
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      dataInicio: dataAtividade,
     });
+
+    console.log(atividade, subatividade);
+
+    // cria a subAtividade
+    await Promise.all(
+      subatividade.map((item) =>
+        atividade.createAtvAgenda({
+          local: item.local_subatividade,
+          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}:00.003Z`,
+          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}:00.003Z`,
+        })
+      )
+    );
+
+    res.status(200).json(atividade);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 };
 
 exports.findById = (req, res) => {
@@ -97,8 +116,8 @@ exports.delete = (req, res) => {
       idEvento: req.params.idEvento,
     },
   })
-    .then(() => {
-      res.send('deletou');
+    .then((atv) => {
+      res.send(atv);
     })
     .catch((err) => {
       res.status(500).send(`Error -> ${err}`);
@@ -183,6 +202,7 @@ exports.selectProtagonista = (req, res) => {
       ],
     })
     .then((prot) => {
+      console.log(prot);
       res.send(prot);
     })
     .catch((err) => {

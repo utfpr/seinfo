@@ -5,7 +5,7 @@
         <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
         <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
           <a-form-item>
-          <the-mask v-model="obj_login.username" placeholder="000.000.000-00" class="lg st" :mask="['###.###.###-##']" />
+          <input v-model="obj_login.username" class="lg st" name="username" placeholder="Usuário" required="required" />
           </a-form-item>
           <a-form-item>
             <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />

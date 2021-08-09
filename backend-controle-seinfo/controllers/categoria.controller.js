@@ -4,6 +4,7 @@ const Categorias = db.categoria;
 
 // Post do Evento
 exports.create = (req, res) => {
+  console.log(req);
   Categorias.create({
     nome: req.body.nome,
   })

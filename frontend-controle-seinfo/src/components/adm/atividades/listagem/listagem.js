@@ -34,7 +34,7 @@ export default {
             });
 
         axios
-            .get("/protagonistas")
+            .get("/api/protagonistas")
             .then((response) => {
                 this.protagonistas = response.data;
             })
@@ -61,8 +61,11 @@ export default {
             }
         },
         openModal(data) {
+
+            console.log("abriu")
             this.pegar_tabela();
             this.modalData = data;
+            
             this.modalVisible = true;
             this.eventos.forEach((element) => {
                 if (element.idEvento === this.modalData.idEvento) {

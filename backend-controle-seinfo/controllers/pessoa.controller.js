@@ -27,6 +27,8 @@ exports.create = (req, res) => {
   // nivel 1 é um placeholder
   if (req.body.nivel == null) {
     nivel = 1;
+  } else {
+    nivel = req.body.nivel;
   }
 
   // classificacao 1 é um placeholder
@@ -325,6 +327,15 @@ exports.cadastrarEmAtividade = (req, res) => {
     .catch((err) => {
       res.status(500).send(`Error -> ${err}`);
     });
+};
+
+exports.index = async (req, res) => {
+  try {
+    const pessoas = await Pessoa.findAll();
+    return res.status(200).send(pessoas);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 };
 
 exports.deletaInscricaoAtividade = (req, res) => {
