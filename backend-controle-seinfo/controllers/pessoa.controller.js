@@ -23,7 +23,7 @@ exports.create = (req, res) => {
   } else {
     senha = req.body.senha;
   }
-
+  console.log(senha);
   // nivel 1 é um placeholder
   if (req.body.nivel == null) {
     nivel = 1;
@@ -55,7 +55,7 @@ exports.create = (req, res) => {
     idPessoa: id,
     nome: req.body.nome,
     email: req.body.email,
-    CPF: req.body.CPF,
+    CPF: req.body.cpf,
     senha,
     nivel,
     classificacao,
