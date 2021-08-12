@@ -16,10 +16,15 @@
       <a-icon type="right" />
     </div>
 
-
-    <div v-for="img in imagens" :key="img.idImagem">
-      <img :src="img.Imagem.url">
+    <div v-if="imagens">
+        <img src="../assets/banner.png">
     </div>
+    <div v-else>
+      <div :v-for="img in imagens" :key="img.idImagem">
+        <img :src="img.Imagem.url">
+      </div>
+    </div>
+  
   </a-carousel>
 </div>
 </template>
@@ -80,6 +85,7 @@ export default {
 }
 
 img{
+  object-fit: cover;
   max-width: 100%;
   min-width: 100%;
   max-height:500px;
