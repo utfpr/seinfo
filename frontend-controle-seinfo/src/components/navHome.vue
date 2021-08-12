@@ -14,7 +14,7 @@
             <a-button class="bt" @click="LoginUser(signIn)" >Entrar</a-button>
           </a-form-item>
           <a-form-item>
-            <a-button class="bti" @click="showModal" >Cadastrar</a-button>
+            <a-button class="bti" href="cadPessoa">Cadastrar</a-button>
           </a-form-item>   
         </a-form>
         <a-modal
