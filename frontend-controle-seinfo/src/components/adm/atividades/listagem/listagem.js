@@ -79,8 +79,8 @@ export default {
                     this.modalData.data_fim_atv = moment(datahorafim).format(
                         "YYYY-MM-DD"
                     );
-                    this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
-                    this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
+                    this.modalData.hora_ini_atv = moment(datahorainicio).utc().format("HH:mm");
+                    this.modalData.hora_fim_atv = moment(datahorafim).utc().format("HH:mm");
                 }
             });
 
@@ -90,7 +90,9 @@ export default {
                 }
             });
 
-            this.modalData.idCategoria = data.categoriaAtv.nome;
+            this.modalData.idEvento = data.idEvento;
+            this.modalData.Categoria = data.categoriaAtv.nome;
+            this.modalData.idCategoria = data.categoriaAtv.idCategoria;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
         },
     },

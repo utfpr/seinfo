@@ -89,6 +89,8 @@ exports.findAll = (req, res) => {
 };
 
 exports.atualiza = (req, res) => {
+  console.log(req.body);
+
   Atividades.update(
     {
       titulo: req.body.titulo,
@@ -106,6 +108,7 @@ exports.atualiza = (req, res) => {
       res.send(atividade);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send(`Error ${err}`);
     });
 };
@@ -116,27 +119,8 @@ exports.delete = (req, res) => {
       idEvento: req.params.idEvento,
     },
   })
-    .then((atv) => {
-      res.send(atv);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
-    });
-  /*
-    Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atividade => {
-      db.agendamentoAtividade.findOne({where:{idAtividade:req.params.idAtividade}}).then(agenda=>{
-        db.agenda.destroy({where:{idAgenda:agenda.idAgenda}})
-        agenda.destroy()
-      })
-      db.protagonista.destroy({where:{idAtividade:req.params.idAtividade}})
-      atividade.destroy({where:{idAtividade: req.params.idAtividade}})
-      console.log("Achou uma atividade pelo ID "+req.params.idAtividade);
-      //res.status(204).send()
-      res.send('deletou'); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-    */
+    .then((atv) => res.status(200).json(atv))
+    .catch((err) => res.status(500).send(`Error -> ${err}`));
 };
 
 exports.AtividadeEvento = (req, res) => {

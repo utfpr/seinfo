@@ -12,7 +12,7 @@ export default {
     async mounted(){
         if(this.$route.params.data){
             this.dataDetalhes = this.$route.params.data;
-            this.dataDetalhes.nomeCategoria = this.dataDetalhes.idCategoria;//não sei pq, mas o nome da categoria sai de modalVerMais como idCategoria
+            this.dataDetalhes.nomeCategoria = this.dataDetalhes.Categoria;//não sei pq, mas o nome da categoria sai de modalVerMais como idCategoria
         }
         else{
             //quando é feito o reload da pagina, se perde toda informação vindo de "modalVerMais.vue" então tem que ser feito a requisição novamente

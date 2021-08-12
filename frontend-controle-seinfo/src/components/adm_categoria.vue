@@ -198,6 +198,7 @@ export default {
             console.log(response);
             this.$router.push("1");
             this.$router.replace("/adm/categoria");
+            location.reload();
           })
           .catch(error => {
             console.log(error)
