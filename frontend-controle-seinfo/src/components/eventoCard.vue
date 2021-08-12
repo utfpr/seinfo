@@ -45,6 +45,7 @@
             <a-card-grid style="width:100%;text-align:center">
               <div class="card-body">
               <h5 class="card-title">Lotes</h5>
+              <p v-if="lotesVencidos == 0 && lotesDisponiveis == 0" > Ainda não existem Lotes para esse evento </P>
               <p v-for="(lotes, i) in lotesVencidos" :key="i">
                 <span style="text-decoration: line-through">
                   {{moment(lotes.dataAbertura).format('DD [de] MMMM [de] YYYY')}} 
@@ -65,6 +66,7 @@
             <a-card-grid style="width:100%;text-align:center">
               <div class="card-body">
               <h5 class="card-title">Cronograma</h5>
+              <p v-if="Object.keys(res.atividades).length == 0" > Ainda não existem Atividades nesse evento</P>
                 <div>
                   <a-collapse >
                     <a-collapse-panel v-for="(cat,key) in res.atividades" v-bind:key="key" :header="key">
@@ -83,8 +85,19 @@
                           <a-descriptions-item label="Quantidade de vagas" :span="3">
                             {{atv.quantidadeVagas}}
                           </a-descriptions-item>
-                          <a-descriptions-item label="Data de início" ::span="3">
+                          <a-descriptions-item label="Data de início" :span="3">
                             {{moment(atv.dataInicio).format('DD [de] MMMM [de] YYYY')}} 
+                          </a-descriptions-item>
+                        </a-descriptions>
+                        <a-descriptions v-if="atv.atvAgenda.length != 0"  layout="vertical" bordered>
+                          <a-descriptions-item label="Horários do curso" :span="3">
+                              <p v-for="(sub,key) in atv.atvAgenda" v-bind:key="key">
+                                <span style="font-weight: bold;margin-right:20px">
+                                  Horário {{key + 1}}      
+                                </span>
+                                {{moment(sub.dataHoraInicio).format('DD [de] MMMM [de] YYYY [em] HH:MM' )}} até {{moment(sub.dataHoraFim).format('DD [de] MMMM [de] YYYY [em] HH:MM' )}} em {{sub.local}}
+                                <br/>
+                              </p>
                           </a-descriptions-item>
                         </a-descriptions>
                       </p>
