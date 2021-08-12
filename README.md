@@ -46,6 +46,14 @@ DB_POOL_MIN="0"
 DB_POOL_ACQUIRE="3000"
 DB_POOL_IDLE="10000"
 
+#EMAIL
+#Caso estiver usando o gmail vai ser necessario criar uma senha de aplicativo.
+SENDER_EMAIL="email@email.com"
+LOGIN_EMAIL="email@email.com"
+PASSWORD_EMAIL="senha"
+HOST_EMAIL="host.email.com"
+PORT_HOST_EMAIL=587
+
 #LDAP
 URL_LDAP="URL E ROTA AQUI"
 LOGIN_URL_LDAP="URL E ROTA AQUI"

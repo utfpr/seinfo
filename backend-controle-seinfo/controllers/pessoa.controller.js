@@ -1,84 +1,71 @@
 const nodemailer = require('nodemailer');
 const formatCPF = require('@fnando/cpf');
 const db = require('../models/index');
+require('dotenv').config();
 
 const Pessoa = db.pessoa;
 
+const {
+  SENDER_EMAIL,
+  LOGIN_EMAIL,
+  PASSWORD_EMAIL,
+  HOST_EMAIL,
+  PORT_HOST_EMAIL,
+} = process.env;
+
 const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
 
-exports.create = (req, res) => {
-  let id;
-  let senha;
-  let nivel;
-  let classificacao;
+exports.create = async (req, res) => {
+  const { RA, nome, email, cpf: CPF } = req.body;
+  let { senha, nivel, classificacao } = req.body;
 
-  if (req.body.RA == null) {
-    id = 'VISITANTE';
-  } else {
-    id = req.body.RA;
-  }
+  const idPessoa = RA || 'VISITANTE';
 
-  if (req.body.senha == null) {
-    senha = Math.random().toString(36).slice(-8);
-  } else {
-    senha = req.body.senha;
-  }
+  senha = senha || Math.random().toString(36).slice(-8);
   console.log(senha);
-  // nivel 1 é um placeholder
-  if (req.body.nivel == null) {
-    nivel = 1;
-  } else {
-    nivel = req.body.nivel;
-  }
 
-  // classificacao 1 é um placeholder
-  if (req.body.classificacao == null) {
-    classificacao = 1;
-  }
+  // nivel 0 é um placeholder
+  nivel = nivel || 0;
 
+  // classificacao 0 é um placeholder
+  classificacao = classificacao || 0;
+
+  // tirar isso e passar pro env
   const remetente = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    // service: 'smtp.gmail.com',
-    port: 587,
+    host: HOST_EMAIL,
+    port: PORT_HOST_EMAIL,
     secure: false,
     auth: {
-      user: 'emailseinfo@gmail.com',
-      pass: 'bcc34falunos',
+      user: LOGIN_EMAIL,
+      pass: PASSWORD_EMAIL,
     },
   });
-  const emailConfCadastro = {
-    from: 'emailseinfo@gmail.com',
-    to: req.body.email,
-    subject: 'Confirmação de cadastro Seinfo',
-    text: `Você está recebendo este email para confirmar seu cadastro no evento Seinfo.\n Sua senha é: ${senha}`,
-  };
 
-  Pessoa.create({
-    idPessoa: id,
-    nome: req.body.nome,
-    email: req.body.email,
-    CPF: req.body.cpf,
-    senha,
-    nivel,
-    classificacao,
-  })
-    .then(() => {
-      console.log('Criado uma Pessoa!');
-      remetente.sendMail(emailConfCadastro, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email enviado com sucesso.');
-        }
-      });
-      res.send(
-        `Foi cadastrado: ${id}\nEntre no seu email para retirar sua senha e entrar no portal!`
-      );
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(`Error -> ${err}`);
+  try {
+    const pessoa = await Pessoa.create({
+      idPessoa,
+      nome,
+      email,
+      CPF,
+      senha,
+      nivel,
+      classificacao,
     });
+
+    await remetente.sendMail({
+      from: SENDER_EMAIL,
+      to: pessoa.email,
+      subject: 'Confirmação de cadastro Seinfo',
+      text: `Você está recebendo este email para confirmar seu cadastro no evento Seinfo.\n Sua senha é: ${senha}`,
+    });
+
+    res.send(
+      `Foi cadastrado: ${pessoa.idPessoa}\nEntre no seu email para retirar sua senha e entrar no portal!`
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error -> ${err}`);
+  }
 };
 
 exports.findById = (req, res) => {
@@ -128,44 +115,48 @@ exports.atualiza = (req, res) => {
 };
 
 exports.recuperarSenha = (req, res) => {
-  Pessoa.findOne({ where: { CPF: formatCPF.strip(atob(req.params.CPF)) } })
-    .then((pessoa) => {
-      if (pessoa) {
-        const senha = Math.random().toString(36).slice(-8);
-        const remetente = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          // service: 'smtp.gmail.com',
-          port: 587,
-          secure: false,
-          auth: {
-            user: 'emailseinfo@gmail.com',
-            pass: 'bcc34falunos',
-          },
-        });
-        const emailConfCadastro = {
-          from: 'emailseinfo@gmail.com',
-          to: pessoa.email,
-          subject: 'Recuperação de senha',
-          text: `Você está recebendo este email para recuperação de senha do seu cadastro na Seinfo.\n Sua senha é: ${senha}`,
-        };
-        remetente.sendMail(emailConfCadastro, (error) => {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Email enviado com sucesso.');
-          }
-        });
-        pessoa.update({ senha });
-        return res
-          .status(200)
-          .send(`Email de recuperação enviado para:${pessoa.email}`);
-      }
-      res.status(404).send('Usuário não cadastrado');
-      return undefined;
-    })
-    .catch((err) => {
-      res.status(404).send(`Error ${err}`);
-    });
+  try {
+    Pessoa.findOne({ where: { CPF: formatCPF.strip(atob(req.params.CPF)) } })
+      .then((pessoa) => {
+        if (pessoa) {
+          const senha = Math.random().toString(36).slice(-8);
+          const remetente = nodemailer.createTransport({
+            host: HOST_EMAIL,
+            port: PORT_HOST_EMAIL,
+            secure: false,
+            auth: {
+              user: LOGIN_EMAIL,
+              pass: PASSWORD_EMAIL,
+            },
+          });
+          const emailConfCadastro = {
+            from: SENDER_EMAIL,
+            to: pessoa.email,
+            subject: 'Recuperação de senha',
+            text: `Você está recebendo este email para recuperação de senha do seu cadastro na Seinfo.\n Sua senha é: ${senha}`,
+          };
+          remetente.sendMail(emailConfCadastro, (error) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email enviado com sucesso.');
+            }
+          });
+          pessoa.update({ senha });
+          return res
+            .status(200)
+            .send(`Email de recuperação enviado para:${pessoa.email}`);
+        }
+        res.status(404).send('Usuário não cadastrado');
+        return undefined;
+      })
+      .catch((err) => {
+        res.status(404).send(`Error ${err}`);
+      });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Error ${err}`);
+  }
 };
 
 exports.delete = (req, res) => {
