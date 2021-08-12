@@ -1,7 +1,6 @@
 <template>
   <a-layout
     id="components-layout-demo-top"
-    class="layout"
   >
     <navHome />
     <a-layout-content>
