@@ -18,6 +18,10 @@ export default {
             console.log(error);
         })
     },
+    mounted(){
+        console.log(this.data);
+        console.log("alou");
+    },
     methods: {
         renderHourValidateStatus() {
             const error = this.onChangeHour();

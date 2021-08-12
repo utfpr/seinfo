@@ -62,24 +62,6 @@
               </a-form-item>
 
               <div class="row justify-content-center">
-                <a-form-item class="space_2">
-                  <label class="ant-form-item-required"
-                    >Selecione um Organizador:
-                  </label>
-                  <a-select mode="multiple" v-model="data.cpfOrganizador" defaultValue="...">
-                    <a-select-option
-                      id="cpfOrganizador"
-                      name="cpfOrganizador"
-                      v-for="pessoa in pessoas"
-                      :key="pessoa.CPF"
-                      :value="pessoa.CPF"
-                      >{{ pessoa.nome }}</a-select-option
-                    >
-                  </a-select>
-                </a-form-item>
-              </div>
-
-              <div class="row justify-content-center">
                 <a-form-item
                   class="space"
                   :validate-status="onChangeDate() === 1 ? 'error' : ''"
@@ -92,7 +74,7 @@
                   <label class="ant-form-item-required"
                     >Data de Inicio do Evento:</label
                   >
-                  <a-input v-model="data.data_ini" name="data_ini" type="date">
+                  <a-input v-model="data.data_ini_eve" name="data_ini_eve" type="date">
                     <a-icon
                       slot="prefix"
                       type="calendar"
@@ -112,7 +94,7 @@
                   <label class="ant-form-item-required"
                     >Hora de Inicio do Evento:</label
                   >
-                  <a-input v-model="data.hora_ini" name="hora_ini" type="time">
+                  <a-input v-model="data.hora_ini_eve" name="hora_ini_eve" type="time">
                     <a-icon
                       slot="prefix"
                       type="clock-circle"
@@ -134,7 +116,7 @@
                   <label class="ant-form-item-required"
                     >Data de Fim do Evento:</label
                   >
-                  <a-input v-model="data.data_fim" name="data_fim" type="date">
+                  <a-input v-model="data.data_fim_eve" name="data_fim_eve" type="date">
                     <a-icon
                       slot="prefix"
                       type="calendar"
@@ -154,7 +136,7 @@
                   <label class="ant-form-item-required"
                     >Hora de Fim do Evento:</label
                   >
-                  <a-input v-model="data.hora_fim" name="hora_fim" type="time">
+                  <a-input v-model="data.hora_fim_eve" name="hora_fim_eve" type="time">
                     <a-icon
                       slot="prefix"
                       type="clock-circle"
@@ -189,27 +171,12 @@
                     name="select_status"
                     defaultValue="0"
                   >
-                    <a-select-option value="1"
+                    <a-select-option :value="1"
                       >Evento disponivel</a-select-option
                     >
-                    <a-select-option value="0"
+                    <a-select-option :value="0"
                       >Evento indisponivel</a-select-option
                     >
-                  </a-select>
-                </a-form-item>
-              </div>
-              <div class="row justify-content-center"></div>
-
-              <div class="row justify-content-center">
-                <a-form-item class="space_2">
-                  <label class="ant-form-item-required">Lotes:</label>
-                  <a-select
-                    v-model="data.status"
-                    name="select_status"
-                    defaultValue="0"
-                  >
-                    <a-select-option value="1">Lote 1</a-select-option>
-                    <a-select-option value="0">Lote 1</a-select-option>
                   </a-select>
                 </a-form-item>
               </div>
