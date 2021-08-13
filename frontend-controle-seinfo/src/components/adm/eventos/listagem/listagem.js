@@ -31,6 +31,7 @@ export default {
       modalVisible2: false,
       nomeEvento: "",
       modalData: {
+        organizacaoEvento: "",
         cpfOrganizador: "",
         idEvento: "",
         nome: "",
@@ -75,6 +76,7 @@ export default {
       this.pegar_tabela();
       this.modalData = data;
       this.modalVisible = true;
+      this.modalData.cpfOrganizador = data.organizacaoEvento.CPF;
       this.modalData.nome = data.nome;
       this.modalData.local_eve = data.agendamento.local;
       this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");
@@ -82,7 +84,6 @@ export default {
       this.modalData.hora_ini_eve = moment(data.agendamento.dataHoraInicio).utc().format("HH:mm");
       this.modalData.hora_fim_eve = moment(data.agendamento.dataHoraFim).utc().format("HH:mm");
       //Chamar funcao do componente modalVerMais
-      console.log(this.modalData);
       this.$root.$emit('loadAtividades', this.modalData.idEvento);
     },
     renderData(data){

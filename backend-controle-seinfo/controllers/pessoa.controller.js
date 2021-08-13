@@ -331,7 +331,9 @@ exports.cadastrarEmAtividade = (req, res) => {
 
 exports.index = async (req, res) => {
   try {
-    const pessoas = await Pessoa.findAll();
+    const pessoas = await Pessoa.findAll({
+      attributes: ['idPessoa', 'nome', 'CPF'],
+    });
     return res.status(200).send(pessoas);
   } catch (error) {
     return res.status(500).send(error);

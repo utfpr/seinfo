@@ -13,7 +13,7 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   created() {
-    axios.get('/api/pessoas').then(response => {
+    axios.get('/api/obtemTodasAsPessoas').then(response => {
       this.pessoas = response.data;
     }).catch(error => {
       console.log(error);

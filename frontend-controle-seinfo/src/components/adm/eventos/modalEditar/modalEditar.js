@@ -12,15 +12,14 @@ export default {
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
     },
     created() {
-        axios.get('/api/pessoas').then(response => {
+        axios.get('/api/obtemTodasAsPessoas').then(response => {
             this.pessoas = response.data;
         }).catch(error => {
             console.log(error);
         })
     },
     mounted(){
-        console.log(this.data);
-        console.log("alou");
+
     },
     methods: {
         renderHourValidateStatus() {
@@ -89,26 +88,27 @@ export default {
             }
         },
         patch(dados) {
-            var erros = [];
-            if (!dados.nome) erros.push("Nome é obrigatório!");
-            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
-            if (!dados.local_eve) erros.push("Local é obrigatório!");
-            if (!dados.status) erros.push("Status é obrigatório!");
-            if (!dados.descricao) erros.push("Descrição é obrigatório!");
-            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
-            if (!erros.length) {
-                axios
-                    .patch(`/api/evento/${dados.idEvento}`, dados)
-                    .then((response) => {
-                        console.log("Editou!");
-                        console.log(response);
-                        this.$router.replace("./eventos");
-                        location.reload();
-                    });
-            } else {
-                alert(erros.join("\n"));
-                this.$router.replace("./eventos");
-            }
+            console.log(dados)
+             var erros = [];
+             if (!dados.nome) erros.push("Nome é obrigatório!");
+             if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
+             if (!dados.local_eve) erros.push("Local é obrigatório!");
+             if (!dados.status) erros.push("Status é obrigatório!");
+             if (!dados.descricao) erros.push("Descrição é obrigatório!");
+             if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
+             if (!erros.length) {
+                 axios
+                     .patch(`/api/evento/${dados.idEvento}`, dados)
+                     .then((response) => {
+                         console.log("Editou!");
+                         console.log(response);
+                         this.$router.replace("./eventos");
+                         location.reload();
+                     });
+             } else {
+                 alert(erros.join("\n"));
+                 this.$router.replace("./eventos");
+             }
         },
     },
 };
