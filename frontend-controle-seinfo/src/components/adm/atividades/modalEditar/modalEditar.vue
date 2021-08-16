@@ -202,7 +202,7 @@
                     <label class="ant-form-item-required">Selecione o Evento:</label>
                     <a-select
                       v-model="nomeEvento"
-                      :defaultValue="this.idEvento"
+                      defaultValue="..."
                     >
                       <a-select-option
                         id="idEvento"

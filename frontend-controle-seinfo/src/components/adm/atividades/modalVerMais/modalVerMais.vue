@@ -44,7 +44,7 @@
                 <br/>
                 <label>Local da Atividade: {{ data.local_atv }}</label>
                 <br/>
-                <label>Categoria: {{ data.Categoria }}</label>
+                <label>Categoria: {{ data.idCategoria }}</label>
                 <br/>
                 <label>Evento: {{ data.nomeEvento }}</label>
                 <br/>
