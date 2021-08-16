@@ -1,16 +1,9 @@
 <template>
   <div>
     <h3>Meus eventos</h3>
-    <div
-      id="list"
-      class="row"
-    >
+    <div id="list" class="row">
       <div class="table-responsive col-md-12">
-        <table
-          class="table table-striped"
-          cellspacing="0"
-          cellpadding="0"
-        >
+        <table class="table table-striped" cellspacing="0" cellpadding="0">
           <thead>
             <tr>
               <th style="width:35%">
@@ -19,18 +12,12 @@
               <th style="text-align: left;">
                 Status
               </th>
-              <th
-                style="text-align:center"
-                class="actions"
-              >
+              <th style="text-align:center" class="actions">
                 Ações
               </th>
             </tr>
           </thead>
-          <tbody
-            v-for="(res) in res_localizar"
-            :key="res.idEvento"
-          >
+          <tbody v-for="res in res_localizar" :key="res.idEvento">
             <tr style="background-color:white;">
               <td>{{ res.eventoInsc.nome }}</td>
               <td>
@@ -42,25 +29,23 @@
                   style="font-size: 32px; margin-left: 5px;"
                 />
               </td>
-              <td
-                style="text-align:center;"
-                class="actions"
-              >
-                <a-button
+              
+              <td style="text-align:center;" class="actions">
+                <button
                   type="button"
-                  class="ic"
-                  @click="redirectAtv(res.idEvento, CPF)"
+                  class="btn btn-success"
+                  @click="redirectAtv(res.idEvento, CPF,res.eventoInsc.idAgenda)"
                 >
                   VER ATIVIDADES
-                </a-button>
+                </button>
                 <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
-                <a-button
+                <button
                   type="button"
-                  class="dl"
+                  class="btn btn-danger"
                   @click="showDeleteConfirm(res.idEvento)"
                 >
                   CANCELAR INSCRIÇÃO
-                </a-button>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -71,46 +56,47 @@
 </template>
 
 <script>
-import axios from '../config/axiosConfig';
-
+import axios from "../config/axiosConfig";
 const columns = [
   {
-    title: 'Nome do Evento',
-    dataIndex: 'nome',
+    title: "Nome do Evento",
+    dataIndex: "nome",
     width: 200, // test
   },
   {
-    title: 'Data do Evento',
-    dataIndex: 'data',
+    title: "Data do Evento",
+    dataIndex: "data",
     width: 200,
   },
   {
-    title: 'Status do Evento',
-    dataIndex: 'status',
+    title: "Status do Evento",
+    dataIndex: "status",
   },
   {
-    title: 'Action',
-    key: 'operation',
-    fixed: 'right',
+    title: "Action",
+    key: "operation",
+    fixed: "right",
     width: 200,
-    scopedSlots: { customRender: 'action' },
+    scopedSlots: { customRender: "action" },
   },
   {
-    title: 'Valor',
-    dataIndex: '',
+    title: "Valor",
+    dataIndex: "",
   },
 ];
-const auth = require('../services/auth');
+const auth = require("../services/auth");
 
 export default {
+  components: {
+  },
   data() {
     return {
       res_localizar: [],
       columns,
       tabelas: [],
       modalVisible: false,
-      modalData: '',
-      CPF: '',
+      modalData: "",
+      CPF: "",
     };
   },
   mounted() {
@@ -118,16 +104,16 @@ export default {
     this.pegar_tabela();
   },
   methods: {
-    redirectAtv(idEvento, CPF) {
+    redirectAtv(idEvento, CPF,idAgenda) {
       // console.log(idEvento, CPF);
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}/${idAgenda}` });
     },
     exclusao(id) {
       axios
         .delete(`/api/inscEv/${id}/${this.CPF}`)
         .then((response) => {
           console.log(response.data);
-          this.pegar_tabela('eventosD');
+          this.pegar_tabela("eventosD");
         })
         .catch((error) => {
           console.log(error);
@@ -144,11 +130,11 @@ export default {
     showDeleteConfirm(id) {
       const cpfPessoa = this.CPF;
       this.$confirm({
-        title: 'Deseja remover sua inscrição?',
-        content: 'Essa ação não poderá ser desfeita!',
-        okText: 'Sim',
-        okType: 'danger',
-        cancelText: 'Voltar',
+        title: "Deseja remover sua inscrição?",
+        content: "Essa ação não poderá ser desfeita!",
+        okText: "Sim",
+        okType: "danger",
+        cancelText: "Voltar",
         onOk() {
           axios
             .delete(`/api/inscEv/${id}/${cpfPessoa}`)
@@ -161,7 +147,7 @@ export default {
             });
         },
         onCancel() {
-          console.log('Cancel');
+          console.log("Cancel");
         },
       });
     },
@@ -173,7 +159,7 @@ export default {
       axios
         .get(`/api/inscEvP/${this.CPF}`)
         .then((response) => {
-          console.log('Listou ');
+          console.log("Listou ");
           console.log(response.data);
           this.res_localizar = response.data;
         })

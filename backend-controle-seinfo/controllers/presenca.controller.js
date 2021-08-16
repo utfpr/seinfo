@@ -1,24 +1,25 @@
-const db = require('../models/index.js');
+const db = require('../models/index');
 
 const Presenca = db.presenca;
 const Atividade = db.atividade;
 const Pessoa = db.pessoa;
 
-exports.create = (req, res) => {
-  const { idAtividade, idAgenda, idEvento, CPF } = req.params;
+const agendamentoAtividadeDb = db.agendamentoAtividade;
 
-  Presenca.create({
+exports.create = async (idAtividade, idAgenda, idEvento, CPF) => {
+  const presencaFoiConfirmada = await Presenca.findAll({
+    where: { idAtividade, idAgenda, idEvento, CPF },
+  });
+  if (presencaFoiConfirmada) return 'Presença ja confirmada';
+  await agendamentoAtividadeDb.create({ idAtividade, idAgenda });
+  const presencaConfirmada = await Presenca.create({
     idAtividade,
     idAgenda,
     idEvento,
     CPF,
-  })
-    .then((response) => {
-      res.status(200).send(response);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+    presenca: 1,
+  });
+  return presencaConfirmada;
 };
 
 exports.findById = (req, res) => {
