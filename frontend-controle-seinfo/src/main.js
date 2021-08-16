@@ -26,18 +26,6 @@ Vue.config.productionTip = false;
 setTimeout(() => {
   teste.userData().then((res) => {
     router = res ?  perm[res.nivel]: Login;
-
-    // router = (res) => {
-    //   const { nivel } = res.nivel
-    //   if (res.nivel === 0) {
-    //     return Usuario;
-    //   } else if (res.nivel === 1) {
-    //     return Login;
-    //   } else if(res.){
-    //     return Admin;
-    //   }
-    //   return Login;
-    // };
     new Vue({
       el: "#app",
       router,
