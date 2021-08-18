@@ -1,6 +1,7 @@
 <template>
   <div class="title">
-    <h5 style="text-align:center">Cadastro de Visitante</h5>
+    <h3 style="text-align:center">Usuário externo à UTFPR</h3>
+    <h6 style="text-align:center">Se você é aluno, técnico ou docente da UTFPR utilize seus dados do sistema acadêmico para o login na página principal</h6>
     <div class="box">
       <form class="form" method="post">
         <div class="row justify-content-center">
