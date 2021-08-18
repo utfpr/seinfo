@@ -45,6 +45,8 @@ export default {
 <style scoped>
 #work {
   display: flex;
+  padding: 20px 0px;
+  gap: 30px;
   flex-wrap: wrap;
   justify-content: center;
   background: #092756;
@@ -112,7 +114,7 @@ export default {
   display: inline-block;
   width: 410px;
   height: 30px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .card-text {
@@ -124,6 +126,7 @@ export default {
 }
 
 .card-body {
+  border-radius: 0px 0px 10px 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -134,8 +137,6 @@ export default {
 .box-1 {
   height: 100%;
   width: 450px;
-  margin: 50px;
-  margin-top: 30px;
   background: transparent;
   border: transparent;
 }
@@ -146,6 +147,8 @@ export default {
 }
 
 .box-2 {
+  border-radius: 10px 10px 0px 0px;
+  object-fit: cover;
   width: 100%;
   min-height: 260px;
   max-height: 260px;

@@ -123,7 +123,6 @@ export default {
     async LoginUser(signIn) {
 
       try {
-        console.log(signIn)
         const response = await axios.post('/public/login', this.obj_login)
         signIn({token: response.data.token, user: response.data.pessoa});
         window.location.replace(
@@ -132,10 +131,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-
-            
-          
-      console.log("FEZ O LOGIN")
     },
     handleOk() {
       this.visible = false

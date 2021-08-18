@@ -20,10 +20,19 @@
 					<tr>Vagas disponíveis: {{record.atividade.quantidadeVagas}}</tr>
 					<tr>Horas de participação: {{record.atividade.horasParticipacao}}</tr>
 					<tr>Descrição: {{record.atividade.descricao}} </tr>
-					<div class="botoes">
+					<tr>
+						<div class="center">
+							<ButaoDePresencaAtividade  
+							v-bind:idEvento="record.idEvento"
+							v-bind:idAtividade="record.idAtividade" 
+							v-bind:idAgenda="idAgenda"
+							v-bind:cpf="cpf"  
+						/>
+						</div>
+					</tr>
+					<tr>
 						<a-button type="button" class="dl"  @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
-				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
-					</div>
+					</tr>
 				</div>
 			</a-table>
 		</div>
@@ -34,6 +43,7 @@
 import AuthConsumer from '../contexts/authConsumer';
 import axios from '../config/axiosConfig';
 import moment from "moment";
+import ButaoDePresencaAtividade from "./ButaoDePresencaAtividade"
 moment.locale("pt-br");
 
 const columns = [{
@@ -48,13 +58,27 @@ const columns2 = [{
 }];
 
 export default {
+	data () {
+		return { 
+			res_atividades: [],
+			res_atividades2: [],
+			idEvento: "",
+			idAgenda:"",
+			columns,
+			columns2,
+			cpf:""
+		};
+	},
 	mounted() {
-		console.log(this.$route.params);
-		this.pegar_tabela_atividades(this.$route.params.idEvento, this.$route.params.CPF)
-		this.pegar_tabela_atividades2(this.$route.params.idEvento, this.$route.params.CPF)
+		const {idEvento , CPF, idAgenda} = this.$route.params
+		this.idAgenda = idAgenda 
+		this.cpf = CPF
+		this.pegar_tabela_atividades(idEvento, CPF)
+		this.pegar_tabela_atividades2(idEvento, CPF)
 	},
 	components: {
-    AuthConsumer
+    AuthConsumer,
+	ButaoDePresencaAtividade
 	},
 	methods: {
 	pegar_tabela_atividades(idEvento, CPF) {
@@ -108,15 +132,6 @@ export default {
 			console.log(error);
         });
     },
-	},
-	data () {
-		return { 
-			res_atividades: [],
-			res_atividades2: [],
-			idEvento: "",
-			columns,
-			columns2,
-		};
 	},
 	
 };

@@ -1,7 +1,5 @@
 const token = '@TOKEN';
 const dataUser = '@USER';
-
-
 const getToken = async () => {
   try {
     const value = localStorage.getItem(token);

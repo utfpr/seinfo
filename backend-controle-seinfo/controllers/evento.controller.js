@@ -31,8 +31,6 @@ exports.create = async (req, res) => {
       local: local_eve,
     });
 
-    console.log(agenda);
-
     const evento = await Evento.create({
       nome,
       descricao,
@@ -41,10 +39,10 @@ exports.create = async (req, res) => {
     });
 
     await Promise.all(
-      lote.forEach(async (loteItem) => {
+      lote.map(async (loteItem) => {
         await Lote.create({
           idEvento: evento.idEvento,
-          valor: loteItem.valor_lote,
+          valor: parseFloat(loteItem.valor_lote),
           dataAbertura: loteItem.data_inicio_lote,
           dataFechamento: loteItem.data_fim_lote,
         });
@@ -58,7 +56,7 @@ exports.create = async (req, res) => {
     await Organizacao.create({
       // 'horasParticipacao': req.body.horasParticipacao,
       idEvento: evento.idEvento,
-      CPF: atob(pessoa.CPF),
+      CPF: pessoa.CPF,
     });
 
     return res.status(200).json(evento);
@@ -145,22 +143,38 @@ exports.findById = async (req, res) => {
   }
 };
 
-exports.findAll = (req, res) => {
-  Evento.findAll({
-    include: [
-      { model: db.lote, as: 'lotes' },
-      { model: db.agenda, as: 'agendamento' },
-    ],
-  })
-    .then((evento) => {
-      res.send(evento); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.findAll = async (req, res) => {
+  try {
+    const eventos = await Evento.findAll({
+      include: [
+        { model: db.lote, as: 'lotes' },
+        { model: db.agenda, as: 'agendamento' },
+      ],
     });
+
+    const eventosFormatados = await Promise.all(
+      eventos.map(async (evento) => {
+        const organizacaoEvento = await Organizacao.findOne({
+          where: {
+            idEvento: evento.idEvento,
+          },
+        });
+
+        return {
+          ...evento.dataValues,
+          organizacaoEvento: organizacaoEvento && organizacaoEvento.dataValues,
+        };
+      })
+    );
+
+    res.status(200).json(eventosFormatados); // Retorna um Json para a Pagina da API
+  } catch (error) {
+    res.status(500).json(`Error -> ${error}`);
+  }
 };
 
 exports.atualiza = (req, res) => {
+  console.log(req.body);
   Evento.update(
     {
       nome: req.body.nome,
@@ -203,7 +217,7 @@ exports.getAllEventosCPF = async (req, res) => {
 
     if (!eventos)
       return res.status(404).json('Não existe nenhum evento disponivel');
-    console.log(CPF);
+
     const idEventosInscrito = (
       await Inscricao.findAll({
         attributes: ['idEvento'],
