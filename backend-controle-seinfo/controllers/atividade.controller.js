@@ -155,7 +155,7 @@ exports.delete = async (req, res) => {
     });
 
     if (!atividade)
-      return res.status(204).json({ error: 'Atividade não encontrada' });
+      return res.status(404).json({ error: 'Atividade não encontrada' });
 
     const agenda = await AgendamentoAtividade.findOne({
       where: { idAtividade },
@@ -212,7 +212,7 @@ exports.criarProtagonista = async (req, res) => {
     });
 
     if (!atividade)
-      return res.status(204).json({ error: 'Atividade não encontrada!' });
+      return res.status(404).json({ error: 'Atividade não encontrada!' });
 
     const pessoa = await Pessoa.findOne({
       where: { CPF: atob(cpf) },
