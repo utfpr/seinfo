@@ -1,68 +1,83 @@
-const db = require('../models/index');
+const db = require('../models');
 
 const Agenda = db.agenda;
 
-// Post do Eventos
-exports.create = (req, res) => {
-  Agenda.create({
-    dataHoraInicio: req.data_ini,
-    dataHoraFim: req.data_fim,
-    local: req.local,
-  })
-    .then((agenda) => {
-      // Cria um Evento
-      res.send(agenda.idAgenda);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.create = async (req, res) => {
+  try {
+    const { data_ini, data_fim, local } = req;
+
+    const agenda = await Agenda.create({
+      dataHoraInicio: data_ini,
+      dataHoraFim: data_fim,
+      local,
     });
+
+    return res.status(200).json(agenda);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.findById = (req, res) => {
-  Agenda.findOne({ where: { idAgenda: req.params.agendaId } })
-    .then((agenda) => {
-      res.send(agenda); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.findById = async (req, res) => {
+  try {
+    const { agendaId } = req.params;
+
+    const agenda = await Agenda.findOne({
+      where: {
+        idAgenda: agendaId,
+      },
     });
+
+    return res.status(200).json(agenda);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.findAll = (req, res) => {
-  Agenda.findAll()
-    .then((agenda) => {
-      res.send(agenda); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
-    });
+exports.findAll = async (req, res) => {
+  try {
+    const agendas = await Agenda.findAll();
+
+    return res.status(200).json(agendas);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.atualiza = (req, res) => {
-  // const data_ini_full = `${req.body.data_ini}T${req.body.hora_ini}`;
-  // const data_fim_full = `${req.body.data_fim}T${req.body.hora_fim}`;
-  Agenda.update(
-    {
-      dataHoraInicio: req.data_ini,
-      dataHoraFim: req.data_fim,
-      local: req.local,
-      horasParticipacao: req.horas,
-    },
-    { where: { idAgenda: req.params.agendaId } }
-  )
-    .then((agenda) => {
-      res.send(agenda);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error ${err}`);
-    });
+exports.atualiza = async (req, res) => {
+  try {
+    const { data_ini, data_fim, local, horas } = req;
+    const { agendaId } = req.params;
+
+    const agenda = await Agenda.update(
+      {
+        dataHoraInicio: data_ini,
+        dataHoraFim: data_fim,
+        local,
+        horasParticipacao: horas,
+      },
+      {
+        where: {
+          idAgenda: agendaId,
+        },
+      }
+    );
+
+    return res.status(200).json(agenda);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
-exports.delete = (req, res) => {
-  Agenda.destroy({ where: { idAgenda: req.params.agendaId } })
-    .then((agenda) => {
-      res.send(agenda); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.delete = async (req, res) => {
+  try {
+    const { agendaId } = req.params;
+
+    const agenda = await Agenda.destroy({
+      where: { idAgenda: agendaId },
     });
+
+    return res.status(200).json(agenda);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
