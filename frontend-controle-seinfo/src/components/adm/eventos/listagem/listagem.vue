@@ -68,8 +68,8 @@
         <div>
     </div>
       <div>
-        <modal-ver-mais v-bind:data="this.modalData" />
         <modal-editar v-bind:data="this.modalData" />
+        <modal-ver-mais v-bind:data="this.modalData" />
         <modal-excluir v-bind:modalData="this.modalData" v-on:deletarModal="deletarModal"/>
       </div>
       </div>

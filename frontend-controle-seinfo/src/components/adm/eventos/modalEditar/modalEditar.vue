@@ -47,8 +47,8 @@
                 >
 
                 <a-select
-                  v-model="data.organizacaoEvento.CPF"
-                  :default-value="data.cpfOrganizador"
+                  v-model="data.organizacaoEvento"
+                  :default-value="data.organizacaoEvento"
                 >
                   <a-select-option
                     id="cpfOrganizador"
@@ -152,7 +152,7 @@
                     maxlength="255"
                     autocomplete="off"
                     placeholder="Local"
-                    v-model="data.local_eve"
+                    v-model="data.agendamento.local"
                     type="text"
                   >
                     <a-icon
@@ -200,7 +200,7 @@
             <br />
             <div class="row justify-content-center">
               <button
-                type="submit"
+                type="button"
                 v-on:click="patch(data)"
                 class="btn btn-outline-primary btn-sm"
               >
