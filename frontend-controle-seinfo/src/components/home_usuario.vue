@@ -1,6 +1,6 @@
 <template>
   <AuthConsumer>
-    <div slot-scope="{ getUser }">
+    <div>
       <a-table
         :columns="columns"
         :data-source="res_localizar"
@@ -14,10 +14,10 @@
           <div class="table-responsive col-md-12">
             <div class="button-wrapper">
               <a-button
-                v-if="!record.estaInscrito"
+                v-if="record.estaInscrito == false"
                 type="button"
                 class="ic"
-                @click="inscricao(getUser.CPF, record.idEvento)"
+                @click="showModal(record.idEvento)"
               >
                 INSCREVER-SE
               </a-button>
@@ -25,10 +25,14 @@
                 v-else
                 type="button"
                 class="ic-yellow"
-                @click="redirectAtv(record.idEvento, getUser.CPF)"
+                @click="showModal(record.estaInscrito)"
               >
                 VER INSCRIÇÕES EM ATIVIDADES
               </a-button>
+              <a-modal v-model="visible" title="Aviso" @ok="handleOk">
+                <p>Você ira se inscrever nessa atividade pelo lote .....</p>
+              </a-modal>            
+
             </div>
             <DetalhesEvento v-bind:id="record.idEvento" />
           </div>
@@ -70,9 +74,10 @@ export default {
       res_atividades: [],
       columns,
       loading: false,
-      confirmLoading: false,
+      visible: false,
       obj: {
         CPF: '',
+        idEvento:''
       }
     };
   },
@@ -87,6 +92,7 @@ export default {
     async pegarPerfil() {
       const user = await auth.getUser();
       this.obj.CPF = user.CPF;
+      console.log(user.CPF)
     },
     async pegar_tabela_eventos(name) {
       try{
@@ -106,7 +112,6 @@ export default {
         });
     },
     inscricao(CPF, idEvento) {
-      console.log(CPF, idEvento);
       axios
         .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
@@ -119,6 +124,14 @@ export default {
           console.log(error);
         });
     },
+    showModal(idEvento){
+      this.visible = true
+      this.obj.idEvento = idEvento
+    },
+    handleOk(){
+      this.inscricao(this.obj.CPF, this.obj.idEvento)
+    }
+
   },
 };
 </script>

@@ -93,9 +93,7 @@
                 </div>
               </div>        
             </a-card-grid>
-
-          </a-card >
-          
+          </a-card >          
       </a-layout-content>
 </template>
 
