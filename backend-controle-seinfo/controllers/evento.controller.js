@@ -196,7 +196,6 @@ exports.getAllEventosCPF = async (req, res) => {
     const eventos = await Evento.findAll({
       where: { status: 1 },
       include: [
-        { model: db.lote, as: 'lotes' },
         { model: db.agenda, as: 'agendamento' },
       ],
     });
@@ -214,11 +213,15 @@ exports.getAllEventosCPF = async (req, res) => {
       const dataAtual = new Date();
 
       lotes.forEach((lote) => {
-        const dataLote = new Date(lote.dataFechamento);
-  
-        if (dataLote < dataAtual) {
+        const dataLoteF = new Date(lote.dataFechamento);
+        const dataLoteA = new Date(lote.dataAbertura);
+        if (dataLoteF < dataAtual) {
           lotesVencidos.push(lote.dataValues);
-        } else {
+        }
+        else if(dataLoteA > dataAtual){
+          lotesVencidos.push(lote.dataValues);
+        } 
+        else {
           lotesDisponiveis.push(lote.dataValues);
         }
       });
