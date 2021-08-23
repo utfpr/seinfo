@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <div v-if="!blyat" class="alert alert-primary" role="alert">
-        Presenca confirmada ! <a href="/">ir para home</a>
+        Presenca confirmada !
       </div>
       <div v-else id="blyat" class="alert alert-warning" role="alert">
         Algo aconteceu camarada! porfavor contate o suporte
@@ -38,6 +38,7 @@ export default {
           idAtividade: this.idAtividade,
           cpf: this.user.CPF,
           idAgenda: this.idAgenda,
+          presenca  : 1,
         })
         .catch((err) => {
           console.log(err);

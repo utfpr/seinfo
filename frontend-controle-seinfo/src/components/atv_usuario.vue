@@ -21,16 +21,6 @@
 					<tr>Horas de participação: {{record.atividade.horasParticipacao}}</tr>
 					<tr>Descrição: {{record.atividade.descricao}} </tr>
 					<tr>
-						<div class="center">
-							<ButaoDePresencaAtividade  
-							v-bind:idEvento="record.idEvento"
-							v-bind:idAtividade="record.idAtividade" 
-							v-bind:idAgenda="idAgenda"
-							v-bind:cpf="cpf"  
-						/>
-						</div>
-					</tr>
-					<tr>
 						<a-button type="button" class="dl"  @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
 					</tr>
 				</div>
@@ -43,7 +33,6 @@
 import AuthConsumer from '../contexts/authConsumer';
 import axios from '../config/axiosConfig';
 import moment from "moment";
-import ButaoDePresencaAtividade from "./ButaoDePresencaAtividade"
 moment.locale("pt-br");
 
 const columns = [{
@@ -78,7 +67,6 @@ export default {
 	},
 	components: {
     AuthConsumer,
-	ButaoDePresencaAtividade
 	},
 	methods: {
 	pegar_tabela_atividades(idEvento, CPF) {

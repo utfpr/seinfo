@@ -1,37 +1,42 @@
-import moment from 'moment';
-import axios from '../../../../config/axiosConfig';
+import moment from "moment";
+import axios from "../../../../config/axiosConfig";
+import listagemParticipantes from "../../atividades_detalhes/listagem_participantes/listagem_participantes.vue";
 moment.locale("pt-br");
 
 export default {
-    props: {
-      modalData: Object,
+  components: {
+    listagemParticipantes,
+  },
+  props: {
+    modalData: Object,
+  },
+  methods: {
+    moment: function(date) {
+      return moment(date);
     },
-    methods: {
-      moment: function (date) {
-          return moment(date);
-      },
-      cancel(){
-        this.active = false;
-        this.remove = false;
-      },
-      toggleExcluir(data){
-        this.dataEdita = data;
-        this.remove = !this.remove;
-        this.active = false;
-      },
-      excluir(){
-        axios.delete("/api/agenda/"+ this.dataEdita.idAgenda)
+    cancel() {
+      this.active = false;
+      this.remove = false;
+    },
+    toggleExcluir(data) {
+      this.dataEdita = data;
+      this.remove = !this.remove;
+      this.active = false;
+    },
+    excluir() {
+      axios
+        .delete("/api/agenda/" + this.dataEdita.idAgenda)
         .then((response) => {
-          console.log("Deletou!",response);
+          console.log("Deletou!", response);
           location.reload();
         });
-      },
     },
-    data() {
-        return {
-            active: false,
-            remove: false,
-            dataEdita: [],
-        }
-    }
-}
+  },
+  data() {
+    return {
+      active: false,
+      remove: false,
+      dataEdita: [],
+    };
+  },
+};

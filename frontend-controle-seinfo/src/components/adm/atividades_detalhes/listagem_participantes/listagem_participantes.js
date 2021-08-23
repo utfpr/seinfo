@@ -1,31 +1,37 @@
-import axios from '../../../../config/axiosConfig';
+import axios from "../../../../config/axiosConfig";
+import ButaoDePresencaAtividade from "../../../ButaoDePresencaAtividade.vue";
 import moment from "moment";
 moment.locale("pt-br");
 export default {
-    props: {
-        idEvento: String,
-        idAtividade: String,
+  components: {
+    ButaoDePresencaAtividade,
+  },
+  props: {
+    idEvento: String,
+    idAtividade: String,
+    idAgenda: String,
+  },
+  async mounted() {
+    await axios
+      .get(`/api/inscAtv/${this.idEvento}/${this.idAtividade}`)
+      .then((response) => {
+        this.participantes = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  methods: {
+    moment: function(date) {
+      return moment(date);
     },
-    async mounted(){
-        await axios.get(`/api/inscAtv/${this.idEvento}/${this.idAtividade}`)
-            .then((response) => {
-                this.participantes = response.data;
-            })
-            .catch(function (error) {
-                console.log(error);
-        });
+    confirmarPresenca(dados) {
+      console.log(dados);
     },
-    methods: {
-        moment: function (date) {
-            return moment(date);
-        },
-        confirmarPresenca (dados) {
-            console.log(dados)
-        },
-    },
-    data(){
-        return {
-            participantes: [],
-        }
-    }
-}
+  },
+  data() {
+    return {
+      participantes: [],
+    };
+  },
+};

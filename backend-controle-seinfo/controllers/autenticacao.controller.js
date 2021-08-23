@@ -24,6 +24,7 @@ exports.autenticar = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
+  console.log(req.body);
   return db.pessoa
     .findOne({
       where: {
@@ -35,7 +36,7 @@ exports.login = async (req, res) => {
         return res.status(404).send({ message: 'Usuário não encontrado' });
       const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
         pessoa.dataValues;
-
+      console.log(pessoa.dataValues);
       if (senha === password) {
         const token = await criaTokens({
           idPessoa,
