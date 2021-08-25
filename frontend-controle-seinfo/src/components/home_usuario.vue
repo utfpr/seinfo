@@ -1,6 +1,6 @@
 <template>
   <AuthConsumer>
-    <div slot-scope="{ getUser }">
+    <div>
       <a-table
         :columns="columns"
         :data-source="res_localizar"
@@ -14,23 +14,27 @@
           <div class="table-responsive col-md-12">
             <div class="button-wrapper">
               <a-button
-                v-if="!record.estaInscrito"
+                v-if="record.estaInscrito == false && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic"
-                @click="inscricao(getUser.CPF, record.idEvento)"
+                @click="showModal(record.idEvento)"
               >
                 INSCREVER-SE
               </a-button>
               <a-button
-                v-else
+                v-if="record.estaInscrito == true && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic-yellow"
-                @click="redirectAtv(record.idEvento, getUser.CPF)"
+                @click="redirectAtv(record.idEvento, obj.cpf)"
               >
                 VER INSCRIÇÕES EM ATIVIDADES
               </a-button>
+              <a-modal v-if="record.estaInscrito == false && record.lotesDisponiveis != 0" v-model="visible" title="Aviso" @ok="handleOk">
+                <p>Você ira se inscrever nessa atividade pelo lote de<b> {{dateConverter(record.lotesDisponiveis[0].dataAbertura)}} até {{dateConverter(record.lotesDisponiveis[0].dataFechamento)}} com valor de {{record.lotesDisponiveis[0].valor}}R$</b> </p>
+              </a-modal>            
+              <p v-if="record.lotesDisponiveis.length == 0" >As inscrições do evento acabaram</p>
             </div>
-            <DetalhesEvento v-bind:id="record.idEvento" />
+            <DetalhesEvento v-bind:id="record.idEvento"/>
           </div>
         </div>
       </a-table>
@@ -39,7 +43,7 @@
 </template>
 
 <script>
-
+import moment from "moment";
 import AuthConsumer from '../contexts/authConsumer.vue';
 import DetalhesEvento from './eventoCard.vue'
 
@@ -67,18 +71,18 @@ export default {
   data() {
     return {
       res_localizar: [],
-      res_atividades: [],
       columns,
       loading: false,
-      confirmLoading: false,
+      visible: false,
+      loteDisponivel:'',
       obj: {
         CPF: '',
+        idEvento:''
       }
     };
   },
   mounted() {
     this.pegar_tabela_eventos('eventosD');
-    this.pegar_tabela_atividades('atividades');
   },
   methods: {
     redirectAtv(idEvento, CPF) {
@@ -87,6 +91,7 @@ export default {
     async pegarPerfil() {
       const user = await auth.getUser();
       this.obj.CPF = user.CPF;
+      console.log(user.CPF)
     },
     async pegar_tabela_eventos(name) {
       try{
@@ -94,19 +99,15 @@ export default {
         const response = await axios.post(`/api/${name}`, {CPF: btoa(this.obj.CPF)})
           // console.log("Listou " + name);
             this.res_localizar = response.data;
-            console.log(this.res_localizar);
+            console.log( this.res_localizar)
          } catch(error) {
             console.log(error);
           }
     },
-    pegar_tabela_atividades(name) {
-      axios.get(`/api/${name}`)
-        .then((response) => {
-          this.res_atividades = response.data;
-        });
-    },
+    dateConverter(date){
+      return moment(date).format('DD [de] MMMM [de] YYYY')
+    },  
     inscricao(CPF, idEvento) {
-      console.log(CPF, idEvento);
       axios
         .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
@@ -119,6 +120,14 @@ export default {
           console.log(error);
         });
     },
+    showModal(idEvento){
+      this.visible = true
+      this.obj.idEvento = idEvento
+    },
+    handleOk(){
+      this.inscricao(this.obj.CPF, this.obj.idEvento)
+    }
+
   },
 };
 </script>

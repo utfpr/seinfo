@@ -218,29 +218,61 @@ exports.getAllEventosCPF = async (req, res) => {
     const { CPF } = req.body;
     const eventos = await Evento.findAll({
       where: { status: 1 },
-      include: [
-        { model: Lote, as: 'lotes' },
-        { model: Agenda, as: 'agendamento' },
-      ],
+      include: [{ model: db.agenda, as: 'agendamento' }],
     });
-
     if (!eventos)
       return res.status(404).json('Não existe nenhum evento disponivel');
+
+    const novosEventos = [];
+    eventos.forEach(async (e) => {
+      const lotes = await e.getLotes({
+        attributes: ['idLote', 'valor', 'dataAbertura', 'dataFechamento'],
+      });
+      const lotesVencidos = [];
+      const lotesDisponiveis = [];
+      const dataAtual = new Date();
+
+      lotes.forEach((lote) => {
+        const dataLoteF = new Date(lote.dataFechamento);
+        const dataLoteA = new Date(lote.dataAbertura);
+        if (dataLoteF < dataAtual) {
+          lotesVencidos.push(lote.dataValues);
+        } else if (dataLoteA > dataAtual) {
+          lotesVencidos.push(lote.dataValues);
+        } else {
+          lotesDisponiveis.push(lote.dataValues);
+        }
+      });
+      const eObj = {
+        ...e.dataValues,
+        lotesDisponiveis,
+        lotesVencidos,
+      };
+
+      // console.log(idEventosInscrito)
+
+      novosEventos.push(eObj);
+    });
 
     const idEventosInscrito = (
       await Inscricao.findAll({
         attributes: ['idEvento'],
-        where: { CPF },
+        where: { CPF: atob(CPF) },
       })
-    ).map((inscricao) => inscricao.idEvento);
+    ).map((e) => e.idEvento);
+    const finalEvents = [];
+    novosEventos.forEach((e) => {
+      console.log(e);
+      const finalObj = {
+        ...e,
+        estaInscrito: idEventosInscrito.includes(e.idEvento),
+      };
+      finalEvents.push(finalObj);
+    });
 
-    const eventosVerificados = eventos.map((evento) => ({
-      ...evento.dataValues,
-      estaInscrito: idEventosInscrito.includes(evento.idEvento),
-    }));
-
-    return res.status(200).json(eventosVerificados);
+    return res.status(200).json(finalEvents);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
