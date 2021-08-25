@@ -50,7 +50,7 @@
               >
                 <a-icon
                   slot="prefix"
-                  type="dashboard"
+                  type="clock-circle"
                   style="color: rgba(0, 0, 0, 0.25)"
                 />
               </a-input>
@@ -137,13 +137,13 @@
               >
                 <a-icon
                   slot="prefix"
-                  type="dollar"
+                  type="calendar"
                   style="color: rgba(0, 0, 0, 0.25)"
                 />
               </a-input>
             </a-form-item>
             <a-form-item class="space">
-              <label class="ant-form-item-required">Data de Inicio:</label>
+              <label class="ant-form-item-required">Hora de Inicio:</label>
               <a-input
                 placeholder="Hora de Inicio"
                 autocomplete="off"
@@ -154,7 +154,7 @@
               >
                 <a-icon
                   slot="prefix"
-                  type="dollar"
+                  type="clock-circle"
                   style="color: rgba(0, 0, 0, 0.25)"
                 />
               </a-input>
