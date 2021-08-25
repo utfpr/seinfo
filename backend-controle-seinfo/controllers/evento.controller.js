@@ -72,7 +72,7 @@ exports.findById = async (req, res) => {
       attributes: ['idEvento', 'nome', 'descricao', 'status'],
       include: [
         {
-          model: db.agenda,
+          model: Agenda,
           as: 'agendamento',
           attributes: ['dataHoraInicio', 'dataHoraFim', 'local'],
         },
@@ -96,7 +96,7 @@ exports.findById = async (req, res) => {
           attributes: ['nome'],
         },
         {
-          model: db.agenda,
+          model: Agenda,
           as: 'atvAgenda',
           through: { attributes: [] },
         },
@@ -147,8 +147,8 @@ exports.findAll = async (req, res) => {
   try {
     const eventos = await Evento.findAll({
       include: [
-        { model: db.lote, as: 'lotes' },
-        { model: db.agenda, as: 'agendamento' },
+        { model: Lote, as: 'lotes' },
+        { model: Agenda, as: 'agendamento' },
       ],
     });
 
@@ -173,25 +173,34 @@ exports.findAll = async (req, res) => {
   }
 };
 
-exports.atualiza = (req, res) => {
+exports.atualiza = async (req, res) => {
   console.log(req.body);
-  Evento.update(
-    {
-      nome: req.body.nome,
-      descricao: req.body.descricao,
-      status: req.body.select_status,
-      // data_horario_inicio: data_ini_full ,
-      // data_hora_fim: data_fim_full,
-      // urlImagem: req.body.urlImagem
-    },
-    { where: { idEvento: req.params.idEvento } }
-  )
-    .then((evento) => {
-      res.send(evento);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error ${err}`);
-    });
+  const { agendamento, lotes, nome, descricao, status } = req.body;
+  const { idEvento } = req.params;
+  try {
+    const { idAgenda } = agendamento;
+    await Agenda.update(agendamento, { where: { idAgenda } });
+
+    await Promise.all(
+      lotes.map((lote) => {
+        const { idLote } = lote;
+        return Lote.update(lote, { where: { idLote } });
+      })
+    );
+
+    const evento = await Evento.update(
+      {
+        nome,
+        descricao,
+        status,
+      },
+      { where: { idEvento } }
+    );
+
+    res.send(evento);
+  } catch (error) {
+    res.status(500).send(`Error ${error}`);
+  }
 };
 
 exports.delete = (req, res) => {
@@ -210,8 +219,8 @@ exports.getAllEventosCPF = async (req, res) => {
     const eventos = await Evento.findAll({
       where: { status: 1 },
       include: [
-        { model: db.lote, as: 'lotes' },
-        { model: db.agenda, as: 'agendamento' },
+        { model: Lote, as: 'lotes' },
+        { model: Agenda, as: 'agendamento' },
       ],
     });
 
@@ -241,8 +250,8 @@ exports.getAllAvailableEvents = async (req, res) => {
     const eventos = await Evento.findAll({
       where: { status: 1 },
       include: [
-        { model: db.lote, as: 'lotes' },
-        { model: db.agenda, as: 'agendamento' },
+        { model: Lote, as: 'lotes' },
+        { model: Agenda, as: 'agendamento' },
       ],
     });
 
