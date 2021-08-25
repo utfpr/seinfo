@@ -1,88 +1,97 @@
 require('dotenv').config();
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-// const formatCPF = require('@fnando/cpf');
 const db = require('../models');
+
+const Pessoa = db.pessoa;
+
 const { generateHash } = require('../utils/hash');
 
-let authorization = '';
-
 const criaTokens = async (object) =>
-  jwt.sign(object, process.env.SECRET, { expiresIn: 9000 });
+  jwt.sign(object, process.env.SECRET, {
+    expiresIn: 9000,
+  });
 
 exports.autenticar = async () => {
-  await axios
-    .post(process.env.URL_LDAP, {
+  try {
+    const response = await await axios.post(process.env.URL_LDAP, {
       username: process.env.LOGIN_LDAP_USERNAME,
       password: process.env.LOGIN_LDAP_PASSWORD,
-    })
-    .then((response) => {
-      authorization = response.data.token;
-      return authorization;
-    })
-    .catch((err) => console.warn(err));
+    });
+
+    return response.data.token;
+  } catch (error) {
+    return error;
+  }
 };
 
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
-  return db.pessoa
-    .findOne({
+  try {
+    const { username, password } = req.body;
+
+    const pessoa = await Pessoa.findOne({
       where: {
         CPF: username,
       },
-    })
-    .then(async (pessoa) => {
-      console.log(pessoa);
-      if (!pessoa)
-        return res.status(404).send({ message: 'Usuário não encontrado' });
-      const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
-        pessoa.dataValues;
+    });
 
-      if (senha === generateHash(password)) {
-        const token = await criaTokens({
-          idPessoa,
-          CPF: pessoa.cpf,
-        });
-        return res.send({
-          pessoa: {
-            CPF,
-            nome,
-            email,
-            nivel,
-            classificacao,
-            idPessoa,
-          },
-          token,
-        });
-      }
+    if (!pessoa)
+      return res.status(404).send({ message: 'Usuário não encontrado' });
+
+    const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
+      pessoa.dataValues;
+
+    if (!(senha === generateHash(password)))
       return res.status(401).send({ message: 'Senha incorreta' });
-    })
-    .catch((err) => res.status(500).send(err));
+
+    const token = await criaTokens({
+      idPessoa,
+      CPF: pessoa.cpf,
+    });
+    return res.status(200).json({
+      pessoa: {
+        CPF,
+        nome,
+        email,
+        nivel,
+        classificacao,
+        idPessoa,
+      },
+      token,
+    });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.loginLDAP = async (req, res) => {
-  const { username, password } = req.body;
-  const { data } = await axios.post(`${process.env.URL_LDAP}`, {
-    username: process.env.LOGIN_LDAP_USERNAME,
-    password: process.env.LOGIN_LDAP_PASSWORD,
-  });
+  try {
+    const { username, password } = req.body;
+    const { data } = await axios.post(`${process.env.URL_LDAP}`, {
+      username: process.env.LOGIN_LDAP_USERNAME,
+      password: process.env.LOGIN_LDAP_PASSWORD,
+    });
 
-  axios
-    .post(
+    const ldapLogin = await axios.post(
       process.env.LOGIN_URL_LDAP,
       {
         username,
         password,
       },
-      { headers: { Authorization: `Bearer ${data.token}` } }
-    )
-    .then((response) => {
-      res.send(response.data);
-      return response.data;
-    })
-    .catch((err) => {
-      console.log(err.data);
-      console.log('RA ou senha incorretos.');
-      return res.status(401).send(err);
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      }
+    );
+
+    return res.status(200).json(ldapLogin);
+  } catch (error) {
+    if (error.response.status === 401) {
+      return res
+        .status(403)
+        .json({ error: 'Dados de usuário ou senha incorretos' });
+    }
+    return res.status(500).json(error);
+  }
 };

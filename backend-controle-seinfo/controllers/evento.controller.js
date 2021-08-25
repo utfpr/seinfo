@@ -1,4 +1,4 @@
-const db = require('../models/index');
+const db = require('../models');
 
 const Evento = db.evento;
 const Agenda = db.agenda;
@@ -54,7 +54,6 @@ exports.create = async (req, res) => {
     });
 
     await Organizacao.create({
-      // 'horasParticipacao': req.body.horasParticipacao,
       idEvento: evento.idEvento,
       CPF: pessoa.CPF,
     });
@@ -169,12 +168,11 @@ exports.findAll = async (req, res) => {
 
     res.status(200).json(eventosFormatados); // Retorna um Json para a Pagina da API
   } catch (error) {
-    res.status(500).json(`Error -> ${error}`);
+    res.status(500).json(error);
   }
 };
 
 exports.atualiza = async (req, res) => {
-  console.log(req.body);
   const { agendamento, lotes, nome, descricao, status } = req.body;
   const { idEvento } = req.params;
   try {
@@ -197,20 +195,22 @@ exports.atualiza = async (req, res) => {
       { where: { idEvento } }
     );
 
-    res.send(evento);
+    res.status(200).json(evento);
   } catch (error) {
-    res.status(500).send(`Error ${error}`);
+    res.status(500).json(error);
   }
 };
 
-exports.delete = (req, res) => {
-  Evento.destroy({ where: { idEvento: req.params.idEvento } })
-    .then(() => {
-      res.send({ msg: 'Evento deletado com sucesso' }); // Retorna um Json para a Pagina da API
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.delete = async (req, res) => {
+  try {
+    const mensagem = await Evento.destroy({
+      where: { idEvento: req.params.idEvento },
     });
+
+    return res.status(200).json(mensagem);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 exports.getAllEventosCPF = async (req, res) => {
@@ -264,46 +264,49 @@ exports.getAllAvailableEvents = async (req, res) => {
   }
 };
 
-exports.EvReceita = (req, res) => {
-  // receita de um evento
-  db.receita
-    .findAll({ where: { idEvento: req.params.idEvento } })
-    .then((recEv) => {
-      res.send(recEv);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+// Receita de um evento
+exports.EvReceita = async (req, res) => {
+  try {
+    const receitaEvento = await db.receita.findAll({
+      where: { idEvento: req.params.idEvento },
     });
+
+    return res.status(200).json(receitaEvento);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 // receita de inscritos no evento
-exports.RecInEv = (req, res) => {
-  db.receitaInscricaoEvento
-    .findAll({ where: { idEvento: req.params.idEvento } })
-    .then((inscEv) => {
-      res.send(inscEv);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+exports.RecInEv = async (req, res) => {
+  try {
+    const inscritosEvento = await db.receitaInscricaoEvento.findAll({
+      where: { idEvento: req.params.idEvento },
     });
+
+    return res.status(200).json(inscritosEvento);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.DespEv = (req, res) => {
-  // despesa de um evento
-  db.despesa
-    .findAll({ where: { idEvento: req.params.idEvento } })
-    .then((DeEv) => {
-      res.send(DeEv);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
+// despesa de um evento
+exports.DespEv = async (req, res) => {
+  try {
+    const despesasEvento = await db.despesa.findAll({
+      where: { idEvento: req.params.idEvento },
     });
+
+    return res.status(200).json(despesasEvento);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 //------------------------------------------------------------------------------------------
 // foi trocado IDPessoa para CPF
 
-exports.criaOrganizacao = (req, res) => {
+exports.criaOrganizacao = async (req, res) => {
   Evento.findOne({ where: { idEvento: req.params.idEvento } })
     .then((evento) => {
       db.pessoa
@@ -331,86 +334,112 @@ exports.criaOrganizacao = (req, res) => {
     });
 };
 
-exports.selectOrganizacao = (req, res) => {
-  // seleciona todos organizadores em todos eventos
-  db.organizacao
-    .findAll({
+exports.criaOrganizacao = async (req, res) => {
+  try {
+    const evento = await Evento.findOne({
+      where: { idEvento: req.params.idEvento },
+    });
+
+    if (!evento) {
+      return res.status(404).json({ error: 'Evento não encontrado.' });
+    }
+
+    const pessoa = await db.pessoa.findOne({
+      where: { CPF: atob(req.params.CPF) },
+    });
+    if (!pessoa) {
+      return res.status(404).json({ error: 'Pessoa não encontrada.' });
+    }
+    const organizacao = await db.organizacao.create({
+      horasParticipacao: req.body.horasParticipacao,
+      idEvento: evento.idEvento,
+      CPF: pessoa.CPF,
+    });
+
+    if (!organizacao) {
+      return res.status(500).json({ error: 'Organização não foi criada.' });
+    }
+
+    return res.status(200).json(evento);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+// seleciona todos organizadores em todos eventos
+exports.selectOrganizacao = async (req, res) => {
+  try {
+    const organizacao = await db.organizacao.findAll({
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
       ],
-    })
-    .then((org) => {
-      res.send(org);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
     });
+
+    return res.send(organizacao);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.selectUmOrganizador = (req, res) => {
-  // seleciona um organizdor de um evento
-  db.organizacao
-    .findOne({
+// Seleciona um organizador de um evento
+exports.selectUmOrganizador = async (req, res) => {
+  try {
+    const organizador = await db.organizacao.findOne({
       where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
       ],
-    })
-    .then((org) => {
-      res.send(org);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
     });
+
+    return res.status(200).json(organizador);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.selectOrganizacaoEvento = (req, res) => {
-  // seleciona os organizadores de um evento
-  db.organizacao
-    .findAll({
+// seleciona os organizadores de um evento
+exports.selectOrganizacaoEvento = async (req, res) => {
+  try {
+    const organizadores = await db.organizacao.findAll({
       where: { idEvento: req.params.idEvento },
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
       ],
-    })
-    .then((org) => {
-      res.send(org);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
     });
+
+    return res.status(200).json(organizadores);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.selectEventoOrganizador = (req, res) => {
-  // seleciona os eventos onde a pessoa é organizadora
-  db.organizacao
-    .findAll({
+// seleciona os eventos onde a pessoa é organizadora
+exports.selectEventoOrganizador = async (req, res) => {
+  try {
+    const org = await db.organizacao.findAll({
       where: { CPF: atob(req.params.CPF) },
       include: [
         { model: db.pessoa, as: 'oPes' },
         { model: db.evento, as: 'oEv' },
       ],
-    })
-    .then((org) => {
-      res.send(org);
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
     });
+
+    return res.status(200).json(org);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.deleteOrganizacao = (req, res) => {
-  db.organizacao
-    .destroy({
+exports.deleteOrganizacao = async (req, res) => {
+  try {
+    const delOrganizacao = await db.organizacao.destroy({
       where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
-    })
-    .then(() => {
-      res.send('deletou');
-    })
-    .catch((err) => {
-      res.status(500).send(`Error -> ${err}`);
     });
+    return res.status(200).json(delOrganizacao);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
