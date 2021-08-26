@@ -37,8 +37,6 @@ exports.create = async (req, res) => {
       dataInicio: dataAtividade,
     });
 
-    console.log(atividade, subatividade);
-
     // Cria a SubAtividade
     await Promise.all(
       subatividade.map((item) =>
@@ -50,8 +48,15 @@ exports.create = async (req, res) => {
       )
     );
 
+    await Protagonista.create({
+      atuacao: 0,
+      CPF: 'admin',
+      idAtividade: atividade.idAtividade,
+    });
+
     res.status(200).json(atividade);
   } catch (error) {
+    console.error(error);
     res.status(500).json(error);
   }
 };
@@ -75,6 +80,10 @@ exports.findById = async (req, res) => {
           as: 'atvAgenda',
           through: { attributes: [] },
         },
+        {
+          model: Protagonista,
+          as: 'protagonistaAtividade',
+        },
       ],
     });
 
@@ -97,6 +106,10 @@ exports.findAll = async (req, res) => {
           as: 'atvAgenda',
           through: { attributes: [] },
         },
+        {
+          model: Protagonista,
+          as: 'protagonistaAtividade',
+        },
       ],
     });
 
@@ -116,9 +129,22 @@ exports.atualiza = async (req, res) => {
       quantidadeVagas,
       idCategoria,
       idEvento,
+      protagonistaAtividade,
     } = req.body;
 
     const { idAtividade } = req.params;
+
+    console.log(protagonistaAtividade.CPF);
+    const teste = await Protagonista.update(
+      {
+        CPF: protagonistaAtividade.CPF,
+      },
+      {
+        where: { idAtividade },
+      }
+    );
+
+    console.log(teste);
 
     const atividade = await Atividade.update(
       {

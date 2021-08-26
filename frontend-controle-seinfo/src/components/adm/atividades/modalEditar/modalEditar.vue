@@ -233,16 +233,16 @@
                   <a-form-item class="space">
                     <label class="ant-form-item-required">Selecione um Protagonista:</label>
                     <a-select
-                      v-model="data.idPessoa"
+                      v-model="data.protagonistaAtividade.CPF"
                       defaultValue="..."
                     >
                       <a-select-option
-                        id="idPessoa"
-                        name="idPessoa"
+                        id="CPF"
+                        name="CPF"
                         v-for="protagonista in protagonistas"
-                        :key="protagonista.aPes.idPessoa"
-                        :value="protagonista.aPes.idPessoa"
-                        >{{ protagonista.aPes.nome }}
+                        :key="protagonista.CPF"
+                        :value="protagonista.CPF"
+                        >{{ protagonista.nome }}
                       </a-select-option>
                     </a-select>
                   </a-form-item>
@@ -265,7 +265,7 @@
               <br />
               <div class="row justify-content-center">
                 <button
-                  type="submit"
+                  type="button"
                   v-on:click="patch(data)"
                   class="btn btn-outline-primary mr-5"
                 >

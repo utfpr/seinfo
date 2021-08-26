@@ -34,7 +34,7 @@ export default {
             });
 
         axios
-            .get("/api/protagonistas")
+            .get("/api/obtemTodasAsPessoas")
             .then((response) => {
                 this.protagonistas = response.data;
             })
@@ -82,16 +82,12 @@ export default {
                     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
                     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
                 }
-            });
+            });            
 
-            this.protagonistas.forEach((element) => {
-                if (this.modalData.idAtividade === element.idAtividade) {
-                    this.modalData.idPessoa = element.aPes.nome;
-                }
-            });
-
-            this.modalData.idCategoria = data.categoriaAtv.nome;
+            this.modalData.cpfOrganizador = data.protagonistaAtividade.CPF;
+            this.modalData.idCategoria = data.categoriaAtv.idCategoria;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
+            console.log(this.modalData)
         },
     },
     data() {
@@ -132,9 +128,10 @@ export default {
                 idCategoria: "",
                 idPessoa: "",
                 descricao: "",
+                cpfOrganizador: "",
             },
             modalData: {
-                titulo: "",
+                    titulo: "",
                 valor: "",
                 data_ini_atv: "",
                 data_fim_atv: "",

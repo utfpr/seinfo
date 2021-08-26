@@ -17,11 +17,7 @@ const app = express();
 const router = express.Router();
 
 // cors
-app.use(
-  cors({
-    origin: ['http://localhost:8080'],
-  })
-);
+app.use(cors());
 
 // padrao
 app.use(express.urlencoded({ extended: true }));

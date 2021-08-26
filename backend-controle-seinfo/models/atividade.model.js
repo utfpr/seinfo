@@ -93,6 +93,11 @@ module.exports = (sequelize, Sequelize) => {
       as: 'presenca',
       foreignKey: 'idAtividade',
     });
+
+    models.atividade.hasOne(models.protagonista, {
+      as: 'protagonistaAtividade',
+      foreignKey: 'idAtividade',
+    });
   };
 
   return Atividade;
