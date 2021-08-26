@@ -76,7 +76,8 @@ export default {
       this.pegar_tabela();
       this.modalData = data;
       this.modalVisible = true;
-      this.modalData.cpfOrganizador = data.organizacaoEvento ? data.organizacaoEvento.CPF : '';
+     
+      
       this.modalData.nome = data.nome;
       this.modalData.local_eve = data.agendamento.local;
       this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");

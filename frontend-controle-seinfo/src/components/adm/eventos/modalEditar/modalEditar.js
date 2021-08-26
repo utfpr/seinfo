@@ -91,6 +91,7 @@ export default {
             }
         },
         async patch(dados) {
+            
             const erros = [];
             if (!dados.nome) erros.push("Nome é obrigatório!");
             if (!dados.agendamento.local) erros.push("Local é obrigatório!");

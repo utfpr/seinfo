@@ -173,7 +173,8 @@ exports.findAll = async (req, res) => {
 };
 
 exports.atualiza = async (req, res) => {
-  const { agendamento, lotes, nome, descricao, status } = req.body;
+  const { agendamento, lotes, nome, descricao, status, organizacaoEvento } =
+    req.body;
   const { idEvento } = req.params;
   try {
     const { idAgenda } = agendamento;
@@ -191,6 +192,13 @@ exports.atualiza = async (req, res) => {
         nome,
         descricao,
         status,
+      },
+      { where: { idEvento } }
+    );
+
+    await Organizacao.update(
+      {
+        CPF: organizacaoEvento.CPF,
       },
       { where: { idEvento } }
     );
