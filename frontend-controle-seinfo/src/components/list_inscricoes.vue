@@ -105,14 +105,12 @@ export default {
   },
   methods: {
     redirectAtv(idEvento, CPF,idAgenda) {
-      // console.log(idEvento, CPF);
       this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}/${idAgenda}` });
     },
     exclusao(id) {
       axios
         .delete(`/api/inscEv/${id}/${btoa(this.CPF)}`)
         .then((response) => {
-          console.log(response.data);
           this.pegar_tabela("eventosD");
         })
         .catch((error) => {
@@ -124,7 +122,6 @@ export default {
         this.CPF = res.CPF;
         this.pegar_tabela();
       });
-      // console.log("USER:", user)
       // this.CPF = user.CPF;
     },
     showDeleteConfirm(id) {
@@ -139,7 +136,6 @@ export default {
           axios
             .delete(`/api/inscEv/${id}/${btoa(cpfPessoa)}`)
             .then((response) => {
-              console.log(response.data);
               document.location.reload(true);
             })
             .catch((error) => {
@@ -159,8 +155,6 @@ export default {
       axios
         .get(`/api/inscEvP/${btoa(this.CPF)}`)
         .then((response) => {
-          console.log("Listou ");
-          console.log(response.data);
           this.res_localizar = response.data;
         })
         .catch((error) => {

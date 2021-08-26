@@ -177,7 +177,6 @@ export default {
   },
   methods: {
     onCancel(){
-      console.log('CANCEL SUBMIT');
       this.nome = "";
   },
     openModal(data) {
@@ -195,7 +194,6 @@ export default {
         axios
           .post("/api/categoria", {nome: this.nome})
           .then(response => {
-            console.log(response);
             this.$router.push("1");
             this.$router.replace("/adm/categoria");
           })
@@ -211,7 +209,6 @@ export default {
       axios
         .get("/api/categoria")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function(error) {
@@ -219,24 +216,20 @@ export default {
         });
     },
     patch(dados) {
-      console.log(dados);
       axios
         .patch(
           "/api/categoria/" + dados.idCategoria,
           dados
         )
         .then(response => {
-          console.log(response);
           this.$router.push("1");
           this.$router.replace("./categoria");
         });
     },
     deletar(pos) {
-      console.log("ID " + pos);
       axios
         .delete("/api/categoria/" + pos)
         .then(response => {
-          console.log(response);
           this.$router.push("1");
           this.$router.replace("./categoria");
         });

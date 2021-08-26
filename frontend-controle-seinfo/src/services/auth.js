@@ -48,7 +48,6 @@ async function isLogged() {
   if (infos.token === null || infos.dataUser) {
     return false
   }
-  console.log(infos);
 
   return true
 }

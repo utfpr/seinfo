@@ -12,7 +12,6 @@ export default {
             return moment(date);
         },
         deletar() {
-            console.log("ID " + this.modalData.idAtividade);
             axios
                 .delete(
                     "/api/atividade/" +
@@ -21,8 +20,6 @@ export default {
                     this.modalData.idEvento
                 )
                 .then((response) => {
-                    console.log("Deletou!");
-                    console.log(response);
                     this.$emit('deletarModal');
                 });
         },

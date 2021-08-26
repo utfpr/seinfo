@@ -18,8 +18,6 @@ export default {
                 )
                 .then(response => {
 
-                    console.log("Deletou!");
-                    console.log(response);
                     location.reload();
                 })
                 .catch(function (error) {

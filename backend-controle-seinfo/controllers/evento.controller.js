@@ -110,7 +110,7 @@ exports.findById = async (req, res) => {
     const dataAtual = new Date();
 
     lotes.forEach((lote) => {
-      const dataLote = new Date(lote.dataFechamento);
+      const dataLote = new Date(`${lote.dataFechamento}T23:59:59.003Z`);
 
       if (dataLote < dataAtual) {
         lotesVencidos.push(lote);
@@ -137,7 +137,6 @@ exports.findById = async (req, res) => {
 
     return res.status(200).json(eventosFormatados);
   } catch (error) {
-    console.log(error);
     return res.status(500).json(error);
   }
 };
@@ -241,8 +240,8 @@ exports.getAllEventosCPF = async (req, res) => {
       const dataAtual = new Date();
 
       lotes.forEach((lote) => {
-        const dataLoteF = new Date(lote.dataFechamento);
-        const dataLoteA = new Date(lote.dataAbertura);
+        const dataLoteF = new Date(`${lote.dataFechamento}T23:59:59.003Z`);
+        const dataLoteA = new Date(`${lote.dataAbertura}T23:59:59.003Z`);
         if (dataLoteF < dataAtual) {
           lotesVencidos.push(lote.dataValues);
         } else if (dataLoteA > dataAtual) {
@@ -257,8 +256,6 @@ exports.getAllEventosCPF = async (req, res) => {
         lotesVencidos,
       };
 
-      // console.log(idEventosInscrito)
-
       novosEventos.push(eObj);
     });
 
@@ -270,7 +267,6 @@ exports.getAllEventosCPF = async (req, res) => {
     ).map((e) => e.idEvento);
     const finalEvents = [];
     novosEventos.forEach((e) => {
-      console.log(e);
       const finalObj = {
         ...e,
         estaInscrito: idEventosInscrito.includes(e.idEvento),
@@ -280,7 +276,6 @@ exports.getAllEventosCPF = async (req, res) => {
 
     return res.status(200).json(finalEvents);
   } catch (error) {
-    console.log(error);
     return res.status(500).json(error);
   }
 };

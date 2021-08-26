@@ -62,7 +62,6 @@ export default {
         },
         openModal(data) {
 
-            console.log("abriu")
             this.pegar_tabela();
             this.modalData = data;
             

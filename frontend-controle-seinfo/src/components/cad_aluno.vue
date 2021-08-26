@@ -51,7 +51,6 @@ export default
     this.obj_cadastroInterno.RA = this.$route.query.ra;
     this.obj_cadastroInterno.nome = this.$route.query.nome;
     this.obj_cadastroInterno.email = this.$route.query.email;
-    console.log(this.obj_cadastroInterno.RA);
   },
    data() {
     return {
@@ -72,18 +71,15 @@ export default
   {
     Btn_Cadastrar() 
     {
-      console.log(this.obj_cadastroInterno)
 
       axios
         .post('/public/pessoa', this.obj_cadastroInterno)
         .then(response => {
-          console.log(response)
           alert(response.data);
           window.location = '/';  
            }).catch(error => {
             alert(error);
           });
-      console.log("FEZ O LOGIN INTERNO")
     }
   }
 };

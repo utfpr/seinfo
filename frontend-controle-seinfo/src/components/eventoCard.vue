@@ -49,13 +49,13 @@
               <p v-for="(lotes, i) in lotesVencidos" :key="i">
                 <span style="text-decoration: line-through">
                   {{moment(lotes.dataAbertura).format('DD [de] MMMM [de] YYYY')}} 
-                  até {{moment(lotes.dataAbertura).format('DD [de] MMMM [de] YYYY')}} com Valor R${{lotes.valor}}
+                  até {{moment(lotes.dataFechamento).format('DD [de] MMMM [de] YYYY')}} com Valor R${{lotes.valor}}
                 </span>
               </p>
               <p v-for="(lotes, i) in lotesDisponiveis" :key="i">
                 <span>
                   {{moment(lotes.dataAbertura).format('DD [de] MMMM [de] YYYY')}} 
-                  até {{moment(lotes.dataAbertura).format('DD [de] MMMM [de] YYYY')}} com Valor R${{lotes.valor}}
+                  até {{moment(lotes.dataFechamento).format('DD [de] MMMM [de] YYYY')}} com Valor R${{lotes.valor}}
                 </span>
               </p>
               </div>        

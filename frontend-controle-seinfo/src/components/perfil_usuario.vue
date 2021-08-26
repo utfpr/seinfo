@@ -103,7 +103,6 @@ export default {
   methods: {
     async pegarPerfil() {
       const user = await auth.default.getUser();
-      console.log('USER:', user);
       this.obj.nome = user.nome;
       this.obj.CPF = user.CPF;
       this.obj.email = user.email;
@@ -117,7 +116,6 @@ export default {
         email: this.obj.email,
       })
         .then((response) => {
-          console.log(response.data);
           alert(response.data);
           atualizaDados({ token, user: this.obj });
           window.location.reload();

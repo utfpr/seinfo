@@ -76,7 +76,6 @@ export default {
   },
   methods: {
     onCancel() {
-      console.log('CANCEL SUBMIT');
       this.nome = "";
       this.data_ini = "";
       this.data_fim = "";
@@ -103,7 +102,6 @@ export default {
       axios
         .get("/public/evento")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function (error) {
@@ -118,7 +116,6 @@ export default {
     add() {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
-      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
@@ -258,7 +255,9 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-            axios.post('/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
+            axios.post('/api/evento', this.obj_Resource).then(response => {  
+              this.info(); this.toggle() 
+            }).catch(error => { console.log(error.response) });
 
           }
         });
@@ -273,15 +272,12 @@ export default {
       if (!dados.local_eve) erros.push("Local é obrigatório!");
       if (!dados.status) erros.push("Status é obrigatório!");
       if (!dados.descricao) erros.push("Descrição é obrigatório!");
-      console.log(dados);
       if (!erros.length) {
         axios
           .patch(
             `/api/evento/${dados.idEvento}`, dados
           )
           .then(response => {
-            console.log("Editou!");
-            console.log(response);
             this.$router.replace("./cadEvento");
             location.reload();
           });

@@ -91,15 +91,12 @@ export default {
     async pegarPerfil() {
       const user = await auth.getUser();
       this.obj.CPF = user.CPF;
-      console.log(user.CPF)
     },
     async pegar_tabela_eventos(name) {
       try{
       await this.pegarPerfil()
         const response = await axios.post(`/api/${name}`, {CPF: btoa(this.obj.CPF)})
-          // console.log("Listou " + name);
             this.res_localizar = response.data;
-            console.log( this.res_localizar)
          } catch(error) {
             console.log(error);
           }
@@ -112,8 +109,6 @@ export default {
         .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
           this.redirectAtv(idEvento, CPF);
-          console.log(response.data);
-          // this.pegar_tabela("eventosD");
         })
         .catch((error) => {
           alert('Você já está inscrito nesse evento!');

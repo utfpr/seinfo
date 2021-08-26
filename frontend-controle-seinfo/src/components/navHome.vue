@@ -87,18 +87,14 @@ export default {
       password: this.obj_userInterno.password
       })
     .then(response => {
-      console.log(response.data.name);
             // obj_userInterno.nome = response.data.name;
             // obj_userInterno.email = response.data.email;
-            console.log(response.data.email);
             this.$router.push({ name: `Cad_Aluno`, query:{
               ra: this.obj_userInterno.username, 
               nome: response.data.name, email: response.data.email
             }}) 
             //mandar os outros dados do LDAP para a página de cadastro
             //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.nome}})
-            //console.log(response.data.message);
-            console.log("VERIFICOU SE ALUNO EXISTE")
             
           }).catch(error => {
             console.log(error.response)
@@ -107,7 +103,6 @@ export default {
     
     ////window.location = "/cad_aluno?username="+username;
     //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.username}})
-    //console.log(obj_userInterno.username);
     },
     showModalRecuperacao()
     {
@@ -144,10 +139,8 @@ export default {
             console.log(error.response)
           });
 
-      console.log("FEZ O LOGIN")
     },
     handleCancel() {
-      console.log('Clicked cancel button');
       this.visible = false
       this.recuperacao = false
     },

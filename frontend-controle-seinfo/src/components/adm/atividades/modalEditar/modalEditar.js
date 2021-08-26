@@ -94,8 +94,6 @@ export default {
             dados
           )
           .then((response) => {
-            console.log("Editou!");
-            console.log(response);
             this.$router.replace("./atividades");
             location.reload();
           });

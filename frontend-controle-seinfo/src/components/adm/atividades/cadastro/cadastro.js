@@ -132,7 +132,6 @@ export default {
     addSubatividade() {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
-      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada

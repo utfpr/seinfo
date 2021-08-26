@@ -98,7 +98,6 @@ export default
       this.obj_rec.cpf = "";
     },
     handleCancel() {
-      console.log('Clicked cancel button');
       this.visible = false
       this.recuperacao = false
     },
@@ -110,18 +109,14 @@ export default
       
         .post('/public/recuperarSenha/'+btoa(this.obj_rec.cpf))
         .then(response => {
-            console.log(response.data)
             alert("Sua nova senha foi enviada ao email cadastrado.");
           }).catch(error => {
-            console.log(error.response)
             alert("Pedido inválido.");
           });      
     },
     Btn_recuperarSenha(){},
     Btn_Cadastrar() 
     {
-      console.log(this.obj_cadastro)
-
       const { cpf, email, nome } = this.obj_cadastro;
       const { email: email_confirmacao } = this.obj_confirmar;
 
@@ -133,13 +128,11 @@ export default
       axios
         .post('/public/pessoa', this.obj_cadastro)
         .then(response => {
-          console.log(response)
           alert(response.data);
           window.location = '/';  
            }).catch(error => {
             alert(error);
           });
-      console.log("FEZ O LOGIN")
     }
   }
 };

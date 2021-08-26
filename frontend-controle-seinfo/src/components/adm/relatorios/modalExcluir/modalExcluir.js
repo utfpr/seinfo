@@ -10,7 +10,6 @@ export default {
       this.modalVisible = true
     },
     deletar_evento(pos) {
-      console.log("ID " + pos);
       axios.delete('/api/evento/' + pos)
         .then(response => {
           console.log("Deletou!");

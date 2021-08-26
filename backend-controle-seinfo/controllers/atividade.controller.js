@@ -134,7 +134,6 @@ exports.atualiza = async (req, res) => {
 
     const { idAtividade } = req.params;
 
-    console.log(protagonistaAtividade.CPF);
     const teste = await Protagonista.update(
       {
         CPF: protagonistaAtividade.CPF,
@@ -143,8 +142,6 @@ exports.atualiza = async (req, res) => {
         where: { idAtividade },
       }
     );
-
-    console.log(teste);
 
     const atividade = await Atividade.update(
       {

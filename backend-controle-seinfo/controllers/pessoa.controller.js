@@ -26,7 +26,6 @@ exports.create = async (req, res) => {
   const idPessoa = RA || 'VISITANTE';
 
   senha = senha || Math.random().toString(36).slice(-8);
-  console.log(senha);
 
   // nivel 0 é um placeholder
   nivel = nivel || 0;
@@ -67,7 +66,6 @@ exports.create = async (req, res) => {
       `Foi cadastrado: ${pessoa.idPessoa}\nEntre no seu email para retirar sua senha e entrar no portal!`
     );
   } catch (err) {
-    console.log(err);
     res.status(500).send(`Error -> ${err}`);
   }
 };
@@ -80,7 +78,6 @@ exports.findById = async (req, res) => {
     if (!pessoa) {
       return res.status(404).send('Pessoa não encontrada'); // Retorna um Json para a Pagina da API
     }
-    console.log(`Achou uma Pessoa pelo ID ${idPessoa}`);
     return res.status(200).send(pessoa); // Retorna um Json para a Pagina da API
   } catch (error) {
     return res.status(500).json(error);
@@ -90,7 +87,6 @@ exports.findById = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     const pessoa = await Pessoa.findAll();
-    console.log('Listou Todas as Pessoas!');
     res.status(200).send(pessoa); // Retorna um Json para a Pagina da API
   } catch (error) {
     res.status(500).send(error);
@@ -110,10 +106,8 @@ exports.atualiza = async (req, res) => {
       },
       { where: { CPF } }
     );
-    console.log('Atualizando uma Pessoa', pessoa);
     res.status(200).send('Dados atualizados com sucesso!');
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 };
@@ -142,11 +136,7 @@ exports.recuperarSenha = async (req, res) => {
         text: `Você está recebendo este email para recuperação de senha do seu cadastro na Seinfo.\n Sua senha é: ${senha}`,
       };
       remetente.sendMail(emailConfCadastro, (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email enviado com sucesso.');
-        }
+        console.log(error);
       });
       pessoa.update({ senha });
       return res
@@ -155,7 +145,6 @@ exports.recuperarSenha = async (req, res) => {
     }
     return res.status(404).send('Usuário não cadastrado');
   } catch (error) {
-    console.error(error);
     return res.status(500).send(error);
   }
 };
@@ -164,7 +153,6 @@ exports.delete = async (req, res) => {
   try {
     const { CPF } = req.params;
     await Pessoa.destroy({ where: { CPF: atob(CPF) } });
-    // console.log(`Deletando uma Pessoa com o ID: ${req.params.CPF}`);
     return res.status(200).send(`${CPF} foi deletado`); // Retorna um Json para a Pagina da API
   } catch (error) {
     return res.status(500).send(error);
