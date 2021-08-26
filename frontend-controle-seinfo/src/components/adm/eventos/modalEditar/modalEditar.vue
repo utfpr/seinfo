@@ -47,8 +47,7 @@
                 >
 
                 <a-select
-                  v-model="data.organizacaoEvento"
-                  :default-value="data.organizacaoEvento"
+                  v-model="data.organizacaoEvento.CPF"
                 >
                   <a-select-option
                     id="cpfOrganizador"
