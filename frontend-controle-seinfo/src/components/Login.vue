@@ -15,10 +15,11 @@
         </div>
         <h5 class="card-title">Login</h5>
         <p class="card-text">
-          <input v-bind="login" type="text" class="form-control" />
-          <input v-bind="senha" type="password" class="form-control " />
+          <input v-model="login" type="text" class="form-control" />
+          <input v-model="password" type="password" class="form-control " />
+          <a href="/">voltar para home</a>
         </p>
-        <a @click="entrarNoSistema" class="btn btn-primary">Entrar</a>
+        <a @click="entrarNoSistema()" class="btn btn-primary">Entrar</a>
       </div>
     </div>
   </div>
@@ -26,34 +27,36 @@
 <script>
 import axios from "../config/axiosConfig";
 import auth from "../services/auth";
+const perm = ["usuario", "supervisor", "adm"];
 export default {
-  props: {
-    urlDeRedirecionamento: String,
-  },
+  props: {},
   data() {
     return {
-      login: String,
-      senha: String,
+      login: "",
+      password: "",
       crenciaisIncorretas: false,
     };
   },
   methods: {
     async entrarNoSistema() {
       try {
-        const credenciais = await axios.post("/public/login", this.obj_login);
-        document.getElementById("credenciaisIncorretas").remove();
+        const obj_login = {
+          username: this.login,
+          password: this.password,
+        };
+        console.log(obj_login);
+        const credenciais = await axios.post("/public/login/", obj_login);
+        const credInc = document.getElementById("credenciaisIncorretas");
+        if (credInc) credInc.remove();
         this.crenciaisIncorretas = false;
-        if (credenciais.status) {
+        if (credenciais) {
           auth.login(credenciais.data.token, credenciais.data.pessoa);
-          if (this.urlDeRedirecionamento) {
-            this.$routes.push(this.urlDeRedirecionamento);
-          }
-          // window.location.replace(
-          //   credenciais.data.pessoa.nivel
-          //     ? perm[credenciais.data.pessoa.nivel]
-          //     : "usuario"
-          // );
-          return;
+          window.location.replace(
+            credenciais.data.pessoa.nivel
+              ? perm[credenciais.data.pessoa.nivel]
+              : "usuario"
+          );
+          this.$router.push("/");
         }
       } catch (error) {
         console.log(error);

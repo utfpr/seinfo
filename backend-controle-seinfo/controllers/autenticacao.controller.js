@@ -33,6 +33,30 @@ exports.login = async (req, res) => {
       where: {
         CPF: username,
       },
+    })
+    .then(async (pessoa) => {
+      if (!pessoa)
+        return res.status(404).send({ message: 'Usuário não encontrado' });
+      const { CPF, nome, email, nivel, classificacao, idPessoa, senha } =
+        pessoa.dataValues;
+      console.log(pessoa.dataValues);
+      if (senha === password) {
+        const token = await criaTokens({
+          idPessoa,
+          CPF: pessoa.cpf,
+        });
+        return res.send({
+          pessoa: {
+            CPF,
+            nome,
+            email,
+            nivel,
+            classificacao,
+            idPessoa,
+          },
+          token,
+        });
+      }
     });
 
     if (!pessoa)

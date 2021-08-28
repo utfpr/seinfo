@@ -16,7 +16,7 @@ exports.create = async (idAtividade, idAgenda, idEvento, CPF) => {
     idAgenda,
     idEvento,
     CPF,
-    presenca: 1,
+    presenca: true,
   });
   return presencaConfirmada;
 };

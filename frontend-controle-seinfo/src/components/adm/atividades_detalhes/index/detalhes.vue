@@ -40,12 +40,6 @@
     <div>
       <listagemSubAtividades v-bind:modalData="this.dataDetalhes"/>
     </div>
-    <br/><br/>
-    <listagemParticipantes 
-      v-if="this.dataDetalhes.idEvento"
-      v-bind:idEvento="this.dataDetalhes.idEvento.toString()"
-      v-bind:idAtividade="this.dataDetalhes.idAtividade.toString()"
-    />
   </div>
 </template>
 
