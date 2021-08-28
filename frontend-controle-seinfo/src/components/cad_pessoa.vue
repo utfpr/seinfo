@@ -108,9 +108,10 @@ export default
       axios
       
         .post('/public/recuperarSenha/'+btoa(this.obj_rec.cpf))
-        .then(response => {
+        .then(() => {
             alert("Sua nova senha foi enviada ao email cadastrado.");
           }).catch(error => {
+            console.log(error)
             alert("Pedido inválido.");
           });      
     },

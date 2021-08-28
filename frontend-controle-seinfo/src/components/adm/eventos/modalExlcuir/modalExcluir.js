@@ -16,7 +16,7 @@ export default {
                 .delete(
                     `/api/evento/${modalData.idEvento}`
                 )
-                .then(response => {
+                .then(() => {
 
                     location.reload();
                 })

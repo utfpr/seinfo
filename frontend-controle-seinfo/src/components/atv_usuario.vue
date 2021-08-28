@@ -95,7 +95,7 @@ export default {
 	inscricao(CPF, record) {
       axios
         .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
-        .then((response) => {
+        .then(() => {
 			document.location.reload(true);
 		})
         .catch(function (error) {
@@ -106,7 +106,7 @@ export default {
 	exclusao(CPF, record) {
       axios
         .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${btoa(CPF)}`)
-        .then((response) => {
+        .then(() => {
 			document.location.reload(true);
         })
         .catch(function (error) {

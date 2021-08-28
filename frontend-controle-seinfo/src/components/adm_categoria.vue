@@ -193,7 +193,7 @@ export default {
       } else {
         axios
           .post("/api/categoria", {nome: this.nome})
-          .then(response => {
+          .then(() => {
             this.$router.push("1");
             this.$router.replace("/adm/categoria");
           })
@@ -221,7 +221,7 @@ export default {
           "/api/categoria/" + dados.idCategoria,
           dados
         )
-        .then(response => {
+        .then(()=> {
           this.$router.push("1");
           this.$router.replace("./categoria");
         });
@@ -229,7 +229,7 @@ export default {
     deletar(pos) {
       axios
         .delete("/api/categoria/" + pos)
-        .then(response => {
+        .then(() => {
           this.$router.push("1");
           this.$router.replace("./categoria");
         });

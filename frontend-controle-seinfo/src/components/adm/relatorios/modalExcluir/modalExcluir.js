@@ -11,9 +11,8 @@ export default {
     },
     deletar_evento(pos) {
       axios.delete('/api/evento/' + pos)
-        .then(response => {
+        .then(() => {
           console.log("Deletou!");
-          console.log(response);
         });
 
       location.reload();

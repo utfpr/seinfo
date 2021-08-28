@@ -26,7 +26,7 @@ export default {
     excluir() {
       axios
         .delete("/api/agenda/" + this.dataEdita.idAgenda)
-        .then((response) => {
+        .then(() => {
           location.reload();
         });
     },

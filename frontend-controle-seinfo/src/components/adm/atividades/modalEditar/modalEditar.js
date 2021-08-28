@@ -93,7 +93,7 @@ export default {
             "/api/atividade/" + dados.idAtividade,
             dados
           )
-          .then((response) => {
+          .then(() => {
             this.$router.replace("./atividades");
             location.reload();
           });

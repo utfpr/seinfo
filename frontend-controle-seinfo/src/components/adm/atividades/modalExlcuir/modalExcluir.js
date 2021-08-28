@@ -19,7 +19,7 @@ export default {
                     "/" +
                     this.modalData.idEvento
                 )
-                .then((response) => {
+                .then(() => {
                     this.$emit('deletarModal');
                 });
         },

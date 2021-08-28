@@ -255,7 +255,7 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-            axios.post('/api/evento', this.obj_Resource).then(response => {  
+            axios.post('/api/evento', this.obj_Resource).then(() => {  
               this.info(); this.toggle() 
             }).catch(error => { console.log(error.response) });
 
@@ -277,7 +277,7 @@ export default {
           .patch(
             `/api/evento/${dados.idEvento}`, dados
           )
-          .then(response => {
+          .then(()=> {
             this.$router.replace("./cadEvento");
             location.reload();
           });

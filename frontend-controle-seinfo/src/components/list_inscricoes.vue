@@ -110,7 +110,8 @@ export default {
     exclusao(id) {
       axios
         .delete(`/api/inscEv/${id}/${btoa(this.CPF)}`)
-        .then((response) => {
+        .then((resp) => {
+          console.log(resp)
           this.pegar_tabela("eventosD");
         })
         .catch((error) => {
@@ -135,7 +136,7 @@ export default {
         onOk() {
           axios
             .delete(`/api/inscEv/${id}/${btoa(cpfPessoa)}`)
-            .then((response) => {
+            .then(() => {
               document.location.reload(true);
             })
             .catch((error) => {
