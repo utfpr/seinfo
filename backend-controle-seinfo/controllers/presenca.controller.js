@@ -1,9 +1,8 @@
-const db = require('../models/index');
+const db = require('../models');
 
 const Presenca = db.presenca;
 const Atividade = db.atividade;
 const Pessoa = db.pessoa;
-
 const agendamentoAtividadeDb = db.agendamentoAtividade;
 
 exports.create = async (idAtividade, idAgenda, idEvento, CPF) => {
@@ -23,73 +22,71 @@ exports.create = async (idAtividade, idAgenda, idEvento, CPF) => {
 };
 
 exports.findById = (req, res) => {
-  const { idAtividade, idAgenda, idEvento, CPF } = req.params;
+  try {
+    const { idAtividade, idAgenda, idEvento, CPF } = req.params;
 
-  Presenca.findOne({
-    where: {
-      idAtividade,
-      idAgenda,
-      idEvento,
-      CPF,
-    },
-  })
-    .then((response) => {
-      res.status(200).send(response);
+    const presenca = Presenca.findOne({
+      where: {
+        idAtividade,
+        idAgenda,
+        idEvento,
+        CPF,
+      },
     })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-};
+
+    return res.status(200).json(presenca);
+  } catch (error) {
+    return res.status(500).json(response);
+  }
+}
 
 exports.findAll = (req, res) => {
-  Presenca.findAll()
-    .then((response) => {
-      res.status(200).send(response);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-};
+  try {
+    const presenca = Presenca.findAll();
+    return res.status(200).json(presenca);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
 
 exports.delete = (req, res) => {
-  const { idAtividade, idAgenda, idEvento, CPF } = req.params;
+  try {
+    const { idAtividade, idAgenda, idEvento, CPF } = req.params;
 
-  Presenca.destroy({
+  const presenca = Presenca.destroy({
     where: {
       idAtividade,
       idAgenda,
       idEvento,
       CPF,
-    },
-  })
-    .then((response) => {
-      res.status(200).send(response);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-};
+    }})
+
+    return res.status(404).json(presenca);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
 
 exports.listPresenca = (req, res) => {
-  Presenca.findAll({
-    include: [
-      {
-        model: Atividade,
-        attributes: ['titulo', 'horasParticipacao'],
+  try {
+    const presenca = Presenca.findAll({
+      include: [
+        {
+          model: Atividade,
+          attributes: ['titulo', 'horasParticipacao'],
+        },
+        {
+          model: Pessoa,
+          attributes: ['nome'],
+        },
+      ],
+      where: {
+        presenca: true,
       },
-      {
-        model: Pessoa,
-        attributes: ['nome'],
-      },
-    ],
-    where: {
-      presenca: true,
-    },
-  })
-    .then((response) => {
-      res.status(200).send(response);
     })
-    .catch((err) => {
-      res.status(500).send(err.toString());
-    });
-};
+
+    return res.status(200).json(presenca);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}

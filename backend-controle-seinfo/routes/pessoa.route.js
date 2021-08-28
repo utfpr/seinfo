@@ -8,11 +8,10 @@ module.exports = (app) => {
   // app.post('/api/recuperarSenha/:CPF', pessoa.recuperarSenha);
   // '/api/recuperarSenha/'+CPF
 
+  app.get('/api/obtemTodasAsPessoas', pessoa.index);
+
   // Procura um pesso a pelo CPF
   app.get('/api/pessoa/:CPF', pessoa.findById);
-
-  // Procura todos os pessoa
-  app.get('/api/pessoas', pessoa.findAll);
 
   // Procura se o RA ja existe no banco de dados (se a pessoa ja se cadastrou)
   app.get('/api/newpessoa/:RA', pessoa.PessoaExistente);

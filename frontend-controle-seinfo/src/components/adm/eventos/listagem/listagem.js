@@ -31,6 +31,7 @@ export default {
       modalVisible2: false,
       nomeEvento: "",
       modalData: {
+        organizacaoEvento: "",
         cpfOrganizador: "",
         idEvento: "",
         nome: "",
@@ -75,6 +76,8 @@ export default {
       this.pegar_tabela();
       this.modalData = data;
       this.modalVisible = true;
+     
+      
       this.modalData.nome = data.nome;
       this.modalData.local_eve = data.agendamento.local;
       this.modalData.data_ini_eve = moment(data.agendamento.dataHoraInicio).format("YYYY-MM-DD");

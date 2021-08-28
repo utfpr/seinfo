@@ -80,6 +80,7 @@ export default {
       return error;
     },
     patch(dados) {
+      console.log(dados)
       var erros = [];
       if (!this.data.titulo) erros.push("Título é obrigatório!");
       if (!this.data.valor) erros.push("Valor é obrigatório!");
@@ -93,8 +94,6 @@ export default {
             dados
           )
           .then((response) => {
-            console.log("Editou!");
-            console.log(response);
             this.$router.replace("./atividades");
             location.reload();
           });
@@ -106,8 +105,7 @@ export default {
   },
   data() {
     return {
-      res: [],
-      titulo: "",
+      res: [],      titulo: "",
       valor: "",
       data_ini_atv: "2020-06-17",
       data_fim_atv: "2020-06-16",

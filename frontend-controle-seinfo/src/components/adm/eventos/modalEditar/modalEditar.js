@@ -12,13 +12,19 @@ export default {
         this.form.getFieldDecorator("keys", { initialValue: [], preserve: true });
     },
     created() {
-        axios.get('/api/pessoas').then(response => {
+        axios.get('/api/obtemTodasAsPessoas').then(response => {
             this.pessoas = response.data;
         }).catch(error => {
             console.log(error);
         })
     },
+    mounted(){
+
+    },
     methods: {
+        moment: function (date) {
+            return moment(date);
+        },
         renderHourValidateStatus() {
             const error = this.onChangeHour();
             if (error === 2) return "error";
@@ -84,26 +90,33 @@ export default {
                 }
             }
         },
-        patch(dados) {
-            var erros = [];
+        async patch(dados) {
+            
+            const erros = [];
             if (!dados.nome) erros.push("Nome é obrigatório!");
-            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
-            if (!dados.local_eve) erros.push("Local é obrigatório!");
-            if (!dados.status) erros.push("Status é obrigatório!");
+            if (!dados.agendamento.local) erros.push("Local é obrigatório!");
+            if (!dados.status && dados.status !== 0) erros.push("Status é obrigatório!");
             if (!dados.descricao) erros.push("Descrição é obrigatório!");
-            if (!dados.cpfOrganizador) erros.push("Organizador é obrigatório!");
+            if (!dados.organizacaoEvento) erros.push("Organizador é obrigatório!");
+            if (!dados.data_ini_eve) erros.push("Data de inicio é obrigatório!");
+            if (!dados.hora_ini_eve) erros.push("Hora do inicio é obrigatório!");
+            if (!dados.data_fim_eve) erros.push("Data do fim  é obrigatório!");
+            if (!dados.hora_fim_eve) erros.push("Hora do fim é obrigatório!");
+            const inicio = `${dados.data_ini_eve} ${dados.hora_ini_eve}`;
+            const fim = `${dados.data_fim_eve} ${dados.hora_fim_eve}`;
+            dados.agendamento.dataHoraInicio = moment(inicio).locale("pt-br").toISOString();
+            dados.agendamento.dataHoraFim = moment(fim).locale("pt-br").toISOString();
             if (!erros.length) {
-                axios
-                    .patch(`/api/evento/${dados.idEvento}`, dados)
-                    .then((response) => {
-                        console.log("Editou!");
-                        console.log(response);
-                        this.$router.replace("./eventos");
-                        location.reload();
-                    });
+                try {
+                    await axios.patch(`/api/evento/${dados.idEvento}`, dados);
+                    this.$router.replace("./eventos");
+                    location.reload();
+                } catch (error) {
+                    console.error(error);
+                    this.$router.replace("./eventos");
+                }
             } else {
-                alert(erros.join("\n"));
-                this.$router.replace("./eventos");
+                alert(erros.join('\n'));
             }
         },
     },

@@ -5,7 +5,7 @@
         <a :href="'/'" class="navbar-brand"><img src="../assets/logo_com_nome.jpg" style="height:50px;"></a>
         <a-form class="form" layout="inline"  method="post" @submit.prevent="realizar_login" encType="multipart/form-data">
           <a-form-item>
-          <the-mask v-model="obj_login.username" placeholder="000.000.000-00" class="lg st" :mask="['###.###.###-##']" />
+          <input v-model="obj_login.username" class="lg st" name="username" placeholder="Usuário" required="required" />
           </a-form-item>
           <a-form-item>
             <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />
@@ -14,7 +14,7 @@
             <a-button class="bt" @click="LoginUser(signIn)" >Entrar</a-button>
           </a-form-item>
           <a-form-item>
-            <a-button class="bti" @click="showModal" >Cadastrar</a-button>
+            <a-button class="bti" href="cadPessoa">Cadastro de usuário externo</a-button>
           </a-form-item>   
         </a-form>
         <a-modal
@@ -87,18 +87,14 @@ export default {
       password: this.obj_userInterno.password
       })
     .then(response => {
-      console.log(response.data.name);
             // obj_userInterno.nome = response.data.name;
             // obj_userInterno.email = response.data.email;
-            console.log(response.data.email);
             this.$router.push({ name: `Cad_Aluno`, query:{
               ra: this.obj_userInterno.username, 
               nome: response.data.name, email: response.data.email
             }}) 
             //mandar os outros dados do LDAP para a página de cadastro
             //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.nome}})
-            //console.log(response.data.message);
-            console.log("VERIFICOU SE ALUNO EXISTE")
             
           }).catch(error => {
             console.log(error.response)
@@ -107,7 +103,6 @@ export default {
     
     ////window.location = "/cad_aluno?username="+username;
     //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.username}})
-    //console.log(obj_userInterno.username);
     },
     showModalRecuperacao()
     {
@@ -144,10 +139,8 @@ export default {
             console.log(error.response)
           });
 
-      console.log("FEZ O LOGIN")
     },
     handleCancel() {
-      console.log('Clicked cancel button');
       this.visible = false
       this.recuperacao = false
     },

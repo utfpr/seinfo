@@ -72,10 +72,8 @@ export default {
 	pegar_tabela_atividades(idEvento, CPF) {
 		
 		axios
-			.get(`/api/inscAtvEventAll/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEventAll/${btoa(CPF)}/${idEvento}`)
 			.then(response => {
-				// console.log(this.$route.params.idEvento);
-				console.log(response.data);
 				this.res_atividades = response.data;
 			})
 			.catch(function(error) {
@@ -86,10 +84,8 @@ export default {
 
 	pegar_tabela_atividades2(idEvento, CPF) {
 		axios
-			.get(`/api/inscAtvEvent/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEvent/${btoa(CPF)}/${idEvento}`)
 			.then(response => {
-				// console.log(this.$route.params.idEvento);
-				console.log(response.data);
 				this.res_atividades2 = response.data;
 			})
 			.catch(function(error) {
@@ -97,11 +93,9 @@ export default {
 			});
 		},
 	inscricao(CPF, record) {
-      console.log(record);
       axios
-        .post(`/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
+        .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
         .then((response) => {
-			console.log(response.data);
 			document.location.reload(true);
 		})
         .catch(function (error) {
@@ -111,9 +105,8 @@ export default {
 	},
 	exclusao(CPF, record) {
       axios
-        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
+        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${btoa(CPF)}`)
         .then((response) => {
-			console.log(response.data);
 			document.location.reload(true);
         })
         .catch(function (error) {

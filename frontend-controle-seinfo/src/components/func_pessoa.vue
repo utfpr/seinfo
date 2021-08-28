@@ -151,8 +151,6 @@ export default {
       axios
         .get(`/api/${name}`)
         .then((response) => {
-          console.log(`Listou ${name}`);
-          console.log(response.data);
           this.res = response.data;
         })
         .catch((error) => {

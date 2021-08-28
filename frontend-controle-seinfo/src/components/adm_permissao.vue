@@ -90,7 +90,6 @@ export default {
             nivel: this.obj.nivel,
           })
           .then((response) => {
-            console.log(response.data);
             alert(response.data);
           })
           .catch((err) => {

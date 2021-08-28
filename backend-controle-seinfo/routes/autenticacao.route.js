@@ -1,4 +1,4 @@
-const login = require('../controllers/autenticacao.controller.js');
+const login = require('../controllers/autenticacao.controller');
 
 module.exports = function (app) {
   async function autenticar_API() {

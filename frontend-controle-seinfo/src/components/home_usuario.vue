@@ -1,6 +1,6 @@
 <template>
   <AuthConsumer>
-    <div slot-scope="{ getUser }">
+    <div>
       <a-table
         :columns="columns"
         :data-source="res_localizar"
@@ -12,70 +12,29 @@
           style="margin: 0"
         >
           <div class="table-responsive col-md-12">
-            <p class="atividade">
-              ATIVIDADES 
-
+            <div class="button-wrapper">
               <a-button
-                v-if="!record.estaInscrito"
+                v-if="record.estaInscrito == false && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic"
-                @click="inscricao(getUser.CPF, record.idEvento)"
+                @click="showModal(record.idEvento)"
               >
                 INSCREVER-SE
               </a-button>
               <a-button
-                v-else
+                v-if="record.estaInscrito == true && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic-yellow"
-                @click="redirectAtv(record.idEvento, getUser.CPF)"
+                @click="redirectAtv(record.idEvento, obj.cpf)"
               >
-                VER DETALHES
+                VER INSCRIÇÕES EM ATIVIDADES
               </a-button>
-            </p>
-            <table
-              class="table table-striped"
-              cellspacing="0"
-              cellpadding="0"
-            >
-              <thead>
-                <tr>
-                  <th style="width:25%">
-                    Nome
-                  </th>
-                  <th style="text-align: left;">
-                    Valor
-                  </th>
-                  <th style="text-align: left;">
-                    Vagas
-                  </th>
-                  <th style="text-align: left;">
-                    Horas de participação
-                  </th>
-                  <th style="text-align: left; width:40%">
-                    Descrição
-                  </th>
-                </tr>
-              </thead>
-              <tbody
-                v-for="response in res_atividades"
-                :key="response.idEvento"
-              >
-                <tr
-                  v-if="response.idEvento == record.idEvento"
-                  style="background-color:white;"
-                >
-                  <td>{{ response.titulo }}</td>
-                  <td>R$ {{ response.valor }}</td>
-                  <td style="padding-left:20px;">
-                    {{ response.quantidadeVagas }}
-                  </td>
-                  <td style="padding-left:54px;">
-                    {{ response.horasParticipacao }}
-                  </td>
-                  <td>{{ response.descricao }}</td>
-                </tr>
-              </tbody>
-            </table>
+              <a-modal v-if="record.estaInscrito == false && record.lotesDisponiveis != 0" v-model="visible" title="Aviso" @ok="handleOk">
+                <p>Você ira se inscrever nessa atividade pelo lote de<b> {{dateConverter(record.lotesDisponiveis[0].dataAbertura)}} até {{dateConverter(record.lotesDisponiveis[0].dataFechamento)}} com valor de {{record.lotesDisponiveis[0].valor}}R$</b> </p>
+              </a-modal>            
+              <p v-if="record.lotesDisponiveis.length == 0" >As inscrições do evento acabaram</p>
+            </div>
+            <DetalhesEvento v-bind:id="record.idEvento"/>
           </div>
         </div>
       </a-table>
@@ -84,8 +43,9 @@
 </template>
 
 <script>
-
+import moment from "moment";
 import AuthConsumer from '../contexts/authConsumer.vue';
+import DetalhesEvento from './eventoCard.vue'
 
 import auth from '../services/auth';
 import axios from '../config/axiosConfig';
@@ -105,27 +65,28 @@ const columns = [{
 export default {
   components: {
     AuthConsumer,
+    DetalhesEvento
   },
 
   data() {
     return {
       res_localizar: [],
-      res_atividades: [],
       columns,
       loading: false,
-      confirmLoading: false,
+      visible: false,
+      loteDisponivel:'',
       obj: {
         CPF: '',
+        idEvento:''
       }
     };
   },
   mounted() {
     this.pegar_tabela_eventos('eventosD');
-    this.pegar_tabela_atividades('atividades');
   },
   methods: {
     redirectAtv(idEvento, CPF) {
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}` });
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}` });
     },
     async pegarPerfil() {
       const user = await auth.getUser();
@@ -134,56 +95,61 @@ export default {
     async pegar_tabela_eventos(name) {
       try{
       await this.pegarPerfil()
-        const response = await axios.post(`/api/${name}`, {CPF: this.obj.CPF})
-          // console.log("Listou " + name);
+        const response = await axios.post(`/api/${name}`, {CPF: btoa(this.obj.CPF)})
             this.res_localizar = response.data;
-            console.log(this.res_localizar);
          } catch(error) {
             console.log(error);
           }
     },
-    pegar_tabela_atividades(name) {
-      axios.get(`/api/${name}`)
-        .then((response) => {
-          this.res_atividades = response.data;
-        });
-    },
+    dateConverter(date){
+      return moment(date).format('DD [de] MMMM [de] YYYY')
+    },  
     inscricao(CPF, idEvento) {
-      console.log(CPF, idEvento);
       axios
-        .post(`/api/inscEv/${idEvento}/${CPF}`, { dataInscricao: '2020-08-09' })
+        .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
         .then((response) => {
           this.redirectAtv(idEvento, CPF);
-          console.log(response.data);
-          // this.pegar_tabela("eventosD");
         })
         .catch((error) => {
           alert('Você já está inscrito nesse evento!');
           console.log(error);
         });
     },
+    showModal(idEvento){
+      this.visible = true
+      this.obj.idEvento = idEvento
+    },
+    handleOk(){
+      this.inscricao(this.obj.CPF, this.obj.idEvento)
+    }
+
   },
 };
 </script>
 
 <style scoped>
 
+.button-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
 .ic{
-  float: right;
   font-weight: 600;
   letter-spacing: 0.8px;
   background-color: rgba(157, 211, 157, 0.5);
   border: 2px solid rgb(64, 212, 64);
   color: black;
   cursor: pointer;
+  height: 60px;
 }
 .ic-yellow{
-  float: right;
   font-weight: 600;
   letter-spacing: 0.8px;
   background-color: rgba(251, 253, 100, 0.5);
   border: 2px solid rgb(212, 202, 64);
   color: black;
+  height: 60px;
   cursor: pointer;
 }
 .ic-yellow:hover{
@@ -211,12 +177,6 @@ export default {
 }
 .article button {
   margin-top: 16px;
-}
-.atividade {
-  margin-bottom: 18px;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: .8px;
 }
 
 </style>

@@ -38,8 +38,6 @@ export default {
     pegar_tabela(name) {
       axios.get('/api/' + name)
         .then((response) => {
-          console.log("Listou " + name);
-          console.log(response.data);
           this.res_localizar = response.data
         })
         .catch(function (error) {

@@ -203,7 +203,6 @@ export default {
       this.modalVisible = true
     },
     deletar_evento(pos) {
-      console.log("ID "+pos);
       axios.delete('/api/evento/'+pos)
             .then(response => {
                 console.log("Deletou!");
@@ -216,8 +215,6 @@ export default {
     pegar_tabela (name) {
       axios.get('/api/' + name)
       .then((response) => {
-       console.log("Listou " + name);
-       console.log(response.data);
        this.res_localizar = response.data
      })
      .catch(function (error) {

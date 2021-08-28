@@ -30,7 +30,7 @@ export default {
       });
 
     axios
-      .get("/api/protagonistas")
+      .get("/api/obtemTodasAsPessoas")
       .then((response) => {
         this.protagonistas = response.data;
       })
@@ -43,10 +43,12 @@ export default {
       this.show = false;
       this.titulo = "";
       this.valor = "";
-      this.data_ini_atv = "";
-      this.data_fim_atv = "";
-      this.hora_ini_atv = "";
-      this.hora_fim_atv = "";
+      this.dataInicio = "";
+      this.horaInicio = "";
+      // this.data_ini_atv = "";
+      // this.data_fim_atv = "";
+      // this.hora_ini_atv = "";
+      // this.hora_fim_atv = "";
       this.horasParticipacao = "";
       this.quantidadeVagas = "";
       this.local_atv = "";
@@ -106,15 +108,18 @@ export default {
         (this.obj_Resource.idCategoria = this.idCategoria),
         (this.obj_Resource.idPessoa = this.idPessoa),
         (this.obj_Resource.descricao = this.descricao),
-        axios
-          .post("/api/atividade", this.obj_Resource)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
-        location.reload();
+        this.obj_Resource.dataInicio = this.dataInicio;
+        this.obj_Resource.horaInicio = this.horaInicio;
+
+         axios
+           .post("/api/atividade", this.obj_Resource)
+           .then((response) => {
+             console.log(response);
+           })
+           .catch((error) => {
+             console.log(error.response);
+           });
+         location.reload();
       } else {
         alert(erros.join("\n"));
       }
@@ -127,7 +132,6 @@ export default {
     addSubatividade() {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
-      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
@@ -192,6 +196,8 @@ export default {
       idEvento: "",
       idCategoria: "",
       idPessoa: "",
+      dataInicio: "",
+      horaInicio: "",
       descricao: "",
       pegou: false,
       modalVisible: false,
@@ -201,10 +207,12 @@ export default {
       modalData: {
         titulo: "",
         valor: "",
-        data_ini_atv: "",
-        data_fim_atv: "",
-        hora_ini_atv: "",
-        hora_fim_atv: "",
+        dataInicio: "",
+        horaInicio: "",
+        // data_ini_atv: "",
+        // data_fim_atv: "",
+        // hora_ini_atv: "",
+        // hora_fim_atv: "",
         horasParticipacao: "",
         quantidadeVagas: "",
         local_atv: "",
@@ -216,10 +224,12 @@ export default {
       obj_Resource: {
         titulo: "",
         valor: "",
-        data_ini_atv: "",
-        data_fim_atv: "",
-        hora_ini_atv: "",
-        hora_fim_atv: "",
+        dataInicio: "",
+        horaInicio: "",
+        // data_ini_atv: "",
+        // data_fim_atv: "",
+        // hora_ini_atv: "",
+        // hora_fim_atv: "",
         horasParticipacao: "",
         quantidadeVagas: "",
         local_atv: "",

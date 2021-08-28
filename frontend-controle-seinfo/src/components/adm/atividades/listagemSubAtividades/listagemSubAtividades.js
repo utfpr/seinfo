@@ -27,7 +27,6 @@ export default {
       axios
         .delete("/api/agenda/" + this.dataEdita.idAgenda)
         .then((response) => {
-          console.log("Deletou!", response);
           location.reload();
         });
     },

@@ -55,6 +55,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         field: 'idEvento',
       },
+      dataInicio: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
     },
 
     {
@@ -71,21 +75,29 @@ module.exports = (sequelize, Sequelize) => {
       foreignKey: 'idEvento',
       onUpdate: 'cascade',
       onDelete: 'cascade',
-    }),
-      models.atividade.belongsTo(models.categoria, {
-        as: 'categoriaAtv',
-        foreignKey: 'idCategoria',
-        onUpdate: 'cascade',
-        onDelete: 'cascade',
-      }),
-      models.atividade.hasMany(models.inscricaoAtividade, {
-        as: 'inscricoesAtv',
-        foreignKey: 'idAtividade',
-      }),
-      models.atividade.hasMany(models.presenca, {
-        // as: 'presenca',
-        foreignKey: 'idAtividade',
-      });
+    });
+
+    models.atividade.belongsTo(models.categoria, {
+      as: 'categoriaAtv',
+      foreignKey: 'idCategoria',
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    });
+
+    models.atividade.hasMany(models.inscricaoAtividade, {
+      as: 'inscricoesAtv',
+      foreignKey: 'idAtividade',
+    });
+
+    models.atividade.hasMany(models.presenca, {
+      as: 'presenca',
+      foreignKey: 'idAtividade',
+    });
+
+    models.atividade.hasOne(models.protagonista, {
+      as: 'protagonistaAtividade',
+      foreignKey: 'idAtividade',
+    });
   };
 
   return Atividade;
