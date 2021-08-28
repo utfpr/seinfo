@@ -1,12 +1,6 @@
 <template>
   <div style="text-align: center row">
-    <div class="">
-      <h5>
-        <b>
-          SubAtividades:
-        </b>
-      </h5>
-    </div>
+    <h2 class="subatividades-title">SubAtividades:</h2>
     <div>
       <slide-up-down :active="remove">
         <div class="alert alert-danger" role="alert">
@@ -35,8 +29,31 @@
         v-for="subatividades in modalData.atvAgenda"
         :key="subatividades.idAgenda"
       >
-        <div class="p-3">
-          <table class="table text-center">
+        <div class="p-3 text-left">
+          <a-tooltip placement="top">
+            <template slot="title">Excluir</template>
+            <a-button 
+              style="background: divansparent; border: none; cursor: pointer; color: black;"
+              @click="toggleExcluir(subatividades)"
+            >
+              <a-icon type="delete" />
+            </a-button>
+          </a-tooltip>
+
+          <span class="subatividade">Subatividade {{subatividades.idAgenda}}</span>
+          <span>
+            dia {{moment(subatividades.dataHoraInicio).format("DD/MM/YYYY")}} 
+            das {{moment(subatividades.dataHoraInicio).format("HH:mm")}} às 
+            {{moment(subatividades.dataHoraInicio).format("HH:mm")}}
+          </span>
+          <div>
+          <span class="subatividade-local-title">
+            Local:
+          </span>
+          <span>{{ subatividades.local }}</span>
+
+          </div>
+          <!-- <table class="table text-center">
             <thead class="thead-dark">
               <tr>
                 <th class="col-1">ID</th>
@@ -67,19 +84,11 @@
                   {{ subatividades.local }}
                 </th>
                 <th class="col-1 ">
-                  <a-tooltip placement="top">
-                    <template slot="title">Excluir</template>
-                    <a-button
-                      style="background: divansparent; border: none; cursor: pointer; color: black;"
-                      @click="toggleExcluir(subatividades)"
-                    >
-                      <a-icon type="delete" />
-                    </a-button>
-                  </a-tooltip>
+                  
                 </th>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </div>
         <div>
           <listagemParticipantes
