@@ -36,3 +36,7 @@
 .reset {
   color : red;
 }
+
+.table th{
+  vertical-align: middle;
+}

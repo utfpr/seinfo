@@ -35,45 +35,51 @@
         v-for="subatividades in modalData.atvAgenda"
         :key="subatividades.idAgenda"
       >
-        <div class="row border border-dark">
-          <div class="col-1 border border-dark">ID</div>
-          <div class="col-2 border border-dark">Data Inicio</div>
-          <div class="col-2 border border-dark">Hora Inicio</div>
-          <div class="col-2 border border-dark">Data Fim</div>
-          <div class="col-2 border border-dark">Hora Fim</div>
-          <div class="col-2 border border-dark">Local</div>
-          <div class="col-1 border border-dark"></div>
-        </div>
-        <div class="row border border-dark">
-          <div class="col-1 border border-dark">
-            {{ subatividades.idAgenda }}
-          </div>
-          <div class="col-2 border border-dark">
-            {{ moment(subatividades.dataHoraInicio).format("DD/MM/YYYY") }}
-          </div>
-          <div class="col-2 border border-dark">
-            {{ moment(subatividades.dataHoraInicio).format("HH:mm") }}
-          </div>
-          <div class="col-2 border border-dark">
-            {{ moment(subatividades.dataHoraFim).format("DD/MM/YYYY") }}
-          </div>
-          <div class="col-2 border border-dark">
-            {{ moment(subatividades.dataHoraFim).format("HH:mm") }}
-          </div>
-          <div class="col-2 border border-dark">
-            {{ subatividades.local }}
-          </div>
-          <div class="col-1 border border-dark">
-            <a-tooltip placement="top">
-              <template slot="title">Excluir</template>
-              <a-button
-                style="background: divansparent; border: none; cursor: pointer; color: black;"
-                @click="toggleExcluir(subatividades)"
-              >
-                <a-icon type="delete" />
-              </a-button>
-            </a-tooltip>
-          </div>
+        <div class="p-3">
+          <table class="table text-center">
+            <thead class="thead-dark">
+              <tr>
+                <th class="col-1">ID</th>
+                <th class="col-2">Data Inicio</th>
+                <th class="col-2">Hora Inicio</th>
+                <th class="col-2">Hora Fim</th>
+                <th class="col-2">Local</th>
+                <th class="col-1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  {{ subatividades.idAgenda }}
+                </th>
+                <th>
+                  {{
+                    moment(subatividades.dataHoraInicio).format("DD/MM/YYYY")
+                  }}
+                </th>
+                <th>
+                  {{ moment(subatividades.dataHoraInicio).format("HH:mm") }}
+                </th>
+                <th>
+                  {{ moment(subatividades.dataHoraFim).format("HH:mm") }}
+                </th>
+                <th>
+                  {{ subatividades.local }}
+                </th>
+                <th class="col-1 ">
+                  <a-tooltip placement="top">
+                    <template slot="title">Excluir</template>
+                    <a-button
+                      style="background: divansparent; border: none; cursor: pointer; color: black;"
+                      @click="toggleExcluir(subatividades)"
+                    >
+                      <a-icon type="delete" />
+                    </a-button>
+                  </a-tooltip>
+                </th>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div>
           <listagemParticipantes

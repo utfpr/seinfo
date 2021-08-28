@@ -8,43 +8,39 @@
         Não tem participantes inscritos nessa atividade.
       </div>
     </div>
-    <div class="">
-      <div class="row border border-dark">
-        <div class="col-3 border border-dark" style="text-align: center">
-          Nome
-        </div>
-        <div class="col-3 border border-dark" style="text-align: center">
-          Email
-        </div>
-        <div class="col-3 border border-dark" style="text-align: center">
-          Data Inscrição
-        </div>
-        <div class="col-3 border border-dark" style="text-align: center"></div>
-      </div>
-      <div
-        v-for="listData in participantes"
-        class="row"
-        :key="listData.dataInscricao"
-      >
-        <div class="col-3 border border-dark">
-          {{ listData.eventoInsc.pessoaInsc.nome }}
-        </div>
-        <div class="col-3 border border-dark">
-          {{ listData.eventoInsc.pessoaInsc.email }}
-        </div>
-        <div class="col-3 border border-dark">
-          {{ listData.eventoInsc.dataInscricao }}
-        </div>
-        <div class="col-3 border border-dark">
-          <ButaoDePresencaAtividade
-            v-bind:idEvento="idEvento"
-            v-bind:idAtividade="idAtividade"
-            v-bind:idAgenda="idAgenda"
-            v-bind:cpf="listData.eventoInsc.pessoaInsc.CPF"
-          />
-        </div>
-      </div>
-    </div>
+    <table class="table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th class="col-3">Nome</th>
+          <th class="col-3">Email</th>
+          <th class="col-3">Data Inscrição</th>
+          <th class="col-1"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th scope="row">
+            {{ listData.eventoInsc.pessoaInsc.nome }}
+          </th>
+          <th>
+            {{ listData.eventoInsc.pessoaInsc.email }}
+          </th>
+          <th>
+            {{ listData.eventoInsc.dataInscricao }}
+          </th>
+          <th>
+            <ButaoDePresencaAtividade
+              v-bind:idEvento="idEvento"
+              v-bind:idAtividade="idAtividade"
+              v-bind:idAgenda="idAgenda"
+              v-bind:cpf="listData.eventoInsc.pessoaInsc.CPF"
+            />
+          </th>
+
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
