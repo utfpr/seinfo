@@ -1,3 +1,7 @@
+.modal {
+  text-align: center;
+}
+
 .ant-input {
   border-radius: 0;
 }
@@ -11,7 +15,7 @@
 .title {
   margin-top: 30px;
 }
-.ant-select-selection{
+.ant-select-selection {
   border-radius: 0;
 }
 .space {
@@ -34,5 +38,23 @@
   color: black;
 }
 .reset {
-  color : red;
+  color: red;
+}
+
+.table th {
+  vertical-align: middle;
+}
+
+.subatividades-title {
+  margin-top: 25px;
+}
+
+.subatividade {
+  font-size: 1.7em;
+  margin-right: 6px;
+}
+
+.subatividade-local-title {
+  margin-left: 3.7em;
+  font-weight: bold;
 }

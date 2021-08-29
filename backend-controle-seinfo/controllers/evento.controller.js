@@ -244,9 +244,9 @@ exports.getAllEventosCPF = async (req, res) => {
         const dataLoteA = new Date(`${lote.dataAbertura}T23:59:59.003Z`);
         if (dataLoteF < dataAtual) {
           lotesVencidos.push(lote.dataValues);
-        } else if (dataLoteA > dataAtual) {
+        } /*else if (dataLoteA > dataAtual) {
           lotesVencidos.push(lote.dataValues);
-        } else {
+        } */ else {
           lotesDisponiveis.push(lote.dataValues);
         }
       });
