@@ -106,7 +106,7 @@ export default {
     },  
     inscricao(CPF, idEvento) {
       axios
-        .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`, { dataInscricao: '2020-08-09' })
+        .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`)
         .then(() => {
 
           this.redirectAtv(idEvento, CPF);

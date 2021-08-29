@@ -176,12 +176,14 @@ exports.PessoaExistente = async (req, res) => {
 
 exports.cadastrarEmEvento = async (req, res) => {
   try {
-    const { CPF, idEventoo } = req.params;
-    const { dataInscricaoo } = req.body;
+    const { CPF, idEvento } = req.params;
+
+    const data = new Date();
+
     const pessoa = await Pessoa.findOne({ where: { CPF: atob(CPF) } });
-    const evento = await Evento.findOne({ where: { idEvento: idEventoo } });
+    const evento = await Evento.findOne({ where: { idEvento } });
     const inscricao = await InscricaoEvento.create({
-      dataInscricao: dataInscricaoo,
+      dataInscricao: data,
       idEvento: evento.idEvento,
       CPF: pessoa.CPF,
     });
@@ -286,8 +288,10 @@ exports.cadastrarEmAtividade = async (req, res) => {
       return res.status(404).json({ error: 'Inscrição não encontrado.' });
     }
 
+    const data = new Date();
+
     const inscricaoAtividade = await InscricaoAtividade.create({
-      dataInscricao: req.body.dataInscricao,
+      dataInscricao: data,
       idEvento: inscricao.idEvento,
       CPF: inscricao.CPF,
       idAtividade: req.body.idAtividade,
@@ -384,11 +388,11 @@ exports.selectInscritoAtv = async (req, res) => {
 // seleciona as pessoas inscritas na ativdade
 exports.selectInscricoesNaAtividade = async (req, res) => {
   try {
-    const { idAtividadeReq, idEventoReq } = req.params;
+    const { idAtividade, idEvento } = req.params;
     const pessoasInscritasUmaAtividade = await InscricaoAtividade.findAll({
       where: {
-        idAtividade: idAtividadeReq,
-        idEvento: idEventoReq,
+        idAtividade,
+        idEvento,
       },
       include: [
         {
@@ -404,7 +408,7 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
           ],
         },
       ],
-    })
+    });
     return res.status(200).json(pessoasInscritasUmaAtividade);
   } catch (error) {
     return res.status(500).json(error);

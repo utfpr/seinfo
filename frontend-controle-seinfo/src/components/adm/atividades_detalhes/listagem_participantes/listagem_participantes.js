@@ -2,6 +2,7 @@ import axios from "../../../../config/axiosConfig";
 import ButaoDePresencaAtividade from "../../../ButaoDePresencaAtividade.vue";
 import moment from "moment";
 moment.locale("pt-br");
+
 export default {
   components: {
     ButaoDePresencaAtividade,
@@ -11,8 +12,8 @@ export default {
     idAtividade: String,
     idAgenda: String,
   },
-  async mounted() {
-    await axios
+  mounted() {
+     axios
       .get(`/api/inscAtv/${this.idEvento}/${this.idAtividade}`)
       .then((response) => {
         this.participantes = response.data;

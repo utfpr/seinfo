@@ -3,11 +3,11 @@
     <div>
       <div v-if="!tokew">
         <div>
-          <h2>Login seu mancebo</h2>
+          <h2>Login</h2>
           <input type="text" name="login" id="login" />
         </div>
         <div>
-          <h2>senha de vossa gaja</h2>
+          <h2>senha</h2>
           <input type="text" name="senha" id="senha" />
         </div>
         <div>
@@ -17,8 +17,7 @@
         </div>
       </div>
       <div v-else>
-        A vossa presença veio a ser realizada meu caro gajo ou minha rapariga
-        agora podeite gozar-te de suas horas. mancebo
+        Sua presença foi confirmada
       </div>
     </div>
   </div>

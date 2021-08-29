@@ -19,7 +19,7 @@
 import axios from "../config/axiosConfig";
 import Auth from "../services/auth";
 export default {
-  props: { idEvento: String, idAtividade: String, idAgenda: String },
+  props: { idEvento: String, idAtividade: String, idAgenda: String, cpf: String },
   data() {
     return {
       user: {},
@@ -36,7 +36,7 @@ export default {
         .post("/api/presenca", {
           idEvento: this.idEvento,
           idAtividade: this.idAtividade,
-          cpf: this.user.CPF,
+          cpf: this.cpf,
           idAgenda: this.idAgenda,
           presenca  : 1,
         })

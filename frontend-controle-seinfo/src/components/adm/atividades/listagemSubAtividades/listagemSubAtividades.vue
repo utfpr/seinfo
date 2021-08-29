@@ -89,14 +89,16 @@
               </tr>
             </tbody>
           </table> -->
-        </div>
-        <div>
+          <div>
+            
           <listagemParticipantes
             v-bind:idEvento="modalData.idEvento.toString()"
             v-bind:idAtividade="modalData.idAtividade.toString()"
             v-bind:idAgenda="subatividades.idAgenda.toString()"
           />
         </div>
+        </div>
+        
       </div>
     </div>
   </div>

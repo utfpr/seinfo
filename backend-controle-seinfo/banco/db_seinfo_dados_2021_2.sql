@@ -21,19 +21,11 @@
 
 LOCK TABLES `agenda` WRITE;
 /*!40000 ALTER TABLE `agenda` DISABLE KEYS */;
-INSERT INTO `agenda` VALUES 
-(11,'2021-08-09 20:00:00','2021-09-09 20:00:00','Campo Mourão'),
-(12,'2021-08-09 20:00:00','2021-09-09 20:00:00','CAMPO MOURAO'),
-(13,'2021-08-09 20:00:00','2021-09-09 20:00:00','Cianorte'),
-(14,'2021-08-10 20:00:00','2021-08-10 20:00:00','UTFPR'),
-(15,'2021-08-11 20:00:00','2021-08-11 22:00:00','UTFPR'),
-(16,'2021-08-12 20:00:00','2021-08-12 22:00:00','UTFPR'),
-(17,'2021-08-09 12:00:00','2021-08-09 12:20:00','UTFPR'),
-(18,'2021-08-10 12:00:00','2021-08-10 12:20:00','UTFPR'),
-(19,'2021-08-11 12:00:00','2021-08-11 12:20:00','UTFPR'),
-(20,'2021-08-09 15:00:00','2021-08-09 15:20:00','UTFPR'),
-(21,'2021-08-11 15:00:00','2021-08-11 15:20:00','UTFPR'),
-(22,'2021-08-10 15:00:00','2021-08-10 15:20:00','UTFPR');
+INSERT INTO `agenda` 
+VALUES (23,'2021-08-29 20:00:00','2022-08-29 20:00:00','Campo Mourão'),
+(24,'2021-08-29 20:00:00','2022-08-29 20:00:00','Campo Mourão'),
+(25,'2021-08-29 20:00:00','2021-08-30 20:00:00','Lote E'),
+(26,'2021-08-29 20:00:00','2021-08-30 20:00:00','Lote G');
 /*!40000 ALTER TABLE `agenda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -43,16 +35,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `agendamentoAtividade` WRITE;
 /*!40000 ALTER TABLE `agendamentoAtividade` DISABLE KEYS */;
-INSERT INTO `agendamentoAtividade` VALUES 
-(12,14),
-(12,15),
-(12,16),
-(13,17),
-(13,18),
-(13,19),
-(14,20),
-(14,21),
-(14,22);
+INSERT INTO `agendamentoAtividade` VALUES (15,25),(16,26);
 /*!40000 ALTER TABLE `agendamentoAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,10 +45,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `atividade` WRITE;
 /*!40000 ALTER TABLE `atividade` DISABLE KEYS */;
-INSERT INTO `atividade` VALUES 
-(12,'Atividade 1',300,'Descrição atividade 1 aqui','04:00:00',20,4,11,'2021-08-10 20:00:00'),
-(13,'Atividade 2',300,'Descrição atividade 2 aqui','01:00:00',20,4,12,'2021-08-09 12:00:00'),
-(14,'Atividade 3',30,'Descrição atividade 3 aqui','10:00:00',20,6,13,'2021-08-09 15:00:00');
+INSERT INTO `atividade` 
+VALUES (15,'Atividade Evento 1',300,'Atividade Evento 1','04:00:00',20,10,14,'2021-08-29 20:00:00'),
+(16,'Atividade Evento 2',30,'Atividade Evento 2','20:05:00',5,9,15,'2021-08-29 20:00:00');
 /*!40000 ALTER TABLE `atividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +57,6 @@ UNLOCK TABLES;
 
 LOCK TABLES `carrossel` WRITE;
 /*!40000 ALTER TABLE `carrossel` DISABLE KEYS */;
-INSERT INTO `carrossel` VALUES (1,1,1);
 /*!40000 ALTER TABLE `carrossel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,11 +66,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES 
-(4,'Minicurso'),
-(5,'Palestra'),
-(6,'Jogos'),
-(7,'Diversos');
+INSERT INTO `categoria` 
+VALUES (9,'Palestra'),
+(10,'MiniCurso');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,10 +87,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` VALUES 
-(11,'Evento 1 ','Descrição do evento 1',1,11),
-(12,'Evento 2','Descrição evento 2 aqui',1,12),
-(13,'Evento 3','Descrição Evento 3 aqui',1,13);
+INSERT INTO `evento` 
+VALUES (14,'Evento 1','Campo Mourão',1,23),
+(15,'Evento 2','Campo Mourão',1,24);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,6 +117,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `inscricaoAtividade` WRITE;
 /*!40000 ALTER TABLE `inscricaoAtividade` DISABLE KEYS */;
+INSERT INTO `inscricaoAtividade` 
+VALUES ('usuario1',14,15,'2021-08-29');
 /*!40000 ALTER TABLE `inscricaoAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,6 +128,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `inscricaoEvento` WRITE;
 /*!40000 ALTER TABLE `inscricaoEvento` DISABLE KEYS */;
+INSERT INTO `inscricaoEvento` 
+VALUES ('usuario1',14,'2021-08-29');
 /*!40000 ALTER TABLE `inscricaoEvento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,16 +139,12 @@ UNLOCK TABLES;
 
 LOCK TABLES `lote` WRITE;
 /*!40000 ALTER TABLE `lote` DISABLE KEYS */;
-INSERT INTO `lote` VALUES 
-(7,30,'2021-08-01','2021-08-03',11),
-(8,50,'2021-08-04','2021-08-10',11),
-(9,100,'2021-08-11','2021-08-15',11),
-(10,30,'2021-07-01','2021-08-03',12),
-(11,300,'2021-08-07','2021-08-11',12),
-(12,50,'2021-08-04','2021-08-06',12),
-(13,50,'2021-08-01','2021-08-02',13),
-(14,500,'2021-08-05','2021-08-11',13),
-(15,100,'2021-08-03','2021-08-04',13);
+INSERT INTO `lote` 
+VALUES (16,20,'2021-08-20','2021-08-29',14),
+(17,300,'2021-08-30','2021-09-22',14),
+(18,20,'2021-08-01','2021-08-15',15),
+(19,300,'2021-08-16','2021-08-29',15),
+(20,500,'2021-08-30','2022-08-29',15);
 /*!40000 ALTER TABLE `lote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,6 +154,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `organizacao` WRITE;
 /*!40000 ALTER TABLE `organizacao` DISABLE KEYS */;
+INSERT INTO `organizacao` 
+ALUES ('supervisor',14,'00:00:00'),
+('supervisor',15,'00:00:00');
 /*!40000 ALTER TABLE `organizacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,8 +166,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
-INSERT INTO `pessoa` VALUES 
-('admin','Admin','admin@gmail.com','�iv�A���M�߱g��s�K��o*�H�',2,1,'admin'),
+INSERT INTO `pessoa` 
+VALUES ('admin','Admin','admin@gmail.com','�iv�A���M�߱g��s�K��o*�H�',2,1,'admin'),
 ('supervisor','Supervisor','supervisor@gmail.com','4��%�Y%{;x�\Z�m����|�J�[��B',1,1,'supervisor'),
 ('usuario1','Usuario 1','usuario1@gmail.com','�������a~��QZ)���n��+��IU\nك���',0,1,'usuario1'),
 ('usuario2','Usuario 2','usuario2@gmail.com','S@c�D�9ٮy&Ps�_!�:� )7��\'�',0,1,'usuario2'),
@@ -209,6 +190,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `protagonista` WRITE;
 /*!40000 ALTER TABLE `protagonista` DISABLE KEYS */;
+INSERT INTO `protagonista` VALUES ('admin',15,0),('admin',16,0);
 /*!40000 ALTER TABLE `protagonista` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-09 19:23:59
+-- Dump completed on 2021-08-29 17:38:34
