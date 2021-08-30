@@ -104,12 +104,12 @@ export default {
     dateConverter(date){
       return moment(date).format('DD [de] MMMM [de] YYYY')
     },  
-    inscricao(CPF, idEvento) {
+    inscricao(CPF, idEvento, idLote) {
       axios
-        .post(`/api/inscEv/${idEvento}/${btoa(CPF)}`)
+        .post(`/api/inscEv/${idEvento}/${idLote}/${btoa(CPF)}`)
         .then(() => {
 
-          this.redirectAtv(idEvento, CPF);
+          this.redirectAtv(idEvento, idLote, CPF);
         })
         .catch((error) => {
           alert('Você já está inscrito nesse evento!');
