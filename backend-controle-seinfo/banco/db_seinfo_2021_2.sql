@@ -207,11 +207,13 @@ CREATE TABLE `inscricaoEvento` (
   `CPF` varchar(64) NOT NULL,
   `idEvento` int NOT NULL,
   `dataInscricao` date NOT NULL,
+  `idLote` int NOT NULL,
   PRIMARY KEY (`CPF`,`idEvento`),
   KEY `fk_pessoa_has_evento_evento2_idx` (`idEvento`),
   KEY `fk_pessoa_has_evento_pessoa1_idx` (`CPF`),
   CONSTRAINT `fk_inscricaoEvento_evento1` FOREIGN KEY (`idEvento`) REFERENCES `evento` (`idEvento`),
-  CONSTRAINT `fk_inscricaoEvento_pessoa1` FOREIGN KEY (`CPF`) REFERENCES `pessoa` (`CPF`)
+  CONSTRAINT `fk_inscricaoEvento_pessoa1` FOREIGN KEY (`CPF`) REFERENCES `pessoa` (`CPF`),
+  CONSTRAINT `fk_inscricaoEvento_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

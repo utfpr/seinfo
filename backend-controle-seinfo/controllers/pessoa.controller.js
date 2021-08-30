@@ -176,16 +176,18 @@ exports.PessoaExistente = async (req, res) => {
 
 exports.cadastrarEmEvento = async (req, res) => {
   try {
-    const { CPF, idEvento } = req.params;
+    const { CPF, idEvento, idLote } = req.params;
 
     const data = new Date();
 
     const pessoa = await Pessoa.findOne({ where: { CPF: atob(CPF) } });
     const evento = await Evento.findOne({ where: { idEvento } });
+    const lote = await Evento.findOne({ where: { idLote } });
     const inscricao = await InscricaoEvento.create({
       dataInscricao: data,
       idEvento: evento.idEvento,
       CPF: pessoa.CPF,
+      idLote: lote.idLote,
     });
     if (!pessoa) {
       return res.status(404).json({ error: 'Pessoa não encontrada' });

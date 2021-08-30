@@ -25,7 +25,7 @@ module.exports = (app) => {
   //----------------------------------------------------------------------------
 
   // cadastra uma pessoa em um evento
-  app.post('/api/inscEv/:idEvento/:CPF', pessoa.cadastrarEmEvento);
+  app.post('/api/inscEv/:idEvento/:idLote/:CPF', pessoa.cadastrarEmEvento);
 
   // seleciona todos dados de pessoas inscritas em eventos
   app.get('/api/inscEv', pessoa.selectInscricaoEvento);
@@ -35,6 +35,8 @@ module.exports = (app) => {
 
   // seleciona todas pessoas inscrita em um evento
   app.get('/api/inscEv/:idEvento', pessoa.InscricoesNoEvento);
+
+  app.get('/api/inscEv/:idEvento/:idLote', pessoa.InscricoesPessoa);
 
   // seleciona os eventos que uma pessoa se inscreveu
   app.get('/api/inscEvP/:CPF', pessoa.InscricoesPessoa);
