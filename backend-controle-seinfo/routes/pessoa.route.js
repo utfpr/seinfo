@@ -42,7 +42,7 @@ module.exports = (app) => {
   app.get('/api/inscEvP/:CPF', pessoa.InscricoesPessoa);
 
   // deleta a inscricao de uma pessoa em um evento
-  app.delete('/api/inscEv/:idEvento/:CPF', pessoa.deletaInscricaoEvento);
+  app.delete('/api/inscEv/:idEventoReq/:CPF', pessoa.deletaInscricaoEvento);
 
   //-----------------------------------------------------------------------------
 

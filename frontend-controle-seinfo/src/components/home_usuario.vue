@@ -17,7 +17,7 @@
                 v-if="record.estaInscrito == false && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic"
-                @click="showModal(record.idEvento)"
+                @click="showModal(record.idEvento,record.lotesDisponiveis)"
               >
                 INSCREVER-SE
               </a-button>
@@ -116,12 +116,13 @@ export default {
           console.log(error);
         });
     },
-    showModal(idEvento){
+    showModal(idEvento,test){
       this.visible = true
       this.obj.idEvento = idEvento
+      this.loteDisponivel = test[0].idLote
     },
     handleOk(){
-      this.inscricao(this.obj.CPF, this.obj.idEvento)
+      this.inscricao(this.obj.CPF, this.obj.idEvento, this.loteDisponivel)
     }
 
   },

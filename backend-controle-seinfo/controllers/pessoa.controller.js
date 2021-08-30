@@ -8,6 +8,7 @@ const Evento = db.evento;
 const Atividade = db.atividade;
 const InscricaoAtividade = db.inscricaoAtividade;
 const InscricaoEvento = db.inscricaoEvento;
+const Lote = db.lote
 
 const {
   SENDER_EMAIL,
@@ -182,12 +183,12 @@ exports.cadastrarEmEvento = async (req, res) => {
 
     const pessoa = await Pessoa.findOne({ where: { CPF: atob(CPF) } });
     const evento = await Evento.findOne({ where: { idEvento } });
-    const lote = await Evento.findOne({ where: { idLote } });
+    const lote = await Lote.findOne({ where: { idLote } });
     const inscricao = await InscricaoEvento.create({
       dataInscricao: data,
       idEvento: evento.idEvento,
       CPF: pessoa.CPF,
-      idLote: lote.idLote,
+      idLote: lote.idLote
     });
     if (!pessoa) {
       return res.status(404).json({ error: 'Pessoa não encontrada' });
@@ -197,18 +198,20 @@ exports.cadastrarEmEvento = async (req, res) => {
     }
     return res.status(200).send(inscricao);
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).send(error)
   }
 };
 
 exports.deletaInscricaoEvento = async (req, res) => {
   try {
     const { CPF, idEventoReq } = req.params;
+    console.log(idEventoReq)
     const inscricao = await InscricaoEvento.destroy({
       where: { idEvento: idEventoReq, CPF: atob(CPF) },
     });
     return res.status(200).json(inscricao);
   } catch (error) {
+    console.log(error)
     return res.status(500).send(error);
   }
 };

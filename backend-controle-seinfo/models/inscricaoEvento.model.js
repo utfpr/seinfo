@@ -14,6 +14,16 @@ module.exports = (sequelize, Sequelize) => {
         },
         field: 'idEvento',
       },
+      idLote: {
+        type: Sequelize.INTEGER(11),
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'lote',
+          key: 'idLote',
+        },
+        field: 'idLote',
+      },
       CPF: {
         type: Sequelize.STRING(64),
         allowNull: false,
@@ -46,6 +56,11 @@ module.exports = (sequelize, Sequelize) => {
       as: 'eventoInsc',
       foreignKey: 'idEvento',
     });
+    models.inscricaoEvento.belongsTo(models.lote, {
+      as: 'loteInsc',
+      foreignKey: 'idLote',
+    });
+
     models.inscricaoEvento.hasOne(models.receitaInscricaoEvento, {
       as: 'receitaInscEv',
       foreignKey: 'idEvento',
@@ -54,6 +69,7 @@ module.exports = (sequelize, Sequelize) => {
       as: 'receitaInscPe',
       foreignKey: 'CPF',
     });
+    
     models.inscricaoEvento.hasOne(models.inscricaoAtividade, {
       as: 'inscAtvPe',
       foreignKey: 'CPF',
@@ -62,6 +78,7 @@ module.exports = (sequelize, Sequelize) => {
       as: 'inscAtvEv',
       foreignKey: 'idEvento',
     });
+
   };
 
   return InscricaoE;
