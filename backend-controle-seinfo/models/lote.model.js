@@ -49,6 +49,10 @@ module.exports = (sequelize, Sequelize) => {
       onUpdate: 'cascade',
       onDelete: 'cascade',
     });
+    models.pessoa.hasMany(models.inscricaoEvento, {
+      as: 'loteInsc',
+      foreignKey: 'idLote',
+    });
   };
 
   return Lote;
