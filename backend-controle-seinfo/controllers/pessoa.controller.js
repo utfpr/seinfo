@@ -8,7 +8,7 @@ const Evento = db.evento;
 const Atividade = db.atividade;
 const InscricaoAtividade = db.inscricaoAtividade;
 const InscricaoEvento = db.inscricaoEvento;
-const Lote = db.lote
+const Lote = db.lote;
 
 const {
   SENDER_EMAIL,
@@ -99,7 +99,7 @@ exports.atualiza = async (req, res) => {
     const { nome, email, nivel } = req.body;
     const CPF = atob(req.params.CPF);
 
-    const pessoa = await Pessoa.update(
+    await Pessoa.update(
       {
         nome,
         email,
@@ -188,7 +188,7 @@ exports.cadastrarEmEvento = async (req, res) => {
       dataInscricao: data,
       idEvento: evento.idEvento,
       CPF: pessoa.CPF,
-      idLote: lote.idLote
+      idLote: lote.idLote,
     });
     if (!pessoa) {
       return res.status(404).json({ error: 'Pessoa não encontrada' });
@@ -198,20 +198,20 @@ exports.cadastrarEmEvento = async (req, res) => {
     }
     return res.status(200).send(inscricao);
   } catch (error) {
-    return res.status(500).send(error)
+    return res.status(500).send(error);
   }
 };
 
 exports.deletaInscricaoEvento = async (req, res) => {
   try {
     const { CPF, idEventoReq } = req.params;
-    console.log(idEventoReq)
+    console.log(idEventoReq);
     const inscricao = await InscricaoEvento.destroy({
       where: { idEvento: idEventoReq, CPF: atob(CPF) },
     });
     return res.status(200).json(inscricao);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).send(error);
   }
 };
@@ -269,6 +269,9 @@ exports.InscricoesPessoa = async (req, res) => {
   try {
     // seleciona todos eventos que a pessoa se inscreveu
     const { CPF } = req.params;
+
+    console.log(CPF, atob(CPF));
+
     const pessoaEv = await InscricaoEvento.findAll({
       where: { CPF: atob(CPF) },
       include: [
@@ -276,8 +279,11 @@ exports.InscricoesPessoa = async (req, res) => {
         { model: Evento, as: 'eventoInsc' },
       ],
     });
+
+    console.log(pessoaEv);
     return res.status(200).send(pessoaEv);
   } catch (error) {
+    console.log(error);
     return res.status(500).send(error);
   }
 };
@@ -456,6 +462,9 @@ exports.selectInscriAtvEventAll = async (req, res) => {
       where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
       include: [{ model: Atividade, as: 'atividade' }],
     });
+
+    console.log(inscricao);
+
     const atividade = await Atividade.findAll({
       where: { idEvento: req.params.idEvento },
       include: [
