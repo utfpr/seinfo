@@ -27,10 +27,15 @@
             {{ res.eventoInsc.pessoaInsc.email }}
           </th>
           <th>
-            {{ res.eventoInsc.dataInscricao }}
+            {{
+              moment(res.eventoInsc.dataInscricao).format(
+                "D [de] MMMM [de] YYYY"
+              )
+            }}
           </th>
           <th>
             <ButaoDePresencaAtividade
+              v-bind:presente="res.presente"
               v-bind:idEvento="idEvento"
               v-bind:idAtividade="idAtividade"
               v-bind:idAgenda="idAgenda"

@@ -12,15 +12,15 @@ export default {
     idAtividade: String,
     idAgenda: String,
   },
-  mounted() {
-     axios
-      .get(`/api/inscAtv/${this.idEvento}/${this.idAtividade}`)
-      .then((response) => {
-        this.participantes = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async mounted() {
+    try{
+      const response = await axios.get(`/api/inscAtv/${this.idEvento}/${this.idAtividade}`)
+      this.participantes = response.data;
+      console.log("participantes",response.data)
+    }catch(error){
+      console.log(error);
+    }
+      
   },
   methods: {
     moment: function(date) {

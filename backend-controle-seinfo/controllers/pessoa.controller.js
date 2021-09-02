@@ -9,6 +9,7 @@ const Atividade = db.atividade;
 const InscricaoAtividade = db.inscricaoAtividade;
 const InscricaoEvento = db.inscricaoEvento;
 const Lote = db.lote;
+const Presenca = db.presenca;
 
 const {
   SENDER_EMAIL,
@@ -400,6 +401,7 @@ exports.selectInscritoAtv = async (req, res) => {
 exports.selectInscricoesNaAtividade = async (req, res) => {
   try {
     const { idAtividade, idEvento } = req.params;
+
     const pessoasInscritasUmaAtividade = await InscricaoAtividade.findAll({
       where: {
         idAtividade,
@@ -420,7 +422,21 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
         },
       ],
     });
-    return res.status(200).json(pessoasInscritasUmaAtividade);
+
+    const cpfPessoasPresentes = await Presenca.findAll({
+      where: {
+        idEvento,
+        idAtividade,
+        presenca: true,
+      },
+    }).map((pessoa) => pessoa.CPF);
+
+    const dadosRetornados = pessoasInscritasUmaAtividade.map((pessoa) => ({
+      presente: !!cpfPessoasPresentes.includes(pessoa.CPF),
+      ...pessoa.dataValues,
+    }));
+
+    return res.status(200).json(dadosRetornados);
   } catch (error) {
     return res.status(500).json(error);
   }

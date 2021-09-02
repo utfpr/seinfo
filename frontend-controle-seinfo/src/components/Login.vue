@@ -44,7 +44,6 @@ export default {
           username: this.login,
           password: this.password,
         };
-        console.log(obj_login);
         const credenciais = await axios.post("/public/login/", obj_login);
         const credInc = document.getElementById("credenciaisIncorretas");
         if (credInc) credInc.remove();

@@ -11,38 +11,33 @@ export default {
   props: {
     data: Object,
   },
-  data: {
-    dataLotes: [],
-    res: [],
-    idEvento: Number,
-    idAtividade: Number,
-    idAgenda: Number,
+  data() {
+    return {
+      dataLotes: [],
+      res: [],
+      idEvento: "",
+      idAtividade: "",
+      idAgenda: "",
+    }
   },
   mounted() {
     //Funcao chamada quando OpenModal() é chamada em evento/listagem.js
-    this.$root.$on("loadAtividades", (idEvento) => {
-      this.idEvento = idEvento;
-      axios
-        .get("/public/atividade/" + idEvento)
-        .then((response) => {
-          const {data } = response
-          console.log(data[0].atvAgenda[0].idAgenda)
-          this.res = data;
-          this.idAtividade = data[0].idAtividade
-          this.idAgenda = data[0].atvAgenda[0].idAgenda
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      //chama os lotes pelo id do evento
-      axios
-        .get("/api/lote/evento/" + idEvento)
-        .then((response) => {
-          this.dataLotes = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    this.$root.$on("loadAtividades", async (idEvento) => {
+      try{
+        
+        this.idEvento = idEvento;
+        const { data } = await axios.get("/public/atividade/" + idEvento);
+        this.res = data;
+        this.idAtividade = data[0].idAtividade
+        this.idAgenda = data[0].atvAgenda[0].idAgenda
+        
+        
+        const response = axios.get("/api/lote/evento/" + idEvento)
+        this.dataLotes = response.data;
+      }catch(error){
+        console.log(error)
+      }
+
     });
   },
 };

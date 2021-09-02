@@ -3,9 +3,9 @@
     <div>
       <sweet-modal>This is an alert.</sweet-modal>
       <div v-if="isHidden">
-        <vue-qrcode v-bind:value="urlPresenca" />
+        <vue-qrcode v-bind:value="this.urlPresenca" />
       </div>
-      <button type="button" class="btn btn-primary" @click="fuck()">
+      <button type="button" class="btn btn-primary" @click="handleOpen()">
         Gerar QR code
       </button>
     </div>
@@ -32,9 +32,10 @@ export default {
       urlPresenca: "",
     };
   },
-  mounted: {},
+  mounted() {
+  },
   methods: {
-    async fuck() {
+    async handleOpen() {
       this.isHidden = !this.isHidden;
       this.urlPresenca = `localhost:8080/presenca/${this.idAgenda}/${this.idEvento}/${this.idAtividade}`;
     },

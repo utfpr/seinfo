@@ -4,8 +4,14 @@ const presencas = require('../controllers/presenca.controller');
 app.get('/listPresenca', presencas.listPresenca);
 app.post('/', async (req, res) => {
   try {
-    const { idAtividade, idAgenda, idEvento, cpf } = req.body;
-    const resp = presencas.create(idAtividade, idAgenda, idEvento, cpf);
+    const { idAtividade, idAgenda, idEvento, cpf, presenca } = req.body;
+    const resp = presencas.createOrUpdate(
+      idAtividade,
+      idAgenda,
+      idEvento,
+      cpf,
+      presenca
+    );
 
     res.send(resp);
   } catch (error) {

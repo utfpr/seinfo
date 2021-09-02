@@ -86,7 +86,6 @@ export default {
             this.modalData.cpfOrganizador = data.protagonistaAtividade.CPF;
             this.modalData.idCategoria = data.categoriaAtv.idCategoria;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
-            console.log(this.modalData)
         },
     },
     data() {

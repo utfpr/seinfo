@@ -1,17 +1,14 @@
 <template>
   <div id="PresencaAtividade" class="button-info row">
-    <div v-if="!presencaConfirmada">
-      <button @click="comfirmaPresenca()" class="btn btn-primary">
+    <div v-if="!presente">
+      <button @click="confirmaPresenca()" class="btn btn-primary">
         Confirma presença
       </button>
     </div>
     <div v-else>
-      <div v-if="!blyat" class="alert alert-primary" role="alert">
-        Presenca confirmada !
-      </div>
-      <div v-else id="blyat" class="alert alert-warning" role="alert">
-        Algo aconteceu camarada! porfavor contate o suporte
-      </div>
+      <button @click="cancelarPresenca()" class="btn btn-danger">
+        Cancelar presença
+      </button>
     </div>
   </div>
 </template>
@@ -19,11 +16,16 @@
 import axios from "../config/axiosConfig";
 import Auth from "../services/auth";
 export default {
-  props: { idEvento: String, idAtividade: String, idAgenda: String, cpf: String },
+  props: { 
+    idEvento: String, 
+    idAtividade: String, 
+    idAgenda: String, 
+    cpf: String,
+    presente: Boolean
+    },
   data() {
     return {
       user: {},
-      presencaConfirmada: false,
       blyat: false,
     };
   },
@@ -31,24 +33,41 @@ export default {
     this.user = await Auth.getUser();
   },
   methods: {
-    async comfirmaPresenca() {
-      const resp = await axios
-        .post("/api/presenca", {
+    async confirmaPresenca() {
+      try{
+        const resp = await axios.post("/api/presenca", {
           idEvento: this.idEvento,
           idAtividade: this.idAtividade,
           cpf: this.cpf,
           idAgenda: this.idAgenda,
-          presenca  : 1,
-        })
-        .catch((err) => {
-          console.log(err);
-          this.blyat = true;
-          setTimeout(() => {
-            this.$route.push("/");
-          }, 10000);
-          return err;
+          presenca: true,
         });
-      if (resp) this.presencaConfirmada = true;
+
+        if (resp) this.presente = true;
+      }catch(err){
+        this.blyat = true;
+        setTimeout(() => {
+          this.$route.push("/");
+        }, 10000);
+      }
+    },
+    async cancelarPresenca() {
+      try{
+        const resp = await axios.post("/api/presenca", {
+          idEvento: this.idEvento,
+          idAtividade: this.idAtividade,
+          cpf: this.cpf,
+          idAgenda: this.idAgenda,
+          presenca: false,
+        });
+
+        if (resp) this.presente = false;
+      }catch(err){
+        this.blyat = true;
+        setTimeout(() => {
+          this.$route.push("/");
+        }, 10000);
+      }
     },
   },
 };

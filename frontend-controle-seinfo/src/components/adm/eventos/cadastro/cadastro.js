@@ -257,7 +257,9 @@ export default {
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
             axios.post('/api/evento', this.obj_Resource).then(() => {  
               this.info(); this.toggle() 
-            }).catch(error => { console.log(error.response) });
+            }).catch(error => { 
+              console.log(error.response) 
+            });
 
           }
         });

@@ -94,7 +94,8 @@ export default {
 		},
 	inscricao(CPF, record) {
       axios
-        .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
+        .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {
+					idAtividade: record.idAtividade})
         .then(() => {
 			document.location.reload(true);
 		})

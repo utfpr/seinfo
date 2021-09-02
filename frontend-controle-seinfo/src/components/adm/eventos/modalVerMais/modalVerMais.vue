@@ -39,13 +39,12 @@
           <br />
           <div class="container">
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <marcarPresencaQrcode 
-                v-bind:idAtividade="idAtividade" 
-                v-bind:idAgenda="idAgenda"  
-                v-bind:idEvento="idEvento" />
+                v-bind:idAtividade="this.idAtividade" 
+                v-bind:idAgenda="this.idAgenda"  
+                v-bind:idEvento="this.idEvento" />
               </div>
-              <div class="col-6"></div>
             </div>
           </div>
 

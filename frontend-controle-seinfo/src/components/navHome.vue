@@ -129,7 +129,6 @@ export default {
     },
     handleOk() {
       this.visible = false
-      console.log("LOGIN - OK")
 
       axios
         .post('/public/login', this.obj_userInterno)

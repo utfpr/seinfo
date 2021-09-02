@@ -5,22 +5,48 @@ const Atividade = db.atividade;
 const Pessoa = db.pessoa;
 // const agendamentoAtividadeDb = db.agendamentoAtividade;
 
-exports.create = async (idAtividade, idAgenda, idEvento, CPF) => {
-  const presencaFoiConfirmada = await Presenca.findAll({
+exports.createOrUpdate = async (
+  idAtividade,
+  idAgenda,
+  idEvento,
+  CPF,
+  presenca
+) => {
+  const presencaExistente = await Presenca.findOne({
     where: { idAtividade, idAgenda, idEvento, CPF },
   });
 
-  if (presencaFoiConfirmada.length) return 'Presença ja confirmada';
+  if (!presencaExistente) {
+    const presencaCriada = await Presenca.create({
+      idAtividade,
+      idAgenda,
+      idEvento,
+      CPF,
+      presenca: true,
+    });
+    return presencaCriada;
+  }
 
-  // await agendamentoAtividadeDb.create({ idAtividade, idAgenda });
-  const presencaConfirmada = await Presenca.create({
-    idAtividade,
-    idAgenda,
-    idEvento,
-    CPF,
-    presenca: true,
-  });
-  return presencaConfirmada;
+  presencaExistente.presenca = presenca;
+  presencaExistente.save();
+  return presencaExistente;
+};
+
+exports.update = async (req, res) => {
+  try {
+    const { idAtividade, idAgenda, idEvento, cpf } = req.body;
+
+    const presenca = await Presenca.findOne({
+      where: { idAtividade, idAgenda, idEvento, CPF: cpf },
+    });
+
+    console.log(presenca);
+
+    return res.status(200).json(presenca);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
 };
 
 exports.findById = (req, res) => {
