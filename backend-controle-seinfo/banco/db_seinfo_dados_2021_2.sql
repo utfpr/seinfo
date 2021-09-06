@@ -21,11 +21,15 @@
 
 LOCK TABLES `agenda` WRITE;
 /*!40000 ALTER TABLE `agenda` DISABLE KEYS */;
-INSERT INTO `agenda` 
-VALUES (23,'2021-08-29 20:00:00','2022-08-29 20:00:00','Campo Mourão'),
-(24,'2021-08-29 20:00:00','2022-08-29 20:00:00','Campo Mourão'),
-(25,'2021-08-29 20:00:00','2021-08-30 20:00:00','Lote E'),
-(26,'2021-08-29 20:00:00','2021-08-30 20:00:00','Lote G');
+INSERT INTO `agenda` VALUES 
+(27,'2021-09-01 20:00:00','2022-09-01 20:00:00','Campo Mourão'),
+(28,'2021-09-01 20:00:00','2021-09-02 01:00:00','Bloco E'),
+(29,'2021-09-06 20:00:00','2022-09-06 20:00:00','Campo Mourão'),
+(30,'2021-08-06 15:00:00','2022-07-06 15:40:00','Campo Mourão'),
+(31,'2021-09-06 10:00:00','2021-09-06 15:00:00','Seinfo'),
+(32,'2021-09-07 10:00:00','2021-09-07 15:00:00','Seinfo'),
+(33,'2021-08-06 10:00:00','2021-08-06 15:00:00','Seinfo 2'),
+(34,'2021-08-07 10:00:00','2021-08-07 15:00:00','Seinfo 2');
 /*!40000 ALTER TABLE `agenda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -35,7 +39,12 @@ UNLOCK TABLES;
 
 LOCK TABLES `agendamentoAtividade` WRITE;
 /*!40000 ALTER TABLE `agendamentoAtividade` DISABLE KEYS */;
-INSERT INTO `agendamentoAtividade` VALUES (15,25),(16,26);
+INSERT INTO `agendamentoAtividade` VALUES 
+(17,28),
+(18,31),
+(18,32),
+(19,33),
+(19,34);
 /*!40000 ALTER TABLE `agendamentoAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -45,9 +54,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `atividade` WRITE;
 /*!40000 ALTER TABLE `atividade` DISABLE KEYS */;
-INSERT INTO `atividade` 
-VALUES (15,'Atividade Evento 1',300,'Atividade Evento 1','04:00:00',20,10,14,'2021-08-29 20:00:00'),
-(16,'Atividade Evento 2',30,'Atividade Evento 2','20:05:00',5,9,15,'2021-08-29 20:00:00');
+INSERT INTO `atividade` VALUES 
+(17,'Curso Python',30,'Curso Python','04:00:00',20,12,16,'2021-09-01 20:00:00'),
+(18,'Atividade 2.1',300,'Atividade 2.1','10:00:00',20,12,17,'2021-09-06 20:00:00'),
+(19,'Atividade 3.1',300,'Atividade 3.1','10:00:00',20,11,18,'2021-08-06 20:00:00');
 /*!40000 ALTER TABLE `atividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,9 +76,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` 
-VALUES (9,'Palestra'),
-(10,'MiniCurso');
+INSERT INTO `categoria` VALUES 
+(11,'Paletra'),
+(12,'Minicurso');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,9 +97,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `evento` WRITE;
 /*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-INSERT INTO `evento` 
-VALUES (14,'Evento 1','Campo Mourão',1,23),
-(15,'Evento 2','Campo Mourão',1,24);
+INSERT INTO `evento` VALUES 
+(16,'Evento 1 ','Evento 1',1,27),
+(17,'Evento 2','Campo Mourão',1,29),
+(18,'Evento 3','Campo Mourão',1,30);
 /*!40000 ALTER TABLE `evento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,8 +128,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `inscricaoAtividade` WRITE;
 /*!40000 ALTER TABLE `inscricaoAtividade` DISABLE KEYS */;
-INSERT INTO `inscricaoAtividade` 
-VALUES ('usuario1',14,15,'2021-08-29');
+INSERT INTO `inscricaoAtividade` VALUES 
+('usuario1',16,17,'2021-09-01');
 /*!40000 ALTER TABLE `inscricaoAtividade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,8 +139,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `inscricaoEvento` WRITE;
 /*!40000 ALTER TABLE `inscricaoEvento` DISABLE KEYS */;
-INSERT INTO `inscricaoEvento` 
-VALUES ('usuario1',14,'2021-08-29');
+INSERT INTO `inscricaoEvento` VALUES 
+('usuario1',16,'2021-09-01',22);
 /*!40000 ALTER TABLE `inscricaoEvento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,12 +150,13 @@ UNLOCK TABLES;
 
 LOCK TABLES `lote` WRITE;
 /*!40000 ALTER TABLE `lote` DISABLE KEYS */;
-INSERT INTO `lote` 
-VALUES (16,20,'2021-08-20','2021-08-29',14),
-(17,300,'2021-08-30','2021-09-22',14),
-(18,20,'2021-08-01','2021-08-15',15),
-(19,300,'2021-08-16','2021-08-29',15),
-(20,500,'2021-08-30','2022-08-29',15);
+INSERT INTO `lote` VALUES 
+(21,30,'2021-08-01','2021-08-05',16),
+(22,100,'2021-08-06','2022-09-01',16),
+(23,100,'2021-08-01','2021-09-01',17),
+(24,300,'2021-09-02','2022-09-06',17),
+(25,200,'2021-08-01','2022-02-04',18),
+(26,300,'2022-02-05','2022-07-06',18);
 /*!40000 ALTER TABLE `lote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,9 +166,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `organizacao` WRITE;
 /*!40000 ALTER TABLE `organizacao` DISABLE KEYS */;
-INSERT INTO `organizacao` 
-ALUES ('supervisor',14,'00:00:00'),
-('supervisor',15,'00:00:00');
+INSERT INTO `organizacao` VALUES 
+('supervisor',16,'00:00:00'),
+('supervisor',17,'00:00:00'),
+('supervisor',18,'00:00:00');
 /*!40000 ALTER TABLE `organizacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,8 +179,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `pessoa` WRITE;
 /*!40000 ALTER TABLE `pessoa` DISABLE KEYS */;
-INSERT INTO `pessoa` 
-VALUES ('admin','Admin','admin@gmail.com','�iv�A���M�߱g��s�K��o*�H�',2,1,'admin'),
+INSERT INTO `pessoa` VALUES 
+('admin','Admin','admin@gmail.com','�iv�A���M�߱g��s�K��o*�H�',2,1,'admin'),
 ('supervisor','Supervisor','supervisor@gmail.com','4��%�Y%{;x�\Z�m����|�J�[��B',1,1,'supervisor'),
 ('usuario1','Usuario 1','usuario1@gmail.com','�������a~��QZ)���n��+��IU\nك���',0,1,'usuario1'),
 ('usuario2','Usuario 2','usuario2@gmail.com','S@c�D�9ٮy&Ps�_!�:� )7��\'�',0,1,'usuario2'),
@@ -181,6 +194,8 @@ UNLOCK TABLES;
 
 LOCK TABLES `presenca` WRITE;
 /*!40000 ALTER TABLE `presenca` DISABLE KEYS */;
+INSERT INTO `presenca` VALUES 
+(28,'usuario1',16,17,0);
 /*!40000 ALTER TABLE `presenca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +205,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `protagonista` WRITE;
 /*!40000 ALTER TABLE `protagonista` DISABLE KEYS */;
-INSERT INTO `protagonista` VALUES ('admin',15,0),('admin',16,0);
+INSERT INTO `protagonista` VALUES 
+('admin',17,0),
+('admin',18,0),
+('admin',19,0);
 /*!40000 ALTER TABLE `protagonista` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-29 17:38:34
+-- Dump completed on 2021-09-06 11:09:20
