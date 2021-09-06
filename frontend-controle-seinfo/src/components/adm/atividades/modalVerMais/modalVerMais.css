@@ -1,7 +1,12 @@
-.modal-title{
-    text-align: left;
+.modal-title {
+  text-align: left;
 }
-.router-link{
-    text-align: center;
-    border: 1px solid lightblue;
+
+.button-border {
+  margin-bottom: 10px;
+}
+
+.router-link {
+  text-align: center;
+  border: 1px solid lightblue;
 }

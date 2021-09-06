@@ -1,56 +1,111 @@
-const db = require('../models/index.js');
-const Carrossel = db.carrossel;
- 
-// Post do Evento
-exports.create = (req, res) => {
-   
-    Carrossel.create({
-      
-    status: req.status,
-    idImagem: req.imagem
+const db = require('../models');
 
-  }).then(agevento => {    
-    // Cria um Evento
-    console.log("Criado o Carrossel!")
-    res.send(agevento);
-  }).catch(err => {
-    console.log("Console -> " + err);
-  })
+const Carrossel = db.carrossel;
+const Imagem = db.imagem;
+
+exports.store = async (req, res) => {
+  try {
+    const urlAPI = process.env.URL_API || 'http://localhost:3000';
+    const { select_status } = req.body;
+    const { path } = req.file;
+    const pathImage = path.slice(path.indexOf('tmp'), path.length);
+    const urlImage = `${urlAPI}/${pathImage}`;
+
+    const imagem = await Imagem.create({
+      url: urlImage,
+    });
+
+    const { idImagem } = imagem;
+
+    const carrossel = await Carrossel.create({
+      status: select_status,
+      idImagem,
+    });
+
+    return res.status(200).json(carrossel);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.delete = (req,res)=>{
-  Carrossel.destroy(
-    {where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
-    res.send('morreu')
-  }).catch(err=>{
-    res.status(500).send("Error "+err)
-  })
-}
+exports.delete = async (req, res) => {
+  try {
+    const { idCarrossel } = req.params;
 
-exports.atualiza = (req,res)=>{
-  Carrossel.update({
-    status: req.status,
-    idImagem: req.imagem
-  },{where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
-    res.send(car)
-  }).catch(err=>{
-    res.status(500).send("Error "+err)
-  })
-}
+    const rows = await Carrossel.destroy({
+      where: { idCarrossel },
+    });
 
-exports.selectCarrossel = (req,res)=>{
-  Carrossel.findOne(
-    {where:{ idCarrossel: req.params.idCarrossel}}).then(car=>{
-    res.send(car)
-  }).catch(err=>{
-    res.status(500).send("Error "+err)
-  })
-}
+    if (rows < 1)
+      return res.status(404).json({ error: 'Nenhum carrossel encontrado!' });
 
-exports.selectTodosCarrossel = (req,res)=>{
-  Carrossel.findAll().then(car=>{
-    res.send(car)
-  }).catch(err=>{
-    res.status(500).send("Error "+err)
-  })
-}
+    return res.status(200).json(rows);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const { idCarrossel } = req.params;
+
+    const carrossel = Carrossel.update(
+      {
+        status,
+      },
+      {
+        where: {
+          idCarrossel,
+        },
+      }
+    );
+
+    return res.status(200).json(carrossel);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.show = async (req, res) => {
+  try {
+    const carrossel = await Carrossel.findAll({
+      include: [
+        {
+          model: Imagem,
+          as: 'Imagem',
+          attributes: ['url'],
+        },
+      ],
+      // raw: true,
+      attributes: ['idImagem', 'idCarrossel', 'status'],
+    });
+
+    return res.status(200).json(carrossel);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.showAllAvailables = async (req, res) => {
+  try {
+    const carrossel = await Carrossel.findAll({
+      where: {
+        status: 1,
+      },
+      include: [
+        {
+          model: Imagem,
+          as: 'Imagem',
+          attributes: ['url'],
+        },
+      ],
+      // raw: true,
+      attributes: ['idImagem', 'idCarrossel', 'status'],
+    });
+
+    return res.status(200).json(carrossel);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};

@@ -169,18 +169,14 @@
 </template>
 
 <script>
-const axios = require("axios");
+import axios from '../config/axiosConfig';
 
 export default {
-  beforeCreate() {
-    this.form = this.$form.createForm(this);
-  },
   created() {
     this.pegar_tabela();
   },
   methods: {
     onCancel(){
-      console.log('CANCEL SUBMIT');
       this.nome = "";
   },
     openModal(data) {
@@ -190,34 +186,28 @@ export default {
     },
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          if (nome.value.length == 0) {
-            alert("Nome da Categoria não pode ser vazio!");
-            return;
-          } else {
-            this.obj_Resource.nome = this.nome;
-            axios
-              .post("http://localhost:3000/api/categoria", this.obj_Resource)
-              .then(response => {
-                console.log(response);
-                this.$router.push("1");
-                this.$router.replace("/adm/categoria");
-              })
-              .catch(error => {
-                console.log(error.response);
-              });
-          }
-        }
-      });
+
+      if (this.nome == 0) {
+        alert("Nome da Categoria não pode ser vazio!");
+        return;
+      } else {
+        axios
+          .post("/api/categoria", {nome: this.nome})
+          .then(() => {
+            this.$router.push("1");
+            this.$router.replace("/adm/categoria");
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
     },
     pegar_tabela() {
       this.$router.push("1");
       this.$router.replace("/adm/categoria");
       axios
-        .get("http://localhost:3000/api/categorias")
+        .get("/api/categoria")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function(error) {
@@ -225,26 +215,22 @@ export default {
         });
     },
     patch(dados) {
-      console.log(dados);
       axios
         .patch(
-          "http://localhost:3000/api/categoria/" + dados.idCategoria,
+          "/api/categoria/" + dados.idCategoria,
           dados
         )
-        .then(response => {
-          console.log(response);
+        .then(()=> {
           this.$router.push("1");
-          this.$router.replace("/adm/categoria");
+          this.$router.replace("./categoria");
         });
     },
     deletar(pos) {
-      console.log("ID " + pos);
       axios
-        .delete("http://localhost:3000/api/categoria/" + pos)
-        .then(response => {
-          console.log(response);
+        .delete("/api/categoria/" + pos)
+        .then(() => {
           this.$router.push("1");
-          this.$router.replace("/adm/categoria");
+          this.$router.replace("./categoria");
         });
     },
     toggle() {
@@ -261,9 +247,6 @@ export default {
         id: "",
         nome: ""
       },
-      obj_Resource: {
-        nome: ""
-      }
     };
   }
 };

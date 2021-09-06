@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 
 moment.locale("pt-br");
@@ -13,7 +13,7 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true });
   },
   created() {
-    axios.get('http://localhost:3000/api/pessoas').then(response => {
+    axios.get('/api/obtemTodasAsPessoas').then(response => {
       this.pessoas = response.data;
     }).catch(error => {
       console.log(error);
@@ -37,7 +37,6 @@ export default {
       pegou: false,
       modalVisible: false,
       modalVisible2: false,
-      active: false,
       nomeEvento: "",
       modalData: {
         idEvento: "",
@@ -77,7 +76,6 @@ export default {
   },
   methods: {
     onCancel() {
-      console.log('CANCEL SUBMIT');
       this.nome = "";
       this.data_ini = "";
       this.data_fim = "";
@@ -102,9 +100,8 @@ export default {
     },
     pegar_tabela() { // v
       axios
-        .get("http://localhost:3000/api/eventos")
+        .get("/public/evento")
         .then(response => {
-          // console.log(response.data);
           this.res = response.data;
         })
         .catch(function (error) {
@@ -119,7 +116,6 @@ export default {
     add() {
       const { form } = this; //pega a referencia do form no html
       const keys = form.getFieldValue('keys'); //a lista de Keys (id) da lista de inputs 
-      // console.log("hello", keys);
       const nextKeys = keys.concat(++id); // soma 1 a ultima key
       form.setFieldsValue({
         keys: nextKeys,                   // coloca a referenicia da key na ultima key criada
@@ -259,7 +255,11 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
-            axios.post('http://localhost:3000/api/evento', this.obj_Resource).then(response => { console.log(response); this.info(); this.toggle() }).catch(error => { console.log(error.response) });
+            axios.post('/api/evento', this.obj_Resource).then(() => {  
+              this.info(); this.toggle() 
+            }).catch(error => { 
+              console.log(error.response) 
+            });
 
           }
         });
@@ -274,21 +274,18 @@ export default {
       if (!dados.local_eve) erros.push("Local é obrigatório!");
       if (!dados.status) erros.push("Status é obrigatório!");
       if (!dados.descricao) erros.push("Descrição é obrigatório!");
-      console.log(dados);
       if (!erros.length) {
         axios
           .patch(
-            `http://localhost:3000/api/evento/${dados.idEvento}`, dados
+            `/api/evento/${dados.idEvento}`, dados
           )
-          .then(response => {
-            console.log("Editou!");
-            console.log(response);
-            this.$router.replace("/adm/cadEvento");
+          .then(()=> {
+            this.$router.replace("./cadEvento");
             location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        this.$router.replace("/adm/cadEvento");
+        this.$router.replace("./cadEvento");
       }
     },
   },

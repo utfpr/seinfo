@@ -1,79 +1,110 @@
-const db = require('../models/index.js');
+const db = require('../models');
+
 const Lotes = db.lote;
- 
+
 // Post do Evento
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
+  try {
+    const { valor, dataAbertura, dataFechamento, idEvento } = req.body;
 
-  Lotes.create({  
-    //idEvento: req.body.idEvento,
-    valor: req.valor,
-    dataAbertura: req.dataAbertura,
-    dataFechamento: req.dataFechamento,
-    idEvento: req.evento
-  }).then(lote => {    
-    // Cria um Evento
-    console.log("Criado o Lote!")
-    //res.redirect("http://localhost:8080/adm/cadEvento");
-    //console.log(lote);
-  }).catch(err => {
-    console.log("Error -> " + err);
-  })
+    const lote = await Lotes.create({
+      valor,
+      dataAbertura,
+      dataFechamento,
+      idEvento,
+    });
+
+    return res.status(200).send(lote);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
 };
 
+exports.findById = async (req, res) => {
+  try {
+    const { loteId } = req.params;
 
-exports.findById = (req, res) => {  
-  Lotes.findOne({where:{idLote:req.params.loteId}}).then(lote => {
-    console.log("Achou o lote pelo ID "+req.params.loteId);
-    res.send(lote); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+    const lote = await Lotes.findOne({ where: { idLote: loteId } });
+
+    if (lote) {
+      return res.status(200).send({ lote });
+    }
+    return res.status(404).send({ message: 'Lote não encontrado' });
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
 };
 
-exports.findAll = (req, res) => {  
-  Lotes.findAll().then(lote => {
-    console.log("Listou Todos os Lotes!");
-    res.send(lote); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.findAll = async (req, res) => {
+  try {
+    const lotes = await Lotes.findAll();
+    return res.status(200).send(lotes);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
 };
 
-exports.loteEvento=(req,res)=>{
-  //todos lotes de um evento
-  Lotes.findAll({where:{idEvento:req.params.idEvento}, include:[{model: db.evento, attributes: ['nome'], as: 'evento'}] }).then(lotes=>{
-    console.log("Listou todos os lotes!");
-    res.send(lotes);
-  }).catch(err=>{
-    console.log("Error -> " + err);
-  })
-}
+exports.loteEvento = async (req, res) => {
+  // todos lotes de um evento
+  try {
+    const { idEvento } = req.params;
 
-exports.atualiza = (req,res)=>{
+    const lotes = await Lotes.findAll({
+      where: { idEvento },
+      include: [{ model: db.evento, attributes: ['nome'], as: 'evento' }],
+    });
 
-  Lotes.update(
-    {
-      valor: req.body.valor,
-      dataAbertura: req.body.dataAbertura,
-      dataFechamento: req.body.dataFechamento,
-      idEvento: req.body.idEvento
-  },
-    {where: {idLote: req.params.loteId}}).then(lote=>{
-      console.log("Atualizando Lote");
-      res.send(lote);
-    }).catch(err=>{
-      res.status(500).send("Error "+err);
-    })
-    
-  },
-  
-
-exports.delete = (req, res) => {  
-  Lotes.destroy({ where: { idLote: req.params.loteId } }).then(lote => {
-    console.log("Deletando o lote com o ID: "+req.params.loteId);
-    res.send(lote); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+    if (lotes.length) {
+      return res.status(200).send({ lotes });
+    }
+    return res.status(404).send({ message: 'Evento não encontrado' });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 };
 
+exports.atualiza = async (req, res) => {
+  try {
+    const { loteId } = req.params;
+    const { valor, dataAbertura, dataFechamento, idEvento } = req.body;
+
+    const lote = await Lotes.findOne({ where: { idLote: loteId } });
+
+    if (!lote) {
+      return res.status(404).send({ message: 'Lote não encontrado' });
+    }
+
+    await lote.update(
+      {
+        valor,
+        dataAbertura,
+        dataFechamento,
+        idEvento,
+      },
+      {
+        where: {
+          idLote: loteId,
+        },
+      }
+    );
+
+    return res.status(200).send(lote);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const { loteId } = req.params;
+
+    const lote = await Lotes.destroy({ where: { idLote: loteId } });
+
+    if (lote) {
+      return res.status(200).send({ sucess: true });
+    }
+    return res.status(404).send({ message: 'Lote não encontrado' });
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};

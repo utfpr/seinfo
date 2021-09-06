@@ -1,6 +1,6 @@
 <template>
      <div
-      class="modal fade bd-example-modal-lg-ver-mais"
+      class="modal fade bd-example-modal-lg-ver-mais modal-border"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
       aria-hidden="true"
@@ -50,10 +50,11 @@
                 <br/>
                 <label>Descrição: {{ data.descricao }}</label>
                 <br />
+
               </div>
             </div>
           </div>
-          <div style="text-align: center">
+          <div style="text-align: center" class="button-border">
             <a-button type="button" class="btn" @click="toggle">Mostrar Subatividades</a-button>
             <slide-up-down :active="this.active">
               <div>
@@ -62,7 +63,7 @@
             </slide-up-down>
           </div>
           <br />
-          <div class="row justify-content-center">
+          <div class="row justify-content-center button-border">
             <router-link :to="{name: 'detalhes', params:{idEvento:data.idEvento, idAtividade:data.idAtividade, data:data}}"
               data-dismiss="modal"
               class="router-link">

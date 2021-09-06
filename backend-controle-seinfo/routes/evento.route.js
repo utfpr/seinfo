@@ -1,52 +1,26 @@
-var nomedoarquivo;
-const  multer = require('multer')
-            const storage = multer.diskStorage({
-                destination: function (req, file, cb) {
-                    cb(null, '../frontend-controle-seinfo/src/assets')
-                    console.log("Teste!\n");
-                },
-                filename: function (req, file, cb) {
-                  nomedoarquivo = file.originalname;
-                    cb(null, file.originalname);
-                    console.log("Teste!\n");
-                }
-            });
-const upload = multer({storage});
+const eventos = require('../controllers/evento.controller');
 
-module.exports = function(app) {
- 
-  const eventos = require('../controllers/evento.controller.js');
-
- /* app.post('/api/evento', upload.single('urlImagem'), function (req, res, next) {
-    console.log("POST DO EVENTO!\n");
-    //console.log(nomedoarquivo);
-    //console.log(obj_Resource.nome);
-    //eventos.create(req,res,nomedoarquivo);
-  }) */
-  
+module.exports = (app) => {
+  // Insere um Novo Evento
   app.post('/api/evento', eventos.create);
 
+  // Procura um evento pelo ID public
+  // app.get('/api/evento/:idEvento', eventos.findById);
 
-  // Insere um Novo Evento
- // app.post('/api/evento', eventos.create);
+  // Procura todos os Eventos PUBLIC
+  // app.get('/api/evento', eventos.findAll);
 
-  //Procura um evento pelo ID
-  app.get('/api/evento/:idEvento', eventos.findById);
+  // todos eventos disponiveis
+  app.post('/api/eventosD', eventos.getAllEventosCPF);
 
-  // Procura todos os Eventos
-  app.get('/api/eventos', eventos.findAll);
+  // receitas de um evento
+  app.get('/api/eventoReceita/:idEvento', eventos.EvReceita);
 
-  //todos eventos disponiveis
-  app.get('/api/eventosD',eventos.EvDisponivel);
+  // receita de inscricoes no evento
+  app.get('/api/eventoRecInsc/:idEvento', eventos.RecInEv);
 
-  //receitas de um evento
-  app.get('/api/eventoReceita/:idEvento',eventos.EvReceita);
-
-  //receita de inscricoes no evento
-  app.get('/api/eventoRecInsc/:idEvento',eventos.RecInEv);
-  
-  //despesas de um evento pelo ID
-  app.get('/api/eventoDespesa/:idEvento',eventos.DespEv);
+  // despesas de um evento pelo ID
+  app.get('/api/eventoDespesa/:idEvento', eventos.DespEv);
 
   // Update de um Evento pelo ID (Implementar)
   app.patch('/api/evento/:idEvento', eventos.atualiza);
@@ -56,22 +30,21 @@ module.exports = function(app) {
 
   //----------------------------------------------------------------------
 
-  //definir organizador para evento
-  app.post('/api/organizacao/:idEvento/:CPF',eventos.criaOrganizacao);
+  // definir organizador para evento
+  app.post('/api/organizacao/:idEvento/:CPF', eventos.criaOrganizacao);
 
-  //seleciona todos dados na tabela organizacao
-  app.get('/api/organizacoes',eventos.selectOrganizacao);
+  // seleciona todos dados na tabela organizacao
+  app.get('/api/organizacoes', eventos.selectOrganizacao);
 
-  //seleciona um organizador em especifico
-  app.get('/api/organizacoes/:idEvento/:CPF',eventos.selectUmOrganizador);
+  // seleciona um organizador em especifico
+  app.get('/api/organizacoes/:idEvento/:CPF', eventos.selectUmOrganizador);
 
-  //seleciona os organizadores de um evento
-  app.get('/api/organizacoesE/:idEvento',eventos.selectOrganizacaoEvento);
+  // seleciona os organizadores de um evento
+  app.get('/api/organizacoesE/:idEvento', eventos.selectOrganizacaoEvento);
 
-  //seleciona os eventos em que uma pessoa é organizador
-  app.get('/api/organizacoesP/:CPF',eventos.selectEventoOrganizador);
+  // seleciona os eventos em que uma pessoa é organizador
+  app.get('/api/organizacoesP/:CPF', eventos.selectEventoOrganizador);
 
-  //deleta uma linha organizador
-  app.delete('/api/organizacao/:idEvento/:CPF',eventos.deleteOrganizacao);
-
-}
+  // deleta uma linha organizador
+  app.delete('/api/organizacao/:idEvento/:CPF', eventos.deleteOrganizacao);
+};

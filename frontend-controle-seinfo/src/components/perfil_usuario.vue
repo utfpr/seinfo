@@ -1,32 +1,71 @@
 <template>
-  <AuthConsumer >
-    <div class="title" slot-scope="{ updateUser, getToken }">
-      <h5 style="text-align:center">Perfil</h5>
+  <AuthConsumer>
+    <div
+      slot-scope="{ updateUser, getToken }"
+      class="title"
+    >
+      <h5 style="text-align:center">
+        Perfil
+      </h5>
       <div class="box">
         <form method="post">
           <a-form-item>
             <label>CPF:</label>
-            <the-mask  v-model="obj.CPF" placeholder="000.000.000-00" class="ant-input ant-input-disabled" :mask="['###.###.###-##']" disabled />
+            <the-mask
+              v-model="obj.CPF"
+              placeholder="000.000.000-00"
+              class="ant-input ant-input-disabled"
+              :mask="['###.###.###-##']"
+              disabled
+            />
           </a-form-item>
           <a-form-item>
             <label>RA:</label>
-            <a-input type="text" v-model="obj.idPessoa" placeholder="RA" disabled />
+            <a-input
+              v-model="obj.idPessoa"
+              type="text"
+              placeholder="RA"
+              disabled
+            />
           </a-form-item>
           <a-form-item>
             <label>Nome:</label>
-            <a-input maxlength="255" placeholder="Nome" v-model="obj.nome" type="text">
-              <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+            <a-input
+              v-model="obj.nome"
+              maxlength="255"
+              placeholder="Nome"
+              type="text"
+            >
+              <a-icon
+                slot="prefix"
+                type="user"
+                style="color:rgba(0,0,0,.25)"
+              />
             </a-input>
           </a-form-item>
           <a-form-item>
             <label>Email:</label>
-            <a-input maxlength="255" placeholder="Email" v-model="obj.email" type="text">
-              <a-icon slot="prefix" type="mail" style="color:rgba(0,0,0,.25)" />
+            <a-input
+              v-model="obj.email"
+              maxlength="255"
+              placeholder="Email"
+              type="text"
+            >
+              <a-icon
+                slot="prefix"
+                type="mail"
+                style="color:rgba(0,0,0,.25)"
+              />
             </a-input>
           </a-form-item>
           <div class="StyleButton">
-            <a-form-item> 
-              <a-button  type="submit" @click="alterarPerfil(updateUser, getToken)">Alterar Perfil</a-button>
+            <a-form-item>
+              <a-button
+                type="submit"
+                @click="alterarPerfil(updateUser, getToken)"
+              >
+                Alterar Perfil
+              </a-button>
             </a-form-item>
           </div>
         </form>
@@ -35,22 +74,35 @@
   </AuthConsumer>
 </template>
 <script>
-import AuthConsumer from "../contexts/authConsumer";
-const axios = require("axios");
-const auth = require("../services/auth");
-import {TheMask} from 'vue-the-mask';
+import { TheMask } from 'vue-the-mask';
+import AuthConsumer from '../contexts/authConsumer';
+
+import axios from '../config/axiosConfig';
+const auth = require('../services/auth');
 
 export default {
+  components: {
+    TheMask,
+    AuthConsumer,
+  },
+  data() {
+    return {
+      obj: {
+        nome: '',
+        CPF: '',
+        email: '',
+        idPessoa: '',
+        classificacao: '',
+        nivel: '',
+      },
+    };
+  },
   mounted() {
     this.pegarPerfil();
-  },
-  components: {
-    TheMask
   },
   methods: {
     async pegarPerfil() {
       const user = await auth.default.getUser();
-      console.log("USER:", user)
       this.obj.nome = user.nome;
       this.obj.CPF = user.CPF;
       this.obj.email = user.email;
@@ -59,35 +111,19 @@ export default {
       this.obj.nivel = user.nivel;
     },
     alterarPerfil(atualizaDados, token) {
-      axios.patch("http://localhost:3000/api/pessoa/" + this.obj.CPF, {
+      axios.patch(`/api/pessoa/${btoa(this.obj.CPF)}`, {
         nome: this.obj.nome,
         email: this.obj.email,
       })
-      .then(response => {
-        console.log(response.data);
-        alert(response.data);
-        atualizaDados({token: token, user: this.obj});
-        window.location.reload();
-      })
-      .catch(err => {
-        alert(err);
-      });
+        .then((response) => {
+          alert(response.data);
+          atualizaDados({ token, user: this.obj });
+          window.location.reload();
+        })
+        .catch((err) => {
+          alert(err);
+        });
     },
-  },
-  components: {
-    AuthConsumer,
-  },
-  data() {
-    return {
-      obj: {
-        nome: "",
-        CPF: "",
-        email: "",
-        idPessoa: "",
-        classificacao:"",
-        nivel:"",
-      },
-    };
   },
 };
 </script>

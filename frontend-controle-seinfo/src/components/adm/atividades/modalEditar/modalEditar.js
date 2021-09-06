@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 export default {
@@ -89,25 +89,22 @@ export default {
       if (!erros.length) {
         axios
           .patch(
-            "http://localhost:3000/api/atividade/" + dados.idAtividade,
+            "/api/atividade/" + dados.idAtividade,
             dados
           )
-          .then((response) => {
-            console.log("Editou!");
-            console.log(response);
-            this.$router.replace("/adm/atividade");
+          .then(() => {
+            this.$router.replace("./atividades");
             location.reload();
           });
       } else {
         alert(erros.join("\n"));
-        this.$router.replace("/adm/atividade");
+        this.$router.replace("./atividades");
       }
     },
   },
   data() {
     return {
-      res: [],
-      titulo: "",
+      res: [],      titulo: "",
       valor: "",
       data_ini_atv: "2020-06-17",
       data_fim_atv: "2020-06-16",

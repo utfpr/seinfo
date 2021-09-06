@@ -1,65 +1,68 @@
-const db = require('../models/index.js');
+const db = require('../models');
+
 const Categorias = db.categoria;
 
 // Post do Evento
-exports.create = (req, res) => {
-    Categorias.create({  
-      nome: req.body.nome
-  }).then(categoria => {    
-    // Cria um Evento
-    console.log("Criado uma categoria!")
-    res.send(categoria);
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.create = async (req, res) => {
+  try{
+    const categoria = await Categorias.create({
+      nome: req.body.nome,
+    });
+    return res.status(200).json(categoria);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-
-exports.findById = (req, res) => {  
-  Categorias.findOne({where:{idCategoria:req.params.categoriaId}}).then(categoria => {
-    console.log("Achou uma categoria pelo ID "+req.params.categoriaId);
-    res.send(categoria); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.findById = async (req, res) => {
+  try{
+    const categoria = await Categorias.findOne({ where: { idCategoria: req.params.categoriaId } });
+    return res.status(200).json(categoria);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.findAll = (req, res) => {  
-  Categorias.findAll().then(categoria => {
-    console.log("Listou Todas as Categorias!");
-    res.send(categoria); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.findAll = async (req, res) => {
+  try{
+    const categoria = await Categorias.findAll();
+    return res.status(200).json(categoria);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.atualiza = (req,res)=>{
-  Categorias.update({
-      nome: req.body.nome
-  },
-    {where: {idCategoria: req.params.categoriaId}}).then(categoria=>{
-      console.log("Atualizando uma Categoria");
-      res.send(categoria);
-    }).catch(err=>{
-      res.status(500).send("Error "+err);
-    })    
-},
-  
-
-exports.delete = (req, res) => {  
-  Categorias.destroy({where:{idCategoria: req.params.categoriaId}}).then(cate=>{
-    res.send('foi')
-  }).catch(err=>{
-    res.status(500).send(err)
-  })
+exports.atualiza = async (req, res) => {
+  try{
+    const categoria = await Categorias.update(
+      {
+        nome: req.body.nome,
+      },
+      { where: { idCategoria: req.params.categoriaId } }
+    );
+    return res.status(200).json(categoria);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
+exports.delete = async (req, res) => {
+  try{
+    const categoria = await Categorias.destroy({ where: { idCategoria: req.params.categoriaId } });
+    return res.status(200).json(categoria);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
-exports.AtividadesCategoria=(req,res)=>{
-  //seleciona as atividades de uma categoria especifica
-    db.atividade.findAll({where:{idCategoria:req.params.idCategoria},include:[{model:db.categoria,as:'categoriaAtv'}]}).then(atv=>{
-      res.send(atv)
-  }).catch(err=>{
-    res.status(500).send(err)
-  })
-}
+exports.AtividadesCategoria = async (req, res) => {
+  try{
+    const atividade = await db.atividade.findAll({
+      where: { idCategoria: req.params.idCategoria },
+      include: [{ model: db.categoria, as: 'categoriaAtv' }],
+    });
+    return res.status(200).json(atividade);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};

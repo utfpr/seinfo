@@ -1,37 +1,52 @@
 <template>
-    <div>
-        <div class="Participantes">
-            Participantes inscritos:
-        </div>
-        <div class="row table-responsive" v-if="participantes.length !== 0">
-            <table
-                class="table table-striped"
-                cellspacing="0"
-                cellpadding="0"
-                style="text-align: center"
-            >
-                <thead>
-                    <tr>
-                        <th style="text-align: center">Nome</th>
-                        <th style="text-align: center">Email</th>
-                        <th style="text-align: center">Data Inscrição</th>
-                    </tr>
-                </thead>
-                <tbody v-for="listData in participantes" :key="listData.dataInscricao" >
-                    <tr>
-                        <td style="text-align: center">{{listData.eventoInsc.pessoaInsc.nome}}</td>
-                        <td style="text-align: center">{{listData.eventoInsc.pessoaInsc.email}}</td>
-                        <td style="text-align: center">{{listData.eventoInsc.dataInscricao}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div v-if="participantes.length == 0">
-            <div class="notfound">
-                Não tem participantes inscritos nessa atividade.
-            </div>
-        </div>
+  <div>
+    <div class="Participantes">
+      Participantes inscritos:
     </div>
+    <div v-if="participantes.length == 0">
+      <div class="notfound">
+        Não tem participantes inscritos nessa atividade.
+      </div>
+    </div>
+    <table class="table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th class="col-3">Nome</th>
+          <th class="col-3">Email</th>
+          <th class="col-3">Data Inscrição</th>
+          <th class="col-1"></th>
+        </tr>
+      </thead>
+
+      <tbody v-for="res in participantes" :key="res.CPF">
+        <tr>
+          <th scope="row">
+            {{ res.eventoInsc.pessoaInsc.nome }}
+          </th>
+          <th>
+            {{ res.eventoInsc.pessoaInsc.email }}
+          </th>
+          <th>
+            {{
+              moment(res.eventoInsc.dataInscricao).format(
+                "D [de] MMMM [de] YYYY"
+              )
+            }}
+          </th>
+          <th>
+            <ButaoDePresencaAtividade
+              v-bind:presente="res.presente"
+              v-bind:idEvento="idEvento"
+              v-bind:idAtividade="idAtividade"
+              v-bind:idAgenda="idAgenda"
+              v-bind:cpf="res.CPF"
+            />
+          </th>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script src="./listagem_participantes.js" />

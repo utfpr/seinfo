@@ -7,7 +7,7 @@
           <h5 class="card-title">{{res.nome}}</h5>
           <p class="card-text">{{res.descricao}}</p>
           <a-divider />
-          <a-button :href="'/evento/'+ res.idEvento" class="bt" style="margin-left:33%;">
+          <a-button :href="'/evento/'+ res.idEvento" class="bt">
             <a-icon type="plus" />SAIBA MAIS
           </a-button>
         </div>
@@ -17,24 +17,19 @@
 </template>
 
 <script>
-const axios = require("axios");
-
+import axios from '../config/axiosConfig';
 export default {
   mounted() {
-    this.pegar_tabela("eventosD");
+    this.pegar_tabela();
   },
   methods: {
-    pegar_tabela(name) {
-      axios
-        .get("http://localhost:3000/api/" + name)
-        .then(response => {
-          // console.log("Listou " + name);
-          // console.log(response.data);
-          this.res = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+    async pegar_tabela() {
+      try {
+        const response = await axios.get("/public/getAllAvailableEvents");
+        this.res = response.data;
+      } catch (error) {
+        console.log(error); 
+      }
     }
   },
   data() {
@@ -49,6 +44,11 @@ export default {
 
 <style scoped>
 #work {
+  display: flex;
+  padding: 20px 0px;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
   background: #092756;
   background: -moz-radial-gradient(
       0% 100%,
@@ -112,11 +112,9 @@ export default {
 
 .card-title {
   display: inline-block;
-  max-width: 410px;
-  min-width: 410px;
-  max-height: 30px;
-  min-height: 30px;
-  overflow: hidden;
+  width: 410px;
+  height: 30px;
+  /* overflow: hidden; */
 }
 
 .card-text {
@@ -128,21 +126,17 @@ export default {
 }
 
 .card-body {
+  border-radius: 0px 0px 10px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: rgb(255, 255, 255);
-  float: left;
-  max-height: 280px;
-  min-height: 280px;
-  margin: 40px;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
+  height: 280px;
 }
 
 .box-1 {
-  height: 450px;
+  height: 100%;
   width: 450px;
-  margin: 50px;
-  margin-top: 30px;
   background: transparent;
   border: transparent;
 }
@@ -153,9 +147,10 @@ export default {
 }
 
 .box-2 {
+  border-radius: 10px 10px 0px 0px;
+  object-fit: cover;
+  width: 100%;
   min-height: 260px;
   max-height: 260px;
-  min-width: 450px;
-  max-width: 450px;
 }
 </style>

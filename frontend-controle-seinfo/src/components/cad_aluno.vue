@@ -43,16 +43,14 @@
 
 
 <script>
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import {TheMask} from 'vue-the-mask';
-import app_url from '../main';
 export default 
 {
   mounted(){
     this.obj_cadastroInterno.RA = this.$route.query.ra;
     this.obj_cadastroInterno.nome = this.$route.query.nome;
     this.obj_cadastroInterno.email = this.$route.query.email;
-    console.log(this.obj_cadastroInterno.RA);
   },
    data() {
     return {
@@ -73,18 +71,15 @@ export default
   {
     Btn_Cadastrar() 
     {
-      console.log(this.obj_cadastroInterno)
 
       axios
-        .post('http://localhost:3000/api/pessoa', this.obj_cadastroInterno)
+        .post('/public/pessoa', this.obj_cadastroInterno)
         .then(response => {
-          console.log(response)
           alert(response.data);
-          window.location = app_url;  
+          window.location = '/';  
            }).catch(error => {
             alert(error);
           });
-      console.log("FEZ O LOGIN INTERNO")
     }
   }
 };

@@ -1,10 +1,8 @@
-const token = 'usertoken';
-const dataUser = {};
-
-
+const token = '@TOKEN';
+const dataUser = '@USER';
 const getToken = async () => {
   try {
-    const value = await localStorage.getItem(token);
+    const value = localStorage.getItem(token);
     if (value !== undefined) {
       return value;
     }
@@ -16,7 +14,7 @@ const getToken = async () => {
 
 const getUser = async () => {
   try {
-    const value = await localStorage.getItem(dataUser);
+    const value = localStorage.getItem(dataUser);
     if (value !== undefined) {
       return JSON.parse(value);
     }
@@ -27,10 +25,9 @@ const getUser = async () => {
 };
 
 const login = async (newToken, newDataUser) => {
-  console.log(newToken, newDataUser)
   try {
-    await localStorage.setItem(token, newToken);
-    await localStorage.setItem(dataUser, JSON.stringify(newDataUser));
+    localStorage.setItem(token, newToken);
+    localStorage.setItem(dataUser, JSON.stringify(newDataUser));
   }
   catch (error) {
     console.log(error);
@@ -48,11 +45,9 @@ async function isLogged() {
     token: await getToken(),
     user: await getUser(),
   }
-  console.log("Hello", infos)
   if (infos.token === null || infos.dataUser) {
     return false
   }
-  console.log(infos);
 
   return true
 }

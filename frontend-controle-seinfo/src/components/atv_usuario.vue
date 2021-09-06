@@ -7,7 +7,7 @@
 					<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
 					<tr>Horas de participação: {{record.horasParticipacao}}</tr>
 					<tr>Categoria : {{record.categoriaAtv.nome}}</tr> 
-				    <tr>Descrição: {{record.descricao}} </tr>
+					<tr>Descrição: {{record.descricao}} </tr>
 					<div class="botoes">
 						<a-button type="button" class="ic" @click="inscricao(getUser.CPF, record)"> INSCREVER-SE </a-button>
 				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
@@ -20,10 +20,9 @@
 					<tr>Vagas disponíveis: {{record.atividade.quantidadeVagas}}</tr>
 					<tr>Horas de participação: {{record.atividade.horasParticipacao}}</tr>
 					<tr>Descrição: {{record.atividade.descricao}} </tr>
-					<div class="botoes">
+					<tr>
 						<a-button type="button" class="dl"  @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
-				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
-					</div>
+					</tr>
 				</div>
 			</a-table>
 		</div>
@@ -32,8 +31,7 @@
 
 <script>
 import AuthConsumer from '../contexts/authConsumer';
-
-import axios from 'axios';
+import axios from '../config/axiosConfig';
 import moment from "moment";
 moment.locale("pt-br");
 
@@ -49,22 +47,33 @@ const columns2 = [{
 }];
 
 export default {
+	data () {
+		return { 
+			res_atividades: [],
+			res_atividades2: [],
+			idEvento: "",
+			idAgenda:"",
+			columns,
+			columns2,
+			cpf:""
+		};
+	},
 	mounted() {
-		console.log(this.$route.params);
-		this.pegar_tabela_atividades(this.$route.params.idEvento, this.$route.params.CPF)
-		this.pegar_tabela_atividades2(this.$route.params.idEvento, this.$route.params.CPF)
+		const {idEvento , CPF, idAgenda} = this.$route.params
+		this.idAgenda = idAgenda 
+		this.cpf = CPF
+		this.pegar_tabela_atividades(idEvento, CPF)
+		this.pegar_tabela_atividades2(idEvento, CPF)
 	},
 	components: {
-    AuthConsumer
-  	},
+    AuthConsumer,
+	},
 	methods: {
 	pegar_tabela_atividades(idEvento, CPF) {
 		
 		axios
-			.get(`http://localhost:3000/api/inscAtvEventAll/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEventAll/${btoa(CPF)}/${idEvento}`)
 			.then(response => {
-				// console.log(this.$route.params.idEvento);
-				console.log(response.data);
 				this.res_atividades = response.data;
 			})
 			.catch(function(error) {
@@ -75,10 +84,8 @@ export default {
 
 	pegar_tabela_atividades2(idEvento, CPF) {
 		axios
-			.get(`http://localhost:3000/api/inscAtvEvent/${CPF}/${idEvento}`)
+			.get(`/api/inscAtvEvent/${btoa(CPF)}/${idEvento}`)
 			.then(response => {
-				// console.log(this.$route.params.idEvento);
-				console.log(response.data);
 				this.res_atividades2 = response.data;
 			})
 			.catch(function(error) {
@@ -86,13 +93,12 @@ export default {
 			});
 		},
 	inscricao(CPF, record) {
-      console.log(record);
       axios
-        .post(`http://localhost:3000/api/inscAtv/${record.idEvento}/${CPF}` , {idAtividade: record.idAtividade, dataInscricao:'2020-08-09'})
-        .then((response) => {
-          console.log(response.data);
-		  document.location.reload(true);
-        })
+        .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {
+					idAtividade: record.idAtividade})
+        .then(() => {
+			document.location.reload(true);
+		})
         .catch(function (error) {
           alert("Não foi possível realizar a inscrição!");
           console.log(error);
@@ -100,24 +106,14 @@ export default {
 	},
 	exclusao(CPF, record) {
       axios
-        .delete(`http://localhost:3000/api/inscAtv/${record.idEvento}/${record.idAtividade}/${CPF}`)
-        .then((response) => {
-		  console.log(response.data);
-		  document.location.reload(true);
+        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${btoa(CPF)}`)
+        .then(() => {
+			document.location.reload(true);
         })
         .catch(function (error) {
-          console.log(error);
+			console.log(error);
         });
     },
-	},
-	data () {
-		return { 
-			res_atividades: [],
-			res_atividades2: [],
-			idEvento: "",
-			columns,
-			columns2,
-		};
 	},
 	
 };

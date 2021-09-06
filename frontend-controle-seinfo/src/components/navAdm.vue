@@ -4,12 +4,12 @@
     <a-layout>
       <a-menu class="menu" mode="horizontal">
         <a-menu-item key="14">
-          <a-icon type="global"/>Eventos
+          <a-icon type="global" />Eventos
           <router-link to="/adm/eventos"></router-link>
         </a-menu-item>
         <a-sub-menu key="sub3">
           <span slot="title">
-            <a-icon type="form"/>
+            <a-icon type="form" />
             <span>Atividades/Categorias</span>
           </span>
           <a-menu-item key="13">
@@ -23,7 +23,7 @@
         </a-sub-menu>
         <a-sub-menu key="sub1">
           <span slot="title">
-            <a-icon type="bank"/>
+            <a-icon type="bank" />
             <span>Fluxo de Caixa</span>
           </span>
           <a-menu-item key="11">
@@ -36,16 +36,16 @@
           </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="7">
-          <a-icon type="form"/>Visitante
+          <a-icon type="form" />Visitante
           <router-link to="/adm/cadPessoa"></router-link>
         </a-menu-item>
         <a-menu-item key="15">
-          <a-icon type="bars"/>Relatório
+          <a-icon type="bars" />Relatório
           <router-link to="/adm/tabela"></router-link>
         </a-menu-item>
         <a-sub-menu key="sub6">
           <span slot="title">
-            <a-icon type="tool"/>
+            <a-icon type="tool" />
             <span>Configurações</span>
           </span>
           <a-menu-item key="18">
@@ -57,10 +57,20 @@
             <router-link to="/adm/funcPessoa"></router-link>
           </a-menu-item>
         </a-sub-menu>
+        <a-menu-item>
+          <a-icon type="user" />
+          Seu Perfil
+          <router-link to="/adm/perfil"> </router-link>
+        </a-menu-item>
+        <a-menu-item>
+          <a-icon type="control" />
+          Permissões
+          <router-link to="/adm/permissao"> </router-link>
+        </a-menu-item>
       </a-menu>
       <a-layout>
         <a-layout-content>
-          <router-view/>
+          <router-view />
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -71,12 +81,12 @@ import navSimples from "./navSimples.vue";
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
     };
   },
   components: {
-    navSimples
-  }
+    navSimples,
+  },
 };
 </script>
 <style>

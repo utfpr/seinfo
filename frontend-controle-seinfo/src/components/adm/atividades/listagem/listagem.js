@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from '../../../../config/axiosConfig';
 import moment from "moment";
 import modalVerMais from '../modalVerMais/modalVerMais.vue';
 import modalEditar from '../modalEditar/modalEditar.vue';
@@ -16,7 +16,7 @@ export default {
     },
     created() {
         axios
-            .get("http://localhost:3000/api/eventos")
+            .get("/public/evento")
             .then((response) => {
                 this.eventos = response.data;
             })
@@ -25,7 +25,7 @@ export default {
             });
 
         axios
-            .get("http://localhost:3000/api/categorias")
+            .get("/api/categoria")
             .then((response) => {
                 this.categorias = response.data;
             })
@@ -34,7 +34,7 @@ export default {
             });
 
         axios
-            .get("http://localhost:3000/api/protagonistas")
+            .get("/api/obtemTodasAsPessoas")
             .then((response) => {
                 this.protagonistas = response.data;
             })
@@ -61,8 +61,10 @@ export default {
             }
         },
         openModal(data) {
+
             this.pegar_tabela();
             this.modalData = data;
+            
             this.modalVisible = true;
             this.eventos.forEach((element) => {
                 if (element.idEvento === this.modalData.idEvento) {
@@ -79,15 +81,10 @@ export default {
                     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
                     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
                 }
-            });
+            });            
 
-            this.protagonistas.forEach((element) => {
-                if (this.modalData.idAtividade === element.idAtividade) {
-                    this.modalData.idPessoa = element.aPes.nome;
-                }
-            });
-
-            this.modalData.idCategoria = data.categoriaAtv.nome;
+            this.modalData.cpfOrganizador = data.protagonistaAtividade.CPF;
+            this.modalData.idCategoria = data.categoriaAtv.idCategoria;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
         },
     },
@@ -129,9 +126,10 @@ export default {
                 idCategoria: "",
                 idPessoa: "",
                 descricao: "",
+                cpfOrganizador: "",
             },
             modalData: {
-                titulo: "",
+                    titulo: "",
                 valor: "",
                 data_ini_atv: "",
                 data_fim_atv: "",

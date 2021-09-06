@@ -1,88 +1,35 @@
-const db = require('../models/index.js');
+const db = require('../models');
+
 const ReceitaInscricaoEvento = db.receitaInscricaoEvento;
- 
-// Post do Evento
-exports.create = (req, res) => {
 
-  ReceitaInscricaoEvento.create({  
-    //idEvento: req.body.idEvento,
-    idEvento: req.body.idEvento,
-    CPF: req.body.CPF,
-    dataPagamento: req.body.dataPagamento
+exports.create = async(req, res) => {
+  try {
+    const {idEvento, CPF, dataPagamento} = req.body;
+    const receita = await ReceitaInscricaoEvento.create({
+      idEvento = idEvento,
+      CPF = CPF,
+      dataPagamento = dataPagamento
+    })
 
-  }).then(receitaInscricaoEvento => {    
-    // Cria um Evento
-    console.log("Criado a receita do evento!")
-    res.send(receitaInscricaoEvento);
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-};
- 
-/* não tem como pesquisar por id pois não tem ID específico de Receita */
+    return res.status(200).json(receita);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
 
-
-exports.findById = (req, res) => { 
-
-
-  ReceitaInscricaoEvento.findByPk(req.params.eventoId).then(receitaEvento => {
-    console.log("Achou o lote pelo ID "+req.params.loteId);
-    res.send(receitaEvento); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-
-  ReceitaInscricaoEvento.findByPk(req.params.pessoaId).then(receitaEvento => {
-    console.log("Achou o lote pelo ID "+req.params.loteId);
-    res.send(receitaEvento); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-
-
-
-};
-
-// exports.findAll = (req, res) => {  
-//   Lotes.findAll({ raw: true}).then(lote => {
-//     console.log("Listou Todos os Lotes!");
-//     res.send(lote); //Retorna um Json para a Pagina da API
-//   }).catch(err => {
-//     res.status(500).send("Error -> " + err);
-//   })
-// };
-
-// exports.atualiza = (req,res)=>{
-
-//   Lotes.update(
-//     {
-//       valor: req.body.valor,
-//       dataAbertura: req.body.dataAbertura,
-//       dataFechamento: req.body.dataFechamento,
-//       idEvento: req.body.idEvento
-//   },
-//     {where: {idLote: req.params.loteId}}).then(lote=>{
-//       console.log("Atualizando Lote");
-//       res.send(lote);
-//     }).catch(err=>{
-//       res.status(500).send("Error "+err);
-//     })
+exports.findById = async (req, res) => {
+  try {
+    const {eventoId, pessoaId} = req.params;
+    const receitaInscricaoEvento = await ReceitaInscricaoEvento.findOne({
+      where: {
+        idEvento: eventoId,
+        CPF: pessoaId
+      }
+    });
     
-//   },
-  
-
-// exports.delete = (req, res) => {  
-//   Lotes.destroy({ 
-      //   where: { idLote: req.params.loteId, idPessoa: req.params.pessoaId },
-      //   orWhere: { idLote: req.params.pessoaId },
-      // }).then(lote => {
-//     console.log("Deletando o lote com o ID: "+req.params.loteId);
-//     res.send(lote); //Retorna um Json para a Pagina da API
-//   }).catch(err => {
-//     res.status(500).send("Error -> " + err);
-//   })
-// };
-
-// exports.amoeba = (req, res) => {
-//   console.log("Função de Teste");
-// }
+    return res.status(200).json(receitaInscricaoEvento);
+    }
+  catch (error) {
+    return res.status(500).json(error);
+  }
+}

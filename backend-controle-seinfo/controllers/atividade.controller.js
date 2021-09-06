@@ -1,169 +1,385 @@
-const db = require('../models/index.js');
-const Atividades = db.atividade;
+const db = require('../models');
 
-// Post do Atividade
-exports.create = (req, res) => {
-  Atividades.create({
-    titulo:req.body.titulo,
-    valor: req.body.valor,
-    descricao: req.body.descricao,
-    horasParticipacao: req.body.horasParticipacao,
-    // quantidadeVagas:req.body.vagas,
-    quantidadeVagas:req.body.quantidadeVagas,
-    idEvento: req.body.idEvento,
-    idCategoria: req.body.idCategoria,
+const Atividade = db.atividade;
+const Categoria = db.categoria;
+const Agenda = db.agenda;
+const AgendamentoAtividade = db.agendamentoAtividade;
+const Protagonista = db.protagonista;
+const Pessoa = db.pessoa;
 
-  }).then(agenda => {
-    //cria a subAtividade
-    for(i = 0; i < req.body.subatividade.length; i++){
-      agenda.createAtvAgenda({
-        "local":req.body.subatividade[i].local_subatividade,
-        "dataHoraInicio":req.body.subatividade[i].data_inicio_subatividade+"T"+req.body.subatividade[i].hora_inicio_subatividade,
-        "dataHoraFim":req.body.subatividade[i].data_fim_subatividade+"T"+req.body.subatividade[i].hora_fim_subatividade
-      });
-    }
-    // Cria agenda / Subatividade
-    console.log("Criado SubAtividades")
-    res.send(agenda);
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
+
+exports.create = async (req, res) => {
+  try {
+    const {
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      subatividade,
+      dataInicio,
+      horaInicio,
+    } = req.body;
+
+    const dataAtividade = new Date(`${dataInicio}T${horaInicio}:00.003Z`);
+
+    const atividade = await Atividade.create({
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idEvento,
+      idCategoria,
+      dataInicio: dataAtividade,
+    });
+
+    // Cria a SubAtividade
+    await Promise.all(
+      subatividade.map((item) =>
+        atividade.createAtvAgenda({
+          local: item.local_subatividade,
+          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}:00.003Z`,
+          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}:00.003Z`,
+        })
+      )
+    );
+
+    await Protagonista.create({
+      atuacao: 0,
+      CPF: 'admin',
+      idAtividade: atividade.idAtividade,
+    });
+
+    res.status(200).json(atividade);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
 };
 
-exports.findById = (req, res) => {
-  Atividades.findOne({ where: { idAtividade: req.params.idAtividade, idEvento: req.params.idEvento }, include: [{ model: db.categoria, as: 'categoriaAtv' }, { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } }] }).then(atividade => {
-    console.log("Achou uma atividade pelo ID " + req.params.idAtividade);
-    res.send(atividade); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.findById = async (req, res) => {
+  try {
+    const { idAtividade, idEvento } = req.params;
+
+    const atividade = await Atividade.findOne({
+      where: {
+        idAtividade,
+        idEvento,
+      },
+      include: [
+        {
+          model: Categoria,
+          as: 'categoriaAtv',
+        },
+        {
+          model: Agenda,
+          as: 'atvAgenda',
+          through: { attributes: [] },
+        },
+        {
+          model: Protagonista,
+          as: 'protagonistaAtividade',
+        },
+      ],
+    });
+
+    return res.status(200).json(atividade);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.findAll = (req, res) => {
-  Atividades.findAll({ include: [{ model: db.categoria, as: 'categoriaAtv' }, { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } }] }).then(atividade => {
-    console.log("Listou Todas as Atividades!");
-    res.send(atividade); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+exports.findAll = async (req, res) => {
+  try {
+    const atividades = await Atividade.findAll({
+      include: [
+        {
+          model: Categoria,
+          as: 'categoriaAtv',
+        },
+        {
+          model: Agenda,
+          as: 'atvAgenda',
+          through: { attributes: [] },
+        },
+        {
+          model: Protagonista,
+          as: 'protagonistaAtividade',
+        },
+      ],
+    });
+
+    return res.status(200).json(atividades);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
-exports.atualiza = (req, res) => {
+exports.atualiza = async (req, res) => {
+  try {
+    const {
+      titulo,
+      valor,
+      descricao,
+      horasParticipacao,
+      quantidadeVagas,
+      idCategoria,
+      idEvento,
+      protagonistaAtividade,
+    } = req.body;
 
-  Atividades.update(
-    {
-      titulo: req.body.titulo,
-      valor: req.body.valor,
-      descricao: req.body.descricao,
-      horasParticipacao: req.body.horasParticipacao,
-      quantidadeVagas: req.body.quantidadeVagas,
-      idCategoria: req.body.idCategoria,
-      idEvento: req.body.idEvento
-    },
-    { where: { idAtividade: req.params.idAtividade } }).then(atividade => {
-      console.log("Atualizando uma Atividade");
-      res.send(atividade);
-    }).catch(err => {
-      res.status(500).send("Error " + err);
-    })
+    const { idAtividade } = req.params;
 
-},
+    const teste = await Protagonista.update(
+      {
+        CPF: protagonistaAtividade.CPF,
+      },
+      {
+        where: { idAtividade },
+      }
+    );
 
+    const atividade = await Atividade.update(
+      {
+        titulo,
+        valor,
+        descricao,
+        horasParticipacao,
+        quantidadeVagas,
+        idCategoria,
+        idEvento,
+      },
+      {
+        where: {
+          idAtividade,
+        },
+      }
+    );
 
-  exports.delete = (req, res) => {
-    Atividades.destroy({ where: { idAtividade: req.params.idAtividade, idEvento: req.params.idEvento } }).then(atv => {
-      res.send('deletou')
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-    /*
-    Atividades.findOne({where:{idAtividade: req.params.idAtividade,idEvento:req.params.idEvento}}).then(atividade => {
-      db.agendamentoAtividade.findOne({where:{idAtividade:req.params.idAtividade}}).then(agenda=>{
-        db.agenda.destroy({where:{idAgenda:agenda.idAgenda}})
-        agenda.destroy()
-      })
-      db.protagonista.destroy({where:{idAtividade:req.params.idAtividade}})
-      atividade.destroy({where:{idAtividade: req.params.idAtividade}})
-      console.log("Achou uma atividade pelo ID "+req.params.idAtividade);
-      //res.status(204).send()
-      res.send('deletou'); //Retorna um Json para a Pagina da API
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-    */
-  };
+    return res.status(200).json(atividade);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
-exports.AtividadeEvento = (req, res) => {
-  //seleciona as atividades de um unico evento
-  Atividades.findAll({ where: { idEvento: req.params.idEvento }, include: [{ model: db.categoria, as: 'categoriaAtv' }, { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } }] }).then(atividade => {
-    console.log("Listou Todas as Atividades!");
-    res.send(atividade); //Retorna um Json para a Pagina da API
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+exports.delete = async (req, res) => {
+  try {
+    const { idAtividade, idEvento } = req.params;
 
+    const atividade = await Atividade.findOne({
+      where: {
+        idAtividade,
+        idEvento,
+      },
+    });
+
+    if (!atividade)
+      return res.status(404).json({ error: 'Atividade não encontrada' });
+
+    const agenda = await AgendamentoAtividade.findOne({
+      where: { idAtividade },
+    });
+
+    const protagonista = await Protagonista.findOne({
+      where: { idAtividade },
+    });
+
+    await agenda.destroy();
+    await protagonista.destroy();
+    await atividade.destroy();
+
+    return res.status(200).json(atividade);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.AtividadeEvento = async (req, res) => {
+  try {
+    const { idEvento } = req.params;
+
+    const atividades = await Atividade.findAll({
+      where: { idEvento },
+      include: [
+        {
+          model: Categoria,
+          as: 'categoriaAtv',
+        },
+        {
+          model: Agenda,
+          as: 'atvAgenda',
+          through: { attributes: [] },
+        },
+      ],
+    });
+
+    return res.status(200).json(atividades);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
 //-------------------------------------------------------------------------------------------
 
-exports.criarProtagonista = (req, res) => {
-  Atividades.findOne({ where: { idAtividade: req.params.idAtividade } }).then(atividade => {
-    db.pessoa.findOne({ where: { CPF: req.params.CPF } }).then(pessoa => {
-      db.protagonista.create({ 'atuacao': req.body.atuacao, 'idAtividade': atividade.idAtividade, 'CPF': pessoa.CPF }).then(prot => {
-        res.send(prot)
-      }).catch(err => {
-        res.status(500).send("Error -> " + err);
-      })
-      //atividade.createAtividadeProt({'atuacao':req.body.atuacao,'idAtividade':atividade.idAtividade,'idPessoa':pessoa.idPessoa})
-    }).catch(err => {
-      res.status(500).send("Error -> " + err);
-    })
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+exports.criarProtagonista = async (req, res) => {
+  try {
+    const { idAtividade, cpf } = req.params;
+    const { atuacao } = req.body;
 
-exports.selectProtagonista = (req, res) => {
-  //seleciona todos protagonistas no banco de dados
-  db.protagonista.findAll({ include: [{ model: db.pessoa, as: 'aPes' }, { model: db.atividade, as: 'aAtv', include: [{ model: db.categoria, as: 'categoriaAtv' }] }] }).then(prot => {
-    res.send(prot)
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
+    const atividade = await Atividade.findOne({
+      where: { idAtividade },
+    });
 
-}
+    if (!atividade)
+      return res.status(404).json({ error: 'Atividade não encontrada!' });
 
-exports.selectUmProtagonista = (req, res) => {
-  //seleciona um protagonista de uma atividade
-  db.protagonista.findOne({ where: { idAtividade: req.params.idAtividade, CPF: req.params.CPF }, include: [{ model: db.pessoa, as: 'aPes' }, { model: db.atividade, as: 'aAtv', include: [{ model: db.categoria, as: 'categoriaAtv' }] }] }).then(prot => {
-    res.send(prot)
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+    const pessoa = await Pessoa.findOne({
+      where: { CPF: atob(cpf) },
+    });
 
-exports.ProtagonistasDaAtv = (req, res) => {
-  //seleciona os protagonistas de uma atividade especifica
-  db.protagonista.findAll({ where: { idAtividade: req.params.idAtividade }, include: [{ model: db.pessoa, as: 'aPes' }, { model: db.atividade, as: 'aAtv', include: [{ model: db.categoria, as: 'categoriaAtv' }] }] }).then(prot => {
-    res.send(prot)
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+    const protagonista = await Protagonista.create({
+      atuacao,
+      idAtividade: atividade.idAtividade,
+      CPF: pessoa.CPF,
+    });
 
-exports.AtividadesDoProtagonista = (req, res) => {
-  //seleciona as atividades em que essa pessoa é protagonista
-  db.protagonista.findAll({ where: { CPF: req.params.CPF }, include: [{ model: db.pessoa, as: 'aPes' }, { model: db.atividade, as: 'aAtv', include: [{ model: db.categoria, as: 'categoriaAtv' }] }] }).then(prot => {
-    res.send(prot)
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+    return res.status(200).json(protagonista);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
 
-exports.deletaProtagonista = (req, res) => {
-  db.protagonista.destroy({ where: { idAtividade: req.params.idAtividade, CPF: req.params.CPF } }).then(prot => {
-    res.send('sumiu')
-  }).catch(err => {
-    res.status(500).send("Error -> " + err);
-  })
-}
+exports.selectProtagonista = async (req, res) => {
+  try {
+    const protagonistas = await Protagonista.findAll({
+      include: [
+        { model: Pessoa, as: 'aPes' },
+        {
+          model: Atividade,
+          as: 'aAtv',
+          include: [
+            {
+              model: Categoria,
+              as: 'categoriaAtv',
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.status(200).json(protagonistas);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.selectUmProtagonista = async (req, res) => {
+  try {
+    const { idAtividade, CPF } = req.params;
+
+    const protagonista = await Protagonista.findOne({
+      where: {
+        idAtividade,
+        CPF: atob(CPF),
+      },
+      include: [
+        {
+          model: Pessoa,
+          as: 'aPes',
+        },
+        {
+          model: Atividade,
+          as: 'aAtv',
+          include: [{ model: db.categoria, as: 'categoriaAtv' }],
+        },
+      ],
+    });
+
+    return res.status(200).json(protagonista);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.ProtagonistasDaAtv = async (req, res) => {
+  try {
+    const { idAtividade } = req.params;
+
+    const protagonista = await Protagonista.findAll({
+      where: {
+        idAtividade,
+      },
+      include: [
+        {
+          model: Pessoa,
+          as: 'aPes',
+        },
+        {
+          model: Atividade,
+          as: 'aAtv',
+          include: [
+            {
+              model: Categoria,
+              as: 'categoriaAtv',
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.status(200).json(protagonista);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.AtividadesDoProtagonista = async (req, res) => {
+  try {
+    const { CPF } = req.params;
+
+    const protagonista = await Protagonista.findAll({
+      where: { CPF: atob(CPF) },
+      include: [
+        {
+          model: Pessoa,
+          as: 'aPes',
+        },
+        {
+          model: Atividade,
+          as: 'aAtv',
+          include: [
+            {
+              model: Categoria,
+              as: 'categoriaAtv',
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.status(200).json(protagonista);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+exports.deletaProtagonista = async (req, res) => {
+  try {
+    const { idAtividade, CPF } = req.params;
+
+    const protagonista = await Protagonista.destroy({
+      where: {
+        idAtividade,
+        CPF: atob(CPF),
+      },
+    });
+
+    return res.status(200).json(protagonista);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};

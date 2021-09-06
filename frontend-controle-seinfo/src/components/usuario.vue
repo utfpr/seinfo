@@ -3,12 +3,12 @@
     <div slot-scope="{ signOut }">
       <a-layout id="components-layout-demo-custom-trigger">
         <a-layout-sider style="min-height:100vh" :trigger="null" collapsible v-model="collapsed">
-          <div class="logo" />
+          <div class="logo"> <img src="../assets/logo_com_nome.jpg" style="height:60px;"></div>
           <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['/']">
             <a-menu-item key="1">
               <a-icon type="home" />
               <span>Home</span>
-              <router-link to="/usuario/homeUsu"></router-link>
+              <router-link to="/usuario"></router-link>
             </a-menu-item>
             <a-menu-item key="2">
               <a-icon type="user" />
@@ -47,7 +47,6 @@
 </template>
 <script>
 import AuthConsumer from '../contexts/authConsumer';
-import app_url from '../main';
 export default {
   data() {
     return {
@@ -60,7 +59,7 @@ export default {
   methods: {
     logOut(signOut){
       signOut();
-      window.location.replace(app_url);
+      window.location.replace('/');
     }
   }
 };
@@ -79,8 +78,8 @@ export default {
 }
 
 #components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 45px;
+  background: transparent;
   margin: 16px;
 }
 </style>

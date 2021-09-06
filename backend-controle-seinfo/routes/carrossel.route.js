@@ -1,38 +1,24 @@
-var nomedoarquivo;
-const express = require('express')
-            , app = express()
-            , multer = require('multer')
-            , path = require('path');
-            const storage = multer.diskStorage({
-                destination: function (req, file, cb) {
-                    cb(null, '../frontend-controle-seinfo/src/assets')
-                },
-                filename: function (req, file, cb) {
-                  nomedoarquivo = file.originalname;
-                    cb(null, file.originalname);
-                }
-            });
-const upload = multer({storage});
+const app = require('express').Router();
+const multer = require('multer');
+const carossel = require('../controllers/carrossel.controller');
+const multerConfig = require('../config/multerConfig');
 
+const upload = multer(multerConfig);
 
-module.exports = function(app) {
- 
-  const carossel = require('../controllers/carrossel.controller.js');
-  const imagem = require('../controllers/imagem.controller.js');
+// store
+app.post('/', upload.single('urlImagem'), carossel.store);
+// /api/carrossel
 
-  //cria um carrossel
-  app.post('/api/carrossel', upload.single('urlImagem'), function (req, res, next) {
-    console.log("POST DO carossel!\n")
-    console.log("\n\n\n STATUS: "+req.body.select_status);
-    imagem.create(req,res,nomedoarquivo);
-  })
+// delete
+app.delete('/:idCarrossel', carossel.delete);
+// /api/carrossel/:idCarrossel
 
-  app.delete('/api/carrossel/:idCarrossel',carossel.delete)
+// update
+app.put('/:idCarrossel', carossel.update);
+// /api/carrossel/
 
-  app.patch('/api/carrossel/:idCarrossel',carossel.atualiza)
+// show
+app.get('/getAllCarrossel', carossel.show);
+// /api/getAllCarrossel
 
-  app.get('/api/carrossel',carossel.selectTodosCarrossel)
-
-  app.get('/api/carrossel/:idCarrossel',carossel.selectCarrossel)
-
-}
+module.exports = app;

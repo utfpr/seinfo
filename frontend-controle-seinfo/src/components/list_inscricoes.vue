@@ -6,23 +6,46 @@
         <table class="table table-striped" cellspacing="0" cellpadding="0">
           <thead>
             <tr>
-              <th style="width:35%">Nome</th>
-              <th style="text-align: left;">Status</th>
-              <th style="text-align:center" class="actions">Ações</th>
+              <th style="width:35%">
+                Nome
+              </th>
+              <th style="text-align: left;">
+                Status
+              </th>
+              <th style="text-align:center" class="actions">
+                Ações
+              </th>
             </tr>
           </thead>
-          <tbody v-for="(res/*,i*/) in res_localizar" :key="res.idEvento">
+          <tbody v-for="res in res_localizar" :key="res.idEvento">
             <tr style="background-color:white;">
-              <td>{{res.eventoInsc.nome}}</td>
+              <td>{{ res.eventoInsc.nome }}</td>
               <td>
                 <!-- <a-progress type="circle" :percent="100" status="success" :width="33" /> -->
-                <a-icon type="check-circle" theme="twoTone" two-tone-color="#52c41a" style="font-size: 32px; margin-left: 5px;" />
-
+                <a-icon
+                  type="check-circle"
+                  theme="twoTone"
+                  two-tone-color="#52c41a"
+                  style="font-size: 32px; margin-left: 5px;"
+                />
               </td>
+              
               <td style="text-align:center;" class="actions">
-                <a-button type="button" class="ic" @click="redirectAtv(res.idEvento, CPF)" > VER ATIVIDADES </a-button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  @click="redirectAtv(res.idEvento, CPF,res.eventoInsc.idAgenda)"
+                >
+                  VER ATIVIDADES
+                </button>
                 <!-- <a-button style="text-align:right" type="button" class="ic" @click="teste(res.idEvento)" >VER ATIVIDADES </a-button> -->
-                <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  @click="showDeleteConfirm(res.idEvento)"
+                >
+                  CANCELAR INSCRIÇÃO
+                </button>
               </td>
             </tr>
           </tbody>
@@ -32,14 +55,13 @@
   </div>
 </template>
 
-
 <script>
-const axios = require("axios");
+import axios from "../config/axiosConfig";
 const columns = [
   {
     title: "Nome do Evento",
     dataIndex: "nome",
-    width: 200, //test
+    width: 200, // test
   },
   {
     title: "Data do Evento",
@@ -63,38 +85,49 @@ const columns = [
   },
 ];
 const auth = require("../services/auth");
+
 export default {
+  components: {
+  },
+  data() {
+    return {
+      res_localizar: [],
+      columns,
+      tabelas: [],
+      modalVisible: false,
+      modalData: "",
+      CPF: "",
+    };
+  },
   mounted() {
     this.pegarPerfil();
     this.pegar_tabela();
   },
   methods: {
-    redirectAtv(idEvento, CPF){
-      //console.log(idEvento, CPF);
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${CPF}`})
+    redirectAtv(idEvento, CPF,idAgenda) {
+      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}/${idAgenda}` });
     },
     exclusao(id) {
       axios
-        .delete(`http://localhost:3000/api/inscEv/${id}/${this.CPF}`)
-        .then((response) => {
-          console.log(response.data);
+        .delete(`/api/inscEv/${id}/${btoa(this.CPF)}`)
+        .then((resp) => {
+          console.log(resp)
           this.pegar_tabela("eventosD");
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     },
     async pegarPerfil() {
-      await auth.default.getUser().then(res => {
+      await auth.default.getUser().then((res) => {
         this.CPF = res.CPF;
         this.pegar_tabela();
-      })
-      //console.log("USER:", user)
-      //this.CPF = user.CPF;
+      });
+      // this.CPF = user.CPF;
     },
     showDeleteConfirm(id) {
-        var cpfPessoa = this.CPF;
-        this.$confirm({
+      const cpfPessoa = this.CPF;
+      this.$confirm({
         title: "Deseja remover sua inscrição?",
         content: "Essa ação não poderá ser desfeita!",
         okText: "Sim",
@@ -102,15 +135,13 @@ export default {
         cancelText: "Voltar",
         onOk() {
           axios
-            .delete(`http://localhost:3000/api/inscEv/${id}/${cpfPessoa}`)
-            .then((response) => {
-              console.log(response.data);
+            .delete(`/api/inscEv/${id}/${btoa(cpfPessoa)}`)
+            .then(() => {
               document.location.reload(true);
             })
-            .catch(function (error) {
+            .catch((error) => {
               console.log(error);
             });
-          
         },
         onCancel() {
           console.log("Cancel");
@@ -123,26 +154,14 @@ export default {
     },
     pegar_tabela() {
       axios
-        .get(`http://localhost:3000/api/inscEvP/${this.CPF}`)
+        .get(`/api/inscEvP/${btoa(this.CPF)}`)
         .then((response) => {
-          console.log("Listou ");
-          console.log(response.data);
           this.res_localizar = response.data;
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     },
-  },
-  data() {
-    return {
-      res_localizar: [],
-      columns,
-      tabelas: [],
-      modalVisible: false,
-      modalData: "",
-      CPF: "",
-    };
   },
 };
 </script>

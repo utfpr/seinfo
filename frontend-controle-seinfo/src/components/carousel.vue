@@ -1,33 +1,61 @@
 <template>
 <div>
-  <a-carousel effect="fade" autoplay arrows >
+  <a-carousel effect="fade" autoplay arrows  >
     <div
-      slot="prevArrow" slot-scope="props"
+      slot="prevArrow"
       class="custom-slick-arrow"
       style="left: 10px;zIndex: 1"
     >
       <a-icon type="left"/>
     </div>
     <div
-      slot="nextArrow" slot-scope="props"
+      slot="nextArrow" 
       class="custom-slick-arrow"
       style="right: 10px"
     >
       <a-icon type="right" />
     </div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
-    <div><img src="../assets/banner.png"></div>
+
+    <div v-if="imagens">
+        <img src="../assets/banner.png">
+    </div>
+    <div v-else>
+      <div :v-for="img in imagens" :key="img.idImagem">
+        <img :src="img.Imagem.url">
+      </div>
+    </div>
+  
   </a-carousel>
 </div>
 </template>
-<script>
-export default {
-}
-</script>
-<style scoped>
 
+
+
+<script>
+import axios from '../config/axiosConfig';
+export default {
+  data() {
+    return {
+      imagens: [],
+    }
+  },
+  mounted() {
+    this.getAllImages();
+  },
+  methods: {
+    async getAllImages(){
+      try {
+        const {data} = await axios.get('/public/getAllCarrosselAvailables');
+        this.imagens = data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
 .ant-carousel >>> .custom-slick-arrow {
   width: 25px;
   height: 25px;
@@ -44,7 +72,6 @@ export default {
 }
 
 .ant-carousel{
-  margin-top: 60px;
   border: 1px solid rgba(12, 12, 12, 0.863);
 }
 
@@ -58,6 +85,7 @@ export default {
 }
 
 img{
+  object-fit: cover;
   max-width: 100%;
   min-width: 100%;
   max-height:500px;

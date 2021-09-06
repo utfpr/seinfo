@@ -31,24 +31,37 @@ Logo em seguida inicia o servidor do backend utilizando o seguinte comando:
 ```bash
 npm start
 ```
-
-Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/config/env.js
+Criar o arquivo .env como o .env.example no backend.
+Obs: Trocar o nome do banco de dados, usuário e senha no arquivo /backend-controle-seinfo/.env
 ```javascript
-const env = {
-    database: 'seu_banco_de_dados',
-    username: 'seu_usuario',
-    password: 'sua_senha',
-    host: 'localhost',
-    dialect: 'mysql',
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  };
-module.exports = env;
+# Database
+DB_HOST="localhost"
+DB_PORT="3306"
+DB_USER="usuario"
+DB_PASS="senha"
+DB_NAME="banco"
+DB_DIALECT="mysql"
+DB_POOL_MAX="5"
+DB_POOL_MIN="0"
+DB_POOL_ACQUIRE="3000"
+DB_POOL_IDLE="10000"
 
+#EMAIL
+#Caso estiver usando o gmail vai ser necessario criar uma senha de aplicativo.
+SENDER_EMAIL="email@email.com"
+LOGIN_EMAIL="email@email.com"
+PASSWORD_EMAIL="senha"
+HOST_EMAIL="host.email.com"
+PORT_HOST_EMAIL=587
+
+#LDAP
+URL_LDAP="URL E ROTA AQUI"
+LOGIN_URL_LDAP="URL E ROTA AQUI"
+LOGIN_LDAP_USERNAME="usuario"
+LOGIN_LDAP_PASSWORD="senha"
+
+#SECRET
+SECRET="escreva o secret aqui"
 ```
 Criar o arquivo dotenv.env.js como o dotenv.env.js.example no frontend.
 ~~~
