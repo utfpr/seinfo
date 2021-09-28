@@ -1,9 +1,42 @@
-version: "3.3"
+version: "3.8"
 services:
-  database:
-    image: mysql
+  frontend:
+    build:
+      context: .
+      dockerfile: _containers/frontend/Dockerfile
     restart: always
-    container_name: "SEINFO"
+    container_name: "SEINFO_FRONTEND"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend-controle-seinfo:/usr/src/frontend
+      - /usr/src/frontend/node_modules
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+  backend:
+    build:
+      context: .
+      dockerfile: _containers/backend/Dockerfile
+    restart: always
+    container_name: "SEINFO_BACKEND"
+    depends_on:
+      - database
+    volumes:
+      - ./backend-controle-seinfo:/usr/src/backend
+      - ./backend-controle-seinfo/.env.docker:/usr/src/backend/.env
+      - /usr/src/backend/node_modules
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+  database:
+    build:
+      context: .
+      dockerfile: _containers/database/Dockerfile
+    restart: always
+    container_name: "SEINFO_DB"
     environment:
       MYSQL_DATABASE: "seinfo"
       MYSQL_USER: "normalUser"
@@ -11,8 +44,9 @@ services:
       MYSQL_ROOT_USER: "admin"
       MYSQL_ROOT_PASSWORD: "admin"
     ports:
-      - "3306:3306"
+      - "3307:3306"
     expose:
-      - "3306"
+      - "3307"
     volumes:
-      - /home/ricardo/Documentos/docker-files/BD_MYSQL:/var/lib/mysql
+      - ./backend-controle-seinfo/banco/db_seinfo_2021_2.sql:/docker-entrypoint-initdb.d/dump1.sql
+      - ./backend-controle-seinfo/banco/db_seinfo_dados_2021_2.sql:/docker-entrypoint-initdb.d/dump2.sql

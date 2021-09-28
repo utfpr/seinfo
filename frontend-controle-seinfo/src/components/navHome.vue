@@ -11,11 +11,11 @@
             <input v-model="obj_login.password" name="password" type="password" placeholder="Senha" class="lg st" required="required" />
           </a-form-item>
           <a-form-item>
-            <a-button class="bt" @click="LoginUser(signIn)" >Entrar</a-button>
+            <a-button class="bt" @click="LoginUser(signIn)" htmlType="submit">Entrar</a-button>
           </a-form-item>
           <a-form-item>
             <a-button class="bti" href="cadPessoa">Cadastro de usuário externo</a-button>
-          </a-form-item>   
+          </a-form-item>
         </a-form>
         <a-modal
             title="Cadastrar-se como aluno"
@@ -82,25 +82,25 @@ export default {
       //PASSA O USUÁRIO PARA A PÁGINA DE CADASTRO
 
     axios
-    .post('/public/loginLDAP',{ 
-      username: this.obj_userInterno.username, 
+    .post('/public/loginLDAP',{
+      username: this.obj_userInterno.username,
       password: this.obj_userInterno.password
       })
     .then(response => {
             // obj_userInterno.nome = response.data.name;
             // obj_userInterno.email = response.data.email;
             this.$router.push({ name: `Cad_Aluno`, query:{
-              ra: this.obj_userInterno.username, 
+              ra: this.obj_userInterno.username,
               nome: response.data.name, email: response.data.email
-            }}) 
+            }})
             //mandar os outros dados do LDAP para a página de cadastro
             //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.nome}})
-            
+
           }).catch(error => {
             console.log(error.response)
           });
-     
-    
+
+
     ////window.location = "/cad_aluno?username="+username;
     //this.$router.push({ name: `Cad_Aluno`, query:{usuario: this.obj_userInterno.username}})
     },
@@ -110,7 +110,7 @@ export default {
       this.visible = false;
       this.obj_rec.cpf = "";
     },
-    showModal() {      
+    showModal() {
       this.obj_userInterno.username = "";
       this.obj_userInterno.password = "";
       this.visible = true;
@@ -122,7 +122,7 @@ export default {
         signIn({token: response.data.token, user: response.data.pessoa});
         window.location.replace(
           response.data.pessoa.nivel ? perm[response.data.pessoa.nivel]: 'usuario'
-        );  
+        );
       } catch (error) {
         console.log(error)
       }
@@ -143,13 +143,13 @@ export default {
       this.visible = false
       this.recuperacao = false
     },
-    handleOkRecuperacao() 
+    handleOkRecuperacao()
     {
       this.recuperacao = false
-      
+
 
       axios
-      
+
         .post('/public/recuperarSenha/'+this.obj_rec.cpf)
         .then(response => {
             console.log(response.data)
@@ -158,7 +158,7 @@ export default {
             console.log(error.response)
             alert("Pedido inválido.");
           });
-      
+
     }
   }
 }
@@ -183,10 +183,10 @@ export default {
 
 .st{
   background: rgba(0, 0, 0, 0.3);
-  border: none; outline: none; 
-  padding: 10px; font-size: 13px; 
-  color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-  border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px; 
+  border: none; outline: none;
+  padding: 10px; font-size: 13px;
+  color: #fff;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3); border-radius: 4px;
   box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2);
 }
 
