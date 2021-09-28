@@ -6,8 +6,6 @@ services:
       dockerfile: _containers/frontend/Dockerfile
     restart: always
     container_name: "SEINFO_FRONTEND"
-    depends_on:
-      - backend
     volumes:
       - ./frontend-controle-seinfo:/usr/src/frontend
       - /usr/src/frontend/node_modules
