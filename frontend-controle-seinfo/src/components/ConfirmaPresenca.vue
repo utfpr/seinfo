@@ -12,7 +12,7 @@
             role="alert"
           >
             Você precisa estar logado !
-            <a href="/login" >Ir para login</a>
+            <a v-bind:href="redirect_url" >Ir para login</a>
           </div>
         </div>
         <div v-else id="condirmarPresenca">
@@ -43,14 +43,16 @@ export default {
       idEvento: String,
       idAtividade: String,
       idAgenda: String,
+      redirect_url: String
     };
   },
   async mounted() {
     this.veridicarParametros();
+    this.redirect_url = `/login?redirect=${window.location.href}`;
   },
   methods: {
     async veridicarParametros() {
-      const { idEvento, idAtividade, idAgenda } = this.$route.params;      
+      const { idEvento, idAtividade, idAgenda } = this.$route.params;
       this.idEvento = idEvento
       this.idAtividade = idAtividade
       this.idAgenda = idAgenda
