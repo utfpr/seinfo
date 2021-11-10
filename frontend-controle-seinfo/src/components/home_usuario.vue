@@ -88,6 +88,9 @@ export default {
     redirectAtv(idEvento, CPF) {
       this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}` });
     },
+    redirectListEvent() {
+      this.$router.push({ path: `/usuario/listInsc` });
+    },
     async pegarPerfil() {
       const user = await auth.getUser();
       this.obj.CPF = user.CPF;
