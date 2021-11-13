@@ -119,3 +119,22 @@ exports.listPresenca = (req, res) => {
     return res.status(500).json(error);
   }
 };
+
+exports.verificaPresenca = async (req, res) => {
+  try {
+    const { idAtividade, CPF } = req.params;
+
+    const check = await Presenca.findOne({
+      where: {
+        idAtividade,
+        CPF,
+      },
+      
+    });
+
+    return res.status(200).json({presente:check ? check.presenca : 0 });
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json(error);
+  }
+};
