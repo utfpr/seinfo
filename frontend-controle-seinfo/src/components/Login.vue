@@ -3,7 +3,7 @@
     <div id="image">
       <img src="../assets/logo_com_nome.jpg" alt="" />
     </div>
-    <div class="card row" style="width: 18rem;">
+    <form class="card row" style="width: 18rem;" @submit.prevent="entrarNoSistema()">
       <div class="card-body">
         <div
           class="alert alert-danger"
@@ -19,9 +19,9 @@
           <input v-model="password" type="password" class="form-control " />
           <a href="/">voltar para home</a>
         </p>
-        <a @click="entrarNoSistema()" class="btn btn-primary">Entrar</a>
+        <a-button htmlType="submit" @click="entrarNoSistema()" class="btn btn-primary">Entrar</a-button>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 <script>
@@ -46,16 +46,19 @@ export default {
         };
         const credenciais = await axios.post("/public/login/", obj_login);
         const credInc = document.getElementById("credenciaisIncorretas");
+        const { redirect } = this.$route.query;
         if (credInc) credInc.remove();
         this.crenciaisIncorretas = false;
         if (credenciais) {
-          auth.login(credenciais.data.token, credenciais.data.pessoa);
+          await auth.login(credenciais.data.token, credenciais.data.pessoa);
+          if(redirect) return window.location.replace(redirect);
+
           window.location.replace(
             credenciais.data.pessoa.nivel
               ? perm[credenciais.data.pessoa.nivel]
               : "usuario"
           );
-          this.$router.push("/");
+          await this.$router.push("/");
         }
       } catch (error) {
         console.log(error);

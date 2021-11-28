@@ -5,7 +5,7 @@
     </div>
     <nav class="navbar navbar-expand-sm navi">
       <div class="navbar-collapse justify-content-center">
-        <a :href="'/'"><img src="../assets/logo_com_nome.jpg" style="height:50px; margin-left:74px;"></a> 
+        <a :href="'/'"><img src="../assets/logo_com_nome.jpg" style="height:50px; margin-left:74px;"></a>
       </div>
       <div class="logOut" >
         <button type="submit"  class="buttonInvisible"  @click="logOut(signOut)">
@@ -23,7 +23,7 @@ import AuthConsumer from '../contexts/authConsumer';
 export default {
   data() {
     return {
-      
+
     }
   },
   components: {
@@ -68,8 +68,8 @@ export default {
 }
 
 .buttonInvisible {
-  background-color: transparent; 
-  border-color: transparent; 
+  background-color: transparent;
+  border-color: transparent;
   cursor: default;
 }
 </style>
