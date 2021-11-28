@@ -3,9 +3,11 @@
     <div id="image">
       <img src="../assets/logo_com_nome.jpg" alt="" />
     </div>
-    <div class="card" style="padding-bottom; 0.25rem;">
+    <div class="card" style="padding-bottom: 0.25rem;">
+     
       <div class="card-body">
-        <div v-if="!usuario">
+         
+        <div v-if="!usuario">      
           <div
             class="alert alert-danger"
             id="credenciaisIncorretas"
@@ -16,13 +18,16 @@
           </div>
         </div>
         <div v-else id="condirmarPresenca">
-          <ButaoDePresencaAtividade
-            v-bind:idEvento="idEvento"
-            v-bind:idAtividade="idAtividade"
-            v-bind:idAgenda="idAgenda"
-            v-bind:cpf="usuario.CPF"
-          />
+           <ButaoDePresencaAtividade
+             v-bind:idEvento="idEvento"
+              v-bind:idAtividade="idAtividade"
+              v-bind:idAgenda="idAgenda"
+              v-bind:cpf="usuario.CPF"
+              v-bind:presente="teste.presente"
+            />
+                
         </div>
+       
       </div>
     </div>
   </div>
@@ -30,6 +35,8 @@
 <script>
 import auth from "../services/auth";
 import ButaoDePresencaAtividade from "./ButaoDePresencaAtividade.vue";
+import axios from '../config/axiosConfig';
+
 export default {
   components: {
     ButaoDePresencaAtividade,
@@ -45,9 +52,11 @@ export default {
       idAgenda: String,
       redirect_url: String
     };
+
   },
   async mounted() {
-    this.veridicarParametros();
+    await this.veridicarParametros();
+    await this.verificarPresenca();
     this.redirect_url = `/login?redirect=${window.location.href}`;
   },
   methods: {
@@ -60,8 +69,16 @@ export default {
         console.log(err)
       });
     },
+     async verificarPresenca(){
+    let resp = await axios.get(`api/presenca/verificar/${this.usuario.CPF}/${this.idAtividade}`);
+    this.teste = resp.data;
+
+      }
   },
+      
 };
+ 
+
 </script>
 <style>
 .wrapper {
@@ -99,3 +116,4 @@ input {
   margin-top: 1.5em;
 }
 </style>
+

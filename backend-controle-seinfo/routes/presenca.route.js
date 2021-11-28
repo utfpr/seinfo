@@ -20,4 +20,7 @@ app.post('/', async (req, res) => {
   }
 });
 
+app.get('/verificar/:CPF/:idAtividade', presencas.verificaPresenca);
+
+
 module.exports = app;
