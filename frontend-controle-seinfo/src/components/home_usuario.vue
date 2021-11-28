@@ -25,7 +25,7 @@
                 v-if="record.estaInscrito == true && record.lotesDisponiveis != 0"
                 type="button"
                 class="ic-yellow"
-                @click="redirectAtv(record.idEvento, obj.cpf)"
+                @click="redirectAtv()"
               >
                 VER INSCRIÇÕES EM ATIVIDADES
               </a-button>
@@ -85,8 +85,8 @@ export default {
     this.pegar_tabela_eventos('eventosD');
   },
   methods: {
-    redirectAtv(idEvento, CPF) {
-      this.$router.push({ path: `/usuario/atvHome/${idEvento}/${btoa(CPF)}` });
+    redirectAtv() {
+      this.$router.push({ path: `/usuario/listInsc` });
     },
     redirectListEvent() {
       this.$router.push({ path: `/usuario/listInsc` });
