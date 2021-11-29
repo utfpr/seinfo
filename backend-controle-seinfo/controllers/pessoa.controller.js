@@ -407,6 +407,9 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
         idAtividade,
         idEvento,
       },
+      group: [
+        'eventoInsc.pessoaInsc.CPF',
+      ],
       include: [
         {
           model: InscricaoEvento,
@@ -423,11 +426,12 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
       ],
     });
 
+    console.log(pessoasInscritasUmaAtividade);
     const cpfPessoasPresentes = await Presenca.findAll({
       where: {
         idEvento,
         idAtividade,
-        presenca: true,
+        presenca: false,
       },
     }).map((pessoa) => pessoa.CPF);
 

@@ -120,21 +120,20 @@ exports.listPresenca = (req, res) => {
   }
 };
 
-exports.verificaPresenca = async (req, res) => {
+exports.createPresenca = (req, res) => {
   try {
-    const { idAtividade, CPF } = req.params;
+    const { idAtividade, idAgenda, idEvento, cpf, presenca } = req.body;
+    const resp = this.createOrUpdate(
+      idAtividade,
+      idAgenda,
+      idEvento,
+      cpf,
+      presenca
+    );
 
-    const check = await Presenca.findOne({
-      where: {
-        idAtividade,
-        CPF,
-      },
-      
-    });
-
-    return res.status(200).json({presente:check ? check.presenca : 0 });
+    res.send(resp);
   } catch (error) {
-    console.log(error)
-    return res.status(500).json(error);
+    console.log(error);
+    res.status(500).send(error);
   }
 };
