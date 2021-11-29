@@ -247,6 +247,63 @@
                     </a-select>
                   </a-form-item>
                 </div>
+
+          <div class="row justify-content-center">
+            <a-form :form="form" class="space_2">
+              <label class="ant-form-item-required">SubAtividades:</label>
+              <a-form-item
+                v-for="(k, index) in data.atvAgenda"
+                :key="k.idAgenda"
+                :label="index === 0 ? '' : ''"
+                :required="false"
+              >
+                <a-input
+                  type="date"
+                  v-model="k.dataInicio"
+                  placeholder="Data Inicio da subAtividade "
+                  style="width: 49%; margin-right: 4px"
+                />
+                <a-input
+                  type="time"
+                  v-model="k.horaInicio"
+                  placeholder="Hora Inicio da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  type="date"
+                  v-model="k.dataFim"
+                  placeholder="Data Fim da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  type="time"
+                  v-model="k.horaFim"
+                  placeholder="Hora Fim da subAtividade "
+                  style="width: 50%; margin-right: 0px"
+                />
+                <a-input
+                  v-model="k.local"
+                  placeholder="Local da subAtividade"
+                />
+                <a-button
+                  type="default"
+                  style="width: 50%"
+                  @click="removeSubatividade(index)"
+                  >Cancelar SubAtividade
+                </a-button>
+                <hr />
+              </a-form-item>
+            
+              <a-form-item v-bind="formItemLayoutWithOutLabel">
+                <a-button type="default" style="width: 100%" @click="addSubatividade"
+                  >Adicionar SubAtividade
+                </a-button>
+              </a-form-item>
+            </a-form>
+          </div>
+
+
+                
                 <div class="row justify-content-center">
                   <a-form-item class="space_2">
                     <label class="ant-form-item-required">Descrição:</label>

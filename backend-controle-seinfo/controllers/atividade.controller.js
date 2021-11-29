@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const db = require('../models');
 
 const Atividade = db.atividade;
@@ -129,6 +130,8 @@ exports.atualiza = async (req, res) => {
       quantidadeVagas,
       idCategoria,
       idEvento,
+      atvAgenda,
+      removeAgenda,
       protagonistaAtividade,
     } = req.body;
 
@@ -143,7 +146,9 @@ exports.atualiza = async (req, res) => {
       }
     );
 
-    const atividade = await Atividade.update(
+    const atividade = await Atividade.findOne({where: {idAtividade}});
+
+    await Atividade.update(
       {
         titulo,
         valor,
@@ -159,6 +164,36 @@ exports.atualiza = async (req, res) => {
         },
       }
     );
+    
+    if(removeAgenda){
+      await Promise.all(removeAgenda.map(async (idAgenda) => {
+        await Agenda.destroy({where: {idAgenda}});
+      })).catch((err) => console.log(err)) ;
+    }
+
+    await Promise.all(
+      atvAgenda.map(async (subatividade) => {
+        try {
+          const { idAgenda } = subatividade;
+          if (idAgenda)
+            return Agenda.update(
+              {
+                local: subatividade.local,
+                dataHoraInicio: `${subatividade.dataInicio}T${subatividade.horaInicio}:00.003Z`,
+                dataHoraFim: `${subatividade.dataFim}T${subatividade.horaFim}:00.003Z`,
+              },
+              { where: { idAgenda } }
+            );
+          return atividade.createAtvAgenda({
+            local: subatividade.local,
+            dataHoraInicio: `${subatividade.dataInicio}T${subatividade.horaInicio}:00.003Z`,
+            dataHoraFim: `${subatividade.dataFim}T${subatividade.horaFim}:00.003Z`,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      })
+    ).catch((err) => console.log(err));
 
     return res.status(200).json(atividade);
   } catch (error) {

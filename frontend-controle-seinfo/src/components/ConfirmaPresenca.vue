@@ -14,7 +14,7 @@
             role="alert"
           >
             Você precisa estar logado !
-            <a href="/login" >Ir para login</a>
+            <a v-bind:href="redirect_url" >Ir para login</a>
           </div>
         </div>
         <div v-else id="condirmarPresenca">
@@ -50,19 +50,18 @@ export default {
       idEvento: String,
       idAtividade: String,
       idAgenda: String,
-      teste:String,
+      redirect_url: String
     };
 
   },
   async mounted() {
-   await this.veridicarParametros();
+    await this.veridicarParametros();
     await this.verificarPresenca();
-    console.log(this.teste);
-   
+    this.redirect_url = `/login?redirect=${window.location.href}`;
   },
   methods: {
     async veridicarParametros() {
-      const { idEvento, idAtividade, idAgenda } = this.$route.params;      
+      const { idEvento, idAtividade, idAgenda } = this.$route.params;
       this.idEvento = idEvento
       this.idAtividade = idAtividade
       this.idAgenda = idAgenda
@@ -73,7 +72,6 @@ export default {
      async verificarPresenca(){
     let resp = await axios.get(`api/presenca/verificar/${this.usuario.CPF}/${this.idAtividade}`);
     this.teste = resp.data;
-    
 
       }
   },

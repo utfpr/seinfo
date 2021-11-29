@@ -4,6 +4,7 @@
 			<a-table :columns="columns" :data-source="res_atividades" :pagination="false" >
 				<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
 					<tr>Valor:  R$ {{record.valor}}</tr>
+					<tr>Vagas preenchidas: {{record.quantidadeVagas}}</tr>	
 					<tr>Vagas disponíveis: {{record.quantidadeVagas}}</tr>
 					<tr>Horas de participação: {{record.horasParticipacao}}</tr>
 					<tr>Categoria : {{record.categoriaAtv.nome}}</tr> 

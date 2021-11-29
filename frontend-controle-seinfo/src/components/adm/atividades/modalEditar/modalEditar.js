@@ -8,7 +8,18 @@ export default {
     categorias: Array,
     protagonistas: Array
   },
+  async mounted(){
+
+  },
   methods: {
+    removeSubatividade: function(index){
+      const { idAgenda } = this.data.atvAgenda[index]
+      if(idAgenda) this.data.removeAgenda.push(idAgenda)
+      this.data.atvAgenda.splice(index, 1);
+    },
+    addSubatividade: function(){
+      this.data.atvAgenda.push({});
+    },
     moment: function (date) {
       return moment(date);
     },
@@ -17,7 +28,6 @@ export default {
       if (!this.idEvento) return 0;
 
       const evento = this.eventos[this.idEvento];
-
       const data_ini_atv = moment(this.data_ini_atv + " " + this.hora_ini_atv);
       const data_fim_atv = moment(this.data_fim_atv + " " + this.hora_fim_atv);
       const data_ini_evento = moment(evento.agendamento.dataHoraInicio);
@@ -86,6 +96,11 @@ export default {
       if (!this.data.horasParticipacao) erros.push("Horas de Participação é obrigatório!");
       if (!this.data.quantidadeVagas) erros.push("Quantidade de Vagas é obrigatório!");
       if (!this.data.descricao) erros.push("Descrição é obrigatório!");
+      this.data.atvAgenda.map((agenda) => {
+        if(!agenda.horaInicio || !agenda.horaFim || !agenda.dataInicio || !agenda.dataFim || !agenda.local){
+          erros.push("Verifique o preenchimento das subatividades!");
+        }
+      })
       if (!erros.length) {
         axios
           .patch(
