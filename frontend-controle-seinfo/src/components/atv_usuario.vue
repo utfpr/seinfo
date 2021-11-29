@@ -1,6 +1,6 @@
 <template>
 	<AuthConsumer>
-    <div slot-scope="{ getUser }">
+    <div slot-scope = "getUser">
 			<a-table :columns="columns" :data-source="res_atividades" :pagination="false" >
 				<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
 					<tr>Valor:  R$ {{record.valor}}</tr>
@@ -8,21 +8,12 @@
 					<tr>Horas de participação: {{record.horasParticipacao}}</tr>
 					<tr>Categoria : {{record.categoriaAtv.nome}}</tr> 
 					<tr>Descrição: {{record.descricao}} </tr>
-					<div class="botoes">
-						<a-button type="button" class="ic" @click="inscricao(getUser.CPF, record)"> INSCREVER-SE </a-button>
-				<!-- <a-button type="button" class="dl" @click="showDeleteConfirm(res.idEvento)"> CANCELAR INSCRIÇÃO </a-button> -->
+					<div v-if="!record.inscrito">
+						<a-button type="button" class="ic" @click="inscricao(getUser.CPF, record)"> INSCREVER-SE </a-button>						 
 					</div>
-				</div>
-			</a-table>
-			<a-table :columns="columns2" :data-source="res_atividades2" :pagination="false" >
-				<div slot="expandedRowRender" slot-scope="record" style="margin: 0" class="info">
-					<tr>Valor:  R$ {{record.atividade.valor}}</tr>
-					<tr>Vagas disponíveis: {{record.atividade.quantidadeVagas}}</tr>
-					<tr>Horas de participação: {{record.atividade.horasParticipacao}}</tr>
-					<tr>Descrição: {{record.atividade.descricao}} </tr>
-					<tr>
-						<a-button type="button" class="dl"  @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
-					</tr>
+					<div v-else>
+						<a-button type="button" class="dl" @click="exclusao(getUser.CPF, record)"> CANCELAR INSCRIÇÃO </a-button>
+					</div>
 				</div>
 			</a-table>
 		</div>
@@ -36,25 +27,19 @@ import moment from "moment";
 moment.locale("pt-br");
 
 const columns = [{
-  title: 'Atividades',
+  title: 'Atividades Inscritas',
   dataIndex: 'titulo',
-	width: 1200,
-}];
-const columns2 = [{
-  title: 'Minhas atividades',
-  dataIndex: 'atividade.titulo',
 	width: 1200,
 }];
 
 export default {
+	
 	data () {
 		return { 
 			res_atividades: [],
-			res_atividades2: [],
 			idEvento: "",
 			idAgenda:"",
 			columns,
-			columns2,
 			cpf:""
 		};
 	},
@@ -62,19 +47,20 @@ export default {
 		const {idEvento , CPF, idAgenda} = this.$route.params
 		this.idAgenda = idAgenda 
 		this.cpf = CPF
-		this.pegar_tabela_atividades(idEvento, CPF)
-		this.pegar_tabela_atividades2(idEvento, CPF)
+		this.pegar_tabela_atividades(idEvento)
 	},
 	components: {
     AuthConsumer,
 	},
 	methods: {
-	pegar_tabela_atividades(idEvento, CPF) {
+	pegar_tabela_atividades(idEvento) {
 		
 		axios
-			.get(`/api/inscAtvEventAll/${btoa(CPF)}/${idEvento}`)
+			.get(`/api/inscAtvEventAll/${idEvento}`)
 			.then(response => {
+				
 				this.res_atividades = response.data;
+				console.log(this.res_atividades)
 			})
 			.catch(function(error) {
 				console.log(error);
@@ -82,19 +68,9 @@ export default {
 
 		},
 
-	pegar_tabela_atividades2(idEvento, CPF) {
-		axios
-			.get(`/api/inscAtvEvent/${btoa(CPF)}/${idEvento}`)
-			.then(response => {
-				this.res_atividades2 = response.data;
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-		},
 	inscricao(CPF, record) {
       axios
-        .post(`/api/inscAtv/${record.idEvento}/${btoa(CPF)}` , {
+        .post(`/api/inscAtv/${record.idEvento}` , {
 					idAtividade: record.idAtividade})
         .then(() => {
 			document.location.reload(true);
@@ -106,7 +82,7 @@ export default {
 	},
 	exclusao(CPF, record) {
       axios
-        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}/${btoa(CPF)}`)
+        .delete(`/api/inscAtv/${record.idEvento}/${record.idAtividade}`)
         .then(() => {
 			document.location.reload(true);
         })
@@ -162,7 +138,7 @@ export default {
 	float: right;
 	margin-left: -50px	;
 }
-.dl:hover {
+.dl:hover {	
   color: white;
   background-color: rgb(236, 69, 69);
 }

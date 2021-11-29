@@ -17,8 +17,8 @@ module.exports = (req, res, next) => {
           auth: false,
           message: 'Failed to authenticate token.',
         });
-
-      req.userId = decoded.id;
+        console.log("decoded",decoded)
+      req.userId = decoded.idPessoa;
       return next();
     });
   }
