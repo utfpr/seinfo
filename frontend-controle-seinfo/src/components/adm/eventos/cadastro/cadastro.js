@@ -255,6 +255,8 @@ export default {
               this.objeto_lote.push(obj_temp)
             }
             this.obj_Resource.lote = values.keys.length !== 0 ? this.objeto_lote : [];
+            this.obj_Resource.dataHoraInicio = moment(`${this.obj_Resource.data_ini} ${this.obj_Resource.hora_ini}`);
+            this.obj_Resource.dataHoraFim = moment(`${this.obj_Resource.data_fim} ${this.obj_Resource.hora_fim}`);
             axios.post('/api/evento', this.obj_Resource).then(() => {  
               this.info(); this.toggle() 
             }).catch(error => { 
