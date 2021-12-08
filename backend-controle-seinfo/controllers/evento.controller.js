@@ -1,3 +1,4 @@
+const moment = require('moment');
 const db = require('../models');
 
 const Evento = db.evento;
@@ -13,21 +14,19 @@ const atob = (b64Encoded) => Buffer.from(b64Encoded, 'base64').toString();
 exports.create = async (req, res) => {
   try {
     const {
-      data_ini,
-      hora_ini,
-      data_fim,
-      hora_fim,
       local_eve,
       nome,
       descricao,
       select_status,
       lote,
       cpfOrganizador,
+      dataHoraInicio,
+      dataHoraFim,
     } = req.body;
 
     const agenda = await Agenda.create({
-      dataHoraInicio: new Date(`${data_ini}T${hora_ini}:00.003Z`),
-      dataHoraFim: new Date(`${data_fim}T${hora_fim}:00.003Z`),
+      dataHoraInicio,
+      dataHoraFim,
       local: local_eve,
     });
 
