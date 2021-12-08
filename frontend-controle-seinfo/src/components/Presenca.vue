@@ -54,7 +54,7 @@ export default {
   async mounted() {
     this.tokew = localStorage.getItem("@TOKEN");
     if (this.tokew) {
-      const { idAtividade, idAgenda, idEvento, cpf } = this.$route.params;
+      const { idAtividade, idAgenda, idEvento, cpf  } = this.$route.params;
       await axios
         .post("/api/presenca", { idAtividade, idAgenda, idEvento, cpf })
         .catch((resp) => {

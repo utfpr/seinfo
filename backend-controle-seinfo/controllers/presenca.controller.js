@@ -120,10 +120,11 @@ exports.listPresenca = (req, res) => {
   }
 };
 
-exports.createPresenca = (req, res) => {
+exports.createPresenca = async (req, res) => {
   try {
     const { idAtividade, idAgenda, idEvento, cpf, presenca } = req.body;
-    const resp = this.createOrUpdate(
+    console.log(req.body);
+    const resp = await this.createOrUpdate(
       idAtividade,
       idAgenda,
       idEvento,
