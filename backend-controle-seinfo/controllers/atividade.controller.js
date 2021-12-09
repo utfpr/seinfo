@@ -21,11 +21,10 @@ exports.create = async (req, res) => {
       idEvento,
       idCategoria,
       subatividade,
-      dataInicio,
-      horaInicio,
+      dataHoraInicio,
     } = req.body;
 
-    const dataAtividade = new Date(`${dataInicio}T${horaInicio}:00.003Z`);
+    const dataAtividade = dataHoraInicio;
 
     const atividade = await Atividade.create({
       titulo,
@@ -43,8 +42,8 @@ exports.create = async (req, res) => {
       subatividade.map((item) =>
         atividade.createAtvAgenda({
           local: item.local_subatividade,
-          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}:00.003Z`,
-          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}:00.003Z`,
+          dataHoraInicio: item.dataHoraInicioSub,
+          dataHoraFim: item.dataHoraFimSub,
         })
       )
     );
