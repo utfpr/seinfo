@@ -17,13 +17,23 @@
             <a v-bind:href="redirect_url" >Ir para login</a>
           </div>
         </div>
+        <div v-if="!permission">      
+          <div
+            class="alert alert-danger"
+            id="credenciaisIncorretas"
+            role="alert"
+          >
+            Sem permissão para participar da atividade
+            <a v-bind:href="redirect_url" >Ir para login</a>
+          </div>
+        </div>
         <div v-else id="condirmarPresenca">
            <ButaoDePresencaAtividade
              v-bind:idEvento="idEvento"
               v-bind:idAtividade="idAtividade"
               v-bind:idAgenda="idAgenda"
               v-bind:cpf="usuario.CPF"
-              v-bind:presente="teste.presente"
+              v-bind:presente="presente"
             />
                 
         </div>
@@ -50,7 +60,10 @@ export default {
       idEvento: String,
       idAtividade: String,
       idAgenda: String,
-      redirect_url: String
+      redirect_url: String,
+      presente: Boolean,
+      permission: Boolean,
+
     };
 
   },
@@ -65,15 +78,13 @@ export default {
       this.idEvento = idEvento
       this.idAtividade = idAtividade
       this.idAgenda = idAgenda
-      this.usuario = await auth.getUser().catch(err => {
-        console.log(err)
-      });
+      this.usuario = await auth.getUser();
     },
-     async verificarPresenca(){
-    let resp = await axios.get(`api/presenca/verificar/${this.usuario.CPF}/${this.idAtividade}`);
-    this.teste = resp.data;
-
-      }
+    async verificarPresenca(){
+      const { data: { presente, permission } } =  await axios.get(`api/presenca/verificar/${this.idEvento}/${this.idAtividade}`);
+      this.presente = presente;
+      this.permission = permission;
+    }
   },
       
 };
