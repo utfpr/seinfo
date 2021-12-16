@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const formatCPF = require('@fnando/cpf');
+const sequelize = require('sequelize');
 const db = require('../models');
 require('dotenv').config();
 
@@ -484,17 +485,13 @@ exports.selectInscriAtvEventAll = async (req, res) => {
       where: { CPF: req.userId, idEvento: req.params.idEvento },
       include: [{ model: Atividade, as: 'atividade' }],
     });
-    console.log("req user aqui aqui aqui aqui ",req.params.idEvento);
     const atividade = await Atividade.findAll({
       where: { idEvento: req.params.idEvento },
       include: [
         { model: db.categoria, as: 'categoriaAtv' },
-        { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } },
+        { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } }, 
       ],
     });
-
-
-
     if (!inscricao)
       return res.status(404).json({ error: 'Inscrição não encontrada' });
     if (!atividade)
@@ -504,14 +501,19 @@ exports.selectInscriAtvEventAll = async (req, res) => {
     const auxInsc = await inscricao.map(
       (Insc1) => Insc1.dataValues.idAtividade
     );
-
-    atividade.map((atv) => {
-      atv.dataValues.inscrito = auxInsc.includes(atv.dataValues.idAtividade);
-      return atv;
-    });
-
+    
+    for (const {dataValues} of atividade ){
+      dataValues.inscrito = auxInsc.includes(dataValues.idAtividade);
+      dataValues.countVagasPreenchidas = (await InscricaoAtividade.findAll({
+      where: {  idAtividade: dataValues.idAtividade },
+      attributes:  ['idAtividade', [sequelize.fn('count', sequelize.col('idAtividade')), 'count']],
+      group: ['idAtividade'],
+      raw: true
+    }))[0].count;
+    }
     return res.status(200).json(atividade);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };
