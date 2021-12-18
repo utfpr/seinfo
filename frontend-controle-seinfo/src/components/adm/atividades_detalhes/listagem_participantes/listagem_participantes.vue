@@ -18,8 +18,8 @@
         </tr>
       </thead>
 
-      <tbody v-for="res in participantes" :key="res.CPF">
-        <tr>
+      <tbody>
+        <tr v-for="res in participantes" :key="res.CPF">
           <th scope="row">
             {{ res.eventoInsc.pessoaInsc.nome }}
           </th>
@@ -36,12 +36,13 @@
           <th>
             <ButaoDePresencaAtividade
               v-bind:presente="res.presente"
-              v-bind:idEvento="idEvento"
-              v-bind:idAtividade="idAtividade"
-              v-bind:idAgenda="idAgenda"
+              v-bind:idEvento="res.idEvento"
+              v-bind:idAtividade="res.idAtividade"
+              v-bind:idAgenda="res.eventoInsc.eventoInsc.idAgenda"
               v-bind:cpf="res.CPF"
             />
           </th>
+
 
         </tr>
       </tbody>

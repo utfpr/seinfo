@@ -124,27 +124,44 @@ exports.listPresenca = (req, res) => {
 exports.verificaPresenca = async (req, res) => {
   try {
     const { idEvento, idAtividade } = req.params;
-    
-    const permission  = await InscricaoAtividade.findOne({
+
+    const permission = await InscricaoAtividade.findOne({
       where: {
         idAtividade,
         idEvento,
         CPF: req.userId,
-      }
-    })
-
+      },
+    });
 
     const check = await Presenca.findOne({
       where: {
         idAtividade,
         CPF: req.userId,
-      }
+      },
     });
-   
-   return res.status(200).json({presente:check ? check.presenca : 0, permission: permission ? true : false});
-  
+
+    return res.status(200).json({
+      presente: check ? check.presenca : 0,
+      permission: !!permission,
+    });
   } catch (error) {
-    console.log(error)
-    return res.status(500).json(error);
+    return res.status(500).send(error);
+  }
+};
+
+exports.createPresenca = async (req, res) => {
+  try {
+    const { idAtividade, idAgenda, idEvento, cpf, presenca } = req.body;
+    const resp = await this.createOrUpdate(
+      idAtividade,
+      idAgenda,
+      idEvento,
+      cpf,
+      presenca
+    );
+
+    res.send(resp);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
