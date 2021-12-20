@@ -64,7 +64,7 @@ export default {
 
             this.pegar_tabela();
             this.modalData = data;
-            
+            this.modalData.removeAgenda = [];
             this.modalVisible = true;
             this.eventos.forEach((element) => {
                 if (element.idEvento === this.modalData.idEvento) {
@@ -80,12 +80,21 @@ export default {
                     );
                     this.modalData.hora_ini_atv = moment(datahorainicio).format("HH:mm");
                     this.modalData.hora_fim_atv = moment(datahorafim).format("HH:mm");
+
                 }
             });            
 
             this.modalData.cpfOrganizador = data.protagonistaAtividade.CPF;
             this.modalData.idCategoria = data.categoriaAtv.idCategoria;
             this.modalData.horasParticipacao = data.horasParticipacao.slice(0, 5);
+
+            this.modalData.atvAgenda.map((agenda) => {
+                const { dataHoraFim, dataHoraInicio } = agenda;
+                agenda.dataFim = moment(dataHoraFim).format("YYYY-MM-DD");
+                agenda.horaFim = moment(dataHoraFim).format("HH:mm");
+                agenda.dataInicio = moment(dataHoraInicio).format("YYYY-MM-DD");
+                agenda.horaInicio = moment(dataHoraInicio).format("HH:mm");
+            })
         },
     },
     data() {

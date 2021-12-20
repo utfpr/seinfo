@@ -42,12 +42,12 @@ module.exports = (app) => {
   app.get('/api/inscEvP/:CPF', pessoa.InscricoesPessoa);
 
   // deleta a inscricao de uma pessoa em um evento
-  app.delete('/api/inscEv/:idEventoReq/:CPF', pessoa.deletaInscricaoEvento);
+  app.delete('/api/inscEv/:idEventoReq/', pessoa.deletaInscricaoEvento);
 
   //-----------------------------------------------------------------------------
 
   // cadastra uma pessoa em uma atividade de um evento que ela se inscreveu
-  app.post('/api/inscAtv/:idEvento/:CPF', pessoa.cadastrarEmAtividade);
+  app.post('/api/inscAtv/:idEvento/', pessoa.cadastrarEmAtividade);
 
   // seleciona todas inscricoes em atividades
   app.get('/api/inscAtv', pessoa.selectInscricaoAtividade);
@@ -60,7 +60,7 @@ module.exports = (app) => {
 
   // seleciona as atividades que a pessoa não se inscreveu de um evento em especifico
   app.get(
-    '/api/inscAtvEventAll/:CPF/:idEvento',
+    '/api/inscAtvEventAll/:idEvento',
     pessoa.selectInscriAtvEventAll
   );
 
@@ -75,7 +75,7 @@ module.exports = (app) => {
 
   // deleta inscricao de uma pessoa em uma atividade
   app.delete(
-    '/api/inscAtv/:idEvento/:idAtividade/:CPF',
+    '/api/inscAtv/:idEvento/:idAtividade/',
     pessoa.deletaInscricaoAtividade
   );
 };

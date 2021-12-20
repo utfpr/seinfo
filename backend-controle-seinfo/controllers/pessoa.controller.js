@@ -1,5 +1,7 @@
+/* eslint-disable no-await-in-loop */
 const nodemailer = require('nodemailer');
 const formatCPF = require('@fnando/cpf');
+const sequelize = require('sequelize');
 const db = require('../models');
 require('dotenv').config();
 
@@ -205,10 +207,10 @@ exports.cadastrarEmEvento = async (req, res) => {
 
 exports.deletaInscricaoEvento = async (req, res) => {
   try {
-    const { CPF, idEventoReq } = req.params;
+    const { idEventoReq } = req.params;
     console.log(idEventoReq);
     const inscricao = await InscricaoEvento.destroy({
-      where: { idEvento: idEventoReq, CPF: atob(CPF) },
+      where: { idEvento: idEventoReq, CPF: req.userId },
     });
     return res.status(200).json(inscricao);
   } catch (error) {
@@ -294,7 +296,7 @@ exports.InscricoesPessoa = async (req, res) => {
 exports.cadastrarEmAtividade = async (req, res) => {
   try {
     const inscricao = await InscricaoEvento.findOne({
-      where: { idEvento: req.params.idEvento, CPF: atob(req.params.CPF) },
+      where: { idEvento: req.params.idEvento, CPF: req.userId },
     });
     if (!inscricao) {
       return res.status(404).json({ error: 'Inscrição não encontrado.' });
@@ -331,12 +333,12 @@ exports.index = async (req, res) => {
 
 exports.deletaInscricaoAtividade = async (req, res) => {
   try {
-    const { idEventoReq, idAtividadeReq, CPF } = req.params;
+    const { idEvento, idAtividade } = req.params;
     const inscricao = await InscricaoAtividade.destroy({
       where: {
-        idEvento: idEventoReq,
-        idAtividade: idAtividadeReq,
-        CPF: atob(CPF),
+        idEvento,
+        idAtividade,
+        CPF: req.userId,
       },
     });
     return res.status(200).json(inscricao);
@@ -407,6 +409,7 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
         idAtividade,
         idEvento,
       },
+      group: ['eventoInsc.pessoaInsc.CPF'],
       include: [
         {
           model: InscricaoEvento,
@@ -423,11 +426,12 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
       ],
     });
 
+    console.log(pessoasInscritasUmaAtividade);
     const cpfPessoasPresentes = await Presenca.findAll({
       where: {
         idEvento,
         idAtividade,
-        presenca: true,
+        presenca: false,
       },
     }).map((pessoa) => pessoa.CPF);
 
@@ -445,7 +449,7 @@ exports.selectInscricoesNaAtividade = async (req, res) => {
 // seleciona as atividades que a pessoa se inscreveu
 exports.selectInscricoesPessoa = async (req, res) => {
   try {
-    const atividadesUmaPessoa = InscricaoAtividade.findAll({
+    const atividadesUmaPessoa = await InscricaoAtividade.findAll({
       where: { CPF: atob(req.params.CPF) },
       include: [{ model: Atividade, as: 'atividade' }],
     });
@@ -459,8 +463,10 @@ exports.selectInscricoesPessoa = async (req, res) => {
 // seleciona as atividades que a pessoa se inscreveu de um evento em especifico
 exports.selectInscriAtvEvent = async (req, res) => {
   try {
+    console.log('userID', req.userId);
+    console.log({ CPF: atob(req.params.CPF), idEvento: req.params.idEvento });
     const atividadesPessoa = await InscricaoAtividade.findAll({
-      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
+      where: { CPF: req.userId, idEvento: req.params.idEvento },
       include: [{ model: Atividade, as: 'atividade' }],
     });
 
@@ -473,14 +479,10 @@ exports.selectInscriAtvEvent = async (req, res) => {
 // seleciona as atividades que a pessoa não se inscreveu de um evento em especifico
 exports.selectInscriAtvEventAll = async (req, res) => {
   try {
-    const vetAtvEvt = [];
     const inscricao = await InscricaoAtividade.findAll({
-      where: { CPF: atob(req.params.CPF), idEvento: req.params.idEvento },
+      where: { CPF: req.userId, idEvento: req.params.idEvento },
       include: [{ model: Atividade, as: 'atividade' }],
     });
-
-    console.log(inscricao);
-
     const atividade = await Atividade.findAll({
       where: { idEvento: req.params.idEvento },
       include: [
@@ -488,7 +490,6 @@ exports.selectInscriAtvEventAll = async (req, res) => {
         { model: db.agenda, as: 'atvAgenda', through: { attributes: [] } },
       ],
     });
-
     if (!inscricao)
       return res.status(404).json({ error: 'Inscrição não encontrada' });
     if (!atividade)
@@ -499,24 +500,25 @@ exports.selectInscriAtvEventAll = async (req, res) => {
       (Insc1) => Insc1.dataValues.idAtividade
     );
 
-    // Monta um array com todos os idsAtividades de um evento em especifico
-    const auxAtv = await atividade.map((Atv1) => Atv1.dataValues.idAtividade);
-
-    // Monta um array com todos os idsAtividade na quala pessoa não esta inscrita
-    const vetAtividade = await auxAtv.filter((element) => {
-      if (auxInsc.indexOf(element) === -1) return element;
-      return undefined;
-    });
-
-    // Monta um array com todos os valores da atividade de acordo com o idAtividade
-    await atividade.filter((element) => {
-      if (vetAtividade.indexOf(element.dataValues.idAtividade) !== -1)
-        vetAtvEvt.push(element);
-      return undefined;
-    });
-
-    return res.status(200).json(vetAtvEvt);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const { dataValues } of atividade) {
+      dataValues.inscrito = auxInsc.includes(dataValues.idAtividade);
+      const preenchidas = (
+        await InscricaoAtividade.findAll({
+          where: { idAtividade: dataValues.idAtividade },
+          attributes: [
+            'idAtividade',
+            [sequelize.fn('count', sequelize.col('idAtividade')), 'count'],
+          ],
+          group: ['idAtividade'],
+          raw: true,
+        })
+      )[0];
+      dataValues.countVagasPreenchidas = preenchidas ? preenchidas.count : 0;
+    }
+    return res.status(200).json(atividade);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(error);
   }
 };

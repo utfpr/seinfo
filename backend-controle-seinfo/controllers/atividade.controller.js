@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const db = require('../models');
 
 const Atividade = db.atividade;
@@ -20,11 +21,10 @@ exports.create = async (req, res) => {
       idEvento,
       idCategoria,
       subatividade,
-      dataInicio,
-      horaInicio,
+      dataHoraInicio,
     } = req.body;
 
-    const dataAtividade = new Date(`${dataInicio}T${horaInicio}:00.003Z`);
+    const dataAtividade = dataHoraInicio;
 
     const atividade = await Atividade.create({
       titulo,
@@ -42,8 +42,8 @@ exports.create = async (req, res) => {
       subatividade.map((item) =>
         atividade.createAtvAgenda({
           local: item.local_subatividade,
-          dataHoraInicio: `${item.data_inicio_subatividade}T${item.hora_inicio_subatividade}:00.003Z`,
-          dataHoraFim: `${item.data_fim_subatividade}T${item.hora_fim_subatividade}:00.003Z`,
+          dataHoraInicio: item.dataHoraInicioSub,
+          dataHoraFim: item.dataHoraFimSub,
         })
       )
     );
@@ -129,6 +129,8 @@ exports.atualiza = async (req, res) => {
       quantidadeVagas,
       idCategoria,
       idEvento,
+      atvAgenda,
+      removeAgenda,
       protagonistaAtividade,
     } = req.body;
 
@@ -143,7 +145,9 @@ exports.atualiza = async (req, res) => {
       }
     );
 
-    const atividade = await Atividade.update(
+    const atividade = await Atividade.findOne({where: {idAtividade}});
+
+    await Atividade.update(
       {
         titulo,
         valor,
@@ -159,6 +163,36 @@ exports.atualiza = async (req, res) => {
         },
       }
     );
+    
+    if(removeAgenda){
+      await Promise.all(removeAgenda.map(async (idAgenda) => {
+        await Agenda.destroy({where: {idAgenda}});
+      })).catch((err) => console.log(err)) ;
+    }
+
+    await Promise.all(
+      atvAgenda.map(async (subatividade) => {
+        try {
+          const { idAgenda } = subatividade;
+          if (idAgenda)
+            return Agenda.update(
+              {
+                local: subatividade.local,
+                dataHoraInicio: `${subatividade.dataInicio}T${subatividade.horaInicio}:00.003Z`,
+                dataHoraFim: `${subatividade.dataFim}T${subatividade.horaFim}:00.003Z`,
+              },
+              { where: { idAgenda } }
+            );
+          return atividade.createAtvAgenda({
+            local: subatividade.local,
+            dataHoraInicio: `${subatividade.dataInicio}T${subatividade.horaInicio}:00.003Z`,
+            dataHoraFim: `${subatividade.dataFim}T${subatividade.horaFim}:00.003Z`,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      })
+    ).catch((err) => console.log(err));
 
     return res.status(200).json(atividade);
   } catch (error) {

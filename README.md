@@ -70,5 +70,18 @@ module.exports = {
   VUE_APP_URL: '"ULR_API"'
 }
 ~~~
+#### Rodar ambiente com docker
+Caso tenha dúvidas de como instalar o docker em seu sistema verifique os guias em https://docs.docker.com/get-docker/
+
+Entre na raiz do projeto e execute o seguinte comando
+```bash
+docker-compose up
+```
+Serão criados containers para o frontend, backend e banco de dados.
+O banco de dados é criado e populado automaticamente durante a primeira inicialização.
+Caso queria ter acesso aos dados basta acessar o banco com o ip: 0.0.0.0 e porta 3307.
+
+O arquivo base de ambiente para os containers é o .env.docker
+
 ## Licença
 Este projeto se encontra sob a licença [MIT](http://opensource.org/licenses/MIT)

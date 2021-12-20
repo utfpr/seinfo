@@ -94,6 +94,8 @@ export default {
               obj_temp.hora_inicio_subatividade = values.hora_inicio_subatividade[i]
               obj_temp.data_fim_subatividade = values.data_fim_subatividade[i]
               obj_temp.hora_fim_subatividade = values.hora_fim_subatividade[i]
+              obj_temp.dataHoraInicioSub = moment(`${values.data_inicio_subatividade[i]} ${values.hora_inicio_subatividade[i]}`);
+              obj_temp.dataHoraFimSub = moment(`${values.data_fim_subatividade[i]} ${values.hora_fim_subatividade[i]}`);
               obj_temp.local_subatividade = values.local_subatividade[i]
               this.objeto_subAtividade.push(obj_temp)
             }
@@ -110,6 +112,7 @@ export default {
         (this.obj_Resource.descricao = this.descricao),
         this.obj_Resource.dataInicio = this.dataInicio;
         this.obj_Resource.horaInicio = this.horaInicio;
+        this.obj_Resource.dataHoraInicio = moment(`${this.dataInicio} ${this.horaInicio}`)
 
          axios
            .post("/api/atividade", this.obj_Resource)

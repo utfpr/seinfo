@@ -3,6 +3,7 @@ const db = require('../models');
 const Presenca = db.presenca;
 const Atividade = db.atividade;
 const Pessoa = db.pessoa;
+const InscricaoAtividade = db.inscricaoAtividade;
 // const agendamentoAtividadeDb = db.agendamentoAtividade;
 
 exports.createOrUpdate = async (
@@ -117,5 +118,50 @@ exports.listPresenca = (req, res) => {
     return res.status(200).json(presenca);
   } catch (error) {
     return res.status(500).json(error);
+  }
+};
+
+exports.verificaPresenca = async (req, res) => {
+  try {
+    const { idEvento, idAtividade } = req.params;
+
+    const permission = await InscricaoAtividade.findOne({
+      where: {
+        idAtividade,
+        idEvento,
+        CPF: req.userId,
+      },
+    });
+
+    const check = await Presenca.findOne({
+      where: {
+        idAtividade,
+        CPF: req.userId,
+      },
+    });
+
+    return res.status(200).json({
+      presente: check ? check.presenca : 0,
+      permission: !!permission,
+    });
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
+exports.createPresenca = async (req, res) => {
+  try {
+    const { idAtividade, idAgenda, idEvento, cpf, presenca } = req.body;
+    const resp = await this.createOrUpdate(
+      idAtividade,
+      idAgenda,
+      idEvento,
+      cpf,
+      presenca
+    );
+
+    res.send(resp);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
