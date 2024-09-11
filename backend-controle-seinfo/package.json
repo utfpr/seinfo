@@ -12,7 +12,7 @@
   "dependencies": {
     "@fnando/cpf": "^1.0.2",
     "axios": "^0.21.1",
-    "body-parser": "1.18.3",
+    "body-parser": "1.20.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
